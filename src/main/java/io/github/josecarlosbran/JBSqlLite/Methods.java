@@ -72,6 +72,10 @@ try{
         return lista;
     }
 
+    public void imprimirnombreclase(){
+        System.out.println("Nombre de la clase: "+this.getClass().getName());
+    }
+/*
     public static void main(String[] args){
         List<String> cadenas= new ArrayList<>();
         addDato(cadenas, "Jose");
@@ -86,6 +90,6 @@ try{
         System.out.println("3 Cadena de la lista: "+getObject(2, cadenas));
         getall(1, 5, 10).forEach(System.out::println);
 
-    }
+    }*/
 
 }

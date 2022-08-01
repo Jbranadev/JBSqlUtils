@@ -5,18 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>JBSqlLite</artifactId>
+    <artifactId>JBSqlUtils</artifactId>
     <version>1.0-SNAPSHOT</version>
 
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>JBSqlLite es una librería java que permite gestionar BD's Sql Lite, de una manera fácil y rápida
+    <description>JBSqlUtils es una librería java que permite gestionar BD's Sql, de una manera fácil y rápida
         sin interrumpir la ejecución del hilo principal del programa, lo cual la hace una potente herramienta
         para aplicaciones android y sistemas empresariales que tengan la necesidad de una BD's portatil, cabe mencionar
         que para ello utiliza el SQLite JDBC de org.xerial. Para mayor información, consultar el siguiente
-        enlace https://github.com/JoseCarlosBran/JBSqlLite/blob/master/Readme.md</description>
+        enlace https://github.com/JoseCarlosBran/JBSqlUtils/blob/master/Readme.md</description>
     <!-- FIXME change it to the project's website -->
-    <url>https://github.com/JoseCarlosBran/JBSqlLite/blob/master/Readme.md</url>
+    <url>https://github.com/JoseCarlosBran/JBSqlUtils/blob/master/Readme.md</url>
 
 
     <licenses>
@@ -35,9 +35,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/JoseCarlosBran/JBSqlLite.git</connection>
-        <developerConnection>scm:git:ssh://github.com/JoseCarlosBran/JBSqlLite.git</developerConnection>
-        <url>https://github.com/JoseCarlosBran/JBSqlLite/tree/master</url>
+        <connection>scm:git:git://github.com/JoseCarlosBran/JBSqlUtils.git</connection>
+        <developerConnection>scm:git:ssh://github.com/JoseCarlosBran/JBSqlUtils.git</developerConnection>
+        <url>https://github.com/JoseCarlosBran/JBSqlUtils/tree/master</url>
     </scm>
 
 
@@ -57,12 +57,36 @@
             <version>0.5.5</version>
         </dependency>
 
-        <!-- Dependencia para el uso de JDBC -->
+        <!-- Dependencia para el uso de JDBC SQLite-->
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.36.0.3</version>
         </dependency>
+
+        <!-- Dependencia para el uso de JDBC PostgreSQL-->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.4.0</version>
+        </dependency>
+
+
+        <!-- Dependencia para el uso de JDBC MySQL-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.30</version>
+        </dependency>
+
+        <!-- Dependencia para el uso de JDBC SQLServer-->
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>10.2.1.jre8</version>
+        </dependency>
+
+
     </dependencies>
 
     <distributionManagement>
