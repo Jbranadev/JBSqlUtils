@@ -1,6 +1,8 @@
 package io.github.josecarlosbran.JBSqlLite;
 
-import io.github.josecarlosbran.JBSqlLite.Exception.DataBaseUndefind;
+import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
+import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import java.sql.Connection;
@@ -8,10 +10,13 @@ import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Properties;
 
-public class Methods {
+public class Methods extends UtilitiesJB {
 
     private DataBase dataBase=setearDB();
+
+    private Properties prop=new Properties();
 
     public Methods() throws DataBaseUndefind {
     }
@@ -28,11 +33,41 @@ public class Methods {
             LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
     */
+
+    
     private DataBase setearDB() throws DataBaseUndefind {
         String dataBase=System.getProperty("DataBase");
-        if(Objects.isNull(dataBase)){
+        if(stringIsNullOrEmpty(dataBase)){
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new DataBaseUndefind("No se a seteado la DataBase que índica a que BD's deseamos se pegue JBSqlUtils");
+        }else{
+            if(dataBase.equals(DataBase.MySQL.name())){
+                setDataBase(DataBase.MySQL);
+                return DataBase.MySQL;
+            }
+            if(dataBase.equals(DataBase.SQLite.name())){
+                setDataBase(DataBase.SQLite);
+                return DataBase.SQLite;
+            }
+            if(dataBase.equals(DataBase.SQLServer.name())){
+                setDataBase(DataBase.SQLServer);
+                return DataBase.SQLServer;
+            }
+            if(dataBase.equals(DataBase.PostgreSQL.name())){
+                setDataBase(DataBase.PostgreSQL);
+                return DataBase.PostgreSQL;
+            }
+        }
+
+        return null;
+    }
+    private DataBase setearPropertiesDB() throws PropertiesDBUndefined {
+        String user=System.getProperty("PropertiesDB.user");
+        String password=System.getProperty("PropertiesDB.password");
+        String puerto=System.getProperty("PropertiesDB.puerto");
+        if(Objects.isNull(dataBase)){
+            //Si la propiedad del sistema no esta definida, Lanza una Exepción
+            throw new PropertiesDBUndefined("No se a seteado la Propiedades de conexión a la BD's deseamos se pegue JBSqlUtils");
         }else{
             if(dataBase.equals(DataBase.MySQL.name())){
                 setDataBase(DataBase.MySQL);
@@ -64,7 +99,8 @@ public class Methods {
                 String url="";
                 String usuario="";
                 String contraseña="";
-                connect = DriverManager.getConnection(url, usuario, contraseña);
+
+                connect = DriverManager.getConnection(url, prop);
 
 
             }
@@ -74,7 +110,7 @@ public class Methods {
                 String url="";
                 String usuario="";
                 String contraseña="";
-                connect = DriverManager.getConnection(url, usuario, contraseña);
+                connect = DriverManager.getConnection(url, prop);
             }
 
             if(this.getDataBase()==DataBase.SQLServer){
@@ -83,7 +119,7 @@ public class Methods {
                 String url="";
                 String usuario="";
                 String contraseña="";
-                connect = DriverManager.getConnection(url, usuario, contraseña);
+                connect = DriverManager.getConnection(url, prop);
             }
 
 
