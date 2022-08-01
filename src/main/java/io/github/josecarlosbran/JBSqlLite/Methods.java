@@ -1,13 +1,19 @@
 package io.github.josecarlosbran.JBSqlLite;
 
+import io.github.josecarlosbran.JBSqlLite.Exception.DataBase;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Methods {
+
+    private DataBase dataBase=setearDB();
+
+
 /*
 try{
 
@@ -19,6 +25,32 @@ try{
         LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
     }
 */
+    private DataBase setearDB(){
+        String dataBase=System.getProperty("DataBase");
+        if(Objects.isNull(dataBase)){
+            //Si la propiedad del sistema no esta definida, Lanza una Exepción
+
+        }else{
+            if(dataBase.equals(DataBase.MySQL.name())){
+                setDataBase(DataBase.MySQL);
+                return DataBase.MySQL;
+            }
+            if(dataBase.equals(DataBase.SQLite.name())){
+                setDataBase(DataBase.SQLite);
+                return DataBase.SQLite;
+            }
+            if(dataBase.equals(DataBase.SQLServer.name())){
+                setDataBase(DataBase.SQLServer);
+                return DataBase.SQLServer;
+            }
+            if(dataBase.equals(DataBase.PostgreSQL.name())){
+                setDataBase(DataBase.PostgreSQL);
+                return DataBase.PostgreSQL;
+            }
+        }
+
+        return null;
+    }
 
     public Connection getConnection(String DB){
         Connection connect=null;
@@ -74,6 +106,15 @@ try{
 
     public void imprimirnombreclase(){
         System.out.println("Nombre de la clase: "+this.getClass().getName());
+    }
+
+    public DataBase getDataBase() {
+        return dataBase;
+    }
+
+    public void setDataBase(DataBase dataBase) {
+        this.dataBase = dataBase;
+        System.out.println("SystemProperty Seteada: "+System.getProperty("DataBase"));
     }
 /*
     public static void main(String[] args){
