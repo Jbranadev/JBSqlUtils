@@ -1,6 +1,6 @@
 package io.github.josecarlosbran.JBSqlLite;
 
-import io.github.josecarlosbran.JBSqlLite.Exception.DataBaseUndefind;
+import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 
 public class SqlLite extends Methods{
     public SqlLite() throws DataBaseUndefind {

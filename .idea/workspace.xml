@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Creación de Excepciones">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Creación de primeros metodos">
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Exceptions/PropertiesDBUndefined.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Utilities/UtilitiesJB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_31_07_2022_17_13__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_31_07_2022_17_13__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/DataBaseUndefind.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Exception/DataBaseUndefind.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Exception/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/DataBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Exception/DataBaseUndefind.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Exceptions/DataBaseUndefind.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/SqlLite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/SqlLite.java" afterDir="false" />
     </list>
@@ -74,7 +75,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/josec/IdeaProjects/JBSqlUtils"
+    "last_opened_file_path": "C:/Users/jobran/IdeaProjects/Automatizacion_CS"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -83,12 +84,12 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="io.github.josecarlosbran.JBSqlLite.SqlLite" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="SqlLite" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="io.github.josecarlosbran.JBSqlLite.SqlLite" />
       <module name="JBSqlUtils" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="io.github.josecarlosbran.JBSqlLite.Exception.*" />
+          <option name="PATTERN" value="io.github.josecarlosbran.JBSqlLite.Exceptions.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
