@@ -65,7 +65,7 @@ public class Methods extends UtilitiesJB {
         String user=System.getProperty("PropertiesDB.user");
         String password=System.getProperty("PropertiesDB.password");
         String puerto=System.getProperty("PropertiesDB.puerto");
-        if(Objects.isNull(dataBase)){
+        if(stringIsNullOrEmpty(user)){
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new PropertiesDBUndefined("No se a seteado la Propiedades de conexión a la BD's deseamos se pegue JBSqlUtils");
         }else{
