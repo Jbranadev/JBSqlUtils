@@ -1,6 +1,6 @@
 package io.github.josecarlosbran.JBSqlLite;
 
-import io.github.josecarlosbran.JBSqlLite.Exception.DataBase;
+import io.github.josecarlosbran.JBSqlLite.Exception.DataBaseUndefind;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import java.sql.Connection;
@@ -13,23 +13,26 @@ public class Methods {
 
     private DataBase dataBase=setearDB();
 
-
-/*
-try{
-
-    }catch (Exception e) {
-        LogsJB.fatal("Excepción disparada en el metodo execute, el cual llama la creación del hilo: "+ e.toString());
-        LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-        LogsJB.fatal("Causa de la Excepción : "+e.getCause());
-        LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-        LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+    public Methods() throws DataBaseUndefind {
     }
-*/
-    private DataBase setearDB(){
+
+
+    /*
+    try{
+
+        }catch (Exception e) {
+            LogsJB.fatal("Excepción disparada en el metodo execute, el cual llama la creación del hilo: "+ e.toString());
+            LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+        }
+    */
+    private DataBase setearDB() throws DataBaseUndefind {
         String dataBase=System.getProperty("DataBase");
         if(Objects.isNull(dataBase)){
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
-
+            throw new DataBaseUndefind("No se a seteado la DataBase que índica a que BD's deseamos se pegue JBSqlUtils");
         }else{
             if(dataBase.equals(DataBase.MySQL.name())){
                 setDataBase(DataBase.MySQL);
@@ -55,6 +58,35 @@ try{
     public Connection getConnection(String DB){
         Connection connect=null;
         try{
+            if(this.getDataBase()==DataBase.PostgreSQL){
+                //Carga el controlador de PostgreSQL
+                Class.forName("org.postgresql.Driver");
+                String url="";
+                String usuario="";
+                String contraseña="";
+                connect = DriverManager.getConnection(url, usuario, contraseña);
+
+
+            }
+            if(this.getDataBase()==DataBase.MySQL){
+                //Carga el controlador de MySQL
+                Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+                String url="";
+                String usuario="";
+                String contraseña="";
+                connect = DriverManager.getConnection(url, usuario, contraseña);
+            }
+
+            if(this.getDataBase()==DataBase.SQLServer){
+                //Carga el controlador de SQLServer
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                String url="";
+                String usuario="";
+                String contraseña="";
+                connect = DriverManager.getConnection(url, usuario, contraseña);
+            }
+
+
             connect = DriverManager.getConnection("jdbc:sqlite:"+DB);
             connect.setAutoCommit(false);
             if (connect!=null) {
@@ -114,6 +146,7 @@ try{
 
     public void setDataBase(DataBase dataBase) {
         this.dataBase = dataBase;
+        System.setProperty("DataBase",dataBase.name());
         System.out.println("SystemProperty Seteada: "+System.getProperty("DataBase"));
     }
 /*

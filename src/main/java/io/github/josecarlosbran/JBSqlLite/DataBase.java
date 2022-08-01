@@ -1,4 +1,4 @@
-package io.github.josecarlosbran.JBSqlLite.Exception;
+package io.github.josecarlosbran.JBSqlLite;
 
 public enum DataBase {
 

@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Se añadieron dependencias al Pom para PostgreSQL, MySQL y SQLServer">
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/DataBase.java" afterDir="false" />
+    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Creación de Excepciones">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/DataBaseUndefind.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Exception/DataBaseUndefind.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Exception/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/DataBase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/SqlLite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/SqlLite.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,16 +20,44 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="JBran" />
+                    <option name="lastUsedInstant" value="1659322064" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1659322063" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -46,13 +77,18 @@
     "last_opened_file_path": "C:/Users/josec/IdeaProjects/JBSqlUtils"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="io.github.josecarlosbran.JBSqlLite.Exception" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration name="SqlLite" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="io.github.josecarlosbran.JBSqlLite.SqlLite" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="io.github.josecarlosbran.JBSqlLite.SqlLite" />
       <module name="JBSqlUtils" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="io.github.josecarlosbran.JBSqlLite.*" />
+          <option name="PATTERN" value="io.github.josecarlosbran.JBSqlLite.Exception.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -62,7 +98,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.SqlLite" />
+        <item itemvalue="Application.io.github.josecarlosbran.JBSqlLite.SqlLite" />
       </list>
     </recent_temporary>
   </component>
@@ -78,7 +114,7 @@
       <workItem from="1659309119856" duration="2463000" />
       <workItem from="1659314654531" duration="79000" />
       <workItem from="1659314765791" duration="94000" />
-      <workItem from="1659314975581" duration="3311000" />
+      <workItem from="1659314975581" duration="6907000" />
     </task>
     <task id="LOCAL-00001" summary="commit inicial">
       <created>1658950672411</created>
@@ -101,7 +137,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659314847496</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Creación de Excepciones">
+      <created>1659322035761</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1659322035761</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,6 +165,7 @@
     <MESSAGE value="commit inicial" />
     <MESSAGE value="Se añadieron dependencias al Pom y descripción del proyecto" />
     <MESSAGE value="Se añadieron dependencias al Pom para PostgreSQL, MySQL y SQLServer" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se añadieron dependencias al Pom para PostgreSQL, MySQL y SQLServer" />
+    <MESSAGE value="Creación de Excepciones" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creación de Excepciones" />
   </component>
 </project>
