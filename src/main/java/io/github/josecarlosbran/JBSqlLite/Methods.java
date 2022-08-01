@@ -34,7 +34,7 @@ public class Methods extends UtilitiesJB {
         }
     */
 
-    
+
     private DataBase setearDB() throws DataBaseUndefind {
         String dataBase=System.getProperty("DataBase");
         if(stringIsNullOrEmpty(dataBase)){
