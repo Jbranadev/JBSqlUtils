@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Inclusión de conexion multi BD's 20%">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_08_2022_08_49__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_08_2022_08_49__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_31_07_2022_16_54__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_31_07_2022_16_54__Changes_.xml" afterDir="false" />
+    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Inclusión de conexion multi BD's 30%">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Enumerations/DataBase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Utilities/UtilitiesJB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Utilities/UtilitiesJB.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +112,7 @@
       <workItem from="1659314654531" duration="79000" />
       <workItem from="1659314765791" duration="94000" />
       <workItem from="1659314975581" duration="6960000" />
-      <workItem from="1659401085507" duration="3712000" />
+      <workItem from="1659401085507" duration="6118000" />
     </task>
     <task id="LOCAL-00001" summary="commit inicial">
       <created>1658950672411</created>
@@ -151,7 +149,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659325698800</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Inclusión de conexion multi BD's 30%">
+      <created>1659414416528</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1659414416528</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,6 +179,7 @@
     <MESSAGE value="Se añadieron dependencias al Pom para PostgreSQL, MySQL y SQLServer" />
     <MESSAGE value="Creación de Excepciones" />
     <MESSAGE value="Inclusión de conexion multi BD's 20%" />
-    <option name="LAST_COMMIT_MESSAGE" value="Inclusión de conexion multi BD's 20%" />
+    <MESSAGE value="Inclusión de conexion multi BD's 30%" />
+    <option name="LAST_COMMIT_MESSAGE" value="Inclusión de conexion multi BD's 30%" />
   </component>
 </project>

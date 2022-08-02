@@ -14,9 +14,12 @@ import java.util.Properties;
 
 public class Methods extends UtilitiesJB {
 
-    private DataBase dataBase=setearDB();
+    private DataBase dataBaseType=setearDBType();
+    
     private String host=setearHost();
     private String port=setearPort();
+    
+    private String BD=setearBD();
     private String user=setearUser();
     private String password=setearPassword();
     private Boolean getPropertySystem=true;
@@ -27,20 +30,10 @@ public class Methods extends UtilitiesJB {
     }
 
 
-    /*
-    try{
-
-        }catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el metodo execute, el cual llama la creación del hilo: "+ e.toString());
-            LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            LogsJB.fatal("Causa de la Excepción : "+e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
-        }
-    */
 
 
-    private DataBase setearDB() throws DataBaseUndefind {
+
+    private DataBase setearDBType() throws DataBaseUndefind {
         if(this.getGetPropertySystem()){
             String dataBase=System.getProperty("DataBase");
             if(stringIsNullOrEmpty(dataBase)){
@@ -48,19 +41,19 @@ public class Methods extends UtilitiesJB {
                 throw new DataBaseUndefind("No se a seteado la DataBase que índica a que BD's deseamos se pegue JBSqlUtils");
             }else{
                 if(dataBase.equals(DataBase.MySQL.name())){
-                    setDataBase(DataBase.MySQL);
+                    setDataBaseType(DataBase.MySQL);
                     return DataBase.MySQL;
                 }
                 if(dataBase.equals(DataBase.SQLite.name())){
-                    setDataBase(DataBase.SQLite);
+                    setDataBaseType(DataBase.SQLite);
                     return DataBase.SQLite;
                 }
                 if(dataBase.equals(DataBase.SQLServer.name())){
-                    setDataBase(DataBase.SQLServer);
+                    setDataBaseType(DataBase.SQLServer);
                     return DataBase.SQLServer;
                 }
                 if(dataBase.equals(DataBase.PostgreSQL.name())){
-                    setDataBase(DataBase.PostgreSQL);
+                    setDataBaseType(DataBase.PostgreSQL);
                     return DataBase.PostgreSQL;
                 }
             }
@@ -85,7 +78,7 @@ public class Methods extends UtilitiesJB {
         if(this.getGetPropertySystem()){
             String port=System.getProperty("DataBase.Port");
             if(stringIsNullOrEmpty(port)){
-                if(this.getDataBase()!=DataBase.SQLite){
+                if(this.getDataBaseType()!=DataBase.SQLite){
                     //Si la propiedad del sistema no esta definida, Lanza una Exepción
                     throw new PropertiesDBUndefined("No se a seteado el puerto en el que se encuentra escuchando la BD's a la cual deseamos se pegue JBSqlUtils");
                 }
@@ -109,6 +102,19 @@ public class Methods extends UtilitiesJB {
         return null;
     }
 
+    private String setearBD() throws PropertiesDBUndefined {
+        if(this.getGetPropertySystem()){
+            String DB=System.getProperty("DataBase.BD");
+            if(stringIsNullOrEmpty(DB)){
+                //Si la propiedad del sistema no esta definida, Lanza una Exepción
+                throw new PropertiesDBUndefined("No se a seteado la BD's a la cual deseamos se pegue JBSqlUtils");
+            }else{
+                this.setBD(DB);
+            }
+        }
+        return null;
+    }
+
     private String setearPassword() throws PropertiesDBUndefined {
         if(this.getGetPropertySystem()){
             String password=System.getProperty("DataBase.Password");
@@ -125,8 +131,9 @@ public class Methods extends UtilitiesJB {
     public Connection getConnection(String DB){
         Connection connect=null;
         try{
-            String url1="jdbc:"+this.getDataBase().getDBType();
-            if(this.getDataBase()==DataBase.PostgreSQL){
+            String url1="jdbc:"+this.getDataBaseType().getDBType()+ "://"+
+                    this.getHost()+":"+this.getPort()+"/";
+            if(this.getDataBaseType()==DataBase.PostgreSQL){
                 //Carga el controlador de PostgreSQL
                 Class.forName("org.postgresql.Driver");
                 String url="";
@@ -138,7 +145,7 @@ public class Methods extends UtilitiesJB {
 
 
             }
-            if(this.getDataBase()==DataBase.MySQL){
+            if(this.getDataBaseType()==DataBase.MySQL){
                 //Carga el controlador de MySQL
                 Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
                 String url="";
@@ -147,7 +154,7 @@ public class Methods extends UtilitiesJB {
                 //connect = DriverManager.getConnection(url, prop);
             }
 
-            if(this.getDataBase()==DataBase.SQLServer){
+            if(this.getDataBaseType()==DataBase.SQLServer){
                 //Carga el controlador de SQLServer
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 String url="";
@@ -188,34 +195,12 @@ public class Methods extends UtilitiesJB {
 
 
 
-    //Obtener un objeto generico de una lista
-    public static <T> T getObject(int id, List<T> lista){
-        return lista.get(id);
+    public DataBase getDataBaseType() {
+        return dataBaseType;
     }
 
-    //agregar un objeto generico de una lista
-    public static <T> void addDato(List<T> lista, T dato){
-        lista.add(dato);
-    }
-
-    public static <T> List<T> getall(T a, T b, T c){
-        List<T> lista=new ArrayList<>();
-        lista.add(a);
-        lista.add(b);
-        lista.add(c);
-        return lista;
-    }
-
-    public void imprimirnombreclase(){
-        System.out.println("Nombre de la clase: "+this.getClass().getName());
-    }
-
-    public DataBase getDataBase() {
-        return dataBase;
-    }
-
-    public void setDataBase(DataBase dataBase) {
-        this.dataBase = dataBase;
+    public void setDataBaseType(DataBase dataBase) {
+        this.dataBaseType = dataBase;
         if(this.getGetPropertySystem()){
             System.setProperty("DataBase",dataBase.name());
             System.out.println("SystemProperty Seteada: "+System.getProperty("DataBase"));
@@ -276,6 +261,18 @@ public class Methods extends UtilitiesJB {
 
     public void setGetPropertySystem(Boolean getPropertySystem) {
         this.getPropertySystem = getPropertySystem;
+    }
+
+    public String getBD() {
+        return BD;
+    }
+
+    public void setBD(String BD) {
+        this.BD = BD;
+        if(this.getGetPropertySystem()){
+            System.setProperty("DataBase.BD",BD);
+            System.out.println("SystemProperty Seteada: "+System.getProperty("DataBase.BD"));
+        }
     }
 /*
     public static void main(String[] args){
