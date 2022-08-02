@@ -13,7 +13,10 @@ import java.util.List;
 import java.util.Properties;
 
 public class Methods extends UtilitiesJB {
-
+    //https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-usagenotes-connect-drivermanager.html#connector-j-examples-connection-drivermanager
+    //https://docs.microsoft.com/en-us/sql/connect/jdbc/using-the-jdbc-driver?view=sql-server-ver16
+    //https://www.dev2qa.com/how-to-load-jdbc-configuration-from-properties-file-example/
+    //https://www.tutorialspoint.com/how-to-connect-to-postgresql-database-using-a-jdbc-program
     private DataBase dataBaseType=setearDBType();
     
     private String host=setearHost();
