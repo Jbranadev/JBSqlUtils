@@ -17,14 +17,42 @@ public class Methods extends UtilitiesJB {
     //https://docs.microsoft.com/en-us/sql/connect/jdbc/using-the-jdbc-driver?view=sql-server-ver16
     //https://www.dev2qa.com/how-to-load-jdbc-configuration-from-properties-file-example/
     //https://www.tutorialspoint.com/how-to-connect-to-postgresql-database-using-a-jdbc-program
+
+    /***
+     * Tipo de BD's a la cual se conectara.
+     */
     private DataBase dataBaseType=setearDBType();
-    
+
+    /***
+     * Host en el cual se encuentra la BD's a la cual se conectara.
+     */
     private String host=setearHost();
+
+    /***
+     * Puerto en el cual esta escuchando la BD's a la cual nos vamos a conectar.
+     */
     private String port=setearPort();
-    
+
+    /***
+     * Nombre de la BD's a la cual nos conectaremos.
+     */
     private String BD=setearBD();
+
+    /***
+     * Usuario de la BD's
+     */
     private String user=setearUser();
+
+    /***
+     * Contraseña del Usuario de la BD's
+     */
     private String password=setearPassword();
+
+    /***
+     * Indica si para este modelo se utilizará la BD's establecida en las propiedades del sistema
+     * al estar en TRUE, cuando esta en FALSE, eso indica que para este modelo se tendra
+     * una configuración personalizada.
+     */
     private Boolean getPropertySystem=true;
 
 
@@ -33,9 +61,13 @@ public class Methods extends UtilitiesJB {
     }
 
 
-
-
-
+    /***
+     * Setea el tipo de BD's al cual se estara conectando este modelo.
+     * @return Retorna el tipo de BD's al cual se estara conectando la BD's si esta definida
+     * de lo contrario retorna NULL.
+     * @throws DataBaseUndefind Lanza esta excepción si no se a seteado el Tipo de Base
+     * de Datos a la cual se conectara.
+     */
     private DataBase setearDBType() throws DataBaseUndefind {
         if(this.getGetPropertySystem()){
             String dataBase=System.getProperty("DataBase");
@@ -64,6 +96,13 @@ public class Methods extends UtilitiesJB {
         return null;
     }
 
+
+    /****
+     * Setea el Host en el cual se encuentra la BD's a la cual se conectara.
+     * @return Retorna el Host en el cual se encuentra la BD's, de no estar definido, retorna NULL
+     * @throws PropertiesDBUndefined Lanza esta excepción si no se a seteado el Host en el cual
+     * se encuentra la BD's
+     */
     private String setearHost() throws PropertiesDBUndefined {
         if(this.getGetPropertySystem()){
             String host=System.getProperty("DataBase.Host");
@@ -77,6 +116,12 @@ public class Methods extends UtilitiesJB {
         return null;
     }
 
+    /***
+     * Setea el Puerto en el cual esta escuchando la BD's a la cual nos vamos a conectar.
+     * @return Retorna el Puerto en el cual se encuentra la BD's, de no estar definido, retorna NULL
+     * @throws PropertiesDBUndefined Lanza esta excepción si no se a seteado el Puerto en el cual
+     * se encuentra la BD's
+     */
     private String setearPort() throws PropertiesDBUndefined {
         if(this.getGetPropertySystem()){
             String port=System.getProperty("DataBase.Port");
@@ -92,6 +137,14 @@ public class Methods extends UtilitiesJB {
         return null;
     }
 
+
+
+    /***
+     * Setea el Usuario de la BD's a la cual nos conectaremos
+     * @return Retorna el Usuario con el cual se conectara la BD's, de no estar definido, retorna NULL
+     * @throws PropertiesDBUndefined Lanza esta excepción si no se a seteado el Usuario con el cual
+     * se conectara a la BD's
+     */
     private String setearUser() throws PropertiesDBUndefined {
         if(this.getGetPropertySystem()){
             String user=System.getProperty("DataBase.User");
@@ -105,6 +158,12 @@ public class Methods extends UtilitiesJB {
         return null;
     }
 
+
+    /***
+     * Setea el Nombre de la BD's a la cual nos conectaremos.
+     * @return Retorna el nombre de la BD's a la cual nos conectaremos, de no estar definido, retorna NULL
+     * @throws PropertiesDBUndefined Lanza esta excepción si no se a seteado el Nombre de la BD's a la cual nos conectaremos.
+     */
     private String setearBD() throws PropertiesDBUndefined {
         if(this.getGetPropertySystem()){
             String DB=System.getProperty("DataBase.BD");
@@ -118,6 +177,13 @@ public class Methods extends UtilitiesJB {
         return null;
     }
 
+
+    /***
+     * Setea la contraseña del usuario de la BD's a la cual nos conectaremos.
+     * @return Retorna la contraseña del usuario con el cual se conectara la BD's, de no estar definida, retorna NULL
+     * @throws PropertiesDBUndefined Lanza esta excepción si no se a seteado la contraseña del usuario con el cual
+     * se conectara a la BD's
+     */
     private String setearPassword() throws PropertiesDBUndefined {
         if(this.getGetPropertySystem()){
             String password=System.getProperty("DataBase.Password");
@@ -131,7 +197,7 @@ public class Methods extends UtilitiesJB {
         return null;
     }
 
-    public Connection getConnection(String DB){
+    public Connection getConnection(){
         Connection connect=null;
         try{
             String url1="jdbc:"+this.getDataBaseType().getDBType()+ "://"+
@@ -167,10 +233,10 @@ public class Methods extends UtilitiesJB {
             }
 
 
-            connect = DriverManager.getConnection("jdbc:sqlite:"+DB);
+            //connect = DriverManager.getConnection("jdbc:sqlite:"+DB);
             connect.setAutoCommit(false);
             if (connect!=null) {
-                LogsJB.info("Conexión a BD's "+ DB+" Realizada exitosamente" );
+                //LogsJB.info("Conexión a BD's "+ DB+" Realizada exitosamente" );
             }
         }catch (Exception e) {
             LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: "+ e.toString());
