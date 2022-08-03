@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 
 public class Methods extends UtilitiesJB {
@@ -18,185 +19,27 @@ public class Methods extends UtilitiesJB {
     //https://www.dev2qa.com/how-to-load-jdbc-configuration-from-properties-file-example/
     //https://www.tutorialspoint.com/how-to-connect-to-postgresql-database-using-a-jdbc-program
 
-    /***
-     * Tipo de BD's a la cual se conectara.
-     */
-    private DataBase dataBaseType=setearDBType();
-
-    /***
-     * Host en el cual se encuentra la BD's a la cual se conectara.
-     */
-    private String host=setearHost();
-
-    /***
-     * Puerto en el cual esta escuchando la BD's a la cual nos vamos a conectar.
-     */
-    private String port=setearPort();
-
-    /***
-     * Nombre de la BD's a la cual nos conectaremos.
-     */
-    private String BD=setearBD();
-
-    /***
-     * Usuario de la BD's
-     */
-    private String user=setearUser();
-
-    /***
-     * Contraseña del Usuario de la BD's
-     */
-    private String password=setearPassword();
-
-    /***
-     * Indica si para este modelo se utilizará la BD's establecida en las propiedades del sistema
-     * al estar en TRUE, cuando esta en FALSE, eso indica que para este modelo se tendra
-     * una configuración personalizada.
-     */
-    private Boolean getPropertySystem=true;
-
-
-    public Methods() throws DataBaseUndefind, PropertiesDBUndefined {
-
-    }
-
-
-    /***
-     * Setea el tipo de BD's al cual se estara conectando este modelo.
-     * @return Retorna el tipo de BD's al cual se estara conectando la BD's si esta definida
-     * de lo contrario retorna NULL.
-     * @throws DataBaseUndefind Lanza esta excepción si no se a seteado el Tipo de Base
-     * de Datos a la cual se conectara.
-     */
-    private DataBase setearDBType() throws DataBaseUndefind {
-        if(this.getGetPropertySystem()){
-            String dataBase=System.getProperty("DataBase");
-            if(stringIsNullOrEmpty(dataBase)){
-                //Si la propiedad del sistema no esta definida, Lanza una Exepción
-                throw new DataBaseUndefind("No se a seteado la DataBase que índica a que BD's deseamos se pegue JBSqlUtils");
-            }else{
-                if(dataBase.equals(DataBase.MySQL.name())){
-                    setDataBaseType(DataBase.MySQL);
-                    return DataBase.MySQL;
-                }
-                if(dataBase.equals(DataBase.SQLite.name())){
-                    setDataBaseType(DataBase.SQLite);
-                    return DataBase.SQLite;
-                }
-                if(dataBase.equals(DataBase.SQLServer.name())){
-                    setDataBaseType(DataBase.SQLServer);
-                    return DataBase.SQLServer;
-                }
-                if(dataBase.equals(DataBase.PostgreSQL.name())){
-                    setDataBaseType(DataBase.PostgreSQL);
-                    return DataBase.PostgreSQL;
-                }
-            }
-        }
-        return null;
-    }
-
-
-    /****
-     * Setea el Host en el cual se encuentra la BD's a la cual se conectara.
-     * @return Retorna el Host en el cual se encuentra la BD's, de no estar definido, retorna NULL
-     * @throws PropertiesDBUndefined Lanza esta excepción si no se a seteado el Host en el cual
-     * se encuentra la BD's
-     */
-    private String setearHost() throws PropertiesDBUndefined {
-        if(this.getGetPropertySystem()){
-            String host=System.getProperty("DataBase.Host");
-            if(stringIsNullOrEmpty(host)){
-                //Si la propiedad del sistema no esta definida, Lanza una Exepción
-                throw new PropertiesDBUndefined("No se a seteado el host en el que se encuentra la BD's a la cual deseamos se pegue JBSqlUtils");
-            }else{
-                this.setHost(host);
-            }
-        }
-        return null;
-    }
-
-    /***
-     * Setea el Puerto en el cual esta escuchando la BD's a la cual nos vamos a conectar.
-     * @return Retorna el Puerto en el cual se encuentra la BD's, de no estar definido, retorna NULL
-     * @throws PropertiesDBUndefined Lanza esta excepción si no se a seteado el Puerto en el cual
-     * se encuentra la BD's
-     */
-    private String setearPort() throws PropertiesDBUndefined {
-        if(this.getGetPropertySystem()){
-            String port=System.getProperty("DataBase.Port");
-            if(stringIsNullOrEmpty(port)){
-                if(this.getDataBaseType()!=DataBase.SQLite){
-                    //Si la propiedad del sistema no esta definida, Lanza una Exepción
-                    throw new PropertiesDBUndefined("No se a seteado el puerto en el que se encuentra escuchando la BD's a la cual deseamos se pegue JBSqlUtils");
-                }
-            }else{
-                this.setPort(port);
-            }
-        }
-        return null;
-    }
 
 
 
-    /***
-     * Setea el Usuario de la BD's a la cual nos conectaremos
-     * @return Retorna el Usuario con el cual se conectara la BD's, de no estar definido, retorna NULL
-     * @throws PropertiesDBUndefined Lanza esta excepción si no se a seteado el Usuario con el cual
-     * se conectara a la BD's
-     */
-    private String setearUser() throws PropertiesDBUndefined {
-        if(this.getGetPropertySystem()){
-            String user=System.getProperty("DataBase.User");
-            if(stringIsNullOrEmpty(user)){
-                //Si la propiedad del sistema no esta definida, Lanza una Exepción
-                throw new PropertiesDBUndefined("No se a seteado el usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
-            }else{
-                this.setUser(user);
-            }
-        }
-        return null;
-    }
 
+/*
+    public static void main(String[] args){
+        List<String> cadenas= new ArrayList<>();
+        addDato(cadenas, "Jose");
+        addDato(cadenas, "Carlos");
+        addDato(cadenas, "Alfredo");
+        addDato(cadenas, "Bran");
+        addDato(cadenas, "Aguirre");
+        List<Integer> numeros= new ArrayList<>();
+        numeros.add(50);
+        numeros.add(100);
+        System.out.println("primer numero de la lista: "+getObject(0, numeros));
+        System.out.println("3 Cadena de la lista: "+getObject(2, cadenas));
+        getall(1, 5, 10).forEach(System.out::println);
 
-    /***
-     * Setea el Nombre de la BD's a la cual nos conectaremos.
-     * @return Retorna el nombre de la BD's a la cual nos conectaremos, de no estar definido, retorna NULL
-     * @throws PropertiesDBUndefined Lanza esta excepción si no se a seteado el Nombre de la BD's a la cual nos conectaremos.
-     */
-    private String setearBD() throws PropertiesDBUndefined {
-        if(this.getGetPropertySystem()){
-            String DB=System.getProperty("DataBase.BD");
-            if(stringIsNullOrEmpty(DB)){
-                //Si la propiedad del sistema no esta definida, Lanza una Exepción
-                throw new PropertiesDBUndefined("No se a seteado la BD's a la cual deseamos se pegue JBSqlUtils");
-            }else{
-                this.setBD(DB);
-            }
-        }
-        return null;
-    }
-
-
-    /***
-     * Setea la contraseña del usuario de la BD's a la cual nos conectaremos.
-     * @return Retorna la contraseña del usuario con el cual se conectara la BD's, de no estar definida, retorna NULL
-     * @throws PropertiesDBUndefined Lanza esta excepción si no se a seteado la contraseña del usuario con el cual
-     * se conectara a la BD's
-     */
-    private String setearPassword() throws PropertiesDBUndefined {
-        if(this.getGetPropertySystem()){
-            String password=System.getProperty("DataBase.Password");
-            if(stringIsNullOrEmpty(password)){
-                //Si la propiedad del sistema no esta definida, Lanza una Exepción
-                throw new PropertiesDBUndefined("No se a seteado la contraseña del usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
-            }else{
-                this.setPassword(password);
-            }
-        }
-        return null;
-    }
-
+    }*/
+/*
     public Connection getConnection(){
         Connection connect=null;
         try{
@@ -260,104 +103,7 @@ public class Methods extends UtilitiesJB {
             LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
     }
+*/
 
-
-
-
-    public DataBase getDataBaseType() {
-        return dataBaseType;
-    }
-
-    public void setDataBaseType(DataBase dataBase) {
-        this.dataBaseType = dataBase;
-        if(this.getGetPropertySystem()){
-            System.setProperty("DataBase",dataBase.name());
-            System.out.println("SystemProperty Seteada: "+System.getProperty("DataBase"));
-        }
-    }
-
-    public String getHost() {
-        return host;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
-        if(this.getGetPropertySystem()){
-            System.setProperty("DataBase.Host",host);
-            System.out.println("SystemProperty Seteada: "+System.getProperty("DataBase.Host"));
-        }
-    }
-
-    public String getPort() {
-        return port;
-    }
-
-    public void setPort(String port) {
-        this.port = port;
-        if(this.getGetPropertySystem()){
-            System.setProperty("DataBase.Port",port);
-            System.out.println("SystemProperty Seteada: "+System.getProperty("DataBase.Port"));
-        }
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-        if(this.getGetPropertySystem()){
-            System.setProperty("DataBase.User",user);
-            System.out.println("SystemProperty Seteada: "+System.getProperty("DataBase.User"));
-        }
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-        if(this.getGetPropertySystem()){
-            System.setProperty("DataBase.Password",password);
-            System.out.println("SystemProperty Seteada: "+System.getProperty("DataBase.Password"));
-        }
-    }
-
-    public Boolean getGetPropertySystem() {
-        return getPropertySystem;
-    }
-
-    public void setGetPropertySystem(Boolean getPropertySystem) {
-        this.getPropertySystem = getPropertySystem;
-    }
-
-    public String getBD() {
-        return BD;
-    }
-
-    public void setBD(String BD) {
-        this.BD = BD;
-        if(this.getGetPropertySystem()){
-            System.setProperty("DataBase.BD",BD);
-            System.out.println("SystemProperty Seteada: "+System.getProperty("DataBase.BD"));
-        }
-    }
-/*
-    public static void main(String[] args){
-        List<String> cadenas= new ArrayList<>();
-        addDato(cadenas, "Jose");
-        addDato(cadenas, "Carlos");
-        addDato(cadenas, "Alfredo");
-        addDato(cadenas, "Bran");
-        addDato(cadenas, "Aguirre");
-        List<Integer> numeros= new ArrayList<>();
-        numeros.add(50);
-        numeros.add(100);
-        System.out.println("primer numero de la lista: "+getObject(0, numeros));
-        System.out.println("3 Cadena de la lista: "+getObject(2, cadenas));
-        getall(1, 5, 10).forEach(System.out::println);
-
-    }*/
 
 }

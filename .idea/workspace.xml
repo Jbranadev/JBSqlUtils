@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Inclusión de conexion multi BD's 35%">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_08_2022_19_20__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_08_2022_19_20__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/SqlLite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/JBSqlUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,9 +81,9 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="io.github.josecarlosbran.JBSqlLite.SqlLite" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="io.github.josecarlosbran.JBSqlLite.SqlLite" />
-      <module name="JBSqlUtils" />
+    <configuration name="JBSqlUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="io.github.josecarlosbran.JBSqlLite.JBSqlUtils" />
+      <module name="JBSqlLite" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="io.github.josecarlosbran.JBSqlLite.Exception.*" />
@@ -94,7 +96,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.io.github.josecarlosbran.JBSqlLite.SqlLite" />
+        <item itemvalue="Application.JBSqlUtils" />
       </list>
     </recent_temporary>
   </component>
