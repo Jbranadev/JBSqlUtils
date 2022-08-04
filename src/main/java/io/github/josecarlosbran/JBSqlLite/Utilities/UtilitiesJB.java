@@ -23,7 +23,8 @@ public class UtilitiesJB {
      * @return Retorna True si la cadena envíada esta vacía o nula, de lo contrario retorna false
      */
     public static boolean stringIsNullOrEmpty(String cadena){
-        if(cadena.isEmpty()|| Objects.isNull(cadena)){
+        //System.out.println(cadena);
+        if( Objects.isNull(cadena)||cadena.isEmpty()){
             return true;
         }
         return false;

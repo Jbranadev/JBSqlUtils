@@ -13,73 +13,63 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 
-public class Methods extends UtilitiesJB {
+public class Methods extends Conexion {
+    public Methods() throws DataBaseUndefind, PropertiesDBUndefined {
+        super();
+    }
     //https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-usagenotes-connect-drivermanager.html#connector-j-examples-connection-drivermanager
     //https://docs.microsoft.com/en-us/sql/connect/jdbc/using-the-jdbc-driver?view=sql-server-ver16
     //https://www.dev2qa.com/how-to-load-jdbc-configuration-from-properties-file-example/
     //https://www.tutorialspoint.com/how-to-connect-to-postgresql-database-using-a-jdbc-program
 
 
-
-
-
-/*
-    public static void main(String[] args){
-        List<String> cadenas= new ArrayList<>();
-        addDato(cadenas, "Jose");
-        addDato(cadenas, "Carlos");
-        addDato(cadenas, "Alfredo");
-        addDato(cadenas, "Bran");
-        addDato(cadenas, "Aguirre");
-        List<Integer> numeros= new ArrayList<>();
-        numeros.add(50);
-        numeros.add(100);
-        System.out.println("primer numero de la lista: "+getObject(0, numeros));
-        System.out.println("3 Cadena de la lista: "+getObject(2, cadenas));
-        getall(1, 5, 10).forEach(System.out::println);
-
-    }*/
-/*
+    /**
+     * Obtiene la conexión del modelo a la BD's con las propiedades definidas.
+     * @return Retorna la conexión del modelo a la BD's con las propiedades definidas.
+     */
     public Connection getConnection(){
         Connection connect=null;
         try{
-            String url1="jdbc:"+this.getDataBaseType().getDBType()+ "://"+
-                    this.getHost()+":"+this.getPort()+"/";
+            String url=null;
             if(this.getDataBaseType()==DataBase.PostgreSQL){
                 //Carga el controlador de PostgreSQL
+                url=null;
+                connect=null;
                 Class.forName("org.postgresql.Driver");
-                String url="";
-                String usuario="";
-                String contraseña="";
-
-                //connect = DriverManager.getConnection(url, prop);
-
-
-
-            }
-            if(this.getDataBaseType()==DataBase.MySQL){
+                url="jdbc:"+this.getDataBaseType().getDBType()+ "://"+
+                        this.getHost()+":"+this.getPort()+"/"+this.getBD();
+                String usuario=this.getUser();
+                String contraseña=this.getPassword();
+                connect = DriverManager.getConnection(url, usuario, contraseña);
+            }else if(this.getDataBaseType()==DataBase.MySQL){
+                url=null;
+                connect=null;
                 //Carga el controlador de MySQL
                 Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-                String url="";
-                String usuario="";
-                String contraseña="";
-                //connect = DriverManager.getConnection(url, prop);
-            }
-
-            if(this.getDataBaseType()==DataBase.SQLServer){
+                url="jdbc:"+this.getDataBaseType().getDBType()+ "://"+
+                        this.getHost()+":"+this.getPort()+"/"+this.getBD();
+                String usuario=this.getUser();
+                String contraseña=this.getPassword();
+                connect = DriverManager.getConnection(url, usuario, contraseña);
+            }else if(this.getDataBaseType()==DataBase.SQLServer){
+                url=null;
+                connect=null;
                 //Carga el controlador de SQLServer
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String url="";
-                String usuario="";
-                String contraseña="";
-                //connect = DriverManager.getConnection(url, prop);
+                url="jdbc:"+this.getDataBaseType().getDBType()+ "://"+
+                        this.getHost()+":"+this.getPort()+";databaseName="+this.getBD();
+                String usuario=this.getUser();
+                String contraseña=this.getPassword();
+                connect = DriverManager.getConnection(url, usuario, contraseña);
+            }else if(this.getDataBaseType()==DataBase.SQLite){
+                url=null;
+                connect=null;
+                url="jdbc:"+this.getDataBaseType().getDBType()+":"+this.getBD();
+                connect = DriverManager.getConnection(url);
             }
 
-
-            //connect = DriverManager.getConnection("jdbc:sqlite:"+DB);
-            connect.setAutoCommit(false);
-            if (connect!=null) {
-                //LogsJB.info("Conexión a BD's "+ DB+" Realizada exitosamente" );
+            if (!Objects.isNull(connect)) {
+                LogsJB.info("Conexión a BD's "+ this.getBD()+" Realizada exitosamente" );
             }
         }catch (Exception e) {
             LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: "+ e.toString());
@@ -91,6 +81,10 @@ public class Methods extends UtilitiesJB {
         return connect;
     }
 
+    /**
+     * Cierra la conexión a BD's
+     * @param connect Conexión que se desea cerrar.
+     */
     public void closeConnection(Connection connect){
         try{
             connect.close();
@@ -103,7 +97,8 @@ public class Methods extends UtilitiesJB {
             LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
     }
-*/
+
+
 
 
 }
