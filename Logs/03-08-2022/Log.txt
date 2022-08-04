@@ -754,3 +754,35 @@
 2022/08/03 22:45:45 168					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Mensaje de la Excepción : No se a conectado el modelo a la BD's
 
 2022/08/03 22:45:45 170					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@6576fe71
+*
+*
+*
+*
+*
+2022/08/03 23:21:32 730					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Excepción disparada al obtener la conexión a la BD's proporcionada: java.sql.SQLException: path to 'C:/Users/josec/IdeaProjects/JBSqlUtils/BD/JBSqlUtils.db': 'C:\Users\josec\IdeaProjects\JBSqlUtils\BD' does not exist
+
+2022/08/03 23:21:32 738					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Tipo de Excepción : class java.sql.SQLException
+
+2022/08/03 23:21:32 740					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Causa de la Excepción : null
+
+2022/08/03 23:21:32 743					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Mensaje de la Excepción : path to 'C:/Users/josec/IdeaProjects/JBSqlUtils/BD/JBSqlUtils.db': 'C:\Users\josec\IdeaProjects\JBSqlUtils\BD' does not exist
+
+2022/08/03 23:21:32 745					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@4ac68d3e
+
+2022/08/03 23:21:32 748					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Excepción disparada al obtener la conexión a la BD's proporcionada: io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind: No se a conectado el modelo a la BD's
+
+2022/08/03 23:21:32 750					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Tipo de Excepción : class io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind
+
+2022/08/03 23:21:32 752					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Causa de la Excepción : null
+
+2022/08/03 23:21:32 754					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Mensaje de la Excepción : No se a conectado el modelo a la BD's
+
+2022/08/03 23:21:32 757					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@5f205aa
+*
+*
+*
+*
+*
+2022/08/03 23:22:16 075					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's C:/Users/josec/IdeaProjects/JBSqlUtils/BD/JBSqlUtils.db Realizada exitosamente
+
+2022/08/03 23:22:16 083					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada

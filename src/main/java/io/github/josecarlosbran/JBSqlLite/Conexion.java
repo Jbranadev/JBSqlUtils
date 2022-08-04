@@ -122,9 +122,9 @@ public class Conexion {
                     //Si la propiedad del sistema no esta definida, Lanza una Exepción
                     throw new PropertiesDBUndefined("No se a seteado el host en el que se encuentra la BD's a la cual deseamos se pegue JBSqlUtils");
                 }
-            } else {
-                this.setHost(host);
             }
+            return host;
+
         }
         return null;
     }
@@ -148,9 +148,9 @@ public class Conexion {
                     //Si la propiedad del sistema no esta definida, Lanza una Exepción
                     throw new PropertiesDBUndefined("No se a seteado el puerto en el que se encuentra escuchando la BD's a la cual deseamos se pegue JBSqlUtils");
                 }
-            } else {
-                this.setPort(port);
             }
+            return port;
+
         }
         return null;
     }
@@ -173,11 +173,9 @@ public class Conexion {
                 if (stringIsNullOrEmpty(user)) {
                     //Si la propiedad del sistema no esta definida, Lanza una Exepción
                     throw new PropertiesDBUndefined("No se a seteado el usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
-
                 }
-            } else {
-                this.setUser(user);
             }
+            return user;
         }
         return null;
     }
@@ -195,13 +193,13 @@ public class Conexion {
     private String setearBD() throws PropertiesDBUndefined {
         if (this.getGetPropertySystem()) {
             String DB = System.getProperty("DataBaseBD");
-            System.out.println("BD seteada en system property: "+DB);
+            System.out.println("BD seteada en system property: " + DB);
             if (stringIsNullOrEmpty(DB)) {
                 //Si la propiedad del sistema no esta definida, Lanza una Exepción
                 throw new PropertiesDBUndefined("No se a seteado la BD's a la cual deseamos se pegue JBSqlUtils");
-            } else {
-                this.setBD(DB);
             }
+            return DB;
+
         }
         return null;
     }
@@ -222,9 +220,8 @@ public class Conexion {
                     throw new PropertiesDBUndefined("No se a seteado la contraseña del usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
 
                 }
-            } else {
-                this.setPassword(password);
             }
+            return password;
         }
         return null;
     }
@@ -299,7 +296,7 @@ public class Conexion {
     public void setHost(String host) {
         try {
             this.host = host;
-            if (this.getGetPropertySystem()&&!stringIsNullOrEmpty(host)) {
+            if (this.getGetPropertySystem() && !stringIsNullOrEmpty(host)) {
                 System.setProperty("DataBaseHost", host);
                 System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseHost"));
             }
@@ -340,7 +337,7 @@ public class Conexion {
     public void setPort(String port) {
         try {
             this.port = port;
-            if (this.getGetPropertySystem()&&!stringIsNullOrEmpty(port)) {
+            if (this.getGetPropertySystem() && !stringIsNullOrEmpty(port)) {
                 System.setProperty("DataBasePort", port);
                 System.out.println("SystemProperty Seteada: " + System.getProperty("DataBasePort"));
             }
@@ -380,7 +377,7 @@ public class Conexion {
     public void setUser(String user) {
         try {
             this.user = user;
-            if (this.getGetPropertySystem()&&!stringIsNullOrEmpty(user)) {
+            if (this.getGetPropertySystem() && !stringIsNullOrEmpty(user)) {
                 System.setProperty("DataBaseUser", user);
                 System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseUser"));
             }
@@ -419,7 +416,7 @@ public class Conexion {
     public void setPassword(String password) {
         try {
             this.password = password;
-            if (this.getGetPropertySystem()&&!stringIsNullOrEmpty(password)) {
+            if (this.getGetPropertySystem() && !stringIsNullOrEmpty(password)) {
                 System.setProperty("DataBasePassword", password);
                 System.out.println("SystemProperty Seteada: " + System.getProperty("DataBasePassword"));
             }
@@ -455,8 +452,8 @@ public class Conexion {
     public void setBD(String BD) {
         try {
             this.BD = BD;
-            if (this.getGetPropertySystem()&&!stringIsNullOrEmpty(BD)) {
-                System.out.println("Base de datos a setear: "+BD);
+            if (this.getGetPropertySystem() && !stringIsNullOrEmpty(BD)) {
+                System.out.println("Base de datos a setear: " + BD);
                 System.setProperty("DataBaseBD", BD);
                 System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseBD"));
             }
