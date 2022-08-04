@@ -4,10 +4,15 @@ import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlLite.Utilities.ColumnsSQL;
+import io.github.josecarlosbran.JBSqlLite.Utilities.TablesSQL;
 import io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
@@ -54,6 +59,12 @@ public class Conexion {
 
     private Connection connect = null;
 
+    private Boolean tableExist=null;
+
+    private String tableName=null;
+
+    protected List<ColumnsSQL> Columnas=new LinkedList<>();
+
 
     public Conexion() throws DataBaseUndefind, PropertiesDBUndefined {
         this.setGetPropertySystem(true);
@@ -63,6 +74,14 @@ public class Conexion {
         this.setPort(setearPort());
         this.setUser(setearUser());
         this.setPassword(setearPassword());
+    }
+
+    public List<ColumnsSQL> getColumnas() {
+        return this.Columnas;
+    }
+
+    public void setColumnas(List<ColumnsSQL> columnas) {
+        this.Columnas = columnas;
     }
 
 
@@ -524,5 +543,21 @@ public class Conexion {
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
+    }
+
+    public Boolean getTableExist() {
+        return tableExist;
+    }
+
+    public void setTableExist(Boolean tableExist) {
+        this.tableExist = tableExist;
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
     }
 }

@@ -1,17 +1,25 @@
 package io.github.josecarlosbran.JBSqlLite;
 
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
+import io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlLite.Utilities.ColumnsSQL;
+import io.github.josecarlosbran.JBSqlLite.Utilities.TablesSQL;
 import io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
+import javax.print.attribute.ResolutionSyntax;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Methods extends Conexion {
     public Methods() throws DataBaseUndefind, PropertiesDBUndefined {
@@ -70,6 +78,7 @@ public class Methods extends Conexion {
 
             if (!Objects.isNull(connect)) {
                 LogsJB.info("Conexión a BD's "+ this.getBD()+" Realizada exitosamente" );
+                tableExist(connect);
             }
         }catch (Exception e) {
             LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: "+ e.toString());
@@ -98,7 +107,75 @@ public class Methods extends Conexion {
         }
     }
 
+    public void tableExist(Connection connexion) {
+        Runnable VerificarExistencia= ()->{
+            try{
+                if(!this.getTableExist()){
+                    DatabaseMetaData metaData=connexion.getMetaData();
+                    ResultSet tables =metaData.getTables(null, null, "%", null);
+                    //Obtener las tablas disponibles
+                    TablesSQL.getTablas().clear();
+                    while(tables.next()){
+                        TablesSQL temp=new TablesSQL();
+                        temp.setTABLE_CAT(tables.getString(1));
+                        temp.setTABLE_SCHEM(tables.getString(2));
+                        temp.setTABLE_NAME(tables.getString(3));
+                        temp.setTABLE_TYPE(tables.getString(4));
+                        temp.setREMARKS(tables.getString(5));
+                        temp.setTYPE_CAT(tables.getString(6));
+                        temp.setTYPE_SCHEM(tables.getString(7));
+                        temp.setTYPE_NAME(tables.getString(8));
+                        temp.setSELF_REFERENCING_COL_NAME(tables.getString(9));
+                        temp.setREF_GENERATION(tables.getString(10));
+                        TablesSQL.getTablas().add(temp);
+                        String NameModel=this.getClass().getSimpleName();
+                        String NameTable=temp.getTABLE_NAME();
+                        if(NameModel.equalsIgnoreCase(NameTable)){
+                            this.setTableExist(Boolean.TRUE);
+                            this.setTableName(NameTable);
+                            LogsJB.info("La tabla correspondiente a este modelo, existe en BD's");
+                        }else{
+                            this.setTableExist(Boolean.FALSE);
+                            LogsJB.info("La tabla correspondiente a este modelo, No existe en BD's");
+                        }
+                    }
+                }else{
+                    LogsJB.info("La tabla correspondiente a este modelo, existe en BD's");
+                }
 
+            }catch (Exception e) {
+                LogsJB.fatal("Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: "+ e.toString());
+                LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+                LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+                LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+                LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+            }
+        };
+        ExecutorService executor = Executors.newFixedThreadPool(1);
+        executor.submit(VerificarExistencia);
+        executor.shutdown();
+    }
+
+    public void getColumnsTable(DatabaseMetaData metaData){
+        try{
+            ResultSet columnas=metaData.getColumns(null, null, this.getTableName(), null);
+            //Obtener las tablas disponibles
+            this.getColumnas().clear();
+            while(columnas.next()){
+                ColumnsSQL temp=new ColumnsSQL();
+
+
+
+            }
+        }catch (Exception e) {
+            LogsJB.fatal("Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo: "+ e.toString());
+            LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+        }
+
+    }
 
 
 }
