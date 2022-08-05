@@ -4,9 +4,13 @@ import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlLite.Utilities.ColumnsSQL;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import java.nio.file.Paths;
+import java.util.function.Consumer;
+
+import static io.github.josecarlosbran.JBSqlLite.JBSqlUtils.*;
 
 public class Principal {
 
@@ -30,12 +34,27 @@ public class Principal {
     public static void main(String[] args){
         try{
             String BDSqlite= (Paths.get("").toAbsolutePath().normalize().toString()+"/BD/JBSqlUtils.db").replace("\\","/");
-            JBSqlUtils.setDataBaseGlobal(BDSqlite);
-            JBSqlUtils.setDataBaseTypeGlobal(DataBase.SQLite);
-            Thread.sleep(1000);
+            String DB="JBSQLUTILS";
+
+            setDataBaseGlobal(DB);
+            setDataBaseTypeGlobal(DataBase.MySQL);
+            setHostGlobal("localhost");
+            setPortGlobal("5076");
+            setUserGlobal("Bran");
+            setPasswordGlobal("bran");
+            Consumer<ColumnsSQL> consumer= ColumnsSQL-> {
+                System.out.println("TableName: "+ColumnsSQL.getTABLE_NAME());
+                System.out.println("ColumnName: "+ColumnsSQL.getCOLUMN_NAME());
+                System.out.println("Tipo de Dato: "+ColumnsSQL.getTYPE_NAME());
+                System.out.println("");
+            };
+
             Test test=new Test();
             test.setConnect(test.getConnection());
+            Thread.sleep(2000);
             test.closeConnection(test.getConnect());
+            Thread.sleep(1000);
+            test.getColumnas().stream().forEach(consumer);
         }catch (DataBaseUndefind | ConexionUndefind | PropertiesDBUndefined |InterruptedException e) {
             LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: "+ e.toString());
             LogsJB.fatal("Tipo de Excepción : "+e.getClass());
@@ -45,5 +64,7 @@ public class Principal {
         }
 
     }
+
+
 
 }

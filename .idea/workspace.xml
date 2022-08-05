@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Metodo para obtener las columnas de un modelo realizado">
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Enumerations/JavatoSQL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Enumerations/SQLtoJava.java" afterDir="false" />
+    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Creación de Interfaz para conversión de Datos">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Conexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Conexion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/JBSqlUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/JBSqlUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,7 +204,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659666209330</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Creación de Interfaz para conversión de Datos">
+      <created>1659672565069</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1659672565069</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,6 +237,7 @@
     <MESSAGE value="Inclusión de conexion multi BD's 30%" />
     <MESSAGE value="Inclusión de conexion multi BD's 35%" />
     <MESSAGE value="Metodo para obtener las columnas de un modelo realizado" />
-    <option name="LAST_COMMIT_MESSAGE" value="Metodo para obtener las columnas de un modelo realizado" />
+    <MESSAGE value="Creación de Interfaz para conversión de Datos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creación de Interfaz para conversión de Datos" />
   </component>
 </project>

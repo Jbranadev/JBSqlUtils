@@ -30,90 +30,93 @@ public class Methods extends Conexion {
 
     /**
      * Obtiene la conexión del modelo a la BD's con las propiedades definidas.
+     *
      * @return Retorna la conexión del modelo a la BD's con las propiedades definidas.
      */
-    public Connection getConnection(){
-        Connection connect=null;
-        try{
-            String url=null;
-            if(this.getDataBaseType()==DataBase.PostgreSQL){
+    public Connection getConnection() {
+        Connection connect = null;
+        try {
+            String url = null;
+            if (this.getDataBaseType() == DataBase.PostgreSQL) {
                 //Carga el controlador de PostgreSQL
-                url=null;
-                connect=null;
+                url = null;
+                connect = null;
                 Class.forName("org.postgresql.Driver");
-                url="jdbc:"+this.getDataBaseType().getDBType()+ "://"+
-                        this.getHost()+":"+this.getPort()+"/"+this.getBD();
-                String usuario=this.getUser();
-                String contraseña=this.getPassword();
+                url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
+                        this.getHost() + ":" + this.getPort() + "/" + this.getBD();
+                String usuario = this.getUser();
+                String contraseña = this.getPassword();
                 connect = DriverManager.getConnection(url, usuario, contraseña);
-            }else if(this.getDataBaseType()==DataBase.MySQL){
-                url=null;
-                connect=null;
+            } else if (this.getDataBaseType() == DataBase.MySQL) {
+                url = null;
+                connect = null;
                 //Carga el controlador de MySQL
                 Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-                url="jdbc:"+this.getDataBaseType().getDBType()+ "://"+
-                        this.getHost()+":"+this.getPort()+"/"+this.getBD();
-                String usuario=this.getUser();
-                String contraseña=this.getPassword();
+                url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
+                        this.getHost() + ":" + this.getPort() + "/" + this.getBD();
+                String usuario = this.getUser();
+                String contraseña = this.getPassword();
                 connect = DriverManager.getConnection(url, usuario, contraseña);
-            }else if(this.getDataBaseType()==DataBase.SQLServer){
-                url=null;
-                connect=null;
+            } else if (this.getDataBaseType() == DataBase.SQLServer) {
+                url = null;
+                connect = null;
                 //Carga el controlador de SQLServer
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                url="jdbc:"+this.getDataBaseType().getDBType()+ "://"+
-                        this.getHost()+":"+this.getPort()+";databaseName="+this.getBD();
-                String usuario=this.getUser();
-                String contraseña=this.getPassword();
+                url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
+                        this.getHost() + ":" + this.getPort() + ";databaseName=" + this.getBD();
+                String usuario = this.getUser();
+                String contraseña = this.getPassword();
                 connect = DriverManager.getConnection(url, usuario, contraseña);
-            }else if(this.getDataBaseType()==DataBase.SQLite){
-                url=null;
-                connect=null;
-                url="jdbc:"+this.getDataBaseType().getDBType()+":"+this.getBD();
+            } else if (this.getDataBaseType() == DataBase.SQLite) {
+                url = null;
+                connect = null;
+                url = "jdbc:" + this.getDataBaseType().getDBType() + ":" + this.getBD();
                 connect = DriverManager.getConnection(url);
             }
 
             if (!Objects.isNull(connect)) {
-                LogsJB.info("Conexión a BD's "+ this.getBD()+" Realizada exitosamente" );
+                LogsJB.info("Conexión a BD's " + this.getBD() + " Realizada exitosamente");
                 tableExist(connect);
             }
-        }catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: "+ e.toString());
-            LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            LogsJB.fatal("Causa de la Excepción : "+e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+        } catch (Exception e) {
+            LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
         return connect;
     }
 
     /**
      * Cierra la conexión a BD's
+     *
      * @param connect Conexión que se desea cerrar.
      */
-    public void closeConnection(Connection connect){
-        try{
+    public void closeConnection(Connection connect) {
+        try {
             connect.close();
             LogsJB.info("Conexión a BD's cerrada");
-        }catch (Exception e) {
-            LogsJB.fatal("Excepción disparada cerrar la conexión a la BD's: "+ e.toString());
-            LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            LogsJB.fatal("Causa de la Excepción : "+e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+        } catch (Exception e) {
+            LogsJB.fatal("Excepción disparada cerrar la conexión a la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
     }
 
     protected void tableExist(Connection connexion) {
-        Runnable VerificarExistencia= ()->{
-            try{
-                if(!this.getTableExist()){
-                    DatabaseMetaData metaData=connexion.getMetaData();
-                    ResultSet tables =metaData.getTables(null, null, "%", null);
+        Runnable VerificarExistencia = () -> {
+            try {
+                if (!this.getTableExist()) {
+
+                    DatabaseMetaData metaData = connexion.getMetaData();
+                    ResultSet tables = metaData.getTables(null, null, "%", null);
                     //Obtener las tablas disponibles
                     TablesSQL.getTablas().clear();
-                    while(tables.next()){
-                        TablesSQL temp=new TablesSQL();
+                    while (tables.next()) {
+                        TablesSQL temp = new TablesSQL();
                         temp.setTABLE_CAT(tables.getString(1));
                         temp.setTABLE_SCHEM(tables.getString(2));
                         temp.setTABLE_NAME(tables.getString(3));
@@ -125,28 +128,28 @@ public class Methods extends Conexion {
                         temp.setSELF_REFERENCING_COL_NAME(tables.getString(9));
                         temp.setREF_GENERATION(tables.getString(10));
                         TablesSQL.getTablas().add(temp);
-                        String NameModel=this.getClass().getSimpleName();
-                        String NameTable=temp.getTABLE_NAME();
-                        if(NameModel.equalsIgnoreCase(NameTable)){
+                        String NameModel = this.getClass().getSimpleName();
+                        String NameTable = temp.getTABLE_NAME();
+                        if (NameModel.equalsIgnoreCase(NameTable)) {
                             this.setTableExist(Boolean.TRUE);
                             this.setTableName(NameTable);
                             LogsJB.info("La tabla correspondiente a este modelo, existe en BD's");
                             getColumnsTable(metaData);
-                        }else{
-                            this.setTableExist(Boolean.FALSE);
-                            LogsJB.info("La tabla correspondiente a este modelo, No existe en BD's");
                         }
                     }
-                }else{
+                    if (!this.getTableExist()) {
+                        LogsJB.info("La tabla correspondiente a este modelo, No existe en BD's");
+                    }
+                } else {
                     LogsJB.info("La tabla correspondiente a este modelo, existe en BD's");
                 }
 
-            }catch (Exception e) {
-                LogsJB.fatal("Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: "+ e.toString());
-                LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-                LogsJB.fatal("Causa de la Excepción : "+e.getCause());
-                LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-                LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+            } catch (Exception e) {
+                LogsJB.fatal("Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: " + e.toString());
+                LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
             }
         };
         ExecutorService executor = Executors.newFixedThreadPool(1);
@@ -154,14 +157,14 @@ public class Methods extends Conexion {
         executor.shutdown();
     }
 
-    protected void getColumnsTable(DatabaseMetaData metaData){
-        Runnable ObtenerColumnas= ()->{
-            try{
-                ResultSet columnas=metaData.getColumns(null, null, this.getTableName(), null);
+    protected void getColumnsTable(DatabaseMetaData metaData) {
+        Runnable ObtenerColumnas = () -> {
+            try {
+                ResultSet columnas = metaData.getColumns(null, null, this.getTableName(), null);
                 //Obtener las tablas disponibles
                 this.getColumnas().clear();
-                while(columnas.next()){
-                    ColumnsSQL temp=new ColumnsSQL();
+                while (columnas.next()) {
+                    ColumnsSQL temp = new ColumnsSQL();
                     temp.setTABLE_CAT(columnas.getString(1));
                     temp.setTABLE_SCHEM(columnas.getString(2));
                     temp.setTABLE_NAME(columnas.getString(3));
@@ -189,12 +192,12 @@ public class Methods extends Conexion {
                     //Types.ARRAY
 
                 }
-            }catch (Exception e) {
-                LogsJB.fatal("Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo: "+ e.toString());
-                LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-                LogsJB.fatal("Causa de la Excepción : "+e.getCause());
-                LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-                LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+            } catch (Exception e) {
+                LogsJB.fatal("Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo: " + e.toString());
+                LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
             }
         };
         ExecutorService executor = Executors.newFixedThreadPool(1);

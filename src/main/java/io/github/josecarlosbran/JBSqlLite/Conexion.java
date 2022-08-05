@@ -59,7 +59,7 @@ public class Conexion {
 
     private Connection connect = null;
 
-    private Boolean tableExist=null;
+    private Boolean tableExist=false;
 
     private String tableName=null;
 
@@ -212,7 +212,7 @@ public class Conexion {
     private String setearBD() throws PropertiesDBUndefined {
         if (this.getGetPropertySystem()) {
             String DB = System.getProperty("DataBaseBD");
-            System.out.println("BD seteada en system property: " + DB);
+            //System.out.println("BD seteada en system property: " + DB);
             if (stringIsNullOrEmpty(DB)) {
                 //Si la propiedad del sistema no esta definida, Lanza una Exepción
                 throw new PropertiesDBUndefined("No se a seteado la BD's a la cual deseamos se pegue JBSqlUtils");
@@ -276,7 +276,7 @@ public class Conexion {
             this.dataBaseType = dataBase;
             if (this.getGetPropertySystem()) {
                 System.setProperty("DataBase", dataBase.name());
-                System.out.println("SystemProperty Seteada: " + System.getProperty("DataBase"));
+                //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBase"));
             }
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el tipo de BD's: " + e.toString());
@@ -317,7 +317,7 @@ public class Conexion {
             this.host = host;
             if (this.getGetPropertySystem() && !stringIsNullOrEmpty(host)) {
                 System.setProperty("DataBaseHost", host);
-                System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseHost"));
+                //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseHost"));
             }
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el host en el que se encuentra la BD's: " + e.toString());
@@ -358,7 +358,7 @@ public class Conexion {
             this.port = port;
             if (this.getGetPropertySystem() && !stringIsNullOrEmpty(port)) {
                 System.setProperty("DataBasePort", port);
-                System.out.println("SystemProperty Seteada: " + System.getProperty("DataBasePort"));
+                //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBasePort"));
             }
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el puerto en el cual se encuentra escuchando la BD's: " + e.toString());
@@ -398,7 +398,7 @@ public class Conexion {
             this.user = user;
             if (this.getGetPropertySystem() && !stringIsNullOrEmpty(user)) {
                 System.setProperty("DataBaseUser", user);
-                System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseUser"));
+                //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseUser"));
             }
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el usuario con el cual el modelo se conectara a la BD's: " + e.toString());
@@ -437,7 +437,7 @@ public class Conexion {
             this.password = password;
             if (this.getGetPropertySystem() && !stringIsNullOrEmpty(password)) {
                 System.setProperty("DataBasePassword", password);
-                System.out.println("SystemProperty Seteada: " + System.getProperty("DataBasePassword"));
+                //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBasePassword"));
             }
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear la contraseña del usuario con el cual el modelo se conectara a la BD's: " + e.toString());
@@ -472,9 +472,9 @@ public class Conexion {
         try {
             this.BD = BD;
             if (this.getGetPropertySystem() && !stringIsNullOrEmpty(BD)) {
-                System.out.println("Base de datos a setear: " + BD);
+                //System.out.println("Base de datos a setear: " + BD);
                 System.setProperty("DataBaseBD", BD);
-                System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseBD"));
+                //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseBD"));
             }
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el nombre de la Base de Datos a la que se conectara el modelo: " + e.toString());
@@ -546,7 +546,7 @@ public class Conexion {
     }
 
     public Boolean getTableExist() {
-        return tableExist;
+        return this.tableExist;
     }
 
     public void setTableExist(Boolean tableExist) {
