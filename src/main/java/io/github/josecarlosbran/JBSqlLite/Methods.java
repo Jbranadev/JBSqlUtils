@@ -10,10 +10,7 @@ import io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import javax.print.attribute.ResolutionSyntax;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -189,6 +186,8 @@ public class Methods extends Conexion {
                     temp.setIS_AUTOINCREMENT(columnas.getString(23));
                     temp.setIS_GENERATEDCOLUMN(columnas.getString(24));
                     this.getColumnas().add(temp);
+                    //Types.ARRAY
+
                 }
             }catch (Exception e) {
                 LogsJB.fatal("Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo: "+ e.toString());
