@@ -107,7 +107,7 @@ public class Methods extends Conexion {
         }
     }
 
-    public void tableExist(Connection connexion) {
+    protected void tableExist(Connection connexion) {
         Runnable VerificarExistencia= ()->{
             try{
                 if(!this.getTableExist()){
@@ -134,6 +134,7 @@ public class Methods extends Conexion {
                             this.setTableExist(Boolean.TRUE);
                             this.setTableName(NameTable);
                             LogsJB.info("La tabla correspondiente a este modelo, existe en BD's");
+                            getColumnsTable(metaData);
                         }else{
                             this.setTableExist(Boolean.FALSE);
                             LogsJB.info("La tabla correspondiente a este modelo, No existe en BD's");
@@ -156,24 +157,51 @@ public class Methods extends Conexion {
         executor.shutdown();
     }
 
-    public void getColumnsTable(DatabaseMetaData metaData){
-        try{
-            ResultSet columnas=metaData.getColumns(null, null, this.getTableName(), null);
-            //Obtener las tablas disponibles
-            this.getColumnas().clear();
-            while(columnas.next()){
-                ColumnsSQL temp=new ColumnsSQL();
+    protected void getColumnsTable(DatabaseMetaData metaData){
+        Runnable ObtenerColumnas= ()->{
+            try{
+                ResultSet columnas=metaData.getColumns(null, null, this.getTableName(), null);
+                //Obtener las tablas disponibles
+                this.getColumnas().clear();
+                while(columnas.next()){
+                    ColumnsSQL temp=new ColumnsSQL();
+                    temp.setTABLE_CAT(columnas.getString(1));
+                    temp.setTABLE_SCHEM(columnas.getString(2));
+                    temp.setTABLE_NAME(columnas.getString(3));
+                    temp.setCOLUMN_NAME(columnas.getString(4));
+                    temp.setDATA_TYPE(columnas.getInt(5));
+                    temp.setTYPE_NAME(columnas.getString(6));
+                    temp.setCOLUMN_SIZE(columnas.getInt(7));
 
+                    temp.setDECIMAL_DIGITS(columnas.getInt(9));
+                    temp.setNUM_PREC_RADIX(columnas.getInt(10));
+                    temp.setNULLABLE(columnas.getInt(11));
+                    temp.setREMARKS(columnas.getString(12));
+                    temp.setCOLUMN_DEF(columnas.getString(13));
 
-
+                    temp.setCHAR_OCTET_LENGTH(columnas.getInt(16));
+                    temp.setORDINAL_POSITION(columnas.getInt(17));
+                    temp.setIS_NULLABLE(columnas.getString(18));
+                    temp.setSCOPE_CATALOG(columnas.getString(19));
+                    temp.setSCOPE_SCHEMA(columnas.getString(20));
+                    temp.setSCOPE_TABLE(columnas.getString(21));
+                    temp.setSOURCE_DATA_TYPE(columnas.getShort(22));
+                    temp.setIS_AUTOINCREMENT(columnas.getString(23));
+                    temp.setIS_GENERATEDCOLUMN(columnas.getString(24));
+                    this.getColumnas().add(temp);
+                }
+            }catch (Exception e) {
+                LogsJB.fatal("Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo: "+ e.toString());
+                LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+                LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+                LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+                LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
             }
-        }catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo: "+ e.toString());
-            LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            LogsJB.fatal("Causa de la Excepción : "+e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
-        }
+        };
+        ExecutorService executor = Executors.newFixedThreadPool(1);
+        executor.submit(ObtenerColumnas);
+        executor.shutdown();
+
 
     }
 
