@@ -45,8 +45,8 @@ public class Methods extends Conexion {
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
                         this.getHost() + ":" + this.getPort() + "/" + this.getBD();
                 String usuario = this.getUser();
-                String contraseña = this.getPassword();
-                connect = DriverManager.getConnection(url, usuario, contraseña);
+                String password = this.getPassword();
+                connect = DriverManager.getConnection(url, usuario, password);
             } else if (this.getDataBaseType() == DataBase.MySQL) {
                 url = null;
                 connect = null;
@@ -55,8 +55,8 @@ public class Methods extends Conexion {
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
                         this.getHost() + ":" + this.getPort() + "/" + this.getBD();
                 String usuario = this.getUser();
-                String contraseña = this.getPassword();
-                connect = DriverManager.getConnection(url, usuario, contraseña);
+                String password = this.getPassword();
+                connect = DriverManager.getConnection(url, usuario, password);
             } else if (this.getDataBaseType() == DataBase.SQLServer) {
                 url = null;
                 connect = null;
@@ -65,8 +65,8 @@ public class Methods extends Conexion {
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
                         this.getHost() + ":" + this.getPort() + ";databaseName=" + this.getBD();
                 String usuario = this.getUser();
-                String contraseña = this.getPassword();
-                connect = DriverManager.getConnection(url, usuario, contraseña);
+                String password = this.getPassword();
+                connect = DriverManager.getConnection(url, usuario, password);
             } else if (this.getDataBaseType() == DataBase.SQLite) {
                 url = null;
                 connect = null;
