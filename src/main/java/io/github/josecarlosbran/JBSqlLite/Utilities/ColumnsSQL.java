@@ -2,53 +2,53 @@ package io.github.josecarlosbran.JBSqlLite.Utilities;
 
 public class ColumnsSQL {
     /**
-     * TABLE_CAT String => table catalog (may be null)
+     * TABLE_CAT String → table catalog (may be null)
      */
     private String TABLE_CAT = null;
 
     /**
-     * TABLE_SCHEM String => table schema (may be null)
+     * TABLE_SCHEM String → table schema (may be null)
      */
     private String TABLE_SCHEM = null;
 
     /**
-     * TABLE_NAME String => table name
+     * TABLE_NAME String → table name
      */
     private String TABLE_NAME = null;
 
     /**
-     * COLUMN_NAME String => column name
+     * COLUMN_NAME String → column name
      */
     private String COLUMN_NAME = null;
 
     /**
-     * DATA_TYPE int => SQL type from java.sql.Types
+     * DATA_TYPE int → SQL type from java.sql.Types
      */
     private int DATA_TYPE = 0;
 
     /**
-     * TYPE_NAME String => Data source dependent type name, for a UDT the type name is fully qualified
+     * TYPE_NAME String → Data source dependent type name, for a UDT the type name is fully qualified
      */
     private String TYPE_NAME = null;
 
 
     /**
-     * COLUMN_SIZE int => column size.
+     * COLUMN_SIZE int → column size.
      */
     private int COLUMN_SIZE = 0;
 
     /**
-     * DECIMAL_DIGITS int => the number of fractional digits. Null is returned for data types where DECIMAL_DIGITS is not applicable.
+     * DECIMAL_DIGITS int → the number of fractional digits. Null is returned for data types where DECIMAL_DIGITS is not applicable.
      */
     private int DECIMAL_DIGITS = 0;
 
     /**
-     * NUM_PREC_RADIX int => Radix (typically either 10 or 2)
+     * NUM_PREC_RADIX int → Radix (typically either 10 or 2)
      */
     private int NUM_PREC_RADIX = 0;
 
     /**
-     * NULLABLE int => is NULL allowed.
+     * NULLABLE int → is NULL allowed.
      * columnNoNulls - might not allow NULL values
      * columnNullable - definitely allows NULL values
      * columnNullableUnknown - nullability unknown
@@ -56,30 +56,30 @@ public class ColumnsSQL {
     private int NULLABLE = 0;
 
     /**
-     * REMARKS String => comment describing column (may be null)
+     * REMARKS String → comment describing column (may be null)
      */
     private String REMARKS = null;
 
     /**
-     * COLUMN_DEF String => default value for the column, which should be interpreted as a string when the value is enclosed in single quotes (may be null)
+     * COLUMN_DEF String → default value for the column, which should be interpreted as a string when the value is enclosed in single quotes (may be null)
      */
     private String COLUMN_DEF = null;
 
 
 
     /**
-     * CHAR_OCTET_LENGTH int => for char types the maximum number of bytes in the column
+     * CHAR_OCTET_LENGTH int → for char types the maximum number of bytes in the column
      */
     private int CHAR_OCTET_LENGTH = 0;
 
     /**
-     * ORDINAL_POSITION int => index of column in table (starting at 1)
+     * ORDINAL_POSITION int → index of column in table (starting at 1)
      *
      */
     private int ORDINAL_POSITION = 0;
 
     /**
-     * IS_NULLABLE String => ISO rules are used to determine the nullability for a column.
+     * IS_NULLABLE String → ISO rules are used to determine the nullability for a column.
      * YES --- if the column can include NULLs
      * NO --- if the column cannot include NULLs
      * empty string --- if the nullability for the column is unknown
@@ -88,28 +88,28 @@ public class ColumnsSQL {
     private String IS_NULLABLE = null;
 
     /**
-     * SCOPE_CATALOG String => catalog of table that is the scope of a reference attribute (null if DATA_TYPE isn't REF)
+     * SCOPE_CATALOG String → catalog of table that is the scope of a reference attribute (null if DATA_TYPE isn't REF)
      *
      */
     private String SCOPE_CATALOG = null;
 
     /**
-     * SCOPE_SCHEMA String => schema of table that is the scope of a reference attribute (null if the DATA_TYPE isn't REF)
+     * SCOPE_SCHEMA String → schema of table that is the scope of a reference attribute (null if the DATA_TYPE isn't REF)
      */
     private String SCOPE_SCHEMA = null;
     /**
-     * SCOPE_TABLE String => table name that this the scope of a reference attribute (null if the DATA_TYPE isn't REF)
+     * SCOPE_TABLE String → table name that this the scope of a reference attribute (null if the DATA_TYPE isn't REF)
      */
     private String SCOPE_TABLE = null;
 
     /**
-     * SOURCE_DATA_TYPE short => source type of a distinct type or user-generated Ref type,
+     * SOURCE_DATA_TYPE short → source type of a distinct type or user-generated Ref type,
      * SQL type from java.sql.Types (null if DATA_TYPE isn't DISTINCT or user-generated REF)
      */
     private short SOURCE_DATA_TYPE=0;
 
     /**
-     * IS_AUTOINCREMENT String => Indicates whether this column is auto incremented
+     * IS_AUTOINCREMENT String → Indicates whether this column is auto incremented
      * YES --- if the column is auto incremented
      * NO --- if the column is not auto incremented
      * empty string --- if it cannot be determined whether the column is auto incremented
@@ -117,7 +117,7 @@ public class ColumnsSQL {
     private String IS_AUTOINCREMENT = null;
 
     /**
-     * IS_GENERATEDCOLUMN String => Indicates whether this is a generated column
+     * IS_GENERATEDCOLUMN String → Indicates whether this is a generated column
      * YES --- if this a generated column
      * NO --- if this not a generated column
      * empty string --- if it cannot be determined whether this is a generated column
@@ -126,7 +126,7 @@ public class ColumnsSQL {
 
 
     /**
-     * TABLE_CAT String => table catalog (may be null)
+     * TABLE_CAT String → table catalog (may be null)
      */
     public String getTABLE_CAT() {
         return TABLE_CAT;
@@ -137,7 +137,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * TABLE_SCHEM String => table schema (may be null)
+     * TABLE_SCHEM String → table schema (may be null)
      */
     public String getTABLE_SCHEM() {
         return TABLE_SCHEM;
@@ -148,7 +148,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * TABLE_NAME String => table name
+     * TABLE_NAME String → table name
      */
     public String getTABLE_NAME() {
         return TABLE_NAME;
@@ -159,7 +159,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * COLUMN_NAME String => column name
+     * COLUMN_NAME String → column name
      */
     public String getCOLUMN_NAME() {
         return COLUMN_NAME;
@@ -170,7 +170,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * DATA_TYPE int => SQL type from java.sql.Types
+     * DATA_TYPE int → SQL type from java.sql.Types
      */
     public int getDATA_TYPE() {
         return DATA_TYPE;
@@ -181,7 +181,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * TYPE_NAME String => Data source dependent type name, for a UDT the type name is fully qualified
+     * TYPE_NAME String → Data source dependent type name, for a UDT the type name is fully qualified
      */
     public String getTYPE_NAME() {
         return TYPE_NAME;
@@ -192,7 +192,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * COLUMN_SIZE int => column size.
+     * COLUMN_SIZE int → column size.
      */
     public int getCOLUMN_SIZE() {
         return COLUMN_SIZE;
@@ -203,7 +203,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * DECIMAL_DIGITS int => the number of fractional digits. Null is returned for data types where DECIMAL_DIGITS is not applicable.
+     * DECIMAL_DIGITS int → the number of fractional digits. Null is returned for data types where DECIMAL_DIGITS is not applicable.
      */
     public int getDECIMAL_DIGITS() {
         return DECIMAL_DIGITS;
@@ -214,7 +214,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * NUM_PREC_RADIX int => Radix (typically either 10 or 2)
+     * NUM_PREC_RADIX int → Radix (typically either 10 or 2)
      */
     public int getNUM_PREC_RADIX() {
         return NUM_PREC_RADIX;
@@ -225,7 +225,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * NULLABLE int => is NULL allowed.
+     * NULLABLE int → is NULL allowed.
      * columnNoNulls - might not allow NULL values
      * columnNullable - definitely allows NULL values
      * columnNullableUnknown - nullability unknown
@@ -239,7 +239,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * REMARKS String => comment describing column (may be null)
+     * REMARKS String → comment describing column (may be null)
      */
     public String getREMARKS() {
         return REMARKS;
@@ -250,7 +250,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * COLUMN_DEF String => default value for the column, which should be interpreted as a string when the value is enclosed in single quotes (may be null)
+     * COLUMN_DEF String → default value for the column, which should be interpreted as a string when the value is enclosed in single quotes (may be null)
      */
     public String getCOLUMN_DEF() {
         return COLUMN_DEF;
@@ -261,7 +261,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * CHAR_OCTET_LENGTH int => for char types the maximum number of bytes in the column
+     * CHAR_OCTET_LENGTH int → for char types the maximum number of bytes in the column
      */
     public int getCHAR_OCTET_LENGTH() {
         return CHAR_OCTET_LENGTH;
@@ -272,7 +272,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * ORDINAL_POSITION int => index of column in table (starting at 1)
+     * ORDINAL_POSITION int → index of column in table (starting at 1)
      *
      */
     public int getORDINAL_POSITION() {
@@ -284,7 +284,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * IS_NULLABLE String => ISO rules are used to determine the nullability for a column.
+     * IS_NULLABLE String → ISO rules are used to determine the nullability for a column.
      * YES --- if the column can include NULLs
      * NO --- if the column cannot include NULLs
      * empty string --- if the nullability for the column is unknown
@@ -299,7 +299,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * SCOPE_CATALOG String => catalog of table that is the scope of a reference attribute (null if DATA_TYPE isn't REF)
+     * SCOPE_CATALOG String → catalog of table that is the scope of a reference attribute (null if DATA_TYPE isn't REF)
      *
      */
     public String getSCOPE_CATALOG() {
@@ -311,7 +311,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * SCOPE_SCHEMA String => schema of table that is the scope of a reference attribute (null if the DATA_TYPE isn't REF)
+     * SCOPE_SCHEMA String → schema of table that is the scope of a reference attribute (null if the DATA_TYPE isn't REF)
      */
     public String getSCOPE_SCHEMA() {
         return SCOPE_SCHEMA;
@@ -322,7 +322,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * SCOPE_TABLE String => table name that this the scope of a reference attribute (null if the DATA_TYPE isn't REF)
+     * SCOPE_TABLE String → table name that this the scope of a reference attribute (null if the DATA_TYPE isn't REF)
      */
     public String getSCOPE_TABLE() {
         return SCOPE_TABLE;
@@ -333,7 +333,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * SOURCE_DATA_TYPE short => source type of a distinct type or user-generated Ref type,
+     * SOURCE_DATA_TYPE short → source type of a distinct type or user-generated Ref type,
      * SQL type from java.sql.Types (null if DATA_TYPE isn't DISTINCT or user-generated REF)
      */
     public short getSOURCE_DATA_TYPE() {
@@ -345,7 +345,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * IS_AUTOINCREMENT String => Indicates whether this column is auto incremented
+     * IS_AUTOINCREMENT String → Indicates whether this column is auto incremented
      * YES --- if the column is auto incremented
      * NO --- if the column is not auto incremented
      * empty string --- if it cannot be determined whether the column is auto incremented
@@ -359,7 +359,7 @@ public class ColumnsSQL {
     }
 
     /**
-     * IS_GENERATEDCOLUMN String => Indicates whether this is a generated column
+     * IS_GENERATEDCOLUMN String → Indicates whether this is a generated column
      * YES --- if this a generated column
      * NO --- if this not a generated column
      * empty string --- if it cannot be determined whether this is a generated column

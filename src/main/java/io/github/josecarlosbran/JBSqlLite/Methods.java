@@ -11,12 +11,11 @@ import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import javax.print.attribute.ResolutionSyntax;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Properties;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Methods extends Conexion {
     public Methods() throws DataBaseUndefind, PropertiesDBUndefined {
@@ -205,6 +204,33 @@ public class Methods extends Conexion {
         executor.shutdown();
 
 
+    }
+
+    void convertirSQLtoJava(){
+
+    }
+
+    public static <T,G> G getObject(T dato){
+        return (G) dato;
+    }
+
+    Function funcion= new Function<Integer, Boolean>() {
+        public Boolean apply(Integer driver) {
+            if(driver>=1){
+                return true;
+            }
+            return false;
+        }
+    };
+
+    public static <T, G> G fromArrayToList(T a, Function<T, G> funcion) {
+        return funcion.apply(a);
+    }
+    public static <T, G> List<G> fromArrayToList(T[] a, Function<T, G> mapperFunction) {
+
+        return Arrays.stream(a)
+                .map(mapperFunction)
+                .collect(Collectors.toList());
     }
 
 
