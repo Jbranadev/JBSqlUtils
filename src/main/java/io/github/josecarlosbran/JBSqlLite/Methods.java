@@ -221,9 +221,18 @@ public class Methods extends Conexion {
             }
             return false;
         }
+
+        public Boolean apply(Double driver) {
+            if(driver>=1){
+                return true;
+            }
+            return false;
+        }
     };
 
-    public static <T, G> G fromArrayToList(T a, Function<T, G> funcion) {
+
+
+    public static <T, G> G Convertir_entero_a_boleano(T a, Function<T, G> funcion) {
         return funcion.apply(a);
     }
     public static <T, G> List<G> fromArrayToList(T[] a, Function<T, G> mapperFunction) {
