@@ -7,7 +7,10 @@ import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Utilities.ColumnsSQL;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
+import java.lang.reflect.Method;
 import java.nio.file.Paths;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.function.Consumer;
 
 import static io.github.josecarlosbran.JBSqlLite.JBSqlUtils.*;
@@ -33,6 +36,8 @@ public class Principal {
 
     public static void main(String[] args){
         try{
+
+
             String BDSqlite= (Paths.get("").toAbsolutePath().normalize().toString()+"/BD/JBSqlUtils.db").replace("\\","/");
             String DB="JBSQLUTILS";
 
@@ -49,13 +54,21 @@ public class Principal {
                 System.out.println("");
             };
 
+            Consumer<Method> imprimirMetodos= metodo-> {
+                System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass().getSimpleName());
+            };
+
             Test test=new Test();
-            test.setConnect(test.getConnection());
+            List<Method> metodos=new LinkedList<>();
+            metodos=test.getMethods();
+            metodos.stream().forEach(imprimirMetodos);
+
+            /*test.setConnect(test.getConnection());
             Thread.sleep(2000);
             test.closeConnection(test.getConnect());
             Thread.sleep(1000);
-            test.getColumnas().stream().forEach(consumer);
-        }catch (DataBaseUndefind | ConexionUndefind | PropertiesDBUndefined |InterruptedException e) {
+            test.getColumnas().stream().forEach(consumer);*/
+        }catch (/*DataBaseUndefind | ConexionUndefind | PropertiesDBUndefined |InterruptedException*/ Exception e) {
             LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: "+ e.toString());
             LogsJB.fatal("Tipo de Excepción : "+e.getClass());
             LogsJB.fatal("Causa de la Excepción : "+e.getCause());

@@ -10,10 +10,10 @@ import io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import javax.print.attribute.ResolutionSyntax;
+import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -75,6 +75,7 @@ public class Methods extends Conexion {
 
             if (!Objects.isNull(connect)) {
                 LogsJB.info("Conexión a BD's " + this.getBD() + " Realizada exitosamente");
+                this.setConnect(connect);
                 tableExist(connect);
             }
         } catch (Exception e) {
@@ -95,6 +96,19 @@ public class Methods extends Conexion {
     public void closeConnection(Connection connect) {
         try {
             connect.close();
+            LogsJB.info("Conexión a BD's cerrada");
+        } catch (Exception e) {
+            LogsJB.fatal("Excepción disparada cerrar la conexión a la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
+    }
+
+    public void closeConnection() {
+        try {
+            this.getConnection().close();
             LogsJB.info("Conexión a BD's cerrada");
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada cerrar la conexión a la BD's: " + e.toString());
@@ -206,24 +220,162 @@ public class Methods extends Conexion {
 
     }
 
-    void convertirSQLtoJava(){
+    public Boolean crateTable() {
+        Boolean result=false;
+        try{
+            Callable<Boolean> createtabla = () -> {
+                try {
+                    String sql="";
+                    if(this.getDataBaseType()==DataBase.MySQL||this.getDataBaseType()==DataBase.PostgreSQL||this.getDataBaseType()==DataBase.SQLite){
+                        sql="DROP TABLE IF EXIST "+this.getClass().getSimpleName()+" RESTRICT";
+                    } else if (this.getDataBaseType()==DataBase.SQLServer) {
+                        sql="if exists (select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = '" +
+                                this.getClass().getSimpleName() +
+                                "' AND TABLE_SCHEMA = 'dbo')\n" +
+                                "    drop table dbo." +
+                                this.getClass().getSimpleName()+
+                                " RESTRICT;";
+                    }
+                    Statement ejecutor= this.getConnection().createStatement();
+                    if(!ejecutor.execute(sql)){
+                        LogsJB.info("Sentencia para eliminar tabla de la BD's ejecutada exitosamente");
+                        int modificados=ejecutor.getUpdateCount();
+                        if(modificados>0){
+                            LogsJB.info("Tabla "+this.getClass().getSimpleName()+" Eliminada exitosamente");
+                            return true;
+                        }else {
+                            LogsJB.info("Tabla "+this.getClass().getSimpleName()+" No pudo ser Eliminada ya que no existe");
+                            LogsJB.info(sql);
+                            return false;
+                        }
+                    }
+                    return false;
+                } catch (Exception e) {
+                    LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo: " + e.toString());
+                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                }
+                return false;
+            };
+
+            ExecutorService ejecutor=Executors.newFixedThreadPool(1);
+            Future<Boolean> future=ejecutor.submit(createtabla);
+            while(!future.isDone()){
+
+            }
+            ejecutor.shutdown();
+            result=future.get();
+        }catch (Exception e) {
+            LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
+        return result;
+    }
+
+    public Boolean dropTableIfExist(){
+        Boolean result=false;
+        try{
+            Callable<Boolean> dropTable = () -> {
+                try {
+                    String sql="";
+                    if(this.getDataBaseType()==DataBase.MySQL||this.getDataBaseType()==DataBase.PostgreSQL||this.getDataBaseType()==DataBase.SQLite){
+                        sql="DROP TABLE IF EXIST "+this.getClass().getSimpleName()+" RESTRICT";
+                    } else if (this.getDataBaseType()==DataBase.SQLServer) {
+                        sql="if exists (select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = '" +
+                                this.getClass().getSimpleName() +
+                                "' AND TABLE_SCHEMA = 'dbo')\n" +
+                                "    drop table dbo." +
+                                this.getClass().getSimpleName()+
+                                " RESTRICT;";
+                    }
+                    Statement ejecutor= this.getConnection().createStatement();
+                    if(!ejecutor.execute(sql)){
+                        LogsJB.info("Sentencia para eliminar tabla de la BD's ejecutada exitosamente");
+                        int modificados=ejecutor.getUpdateCount();
+                        if(modificados>0){
+                            LogsJB.info("Tabla "+this.getClass().getSimpleName()+" Eliminada exitosamente");
+                            return true;
+                        }else {
+                            LogsJB.info("Tabla "+this.getClass().getSimpleName()+" No pudo ser Eliminada ya que no existe");
+                            LogsJB.info(sql);
+                            return false;
+                        }
+                    }
+                    return false;
+                } catch (Exception e) {
+                    LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo: " + e.toString());
+                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                }
+                return false;
+            };
+
+            ExecutorService ejecutor=Executors.newFixedThreadPool(1);
+            Future<Boolean> future=ejecutor.submit(dropTable);
+            while(!future.isDone()){
+
+            }
+            ejecutor.shutdown();
+            result=future.get();
+        }catch (Exception e) {
+            LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
+        return result;
+    }
+
+    public void getWhereId(String id) {
+
 
     }
 
-    public static <T,G> G getObject(T dato){
+    void convertirSQLtoJava() {
+
+    }
+
+    //Obtener un objeto generico de una lista
+    public <T> List<Method> getMethods(){
+        Method[] metodos=this.getClass().getMethods();
+        List<Method> result=new LinkedList<>();
+        // Los muestro en consola
+        for (Method metodo : metodos) {
+            String clase=metodo.getDeclaringClass().getSimpleName();
+
+            if(clase.equals("Object")||clase.equals("Conexion")||clase.equals("Methods")||clase.equals("JBSqlUtils")){
+
+            }else{
+                //System.out.println(metodo.getName()+"   "+clase);
+                result.add(metodo);
+            }
+            //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass());
+        }
+        return result;
+    }
+
+    public static <T, G> G getObject(T dato) {
         return (G) dato;
     }
 
-    Function funcion= new Function<Integer, Boolean>() {
+    Function funcion = new Function<Integer, Boolean>() {
         public Boolean apply(Integer driver) {
-            if(driver>=1){
+            if (driver >= 1) {
                 return true;
             }
             return false;
         }
 
         public Boolean apply(Double driver) {
-            if(driver>=1){
+            if (driver >= 1) {
                 return true;
             }
             return false;
@@ -231,10 +383,10 @@ public class Methods extends Conexion {
     };
 
 
-
     public static <T, G> G Convertir_entero_a_boleano(T a, Function<T, G> funcion) {
         return funcion.apply(a);
     }
+
     public static <T, G> List<G> fromArrayToList(T[] a, Function<T, G> mapperFunction) {
 
         return Arrays.stream(a)
