@@ -1,5 +1,6 @@
 package io.github.josecarlosbran.JBSqlLite;
 
+import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 
@@ -8,42 +9,41 @@ public class Test extends JBSqlUtils{
         super();
     }
 
-    private int id;
-    private String name;
-    private String apellido;
+    private Column<Integer> id=new Column<>(DataType.INTEGER);
+    private Column<String> name=new Column<>(DataType.VARCHAR);
+    private Column<String> apellido=new Column<>(DataType.VARCHAR);;
+    private Column<Boolean> isMayor=new Column<>(Boolean.FALSE, DataType.BIT);;
 
-    private Boolean isMayor;
-
-
-    public int getId() {
+    public Column<Integer> getId() {
         return id;
     }
 
-    public void setId(int id) {
+
+    public void setId(Column<Integer> id) {
         this.id = id;
     }
 
-    public String getName() {
+    public Column<String> getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Column<String> name) {
         this.name = name;
     }
 
-    public String getApellido() {
+    public Column<String> getApellido() {
         return apellido;
     }
 
-    public void setApellido(String apellido) {
+    public void setApellido(Column<String> apellido) {
         this.apellido = apellido;
     }
 
-    public Boolean getMayor() {
+    public Column<Boolean> getIsMayor() {
         return isMayor;
     }
 
-    public void setMayor(Boolean mayor) {
-        isMayor = mayor;
+    public void setIsMayor(Column<Boolean> isMayor) {
+        this.isMayor = isMayor;
     }
 }

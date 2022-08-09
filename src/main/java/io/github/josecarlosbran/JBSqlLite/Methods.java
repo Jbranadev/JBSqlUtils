@@ -225,6 +225,10 @@ public class Methods extends Conexion {
         try{
             Callable<Boolean> createtabla = () -> {
                 try {
+                    List<Method> metodos=new LinkedList<>();
+                    metodos=this.getMethodsModel();
+                    List<ColumnsSQL> Campos=new LinkedList<>();
+
                     String sql="";
                     if(this.getDataBaseType()==DataBase.MySQL||this.getDataBaseType()==DataBase.PostgreSQL||this.getDataBaseType()==DataBase.SQLite){
                         sql="DROP TABLE IF EXIST "+this.getClass().getSimpleName()+" RESTRICT";
@@ -344,20 +348,21 @@ public class Methods extends Conexion {
     }
 
     //Obtener un objeto generico de una lista
-    public <T> List<Method> getMethods(){
+    public <T> List<Method> getMethodsModel(){
         Method[] metodos=this.getClass().getMethods();
         List<Method> result=new LinkedList<>();
         // Los muestro en consola
         for (Method metodo : metodos) {
             String clase=metodo.getDeclaringClass().getSimpleName();
+            String returntype=metodo.getReturnType().getSimpleName();
 
-            if(clase.equals("Object")||clase.equals("Conexion")||clase.equals("Methods")||clase.equals("JBSqlUtils")){
+            if((clase.equals("Object")||clase.equals("Conexion")||clase.equals("Methods")||clase.equals("JBSqlUtils"))&&!returntype.equals("Column") ){
 
             }else{
-                //System.out.println(metodo.getName()+"   "+clase);
+                System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+returntype);
                 result.add(metodo);
             }
-            //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass());
+            //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+returntype);
         }
         return result;
     }

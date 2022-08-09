@@ -1,74 +1,76 @@
 package io.github.josecarlosbran.JBSqlLite.Enumerations;
 
-public enum SQLtoJava {
+
+public enum DataType {
+
     /**
      * Cadena de caracteres de longitud fija
      */
-    CHAR("java.lang.String"),
+    CHAR("1"),
 
     /**
      * Cadena de caracteres de longitud variable
      */
-    VARCHAR("java.lang.String"),
+    VARCHAR("254"),
 
     /**
      * Cadenas de cualquier longitud (varios megabytes)
      */
-    LONGVARCHAR("java.lang.String"),
+    LONGVARCHAR(""),
 
     /**
      * Valores decimales de precisión absoluta
      */
-    NUMERIC("java.lang.Bignum"),
+    NUMERIC(""),
 
     /**
      * Valor decimal de precisión absoluta
      */
-    DECIMAL("java.lang.Bignum"),
+    DECIMAL(""),
 
     /**
      * Valor decimal de precisión absoluta
      */
-    MONEY("java.lang.BigDecimal"),
+    MONEY(""),
 
     /**
      * Valor decimal de precisión absoluta
      */
-    SMALLMONEY("java.lang.BigDecimal"),
+    SMALLMONEY(""),
 
     /**
      * Bit único/valor binario (activado o desactivado)
      */
-    BIT("java.lang.Boolean"),
+    BIT(""),
 
     /**
      * entero de 16 bits
      */
-    SMALLINT("short"),
+    SMALLINT(""),
 
     /**
      * entero de 16 bits
      */
-    TINYINT("short"),
+    TINYINT(""),
 
     //java.lang.Integer
 
     /**
      * Entero de 32 bits con signo
      */
-    INTEGER("int"),
+    INTEGER(""),
 
     //java.lang.Integer
 
     /**
      * Valor de coma flotante
      */
-    REAL("java.lang.Float"),
+    REAL(""),
 
     /**
      * Valor de coma flotante
      */
-    FLOAT("java.lang.Float"),
+    FLOAT(""),
 
     //double
 
@@ -77,66 +79,68 @@ public enum SQLtoJava {
     /**
      * Gran valor de punto flotante
      */
-    DOUBLE("java.lang.Double"),
+    DOUBLE(""),
 
     /**
      * Matriz de valores binarios
      */
-    BINARY("byte[]"),
+    BINARY(""),
 
     /**
      * Matriz de longitud variable de valores binarios
      */
-    VARBINARY("byte[]"),
+    VARBINARY(""),
 
     /**
      * Matriz de valores binarios de cualquier longitud (varios megabytes)
      */
-    LONGVARBINARY("byte[]"),
+    LONGVARBINARY(""),
 
 
     /**
      * Valor de fecha
      */
-    DATE("java.sql.Date"),
+    DATE(""),
 
     /**
      * Valor del tiempo
      */
-    TIME("java.sql.Time"),
+    TIME(""),
 
     /**
      * Valor de tiempo con campo adicional de nanosegundos
      */
-    TIMESTAMP("java.sql.Timestamp"),
+    TIMESTAMP(""),
 
     /**
      * Valor de tiempo con campo adicional de nanosegundos
      */
-    SMALLDATETIME("java.sql.Timestamp"),
+    SMALLDATETIME(""),
 
     /**
      * Valor de tiempo con campo adicional de nanosegundos
      */
-    DATETIME("java.sql.Timestamp"),
+    DATETIME(""),
 
     /**
      * Valor de tiempo con campo adicional de nanosegundos
      */
-    DATETIME2("java.sql.Timestamp");
-    private String typeJava;
+    DATETIME2("");
+    private String size;
 
-    private SQLtoJava(String tipo){
-        this.typeJava=tipo;
+    private DataType(String Size){
+        this.size=Size;
     }
 
     /***
      * Obtiene el nombre de la clase del tipo equivalente en java al tipo SQL.
      * @return Retorna el nombre de la clase del tipo equivalente en java al tipo SQL.
      */
-    public String getTypeJava() {
-        return typeJava;
+    public String getSize() {
+        return size;
     }
 
-
+    public void setSize(String Size){
+        this.size=Size;
+    }
 }
