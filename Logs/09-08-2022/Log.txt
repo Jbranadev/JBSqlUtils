@@ -110,3 +110,45 @@
 2022/08/09 14:12:17 233					jobran 							io.github.josecarlosbran.JBSqlLite.Methods 		getMethodsModel						INFO							getClass   class java.lang.Object  Class
 
 2022/08/09 14:12:17 238					jobran 							io.github.josecarlosbran.JBSqlLite.Methods 		getMethodsModel						INFO							notifyAll   class java.lang.Object  void
+*
+*
+*
+*
+*
+2022/08/09 16:59:12 678					jobran 							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Excepción disparada al obtener la conexión a la BD's proporcionada: java.util.ConcurrentModificationException
+
+2022/08/09 16:59:12 686					jobran 							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Tipo de Excepción : class java.util.ConcurrentModificationException
+
+2022/08/09 16:59:12 689					jobran 							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Causa de la Excepción : null
+
+2022/08/09 16:59:12 691					jobran 							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Mensaje de la Excepción : null
+
+2022/08/09 16:59:12 693					jobran 							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@300ffa5d
+*
+*
+*
+*
+*
+2022/08/09 17:00:58 561					jobran 							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Excepción disparada al obtener la conexión a la BD's proporcionada: java.util.ConcurrentModificationException
+
+2022/08/09 17:00:58 567					jobran 							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Tipo de Excepción : class java.util.ConcurrentModificationException
+
+2022/08/09 17:00:58 570					jobran 							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Causa de la Excepción : null
+
+2022/08/09 17:00:58 573					jobran 							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Mensaje de la Excepción : null
+
+2022/08/09 17:00:58 576					jobran 							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@7eda2dbb
+*
+*
+*
+*
+*
+2022/08/09 17:03:22 775					jobran 							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Excepción disparada al obtener la conexión a la BD's proporcionada: java.util.ConcurrentModificationException
+
+2022/08/09 17:03:22 783					jobran 							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Tipo de Excepción : class java.util.ConcurrentModificationException
+
+2022/08/09 17:03:22 786					jobran 							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Causa de la Excepción : null
+
+2022/08/09 17:03:22 788					jobran 							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Mensaje de la Excepción : null
+
+2022/08/09 17:03:22 790					jobran 							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@7eda2dbb

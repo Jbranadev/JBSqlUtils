@@ -61,6 +61,9 @@ public class Principal {
             Test test=new Test();
             List<Method> metodos=new LinkedList<>();
             metodos=test.getMethodsModel();
+            System.out.println(" ");
+            Thread.sleep(5000);
+            metodos=getMethodsGetOfModel(metodos);
             //metodos.stream().forEach(imprimirMetodos);
 
             /*test.setConnect(test.getConnection());

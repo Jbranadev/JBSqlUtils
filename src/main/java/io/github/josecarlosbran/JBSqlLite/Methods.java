@@ -225,34 +225,40 @@ public class Methods extends Conexion {
         try{
             Callable<Boolean> createtabla = () -> {
                 try {
-                    List<Method> metodos=new LinkedList<>();
-                    metodos=this.getMethodsModel();
-                    List<ColumnsSQL> Campos=new LinkedList<>();
+                    if(this.getTableExist()){
+                        LogsJB.info("La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.");
+                        return false;
+                    }else{
+                        List<Method> metodos=new LinkedList<>();
+                        metodos=this.getMethodsModel();
+                        List<ColumnsSQL> Campos=new LinkedList<>();
 
-                    String sql="";
-                    if(this.getDataBaseType()==DataBase.MySQL||this.getDataBaseType()==DataBase.PostgreSQL||this.getDataBaseType()==DataBase.SQLite){
-                        sql="DROP TABLE IF EXIST "+this.getClass().getSimpleName()+" RESTRICT";
-                    } else if (this.getDataBaseType()==DataBase.SQLServer) {
-                        sql="if exists (select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = '" +
-                                this.getClass().getSimpleName() +
-                                "' AND TABLE_SCHEMA = 'dbo')\n" +
-                                "    drop table dbo." +
-                                this.getClass().getSimpleName()+
-                                " RESTRICT;";
-                    }
-                    Statement ejecutor= this.getConnection().createStatement();
-                    if(!ejecutor.execute(sql)){
-                        LogsJB.info("Sentencia para eliminar tabla de la BD's ejecutada exitosamente");
-                        int modificados=ejecutor.getUpdateCount();
-                        if(modificados>0){
-                            LogsJB.info("Tabla "+this.getClass().getSimpleName()+" Eliminada exitosamente");
-                            return true;
-                        }else {
-                            LogsJB.info("Tabla "+this.getClass().getSimpleName()+" No pudo ser Eliminada ya que no existe");
-                            LogsJB.info(sql);
-                            return false;
+                        String sql="";
+                        if(this.getDataBaseType()==DataBase.MySQL||this.getDataBaseType()==DataBase.PostgreSQL||this.getDataBaseType()==DataBase.SQLite){
+                            sql="DROP TABLE IF EXIST "+this.getClass().getSimpleName()+" RESTRICT";
+                        } else if (this.getDataBaseType()==DataBase.SQLServer) {
+                            sql="if exists (select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = '" +
+                                    this.getClass().getSimpleName() +
+                                    "' AND TABLE_SCHEMA = 'dbo')\n" +
+                                    "    drop table dbo." +
+                                    this.getClass().getSimpleName()+
+                                    " RESTRICT;";
+                        }
+                        Statement ejecutor= this.getConnection().createStatement();
+                        if(!ejecutor.execute(sql)){
+                            LogsJB.info("Sentencia para eliminar tabla de la BD's ejecutada exitosamente");
+                            int modificados=ejecutor.getUpdateCount();
+                            if(modificados>0){
+                                LogsJB.info("Tabla "+this.getClass().getSimpleName()+" Eliminada exitosamente");
+                                return true;
+                            }else {
+                                LogsJB.info("Tabla "+this.getClass().getSimpleName()+" No pudo ser Eliminada ya que no existe");
+                                LogsJB.info(sql);
+                                return false;
+                            }
                         }
                     }
+
                     return false;
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo: " + e.toString());
@@ -365,6 +371,21 @@ public class Methods extends Conexion {
             //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+returntype);
         }
         return result;
+    }
+
+    //Obtener unicamente los metodos get del modelo
+    public static <T> List<Method> getMethodsGetOfModel(List<Method> metodos){
+        // Los muestro en consola
+        for (Method metodo : metodos) {
+            String returntype=metodo.getReturnType().getSimpleName();
+            if(returntype.equals("Column")){
+
+            }else{
+                System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+returntype);
+                metodos.remove(metodo);
+            }
+        }
+        return metodos;
     }
 
     public static <T, G> G getObject(T dato) {
