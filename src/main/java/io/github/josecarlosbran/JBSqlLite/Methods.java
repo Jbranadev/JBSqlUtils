@@ -1,6 +1,8 @@
 package io.github.josecarlosbran.JBSqlLite;
 
+import io.github.josecarlosbran.JBSqlLite.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
+import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
@@ -231,11 +233,24 @@ public class Methods extends Conexion {
                         LogsJB.info("La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.");
                         return false;
                     } else {
-                        List<Method> metodos = new LinkedList<>();
-                        metodos = this.getMethodsModel();
-                        List<ColumnsSQL> Campos = new LinkedList<>();
-
                         String sql = "";
+                        List<Method> metodos = new LinkedList<>();
+                        metodos = this.getMethodsGetOfModel(this.getMethodsModel());
+                        for(int i=0; i<metodos.size(); i++){
+                            Method metodo= metodos.get(i);
+                            Column columnsSQL= (Column) metodo.invoke(this, null);
+                            DataType columnType=columnsSQL.getDataTypeSQL();
+                            Constraint columnRestriccion=columnsSQL.getRestriccion();
+
+
+
+                        }
+
+
+                        List<Column> Campos = new LinkedList<>();
+
+
+
                         if (this.getDataBaseType() == DataBase.MySQL || this.getDataBaseType() == DataBase.PostgreSQL || this.getDataBaseType() == DataBase.SQLite) {
                             sql = "DROP TABLE IF EXIST " + this.getClass().getSimpleName() + " RESTRICT";
                         } else if (this.getDataBaseType() == DataBase.SQLServer) {
@@ -376,7 +391,7 @@ public class Methods extends Conexion {
     }
 
     //Obtener unicamente los metodos get del modelo
-    public static <T> List<Method> getMethodsGetOfModel(List<Method> metodos) {
+    public <T> List<Method> getMethodsGetOfModel(List<Method> metodos) {
         // Los muestro en consola
         int i = 0;
         List<Method> result = metodos;
@@ -394,7 +409,7 @@ public class Methods extends Conexion {
         return result;
     }
 
-    public static <T> List<Method> getMethodsSetOfModel(List<Method> metodos) {
+    public <T> List<Method> getMethodsSetOfModel(List<Method> metodos) {
         List<Method> result = metodos;
         int i = 0;
         while (i < result.size()) {

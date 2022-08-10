@@ -65,12 +65,12 @@ public class Principal {
             //metodos=test.getMethodsModel();
             System.out.println(" ");
             //Thread.sleep(5000);
-            get=getMethodsGetOfModel(test.getMethodsModel());
+            get=test.getMethodsGetOfModel(test.getMethodsModel());
             System.out.println(" ");
             get.stream().forEach(imprimirMetodos);
 
             System.out.println(" ");
-            set=getMethodsSetOfModel(test.getMethodsModel());
+            set=test.getMethodsSetOfModel(test.getMethodsModel());
             System.out.println(" ");
             set.stream().forEach(imprimirMetodos);
             /*test.setConnect(test.getConnection());
