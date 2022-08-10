@@ -8,9 +8,11 @@ import io.github.josecarlosbran.JBSqlLite.Utilities.ColumnsSQL;
 import io.github.josecarlosbran.JBSqlLite.Utilities.TablesSQL;
 import io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB;
 import io.github.josecarlosbran.LogsJB.LogsJB;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.print.attribute.ResolutionSyntax;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.sql.*;
 import java.util.*;
 import java.util.concurrent.*;
@@ -221,38 +223,38 @@ public class Methods extends Conexion {
     }
 
     public Boolean crateTable() {
-        Boolean result=false;
-        try{
+        Boolean result = false;
+        try {
             Callable<Boolean> createtabla = () -> {
                 try {
-                    if(this.getTableExist()){
+                    if (this.getTableExist()) {
                         LogsJB.info("La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.");
                         return false;
-                    }else{
-                        List<Method> metodos=new LinkedList<>();
-                        metodos=this.getMethodsModel();
-                        List<ColumnsSQL> Campos=new LinkedList<>();
+                    } else {
+                        List<Method> metodos = new LinkedList<>();
+                        metodos = this.getMethodsModel();
+                        List<ColumnsSQL> Campos = new LinkedList<>();
 
-                        String sql="";
-                        if(this.getDataBaseType()==DataBase.MySQL||this.getDataBaseType()==DataBase.PostgreSQL||this.getDataBaseType()==DataBase.SQLite){
-                            sql="DROP TABLE IF EXIST "+this.getClass().getSimpleName()+" RESTRICT";
-                        } else if (this.getDataBaseType()==DataBase.SQLServer) {
-                            sql="if exists (select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = '" +
+                        String sql = "";
+                        if (this.getDataBaseType() == DataBase.MySQL || this.getDataBaseType() == DataBase.PostgreSQL || this.getDataBaseType() == DataBase.SQLite) {
+                            sql = "DROP TABLE IF EXIST " + this.getClass().getSimpleName() + " RESTRICT";
+                        } else if (this.getDataBaseType() == DataBase.SQLServer) {
+                            sql = "if exists (select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = '" +
                                     this.getClass().getSimpleName() +
                                     "' AND TABLE_SCHEMA = 'dbo')\n" +
                                     "    drop table dbo." +
-                                    this.getClass().getSimpleName()+
+                                    this.getClass().getSimpleName() +
                                     " RESTRICT;";
                         }
-                        Statement ejecutor= this.getConnection().createStatement();
-                        if(!ejecutor.execute(sql)){
+                        Statement ejecutor = this.getConnection().createStatement();
+                        if (!ejecutor.execute(sql)) {
                             LogsJB.info("Sentencia para eliminar tabla de la BD's ejecutada exitosamente");
-                            int modificados=ejecutor.getUpdateCount();
-                            if(modificados>0){
-                                LogsJB.info("Tabla "+this.getClass().getSimpleName()+" Eliminada exitosamente");
+                            int modificados = ejecutor.getUpdateCount();
+                            if (modificados > 0) {
+                                LogsJB.info("Tabla " + this.getClass().getSimpleName() + " Eliminada exitosamente");
                                 return true;
-                            }else {
-                                LogsJB.info("Tabla "+this.getClass().getSimpleName()+" No pudo ser Eliminada ya que no existe");
+                            } else {
+                                LogsJB.info("Tabla " + this.getClass().getSimpleName() + " No pudo ser Eliminada ya que no existe");
                                 LogsJB.info(sql);
                                 return false;
                             }
@@ -270,14 +272,14 @@ public class Methods extends Conexion {
                 return false;
             };
 
-            ExecutorService ejecutor=Executors.newFixedThreadPool(1);
-            Future<Boolean> future=ejecutor.submit(createtabla);
-            while(!future.isDone()){
+            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            Future<Boolean> future = ejecutor.submit(createtabla);
+            while (!future.isDone()) {
 
             }
             ejecutor.shutdown();
-            result=future.get();
-        }catch (Exception e) {
+            result = future.get();
+        } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
@@ -287,31 +289,31 @@ public class Methods extends Conexion {
         return result;
     }
 
-    public Boolean dropTableIfExist(){
-        Boolean result=false;
-        try{
+    public Boolean dropTableIfExist() {
+        Boolean result = false;
+        try {
             Callable<Boolean> dropTable = () -> {
                 try {
-                    String sql="";
-                    if(this.getDataBaseType()==DataBase.MySQL||this.getDataBaseType()==DataBase.PostgreSQL||this.getDataBaseType()==DataBase.SQLite){
-                        sql="DROP TABLE IF EXIST "+this.getClass().getSimpleName()+" RESTRICT";
-                    } else if (this.getDataBaseType()==DataBase.SQLServer) {
-                        sql="if exists (select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = '" +
+                    String sql = "";
+                    if (this.getDataBaseType() == DataBase.MySQL || this.getDataBaseType() == DataBase.PostgreSQL || this.getDataBaseType() == DataBase.SQLite) {
+                        sql = "DROP TABLE IF EXIST " + this.getClass().getSimpleName() + " RESTRICT";
+                    } else if (this.getDataBaseType() == DataBase.SQLServer) {
+                        sql = "if exists (select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = '" +
                                 this.getClass().getSimpleName() +
                                 "' AND TABLE_SCHEMA = 'dbo')\n" +
                                 "    drop table dbo." +
-                                this.getClass().getSimpleName()+
+                                this.getClass().getSimpleName() +
                                 " RESTRICT;";
                     }
-                    Statement ejecutor= this.getConnection().createStatement();
-                    if(!ejecutor.execute(sql)){
+                    Statement ejecutor = this.getConnection().createStatement();
+                    if (!ejecutor.execute(sql)) {
                         LogsJB.info("Sentencia para eliminar tabla de la BD's ejecutada exitosamente");
-                        int modificados=ejecutor.getUpdateCount();
-                        if(modificados>0){
-                            LogsJB.info("Tabla "+this.getClass().getSimpleName()+" Eliminada exitosamente");
+                        int modificados = ejecutor.getUpdateCount();
+                        if (modificados > 0) {
+                            LogsJB.info("Tabla " + this.getClass().getSimpleName() + " Eliminada exitosamente");
                             return true;
-                        }else {
-                            LogsJB.info("Tabla "+this.getClass().getSimpleName()+" No pudo ser Eliminada ya que no existe");
+                        } else {
+                            LogsJB.info("Tabla " + this.getClass().getSimpleName() + " No pudo ser Eliminada ya que no existe");
                             LogsJB.info(sql);
                             return false;
                         }
@@ -327,14 +329,14 @@ public class Methods extends Conexion {
                 return false;
             };
 
-            ExecutorService ejecutor=Executors.newFixedThreadPool(1);
-            Future<Boolean> future=ejecutor.submit(dropTable);
-            while(!future.isDone()){
+            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            Future<Boolean> future = ejecutor.submit(dropTable);
+            while (!future.isDone()) {
 
             }
             ejecutor.shutdown();
-            result=future.get();
-        }catch (Exception e) {
+            result = future.get();
+        } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
@@ -354,18 +356,18 @@ public class Methods extends Conexion {
     }
 
     //Obtener un objeto generico de una lista
-    public <T> List<Method> getMethodsModel(){
-        Method[] metodos=this.getClass().getMethods();
-        List<Method> result=new LinkedList<>();
+    public <T> List<Method> getMethodsModel() {
+        Method[] metodos = this.getClass().getMethods();
+        List<Method> result = new LinkedList<>();
         // Los muestro en consola
         for (Method metodo : metodos) {
-            String clase=metodo.getDeclaringClass().getSimpleName();
-            String returntype=metodo.getReturnType().getSimpleName();
+            String clase = metodo.getDeclaringClass().getSimpleName();
+            String returntype = metodo.getReturnType().getSimpleName();
 
-            if((clase.equals("Object")||clase.equals("Conexion")||clase.equals("Methods")||clase.equals("JBSqlUtils"))&&!returntype.equals("Column") ){
+            if ((clase.equals("Object") || clase.equals("Conexion") || clase.equals("Methods") || clase.equals("JBSqlUtils")) && !returntype.equals("Column")) {
 
-            }else{
-                System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+returntype);
+            } else {
+                //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + returntype);
                 result.add(metodo);
             }
             //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+returntype);
@@ -374,18 +376,47 @@ public class Methods extends Conexion {
     }
 
     //Obtener unicamente los metodos get del modelo
-    public static <T> List<Method> getMethodsGetOfModel(List<Method> metodos){
+    public static <T> List<Method> getMethodsGetOfModel(List<Method> metodos) {
         // Los muestro en consola
-        for (Method metodo : metodos) {
-            String returntype=metodo.getReturnType().getSimpleName();
-            if(returntype.equals("Column")){
-
-            }else{
-                System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+returntype);
-                metodos.remove(metodo);
+        int i = 0;
+        List<Method> result = metodos;
+        while (i < result.size()) {
+            Method metodo = result.get(i);
+            String returntype = metodo.getReturnType().getSimpleName();
+            String nombre = metodo.getName();
+            if (returntype.equals("Column") && StringUtils.containsIgnoreCase(nombre, "Get")) {
+                i++;
+            } else {
+                //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + returntype);
+                result.remove(i);
             }
         }
-        return metodos;
+        return result;
+    }
+
+    public static <T> List<Method> getMethodsSetOfModel(List<Method> metodos) {
+        List<Method> result = metodos;
+        int i = 0;
+        while (i < result.size()) {
+            Method metodo = result.get(i);
+            Parameter[] parametros = metodo.getParameters();
+            String ParametroType = "";
+            String nombre = metodo.getName();
+            //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + ParametroType);
+            if (StringUtils.containsIgnoreCase(nombre, "Set")) {
+                ParametroType = parametros[0].getType().getSimpleName();
+                //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+ParametroType);
+                if(ParametroType.equals("Column")){
+                    if (parametros.length >= 1) {
+                        //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+ParametroType);
+                        i++;
+                    }
+                }
+            }else {
+                result.remove(i);
+            }
+        }
+        return result;
     }
 
     public static <T, G> G getObject(T dato) {

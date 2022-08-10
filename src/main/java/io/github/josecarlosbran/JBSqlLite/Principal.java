@@ -60,18 +60,25 @@ public class Principal {
 
             Test test=new Test();
             List<Method> metodos=new LinkedList<>();
-            metodos=test.getMethodsModel();
+            List<Method> get=new LinkedList<>();
+            List<Method> set=new LinkedList<>();
+            //metodos=test.getMethodsModel();
             System.out.println(" ");
-            Thread.sleep(5000);
-            metodos=getMethodsGetOfModel(metodos);
-            //metodos.stream().forEach(imprimirMetodos);
+            //Thread.sleep(5000);
+            get=getMethodsGetOfModel(test.getMethodsModel());
+            System.out.println(" ");
+            get.stream().forEach(imprimirMetodos);
 
+            System.out.println(" ");
+            set=getMethodsSetOfModel(test.getMethodsModel());
+            System.out.println(" ");
+            set.stream().forEach(imprimirMetodos);
             /*test.setConnect(test.getConnection());
             Thread.sleep(2000);
             test.closeConnection(test.getConnect());
             Thread.sleep(1000);
             test.getColumnas().stream().forEach(consumer);*/
-        }catch (/*DataBaseUndefind | ConexionUndefind | PropertiesDBUndefined |InterruptedException*/ Exception e) {
+        }catch (DataBaseUndefind | /*ConexionUndefind |*/ PropertiesDBUndefined /*|InterruptedException*/ e) {
             LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: "+ e.toString());
             LogsJB.fatal("Tipo de Excepción : "+e.getClass());
             LogsJB.fatal("Causa de la Excepción : "+e.getCause());

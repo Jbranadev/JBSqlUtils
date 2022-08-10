@@ -4,8 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Creación de metodo para crear tabla correspondiente al modelo 10%">
+    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Creación de Interfaz para conversión de Datos">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_08_2022_14_39__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_08_2022_14_39__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_08_2022_20_12__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_08_2022_20_12__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_08_2022_10_12__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_08_2022_10_12__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_08_2022_20_00__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_08_2022_20_00__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_08_2022_09_43__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_08_2022_09_43__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9_08_2022_09_21__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9_08_2022_09_21__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/09-08-2022/Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/09-08-2022/Log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" afterDir="false" />
     </list>
@@ -42,7 +51,7 @@
                 <list>
                   <RecentBranch>
                     <option name="branchName" value="JBran" />
-                    <option name="lastUsedInstant" value="1659714243" />
+                    <option name="lastUsedInstant" value="1660101875" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="master" />
@@ -258,5 +267,16 @@
     <MESSAGE value="Se comenzo a trabajar el metodo encargado de Retornar el tipo de dato correcto 10%" />
     <MESSAGE value="Creación de metodo para crear tabla correspondiente al modelo 10%" />
     <option name="LAST_COMMIT_MESSAGE" value="Creación de metodo para crear tabla correspondiente al modelo 10%" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java</url>
+          <line>398</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
