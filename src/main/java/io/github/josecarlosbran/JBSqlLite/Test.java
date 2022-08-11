@@ -1,5 +1,6 @@
 package io.github.josecarlosbran.JBSqlLite;
 
+import io.github.josecarlosbran.JBSqlLite.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
@@ -9,7 +10,8 @@ public class Test extends JBSqlUtils{
         super();
     }
 
-    private Column<Integer> id=new Column<>(DataType.INTEGER);
+    private Column<Integer> id=new Column<>(DataType.INTEGER, new Constraint[]{Constraint.AUTO_INCREMENT,Constraint.PRIMARY_KEY});
+
     private Column<String> name=new Column<>(DataType.VARCHAR);
     private Column<String> apellido=new Column<>(DataType.VARCHAR);;
     private Column<Boolean> isMayor=new Column<>(Boolean.FALSE, DataType.BIT);;

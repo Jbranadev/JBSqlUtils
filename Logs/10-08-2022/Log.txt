@@ -1,0 +1,1380 @@
+*
+*
+*
+*
+*
+2022/08/10 21:26:41 051					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Tipo de Excepción : class java.sql.SQLException
+
+2022/08/10 21:26:41 054					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Causa de la Excepción : null
+
+2022/08/10 21:26:41 057					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Mensaje de la Excepción : Access denied for user 'Bran'@'localhost' (using password: YES)
+
+2022/08/10 21:26:41 060					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@1aef202b
+
+2022/08/10 21:26:41 063					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Excepción disparada en el método que Crea la tabla correspondiente al modelo: java.lang.NullPointerException: Cannot invoke "java.sql.Connection.createStatement()" because the return value of "io.github.josecarlosbran.JBSqlLite.Methods.getConnection()" is null
+
+2022/08/10 21:26:41 066					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Tipo de Excepción : class java.lang.NullPointerException
+
+2022/08/10 21:26:41 069					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Causa de la Excepción : null
+
+2022/08/10 21:26:41 072					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Mensaje de la Excepción : Cannot invoke "java.sql.Connection.createStatement()" because the return value of "io.github.josecarlosbran.JBSqlLite.Methods.getConnection()" is null
+
+2022/08/10 21:26:41 075					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@1b6e0ce3
+*
+*
+*
+*
+*
+2022/08/10 21:31:07 367					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 21:31:07 504					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Excepción disparada en el método que Crea la tabla correspondiente al modelo: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Name VARCHAR(254)  , Id INTEGER  AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(2' at line 1
+
+2022/08/10 21:31:07 511					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Tipo de Excepción : class java.sql.SQLSyntaxErrorException
+
+2022/08/10 21:31:07 514					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 21:31:07 525					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@6084d105
+
+2022/08/10 21:31:07 518					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Mensaje de la Excepción : You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Name VARCHAR(254)  , Id INTEGER  AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(2' at line 1
+
+2022/08/10 21:31:07 515					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Causa de la Excepción : null
+
+2022/08/10 21:31:07 580					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 21:31:07 595					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: java.sql.SQLNonTransientConnectionException: No operations allowed after connection closed.
+
+2022/08/10 21:31:07 587					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 21:31:07 599					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Tipo de Excepción : class java.sql.SQLNonTransientConnectionException
+
+2022/08/10 21:31:07 602					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Causa de la Excepción : com.mysql.cj.exceptions.ConnectionIsClosedException: No operations allowed after connection closed.
+
+2022/08/10 21:31:07 605					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Mensaje de la Excepción : No operations allowed after connection closed.
+
+2022/08/10 21:31:07 609					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@4c0d99e6
+*
+*
+*
+*
+*
+2022/08/10 21:35:46 073					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 21:35:46 144					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 21:35:49 105					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , IsMayor BIT , Apellido VARCHAR(254) );
+
+2022/08/10 21:35:49 117					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Excepción disparada en el método que Crea la tabla correspondiente al modelo: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , IsMayor BIT , Apelli' at line 1
+
+2022/08/10 21:35:49 121					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Tipo de Excepción : class java.sql.SQLSyntaxErrorException
+
+2022/08/10 21:35:49 125					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Causa de la Excepción : null
+
+2022/08/10 21:35:49 128					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Mensaje de la Excepción : You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , IsMayor BIT , Apelli' at line 1
+
+2022/08/10 21:35:49 131					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@1dd261e2
+
+2022/08/10 21:35:49 162					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 21:35:49 167					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 21:35:49 169					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: java.sql.SQLNonTransientConnectionException: No operations allowed after connection closed.
+
+2022/08/10 21:35:49 172					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Tipo de Excepción : class java.sql.SQLNonTransientConnectionException
+
+2022/08/10 21:35:49 175					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Causa de la Excepción : com.mysql.cj.exceptions.ConnectionIsClosedException: No operations allowed after connection closed.
+
+2022/08/10 21:35:49 178					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Mensaje de la Excepción : No operations allowed after connection closed.
+
+2022/08/10 21:35:49 181					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@54dfcd32
+*
+*
+*
+*
+*
+2022/08/10 21:44:34 979					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Excepción disparada al obtener la conexión a la BD's proporcionada: java.sql.SQLException: Access denied for user 'Bran'@'localhost' (using password: YES)
+
+2022/08/10 21:44:34 987					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Tipo de Excepción : class java.sql.SQLException
+
+2022/08/10 21:44:34 990					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Causa de la Excepción : null
+
+2022/08/10 21:44:34 993					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Mensaje de la Excepción : Access denied for user 'Bran'@'localhost' (using password: YES)
+
+2022/08/10 21:44:34 996					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@15a8812c
+
+2022/08/10 21:44:35 025					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Excepción disparada al obtener la conexión a la BD's proporcionada: java.sql.SQLException: Access denied for user 'Bran'@'localhost' (using password: YES)
+
+2022/08/10 21:44:35 028					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Tipo de Excepción : class java.sql.SQLException
+
+2022/08/10 21:44:35 031					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Causa de la Excepción : null
+
+2022/08/10 21:44:35 034					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Mensaje de la Excepción : Access denied for user 'Bran'@'localhost' (using password: YES)
+
+2022/08/10 21:44:35 037					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@57e70f97
+
+2022/08/10 21:44:35 040					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Excepción disparada en el método que Elimina la tabla correspondiente al modelo: java.lang.NullPointerException: Cannot invoke "java.sql.Connection.createStatement()" because the return value of "io.github.josecarlosbran.JBSqlLite.Methods.getConnection()" is null
+
+2022/08/10 21:44:35 043					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Tipo de Excepción : class java.lang.NullPointerException
+
+2022/08/10 21:44:35 046					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Causa de la Excepción : null
+
+2022/08/10 21:44:35 049					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Mensaje de la Excepción : Cannot invoke "java.sql.Connection.createStatement()" because the return value of "io.github.josecarlosbran.JBSqlLite.Methods.getConnection()" is null
+
+2022/08/10 21:44:35 052					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@18a5d975
+
+2022/08/10 21:44:35 084					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Excepción disparada al obtener la conexión a la BD's proporcionada: java.sql.SQLException: Access denied for user 'Bran'@'localhost' (using password: YES)
+
+2022/08/10 21:44:35 087					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Tipo de Excepción : class java.sql.SQLException
+
+2022/08/10 21:44:35 090					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Causa de la Excepción : null
+
+2022/08/10 21:44:35 093					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Mensaje de la Excepción : Access denied for user 'Bran'@'localhost' (using password: YES)
+
+2022/08/10 21:44:35 097					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@79fc0f2f
+
+2022/08/10 21:44:35 100					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Excepción disparada cerrar la conexión a la BD's: java.lang.NullPointerException: Cannot invoke "java.sql.Connection.close()" because the return value of "io.github.josecarlosbran.JBSqlLite.Methods.getConnection()" is null
+
+2022/08/10 21:44:35 103					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Tipo de Excepción : class java.lang.NullPointerException
+
+2022/08/10 21:44:35 106					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Causa de la Excepción : null
+
+2022/08/10 21:44:35 109					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Mensaje de la Excepción : Cannot invoke "java.sql.Connection.close()" because the return value of "io.github.josecarlosbran.JBSqlLite.Methods.getConnection()" is null
+
+2022/08/10 21:44:35 112					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@49097b5d
+
+2022/08/10 21:44:35 165					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Excepción disparada al obtener la conexión a la BD's proporcionada: java.sql.SQLException: Access denied for user 'Bran'@'localhost' (using password: YES)
+
+2022/08/10 21:44:35 174					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Mensaje de la Excepción : Access denied for user 'Bran'@'localhost' (using password: YES)
+
+2022/08/10 21:44:35 171					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Causa de la Excepción : null
+
+2022/08/10 21:44:35 168					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Tipo de Excepción : class java.sql.SQLException
+
+2022/08/10 21:44:35 177					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@7a3254bb
+
+2022/08/10 21:44:35 192					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Excepción disparada en el método que Crea la tabla correspondiente al modelo: io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind: No se a conectado el modelo a la BD's
+
+2022/08/10 21:44:35 195					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Tipo de Excepción : class io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind
+
+2022/08/10 21:44:35 198					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Causa de la Excepción : null
+
+2022/08/10 21:44:35 201					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Mensaje de la Excepción : No se a conectado el modelo a la BD's
+
+2022/08/10 21:44:35 204					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@be61e8a
+
+2022/08/10 21:44:35 252					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Excepción disparada al obtener la conexión a la BD's proporcionada: java.sql.SQLException: Access denied for user 'Bran'@'localhost' (using password: YES)
+
+2022/08/10 21:44:35 258					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Tipo de Excepción : class java.sql.SQLException
+
+2022/08/10 21:44:35 262					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Causa de la Excepción : null
+
+2022/08/10 21:44:35 265					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Mensaje de la Excepción : Access denied for user 'Bran'@'localhost' (using password: YES)
+
+2022/08/10 21:44:35 270					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@76fb509a
+
+2022/08/10 21:44:35 279					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Tipo de Excepción : class java.lang.NullPointerException
+
+2022/08/10 21:44:35 273					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Excepción disparada cerrar la conexión a la BD's: java.lang.NullPointerException: Cannot invoke "java.sql.Connection.close()" because the return value of "io.github.josecarlosbran.JBSqlLite.Methods.getConnection()" is null
+
+2022/08/10 21:44:35 282					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Causa de la Excepción : null
+
+2022/08/10 21:44:35 285					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Mensaje de la Excepción : Cannot invoke "java.sql.Connection.close()" because the return value of "io.github.josecarlosbran.JBSqlLite.Methods.getConnection()" is null
+
+2022/08/10 21:44:35 289					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@c4437c4
+*
+*
+*
+*
+*
+2022/08/10 21:45:38 040					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 21:45:38 071					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 21:45:38 104					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Causa de la Excepción : null
+
+2022/08/10 21:45:38 127					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@30a67977
+
+2022/08/10 21:45:38 117					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Mensaje de la Excepción : You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'EXIST Test RESTRICT' at line 1
+
+2022/08/10 21:45:38 095					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Excepción disparada en el método que Elimina la tabla correspondiente al modelo: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'EXIST Test RESTRICT' at line 1
+
+2022/08/10 21:45:38 142					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 21:45:38 173					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 21:45:38 178					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 21:45:38 099					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Tipo de Excepción : class java.sql.SQLSyntaxErrorException
+
+2022/08/10 21:45:38 179					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: java.sql.SQLNonTransientConnectionException: No operations allowed after connection closed.
+
+2022/08/10 21:45:38 182					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Tipo de Excepción : class java.sql.SQLNonTransientConnectionException
+
+2022/08/10 21:45:38 185					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Causa de la Excepción : com.mysql.cj.exceptions.ConnectionIsClosedException: No operations allowed after connection closed.
+
+2022/08/10 21:45:38 189					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Mensaje de la Excepción : No operations allowed after connection closed.
+
+2022/08/10 21:45:38 194					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@1ded315c
+
+2022/08/10 21:45:48 226					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 21:45:48 238					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(254) , IsMayor BIT );
+
+2022/08/10 21:45:48 255					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 21:45:48 269					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Sentencia para crear tabla de la BD's ejecutada exitosamente
+
+2022/08/10 21:45:48 272					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Tabla Test No pudo ser Creada
+
+2022/08/10 21:45:48 275					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(254) , IsMayor BIT );
+
+2022/08/10 21:45:48 304					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 21:45:48 309					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 21:45:48 315					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: java.sql.SQLNonTransientConnectionException: No operations allowed after connection closed.
+
+2022/08/10 21:45:48 318					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Tipo de Excepción : class java.sql.SQLNonTransientConnectionException
+
+2022/08/10 21:45:48 322					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Causa de la Excepción : com.mysql.cj.exceptions.ConnectionIsClosedException: No operations allowed after connection closed.
+
+2022/08/10 21:45:48 325					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Mensaje de la Excepción : No operations allowed after connection closed.
+
+2022/08/10 21:45:48 328					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@393b97be
+*
+*
+*
+*
+*
+2022/08/10 21:48:19 639					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 21:48:19 709					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 21:48:29 691					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 21:48:29 702					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 21:48:29 705					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Excepción disparada en el método que Elimina la tabla correspondiente al modelo: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'EXIST Test RESTRICT' at line 1
+
+2022/08/10 21:48:29 708					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Tipo de Excepción : class java.sql.SQLSyntaxErrorException
+
+2022/08/10 21:48:29 711					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Causa de la Excepción : null
+
+2022/08/10 21:48:29 714					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Mensaje de la Excepción : You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'EXIST Test RESTRICT' at line 1
+
+2022/08/10 21:48:29 717					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@524b043f
+
+2022/08/10 21:48:39 723					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.
+*
+*
+*
+*
+*
+2022/08/10 21:50:38 309					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 21:50:38 495					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 21:50:48 336					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.
+*
+*
+*
+*
+*
+2022/08/10 21:51:29 159					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 21:51:29 228					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 21:51:39 202					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , IsMayor BIT , Apellido VARCHAR(254) );
+
+2022/08/10 21:51:39 221					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Sentencia para crear tabla de la BD's ejecutada exitosamente
+
+2022/08/10 21:51:39 225					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Tabla Test No pudo ser Creada
+
+2022/08/10 21:51:39 228					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , IsMayor BIT , Apellido VARCHAR(254) );
+*
+*
+*
+*
+*
+2022/08/10 21:57:51 626					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 21:57:51 692					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 21:58:01 688					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 21:58:01 695					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 21:58:01 702					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Excepción disparada en el método que Elimina la tabla correspondiente al modelo: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'EXIST Test' at line 1
+
+2022/08/10 21:58:01 705					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Tipo de Excepción : class java.sql.SQLSyntaxErrorException
+
+2022/08/10 21:58:01 708					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Causa de la Excepción : null
+
+2022/08/10 21:58:01 711					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Mensaje de la Excepción : You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'EXIST Test' at line 1
+
+2022/08/10 21:58:01 714					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@63e09864
+*
+*
+*
+*
+*
+2022/08/10 21:59:31 763					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 21:59:31 850					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 21:59:41 782					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXIST Test
+
+2022/08/10 21:59:41 814					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Excepción disparada en el método que Elimina la tabla correspondiente al modelo: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'EXIST Test' at line 1
+
+2022/08/10 21:59:41 818					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Tipo de Excepción : class java.sql.SQLSyntaxErrorException
+
+2022/08/10 21:59:41 821					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Causa de la Excepción : null
+
+2022/08/10 21:59:41 824					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Mensaje de la Excepción : You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'EXIST Test' at line 1
+
+2022/08/10 21:59:41 827					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@531de5fe
+*
+*
+*
+*
+*
+2022/08/10 22:01:01 564					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:01:01 630					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 22:01:11 581					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 22:01:11 602					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:01:11 605					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 22:01:11 608					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+*
+*
+*
+*
+*
+2022/08/10 22:03:32 467					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:03:32 540					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:03:37 523					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:03:37 531					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:03:37 534					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 22:03:37 537					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 22:03:37 546					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:03:37 560					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:03:37 564					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:03:37 575					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: java.sql.SQLNonTransientConnectionException: No operations allowed after connection closed.
+
+2022/08/10 22:03:37 579					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Tipo de Excepción : class java.sql.SQLNonTransientConnectionException
+
+2022/08/10 22:03:37 582					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Causa de la Excepción : com.mysql.cj.exceptions.ConnectionIsClosedException: No operations allowed after connection closed.
+
+2022/08/10 22:03:37 585					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Mensaje de la Excepción : No operations allowed after connection closed.
+
+2022/08/10 22:03:37 588					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@45770e36
+
+2022/08/10 22:03:42 606					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:03:42 618					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(254) , IsMayor BIT );
+
+2022/08/10 22:03:42 655					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Sentencia para crear tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:03:42 687					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:03:42 691					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:03:42 660					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Tabla Test Creada exitosamente
+
+2022/08/10 22:03:42 695					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: java.sql.SQLNonTransientConnectionException: No operations allowed after connection closed.
+
+2022/08/10 22:03:42 659					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:03:42 663					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(254) , IsMayor BIT );
+
+2022/08/10 22:03:42 699					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Tipo de Excepción : class java.sql.SQLNonTransientConnectionException
+
+2022/08/10 22:03:42 702					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Causa de la Excepción : com.mysql.cj.exceptions.ConnectionIsClosedException: No operations allowed after connection closed.
+
+2022/08/10 22:03:42 705					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Mensaje de la Excepción : No operations allowed after connection closed.
+
+2022/08/10 22:03:42 708					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@6e59041b
+*
+*
+*
+*
+*
+2022/08/10 22:04:34 147					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:04:34 176					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 22:04:34 222					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:04:34 179					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 22:04:34 227					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:04:34 172					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:04:34 238					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:04:34 251					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: java.sql.SQLNonTransientConnectionException: No operations allowed after connection closed.
+
+2022/08/10 22:04:34 255					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Tipo de Excepción : class java.sql.SQLNonTransientConnectionException
+
+2022/08/10 22:04:34 262					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Mensaje de la Excepción : No operations allowed after connection closed.
+
+2022/08/10 22:04:34 259					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Causa de la Excepción : com.mysql.cj.exceptions.ConnectionIsClosedException: No operations allowed after connection closed.
+
+2022/08/10 22:04:34 265					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@67699764
+
+2022/08/10 22:04:39 280					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:04:39 292					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , IsMayor BIT , Apellido VARCHAR(254) );
+
+2022/08/10 22:04:39 309					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:04:39 323					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Sentencia para crear tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:04:39 326					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Tabla Test Creada exitosamente
+
+2022/08/10 22:04:39 329					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , IsMayor BIT , Apellido VARCHAR(254) );
+
+2022/08/10 22:04:39 352					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:04:39 355					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:04:39 359					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: java.sql.SQLNonTransientConnectionException: No operations allowed after connection closed.
+
+2022/08/10 22:04:39 362					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Tipo de Excepción : class java.sql.SQLNonTransientConnectionException
+
+2022/08/10 22:04:39 365					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Causa de la Excepción : com.mysql.cj.exceptions.ConnectionIsClosedException: No operations allowed after connection closed.
+
+2022/08/10 22:04:39 368					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Mensaje de la Excepción : No operations allowed after connection closed.
+
+2022/08/10 22:04:39 371					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@6e59041b
+*
+*
+*
+*
+*
+2022/08/10 22:05:03 760					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:05:03 788					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:05:03 852					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:05:03 857					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:05:03 795					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 22:05:03 792					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 22:05:03 874					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:05:03 893					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Causa de la Excepción : com.mysql.cj.exceptions.ConnectionIsClosedException: No operations allowed after connection closed.
+
+2022/08/10 22:05:03 884					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: java.sql.SQLNonTransientConnectionException: No operations allowed after connection closed.
+
+2022/08/10 22:05:03 889					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Tipo de Excepción : class java.sql.SQLNonTransientConnectionException
+
+2022/08/10 22:05:03 897					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Mensaje de la Excepción : No operations allowed after connection closed.
+
+2022/08/10 22:05:03 900					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@46639d8e
+
+2022/08/10 22:05:18 943					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:05:18 963					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , IsMayor BIT , Apellido VARCHAR(254) );
+
+2022/08/10 22:05:18 998					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:05:19 055					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:05:19 051					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:05:18 993					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Sentencia para crear tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:05:19 004					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , IsMayor BIT , Apellido VARCHAR(254) );
+
+2022/08/10 22:05:19 000					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Tabla Test Creada exitosamente
+
+2022/08/10 22:05:19 061					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: java.sql.SQLNonTransientConnectionException: No operations allowed after connection closed.
+
+2022/08/10 22:05:19 064					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Tipo de Excepción : class java.sql.SQLNonTransientConnectionException
+
+2022/08/10 22:05:19 067					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Causa de la Excepción : com.mysql.cj.exceptions.ConnectionIsClosedException: No operations allowed after connection closed.
+
+2022/08/10 22:05:19 070					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Mensaje de la Excepción : No operations allowed after connection closed.
+
+2022/08/10 22:05:19 073					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@45c7b25
+*
+*
+*
+*
+*
+2022/08/10 22:16:51 770					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:16:51 803					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:16:51 808					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:16:51 876					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 22:16:51 901					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:16:51 914					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:16:51 948					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:16:51 920					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 22:16:51 917					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 22:16:51 952					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:17:07 004					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:17:07 007					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.
+
+2022/08/10 22:17:07 039					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:17:07 043					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/10 22:17:31 562					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:17:31 597					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:17:31 602					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:17:31 653					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:17:46 652					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:17:46 659					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:17:46 662					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 22:17:46 665					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 22:17:46 688					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:17:46 691					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:18:01 727					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:18:01 744					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(254) , IsMayor BIT );
+
+2022/08/10 22:18:01 758					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Sentencia para crear tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:18:01 761					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Tabla Test Creada exitosamente
+
+2022/08/10 22:18:01 764					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(254) , IsMayor BIT );
+
+2022/08/10 22:18:01 807					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:18:01 811					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/10 22:18:30 707					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:18:30 739					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:18:30 743					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:18:30 808					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 22:19:00 792					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:19:00 806					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:19:00 810					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 22:19:00 813					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 22:19:00 835					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:19:00 839					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:19:30 888					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:19:30 891					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.
+
+2022/08/10 22:19:30 913					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:19:30 918					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/10 22:26:56 764					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:26:56 773					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:26:56 783					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: java.sql.SQLNonTransientConnectionException: Connection is closed.
+
+2022/08/10 22:26:56 786					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Tipo de Excepción : class java.sql.SQLNonTransientConnectionException
+
+2022/08/10 22:26:56 789					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Causa de la Excepción : null
+
+2022/08/10 22:26:56 792					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Mensaje de la Excepción : Connection is closed.
+
+2022/08/10 22:26:56 795					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@51ce5b45
+
+2022/08/10 22:27:26 825					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:27:26 840					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:27:26 844					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 22:27:26 848					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 22:27:26 853					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:27:56 886					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:27:56 905					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , IsMayor BIT , Apellido VARCHAR(254) );
+
+2022/08/10 22:27:56 958					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Sentencia para crear tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:27:56 961					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Tabla Test Creada exitosamente
+
+2022/08/10 22:27:56 971					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:27:56 968					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:27:56 964					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , IsMayor BIT , Apellido VARCHAR(254) );
+*
+*
+*
+*
+*
+2022/08/10 22:29:10 720					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:29:10 729					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:29:10 737					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: java.sql.SQLNonTransientConnectionException: No operations allowed after connection closed.
+
+2022/08/10 22:29:10 740					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Tipo de Excepción : class java.sql.SQLNonTransientConnectionException
+
+2022/08/10 22:29:10 743					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Causa de la Excepción : com.mysql.cj.exceptions.ConnectionIsClosedException: No operations allowed after connection closed.
+
+2022/08/10 22:29:10 746					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Mensaje de la Excepción : No operations allowed after connection closed.
+
+2022/08/10 22:29:10 749					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@4f3f72af
+
+2022/08/10 22:29:40 779					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:29:40 798					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:29:40 801					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 22:29:40 805					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 22:29:40 808					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:30:10 837					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:30:10 861					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:30:10 873					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(254) , IsMayor BIT );
+
+2022/08/10 22:30:10 918					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(254) , IsMayor BIT );
+
+2022/08/10 22:30:10 915					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:30:10 914					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Tabla Test Creada exitosamente
+
+2022/08/10 22:30:10 911					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:30:10 910					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Sentencia para crear tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:30:10 921					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/10 22:30:55 143					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Excepción disparada cerrar la conexión a la BD's: io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind: No se a conectado el modelo a la BD's
+
+2022/08/10 22:30:55 161					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Causa de la Excepción : null
+
+2022/08/10 22:30:55 158					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Tipo de Excepción : class io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind
+
+2022/08/10 22:30:55 163					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Mensaje de la Excepción : No se a conectado el modelo a la BD's
+
+2022/08/10 22:30:55 166					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@46f7f36a
+
+2022/08/10 22:30:55 809					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:30:55 890					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 22:30:55 898					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:30:55 914					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					FATAL  							Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo: java.sql.SQLNonTransientConnectionException: No operations allowed after connection closed.
+
+2022/08/10 22:30:55 917					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					FATAL  							Tipo de Excepción : class java.sql.SQLNonTransientConnectionException
+
+2022/08/10 22:30:55 920					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					FATAL  							Causa de la Excepción : com.mysql.cj.exceptions.ConnectionIsClosedException: No operations allowed after connection closed.
+
+2022/08/10 22:30:55 923					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					FATAL  							Mensaje de la Excepción : No operations allowed after connection closed.
+
+2022/08/10 22:30:55 926					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@3fe5bd1a
+
+2022/08/10 22:31:25 211					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:31:25 222					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:31:25 225					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 22:31:25 228					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 22:31:25 231					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:31:55 283					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:31:55 286					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 22:31:55 289					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:31:55 287					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.
+*
+*
+*
+*
+*
+2022/08/10 22:32:11 844					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Excepción disparada cerrar la conexión a la BD's: io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind: No se a conectado el modelo a la BD's
+
+2022/08/10 22:32:11 854					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Tipo de Excepción : class io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind
+
+2022/08/10 22:32:11 865					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Causa de la Excepción : null
+
+2022/08/10 22:32:11 874					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@46f7f36a
+
+2022/08/10 22:32:11 869					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Mensaje de la Excepción : No se a conectado el modelo a la BD's
+
+2022/08/10 22:32:12 659					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:32:12 727					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:32:12 734					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:32:41 918					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:32:41 930					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:32:41 933					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 22:32:41 936					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 22:32:41 940					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/10 22:33:04 747					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Excepción disparada cerrar la conexión a la BD's: io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind: No se a conectado el modelo a la BD's
+
+2022/08/10 22:33:04 756					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Tipo de Excepción : class io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind
+
+2022/08/10 22:33:04 760					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Causa de la Excepción : null
+
+2022/08/10 22:33:04 763					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Mensaje de la Excepción : No se a conectado el modelo a la BD's
+
+2022/08/10 22:33:04 773					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@421faab1
+
+2022/08/10 22:33:05 433					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:33:05 493					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:33:05 499					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:33:34 820					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:33:34 827					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:33:34 831					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 22:33:34 834					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 22:33:34 837					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/10 22:35:14 687					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:35:14 697					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:35:14 687					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:35:14 759					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:35:14 792					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:35:14 795					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:35:44 742					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:35:44 749					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:35:44 752					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 22:35:44 755					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 22:35:44 775					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:35:44 778					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/10 22:37:37 309					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:37:37 379					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:37:37 404					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:37:37 409					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/10 22:40:09 325					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:40:09 401					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:40:09 406					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/10 22:41:14 689					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:41:14 762					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:41:14 768					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:41:24 016					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:41:24 022					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:41:24 025					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 22:41:24 028					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 22:41:24 031					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:41:34 104					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:41:34 118					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:41:34 108					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:41:34 087					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:41:34 131					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(254) , IsMayor BIT );
+
+2022/08/10 22:41:34 148					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Sentencia para crear tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:41:34 151					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Tabla Test Creada exitosamente
+
+2022/08/10 22:41:34 160					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:41:34 154					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(254) , IsMayor BIT );
+*
+*
+*
+*
+*
+2022/08/10 22:47:14 728					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Excepción disparada cerrar la conexión a la BD's: io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind: No se a conectado el modelo a la BD's
+
+2022/08/10 22:47:14 732					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Tipo de Excepción : class io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind
+
+2022/08/10 22:47:14 720					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla correspondiente al modelo no existe en BD's'
+
+2022/08/10 22:47:14 739					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Mensaje de la Excepción : No se a conectado el modelo a la BD's
+
+2022/08/10 22:47:14 735					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Causa de la Excepción : null
+
+2022/08/10 22:47:14 742					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@7646d1e7
+
+2022/08/10 22:47:15 363					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:47:15 420					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 22:47:15 432					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:47:15 482					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:47:15 494					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/10 22:47:15 498					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:47:24 793					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:47:24 796					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 22:47:24 797					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.
+
+2022/08/10 22:47:24 799					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:47:24 806					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Causa de la Excepción : null
+
+2022/08/10 22:47:24 809					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Mensaje de la Excepción : No se a conectado el modelo a la BD's
+
+2022/08/10 22:47:24 812					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@76b66435
+
+2022/08/10 22:47:24 803					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Tipo de Excepción : class io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind
+
+2022/08/10 22:47:24 800					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Excepción disparada cerrar la conexión a la BD's: io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind: No se a conectado el modelo a la BD's
+*
+*
+*
+*
+*
+2022/08/10 22:49:02 718					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:49:02 793					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 22:49:02 801					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:49:02 862					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:49:02 874					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/10 22:49:02 877					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:49:12 027					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:49:12 038					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:49:12 041					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 22:49:12 044					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 22:49:12 047					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:49:22 095					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:49:22 098					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 22:49:22 099					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.
+
+2022/08/10 22:49:22 105					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Tipo de Excepción : class io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind
+
+2022/08/10 22:49:22 114					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@3f0467f6
+
+2022/08/10 22:49:22 102					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Excepción disparada cerrar la conexión a la BD's: io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind: No se a conectado el modelo a la BD's
+
+2022/08/10 22:49:22 101					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:49:22 111					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Mensaje de la Excepción : No se a conectado el modelo a la BD's
+
+2022/08/10 22:49:22 108					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Causa de la Excepción : null
+*
+*
+*
+*
+*
+2022/08/10 22:50:46 437					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:50:46 507					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:50:46 512					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:50:55 744					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla correspondiente al modelo no existe en BD's'
+
+2022/08/10 22:50:55 749					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:51:05 802					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:51:05 803					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:51:05 816					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , IsMayor BIT , Apellido VARCHAR(254) );
+
+2022/08/10 22:51:05 823					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:51:05 832					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:51:05 831					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Sentencia para crear tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:51:05 841					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:51:05 838					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , IsMayor BIT , Apellido VARCHAR(254) );
+
+2022/08/10 22:51:05 835					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Tabla Test Creada exitosamente
+*
+*
+*
+*
+*
+2022/08/10 22:52:06 327					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:52:06 436					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 22:52:06 452					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:52:06 500					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:52:06 512					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/10 22:52:06 515					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:52:25 547					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:52:25 559					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 22:52:25 562					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 22:52:25 565					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 22:52:25 568					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:52:45 606					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:52:45 609					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.
+
+2022/08/10 22:52:45 630					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:52:45 612					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:52:45 634					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 22:52:45 637					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/10 22:55:17 824					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla correspondiente al modelo no existe en BD's'
+
+2022/08/10 22:55:17 838					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Excepción disparada cerrar la conexión a la BD's: io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind: No se a conectado el modelo a la BD's
+
+2022/08/10 22:55:17 850					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Mensaje de la Excepción : No se a conectado el modelo a la BD's
+
+2022/08/10 22:55:17 846					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Causa de la Excepción : null
+
+2022/08/10 22:55:17 841					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Tipo de Excepción : class io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind
+
+2022/08/10 22:55:17 853					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@6667bb43
+
+2022/08/10 22:55:18 551					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:55:18 610					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:55:18 616					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/10 22:58:54 646					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla correspondiente al modelo no existe en BD's'
+
+2022/08/10 22:58:55 264					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:58:55 323					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:58:55 330					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:59:14 699					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 22:59:14 734					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Excepción disparada en el método que Crea la tabla correspondiente al modelo: java.sql.SQLNonTransientConnectionException: No operations allowed after connection closed.
+
+2022/08/10 22:59:14 721					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 22:59:14 717					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 22:59:14 737					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Tipo de Excepción : class java.sql.SQLNonTransientConnectionException
+
+2022/08/10 22:59:14 740					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Causa de la Excepción : com.mysql.cj.exceptions.ConnectionIsClosedException: No operations allowed after connection closed.
+
+2022/08/10 22:59:14 743					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Mensaje de la Excepción : No operations allowed after connection closed.
+
+2022/08/10 22:59:14 746					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@26ec5e6f
+*
+*
+*
+*
+*
+2022/08/10 23:02:14 812					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla correspondiente al modelo no existe en BD's'
+
+2022/08/10 23:02:15 480					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:02:15 547					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 23:02:15 552					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 23:02:34 872					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:02:34 878					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(254) , IsMayor BIT );
+
+2022/08/10 23:02:34 896					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 23:02:34 899					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Sentencia para crear tabla de la BD's ejecutada exitosamente
+
+2022/08/10 23:02:34 900					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 23:02:34 902					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Tabla Test Creada exitosamente
+
+2022/08/10 23:02:34 905					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(254) , IsMayor BIT );
+
+2022/08/10 23:02:34 908					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/10 23:05:51 491					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla correspondiente al modelo no existe en BD's'
+
+2022/08/10 23:05:52 137					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:05:52 199					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 23:05:52 207					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 23:05:52 241					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:05:52 253					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/10 23:05:52 257					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 23:06:11 512					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.
+
+2022/08/10 23:06:11 536					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:06:11 553					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 23:06:11 559					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 23:06:11 595					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/10 23:06:11 587					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:06:11 599					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/10 23:11:41 026					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:11:41 089					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 23:11:41 094					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 23:11:41 137					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:11:41 197					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:11:41 207					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/10 23:11:41 207					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 23:11:41 203					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 23:11:41 200					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 23:11:41 210					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 23:12:01 259					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:12:01 276					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.
+*
+*
+*
+*
+*
+2022/08/10 23:18:43 430					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:18:43 535					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 23:18:43 542					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 23:18:43 554					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla correspondiente al modelo no existe en BD's'
+
+2022/08/10 23:19:03 601					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:19:03 621					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/10 23:19:03 626					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 23:19:03 662					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:19:03 665					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , IsMayor BIT , Apellido VARCHAR(254) );
+
+2022/08/10 23:19:03 681					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Sentencia para crear tabla de la BD's ejecutada exitosamente
+
+2022/08/10 23:19:03 685					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Tabla Test Creada exitosamente
+
+2022/08/10 23:19:03 688					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , IsMayor BIT , Apellido VARCHAR(254) );
+
+2022/08/10 23:19:03 691					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/10 23:19:11 408					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:19:11 479					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 23:19:11 506					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:19:11 474					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 23:19:11 537					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 23:19:11 549					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:19:11 533					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 23:19:11 528					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 23:19:11 561					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/10 23:19:11 565					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 23:19:31 588					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:19:31 640					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:19:31 644					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(254) , IsMayor BIT );
+
+2022/08/10 23:19:31 658					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Sentencia para crear tabla de la BD's ejecutada exitosamente
+
+2022/08/10 23:19:31 661					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Tabla Test Creada exitosamente
+
+2022/08/10 23:19:31 664					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(254) , IsMayor BIT );
+
+2022/08/10 23:19:31 667					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/10 23:20:32 260					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:20:32 334					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 23:20:32 339					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 23:20:32 370					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:20:32 387					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 23:20:32 415					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/10 23:20:32 405					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:20:32 383					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 23:20:32 380					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 23:20:32 418					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 23:20:52 424					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:20:52 474					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:20:52 477					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(254) , IsMayor BIT );
+
+2022/08/10 23:20:52 489					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Sentencia para crear tabla de la BD's ejecutada exitosamente
+
+2022/08/10 23:20:52 493					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Tabla Test Creada exitosamente
+
+2022/08/10 23:20:52 496					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(254) , IsMayor BIT );
+
+2022/08/10 23:20:52 499					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/10 23:22:07 720					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:22:07 789					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 23:22:07 794					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 23:22:07 855					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:22:07 873					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/10 23:22:07 869					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/10 23:22:07 882					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:22:07 893					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/10 23:22:07 876					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/10 23:22:07 897					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 23:22:27 917					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:22:27 963					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:22:27 982					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Sentencia para crear tabla de la BD's ejecutada exitosamente
+
+2022/08/10 23:22:27 967					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(254) , IsMayor BIT );
+
+2022/08/10 23:22:27 991					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 23:22:27 988					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id INTEGER AUTO_INCREMENT PRIMARY KEY , Apellido VARCHAR(254) , IsMayor BIT );
+
+2022/08/10 23:22:27 985					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Tabla Test Creada exitosamente
+*
+*
+*
+*
+*
+2022/08/10 23:23:09 401					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:23:09 463					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 23:23:09 468					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 23:23:09 471					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.
+
+2022/08/10 23:23:09 509					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:23:09 521					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/10 23:23:09 525					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/10 23:24:29 971					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:24:30 040					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/10 23:24:30 045					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/10 23:24:30 049					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.
+
+2022/08/10 23:24:30 078					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/10 23:24:30 091					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/10 23:24:30 094					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada

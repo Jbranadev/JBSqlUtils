@@ -1,16 +1,22 @@
 package io.github.josecarlosbran.JBSqlLite;
 
+import io.github.josecarlosbran.JBSqlLite.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
+import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Utilities.ColumnsSQL;
 import io.github.josecarlosbran.LogsJB.LogsJB;
+import org.apache.commons.lang3.StringUtils;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 import static io.github.josecarlosbran.JBSqlLite.JBSqlUtils.*;
@@ -46,39 +52,27 @@ public class Principal {
             setHostGlobal("localhost");
             setPortGlobal("5076");
             setUserGlobal("Bran");
-            setPasswordGlobal("bran");
-            Consumer<ColumnsSQL> consumer= ColumnsSQL-> {
-                System.out.println("TableName: "+ColumnsSQL.getTABLE_NAME());
-                System.out.println("ColumnName: "+ColumnsSQL.getCOLUMN_NAME());
-                System.out.println("Tipo de Dato: "+ColumnsSQL.getTYPE_NAME());
-                System.out.println("");
-            };
+            setPasswordGlobal("Bran");
 
-            Consumer<Method> imprimirMetodos= metodo-> {
-                System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass().getSimpleName());
-            };
+
 
             Test test=new Test();
-            List<Method> metodos=new LinkedList<>();
-            List<Method> get=new LinkedList<>();
-            List<Method> set=new LinkedList<>();
-            //metodos=test.getMethodsModel();
-            System.out.println(" ");
+            //test.getConnection();
             //Thread.sleep(5000);
-            get=test.getMethodsGetOfModel(test.getMethodsModel());
-            System.out.println(" ");
-            get.stream().forEach(imprimirMetodos);
+            /*System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            //Thread.sleep(20000);
+            test.dropTableIfExist();
 
-            System.out.println(" ");
-            set=test.getMethodsSetOfModel(test.getMethodsModel());
-            System.out.println(" ");
-            set.stream().forEach(imprimirMetodos);
-            /*test.setConnect(test.getConnection());
-            Thread.sleep(2000);
-            test.closeConnection(test.getConnect());
-            Thread.sleep(1000);
-            test.getColumnas().stream().forEach(consumer);*/
-        }catch (DataBaseUndefind | /*ConexionUndefind |*/ PropertiesDBUndefined /*|InterruptedException*/ e) {
+            /*Thread.sleep(20000);
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");*/
+            test.crateTable();
+
+        }catch (DataBaseUndefind | /*ConexionUndefind |*/ PropertiesDBUndefined /*|InterruptedException*/
+                /*|IllegalAccessException|InvocationTargetException*/ e) {
             LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: "+ e.toString());
             LogsJB.fatal("Tipo de Excepción : "+e.getClass());
             LogsJB.fatal("Causa de la Excepción : "+e.getCause());

@@ -1,6 +1,8 @@
 package io.github.josecarlosbran.JBSqlLite.Enumerations;
 
 
+import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
+
 public enum DataType {
 
     /**
@@ -60,6 +62,15 @@ public enum DataType {
      */
     INTEGER(""),
 
+    /**
+     * Tipo de dato auto incrementable en SQL Server
+     */
+    IDENTITY("1,1"),
+
+    /**
+     * Tipo de dato auto incrementable en PostgreSQL
+     */
+    SERIAL("SERIAL"),
     //java.lang.Integer
 
     /**
@@ -138,6 +149,14 @@ public enum DataType {
      */
     public String getSize() {
         return size;
+    }
+
+    public String toString(){
+        if(stringIsNullOrEmpty(this.getSize())){
+            return this.name();
+        }else{
+            return this.name()+"("+this.getSize()+")";
+        }
     }
 
     public void setSize(String Size){

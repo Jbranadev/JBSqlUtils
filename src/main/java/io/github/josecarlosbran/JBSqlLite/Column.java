@@ -7,9 +7,9 @@ import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
 public class Column<T> {
     private T valor;
 
-    private DataType dataTypeSQL;
+    private DataType dataTypeSQL=null;
 
-    private Constraint restriccion;
+    private Constraint[] restriccion =null;
 
     Column(DataType tipo_de_dato){
         this.setDataTypeSQL(tipo_de_dato);
@@ -21,8 +21,13 @@ public class Column<T> {
     }
 
 
-    Column(T Valor, DataType tipo_de_dato, Constraint restriccion){
+    Column(T Valor, DataType tipo_de_dato, Constraint[] restriccion){
         this.setValor(Valor);
+        this.setDataTypeSQL(tipo_de_dato);
+        this.setRestriccion(restriccion);
+    }
+
+    Column(DataType tipo_de_dato, Constraint[] restriccion){
         this.setDataTypeSQL(tipo_de_dato);
         this.setRestriccion(restriccion);
     }
@@ -43,11 +48,11 @@ public class Column<T> {
         this.dataTypeSQL = dataTypeSQL;
     }
 
-    public Constraint getRestriccion() {
+    public Constraint[] getRestriccion() {
         return restriccion;
     }
 
-    public void setRestriccion(Constraint restriccion) {
+    public void setRestriccion(Constraint[] restriccion) {
         this.restriccion = restriccion;
     }
 }

@@ -13,14 +13,22 @@ public enum Constraint {
 
     FOREIGN_KEY("FOREIGN KEY"),
 
-    CURRENT_TIMESTAMP("CURRENT_TIMESTAMP");
+    CURRENT_TIMESTAMP("CURRENT_TIMESTAMP"),
+
+    AUTO_INCREMENT("AUTO_INCREMENT");
 
     private String restriccion;
 
     private Constraint(String Restriccion){
-        this.restriccion=Restriccion;
+        this.setRestriccion(Restriccion);
     }
 
 
+    public String getRestriccion() {
+        return restriccion;
+    }
 
+    private void setRestriccion(String restriccion) {
+        this.restriccion = restriccion;
+    }
 }
