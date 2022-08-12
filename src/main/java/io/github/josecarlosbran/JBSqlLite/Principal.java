@@ -40,48 +40,81 @@ public class Principal {
 
     }*/
 
-    public static void main(String[] args){
-        try{
+    public static void main(String[] args) {
+        try {
+            String separador=System.getProperty("file.separator");
+            String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
+                    "BD" +
+                    separador +
+                    "JBSqlUtils.db");
 
-
-            String BDSqlite= (Paths.get("").toAbsolutePath().normalize().toString()+"/BD/JBSqlUtils.db").replace("\\","/");
-            String DB="JBSQLUTILS";
-
+            String DB = "JBSQLUTILS";
+            setDataBaseTypeGlobal(DataBase.PostgreSQL);
+            //setDataBaseGlobal(BDSqlite);
             setDataBaseGlobal(DB);
-            setDataBaseTypeGlobal(DataBase.MySQL);
+            //setDataBaseTypeGlobal(DataBase.MySQL);
             setHostGlobal("localhost");
             setPortGlobal("5076");
             setUserGlobal("Bran");
+            //setUserGlobal("postgres");
             setPasswordGlobal("Bran");
+            //LogsJB.info(BDSqlite);
 
+            Test test = new Test();
+            //new Principal().MySQL(test);
 
+            new Principal().PostgreSQL(test);
 
-            Test test=new Test();
-            //test.getConnection();
-            //Thread.sleep(5000);
-            /*System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            //Thread.sleep(20000);
-            test.dropTableIfExist();
-
-            /*Thread.sleep(20000);
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");*/
-            test.crateTable();
-
-        }catch (DataBaseUndefind | /*ConexionUndefind |*/ PropertiesDBUndefined /*|InterruptedException*/
+        } catch (DataBaseUndefind | /*ConexionUndefind |*/ PropertiesDBUndefined /*|InterruptedException*/
                 /*|IllegalAccessException|InvocationTargetException*/ e) {
-            LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: "+ e.toString());
-            LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            LogsJB.fatal("Causa de la Excepción : "+e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+            LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
 
     }
 
 
+    void SQLITE(Test test) {
+
+        //test.closeConnection(test.getConnection());
+        //test.dropTableIfExist();
+        //test.crateTable();
+    }
+
+    void MySQL(Test test) {
+
+
+
+        //test.getConnection();
+        //Thread.sleep(5000);
+            /*System.out.println("");
+            System.out.println("");
+            System.out.println("");*/
+        //Thread.sleep(20000);
+        test.dropTableIfExist();
+
+            /*Thread.sleep(20000);
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");*/
+        test.crateTable();
+    }
+
+    void PostgreSQL(Test test){
+        test.setGetPropertySystem(false);
+        test.setPort("5075");
+        test.setHost("localhost");
+        test.setUser("postgres");
+        test.setPassword("Bran");
+        test.setBD("JBSQLUTILS");
+        test.setDataBaseType(DataBase.PostgreSQL);
+
+        //test.closeConnection(test.getConnection());
+        test.dropTableIfExist();
+        test.crateTable();
+    }
 
 }

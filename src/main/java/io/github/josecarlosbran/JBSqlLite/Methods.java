@@ -133,12 +133,8 @@ public class Methods extends Conexion {
         try {
             Callable<Boolean> VerificarExistencia = () -> {
                 try {
-                    Connection connexion = this.getConnection();
-                    DatabaseMetaData metaData;
-                    if (Objects.isNull(connexion)) {
-                        return false;
-                    }
-                    metaData = connexion.getMetaData();
+
+                    DatabaseMetaData metaData = this.getConnection().getMetaData();
                     ResultSet tables = metaData.getTables(null, null, "%", null);
                     //Obtener las tablas disponibles
                     TablesSQL.getTablas().clear();
@@ -161,11 +157,13 @@ public class Methods extends Conexion {
                             this.setTableExist(Boolean.TRUE);
                             this.setTableName(NameTable);
                             LogsJB.info("La tabla correspondiente a este modelo, existe en BD's");
+                            tables.close();
                             this.closeConnection();
                             getColumnsTable();
                             return true;
                         }
                     }
+                    tables.close();
                     if (!this.getTableExist()) {
                         LogsJB.info("La tabla correspondiente a este modelo, No existe en BD's");
                         this.closeConnection();
@@ -236,6 +234,7 @@ public class Methods extends Conexion {
 
                 }
                 LogsJB.info("Información de las columnas de la tabla correspondiente al modelo obtenida");
+                columnas.close();
                 this.closeConnection();
             } catch (Exception e) {
                 LogsJB.fatal("Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo: " + e.toString());
@@ -257,8 +256,6 @@ public class Methods extends Conexion {
         try {
             Callable<Boolean> createtabla = () -> {
                 try {
-
-
                     if (this.tableExist()) {
                         LogsJB.info("La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.");
                         return false;
@@ -276,13 +273,20 @@ public class Methods extends Conexion {
                             DataType columnType = columnsSQL.getDataTypeSQL();
                             Constraint[] columnRestriccion = columnsSQL.getRestriccion();
                             String restricciones = "";
+                            String tipo_de_columna=columnType.toString();
                             if (!Objects.isNull(columnRestriccion)) {
                                 for (Constraint restriccion : columnRestriccion) {
-                                    restricciones = restricciones + restriccion.getRestriccion() + " ";
+                                    if((DataBase.PostgreSQL==this.getDataBaseType()) &&
+                                            (restriccion==Constraint.AUTO_INCREMENT)){
+                                        tipo_de_columna=DataType.SERIAL.name();
+                                    }else{
+                                        restricciones = restricciones + restriccion.getRestriccion() + " ";
+                                    }
                                 }
                             }
                             //System.out.println(" ");
-                            String columna = columnName + " " + columnType.toString() + " " + restricciones;
+
+                            String columna = columnName + " " + tipo_de_columna + " " + restricciones;
                             //System.out.println(columna);
 
                             sql = sql + columna;
@@ -304,9 +308,9 @@ public class Methods extends Conexion {
                             this.closeConnection();
                             return true;
                         }
+                        ejecutor.close();
                         this.closeConnection();
                     }
-
                     return false;
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Crea la tabla correspondiente al modelo: " + e.toString());
@@ -341,9 +345,7 @@ public class Methods extends Conexion {
         try {
             Callable<Boolean> dropTable = () -> {
                 try {
-
                     if (this.tableExist()) {
-                        this.getConnection();
                         String sql = "";
                         if (this.getDataBaseType() == DataBase.MySQL || this.getDataBaseType() == DataBase.PostgreSQL || this.getDataBaseType() == DataBase.SQLite) {
                             sql = "DROP TABLE IF EXISTS " + this.getClass().getSimpleName();
@@ -356,7 +358,7 @@ public class Methods extends Conexion {
                                     this.getClass().getSimpleName() +
                                     " RESTRICT;";
                         }
-                        Statement ejecutor = this.getConnect().createStatement();
+                        Statement ejecutor = this.getConnection().createStatement();
                         //LogsJB.info(sql);
                         if (!ejecutor.execute(sql)) {
                             LogsJB.info("Sentencia para eliminar tabla de la BD's ejecutada exitosamente");
@@ -364,6 +366,7 @@ public class Methods extends Conexion {
                             LogsJB.info(sql);
                             return true;
                         }
+                        ejecutor.close();
                         this.closeConnection();
                     } else {
                         LogsJB.info("Tabla correspondiente al modelo no existe en BD's'");
