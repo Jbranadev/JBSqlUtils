@@ -68,7 +68,7 @@ public class Methods extends Conexion {
                 //Carga el controlador de SQLServer
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
-                        this.getHost() + ":" + this.getPort() + ";databaseName=" + this.getBD();
+                        this.getHost() + ":" + this.getPort() + ";databaseName=" + this.getBD()+";TrustServerCertificate=True";
                 String usuario = this.getUser();
                 String password = this.getPassword();
                 connect = DriverManager.getConnection(url, usuario, password);
@@ -345,6 +345,7 @@ public class Methods extends Conexion {
         try {
             Callable<Boolean> dropTable = () -> {
                 try {
+                    LogsJB.info("Comienza el metodo");
                     if (this.tableExist()) {
                         String sql = "";
                         if (this.getDataBaseType() == DataBase.MySQL || this.getDataBaseType() == DataBase.PostgreSQL || this.getDataBaseType() == DataBase.SQLite) {
@@ -355,11 +356,12 @@ public class Methods extends Conexion {
                                     this.getClass().getSimpleName() +
                                     "' AND TABLE_SCHEMA = 'dbo')\n" +
                                     "    drop table dbo." +
-                                    this.getClass().getSimpleName() +
-                                    " RESTRICT;";
+                                    this.getClass().getSimpleName();
+                                    //+" RESTRICT;";
                         }
+                        LogsJB.info(sql);
                         Statement ejecutor = this.getConnection().createStatement();
-                        //LogsJB.info(sql);
+
                         if (!ejecutor.execute(sql)) {
                             LogsJB.info("Sentencia para eliminar tabla de la BD's ejecutada exitosamente");
                             LogsJB.info("Tabla " + this.getClass().getSimpleName() + " Eliminada exitosamente");

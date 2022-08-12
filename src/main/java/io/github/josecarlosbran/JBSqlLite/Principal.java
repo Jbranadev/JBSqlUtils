@@ -63,7 +63,9 @@ public class Principal {
             Test test = new Test();
             //new Principal().MySQL(test);
 
-            new Principal().PostgreSQL(test);
+            //new Principal().PostgreSQL(test);
+
+            new Principal().SQLServer(test);
 
         } catch (DataBaseUndefind | /*ConexionUndefind |*/ PropertiesDBUndefined /*|InterruptedException*/
                 /*|IllegalAccessException|InvocationTargetException*/ e) {
@@ -115,6 +117,21 @@ public class Principal {
         //test.closeConnection(test.getConnection());
         test.dropTableIfExist();
         test.crateTable();
+    }
+
+
+    void SQLServer(Test test){
+        test.setGetPropertySystem(false);
+        test.setPort("5077");
+        test.setHost("localhost");
+        test.setUser("Bran");
+        test.setPassword("Bran");
+        test.setBD("JBSQLUTILS");
+        test.setDataBaseType(DataBase.SQLServer);
+
+        //test.closeConnection(test.getConnection());
+        test.dropTableIfExist();
+        //test.crateTable();
     }
 
 }
