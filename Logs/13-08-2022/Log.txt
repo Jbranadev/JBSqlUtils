@@ -1,0 +1,628 @@
+*
+*
+*
+*
+*
+2022/08/13 00:04:46 773					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:04:46 777					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:04:46 792					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							INSERT INTO Test(Name, Apellido, IsMayor) VALUES (?, ?, ?);
+
+2022/08/13 00:04:46 862					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:04:46 891					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@14c28b95
+
+2022/08/13 00:04:46 888					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Mensaje de la Excepción : ERROR: la columna «ismayor» es de tipo bit pero la expresión es de tipo boolean
+  Hint: Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+  Position: 59
+
+2022/08/13 00:04:46 885					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Causa de la Excepción : null
+
+2022/08/13 00:04:46 882					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Tipo de Excepción : class org.postgresql.util.PSQLException
+
+2022/08/13 00:04:46 878					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Excepción disparada en el método que Guarda el modelo en la BD's: org.postgresql.util.PSQLException: ERROR: la columna «ismayor» es de tipo bit pero la expresión es de tipo boolean
+  Hint: Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+  Position: 59
+
+2022/08/13 00:04:46 920					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:04:46 942					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:04:46 939					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+*
+*
+*
+*
+*
+2022/08/13 00:05:30 860					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:05:30 909					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:05:30 914					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:05:30 929					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							INSERT INTO Test(Name, Apellido, IsMayor) VALUES (?, ?, ?);
+
+2022/08/13 00:05:30 995					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:05:31 027					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Causa de la Excepción : null
+
+2022/08/13 00:05:31 033					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@655a2959
+
+2022/08/13 00:05:31 026					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:05:31 024					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Tipo de Excepción : class org.postgresql.util.PSQLException
+
+2022/08/13 00:05:31 023					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/13 00:05:31 021					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Excepción disparada en el método que Guarda el modelo en la BD's: org.postgresql.util.PSQLException: ERROR: la columna «ismayor» es de tipo bit pero la expresión es de tipo integer
+  Hint: Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+  Position: 59
+
+2022/08/13 00:05:31 030					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Mensaje de la Excepción : ERROR: la columna «ismayor» es de tipo bit pero la expresión es de tipo integer
+  Hint: Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+  Position: 59
+*
+*
+*
+*
+*
+2022/08/13 00:11:59 075					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:11:59 124					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:11:59 128					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:11:59 145					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							INSERT INTO Test(Name, Apellido, IsMayor) VALUES (?, ?, ?);
+
+2022/08/13 00:11:59 213					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:11:59 239					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:11:59 235					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/13 00:11:59 241					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Excepción disparada en el método que Guarda el modelo en la BD's: org.postgresql.util.PSQLException: ERROR: la columna «ismayor» es de tipo bit pero la expresión es de tipo character varying
+  Hint: Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+  Position: 59
+
+2022/08/13 00:11:59 254					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@2ca91680
+
+2022/08/13 00:11:59 250					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Mensaje de la Excepción : ERROR: la columna «ismayor» es de tipo bit pero la expresión es de tipo character varying
+  Hint: Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+  Position: 59
+
+2022/08/13 00:11:59 247					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Causa de la Excepción : null
+
+2022/08/13 00:11:59 244					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Tipo de Excepción : class org.postgresql.util.PSQLException
+*
+*
+*
+*
+*
+2022/08/13 00:12:35 022					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:12:35 026					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:12:34 971					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:12:35 043					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							INSERT INTO Test(Name, Apellido, IsMayor) VALUES (?, ?, ?);
+
+2022/08/13 00:12:35 112					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:12:35 141					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Excepción disparada en el método que Guarda el modelo en la BD's: org.postgresql.util.PSQLException: ERROR: la columna «ismayor» es de tipo bit pero la expresión es de tipo boolean
+  Hint: Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+  Position: 59
+
+2022/08/13 00:12:35 144					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/13 00:12:35 147					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Causa de la Excepción : null
+
+2022/08/13 00:12:35 147					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:12:35 150					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Mensaje de la Excepción : ERROR: la columna «ismayor» es de tipo bit pero la expresión es de tipo boolean
+  Hint: Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+  Position: 59
+
+2022/08/13 00:12:35 153					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@14c28b95
+
+2022/08/13 00:12:35 144					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Tipo de Excepción : class org.postgresql.util.PSQLException
+*
+*
+*
+*
+*
+2022/08/13 00:19:54 556					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:19:54 606					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:19:54 602					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:19:54 626					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							INSERT INTO Test(Name, Apellido, IsMayor) VALUES (?, ?, ?);
+
+2022/08/13 00:19:54 699					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:19:54 719					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/13 00:19:54 723					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:19:54 785					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Excepción disparada en el método que Guarda el modelo en la BD's: org.postgresql.util.PSQLException: ERROR: la columna «ismayor» es de tipo bit pero la expresión es de tipo boolean
+  Hint: Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+  Position: 59
+
+2022/08/13 00:19:54 788					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Tipo de Excepción : class org.postgresql.util.PSQLException
+
+2022/08/13 00:19:54 769					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:19:54 799					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@53a8858f
+
+2022/08/13 00:19:54 795					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Mensaje de la Excepción : ERROR: la columna «ismayor» es de tipo bit pero la expresión es de tipo boolean
+  Hint: Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+  Position: 59
+
+2022/08/13 00:19:54 792					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Causa de la Excepción : null
+*
+*
+*
+*
+*
+2022/08/13 00:20:22 778					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:20:22 825					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:20:22 830					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:20:22 843					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							INSERT INTO Test(Name, IsMayor, Apellido) VALUES (?, ?, ?);
+
+2022/08/13 00:20:22 931					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:20:22 956					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@72f5fadf
+
+2022/08/13 00:20:22 953					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Mensaje de la Excepción : No se ha especificado un valor para el parámetro 2.
+
+2022/08/13 00:20:22 950					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Causa de la Excepción : null
+
+2022/08/13 00:20:22 947					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Tipo de Excepción : class org.postgresql.util.PSQLException
+
+2022/08/13 00:20:22 943					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Excepción disparada en el método que Guarda el modelo en la BD's: org.postgresql.util.PSQLException: No se ha especificado un valor para el parámetro 2.
+
+2022/08/13 00:20:22 984					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:20:23 012					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:20:23 008					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+*
+*
+*
+*
+*
+2022/08/13 00:20:50 772					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:20:50 825					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:20:50 829					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:20:50 843					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							INSERT INTO Test(Name, Apellido, IsMayor) VALUES (?, ?, ?);
+
+2022/08/13 00:20:50 923					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:20:50 942					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Excepción disparada en el método que Guarda el modelo en la BD's: org.postgresql.util.PSQLException: ERROR: la columna «ismayor» es de tipo bit pero la expresión es de tipo boolean
+  Hint: Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+  Position: 59
+
+2022/08/13 00:20:50 964					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@53a8858f
+
+2022/08/13 00:20:50 951					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Mensaje de la Excepción : ERROR: la columna «ismayor» es de tipo bit pero la expresión es de tipo boolean
+  Hint: Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+  Position: 59
+
+2022/08/13 00:20:50 948					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Causa de la Excepción : null
+
+2022/08/13 00:20:50 945					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Tipo de Excepción : class org.postgresql.util.PSQLException
+
+2022/08/13 00:20:50 981					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:20:51 002					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/13 00:20:51 006					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/13 00:24:07 066					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:24:07 119					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:24:07 115					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:24:07 134					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							INSERT INTO Test(Name, Apellido, IsMayor) VALUES (?, ?, ?);
+
+2022/08/13 00:24:07 208					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:24:07 230					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Excepción disparada en el método que Guarda el modelo en la BD's: org.postgresql.util.PSQLException: ERROR: la columna «ismayor» es de tipo bit pero la expresión es de tipo character varying
+  Hint: Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+  Position: 59
+
+2022/08/13 00:24:07 233					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Tipo de Excepción : class org.postgresql.util.PSQLException
+
+2022/08/13 00:24:07 236					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Causa de la Excepción : null
+
+2022/08/13 00:24:07 250					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:24:07 246					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/13 00:24:07 242					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@14c28b95
+
+2022/08/13 00:24:07 239					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Mensaje de la Excepción : ERROR: la columna «ismayor» es de tipo bit pero la expresión es de tipo character varying
+  Hint: Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+  Position: 59
+*
+*
+*
+*
+*
+2022/08/13 00:25:32 452					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:25:32 507					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:25:32 515					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:25:32 533					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							INSERT INTO Test(Name, IsMayor, Apellido) VALUES (?, ?, ?);
+
+2022/08/13 00:25:32 600					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:25:32 625					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Excepción disparada en el método que Guarda el modelo en la BD's: org.postgresql.util.PSQLException: ERROR: la columna «ismayor» es de tipo bit pero la expresión es de tipo character varying
+  Hint: Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+  Position: 55
+
+2022/08/13 00:25:32 637					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@14c28b95
+
+2022/08/13 00:25:32 628					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Tipo de Excepción : class org.postgresql.util.PSQLException
+
+2022/08/13 00:25:32 634					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Mensaje de la Excepción : ERROR: la columna «ismayor» es de tipo bit pero la expresión es de tipo character varying
+  Hint: Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+  Position: 55
+
+2022/08/13 00:25:32 631					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Causa de la Excepción : null
+
+2022/08/13 00:25:32 689					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/13 00:25:32 692					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/13 00:35:28 177					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:35:28 235					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:35:28 240					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:35:28 262					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							INSERT INTO Test(Name, Apellido, IsMayor) VALUES (?, ?, ?);
+
+2022/08/13 00:35:28 331					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:35:28 350					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/13 00:35:28 354					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:35:28 413					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:35:28 429					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Excepción disparada en el método que Guarda el modelo en la BD's: org.postgresql.util.PSQLException: ERROR: la columna «ismayor» es de tipo bit pero la expresión es de tipo boolean
+  Hint: Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+  Position: 59
+
+2022/08/13 00:35:28 435					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Causa de la Excepción : null
+
+2022/08/13 00:35:28 432					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Tipo de Excepción : class org.postgresql.util.PSQLException
+
+2022/08/13 00:35:28 442					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Mensaje de la Excepción : ERROR: la columna «ismayor» es de tipo bit pero la expresión es de tipo boolean
+  Hint: Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+  Position: 59
+
+2022/08/13 00:35:28 445					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@14c28b95
+*
+*
+*
+*
+*
+2022/08/13 00:35:51 889					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:35:51 946					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:35:51 950					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:35:51 953					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/13 00:35:52 031					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:35:52 046					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/13 00:35:52 050					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/13 00:35:52 053					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$3  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/13 00:35:52 073					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:35:52 092					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/13 00:35:52 095					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:35:52 508					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:35:52 595					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:35:52 598					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id SERIAL PRIMARY KEY , IsMayor BOOLEAN , Apellido VARCHAR(254) );
+
+2022/08/13 00:35:52 616					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Sentencia para crear tabla de la BD's ejecutada exitosamente
+
+2022/08/13 00:35:52 622					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id SERIAL PRIMARY KEY , IsMayor BOOLEAN , Apellido VARCHAR(254) );
+
+2022/08/13 00:35:52 619					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$2					INFO							Tabla Test Creada exitosamente
+
+2022/08/13 00:35:52 625					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/13 00:36:05 906					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:36:05 953					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:36:05 957					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:36:05 975					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							INSERT INTO Test(Name, IsMayor, Apellido) VALUES (?, ?, ?);
+
+2022/08/13 00:36:06 043					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:36:06 059					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							Filas actualizadas: 1
+
+2022/08/13 00:36:06 081					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@de53c3f
+
+2022/08/13 00:36:06 078					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					FATAL  							Mensaje de la Excepción : An I/O error occurred while sending to the backend.
+
+2022/08/13 00:36:06 071					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					FATAL  							Tipo de Excepción : class org.postgresql.util.PSQLException
+
+2022/08/13 00:36:06 075					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					FATAL  							Causa de la Excepción : java.net.SocketException: Socket closed
+
+2022/08/13 00:36:06 067					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					FATAL  							Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo: org.postgresql.util.PSQLException: An I/O error occurred while sending to the backend.
+
+2022/08/13 00:36:06 062					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/13 00:37:35 459					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:37:35 520					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:37:35 524					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:37:35 538					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							INSERT INTO Test(Name, IsMayor, Apellido) VALUES (?, ?, ?);
+
+2022/08/13 00:37:35 660					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:37:35 678					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/13 00:37:35 681					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:37:35 706					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							Filas actualizadas: 1
+
+2022/08/13 00:37:35 697					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+*
+*
+*
+*
+*
+2022/08/13 00:38:18 170					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:38:18 221					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:38:18 217					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:38:18 238					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							INSERT INTO Test(Name, Apellido, IsMayor) VALUES (?, ?, ?);
+
+2022/08/13 00:38:18 343					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:38:18 357					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							Filas actualizadas: 1
+
+2022/08/13 00:38:18 360					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:38:18 368					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					FATAL  							Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo: org.postgresql.util.PSQLException: An I/O error occurred while sending to the backend.
+
+2022/08/13 00:38:18 371					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					FATAL  							Tipo de Excepción : class org.postgresql.util.PSQLException
+
+2022/08/13 00:38:18 378					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					FATAL  							Mensaje de la Excepción : An I/O error occurred while sending to the backend.
+
+2022/08/13 00:38:18 375					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					FATAL  							Causa de la Excepción : java.net.SocketException: Socket closed
+
+2022/08/13 00:38:18 381					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@14291655
+*
+*
+*
+*
+*
+2022/08/13 00:48:04 104					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:48:04 056					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:48:04 112					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		tableExist 							FATAL  							Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: java.util.concurrent.ExecutionException: java.lang.StackOverflowError
+
+2022/08/13 00:48:04 118					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		tableExist 							FATAL  							Tipo de Excepción : class java.util.concurrent.ExecutionException
+
+2022/08/13 00:48:04 125					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		tableExist 							FATAL  							Causa de la Excepción : java.lang.StackOverflowError
+
+2022/08/13 00:48:04 129					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		tableExist 							FATAL  							Mensaje de la Excepción : java.lang.StackOverflowError
+
+2022/08/13 00:48:04 135					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		tableExist 							FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@7fc42548
+
+2022/08/13 00:48:04 139					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							Tabla correspondiente al modelo no existe en BD's'
+*
+*
+*
+*
+*
+2022/08/13 00:48:56 466					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:48:56 514					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:48:56 524					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		tableExist 							FATAL  							Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: java.util.concurrent.ExecutionException: java.lang.StackOverflowError
+
+2022/08/13 00:48:56 530					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		tableExist 							FATAL  							Tipo de Excepción : class java.util.concurrent.ExecutionException
+
+2022/08/13 00:48:56 535					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		tableExist 							FATAL  							Causa de la Excepción : java.lang.StackOverflowError
+
+2022/08/13 00:48:56 537					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		tableExist 							FATAL  							Mensaje de la Excepción : java.lang.StackOverflowError
+
+2022/08/13 00:48:56 544					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		tableExist 							FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@7fc42548
+
+2022/08/13 00:48:56 550					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							Tabla correspondiente al modelo no existe en BD's'
+*
+*
+*
+*
+*
+2022/08/13 00:50:44 195					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:50:44 243					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:50:44 247					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:50:44 264					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							INSERT INTO Test(Name, IsMayor, Apellido) VALUES (?, ?, ?);
+
+2022/08/13 00:50:44 327					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:50:44 343					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:50:44 351					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:50:44 339					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							Filas actualizadas: 1
+
+2022/08/13 00:50:44 373					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:50:44 370					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+*
+*
+*
+*
+*
+2022/08/13 00:51:27 647					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:51:27 696					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:51:27 692					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:51:27 712					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							INSERT INTO Test(Name, Apellido, IsMayor) VALUES (?, ?, ?);
+
+2022/08/13 00:51:27 793					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:51:27 805					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							Filas actualizadas: 1
+
+2022/08/13 00:51:27 808					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:51:27 818					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+*
+*
+*
+*
+*
+2022/08/13 00:51:43 236					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:51:43 184					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:51:43 257					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							INSERT INTO Test(Name, IsMayor, Apellido) VALUES (?, ?, ?);
+
+2022/08/13 00:51:43 241					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:51:43 343					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:51:43 354					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							Filas actualizadas: 1
+
+2022/08/13 00:51:43 357					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:51:43 432					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:51:43 459					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:51:43 454					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+*
+*
+*
+*
+*
+2022/08/13 00:52:59 729					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:52:59 777					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:52:59 781					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:52:59 795					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							INSERT INTO Test(Name, Apellido, IsMayor) VALUES (?, ?, ?);
+
+2022/08/13 00:52:59 903					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:52:59 923					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/13 00:52:59 954					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:52:59 926					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:52:59 964					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							Filas actualizadas: 1
+
+2022/08/13 00:52:59 971					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: false
+
+2022/08/13 00:52:59 967					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/13 00:54:39 641					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:54:39 688					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:54:39 693					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:54:39 708					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							INSERT INTO Test(Name, Apellido, IsMayor) VALUES (?, ?, ?);
+
+2022/08/13 00:54:39 779					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:54:39 789					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							Filas actualizadas: 1
+
+2022/08/13 00:54:39 796					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: true
+
+2022/08/13 00:54:39 792					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:54:39 836					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/13 00:54:39 816					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:54:39 840					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/13 00:56:15 998					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:56:16 048					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:56:16 044					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/13 00:56:16 068					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							INSERT INTO Test(Name, Apellido, IsMayor) VALUES (?, ?, ?);
+
+2022/08/13 00:56:16 129					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:56:16 148					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/13 00:56:16 152					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:56:16 171					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/13 00:56:16 188					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: true
+
+2022/08/13 00:56:16 184					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/13 00:56:16 181					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$save$4  						INFO							Filas actualizadas: 1

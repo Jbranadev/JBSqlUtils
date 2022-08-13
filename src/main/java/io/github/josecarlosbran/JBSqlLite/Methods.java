@@ -16,10 +16,14 @@ import javax.print.attribute.ResolutionSyntax;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.getBooleanfromInt;
+import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.getIntFromBoolean;
 
 public class Methods extends Conexion {
     public Methods() throws DataBaseUndefind, PropertiesDBUndefined {
@@ -68,7 +72,7 @@ public class Methods extends Conexion {
                 //Carga el controlador de SQLServer
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
-                        this.getHost() + ":" + this.getPort() + ";databaseName=" + this.getBD()+";TrustServerCertificate=True";
+                        this.getHost() + ":" + this.getPort() + ";databaseName=" + this.getBD() + ";TrustServerCertificate=True";
                 String usuario = this.getUser();
                 String password = this.getPassword();
                 connect = DriverManager.getConnection(url, usuario, password);
@@ -101,7 +105,10 @@ public class Methods extends Conexion {
      */
     public void closeConnection(Connection connect) {
         try {
-            connect.close();
+            if(!connect.isClosed()){
+                connect.close();
+            }
+
             LogsJB.info("Conexión a BD's cerrada");
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada cerrar la conexión a la BD's: " + e.toString());
@@ -114,9 +121,8 @@ public class Methods extends Conexion {
 
     public void closeConnection() {
         try {
-            if (!Objects.isNull(this.getConnect())) {
+            if(!this.getConnect().isClosed()){
                 this.getConnect().close();
-                //this.setConnect(null);
             }
             LogsJB.info("Conexión a BD's cerrada");
         } catch (Exception e) {
@@ -133,11 +139,12 @@ public class Methods extends Conexion {
         try {
             Callable<Boolean> VerificarExistencia = () -> {
                 try {
-
+                    LogsJB.trace("Comienza a verificar la existencia de la tabla");
                     DatabaseMetaData metaData = this.getConnection().getMetaData();
                     ResultSet tables = metaData.getTables(null, null, "%", null);
                     //Obtener las tablas disponibles
                     TablesSQL.getTablas().clear();
+                    LogsJB.trace("Revisara el resultSet");
                     while (tables.next()) {
                         TablesSQL temp = new TablesSQL();
                         temp.setTABLE_CAT(tables.getString(1));
@@ -145,11 +152,17 @@ public class Methods extends Conexion {
                         temp.setTABLE_NAME(tables.getString(3));
                         temp.setTABLE_TYPE(tables.getString(4));
                         temp.setREMARKS(tables.getString(5));
-                        temp.setTYPE_CAT(tables.getString(6));
-                        temp.setTYPE_SCHEM(tables.getString(7));
-                        temp.setTYPE_NAME(tables.getString(8));
-                        temp.setSELF_REFERENCING_COL_NAME(tables.getString(9));
-                        temp.setREF_GENERATION(tables.getString(10));
+
+
+                        if (this.getDataBaseType() != DataBase.SQLServer) {
+                            temp.setTYPE_CAT(tables.getString(6));
+                            temp.setTYPE_SCHEM(tables.getString(7));
+                            temp.setTYPE_NAME(tables.getString(8));
+                            temp.setSELF_REFERENCING_COL_NAME(tables.getString(9));
+                            temp.setREF_GENERATION(tables.getString(10));
+
+                        }
+
                         TablesSQL.getTablas().add(temp);
                         String NameModel = this.getClass().getSimpleName();
                         String NameTable = temp.getTABLE_NAME();
@@ -158,15 +171,20 @@ public class Methods extends Conexion {
                             this.setTableName(NameTable);
                             LogsJB.info("La tabla correspondiente a este modelo, existe en BD's");
                             tables.close();
-                            this.closeConnection();
+                            if(!this.getConnect().isClosed()){
+                                this.closeConnection();
+                            }
                             getColumnsTable();
                             return true;
                         }
                     }
+                    LogsJB.trace("Termino de Revisarar el resultSet");
                     tables.close();
                     if (!this.getTableExist()) {
                         LogsJB.info("La tabla correspondiente a este modelo, No existe en BD's");
-                        this.closeConnection();
+                        if(!this.getConnect().isClosed()){
+                            this.closeConnection();
+                        }
                         return false;
                     }
 
@@ -186,7 +204,7 @@ public class Methods extends Conexion {
 
             }
             executor.shutdown();
-            result=future.get();
+            result = future.get();
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -235,7 +253,9 @@ public class Methods extends Conexion {
                 }
                 LogsJB.info("Información de las columnas de la tabla correspondiente al modelo obtenida");
                 columnas.close();
-                this.closeConnection();
+                if(!this.getConnect().isClosed()){
+                    this.closeConnection();
+                }
             } catch (Exception e) {
                 LogsJB.fatal("Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo: " + e.toString());
                 LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -273,13 +293,19 @@ public class Methods extends Conexion {
                             DataType columnType = columnsSQL.getDataTypeSQL();
                             Constraint[] columnRestriccion = columnsSQL.getRestriccion();
                             String restricciones = "";
-                            String tipo_de_columna=columnType.toString();
+                            String tipo_de_columna = columnType.toString();
+                            if((this.getDataBaseType()== DataBase.PostgreSQL)&&(columnType==DataType.BIT))
+                                tipo_de_columna = DataType.BOOLEAN.toString();
                             if (!Objects.isNull(columnRestriccion)) {
                                 for (Constraint restriccion : columnRestriccion) {
-                                    if((DataBase.PostgreSQL==this.getDataBaseType()) &&
-                                            (restriccion==Constraint.AUTO_INCREMENT)){
-                                        tipo_de_columna=DataType.SERIAL.name();
-                                    }else{
+                                    if ((DataBase.PostgreSQL == this.getDataBaseType()) &&
+                                            (restriccion == Constraint.AUTO_INCREMENT)) {
+                                        tipo_de_columna = DataType.SERIAL.name();
+                                    } else if ((DataBase.SQLServer == this.getDataBaseType()) &&
+                                            (restriccion == Constraint.AUTO_INCREMENT)) {
+                                        //tipo_de_columna = DataType.IDENTITY.toString();
+                                        restricciones = restricciones + DataType.IDENTITY.toString() + " ";
+                                    } else {
                                         restricciones = restricciones + restriccion.getRestriccion() + " ";
                                     }
                                 }
@@ -305,11 +331,15 @@ public class Methods extends Conexion {
                             LogsJB.info("Sentencia para crear tabla de la BD's ejecutada exitosamente");
                             LogsJB.info("Tabla " + this.getClass().getSimpleName() + " Creada exitosamente");
                             LogsJB.info(sql);
-                            this.closeConnection();
+                            if(!this.getConnect().isClosed()){
+                                this.closeConnection();
+                            }
                             return true;
                         }
                         ejecutor.close();
-                        this.closeConnection();
+                        if(!this.getConnect().isClosed()){
+                            this.closeConnection();
+                        }
                     }
                     return false;
                 } catch (Exception e) {
@@ -336,7 +366,6 @@ public class Methods extends Conexion {
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
-        //this.closeConnection();
         return result;
     }
 
@@ -345,7 +374,6 @@ public class Methods extends Conexion {
         try {
             Callable<Boolean> dropTable = () -> {
                 try {
-                    LogsJB.info("Comienza el metodo");
                     if (this.tableExist()) {
                         String sql = "";
                         if (this.getDataBaseType() == DataBase.MySQL || this.getDataBaseType() == DataBase.PostgreSQL || this.getDataBaseType() == DataBase.SQLite) {
@@ -357,7 +385,7 @@ public class Methods extends Conexion {
                                     "' AND TABLE_SCHEMA = 'dbo')\n" +
                                     "    drop table dbo." +
                                     this.getClass().getSimpleName();
-                                    //+" RESTRICT;";
+                            //+" RESTRICT;";
                         }
                         LogsJB.info(sql);
                         Statement ejecutor = this.getConnection().createStatement();
@@ -369,7 +397,9 @@ public class Methods extends Conexion {
                             return true;
                         }
                         ejecutor.close();
-                        this.closeConnection();
+                        if(!this.getConnect().isClosed()){
+                            this.closeConnection();
+                        }
                     } else {
                         LogsJB.info("Tabla correspondiente al modelo no existe en BD's'");
                     }
@@ -399,7 +429,147 @@ public class Methods extends Conexion {
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
-        //this.closeConnection();
+        return result;
+    }
+
+    public Boolean save() {
+        Boolean result = false;
+        try {
+            Callable<Boolean> Save = () -> {
+                try {
+                    if (this.tableExist()) {
+
+                        String sql = "INSERT INTO " + this.getClass().getSimpleName() + "(";
+                        List<Method> metodos = new LinkedList<>();
+                        metodos = this.getMethodsGetOfModel(this.getMethodsModel());
+                        int datos = 0;
+                        //Llena la información de las columnas que se insertaran
+                        for (int i = 0; i < metodos.size(); i++) {
+                            //Obtengo el metodo
+                            Method metodo = metodos.get(i);
+                            //Obtengo la información de la columna
+                            Column columnsSQL = (Column) metodo.invoke(this, null);
+                            String columnName = metodo.getName();
+                            columnName = StringUtils.remove(columnName, "get");
+                            if (Objects.isNull(columnsSQL.getValor())) {
+                                continue;
+                            }
+                            datos++;
+                            sql = sql + columnName;
+                            int temporal = metodos.size() - 1;
+                            if (i < temporal) {
+                                sql = sql + ", ";
+                            } else if (i == temporal) {
+                                sql = sql + ") VALUES (";
+                            }
+                        }
+
+                        //Llena los espacios con la información de los datos que serán agregados
+                        for (int i = 0; i < datos; i++) {
+                            sql = sql + "?";
+                            int temporal = datos - 1;
+                            if (i < temporal) {
+                                sql = sql + ", ";
+                            } else if (i == temporal) {
+                                sql = sql + ");";
+                            }
+                        }
+                        LogsJB.info(sql);
+                        PreparedStatement ejecutor = this.getConnection().prepareStatement(sql);
+                        //LogsJB.info("Creo la instancia del PreparedStatement");
+                        //Llena el prepareStatement
+                        int auxiliar=1;
+                        for (int i = 0; i < metodos.size(); i++) {
+                            //Obtengo el metodo
+                            Method metodo = metodos.get(i);
+                            //Obtengo la información de la columna
+                            Column columnsSQL = (Column) metodo.invoke(this, null);
+                            if (Objects.isNull(columnsSQL.getValor())) {
+                                continue;
+                            }
+
+                            if ((columnsSQL.getDataTypeSQL() == DataType.CHAR) || (columnsSQL.getDataTypeSQL() == DataType.VARCHAR)
+                                    || (columnsSQL.getDataTypeSQL() == DataType.LONGVARCHAR)) {
+                                //Caracteres y cadenas de Texto
+                                ejecutor.setString(auxiliar, (String) columnsSQL.getValor());
+
+                            } else if ((columnsSQL.getDataTypeSQL() == DataType.NUMERIC) || (columnsSQL.getDataTypeSQL() == DataType.DECIMAL)
+                                    || (columnsSQL.getDataTypeSQL() == DataType.MONEY) || (columnsSQL.getDataTypeSQL() == DataType.SMALLMONEY)
+                                    || (columnsSQL.getDataTypeSQL() == DataType.DOUBLE)) {
+                                //Dinero y numericos que tienen decimales
+                                ejecutor.setDouble(auxiliar, (Double) columnsSQL.getValor());
+
+                            } else if ((columnsSQL.getDataTypeSQL() == DataType.BIT)) {
+                                //Valores Booleanos
+                                ejecutor.setBoolean(auxiliar, (Boolean) columnsSQL.getValor());
+                                //ejecutor.setObject(auxiliar, columnsSQL.getValor(), Types.BOOLEAN);
+                            } else if ((columnsSQL.getDataTypeSQL() == DataType.SMALLINT) || (columnsSQL.getDataTypeSQL() == DataType.TINYINT)
+                                    || (columnsSQL.getDataTypeSQL() == DataType.INTEGER) || (columnsSQL.getDataTypeSQL() == DataType.IDENTITY)
+                                    || (columnsSQL.getDataTypeSQL() == DataType.SERIAL)) {
+                                //Valores Enteros
+                                ejecutor.setInt(auxiliar, (Integer) columnsSQL.getValor());
+
+                            } else if ((columnsSQL.getDataTypeSQL() == DataType.REAL) || (columnsSQL.getDataTypeSQL() == DataType.FLOAT)) {
+                                //Valores Flotantes
+                                ejecutor.setFloat(auxiliar, (Float) columnsSQL.getValor());
+
+                            } else if ((columnsSQL.getDataTypeSQL() == DataType.BINARY) || (columnsSQL.getDataTypeSQL() == DataType.VARBINARY)
+                                    || (columnsSQL.getDataTypeSQL() == DataType.LONGVARBINARY)) {
+                                //Valores binarios
+                                ejecutor.setBytes(auxiliar, (byte[]) columnsSQL.getValor());
+                            } else if ((columnsSQL.getDataTypeSQL() == DataType.DATE)) {
+                                //DATE
+                                ejecutor.setDate(auxiliar, (Date) columnsSQL.getValor());
+                            } else if ((columnsSQL.getDataTypeSQL() == DataType.TIME)) {
+                                //Time
+                                ejecutor.setTime(auxiliar, (Time) columnsSQL.getValor());
+                            } else if ((columnsSQL.getDataTypeSQL() == DataType.TIMESTAMP) || (columnsSQL.getDataTypeSQL() == DataType.DATETIME)
+                                    || (columnsSQL.getDataTypeSQL() == DataType.SMALLDATETIME)
+                                    || (columnsSQL.getDataTypeSQL() == DataType.DATETIME2)) {
+                                //TimeStamp
+                                ejecutor.setTimestamp(auxiliar, (Timestamp) columnsSQL.getValor());
+                            } else {
+                                ejecutor.setObject(auxiliar, columnsSQL.getValor());
+                            }
+                            auxiliar++;
+                        }
+
+                        if(ejecutor.executeUpdate()==1){
+                            int filas=ejecutor.getUpdateCount();
+                            LogsJB.info("Filas actualizadas: "+filas);
+                        }
+                        if(!this.getConnect().isClosed()){
+                            this.closeConnection();
+                        }
+                        return true;
+                    } else {
+                        LogsJB.info("Tabla correspondiente al modelo no existe en BD's'");
+                    }
+                    return false;
+                } catch (Exception e) {
+                    LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
+                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                }
+                return false;
+            };
+
+            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            Future<Boolean> future = ejecutor.submit(Save);
+            while (!future.isDone()) {
+
+            }
+            ejecutor.shutdown();
+            result = future.get();
+        } catch (Exception e) {
+            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
         return result;
     }
 

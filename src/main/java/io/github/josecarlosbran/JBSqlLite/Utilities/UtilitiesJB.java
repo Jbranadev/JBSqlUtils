@@ -41,6 +41,13 @@ public class UtilitiesJB {
         return false;
     }
 
+    public static int getIntFromBoolean(Boolean temp){
+        if (temp == null||temp==false) {
+            return 0;
+        }
+        return 1;
+    }
+
 
 
 

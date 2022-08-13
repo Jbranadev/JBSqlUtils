@@ -5,7 +5,7 @@ import io.github.josecarlosbran.JBSqlLite.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
 
 public class Column<T> {
-    private T valor;
+    private T valor=null;
 
     private DataType dataTypeSQL=null;
 
