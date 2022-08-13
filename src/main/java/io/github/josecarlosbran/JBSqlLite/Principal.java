@@ -42,11 +42,6 @@ public class Principal {
 
     public static void main(String[] args) {
         try {
-            String separador=System.getProperty("file.separator");
-            String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
-                    "BD" +
-                    separador +
-                    "JBSqlUtils.db");
 
             String DB = "JBSQLUTILS";
             setDataBaseTypeGlobal(DataBase.PostgreSQL);
@@ -61,11 +56,13 @@ public class Principal {
             //LogsJB.info(BDSqlite);
 
             Test test = new Test();
-            //new Principal().MySQL(test);
+            new Principal().SQLITE(test);
+
+            new Principal().MySQL(test);
 
             new Principal().PostgreSQL(test);
 
-            //new Principal().SQLServer(test);
+            new Principal().SQLServer(test);
 
         } catch (DataBaseUndefind | /*ConexionUndefind |*/ PropertiesDBUndefined /*|InterruptedException*/
                 /*|IllegalAccessException|InvocationTargetException*/ e) {
@@ -80,29 +77,45 @@ public class Principal {
 
 
     void SQLITE(Test test) {
+        String separador=System.getProperty("file.separator");
+        String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
+                "BD" +
+                separador +
+                "JBSqlUtils.db");
+        test.setGetPropertySystem(false);
+        test.setBD(BDSqlite);
+        test.setDataBaseType(DataBase.SQLite);
 
         //test.closeConnection(test.getConnection());
         //test.dropTableIfExist();
         //test.crateTable();
+
+        test.getName().setValor("Jose");
+        test.getApellido().setValor("Bran");
+        test.getIsMayor().setValor(true);
+        test.save();
     }
 
     void MySQL(Test test) {
 
+        test.setGetPropertySystem(false);
+        test.setPort("5076");
+        test.setHost("localhost");
+        test.setUser("Bran");
+        test.setPassword("Bran");
+        test.setBD("JBSQLUTILS");
+        test.setDataBaseType(DataBase.MySQL);
 
 
-        //test.getConnection();
-        //Thread.sleep(5000);
-            /*System.out.println("");
-            System.out.println("");
-            System.out.println("");*/
-        //Thread.sleep(20000);
-        test.dropTableIfExist();
+        //test.closeConnection(test.getConnection());
+        //test.dropTableIfExist();
+        //test.crateTable();
 
-            /*Thread.sleep(20000);
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");*/
-        test.crateTable();
+        test.getName().setValor("Jose");
+        test.getApellido().setValor("Bran");
+        test.getIsMayor().setValor(true);
+        test.save();
+
     }
 
     void PostgreSQL(Test test){
@@ -121,7 +134,8 @@ public class Principal {
         test.getName().setValor("Jose");
         test.getApellido().setValor("Bran");
         test.getIsMayor().setValor(true);
-        LogsJB.info("Resultado es: "+test.save());
+        test.save();
+        //LogsJB.info("Resultado es: "+test.save());
     }
 
 
@@ -135,8 +149,8 @@ public class Principal {
         test.setDataBaseType(DataBase.SQLServer);
 
         //test.closeConnection(test.getConnection());
-        test.dropTableIfExist();
-        test.crateTable();
+        //test.dropTableIfExist();
+        //test.crateTable();
 
         test.getName().setValor("Jose");
         test.getApellido().setValor("Bran");

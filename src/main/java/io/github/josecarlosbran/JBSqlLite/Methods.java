@@ -85,7 +85,7 @@ public class Methods extends Conexion {
 
             if (!Objects.isNull(connect)) {
                 LogsJB.info("Conexión a BD's " + this.getBD() + " Realizada exitosamente");
-                this.setConnect(connect);
+                //this.setConnect(connect);
                 //tableExist(connect);
             }
         } catch (Exception e) {
@@ -103,14 +103,21 @@ public class Methods extends Conexion {
      *
      * @param connect Conexión que se desea cerrar.
      */
-    public void closeConnection(Connection connect) {
+    public synchronized void closeConnection(Connection connect) {
         try {
-            if(!connect.isClosed()){
-                connect.close();
+            if (Objects.isNull(connect)) {
+                //Si la propiedad del sistema no esta definida, Lanza una Exepción
+                throw new ConexionUndefind("No se a conectado el modelo a la BD's");
             }
-
-            LogsJB.info("Conexión a BD's cerrada");
-        } catch (Exception e) {
+            if (!connect.isClosed()) {
+                connect.close();
+                LogsJB.info("Conexión a BD's cerrada");
+            } else {
+                LogsJB.info("Conexión a BD's ya estaba cerrada");
+            }
+        } catch (ConexionUndefind e) {
+            LogsJB.warning("El modelo no estaba conectado a la BD's por lo cual no se cerrara la conexión");
+        }catch (Exception e) {
             LogsJB.fatal("Excepción disparada cerrar la conexión a la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
@@ -119,13 +126,17 @@ public class Methods extends Conexion {
         }
     }
 
-    public void closeConnection() {
+    public synchronized void closeConnection() {
         try {
-            if(!this.getConnect().isClosed()){
+            if (!this.getConnect().isClosed()) {
                 this.getConnect().close();
+                LogsJB.info("Conexión a BD's cerrada");
+            } else {
+                LogsJB.info("Conexión a BD's ya estaba cerrada");
             }
-            LogsJB.info("Conexión a BD's cerrada");
-        } catch (Exception e) {
+        }catch (ConexionUndefind e) {
+            LogsJB.warning("El modelo no estaba conectado a la BD's por lo cual no se cerrara la conexión");
+        }catch (Exception e) {
             LogsJB.fatal("Excepción disparada cerrar la conexión a la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
@@ -140,7 +151,8 @@ public class Methods extends Conexion {
             Callable<Boolean> VerificarExistencia = () -> {
                 try {
                     LogsJB.trace("Comienza a verificar la existencia de la tabla");
-                    DatabaseMetaData metaData = this.getConnection().getMetaData();
+                    Connection connect = this.getConnection();
+                    DatabaseMetaData metaData = connect.getMetaData();
                     ResultSet tables = metaData.getTables(null, null, "%", null);
                     //Obtener las tablas disponibles
                     TablesSQL.getTablas().clear();
@@ -171,9 +183,7 @@ public class Methods extends Conexion {
                             this.setTableName(NameTable);
                             LogsJB.info("La tabla correspondiente a este modelo, existe en BD's");
                             tables.close();
-                            if(!this.getConnect().isClosed()){
-                                this.closeConnection();
-                            }
+                            this.closeConnection(connect);
                             getColumnsTable();
                             return true;
                         }
@@ -182,9 +192,9 @@ public class Methods extends Conexion {
                     tables.close();
                     if (!this.getTableExist()) {
                         LogsJB.info("La tabla correspondiente a este modelo, No existe en BD's");
-                        if(!this.getConnect().isClosed()){
-                            this.closeConnection();
-                        }
+
+                        this.closeConnection(connect);
+
                         return false;
                     }
 
@@ -218,7 +228,8 @@ public class Methods extends Conexion {
     protected void getColumnsTable() {
         Runnable ObtenerColumnas = () -> {
             try {
-                DatabaseMetaData metaData = this.getConnection().getMetaData();
+                Connection connect = this.getConnection();
+                DatabaseMetaData metaData = connect.getMetaData();
                 ResultSet columnas = metaData.getColumns(null, null, this.getTableName(), null);
                 //Obtener las tablas disponibles
                 this.getColumnas().clear();
@@ -253,9 +264,9 @@ public class Methods extends Conexion {
                 }
                 LogsJB.info("Información de las columnas de la tabla correspondiente al modelo obtenida");
                 columnas.close();
-                if(!this.getConnect().isClosed()){
-                    this.closeConnection();
-                }
+
+                this.closeConnection(connect);
+
             } catch (Exception e) {
                 LogsJB.fatal("Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo: " + e.toString());
                 LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -294,8 +305,11 @@ public class Methods extends Conexion {
                             Constraint[] columnRestriccion = columnsSQL.getRestriccion();
                             String restricciones = "";
                             String tipo_de_columna = columnType.toString();
-                            if((this.getDataBaseType()== DataBase.PostgreSQL)&&(columnType==DataType.BIT))
+                            if ((((this.getDataBaseType() == DataBase.PostgreSQL)) || ((this.getDataBaseType() == DataBase.MySQL))
+                                    || ((this.getDataBaseType() == DataBase.SQLite))) &&
+                                    (columnType == DataType.BIT)) {
                                 tipo_de_columna = DataType.BOOLEAN.toString();
+                            }
                             if (!Objects.isNull(columnRestriccion)) {
                                 for (Constraint restriccion : columnRestriccion) {
                                     if ((DataBase.PostgreSQL == this.getDataBaseType()) &&
@@ -305,6 +319,9 @@ public class Methods extends Conexion {
                                             (restriccion == Constraint.AUTO_INCREMENT)) {
                                         //tipo_de_columna = DataType.IDENTITY.toString();
                                         restricciones = restricciones + DataType.IDENTITY.toString() + " ";
+                                    } else if ((DataBase.SQLite == this.getDataBaseType()) &&
+                                            (restriccion == Constraint.AUTO_INCREMENT)) {
+                                        restricciones = restricciones + "";
                                     } else {
                                         restricciones = restricciones + restriccion.getRestriccion() + " ";
                                     }
@@ -325,21 +342,21 @@ public class Methods extends Conexion {
 
                         }
                         //System.out.println(sql);
-                        Statement ejecutor = this.getConnection().createStatement();
+                        Connection connect = this.getConnection();
+                        Statement ejecutor = connect.createStatement();
                         LogsJB.info(sql);
                         if (!ejecutor.execute(sql)) {
                             LogsJB.info("Sentencia para crear tabla de la BD's ejecutada exitosamente");
                             LogsJB.info("Tabla " + this.getClass().getSimpleName() + " Creada exitosamente");
                             LogsJB.info(sql);
-                            if(!this.getConnect().isClosed()){
-                                this.closeConnection();
-                            }
+
+                                this.closeConnection(connect);
+
                             return true;
                         }
                         ejecutor.close();
-                        if(!this.getConnect().isClosed()){
-                            this.closeConnection();
-                        }
+                        this.closeConnection(connect);
+
                     }
                     return false;
                 } catch (Exception e) {
@@ -388,7 +405,8 @@ public class Methods extends Conexion {
                             //+" RESTRICT;";
                         }
                         LogsJB.info(sql);
-                        Statement ejecutor = this.getConnection().createStatement();
+                        Connection connect = this.getConnection();
+                        Statement ejecutor = connect.createStatement();
 
                         if (!ejecutor.execute(sql)) {
                             LogsJB.info("Sentencia para eliminar tabla de la BD's ejecutada exitosamente");
@@ -397,9 +415,8 @@ public class Methods extends Conexion {
                             return true;
                         }
                         ejecutor.close();
-                        if(!this.getConnect().isClosed()){
-                            this.closeConnection();
-                        }
+                        this.closeConnection(connect);
+
                     } else {
                         LogsJB.info("Tabla correspondiente al modelo no existe en BD's'");
                     }
@@ -475,10 +492,11 @@ public class Methods extends Conexion {
                             }
                         }
                         LogsJB.info(sql);
-                        PreparedStatement ejecutor = this.getConnection().prepareStatement(sql);
+                        Connection connect = this.getConnection();
+                        PreparedStatement ejecutor = connect.prepareStatement(sql);
                         //LogsJB.info("Creo la instancia del PreparedStatement");
                         //Llena el prepareStatement
-                        int auxiliar=1;
+                        int auxiliar = 1;
                         for (int i = 0; i < metodos.size(); i++) {
                             //Obtengo el metodo
                             Method metodo = metodos.get(i);
@@ -534,13 +552,13 @@ public class Methods extends Conexion {
                             auxiliar++;
                         }
 
-                        if(ejecutor.executeUpdate()==1){
-                            int filas=ejecutor.getUpdateCount();
-                            LogsJB.info("Filas actualizadas: "+filas);
+                        if (ejecutor.executeUpdate() == 1) {
+                            int filas = ejecutor.getUpdateCount();
+                            LogsJB.info("Filas actualizadas: " + filas);
                         }
-                        if(!this.getConnect().isClosed()){
-                            this.closeConnection();
-                        }
+
+                        this.closeConnection(connect);
+
                         return true;
                     } else {
                         LogsJB.info("Tabla correspondiente al modelo no existe en BD's'");
