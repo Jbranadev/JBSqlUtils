@@ -8,6 +8,7 @@ import io.github.josecarlosbran.JBSqlLite.Utilities.ColumnsSQL;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -72,7 +73,7 @@ public class Conexion {
     /**
      * Lista de las columnas que tiene la tabla correspondiente al modelo
      */
-    protected List<ColumnsSQL> Columnas=new LinkedList<>();
+    protected List<ColumnsSQL> Columnas=new ArrayList<>();
 
     /**
      * Bandera que sirve para identificar si la tarea que estaba realizando el modelo a sido terminada

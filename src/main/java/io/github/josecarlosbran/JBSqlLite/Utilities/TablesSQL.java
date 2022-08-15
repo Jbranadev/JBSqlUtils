@@ -1,6 +1,7 @@
 package io.github.josecarlosbran.JBSqlLite.Utilities;
 
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class TablesSQL {
     private String SELF_REFERENCING_COL_NAME=null;
     private String REF_GENERATION =null;
 
-    protected static List<TablesSQL> Tablas=new LinkedList<>();
+    protected static List<TablesSQL> Tablas=new ArrayList<>();
 
     public synchronized static List<TablesSQL> getTablas() {
         return Tablas;
