@@ -5,8 +5,6 @@ import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
-import java.util.Objects;
-
 public class JBSqlUtils extends Methods{
 
 

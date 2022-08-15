@@ -5,12 +5,9 @@ import io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Utilities.ColumnsSQL;
-import io.github.josecarlosbran.JBSqlLite.Utilities.TablesSQL;
-import io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -607,7 +604,7 @@ public class Conexion {
      * @return True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
      * actualmente.
      */
-    public Boolean getTaskIsReady() {
+    public synchronized Boolean getTaskIsReady() {
         return taskIsReady;
     }
 
@@ -616,7 +613,7 @@ public class Conexion {
      * @param taskIsReady True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
      * actualmente.
      */
-    public void setTaskIsReady(Boolean taskIsReady) {
+    public synchronized void setTaskIsReady(Boolean taskIsReady) {
         this.taskIsReady = taskIsReady;
     }
 }

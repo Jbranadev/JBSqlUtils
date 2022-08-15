@@ -1,23 +1,11 @@
 package io.github.josecarlosbran.JBSqlLite;
 
-import io.github.josecarlosbran.JBSqlLite.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
-import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
-import io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
-import io.github.josecarlosbran.JBSqlLite.Utilities.ColumnsSQL;
 import io.github.josecarlosbran.LogsJB.LogsJB;
-import org.apache.commons.lang3.StringUtils;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
-import java.util.function.Consumer;
 
 import static io.github.josecarlosbran.JBSqlLite.JBSqlUtils.*;
 
@@ -56,13 +44,13 @@ public class Principal {
             //LogsJB.info(BDSqlite);
 
             Test test = new Test();
-            new Principal().SQLITE(test);
+            //new Principal().SQLITE(test);
 
-            new Principal().MySQL(test);
+            //new Principal().MySQL(test);
 
             new Principal().PostgreSQL(test);
 
-            new Principal().SQLServer(test);
+            //new Principal().SQLServer(test);
 
         } catch (DataBaseUndefind | /*ConexionUndefind |*/ PropertiesDBUndefined /*|InterruptedException*/
                 /*|IllegalAccessException|InvocationTargetException*/ e) {
@@ -131,11 +119,12 @@ public class Principal {
         //test.dropTableIfExist();
         //test.crateTable();
 
+
         test.getName().setValor("Jose");
         test.getApellido().setValor("Bran");
         test.getIsMayor().setValor(true);
         test.save();
-        //LogsJB.info("Resultado es: "+test.save());
+        LogsJB.info("Resultado es: "+test.getTaskIsReady());
     }
 
 
@@ -150,12 +139,12 @@ public class Principal {
 
         //test.closeConnection(test.getConnection());
         //test.dropTableIfExist();
-        //test.crateTable();
+        test.crateTable();
 
         test.getName().setValor("Jose");
         test.getApellido().setValor("Bran");
         test.getIsMayor().setValor(true);
-        test.save();
+        //test.save();
 
     }
 
