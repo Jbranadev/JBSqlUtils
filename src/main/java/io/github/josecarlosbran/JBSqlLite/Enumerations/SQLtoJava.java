@@ -1,5 +1,9 @@
 package io.github.josecarlosbran.JBSqlLite.Enumerations;
 
+/**
+ * @author Jose Bran
+ * Enumeración que permite realizar la converción de datos de SQL a Java
+ */
 public enum SQLtoJava {
     /**
      * Cadena de caracteres de longitud fija

@@ -3,6 +3,10 @@ package io.github.josecarlosbran.JBSqlLite.Enumerations;
 
 import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
+/**
+ * @author Jose Bran
+ * Enumeración que sirve para identificar el tipo de dato SQL que tiene la columna en el servidor.
+ */
 public enum DataType {
 
     /**
