@@ -1,5 +1,10 @@
 package io.github.josecarlosbran.JBSqlLite.Utilities;
 
+/**
+ * @author Jose Bran
+ * Clase que permite identificar las caracteristicas de la columnas que tiene la tabla que corresponde
+ * al modelo.
+ */
 public class ColumnsSQL {
     /**
      * TABLE_CAT String → table catalog (may be null)

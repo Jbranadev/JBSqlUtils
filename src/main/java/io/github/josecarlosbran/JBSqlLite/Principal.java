@@ -86,7 +86,7 @@ public class Principal {
         test.setBD(BDSqlite);
         test.setDataBaseType(DataBase.SQLite);
 
-        //test.closeConnection(test.getConnection());
+        test.closeConnection(test.getConnection());
         //test.dropTableIfExist();
         //test.crateTable();
 

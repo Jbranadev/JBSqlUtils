@@ -57,17 +57,38 @@ public class Conexion {
      */
     private Boolean getPropertySystem = true;
 
+    /**
+     * Conexión del modelo
+     */
     private Connection connect = null;
 
+    /**
+     * Bandera que sirve para identificar si la tabla correspondiente al modelo Existe
+     */
     private Boolean tableExist=false;
 
+    /**
+     * Nombre de la tabla correspondiente al modelo.
+     */
     private String tableName=null;
 
+    /**
+     * Lista de las columnas que tiene la tabla correspondiente al modelo
+     */
     protected List<ColumnsSQL> Columnas=new LinkedList<>();
 
+    /**
+     * Bandera que sirve para identificar si la tarea que estaba realizando el modelo a sido terminada
+     */
     private Boolean taskIsReady=true;
 
-
+    /**
+     * Constructor de la clase Conexión que se encarga de inicializar las propiedades de conexión del modelo,
+     * las cuales las obtiene de las propiedades del sistema Java.
+     * @throws DataBaseUndefind Lanza esta excepción si el tipo de BD's a la cual se conectara el modelo no ha sido definida entre
+     * las propiedades del sistema Java.
+     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión no han sido definidas.
+     */
     public Conexion() throws DataBaseUndefind, PropertiesDBUndefined {
         this.setGetPropertySystem(true);
         this.setDataBaseType(setearDBType());
@@ -78,13 +99,14 @@ public class Conexion {
         this.setPassword(setearPassword());
     }
 
+    /**
+     * Obtiene la lista de las columnas que posee la tabla correspondiente al modelo.
+     * @return Lista de las columnas que posee la tabla correspondiente al modelo.
+     */
     public List<ColumnsSQL> getColumnas() {
         return this.Columnas;
     }
 
-    public void setColumnas(List<ColumnsSQL> columnas) {
-        this.Columnas = columnas;
-    }
 
 
     /**
@@ -547,26 +569,53 @@ public class Conexion {
         }
     }
 
+    /**
+     * Obtiene la bandera que indica si la tabla correspondiente al modelo en BD's
+     * @return True si la tabla correspondiente al modelo existe en BD's, de lo contrario retorna
+     * False.
+     */
     public Boolean getTableExist() {
         return this.tableExist;
     }
 
+    /**
+     * Setea la bandera que indica si la tabla correspondiente al modelo existe en BD's
+     * @param tableExist True si la tabla correspondiente al modelo existe en BD's, de lo contrario False.
+     */
     public void setTableExist(Boolean tableExist) {
         this.tableExist = tableExist;
     }
 
+    /**
+     * Obtiene el nombre de la tabla en BD's correspondiente al modelo.
+     * @return Retorna el nombre de la tabla en BD's correspondiente al modelo.
+     */
     public String getTableName() {
         return tableName;
     }
 
+    /**
+     * Setea el nombre de la tabla en BD's correspondiente al modelo.
+     * @param tableName Nombre de la tabla en BD's correspondiente al modelo.
+     */
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
 
+    /**
+     * Obtiene la bandera que indica si la tarea que estaba realizando el modelo ha sido terminada
+     * @return True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
+     * actualmente.
+     */
     public Boolean getTaskIsReady() {
         return taskIsReady;
     }
 
+    /**
+     * Setea el valor de la bandera que indica si el modelo actual esta realizando una tarea
+     * @param taskIsReady True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
+     * actualmente.
+     */
     public void setTaskIsReady(Boolean taskIsReady) {
         this.taskIsReady = taskIsReady;
     }

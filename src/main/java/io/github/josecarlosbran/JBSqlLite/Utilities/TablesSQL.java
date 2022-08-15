@@ -4,6 +4,10 @@ package io.github.josecarlosbran.JBSqlLite.Utilities;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @author Jose Bran
+ * Clase que sirve para identificar las caracteristicas de la tabla correspondiente al modelo
+ */
 public class TablesSQL {
     private String TABLE_CAT =null;
     private String TABLE_SCHEM =null;

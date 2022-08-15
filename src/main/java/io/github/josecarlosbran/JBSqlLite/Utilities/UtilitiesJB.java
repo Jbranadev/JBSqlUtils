@@ -41,6 +41,13 @@ public class UtilitiesJB {
         return false;
     }
 
+    /**
+     * @author Jose Bran
+     * Medoto que convierte el valor Booleano en un entero, si el valor es NULL o False, retorna 0.
+     * Si el valor es True retorna 1.
+     * @param temp Valor Booleano a ser evaluado.
+     * @return Si el valor es NULL o False, retorna 0, si el valor es True retorna 1.
+     */
     public static int getIntFromBoolean(Boolean temp){
         if (temp == null||temp==false) {
             return 0;

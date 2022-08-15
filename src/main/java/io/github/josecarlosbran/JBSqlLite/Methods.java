@@ -28,9 +28,8 @@ import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.getIntFro
 public class Methods extends Conexion {
     public Methods() throws DataBaseUndefind, PropertiesDBUndefined {
         super();
-
-
     }
+
     //https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-usagenotes-connect-drivermanager.html#connector-j-examples-connection-drivermanager
     //https://docs.microsoft.com/en-us/sql/connect/jdbc/using-the-jdbc-driver?view=sql-server-ver16
     //https://www.dev2qa.com/how-to-load-jdbc-configuration-from-properties-file-example/
@@ -39,7 +38,6 @@ public class Methods extends Conexion {
 
     /**
      * Obtiene la conexión del modelo a la BD's con las propiedades definidas.
-     *
      * @return Retorna la conexión del modelo a la BD's con las propiedades definidas.
      */
     public Connection getConnection() {
@@ -98,12 +96,13 @@ public class Methods extends Conexion {
         return connect;
     }
 
+
+
     /**
      * Cierra la conexión a BD's
-     *
-     * @param connect Conexión que se desea cerrar.
+     * @param connect Conexión que se desea cerrar
      */
-    public synchronized void closeConnection(Connection connect) {
+    public void closeConnection(Connection connect) {
         try {
             if (Objects.isNull(connect)) {
                 //Si la propiedad del sistema no esta definida, Lanza una Exepción
@@ -126,6 +125,9 @@ public class Methods extends Conexion {
         }
     }
 
+    /**
+     * Cierra la conexión a BD's del modelo.
+     */
     public synchronized void closeConnection() {
         try {
             if (!this.getConnect().isClosed()) {
@@ -145,6 +147,10 @@ public class Methods extends Conexion {
         }
     }
 
+    /**
+     * Verifica la existencia de la tabla correspondiente al modelo en BD's
+     * @return True si la tabla correspondiente al modelo existe en BD's, de lo contrario False.
+     */
     protected Boolean tableExist() {
         Boolean result = false;
         try {
@@ -225,6 +231,9 @@ public class Methods extends Conexion {
         return result;
     }
 
+    /**
+     * Obtiene las columnas que tiene la tabla correspondiente al modelo en BD's.
+     */
     protected void getColumnsTable() {
         Runnable ObtenerColumnas = () -> {
             try {
@@ -282,6 +291,11 @@ public class Methods extends Conexion {
 
     }
 
+    /**
+     * Crea la tabla correspondiente al modelo en BD's si esta no existe.
+     * @return True si la tabla correspondiente al modelo en BD's no existe y fue creada exitosamente,
+     * False si la tabla correspondiente al modelo ya existe en BD's
+     */
     public Boolean crateTable() {
         Boolean result = false;
         try {
@@ -327,10 +341,9 @@ public class Methods extends Conexion {
                                     }
                                 }
                             }
-                            //System.out.println(" ");
 
                             String columna = columnName + " " + tipo_de_columna + " " + restricciones;
-                            //System.out.println(columna);
+
 
                             sql = sql + columna;
                             int temporal = metodos.size() - 1;
@@ -341,7 +354,6 @@ public class Methods extends Conexion {
                             }
 
                         }
-                        //System.out.println(sql);
                         Connection connect = this.getConnection();
                         Statement ejecutor = connect.createStatement();
                         LogsJB.info(sql);
@@ -386,6 +398,11 @@ public class Methods extends Conexion {
         return result;
     }
 
+    /**
+     * Elimina la tabla correspondiente al modelo en BD's
+     * @return True si la tabla correspondiente al modelo en BD's existe y fue eliminada, de no existir la tabla correspondiente
+     * en BD's retorna False.
+     */
     public Boolean dropTableIfExist() {
         Boolean result = false;
         try {
@@ -419,9 +436,9 @@ public class Methods extends Conexion {
                         this.closeConnection(connect);
 
                     } else {
-                        LogsJB.info("Tabla correspondiente al modelo no existe en BD's'");
+                        LogsJB.info("Tabla correspondiente al modelo no existe en BD's por eso no pudo ser eliminada");
+                        return false;
                     }
-
                     return false;
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo: " + e.toString());
@@ -597,8 +614,11 @@ public class Methods extends Conexion {
     }
 
 
-
-
+    /**
+     * Almacena el modelo proporcionado.
+     * @param modelo Modelo que será almacenado en BD's
+     * @param <T> Expresión que hace que el metodo sea generico y pueda ser utilizado por cualquier objeto que herede la Clase JBSqlUtils
+     */
     public <T extends JBSqlUtils> void saveModel(T modelo){
         try {
             modelo.setTaskIsReady(false);
