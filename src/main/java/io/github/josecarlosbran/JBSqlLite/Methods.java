@@ -412,6 +412,7 @@ public class Methods extends Conexion {
                             LogsJB.info("Sentencia para eliminar tabla de la BD's ejecutada exitosamente");
                             LogsJB.info("Tabla " + this.getClass().getSimpleName() + " Eliminada exitosamente");
                             LogsJB.info(sql);
+                            //this.setTableExist(false);
                             return true;
                         }
                         ejecutor.close();
@@ -506,6 +507,7 @@ public class Methods extends Conexion {
                                 continue;
                             }
 
+                            /*
                             if ((columnsSQL.getDataTypeSQL() == DataType.CHAR) || (columnsSQL.getDataTypeSQL() == DataType.VARCHAR)
                                     || (columnsSQL.getDataTypeSQL() == DataType.LONGVARCHAR)) {
                                 //Caracteres y cadenas de Texto
@@ -549,6 +551,9 @@ public class Methods extends Conexion {
                             } else {
                                 ejecutor.setObject(auxiliar, columnsSQL.getValor());
                             }
+
+                            */
+                            convertJavaToSQL(columnsSQL, ejecutor, auxiliar);
                             auxiliar++;
                         }
 
@@ -590,6 +595,195 @@ public class Methods extends Conexion {
         }
         return result;
     }
+
+
+
+
+    public <T extends JBSqlUtils> void saveModel(T modelo){
+        try {
+            modelo.setTaskIsReady(false);
+            Runnable Save = () -> {
+                try {
+                    if (modelo.tableExist()) {
+
+                        String sql = "INSERT INTO " + modelo.getClass().getSimpleName() + "(";
+                        List<Method> metodos = new LinkedList<>();
+                        metodos = modelo.getMethodsGetOfModel(modelo.getMethodsModel());
+                        int datos = 0;
+                        //Llena la información de las columnas que se insertaran
+                        for (int i = 0; i < metodos.size(); i++) {
+                            //Obtengo el metodo
+                            Method metodo = metodos.get(i);
+                            //Obtengo la información de la columna
+                            Column columnsSQL = (Column) metodo.invoke(modelo, null);
+                            String columnName = metodo.getName();
+                            columnName = StringUtils.remove(columnName, "get");
+                            if (Objects.isNull(columnsSQL.getValor())) {
+                                continue;
+                            }
+                            datos++;
+                            sql = sql + columnName;
+                            int temporal = metodos.size() - 1;
+                            if (i < temporal) {
+                                sql = sql + ", ";
+                            } else if (i == temporal) {
+                                sql = sql + ") VALUES (";
+                            }
+                        }
+
+                        //Llena los espacios con la información de los datos que serán agregados
+                        for (int i = 0; i < datos; i++) {
+                            sql = sql + "?";
+                            int temporal = datos - 1;
+                            if (i < temporal) {
+                                sql = sql + ", ";
+                            } else if (i == temporal) {
+                                sql = sql + ");";
+                            }
+                        }
+                        LogsJB.info(sql);
+                        Connection connect = modelo.getConnection();
+                        PreparedStatement ejecutor = connect.prepareStatement(sql);
+                        //LogsJB.info("Creo la instancia del PreparedStatement");
+                        //Llena el prepareStatement
+                        int auxiliar = 1;
+                        for (int i = 0; i < metodos.size(); i++) {
+                            //Obtengo el metodo
+                            Method metodo = metodos.get(i);
+                            //Obtengo la información de la columna
+                            Column columnsSQL = (Column) metodo.invoke(modelo, null);
+                            if (Objects.isNull(columnsSQL.getValor())) {
+                                continue;
+                            }
+
+                            /*
+                            if ((columnsSQL.getDataTypeSQL() == DataType.CHAR) || (columnsSQL.getDataTypeSQL() == DataType.VARCHAR)
+                                    || (columnsSQL.getDataTypeSQL() == DataType.LONGVARCHAR)) {
+                                //Caracteres y cadenas de Texto
+                                ejecutor.setString(auxiliar, (String) columnsSQL.getValor());
+
+                            } else if ((columnsSQL.getDataTypeSQL() == DataType.NUMERIC) || (columnsSQL.getDataTypeSQL() == DataType.DECIMAL)
+                                    || (columnsSQL.getDataTypeSQL() == DataType.MONEY) || (columnsSQL.getDataTypeSQL() == DataType.SMALLMONEY)
+                                    || (columnsSQL.getDataTypeSQL() == DataType.DOUBLE)) {
+                                //Dinero y numericos que tienen decimales
+                                ejecutor.setDouble(auxiliar, (Double) columnsSQL.getValor());
+
+                            } else if ((columnsSQL.getDataTypeSQL() == DataType.BIT)) {
+                                //Valores Booleanos
+                                ejecutor.setBoolean(auxiliar, (Boolean) columnsSQL.getValor());
+                                //ejecutor.setObject(auxiliar, columnsSQL.getValor(), Types.BOOLEAN);
+                            } else if ((columnsSQL.getDataTypeSQL() == DataType.SMALLINT) || (columnsSQL.getDataTypeSQL() == DataType.TINYINT)
+                                    || (columnsSQL.getDataTypeSQL() == DataType.INTEGER) || (columnsSQL.getDataTypeSQL() == DataType.IDENTITY)
+                                    || (columnsSQL.getDataTypeSQL() == DataType.SERIAL)) {
+                                //Valores Enteros
+                                ejecutor.setInt(auxiliar, (Integer) columnsSQL.getValor());
+
+                            } else if ((columnsSQL.getDataTypeSQL() == DataType.REAL) || (columnsSQL.getDataTypeSQL() == DataType.FLOAT)) {
+                                //Valores Flotantes
+                                ejecutor.setFloat(auxiliar, (Float) columnsSQL.getValor());
+
+                            } else if ((columnsSQL.getDataTypeSQL() == DataType.BINARY) || (columnsSQL.getDataTypeSQL() == DataType.VARBINARY)
+                                    || (columnsSQL.getDataTypeSQL() == DataType.LONGVARBINARY)) {
+                                //Valores binarios
+                                ejecutor.setBytes(auxiliar, (byte[]) columnsSQL.getValor());
+                            } else if ((columnsSQL.getDataTypeSQL() == DataType.DATE)) {
+                                //DATE
+                                ejecutor.setDate(auxiliar, (Date) columnsSQL.getValor());
+                            } else if ((columnsSQL.getDataTypeSQL() == DataType.TIME)) {
+                                //Time
+                                ejecutor.setTime(auxiliar, (Time) columnsSQL.getValor());
+                            } else if ((columnsSQL.getDataTypeSQL() == DataType.TIMESTAMP) || (columnsSQL.getDataTypeSQL() == DataType.DATETIME)
+                                    || (columnsSQL.getDataTypeSQL() == DataType.SMALLDATETIME)
+                                    || (columnsSQL.getDataTypeSQL() == DataType.DATETIME2)) {
+                                //TimeStamp
+                                ejecutor.setTimestamp(auxiliar, (Timestamp) columnsSQL.getValor());
+                            } else {
+                                ejecutor.setObject(auxiliar, columnsSQL.getValor());
+                            }*/
+                            convertJavaToSQL(columnsSQL, ejecutor, auxiliar);
+
+                            auxiliar++;
+                        }
+
+                        if (ejecutor.executeUpdate() == 1) {
+                            int filas = ejecutor.getUpdateCount();
+                            LogsJB.info("Filas actualizadas: " + filas);
+                        }
+
+                        modelo.closeConnection(connect);
+
+                    } else {
+                        LogsJB.info("Tabla correspondiente al modelo no existe en BD's'");
+                    }
+                    modelo.setTaskIsReady(true);
+                } catch (Exception e) {
+                    LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
+                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                }
+            };
+            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            ejecutor.submit(Save);
+            ejecutor.shutdown();
+        } catch (Exception e) {
+            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
+    }
+
+
+    protected void convertJavaToSQL(Column columnsSQL, PreparedStatement ejecutor, int auxiliar) throws SQLException {
+
+        if ((columnsSQL.getDataTypeSQL() == DataType.CHAR) || (columnsSQL.getDataTypeSQL() == DataType.VARCHAR)
+                || (columnsSQL.getDataTypeSQL() == DataType.LONGVARCHAR)) {
+            //Caracteres y cadenas de Texto
+            ejecutor.setString(auxiliar, (String) columnsSQL.getValor());
+
+        } else if ((columnsSQL.getDataTypeSQL() == DataType.NUMERIC) || (columnsSQL.getDataTypeSQL() == DataType.DECIMAL)
+                || (columnsSQL.getDataTypeSQL() == DataType.MONEY) || (columnsSQL.getDataTypeSQL() == DataType.SMALLMONEY)
+                || (columnsSQL.getDataTypeSQL() == DataType.DOUBLE)) {
+            //Dinero y numericos que tienen decimales
+            ejecutor.setDouble(auxiliar, (Double) columnsSQL.getValor());
+
+        } else if ((columnsSQL.getDataTypeSQL() == DataType.BIT)) {
+            //Valores Booleanos
+            ejecutor.setBoolean(auxiliar, (Boolean) columnsSQL.getValor());
+            //ejecutor.setObject(auxiliar, columnsSQL.getValor(), Types.BOOLEAN);
+        } else if ((columnsSQL.getDataTypeSQL() == DataType.SMALLINT) || (columnsSQL.getDataTypeSQL() == DataType.TINYINT)
+                || (columnsSQL.getDataTypeSQL() == DataType.INTEGER) || (columnsSQL.getDataTypeSQL() == DataType.IDENTITY)
+                || (columnsSQL.getDataTypeSQL() == DataType.SERIAL)) {
+            //Valores Enteros
+            ejecutor.setInt(auxiliar, (Integer) columnsSQL.getValor());
+
+        } else if ((columnsSQL.getDataTypeSQL() == DataType.REAL) || (columnsSQL.getDataTypeSQL() == DataType.FLOAT)) {
+            //Valores Flotantes
+            ejecutor.setFloat(auxiliar, (Float) columnsSQL.getValor());
+
+        } else if ((columnsSQL.getDataTypeSQL() == DataType.BINARY) || (columnsSQL.getDataTypeSQL() == DataType.VARBINARY)
+                || (columnsSQL.getDataTypeSQL() == DataType.LONGVARBINARY)) {
+            //Valores binarios
+            ejecutor.setBytes(auxiliar, (byte[]) columnsSQL.getValor());
+        } else if ((columnsSQL.getDataTypeSQL() == DataType.DATE)) {
+            //DATE
+            ejecutor.setDate(auxiliar, (Date) columnsSQL.getValor());
+        } else if ((columnsSQL.getDataTypeSQL() == DataType.TIME)) {
+            //Time
+            ejecutor.setTime(auxiliar, (Time) columnsSQL.getValor());
+        } else if ((columnsSQL.getDataTypeSQL() == DataType.TIMESTAMP) || (columnsSQL.getDataTypeSQL() == DataType.DATETIME)
+                || (columnsSQL.getDataTypeSQL() == DataType.SMALLDATETIME)
+                || (columnsSQL.getDataTypeSQL() == DataType.DATETIME2)) {
+            //TimeStamp
+            ejecutor.setTimestamp(auxiliar, (Timestamp) columnsSQL.getValor());
+        } else {
+            ejecutor.setObject(auxiliar, columnsSQL.getValor());
+        }
+    }
+
 
     public void getWhereId(String id) {
 

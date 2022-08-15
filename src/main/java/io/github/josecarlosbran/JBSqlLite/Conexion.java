@@ -65,6 +65,8 @@ public class Conexion {
 
     protected List<ColumnsSQL> Columnas=new LinkedList<>();
 
+    private Boolean taskIsReady=true;
+
 
     public Conexion() throws DataBaseUndefind, PropertiesDBUndefined {
         this.setGetPropertySystem(true);
@@ -559,5 +561,13 @@ public class Conexion {
 
     public void setTableName(String tableName) {
         this.tableName = tableName;
+    }
+
+    public Boolean getTaskIsReady() {
+        return taskIsReady;
+    }
+
+    public void setTaskIsReady(Boolean taskIsReady) {
+        this.taskIsReady = taskIsReady;
     }
 }
