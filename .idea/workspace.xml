@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Metodo Get finalizado">
+    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Creación de metodo para crear tabla correspondiente al modelo 15%">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_08_2022_18_58__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_08_2022_18_58__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_08_2022_14_29__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_08_2022_14_29__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9_08_2022_09_21_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9_08_2022_09_21__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Conexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Conexion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods_Conexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods_Conexion.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +47,7 @@
                 <list>
                   <RecentBranch>
                     <option name="branchName" value="JBran" />
-                    <option name="lastUsedInstant" value="1660402775" />
+                    <option name="lastUsedInstant" value="1659714243" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="master" />
@@ -74,7 +78,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/josec/IdeaProjects/JBSqlUtils&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.customizations&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -228,63 +232,21 @@
       <option name="project" value="LOCAL" />
       <updated>1660078083981</updated>
     </task>
-    <task id="LOCAL-00014" summary="Metodos para obtener los metodos del modelo completados">
-      <created>1660105994765</created>
+    <task id="LOCAL-00014" summary="Creación de metodo para crear tabla correspondiente al modelo 10%">
+      <created>1660086214771</created>
       <option name="number" value="00014" />
       <option name="presentableId" value="LOCAL-00014" />
       <option name="project" value="LOCAL" />
-      <updated>1660105994765</updated>
+      <updated>1660086214772</updated>
     </task>
-    <task id="LOCAL-00015" summary="Metodos para eliminar y crear Tabla correspondiente al modelo 100%">
-      <created>1660195525111</created>
+    <task id="LOCAL-00015" summary="Creación de metodo para crear tabla correspondiente al modelo 15%">
+      <created>1660172839357</created>
       <option name="number" value="00015" />
       <option name="presentableId" value="LOCAL-00015" />
       <option name="project" value="LOCAL" />
-      <updated>1660195525111</updated>
+      <updated>1660172839357</updated>
     </task>
-    <task id="LOCAL-00016" summary="Adaptación a PostGreSQL">
-      <created>1660278525953</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1660278525953</updated>
-    </task>
-    <task id="LOCAL-00017" summary="adaptación SQLServer 10%">
-      <created>1660311347346</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1660311347346</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Creación metodo Save SQLServer y PostgreSQL finalizada">
-      <created>1660373925685</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1660373925685</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Se optimizo la importación de metodos">
-      <created>1660602797155</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1660602797155</updated>
-    </task>
-    <task id="LOCAL-00020" summary="Se optimizaron el tipo de listas">
-      <created>1660603081374</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1660603081375</updated>
-    </task>
-    <task id="LOCAL-00021" summary="Metodo Get finalizado">
-      <created>1660627161688</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1660627161688</updated>
-    </task>
-    <option name="localTasksCounter" value="22" />
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -314,14 +276,7 @@
     <MESSAGE value="Se comenzo a trabajar el metodo encargado de Retornar el tipo de dato correcto" />
     <MESSAGE value="Se comenzo a trabajar el metodo encargado de Retornar el tipo de dato correcto 10%" />
     <MESSAGE value="Creación de metodo para crear tabla correspondiente al modelo 10%" />
-    <MESSAGE value="Metodos para obtener los metodos del modelo completados" />
-    <MESSAGE value="Metodos para eliminar y crear Tabla correspondiente al modelo 100%" />
-    <MESSAGE value="Adaptación a PostGreSQL" />
-    <MESSAGE value="adaptación SQLServer 10%" />
-    <MESSAGE value="Creación metodo Save SQLServer y PostgreSQL finalizada" />
-    <MESSAGE value="Se optimizo la importación de metodos" />
-    <MESSAGE value="Se optimizaron el tipo de listas" />
-    <MESSAGE value="Metodo Get finalizado" />
-    <option name="LAST_COMMIT_MESSAGE" value="Metodo Get finalizado" />
+    <MESSAGE value="Creación de metodo para crear tabla correspondiente al modelo 15%" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creación de metodo para crear tabla correspondiente al modelo 15%" />
   </component>
 </project>

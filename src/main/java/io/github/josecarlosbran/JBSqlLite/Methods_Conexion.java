@@ -463,6 +463,79 @@ public class Methods_Conexion extends Conexion {
     }
 
 
+    protected void convertSQLtoJava(ColumnsSQL columna, ResultSet resultado, Method metodo, Column columnaSql, int numerofila) throws SQLException, InvocationTargetException, IllegalAccessException {
+        String columnName = columna.getCOLUMN_NAME();
+        String columnType = columna.getTYPE_NAME();
+        if ((StringUtils.equalsIgnoreCase(columnType, DataType.CHAR.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.VARCHAR.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.LONGVARCHAR.name()))) {
+            //Caracteres y cadenas de Texto
+            resultado.absolute(numerofila);
+            columnaSql.setValor(resultado.getString(columnName));
+            metodo.invoke(this, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.NUMERIC.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.DECIMAL.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.MONEY.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.SMALLMONEY.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.DOUBLE.name()))) {
+            //Dinero y numericos que tienen decimales
+            resultado.absolute(numerofila);
+            columnaSql.setValor(resultado.getDouble(columnName));
+            metodo.invoke(this, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.BIT.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.BOOLEAN.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.BOOL.name()))) {
+            //Valores Booleanos
+            resultado.absolute(numerofila);
+            columnaSql.setValor(resultado.getBoolean(columnName));
+            metodo.invoke(this, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.SMALLINT.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.TINYINT.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.INTEGER.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.IDENTITY.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.SERIAL.name()))) {
+            //Valores Enteros
+            resultado.absolute(numerofila);
+            columnaSql.setValor(resultado.getInt(columnName));
+            metodo.invoke(this, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.REAL.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.FLOAT.name()))) {
+            //Valores Flotantes
+            resultado.absolute(numerofila);
+            columnaSql.setValor(resultado.getFloat(columnName));
+            metodo.invoke(this, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.BINARY.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.VARBINARY.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.LONGVARBINARY.name()))) {
+            //Valores binarios
+            resultado.absolute(numerofila);
+            columnaSql.setValor(resultado.getBytes(columnName));
+            metodo.invoke(this, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.DATE.name()))) {
+            //DATE
+            resultado.absolute(numerofila);
+            columnaSql.setValor(resultado.getDate(columnName));
+            metodo.invoke(this, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.TIME.name()))) {
+            //Time
+            resultado.absolute(numerofila);
+            columnaSql.setValor(resultado.getTime(columnName));
+            metodo.invoke(this, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.TIMESTAMP.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.DATETIME.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.SMALLDATETIME.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.DATETIME2.name()))) {
+            //TimeStamp
+            resultado.absolute(numerofila);
+            columnaSql.setValor(resultado.getTimestamp(columnName));
+            metodo.invoke(this, columnaSql);
+        } else {
+            LogsJB.warning("No se pudo setear el valor de la columna: "+columnName);
+            LogsJB.warning("Debido a que ninguno de los metodos corresponde al tipo de dato SQL: "+columnType);
+        }
+
+    }
+
     protected void convertSQLtoJava(ColumnsSQL columna, ResultSet resultado, Method metodo, Column columnaSql) throws SQLException, InvocationTargetException, IllegalAccessException {
         String columnName = columna.getCOLUMN_NAME();
         String columnType = columna.getTYPE_NAME();
@@ -526,7 +599,6 @@ public class Methods_Conexion extends Conexion {
         }
 
     }
-
 
     /**
      * Almacena el modelo proporcionado.
