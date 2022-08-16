@@ -104,6 +104,10 @@ public class Conexion {
         return this.Columnas;
     }
 
+    public void setColumnas(List<ColumnsSQL> columnas) {
+        this.Columnas=columnas;
+    }
+
 
 
     /**

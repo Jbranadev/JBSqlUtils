@@ -9,6 +9,9 @@ import io.github.josecarlosbran.LogsJB.LogsJB;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
 import static io.github.josecarlosbran.JBSqlLite.JBSqlUtils.*;
 import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.expresion;
@@ -120,10 +123,10 @@ public class Principal {
         test.setPassword("Bran");
         test.setBD("JBSQLUTILS");
         test.setDataBaseType(DataBase.PostgreSQL);
-/*
+
         test.closeConnection(test.getConnection());
         test.refresh();
-        Thread.sleep(1500);*/
+        //Thread.sleep(1500);
         /*Consumer<ColumnsSQL> showColumnas = columna -> {
 
             System.out.println(columna.getCOLUMN_NAME()+"   "+columna.getORDINAL_POSITION()+"   "+columna.getTYPE_NAME());
@@ -143,13 +146,23 @@ public class Principal {
         test.getIsMayor().setValor(false);
         test.save();*/
 
-        test.get(where(expresion(expresion("name", Operator.IGUAL_QUE, "'Jose Carlos'"), Operator.AND, expresion("isMayor", Operator.IGUAL_QUE, "false"))));
+        Consumer<Test> showFilas = fila -> {
+            LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor());
+
+        };
+
+        //test.get(where(expresion(expresion("name", Operator.IGUAL_QUE, "'Jose Carlos'"), Operator.AND, expresion("isMayor", Operator.IGUAL_QUE, "false"))));
+        List<Test> lista=new ArrayList<>();
+        lista=test.getALL(test);
+        //Thread.sleep(5000);
         while (!test.getTaskIsReady()){
 
         }
-        LogsJB.info("Resultado es: "+test.getId().getValor()+"    "+test.getName().getValor()+"    "
+        /*LogsJB.info("Resultado es: "+test.getId().getValor()+"    "+test.getName().getValor()+"    "
         +test.getApellido().getValor()+"    "
-        +test.getIsMayor().getValor()+"    ");
+        +test.getIsMayor().getValor()+"    ");*/
+        lista.forEach(showFilas);
+
     }
 
 
