@@ -9,7 +9,6 @@ import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 

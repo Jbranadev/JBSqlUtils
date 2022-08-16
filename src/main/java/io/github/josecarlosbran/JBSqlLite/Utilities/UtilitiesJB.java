@@ -1,5 +1,8 @@
 package io.github.josecarlosbran.JBSqlLite.Utilities;
 
+import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
+import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -55,6 +58,56 @@ public class UtilitiesJB {
         return 1;
     }
 
+
+
+    public static String where(String expresion) throws ValorUndefined {
+        String respuesta = "";
+        if (stringIsNullOrEmpty(expresion)) {
+            throw new ValorUndefined("La expresion proporcionada esta vacía o es NULL");
+        }
+        respuesta = "WHERE ";
+        respuesta = respuesta + expresion;
+
+        return respuesta;
+    }
+
+    public static String expresion(String columna, Operator operador, String valor) throws ValorUndefined {
+        String respuesta = "";
+        if (stringIsNullOrEmpty(columna)) {
+            throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
+        }
+        if (stringIsNullOrEmpty(valor)) {
+            throw new ValorUndefined("El valor proporcionado esta vacío o es NULL");
+        }
+        if (Objects.isNull(operador)) {
+            throw new ValorUndefined("El operador proporcionado es NULL");
+        }
+        respuesta = columna + operador.getOperador() + valor;
+        return respuesta;
+    }
+
+
+    public static String between(String valorInferior, String valorSuperior) throws ValorUndefined {
+        String respuesta = "";
+
+        if (stringIsNullOrEmpty(valorInferior)) {
+            throw new ValorUndefined("El valor inferior proporcionado esta vacío o es NULL");
+        }
+        if (stringIsNullOrEmpty(valorSuperior)) {
+            throw new ValorUndefined("El valor superior proporcionado esta vacío o es NULL");
+        }
+        respuesta = "Between " + valorInferior + Operator.AND.getOperador() + valorSuperior;
+
+        return respuesta;
+    }
+
+    public static String openParentesis(){
+        return " (";
+    }
+
+    public static String cerrarParentesis(){
+        return " )";
+    }
 
 
 

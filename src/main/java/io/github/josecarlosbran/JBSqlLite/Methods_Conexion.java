@@ -10,10 +10,12 @@ import io.github.josecarlosbran.JBSqlLite.Utilities.TablesSQL;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 import org.apache.commons.lang3.StringUtils;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
@@ -21,7 +23,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class Methods_Conexion extends Conexion{
+public class Methods_Conexion extends Conexion {
 
 
     /**
@@ -37,11 +39,11 @@ public class Methods_Conexion extends Conexion{
     }
 
 
-
     /**
      * Obtiene la lista de metodos pertenecientes al modelo que lo invoca.
-     * @return Retorna una lista de los metodos pertenecientes al modelo.
+     *
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @return Retorna una lista de los metodos pertenecientes al modelo.
      */
     public <T> List<Method> getMethodsModel() {
         Method[] metodos = this.getClass().getMethods();
@@ -62,13 +64,22 @@ public class Methods_Conexion extends Conexion{
         return result;
     }
 
+    public <T> Method getMethodModel(String nombre) throws NoSuchMethodException {
+        Method metodo = this.getClass().getMethod(nombre);
+        // Los muestro en consola
+        //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+returntype);
+
+        return metodo;
+    }
+
     //Obtener unicamente los metodos get del modelo
 
     /**
      * Obtiene la lista de los metodos get del modelo que lo invoca.
+     *
      * @param metodos Lista de metodos que tiene el modelo, sobre los cuales se filtraran los metodos get.
+     * @param <T>     Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Lista de los metodos get del modelo que lo invoca.
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      */
     public <T> List<Method> getMethodsGetOfModel(List<Method> metodos) {
         // Los muestro en consola
@@ -90,9 +101,10 @@ public class Methods_Conexion extends Conexion{
 
     /**
      * Obtiene la lista de los metodos set del modelo que lo invoca.
+     *
      * @param metodos Lista de metodos que tiene el modelo, sobre los cuales se filtraran los metodos set.
+     * @param <T>     Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Lista de los metodos set del modelo que lo invoca.
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      */
     public <T> List<Method> getMethodsSetOfModel(List<Method> metodos) {
         List<Method> result = metodos;
@@ -110,7 +122,11 @@ public class Methods_Conexion extends Conexion{
                     if (parametros.length >= 1) {
                         //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+ParametroType);
                         i++;
+                    }else {
+                        result.remove(i);
                     }
+                }else {
+                    result.remove(i);
                 }
             } else {
                 result.remove(i);
@@ -121,6 +137,7 @@ public class Methods_Conexion extends Conexion{
 
     /**
      * Obtiene la conexión del modelo a la BD's con las propiedades definidas.
+     *
      * @return Retorna la conexión del modelo a la BD's con las propiedades definidas.
      */
     public Connection getConnection() {
@@ -182,6 +199,7 @@ public class Methods_Conexion extends Conexion{
 
     /**
      * Cierra la conexión a BD's
+     *
      * @param connect Conexión que se desea cerrar
      */
     public void closeConnection(Connection connect) {
@@ -198,7 +216,7 @@ public class Methods_Conexion extends Conexion{
             }
         } catch (ConexionUndefind e) {
             LogsJB.warning("El modelo no estaba conectado a la BD's por lo cual no se cerrara la conexión");
-        }catch (Exception e) {
+        } catch (Exception e) {
             LogsJB.fatal("Excepción disparada cerrar la conexión a la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
@@ -218,9 +236,9 @@ public class Methods_Conexion extends Conexion{
             } else {
                 LogsJB.info("Conexión a BD's ya estaba cerrada");
             }
-        }catch (ConexionUndefind e) {
+        } catch (ConexionUndefind e) {
             LogsJB.warning("El modelo no estaba conectado a la BD's por lo cual no se cerrara la conexión");
-        }catch (Exception e) {
+        } catch (Exception e) {
             LogsJB.fatal("Excepción disparada cerrar la conexión a la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
@@ -231,6 +249,7 @@ public class Methods_Conexion extends Conexion{
 
     /**
      * Verifica la existencia de la tabla correspondiente al modelo en BD's
+     *
      * @return True si la tabla correspondiente al modelo existe en BD's, de lo contrario False.
      */
     protected Boolean tableExist() {
@@ -355,9 +374,8 @@ public class Methods_Conexion extends Conexion{
                 }
                 LogsJB.info("Información de las columnas de la tabla correspondiente al modelo obtenida");
                 columnas.close();
-
                 this.closeConnection(connect);
-
+                this.getColumnas().stream().sorted(Comparator.comparing(ColumnsSQL::getORDINAL_POSITION));
             } catch (Exception e) {
                 LogsJB.fatal("Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo: " + e.toString());
                 LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -376,24 +394,25 @@ public class Methods_Conexion extends Conexion{
     /**
      * Metodo que actualiza la información que el modelo tiene sobre lo que existe en BD's'
      */
-    public void refresh(){
-        try{
+    public void refresh() {
+        try {
             this.setTableExist(this.tableExist());
-        }catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el metodo que actualiza la información de conexión del modelo: "+ e.toString());
-            LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            LogsJB.fatal("Causa de la Excepción : "+e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+        } catch (Exception e) {
+            LogsJB.fatal("Excepción disparada en el metodo que actualiza la información de conexión del modelo: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
     }
 
 
     /**
      * Metodo que setea la información de la columna Java en el respectivo tipo de Dato SQL
+     *
      * @param columnsSQL Columna java que será analizada
-     * @param ejecutor PreparedStatement sobre el cual se estara envíando la información de la columna
-     * @param auxiliar Indice que indica la posición del parametro en el ejecutor.
+     * @param ejecutor   PreparedStatement sobre el cual se estara envíando la información de la columna
+     * @param auxiliar   Indice que indica la posición del parametro en el ejecutor.
      * @throws SQLException Lanza esta excepción si sucede algun problema al setear el valor Java en el ejecutor.
      */
     protected void convertJavaToSQL(Column columnsSQL, PreparedStatement ejecutor, int auxiliar) throws SQLException {
@@ -444,6 +463,70 @@ public class Methods_Conexion extends Conexion{
     }
 
 
+    protected void convertSQLtoJava(ColumnsSQL columna, ResultSet resultado, Method metodo, Column columnaSql) throws SQLException, InvocationTargetException, IllegalAccessException {
+        String columnName = columna.getCOLUMN_NAME();
+        String columnType = columna.getTYPE_NAME();
+        if ((StringUtils.equalsIgnoreCase(columnType, DataType.CHAR.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.VARCHAR.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.LONGVARCHAR.name()))) {
+            //Caracteres y cadenas de Texto
+            columnaSql.setValor(resultado.getString(columnName));
+            metodo.invoke(this, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.NUMERIC.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.DECIMAL.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.MONEY.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.SMALLMONEY.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.DOUBLE.name()))) {
+            //Dinero y numericos que tienen decimales
+            columnaSql.setValor(resultado.getDouble(columnName));
+            metodo.invoke(this, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.BIT.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.BOOLEAN.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.BOOL.name()))) {
+            //Valores Booleanos
+            columnaSql.setValor(resultado.getBoolean(columnName));
+            metodo.invoke(this, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.SMALLINT.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.TINYINT.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.INTEGER.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.IDENTITY.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.SERIAL.name()))) {
+            //Valores Enteros
+            columnaSql.setValor(resultado.getInt(columnName));
+            metodo.invoke(this, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.REAL.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.FLOAT.name()))) {
+            //Valores Flotantes
+            columnaSql.setValor(resultado.getFloat(columnName));
+            metodo.invoke(this, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.BINARY.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.VARBINARY.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.LONGVARBINARY.name()))) {
+            //Valores binarios
+            columnaSql.setValor(resultado.getBytes(columnName));
+            metodo.invoke(this, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.DATE.name()))) {
+            //DATE
+            columnaSql.setValor(resultado.getDate(columnName));
+            metodo.invoke(this, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.TIME.name()))) {
+            //Time
+            columnaSql.setValor(resultado.getTime(columnName));
+            metodo.invoke(this, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.TIMESTAMP.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.DATETIME.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.SMALLDATETIME.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.DATETIME2.name()))) {
+            //TimeStamp
+            columnaSql.setValor(resultado.getTimestamp(columnName));
+            metodo.invoke(this, columnaSql);
+        } else {
+            LogsJB.warning("No se pudo setear el valor de la columna: "+columnName);
+            LogsJB.warning("Debido a que ninguno de los metodos corresponde al tipo de dato SQL: "+columnType);
+        }
+
+    }
+
 
     /**
      * Almacena el modelo proporcionado.
@@ -454,7 +537,7 @@ public class Methods_Conexion extends Conexion{
     public <T extends Methods_Conexion> void saveModel(T modelo) {
         try {
             modelo.setTaskIsReady(false);
-            if(!modelo.getTableExist()){
+            if (!modelo.getTableExist()) {
                 modelo.refresh();
             }
             Connection connect = modelo.getConnection();
@@ -462,7 +545,7 @@ public class Methods_Conexion extends Conexion{
                 try {
                     if (modelo.getTableExist()) {
 
-                        String sql = "INSERT INTO " + modelo.getClass().getSimpleName() + "(";
+                        String sql = "INSERT INTO " + modelo.getTableName() + "(";
                         List<Method> metodos = new ArrayList<>();
                         metodos = modelo.getMethodsGetOfModel(modelo.getMethodsModel());
                         int datos = 0;
@@ -546,7 +629,6 @@ public class Methods_Conexion extends Conexion{
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
     }
-
 
 
 }

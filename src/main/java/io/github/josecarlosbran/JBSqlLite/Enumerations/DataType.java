@@ -55,6 +55,11 @@ public enum DataType {
     BOOLEAN(""),
 
     /**
+     * Valor Booleano
+     */
+    BOOL(""),
+
+    /**
      * entero de 16 bits
      */
     SMALLINT(""),

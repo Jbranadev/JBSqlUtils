@@ -5,11 +5,14 @@ import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlLite.Utilities.ColumnsSQL;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Method;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +24,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
 public class Methods extends Methods_Conexion {
     public Methods() throws DataBaseUndefind, PropertiesDBUndefined {
@@ -227,6 +232,98 @@ public class Methods extends Methods_Conexion {
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
     }
+
+
+    public void get(String expresion) {
+        try {
+            this.setTaskIsReady(false);
+            if (!this.getTableExist()) {
+                this.refresh();
+            }
+            Connection connect = this.getConnection();
+            Runnable get = () -> {
+                try {
+                    if (this.getTableExist()) {
+                        String sql = "SELECT * FROM " + this.getTableName() + " ";
+                        if(!stringIsNullOrEmpty(expresion)){
+                            sql= sql +expresion;
+                        }
+
+                        LogsJB.info(sql);
+                        PreparedStatement ejecutor = connect.prepareStatement(sql);
+                        ResultSet registros=ejecutor.executeQuery();
+                        if (registros.next()) {
+                            LogsJB.debug("Obtuvo un resultado de BD's, procedera a llenar el modelo");
+                            List<Method> metodosSet = new ArrayList<>();
+                            LogsJB.trace("Inicializa el array list de los metodos set");
+                            metodosSet = this.getMethodsSetOfModel(this.getMethodsModel());
+                            LogsJB.trace("obtuvo los metodos set");
+                            LogsJB.debug("Cantidad de columnas : "+this.getColumnas().size());
+                            //Llena la información del modelo
+                            for(int i=0; i < this.getColumnas().size(); i++){
+                                ColumnsSQL columna=this.getColumnas().get(i);
+                                String columnName=columna.getCOLUMN_NAME();
+                                LogsJB.trace("Columna : "+columnName);
+                                LogsJB.debug("Cantidad de metodos set: "+metodosSet.size());
+                                //Recorrera los metodos set del modelo para ver cual es el que corresponde a la columna
+                                for (int j = 0; j < metodosSet.size(); j++) {
+                                    Method metodo= metodosSet.get(j);
+                                    String metodoName = metodo.getName();
+                                    metodoName = StringUtils.remove(metodoName, "set");
+                                    if(StringUtils.equalsIgnoreCase(metodoName, columnName)){
+                                        LogsJB.trace("Nombre de la columna, nombre del metodo set: "+columnName+"   "+metodoName);
+                                        List<Method> metodosget = new ArrayList<>();
+                                        metodosget=this.getMethodsGetOfModel(this.getMethodsModel());
+                                        LogsJB.trace("Cantidad de metodos get: "+metodosget.size());
+                                        //Llena la información de las columnas que se insertaran
+                                        for (int a = 0; a < metodosget.size(); a++) {
+                                            //Obtengo el metodo
+                                            Method metodoget = metodosget.get(a);
+                                            //Obtengo la información de la columna
+                                            Column columnsSQL = (Column) metodoget.invoke(this, null);
+                                            String NameMetodoGet = metodoget.getName();
+                                            NameMetodoGet = StringUtils.remove(NameMetodoGet, "get");
+                                            if(StringUtils.equalsIgnoreCase(NameMetodoGet, columnName)){
+                                                LogsJB.trace("Nombre de la columna, nombre del metodo get: "+columnName+"   "+NameMetodoGet);
+                                                LogsJB.debug("Coincide el nombre de los metodos con la columna: "+columnName);
+
+                                                convertSQLtoJava(columna, registros, metodo, columnsSQL);
+                                            }
+                                        }
+                                    }
+                                }
+
+
+                            }
+                        }
+                        this.closeConnection(connect);
+                    } else {
+                        LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
+                                "recuperar el Registro");
+                    }
+                    this.setTaskIsReady(true);
+                } catch (Exception e) {
+                    LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's: " + e.toString());
+                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                }
+            };
+            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            ejecutor.submit(get);
+            ejecutor.shutdown();
+        } catch (Exception e) {
+            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
+    }
+
+
+
 /*
     public Boolean saveBoolean(){
         Boolean result = false;
@@ -246,8 +343,6 @@ public class Methods extends Methods_Conexion {
     }
 
 */
-
-
 
 
     public void getWhereId(String id) {

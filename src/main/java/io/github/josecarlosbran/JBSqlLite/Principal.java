@@ -1,13 +1,18 @@
 package io.github.josecarlosbran.JBSqlLite;
 
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
+import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.LogsJB.LogsJB;
+import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 
 import java.nio.file.Paths;
 
 import static io.github.josecarlosbran.JBSqlLite.JBSqlUtils.*;
+import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.expresion;
+import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.where;
 
 public class Principal {
 
@@ -31,6 +36,7 @@ public class Principal {
     public static void main(String[] args) {
         try {
 
+            LogsJB.setGradeLog(NivelLog.INFO);
             String DB = "JBSQLUTILS";
             setDataBaseTypeGlobal(DataBase.PostgreSQL);
             //setDataBaseGlobal(BDSqlite);
@@ -52,7 +58,7 @@ public class Principal {
 
             //new Principal().SQLServer(test);
 
-        } catch (DataBaseUndefind | /*ConexionUndefind |*/ PropertiesDBUndefined /*|InterruptedException*/
+        } catch (DataBaseUndefind | PropertiesDBUndefined | InterruptedException | ValorUndefined
                 /*|IllegalAccessException|InvocationTargetException*/ e) {
             LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -106,7 +112,7 @@ public class Principal {
 
     }
 
-    void PostgreSQL(Test test){
+    void PostgreSQL(Test test) throws InterruptedException, ValorUndefined {
         test.setGetPropertySystem(false);
         test.setPort("5075");
         test.setHost("localhost");
@@ -114,17 +120,36 @@ public class Principal {
         test.setPassword("Bran");
         test.setBD("JBSQLUTILS");
         test.setDataBaseType(DataBase.PostgreSQL);
+/*
+        test.closeConnection(test.getConnection());
+        test.refresh();
+        Thread.sleep(1500);*/
+        /*Consumer<ColumnsSQL> showColumnas = columna -> {
 
-        //test.closeConnection(test.getConnection());
+            System.out.println(columna.getCOLUMN_NAME()+"   "+columna.getORDINAL_POSITION()+"   "+columna.getTYPE_NAME());
+
+        };
+
+        Thread.sleep(3000);
+        test.getColumnas().forEach(showColumnas);*/
+
+
         //test.dropTableIfExist();
         //test.crateTable();
 
 
-        test.getName().setValor("Jose");
-        test.getApellido().setValor("Bran");
-        test.getIsMayor().setValor(true);
-        test.save();
-        LogsJB.info("Resultado es: "+test.getTaskIsReady());
+        /*test.getName().setValor("Jose Alfredo");
+        test.getApellido().setValor("Bran Lara");
+        test.getIsMayor().setValor(false);
+        test.save();*/
+
+        test.get(where(expresion(expresion("name", Operator.IGUAL_QUE, "'Jose Carlos'"), Operator.AND, expresion("isMayor", Operator.IGUAL_QUE, "false"))));
+        while (!test.getTaskIsReady()){
+
+        }
+        LogsJB.info("Resultado es: "+test.getId().getValor()+"    "+test.getName().getValor()+"    "
+        +test.getApellido().getValor()+"    "
+        +test.getIsMayor().getValor()+"    ");
     }
 
 
