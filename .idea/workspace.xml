@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Creación de metodo para crear tabla correspondiente al modelo 15%">
+    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Se realizo el machote de la optimización de lectura de datos GetAll()">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_08_2022_09_19_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_08_2022_09_19__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_08_2022_09_30_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_08_2022_09_30__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_08_2022_18_58__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_08_2022_18_58__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_08_2022_14_29__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_08_2022_14_29__Changes_.xml" afterDir="false" />
@@ -246,7 +250,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660172839357</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Se realizo el machote de la optimización de lectura de datos GetAll()">
+      <created>1660679021381</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1660679021381</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -277,6 +288,7 @@
     <MESSAGE value="Se comenzo a trabajar el metodo encargado de Retornar el tipo de dato correcto 10%" />
     <MESSAGE value="Creación de metodo para crear tabla correspondiente al modelo 10%" />
     <MESSAGE value="Creación de metodo para crear tabla correspondiente al modelo 15%" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creación de metodo para crear tabla correspondiente al modelo 15%" />
+    <MESSAGE value="Se realizo el machote de la optimización de lectura de datos GetAll()" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se realizo el machote de la optimización de lectura de datos GetAll()" />
   </component>
 </project>

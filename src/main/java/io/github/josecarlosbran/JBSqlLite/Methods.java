@@ -445,7 +445,7 @@ public class Methods extends Methods_Conexion {
                                                     if (StringUtils.equalsIgnoreCase(NameMetodoGet, columnName)) {
                                                         LogsJB.trace("Nombre de la columna, nombre del metodo get: " + columnName + "   " + NameMetodoGet);
                                                         LogsJB.debug("Coincide el nombre de los metodos con la columna: " + columnName);
-                                                        convertSQLtoJava(columna, registros, metodo, columnsSQL, indicefila);
+                                                        convertSQLtoJava(columna, filas, metodo, columnsSQL, indicefila);
                                                     }
                                                 }
                                             }
