@@ -61,7 +61,8 @@ public class Principal {
 
             //new Principal().SQLServer(new Test());
 
-        } catch (DataBaseUndefind | PropertiesDBUndefined | InterruptedException | ValorUndefined
+        } catch (DataBaseUndefind | PropertiesDBUndefined | InterruptedException | ValorUndefined |
+                 InstantiationException | IllegalAccessException
                 /*|IllegalAccessException|InvocationTargetException*/ e) {
             LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -115,7 +116,7 @@ public class Principal {
 
     }
 
-    void PostgreSQL(Test test) throws InterruptedException, ValorUndefined {
+    void PostgreSQL(Test test) throws InterruptedException, ValorUndefined, DataBaseUndefind, PropertiesDBUndefined, InstantiationException, IllegalAccessException {
         test.setGetPropertySystem(false);
         test.setPort("5075");
         test.setHost("localhost");
@@ -166,6 +167,7 @@ public class Principal {
         List<Test> lista=new ArrayList<>();
         lista=test.getALL(test, where(expresion(expresion("name", Operator.LIKE, "'Jose%'"), Operator.AND, expresion("isMayor", Operator.IGUAL_QUE, "true"))));
         //Thread.sleep(5000);
+        test.where("",null, "").and("", null, "").or("", null, "").and("").getAll();
         while (!test.getTaskIsReady()){
 
         }

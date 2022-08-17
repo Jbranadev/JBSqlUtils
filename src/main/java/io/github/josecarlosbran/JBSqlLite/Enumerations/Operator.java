@@ -20,12 +20,17 @@ public enum Operator {
 
     CLOSE_PARENTESIS(" )"),
 
+    ORDERBY(" ORDER BY "),
+
 
     AND(" AND "),
 
     OR(" OR "),
 
     NOT(" NOT ");
+
+
+
 
 
     private String operador;

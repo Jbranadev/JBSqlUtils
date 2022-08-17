@@ -3,8 +3,11 @@ package io.github.josecarlosbran.JBSqlLite;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
+import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
+import io.github.josecarlosbran.JBSqlLite.Search.Where;
 import io.github.josecarlosbran.JBSqlLite.Utilities.ColumnsSQL;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 import org.apache.commons.lang3.StringUtils;
@@ -24,7 +27,7 @@ import java.util.stream.Collectors;
 
 import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
-public class Methods extends Methods_Conexion {
+public class Methods extends Where {
     public Methods() throws DataBaseUndefind, PropertiesDBUndefined {
         super();
     }
@@ -555,6 +558,7 @@ public class Methods extends Methods_Conexion {
     }
 
 */
+
 
 
 

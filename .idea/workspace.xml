@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Adecuaciones de los metodos para asegurar un mejor rendimiento y poder dar un mejor seguimiento.">
+    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Creación de los atributos por default para el manejo de TimeStamp">
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Enumerations/OrderType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Exceptions/ModelNotFound.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/And.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/GET.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Or.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/OrderBy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Where.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Conexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Conexion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/JBSqlUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/JBSqlUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Enumerations/Operator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Enumerations/Operator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +92,9 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="io.github.josecarlosbran.JBSqlLite.Exception" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="io.github.josecarlosbran.JBSqlLite.Search" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.Principal">
     <configuration name="JBSqlUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -104,7 +115,7 @@
       <module name="JBSqlUtils" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="io.github.josecarlosbran.JBSqlLite.*" />
+          <option name="PATTERN" value="io.github.josecarlosbran.JBSqlLite.Search.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -266,7 +277,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660749851740</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Creación de los atributos por default para el manejo de TimeStamp">
+      <created>1660755315330</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1660755315330</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -299,6 +317,7 @@
     <MESSAGE value="Creación de metodo para crear tabla correspondiente al modelo 15%" />
     <MESSAGE value="Se realizo el machote de la optimización de lectura de datos GetAll()" />
     <MESSAGE value="Adecuaciones de los metodos para asegurar un mejor rendimiento y poder dar un mejor seguimiento." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adecuaciones de los metodos para asegurar un mejor rendimiento y poder dar un mejor seguimiento." />
+    <MESSAGE value="Creación de los atributos por default para el manejo de TimeStamp" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creación de los atributos por default para el manejo de TimeStamp" />
   </component>
 </project>
