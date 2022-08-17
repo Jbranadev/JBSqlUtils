@@ -241,7 +241,7 @@ public class Methods extends Methods_Conexion {
             Runnable get = () -> {
                 try {
                     if (this.getTableExist()) {
-                        String sql = "SELECT * FROM " + this.getTableName();
+                        String sql = "SELECT * FROM " + this.getClass().getSimpleName();
                         if (!stringIsNullOrEmpty(expresion)) {
                             sql = sql + expresion;
                         }
@@ -250,6 +250,7 @@ public class Methods extends Methods_Conexion {
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         ResultSet registros = ejecutor.executeQuery();
                         if (registros.next()) {
+                            /*
                             LogsJB.debug("Obtuvo un resultado de BD's, procedera a llenar el modelo");
                             List<Method> metodosSet = new ArrayList<>();
                             LogsJB.trace("Inicializa el array list de los metodos set");
@@ -283,7 +284,6 @@ public class Methods extends Methods_Conexion {
                                             if (StringUtils.equalsIgnoreCase(NameMetodoGet, columnName)) {
                                                 LogsJB.trace("Nombre de la columna, nombre del metodo get: " + columnName + "   " + NameMetodoGet);
                                                 LogsJB.debug("Coincide el nombre de los metodos con la columna: " + columnName);
-
                                                 convertSQLtoJava(columna, registros, metodo, columnsSQL);
                                             }
                                         }
@@ -292,6 +292,10 @@ public class Methods extends Methods_Conexion {
 
 
                             }
+
+                            */
+                            procesarResultSet(this, registros);
+
                         }
                         this.closeConnection(connect);
                     } else {
@@ -322,7 +326,7 @@ public class Methods extends Methods_Conexion {
 
 
     public <T extends Methods_Conexion> List<T> getALL(T modelo) {
-        modelo.setTaskIsReady(false);
+        /*modelo.setTaskIsReady(false);
         List<T> lista = new ArrayList<>();
         try {
             if (!modelo.getTableExist()) {
@@ -407,7 +411,8 @@ public class Methods extends Methods_Conexion {
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
-        return lista;
+        return lista;*/
+        return this.getALL(modelo, "");
     }
 
     public <T extends Methods_Conexion> List<T> getALL(T modelo, String expresion) {
@@ -421,7 +426,7 @@ public class Methods extends Methods_Conexion {
             Runnable get = () -> {
                 try {
                     if (modelo.getTableExist()) {
-                        String sql = "SELECT * FROM " + modelo.getTableName();
+                        String sql = "SELECT * FROM " + this.getClass().getSimpleName();
                         if (!stringIsNullOrEmpty(expresion)) {
                             sql = sql + expresion;
                         }
@@ -431,6 +436,7 @@ public class Methods extends Methods_Conexion {
                         ResultSet registros = ejecutor.executeQuery();
 
                         while(registros.next()) {
+                            /*
                             T temp= (T) modelo.getClass().newInstance();
                             temp.setColumnas(modelo.getColumnas());
                             LogsJB.info("Obtuvo un resultado de BD's, procedera a llenar el modelo");
@@ -475,6 +481,10 @@ public class Methods extends Methods_Conexion {
                                 }
                             }
                             lista.add(temp);
+                            */
+
+                            lista.add(procesarResultSet(modelo, registros));
+
                         }
 
                         modelo.closeConnection(connect);
@@ -506,6 +516,9 @@ public class Methods extends Methods_Conexion {
         }
         return lista;
     }
+
+
+
 
 
     public <T extends Methods_Conexion> void saveALL(List<T> modelos){
@@ -543,48 +556,6 @@ public class Methods extends Methods_Conexion {
 
 */
 
-
-    public void getWhereId(String id) {
-
-
-    }
-
-    void convertirSQLtoJava() {
-
-    }
-
-
-    public static <T, G> G getObject(T dato) {
-        return (G) dato;
-    }
-
-    Function funcion = new Function<Integer, Boolean>() {
-        public Boolean apply(Integer driver) {
-            if (driver >= 1) {
-                return true;
-            }
-            return false;
-        }
-
-        public Boolean apply(Double driver) {
-            if (driver >= 1) {
-                return true;
-            }
-            return false;
-        }
-    };
-
-
-    public static <T, G> G Convertir_entero_a_boleano(T a, Function<T, G> funcion) {
-        return funcion.apply(a);
-    }
-
-    public static <T, G> List<G> fromArrayToList(T[] a, Function<T, G> mapperFunction) {
-
-        return Arrays.stream(a)
-                .map(mapperFunction)
-                .collect(Collectors.toList());
-    }
 
 
 }
