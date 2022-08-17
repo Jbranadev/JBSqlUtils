@@ -126,7 +126,7 @@ public class Principal {
         test.setDataBaseType(DataBase.PostgreSQL);
 
         //test.closeConnection(test.getConnection());
-        //test.refresh();
+        test.refresh();
         //Thread.sleep(1500);
         /*Consumer<ColumnsSQL> showColumnas = columna -> {
 

@@ -9,16 +9,69 @@ import java.util.List;
  * Clase que sirve para identificar las caracteristicas de la tabla correspondiente al modelo
  */
 public class TablesSQL {
+    /**
+     * TABLE_CAT String => catálogo de tablas (puede ser nulo)
+     */
     private String TABLE_CAT =null;
+
+    /**
+     * TABLE_SCHEM String => esquema de tabla (puede ser nulo)
+     */
     private String TABLE_SCHEM =null;
+
+    /**
+     * TABLE_NAME Cadena => nombre de la tabla
+     */
     private String TABLE_NAME =null;
+
+    /**
+     * TABLE_TYPE Cadena => tipo de tabla. Los tipos típicos son "TABLE", "VIEW", "SYSTEM TABLE",
+     * "GLOBAL TEMPORARY", "LOCAL TEMPORARY", "ALIAS", "SYNONYM".
+     * OBSERVACIONES String => comentario explicativo sobre la tabla
+     */
     private String TABLE_TYPE =null;
+
+    /**
+     *
+     */
     private String REMARKS =null;
+
+    /**
+     * TYPE_CAT String => el catálogo de tipos (puede ser nulo)
+     */
     private String TYPE_CAT =null;
+
+    /**
+     * TYPE_SCHEM String => el esquema de tipos (puede ser nulo)
+     */
     private String TYPE_SCHEM =null;
+
+    /**
+     * TYPE_NAME Cadena => nombre de tipo (puede ser nulo)
+     */
     private String TYPE_NAME =null;
+
+    /**
+     * SELF_REFERENCING_COL_NAME Cadena => nombre de la columna de "identificador"
+     * designada de una tabla escrita (puede ser nulo)
+     */
     private String SELF_REFERENCING_COL_NAME=null;
+    /**
+     * REF_GENERATION String => especifica cómo se crean los valores en SELF_REFERENCING_COL_NAME.
+     * Los valores son "SISTEMA", "USUARIO", "DERIVADO". (puede ser nulo)
+     */
     private String REF_GENERATION =null;
+
+    /**
+     * Clave Primaria correspondiente a la tabla
+     */
+    private PrimaryKey claveprimaria=null;
+
+    /**
+     * Lista de las columnas que tiene la tabla correspondiente al modelo
+     */
+    protected List<ColumnsSQL> Columnas = new ArrayList<>();
+
 
     protected static List<TablesSQL> Tablas=new ArrayList<>();
 
@@ -26,7 +79,18 @@ public class TablesSQL {
         return Tablas;
     }
 
-    
+    /**
+     * Obtiene la lista de las columnas que posee la tabla correspondiente al modelo.
+     * @return Lista de las columnas que posee la tabla correspondiente al modelo.
+     */
+    public List<ColumnsSQL> getColumnas() {
+        return this.Columnas;
+    }
+
+    public void setColumnas(List<ColumnsSQL> columnas) {
+        this.Columnas=columnas;
+    }
+
 
     public String getTABLE_CAT() {
         return TABLE_CAT;
@@ -109,8 +173,16 @@ public class TablesSQL {
     }
 
 
+    /**
+     * Clave Primaria correspondiente a la tabla
+     */
+    public PrimaryKey getClaveprimaria() {
+        return claveprimaria;
+    }
 
-
+    public void setClaveprimaria(PrimaryKey claveprimaria) {
+        this.claveprimaria = claveprimaria;
+    }
 }
 
 

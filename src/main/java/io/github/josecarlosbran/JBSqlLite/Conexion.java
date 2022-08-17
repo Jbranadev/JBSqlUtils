@@ -5,6 +5,7 @@ import io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Utilities.ColumnsSQL;
+import io.github.josecarlosbran.JBSqlLite.Utilities.TablesSQL;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import java.sql.Connection;
@@ -62,53 +63,64 @@ public class Conexion {
     /**
      * Bandera que sirve para identificar si la tabla correspondiente al modelo Existe
      */
-    private Boolean tableExist=false;
+    private Boolean tableExist = false;
 
     /**
      * Nombre de la tabla correspondiente al modelo.
      */
-    private String tableName=null;
+    private String tableName = null;
 
-    /**
-     * Lista de las columnas que tiene la tabla correspondiente al modelo
-     */
-    protected List<ColumnsSQL> Columnas=new ArrayList<>();
+
 
     /**
      * Bandera que sirve para identificar si la tarea que estaba realizando el modelo a sido terminada
      */
-    private Boolean taskIsReady=true;
+    private Boolean taskIsReady = true;
 
     /**
      * Define cual será la clave primaria del modelo
      */
-    private String primaryKey=null;
+    private String primaryKey = null;
 
     /**
      * Define si la clave primaria es autoincrementable, el valor por default es true
      */
-    private Boolean primaryKeyIsIncremental=true;
+    private Boolean primaryKeyIsIncremental = true;
 
     /**
      * Define si el modelo desea que JBSqlUtils maneje las timestamps Created_at, Update_at.
      */
-    private Boolean timestamps=true;
+    private Boolean timestamps = true;
 
 
     /**
      * Define el formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
      */
-    private String dateFormat=null;
+    private String dateFormat = null;
 
     /**
      * Define el nombre de la columna correspondiente a la TimeStamp CreateAT
      */
-    private String createdAt=null;
+    private String createdAt = null;
 
     /**
      * Define el nombre de la columna correspondiente a la TimeStamp UpdateAT
      */
-    private String updateAT=null;
+    private String updateAT = null;
+
+    /**
+     * Bandera que sirve para identificar si el modelo existe en BD's, de existir cuando se llame al metodo save se procedera a actualizar el modelo
+     */
+    private Boolean modelExist = false;
+
+    /**
+     * Representa la metadata de la tabla correspondiente al modelo en BD's
+     */
+    private TablesSQL tabla = null;
+
+
+
+
 
 
 
@@ -129,17 +141,6 @@ public class Conexion {
         this.setPassword(setearPassword());
     }
 
-    /**
-     * Obtiene la lista de las columnas que posee la tabla correspondiente al modelo.
-     * @return Lista de las columnas que posee la tabla correspondiente al modelo.
-     */
-    public List<ColumnsSQL> getColumnas() {
-        return this.Columnas;
-    }
-
-    public void setColumnas(List<ColumnsSQL> columnas) {
-        this.Columnas=columnas;
-    }
 
 
 
@@ -743,5 +744,38 @@ public class Conexion {
      */
     public void setUpdateAT(String updateAT) {
         this.updateAT = updateAT;
+    }
+
+
+
+    /**
+     * Obtiene la Bandera que sirve para identificar si el modelo existe en BD's, de existir cuando se
+     * llame al metodo save se procedera a actualizar el modelo
+     * @return TRUE indica que el modelo fue obtenido de BD's,
+     * False indica que el modelo no existe en BD's
+     */
+    public Boolean getModelExist() {
+        return modelExist;
+    }
+
+    /**
+     * Setea la Bandera que sirve para identificar si el modelo existe en BD's, de existir cuando se llame
+     * al metodo save se procedera a actualizar el modelo
+     * @param modelExist Bandera que sirve para identificar si el modelo existe en BD's, TRUE indica que el modelo fue obtenido de BD's
+     *                   False indica que el modelo no existe en BD's
+     */
+    public void setModelExist(Boolean modelExist) {
+        this.modelExist = modelExist;
+    }
+
+    /**
+     * Representa la metadata de la tabla correspondiente al modelo en BD's
+     */
+    public TablesSQL getTabla() {
+        return tabla;
+    }
+
+    public void setTabla(TablesSQL tabla) {
+        this.tabla = tabla;
     }
 }
