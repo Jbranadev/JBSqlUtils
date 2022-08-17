@@ -688,6 +688,7 @@ public class Methods_Conexion extends Conexion {
                     LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    modelo.setTaskIsReady(true);
                 }
             };
             ExecutorService ejecutor = Executors.newFixedThreadPool(1);

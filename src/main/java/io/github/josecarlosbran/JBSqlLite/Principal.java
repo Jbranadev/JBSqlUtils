@@ -53,13 +53,13 @@ public class Principal {
             //LogsJB.info(BDSqlite);
 
             Test test = new Test();
-            //new Principal().SQLITE(test);
+            new Principal().SQLITE(new Test());
 
-            //new Principal().MySQL(test);
+            //new Principal().MySQL(new Test());
 
-            new Principal().PostgreSQL(test);
+            new Principal().PostgreSQL(new Test());
 
-            //new Principal().SQLServer(test);
+            //new Principal().SQLServer(new Test());
 
         } catch (DataBaseUndefind | PropertiesDBUndefined | InterruptedException | ValorUndefined
                 /*|IllegalAccessException|InvocationTargetException*/ e) {
@@ -83,14 +83,14 @@ public class Principal {
         test.setBD(BDSqlite);
         test.setDataBaseType(DataBase.SQLite);
 
-        test.closeConnection(test.getConnection());
-        //test.dropTableIfExist();
-        //test.crateTable();
+        //test.closeConnection(test.getConnection());
+        test.dropTableIfExist();
+        test.crateTable();
 
         test.getName().setValor("Jose");
         test.getApellido().setValor("Bran");
         test.getIsMayor().setValor(true);
-        test.save();
+        //test.save();
     }
 
     void MySQL(Test test) {
@@ -124,8 +124,8 @@ public class Principal {
         test.setBD("JBSQLUTILS");
         test.setDataBaseType(DataBase.PostgreSQL);
 
-        test.closeConnection(test.getConnection());
-        test.refresh();
+        //test.closeConnection(test.getConnection());
+        //test.refresh();
         //Thread.sleep(1500);
         /*Consumer<ColumnsSQL> showColumnas = columna -> {
 
@@ -147,13 +147,24 @@ public class Principal {
         test.save();*/
 
         Consumer<Test> showFilas = fila -> {
-            LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor());
+
+            String separador=System.getProperty("file.separator");
+            String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
+                    "BD" +
+                    separador +
+                    "JBSqlUtils.db");
+            fila.setGetPropertySystem(false);
+            fila.setBD(BDSqlite);
+            fila.setDataBaseType(DataBase.SQLite);
+            fila.setTableExist(false);
+            fila.getId().setValor(null);
+            //LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor());
 
         };
 
         //test.get(where(expresion(expresion("name", Operator.IGUAL_QUE, "'Jose Carlos'"), Operator.AND, expresion("isMayor", Operator.IGUAL_QUE, "false"))));
         List<Test> lista=new ArrayList<>();
-        lista=test.getALL(test);
+        lista=test.getALL(test, where(expresion(expresion("name", Operator.LIKE, "'Jose%'"), Operator.AND, expresion("isMayor", Operator.IGUAL_QUE, "true"))));
         //Thread.sleep(5000);
         while (!test.getTaskIsReady()){
 
@@ -161,7 +172,15 @@ public class Principal {
         /*LogsJB.info("Resultado es: "+test.getId().getValor()+"    "+test.getName().getValor()+"    "
         +test.getApellido().getValor()+"    "
         +test.getIsMayor().getValor()+"    ");*/
+        //LogsJB.info("Tamaño de la lista obtenida: "+lista.size());
         lista.forEach(showFilas);
+
+        //test.getConnection();
+        //test.refresh();
+        LogsJB.fatal("Invocara los metodos que almacena los modelos en BD's");
+        test.saveALL(lista);
+
+        LogsJB.fatal("Termino de invocar los metodos que almacena los modelos en BD's");
 
     }
 

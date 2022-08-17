@@ -65,7 +65,7 @@ public class UtilitiesJB {
         if (stringIsNullOrEmpty(expresion)) {
             throw new ValorUndefined("La expresion proporcionada esta vacía o es NULL");
         }
-        respuesta = "WHERE ";
+        respuesta = " WHERE ";
         respuesta = respuesta + expresion;
 
         return respuesta;
