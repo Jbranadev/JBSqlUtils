@@ -1,12 +1,18 @@
 package io.github.josecarlosbran.JBSqlLite;
 
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
+import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
+import java.sql.Timestamp;
+
 public class JBSqlUtils extends Methods{
 
+    private Column<Timestamp> created_at=new Column<>(DataType.TIMESTAMP);
+
+    private Column<Timestamp> updated_at=new Column<>(DataType.TIMESTAMP);
 
     public JBSqlUtils() throws DataBaseUndefind, PropertiesDBUndefined {
         super();
@@ -123,4 +129,37 @@ public class JBSqlUtils extends Methods{
 
     }
 
+    /**
+     * TimeStamp correspondiente a la fecha de creación del registro en BD's
+     */
+    public Column<Timestamp> getCreated_at() {
+        Long datetime = System.currentTimeMillis();
+        created_at.setValor(new Timestamp(datetime));
+        return created_at;
+    }
+
+    /**
+     * Setea la TimeStamp correspondiente a la fecha de creación del registro en BD's
+     * @param created_at TimeStamp correspondiente a la fecha de creación del registro en BD's
+     */
+    public void setCreated_at(Column<Timestamp> created_at) {
+        this.created_at = created_at;
+    }
+
+    /**
+     * TimeStamp correspondiente a la fecha de actualización del registro en BD's
+     */
+    public Column<Timestamp> getUpdated_at() {
+        Long datetime = System.currentTimeMillis();
+        updated_at.setValor(new Timestamp(datetime));
+        return updated_at;
+    }
+
+    /**
+     * Setea la TimeStamp correspondiente a la fecha de actualización del registro en BD's
+     * @param updated_at TimeStamp correspondiente a la fecha de actualización del registro en BD's
+     */
+    public void setUpdated_at(Column<Timestamp> updated_at) {
+        this.updated_at = updated_at;
+    }
 }

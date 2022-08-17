@@ -80,6 +80,39 @@ public class Conexion {
     private Boolean taskIsReady=true;
 
     /**
+     * Define cual será la clave primaria del modelo
+     */
+    private String primaryKey=null;
+
+    /**
+     * Define si la clave primaria es autoincrementable, el valor por default es true
+     */
+    private Boolean primaryKeyIsIncremental=true;
+
+    /**
+     * Define si el modelo desea que JBSqlUtils maneje las timestamps Created_at, Update_at.
+     */
+    private Boolean timestamps=true;
+
+
+    /**
+     * Define el formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
+     */
+    private String dateFormat=null;
+
+    /**
+     * Define el nombre de la columna correspondiente a la TimeStamp CreateAT
+     */
+    private String createdAt=null;
+
+    /**
+     * Define el nombre de la columna correspondiente a la TimeStamp UpdateAT
+     */
+    private String updateAT=null;
+
+
+
+    /**
      * Constructor de la clase Conexión que se encarga de inicializar las propiedades de conexión del modelo,
      * las cuales las obtiene de las propiedades del sistema Java.
      * @throws DataBaseUndefind Lanza esta excepción si el tipo de BD's a la cual se conectara el modelo no ha sido definida entre
@@ -619,5 +652,96 @@ public class Conexion {
      */
     public synchronized void setTaskIsReady(Boolean taskIsReady) {
         this.taskIsReady = taskIsReady;
+    }
+
+    /**
+     * Obtiene la clave primaria del modelo.
+     */
+    public String getPrimaryKey() {
+        return primaryKey;
+    }
+
+    /**
+     * Setea la clave primaria del modelo
+     * @param primaryKey Nombre de la columna que sirve como clave primaria del modelo
+     */
+    public void setPrimaryKey(String primaryKey) {
+        this.primaryKey = primaryKey;
+    }
+
+    /**
+     * Obtiene la bandera que indica si la clave primaria del modelo es autoincrementable.
+     * @return Retorna True si la clave primaria es autoincrementable.
+     */
+    public Boolean getPrimaryKeyIsIncremental() {
+        return primaryKeyIsIncremental;
+    }
+
+    /**
+     * Setea la información sobre si la clave primaria es autoincrementable.
+     * @param primaryKeyIsIncremental True si la clave primaria es autoincrementable, False si no lo es.
+     */
+    public void setPrimaryKeyIsIncremental(Boolean primaryKeyIsIncremental) {
+        this.primaryKeyIsIncremental = primaryKeyIsIncremental;
+    }
+
+    /**
+     * Obtiene la bandera que define si el modelo desea que JBSqlUtils maneje las timestamps Created_at, Update_at.
+     */
+    public Boolean getTimestamps() {
+        return timestamps;
+    }
+
+    /**
+     * Setea la bandera que define si el modelo desea que JBSqlUtils maneje las timestamps Created_at, Update_at.
+     * @param timestamps True si las timestamps serán manejadas por JBSqlUtils, False, si el modelo no tiene estas
+     *                   columnas.
+     */
+    public void setTimestamps(Boolean timestamps) {
+        this.timestamps = timestamps;
+    }
+
+    /**
+     * Obtiene el formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
+     */
+    public String getDateFormat() {
+        return dateFormat;
+    }
+
+    /**
+     * Setea el formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
+     * @param dateFormat Formato de fecha en el que se desea se almacenen las TimeStamp
+     */
+    public void setDateFormat(String dateFormat) {
+        this.dateFormat = dateFormat;
+    }
+
+    /**
+     * Obtiene el nombre de la columna correspondiente a la TimeStamp CreateAT
+     */
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     * Setea el nombre de la columna correspondiente a la TimeStamp CreateAT
+     * @param createdAt Nombre de la columna correspondiente a la TimeStamp CreateAT
+     */
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    /**
+     * Obtiene el nombre de la columna correspondiente a la TimeStamp UpdateAT
+     */
+    public String getUpdateAT() {
+        return updateAT;
+    }
+    /**
+     * Setea el nombre de la columna correspondiente a la TimeStamp UpdateAT
+     * @param updateAT Nombre de la columna correspondiente a la TimeStamp UpdateAT
+     */
+    public void setUpdateAT(String updateAT) {
+        this.updateAT = updateAT;
     }
 }
