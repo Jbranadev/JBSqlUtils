@@ -188,8 +188,7 @@ public class GET extends Methods_Conexion {
         return (T) this;
     }
 
-    public <T extends Methods_Conexion> List<T> getAll(String Sql) throws InstantiationException, IllegalAccessException {
-        T modelo= (T) this.getClass().newInstance();
+    public <T extends Methods_Conexion> List<T> getAll(T modelo, String Sql) throws InstantiationException, IllegalAccessException {
         modelo.setTaskIsReady(false);
         List<T> lista = new ArrayList<>();
         try {
@@ -197,21 +196,19 @@ public class GET extends Methods_Conexion {
                 modelo.refresh();
             }
             Connection connect = modelo.getConnection();
+            //T finalTemp = temp;
             Runnable get = () -> {
                 try {
                     if (modelo.getTableExist()) {
-                        String sql=Sql;
-                        if(stringIsNullOrEmpty(Sql)){
-                            sql = "SELECT * FROM " + this.getClass().getSimpleName();
-                        }
-                        sql = sql + ";";
+                        String sql="SELECT * FROM " + modelo.getTableName();
+                        sql = sql+Sql + ";";
                         LogsJB.info(sql);
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         ResultSet registros = ejecutor.executeQuery();
 
                         while(registros.next()) {
                             lista.add(procesarResultSet(modelo, registros));
-
+                            //procesarResultSet(modelo, registros);
                         }
                         modelo.closeConnection(connect);
                     } else {

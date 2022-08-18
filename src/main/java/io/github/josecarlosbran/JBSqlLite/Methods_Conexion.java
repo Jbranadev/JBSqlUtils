@@ -46,18 +46,33 @@ public class Methods_Conexion extends Conexion {
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Retorna una lista de los metodos pertenecientes al modelo.
      */
-    public <T> List<Method> getMethodsModel() {
+    public synchronized <T> List<Method> getMethodsModel() {
         Method[] metodos = this.getClass().getMethods();
         List<Method> result = new ArrayList<>();
         // Los muestro en consola
         for (Method metodo : metodos) {
             String clase = metodo.getDeclaringClass().getSimpleName();
             String returntype = metodo.getReturnType().getSimpleName();
+            Parameter[] parametros = metodo.getParameters();
+            String ParametroType = "";
+            if(parametros.length>=1 ){
+                ParametroType = parametros[0].getType().getSimpleName();
+            }
 
-            if ((clase.equals("Object") || clase.equals("Conexion") || clase.equals("Methods") || clase.equals("JBSqlUtils")) && !returntype.equals("Column")) {
+            if ((clase.equals("Object")
+                    || clase.equals("And")
+                    || clase.equals("GET")
+                    || clase.equals("Or")
+                    || clase.equals("OrderBy")
+                    || clase.equals("Where")
+                    || clase.equals("Conexion")
+                    || clase.equals("Methods")
+                    || clase.equals("Methods_Conexion"))
+                    //&& !(returntype.equals("Column") ||ParametroType.equals("Column"))
+            ) {
 
-            } else {
-                //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + returntype);
+            } else if((returntype.equals("Column") || ParametroType.equals("Column"))) {
+                //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + returntype+"  " + ParametroType);
                 result.add(metodo);
             }
             //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+returntype);
@@ -85,16 +100,18 @@ public class Methods_Conexion extends Conexion {
     public <T> List<Method> getMethodsGetOfModel(List<Method> metodos) {
         // Los muestro en consola
         int i = 0;
-        List<Method> result = metodos;
-        while (i < result.size()) {
-            Method metodo = result.get(i);
+        //System.out.println("Inicia a obtener los metodos get");
+        List<Method> result = new ArrayList<>();
+        //System.out.println("asigno los metodos get");
+        for(Method metodo:metodos){
+            //Method metodo = result.get(i);
             String returntype = metodo.getReturnType().getSimpleName();
             String nombre = metodo.getName();
             if (returntype.equals("Column") && StringUtils.containsIgnoreCase(nombre, "Get")) {
-                i++;
+                //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + returntype);
+                result.add(metodo);
             } else {
                 //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + returntype);
-                result.remove(i);
             }
         }
         return result;
@@ -108,29 +125,20 @@ public class Methods_Conexion extends Conexion {
      * @return Lista de los metodos set del modelo que lo invoca.
      */
     public <T> List<Method> getMethodsSetOfModel(List<Method> metodos) {
-        List<Method> result = metodos;
-        int i = 0;
-        while (i < result.size()) {
-            Method metodo = result.get(i);
+        List<Method> result = new ArrayList<>();
+        for(Method metodo:metodos){
             Parameter[] parametros = metodo.getParameters();
             String ParametroType = "";
             String nombre = metodo.getName();
-            //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + ParametroType);
-            if (StringUtils.containsIgnoreCase(nombre, "Set")) {
+            if(parametros.length>=1 ){
                 ParametroType = parametros[0].getType().getSimpleName();
+            }
+            //System.out.println(nombre + "   " + metodo.getDeclaringClass() + "  " + ParametroType);
+            if ((StringUtils.containsIgnoreCase(nombre, "Set")) &&(ParametroType.equals("Column"))) {
+                result.add(metodo);
                 //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+ParametroType);
-                if (ParametroType.equals("Column")) {
-                    if (parametros.length >= 1) {
-                        //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+ParametroType);
-                        i++;
-                    }else {
-                        result.remove(i);
-                    }
-                }else {
-                    result.remove(i);
-                }
             } else {
-                result.remove(i);
+                //result.remove(metodo);
             }
         }
         return result;
@@ -478,6 +486,70 @@ public class Methods_Conexion extends Conexion {
     }
 
 
+    protected void convertSQLtoJava(ColumnsSQL columna, ResultSet resultado, Method metodo, Column columnaSql, Object invocador) throws SQLException, InvocationTargetException, IllegalAccessException {
+        String columnName = columna.getCOLUMN_NAME();
+        String columnType = columna.getTYPE_NAME();
+        if ((StringUtils.equalsIgnoreCase(columnType, DataType.CHAR.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.VARCHAR.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.LONGVARCHAR.name()))) {
+            //Caracteres y cadenas de Texto
+            columnaSql.setValor(resultado.getString(columnName));
+            metodo.invoke(invocador, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.NUMERIC.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.DECIMAL.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.MONEY.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.SMALLMONEY.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.DOUBLE.name()))) {
+            //Dinero y numericos que tienen decimales
+            columnaSql.setValor(resultado.getDouble(columnName));
+            metodo.invoke(invocador, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.BIT.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.BOOLEAN.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.BOOL.name()))) {
+            //Valores Booleanos
+            columnaSql.setValor(resultado.getBoolean(columnName));
+            metodo.invoke(invocador, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.SMALLINT.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.TINYINT.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.INTEGER.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.IDENTITY.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.SERIAL.name()))) {
+            //Valores Enteros
+            columnaSql.setValor(resultado.getInt(columnName));
+            metodo.invoke(invocador, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.REAL.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.FLOAT.name()))) {
+            //Valores Flotantes
+            columnaSql.setValor(resultado.getFloat(columnName));
+            metodo.invoke(invocador, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.BINARY.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.VARBINARY.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.LONGVARBINARY.name()))) {
+            //Valores binarios
+            columnaSql.setValor(resultado.getBytes(columnName));
+            metodo.invoke(invocador, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.DATE.name()))) {
+            //DATE
+            columnaSql.setValor(resultado.getDate(columnName));
+            metodo.invoke(invocador, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.TIME.name()))) {
+            //Time
+            columnaSql.setValor(resultado.getTime(columnName));
+            metodo.invoke(invocador, columnaSql);
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.TIMESTAMP.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.DATETIME.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.SMALLDATETIME.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.DATETIME2.name()))) {
+            //TimeStamp
+            columnaSql.setValor(resultado.getTimestamp(columnName));
+            metodo.invoke(invocador, columnaSql);
+        } else {
+            LogsJB.warning("No se pudo setear el valor de la columna: "+columnName);
+            LogsJB.warning("Debido a que ninguno de los metodos corresponde al tipo de dato SQL: "+columnType);
+        }
+
+    }
+
 
     protected void convertSQLtoJava(ColumnsSQL columna, ResultSet resultado, Method metodo, Column columnaSql) throws SQLException, InvocationTargetException, IllegalAccessException {
         String columnName = columna.getCOLUMN_NAME();
@@ -737,10 +809,9 @@ public class Methods_Conexion extends Conexion {
 
 
     public <T extends Methods_Conexion> T procesarResultSet(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException {
-        T temp= (T) modelo.getClass().newInstance();
-        temp=modelo;
+        T temp = (T) modelo.getClass().newInstance();
+        temp.setTabla(modelo.getTabla());
         temp.setModelExist(true);
-        temp.getTabla().setColumnas(modelo.getTabla().getColumnas());
         LogsJB.info("Obtuvo un resultado de BD's, procedera a llenar el modelo");
         List<Method> metodosSet = new ArrayList<>();
         LogsJB.trace("Inicializa el array list de los metodos set");
@@ -749,6 +820,7 @@ public class Methods_Conexion extends Conexion {
         LogsJB.debug("Cantidad de columnas : "+temp.getTabla().getColumnas().size());
 
         //Llena la información del modelo
+
         for(int i=0; i < temp.getTabla().getColumnas().size(); i++){
             ColumnsSQL columna=temp.getTabla().getColumnas().get(i);
             String columnName=columna.getCOLUMN_NAME();
@@ -759,12 +831,15 @@ public class Methods_Conexion extends Conexion {
                 Method metodo= metodosSet.get(j);
                 String metodoName = metodo.getName();
                 metodoName = StringUtils.remove(metodoName, "set");
+
                 if(StringUtils.equalsIgnoreCase(metodoName, columnName)){
+
                     LogsJB.trace("Nombre de la columna, nombre del metodo set: "+columnName+"   "+metodoName);
                     List<Method> metodosget = new ArrayList<>();
                     metodosget=temp.getMethodsGetOfModel(temp.getMethodsModel());
                     LogsJB.trace("Cantidad de metodos get: "+metodosget.size());
                     //Llena la información de las columnas que se insertaran
+
                     for (int a = 0; a < metodosget.size(); a++) {
                         //Obtengo el metodo
                         Method metodoget = metodosget.get(a);
@@ -774,8 +849,8 @@ public class Methods_Conexion extends Conexion {
                         NameMetodoGet = StringUtils.remove(NameMetodoGet, "get");
                         if(StringUtils.equalsIgnoreCase(NameMetodoGet, columnName)){
                             LogsJB.trace("Nombre de la columna, nombre del metodo get: "+columnName+"   "+NameMetodoGet);
-                            LogsJB.debug("Coincide el nombre de los metodos con la columna: "+columnName);
-                            convertSQLtoJava(columna, registros, metodo, columnsSQL);
+                            //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
+                            convertSQLtoJava(columna, registros, metodo, columnsSQL, temp);
                         }
                     }
                 }

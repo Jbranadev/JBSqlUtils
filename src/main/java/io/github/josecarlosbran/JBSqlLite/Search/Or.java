@@ -70,8 +70,8 @@ public class Or extends GET{
         return (T) super.firstOrFail(this.sql);
     }
 
-    public <T extends Methods_Conexion> List<T> getAll() throws InstantiationException, IllegalAccessException {
-        return super.getAll(this.sql);
+    public <T extends Methods_Conexion> List<T> getAll(T modelo) throws InstantiationException, IllegalAccessException {
+        return super.getAll(modelo, this.sql);
     }
 
 

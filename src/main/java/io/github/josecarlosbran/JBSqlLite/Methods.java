@@ -610,7 +610,9 @@ public class Methods extends Where {
         return temp;
     }
 
-
+    public Where where(String columna, Operator operador, String valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+        return new Where(columna, operador, valor);
+    }
 
 
 }

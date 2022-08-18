@@ -39,6 +39,10 @@ public class And extends GET{
         this.sql = sql+Operator.AND.getOperador()+Operator.OPEN_PARENTESIS.getOperador()+expresion+Operator.CLOSE_PARENTESIS.getOperador();
     }
 
+    public And() throws DataBaseUndefind, PropertiesDBUndefined{
+        super();
+    }
+
     public And and(String columna, Operator operador, String valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         return new And(this.sql, columna, operador, valor);
     }
@@ -71,8 +75,8 @@ public class And extends GET{
         return (T) super.firstOrFail(this.sql);
     }
 
-    public <T extends Methods_Conexion> List<T> getAll() throws InstantiationException, IllegalAccessException {
-        return super.getAll(this.sql);
+    public <T extends Methods_Conexion> List<T> getAll(T modelo) throws InstantiationException, IllegalAccessException {
+        return super.getAll(modelo, this.sql);
     }
 
 

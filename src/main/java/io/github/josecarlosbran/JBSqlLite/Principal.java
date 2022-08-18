@@ -39,7 +39,7 @@ public class Principal {
     public static void main(String[] args) {
         try {
 
-            LogsJB.setGradeLog(NivelLog.INFO);
+            LogsJB.setGradeLog(NivelLog.TRACE);
             String DB = "JBSQLUTILS";
             setDataBaseTypeGlobal(DataBase.PostgreSQL);
             //setDataBaseGlobal(BDSqlite);
@@ -53,7 +53,7 @@ public class Principal {
             //LogsJB.info(BDSqlite);
 
             Test test = new Test();
-            new Principal().SQLITE(new Test());
+            //new Principal().SQLITE(new Test());
 
             //new Principal().MySQL(new Test());
 
@@ -126,7 +126,7 @@ public class Principal {
         test.setDataBaseType(DataBase.PostgreSQL);
 
         //test.closeConnection(test.getConnection());
-        test.refresh();
+        //test.refresh();
         //Thread.sleep(1500);
         /*Consumer<ColumnsSQL> showColumnas = columna -> {
 
@@ -148,7 +148,7 @@ public class Principal {
         test.save();*/
 
         Consumer<Test> showFilas = fila -> {
-
+/*
             String separador=System.getProperty("file.separator");
             String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
                     "BD" +
@@ -158,16 +158,17 @@ public class Principal {
             fila.setBD(BDSqlite);
             fila.setDataBaseType(DataBase.SQLite);
             fila.setTableExist(false);
-            fila.getId().setValor(null);
-            //LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor());
+            fila.getId().setValor(null);*/
+            LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor());
 
         };
 
         //test.get(where(expresion(expresion("name", Operator.IGUAL_QUE, "'Jose Carlos'"), Operator.AND, expresion("isMayor", Operator.IGUAL_QUE, "false"))));
         List<Test> lista=new ArrayList<>();
-        lista=test.getALL(test, where(expresion(expresion("name", Operator.LIKE, "'Jose%'"), Operator.AND, expresion("isMayor", Operator.IGUAL_QUE, "true"))));
+        //lista=test.getALL(test, where(expresion(expresion("name", Operator.LIKE, "'Jose%'"), Operator.AND, expresion("isMayor", Operator.IGUAL_QUE, "true"))));
+        lista=test.where("name", Operator.LIKE, "'Jose%'").and("isMayor", Operator.IGUAL_QUE, "true").getAll(test);
         //Thread.sleep(5000);
-        test.where("",null, "").and("", null, "").or("", null, "").and("").getAll();
+        //test.where("",null, "").and("", null, "").or("", null, "").and("").getAll();
         while (!test.getTaskIsReady()){
 
         }
@@ -179,10 +180,10 @@ public class Principal {
 
         //test.getConnection();
         //test.refresh();
-        LogsJB.fatal("Invocara los metodos que almacena los modelos en BD's");
-        test.saveALL(lista);
+        //LogsJB.fatal("Invocara los metodos que almacena los modelos en BD's");
+        //test.saveALL(lista);
 
-        LogsJB.fatal("Termino de invocar los metodos que almacena los modelos en BD's");
+        //LogsJB.fatal("Termino de invocar los metodos que almacena los modelos en BD's");
 
     }
 

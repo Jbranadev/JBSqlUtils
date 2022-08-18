@@ -7,6 +7,7 @@ import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
+import io.github.josecarlosbran.JBSqlLite.Methods;
 import io.github.josecarlosbran.JBSqlLite.Methods_Conexion;
 
 import java.util.List;
@@ -40,8 +41,8 @@ public class OrderBy extends GET{
         return (T) super.firstOrFail(this.sql);
     }
 
-    public <T extends Methods_Conexion> List<T> getAll() throws InstantiationException, IllegalAccessException {
-        return super.getAll(this.sql);
+    public <T extends Methods> List<T> getAll(T modelo) throws InstantiationException, IllegalAccessException {
+        return super.getAll(modelo, this.sql);
     }
 
 }
