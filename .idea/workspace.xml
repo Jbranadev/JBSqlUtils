@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Metodo GetALL y SaveAll finalizados, pendiente verificar funcionamiento en SQL SERVER y en MySQL">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_08_2022_12_58__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_08_2022_18_58__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_08_2022_08_49__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_08_2022_08_49__Changes_.xml" afterDir="false" />
+    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Se logro hacer funcionar el metodo GetALL">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/17-08-2022/Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/17-08-2022/Log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods_Conexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods_Conexion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/And.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/And.java" afterDir="false" />
@@ -293,7 +289,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660772946385</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Se logro hacer funcionar el metodo GetALL">
+      <created>1660800128643</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1660800128643</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,6 +331,7 @@
     <MESSAGE value="Adecuaciones de los metodos para asegurar un mejor rendimiento y poder dar un mejor seguimiento." />
     <MESSAGE value="Creación de los atributos por default para el manejo de TimeStamp" />
     <MESSAGE value="Metodos para generar consultas personalizadas terminados" />
-    <option name="LAST_COMMIT_MESSAGE" value="Metodos para generar consultas personalizadas terminados" />
+    <MESSAGE value="Se logro hacer funcionar el metodo GetALL" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se logro hacer funcionar el metodo GetALL" />
   </component>
 </project>

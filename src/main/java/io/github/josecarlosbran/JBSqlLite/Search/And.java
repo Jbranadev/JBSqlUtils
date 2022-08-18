@@ -63,16 +63,16 @@ public class And extends GET{
         return new OrderBy(this.sql, columna, orderType);
     }
 
-    public <T extends Methods_Conexion> void get(){
-        super.get(this.sql);
+    public <T extends Methods_Conexion> void get(T modelo){
+        super.get(modelo, this.sql);
     }
 
-    public <T extends Methods_Conexion> T first(){
-        return (T) super.first(this.sql);
+    public <T extends Methods_Conexion> T first(T modelo){
+        return (T) super.first(modelo, this.sql);
     }
 
-    public <T extends Methods_Conexion> T firstOrFail() throws ModelNotFound {
-        return (T) super.firstOrFail(this.sql);
+    public <T extends Methods_Conexion> T firstOrFail(T modelo) throws ModelNotFound {
+        return (T) super.firstOrFail(modelo, this.sql);
     }
 
     public <T extends Methods_Conexion> List<T> getAll(T modelo) throws InstantiationException, IllegalAccessException {

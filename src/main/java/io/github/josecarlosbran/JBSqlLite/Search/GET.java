@@ -26,42 +26,38 @@ public class GET extends Methods_Conexion {
     }
 
 
-    public <T extends Methods_Conexion> void get(String Sql){
+    protected  <T extends Methods_Conexion> void get(T modelo, String Sql){
         try {
-            this.setTaskIsReady(false);
-            if (!this.getTableExist()) {
-                this.refresh();
+            modelo.setTaskIsReady(false);
+            if (!modelo.getTableExist()) {
+                modelo.refresh();
             }
-            Connection connect = this.getConnection();
+            Connection connect = modelo.getConnection();
             Runnable get = () -> {
                 try {
-                    if (this.getTableExist()) {
-                        String sql=Sql;
-                        if(stringIsNullOrEmpty(Sql)){
-                            sql = "SELECT * FROM " + this.getClass().getSimpleName();
-                        }
-
-                        sql = sql + ";";
+                    if (modelo.getTableExist()) {
+                        String sql="SELECT * FROM " + modelo.getTableName();
+                        sql = sql+Sql + ";";
                         LogsJB.info(sql);
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         ResultSet registros = ejecutor.executeQuery();
                         if (registros.next()) {
-                            procesarResultSet(this, registros);
+                            procesarResultSetOneResult(modelo, registros);
 
                         }
-                        this.closeConnection(connect);
+                        modelo.closeConnection(connect);
                     } else {
                         LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
                                 "recuperar el Registro");
                     }
-                    this.setTaskIsReady(true);
+                    modelo.setTaskIsReady(true);
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's: " + e.toString());
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                     LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-                    this.setTaskIsReady(true);
+                    modelo.setTaskIsReady(true);
                 }
             };
             ExecutorService ejecutor = Executors.newFixedThreadPool(1);
@@ -76,42 +72,38 @@ public class GET extends Methods_Conexion {
         }
     }
 
-    public <T extends Methods_Conexion> T first(String Sql){
+    protected <T extends Methods_Conexion> T first(T modelo, String Sql){
         try {
-            this.setTaskIsReady(false);
-            if (!this.getTableExist()) {
-                this.refresh();
+            modelo.setTaskIsReady(false);
+            if (!modelo.getTableExist()) {
+                modelo.refresh();
             }
-            Connection connect = this.getConnection();
+            Connection connect = modelo.getConnection();
             Runnable get = () -> {
                 try {
-                    if (this.getTableExist()) {
-                        String sql=Sql;
-                        if(stringIsNullOrEmpty(Sql)){
-                            sql = "SELECT * FROM " + this.getClass().getSimpleName();
-                        }
-
-                        sql = sql + ";";
+                    if (modelo.getTableExist()) {
+                        String sql="SELECT * FROM " + modelo.getTableName();
+                        sql = sql+Sql + ";";
                         LogsJB.info(sql);
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         ResultSet registros = ejecutor.executeQuery();
                         if (registros.next()) {
-                            procesarResultSet(this, registros);
+                            procesarResultSetOneResult(modelo, registros);
 
                         }
-                        this.closeConnection(connect);
+                        modelo.closeConnection(connect);
                     } else {
                         LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
                                 "recuperar el Registro");
                     }
-                    this.setTaskIsReady(true);
+                    modelo.setTaskIsReady(true);
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's: " + e.toString());
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                     LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-                    this.setTaskIsReady(true);
+                    modelo.setTaskIsReady(true);
                 }
             };
             ExecutorService ejecutor = Executors.newFixedThreadPool(1);
@@ -124,44 +116,42 @@ public class GET extends Methods_Conexion {
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
-        return (T) this;
+        return modelo;
     }
 
-    public <T extends Methods_Conexion> T firstOrFail(String Sql) throws ModelNotFound {
-            this.setTaskIsReady(false);
-            if (!this.getTableExist()) {
-                this.refresh();
+    protected <T extends Methods_Conexion> T firstOrFail(T modelo, String Sql) throws ModelNotFound {
+            modelo.setTaskIsReady(false);
+            if (!modelo.getTableExist()) {
+                modelo.refresh();
             }
-            Connection connect = this.getConnection();
+
+            Connection connect = modelo.getConnection();
             Callable<Boolean> get = () -> {
                 Boolean respuesta=false;
                 try {
-                    if (this.getTableExist()) {
-                        String sql=Sql;
-                        if(stringIsNullOrEmpty(Sql)){
-                            sql = "SELECT * FROM " + this.getClass().getSimpleName();
-                        }
-                        sql = sql + ";";
+                    if (modelo.getTableExist()) {
+                        String sql="SELECT * FROM " + modelo.getTableName();
+                        sql = sql+Sql + ";";
                         LogsJB.info(sql);
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         ResultSet registros = ejecutor.executeQuery();
                         if (registros.next()) {
-                            procesarResultSet(this, registros);
+                            procesarResultSetOneResult(modelo, registros);
                             respuesta=true;
                         }
-                        this.closeConnection(connect);
+                        modelo.closeConnection(connect);
                     } else {
                         LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
                                 "recuperar el Registro");
                     }
-                    this.setTaskIsReady(true);
+                    modelo.setTaskIsReady(true);
                 } catch (SQLException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
                     LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's: " + e.toString());
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                     LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-                    this.setTaskIsReady(true);
+                    modelo.setTaskIsReady(true);
                 }
                 return respuesta;
             };
@@ -183,12 +173,13 @@ public class GET extends Methods_Conexion {
                 LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
             }
             if(!result){
-                throw new ModelNotFound("No existe un modelo en BD's que corresponda a los criterios de la consulta sql: "+Sql);
+                String sql="SELECT * FROM " + modelo.getTableName();
+                throw new ModelNotFound("No existe un modelo en BD's que corresponda a los criterios de la consulta sql: "+sql+Sql);
             }
-        return (T) this;
+        return modelo;
     }
 
-    public <T extends Methods_Conexion> List<T> getAll(T modelo, String Sql) throws InstantiationException, IllegalAccessException {
+    protected <T extends Methods_Conexion> List<T> getAll(T modelo, String Sql) throws InstantiationException, IllegalAccessException {
         modelo.setTaskIsReady(false);
         List<T> lista = new ArrayList<>();
         try {

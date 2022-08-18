@@ -4918,3 +4918,841 @@
 2022/08/17 23:18:29 530					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
 
 2022/08/17 23:18:29 535					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							5   Jose Alfredo   Bran Lara   true
+*
+*
+*
+*
+*
+2022/08/17 23:31:05 360					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Comienza a verificar la existencia de la tabla
+
+2022/08/17 23:31:05 821					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:31:05 858					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Revisara el resultSet
+
+2022/08/17 23:31:05 876					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/17 23:31:05 881					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:31:05 944					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:31:05 980					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/17 23:31:06 096					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:31:06 093					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: id   Id
+
+2022/08/17 23:31:06 090					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:31:06 087					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : id
+
+2022/08/17 23:31:06 080					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: name   Name
+
+2022/08/17 23:31:06 076					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:31:06 071					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: name   Name
+
+2022/08/17 23:31:06 068					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:31:06 065					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : name
+
+2022/08/17 23:31:06 062					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de columnas : 4
+
+2022/08/17 23:31:06 059					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							obtuvo los metodos set
+
+2022/08/17 23:31:06 044					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Inicializa el array list de los metodos set
+
+2022/08/17 23:31:06 041					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
+
+2022/08/17 23:31:06 030					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$first$1 						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' ) AND  (isMayor = true );
+
+2022/08/17 23:31:05 984					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:31:06 135					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:31:06 111					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: ismayor   IsMayor
+
+2022/08/17 23:31:06 107					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:31:06 103					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : ismayor
+
+2022/08/17 23:31:06 100					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: id   Id
+
+2022/08/17 23:31:06 143					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : apellido
+
+2022/08/17 23:31:06 152					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:31:06 149					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: apellido   Apellido
+
+2022/08/17 23:31:06 155					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: apellido   Apellido
+
+2022/08/17 23:31:06 146					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:31:06 158					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:31:06 139					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: ismayor   IsMayor
+
+2022/08/17 23:31:06 164					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							null   null   null   false
+*
+*
+*
+*
+*
+2022/08/17 23:37:32 253					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Comienza a verificar la existencia de la tabla
+
+2022/08/17 23:37:32 766					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:37:32 811					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Revisara el resultSet
+
+2022/08/17 23:37:32 827					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/17 23:37:32 832					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:37:32 905					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:37:33 050					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo set: name   Name
+
+2022/08/17 23:37:32 986					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$first$1 						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' ) AND  (isMayor = true );
+
+2022/08/17 23:37:33 047					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:37:33 044					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Columna : name
+
+2022/08/17 23:37:33 040					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de columnas : 4
+
+2022/08/17 23:37:33 037					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							obtuvo los metodos set
+
+2022/08/17 23:37:33 017					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:37:33 011					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/17 23:37:33 010					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Inicializa el array list de los metodos set
+
+2022/08/17 23:37:33 007					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
+
+2022/08/17 23:37:33 106					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:37:33 103					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Columna : apellido
+
+2022/08/17 23:37:33 100					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo get: ismayor   IsMayor
+
+2022/08/17 23:37:33 097					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:37:33 089					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo set: ismayor   IsMayor
+
+2022/08/17 23:37:33 085					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:37:33 081					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Columna : ismayor
+
+2022/08/17 23:37:33 078					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo get: id   Id
+
+2022/08/17 23:37:33 074					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:37:33 071					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo set: id   Id
+
+2022/08/17 23:37:33 068					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:37:33 064					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Columna : id
+
+2022/08/17 23:37:33 058					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo get: name   Name
+
+2022/08/17 23:37:33 054					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:37:33 132					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo get: apellido   Apellido
+
+2022/08/17 23:37:33 129					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:37:33 109					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo set: apellido   Apellido
+
+2022/08/17 23:37:33 136					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:37:33 140					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+*
+*
+*
+*
+*
+2022/08/17 23:39:18 887					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Comienza a verificar la existencia de la tabla
+
+2022/08/17 23:39:19 394					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:39:19 434					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Revisara el resultSet
+
+2022/08/17 23:39:19 451					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/17 23:39:19 456					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:39:19 528					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:39:19 567					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/17 23:39:19 607					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Inicializa el array list de los metodos set
+
+2022/08/17 23:39:19 603					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
+
+2022/08/17 23:39:19 595					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$first$1 						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
+
+2022/08/17 23:39:19 570					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:39:19 668					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo get: name   Name
+
+2022/08/17 23:39:19 665					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:39:19 647					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo set: name   Name
+
+2022/08/17 23:39:19 643					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:39:19 639					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Columna : name
+
+2022/08/17 23:39:19 632					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de columnas : 4
+
+2022/08/17 23:39:19 626					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							obtuvo los metodos set
+
+2022/08/17 23:39:19 745					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Columna : id
+
+2022/08/17 23:39:19 749					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:39:19 759					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:39:19 756					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo set: id   Id
+
+2022/08/17 23:39:19 769					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:39:19 766					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Columna : ismayor
+
+2022/08/17 23:39:19 763					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo get: id   Id
+
+2022/08/17 23:39:19 781					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo get: ismayor   IsMayor
+
+2022/08/17 23:39:19 777					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:39:19 772					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo set: ismayor   IsMayor
+
+2022/08/17 23:39:19 790					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo set: apellido   Apellido
+
+2022/08/17 23:39:19 787					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:39:19 784					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Columna : apellido
+
+2022/08/17 23:39:19 793					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:39:19 796					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo get: apellido   Apellido
+
+2022/08/17 23:39:19 799					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:39:19 804					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+*
+*
+*
+*
+*
+2022/08/17 23:39:44 676					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Comienza a verificar la existencia de la tabla
+
+2022/08/17 23:39:45 136					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:39:45 178					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Revisara el resultSet
+
+2022/08/17 23:39:45 194					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/17 23:39:45 198					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:39:45 281					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:39:45 343					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$first$1 						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+
+2022/08/17 23:39:45 362					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							null   null   null   false
+
+2022/08/17 23:39:45 347					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:39:45 344					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+*
+*
+*
+*
+*
+2022/08/17 23:40:29 179					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Comienza a verificar la existencia de la tabla
+
+2022/08/17 23:40:29 640					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:40:29 680					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Revisara el resultSet
+
+2022/08/17 23:40:29 696					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/17 23:40:29 700					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:40:29 765					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:40:29 805					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/17 23:40:29 808					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:40:29 860					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$firstOrFail$2					INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+
+2022/08/17 23:40:29 871					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:40:29 875					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Excepción disparada al obtener la conexión a la BD's proporcionada: io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound: No existe un modelo en BD's que corresponda a los criterios de la consulta sql:  WHERE  (name = 'Jose' ) AND  (isMayor = false )
+
+2022/08/17 23:40:29 884					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Tipo de Excepción : class io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound
+
+2022/08/17 23:40:29 890					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Causa de la Excepción : null
+
+2022/08/17 23:40:29 895					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Mensaje de la Excepción : No existe un modelo en BD's que corresponda a los criterios de la consulta sql:  WHERE  (name = 'Jose' ) AND  (isMayor = false )
+
+2022/08/17 23:40:29 901					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@421faab1
+*
+*
+*
+*
+*
+2022/08/17 23:46:01 085					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Comienza a verificar la existencia de la tabla
+
+2022/08/17 23:46:01 582					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:46:01 619					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Revisara el resultSet
+
+2022/08/17 23:46:01 634					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/17 23:46:01 638					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:46:01 701					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:46:01 752					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$firstOrFail$2					INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+
+2022/08/17 23:46:01 761					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:46:01 808					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/17 23:46:01 806					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Causa de la Excepción : null
+
+2022/08/17 23:46:01 798					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Tipo de Excepción : class io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound
+
+2022/08/17 23:46:01 786					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:46:01 765					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Excepción disparada al obtener la conexión a la BD's proporcionada: io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound: No existe un modelo en BD's que corresponda a los criterios de la consulta sql: SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false )
+
+2022/08/17 23:46:01 816					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@421faab1
+
+2022/08/17 23:46:01 813					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Mensaje de la Excepción : No existe un modelo en BD's que corresponda a los criterios de la consulta sql: SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false )
+
+2022/08/17 23:46:01 812					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/17 23:47:52 477					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Comienza a verificar la existencia de la tabla
+
+2022/08/17 23:47:52 941					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:47:52 986					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Revisara el resultSet
+
+2022/08/17 23:47:53 001					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/17 23:47:53 006					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:47:53 072					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:47:53 138					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/17 23:47:53 141					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:47:53 166					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$first$1 						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+
+2022/08/17 23:47:53 178					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:47:53 185					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							null   null   null   false
+*
+*
+*
+*
+*
+2022/08/17 23:48:07 684					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Comienza a verificar la existencia de la tabla
+
+2022/08/17 23:48:08 143					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:48:08 178					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Revisara el resultSet
+
+2022/08/17 23:48:08 195					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/17 23:48:08 199					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:48:08 269					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:48:08 291					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/17 23:48:08 294					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:48:08 441					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Columna : id
+
+2022/08/17 23:48:08 436					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo get: name   Name
+
+2022/08/17 23:48:08 433					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:48:08 426					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo set: name   Name
+
+2022/08/17 23:48:08 423					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:48:08 420					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Columna : name
+
+2022/08/17 23:48:08 417					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de columnas : 4
+
+2022/08/17 23:48:08 413					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							obtuvo los metodos set
+
+2022/08/17 23:48:08 389					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Inicializa el array list de los metodos set
+
+2022/08/17 23:48:08 385					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
+
+2022/08/17 23:48:08 375					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$first$1 						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
+
+2022/08/17 23:48:08 454					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo set: id   Id
+
+2022/08/17 23:48:08 444					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:48:08 457					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:48:08 460					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo get: id   Id
+
+2022/08/17 23:48:08 464					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Columna : ismayor
+
+2022/08/17 23:48:08 467					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:48:08 470					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo set: ismayor   IsMayor
+
+2022/08/17 23:48:08 479					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Columna : apellido
+
+2022/08/17 23:48:08 476					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo get: ismayor   IsMayor
+
+2022/08/17 23:48:08 473					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:48:08 483					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:48:08 486					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo set: apellido   Apellido
+
+2022/08/17 23:48:08 489					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:48:08 495					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:48:08 492					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo get: apellido   Apellido
+
+2022/08/17 23:48:08 498					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+*
+*
+*
+*
+*
+2022/08/17 23:48:56 435					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Comienza a verificar la existencia de la tabla
+
+2022/08/17 23:48:56 908					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:48:56 955					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Revisara el resultSet
+
+2022/08/17 23:48:56 973					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/17 23:48:56 977					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:48:57 046					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:48:57 077					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/17 23:48:57 137					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
+
+2022/08/17 23:48:57 080					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:48:57 148					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
+
+2022/08/17 23:48:57 151					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Inicializa el array list de los metodos set
+
+2022/08/17 23:48:57 171					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							obtuvo los metodos set
+
+2022/08/17 23:48:57 178					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Columna : name
+
+2022/08/17 23:48:57 181					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:48:57 189					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:48:57 185					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo set: name   Name
+
+2022/08/17 23:48:57 192					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo get: name   Name
+
+2022/08/17 23:48:57 198					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Columna : id
+
+2022/08/17 23:48:57 202					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:48:57 205					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo set: id   Id
+
+2022/08/17 23:48:57 175					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de columnas : 4
+
+2022/08/17 23:48:57 244					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:48:57 248					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo get: id   Id
+
+2022/08/17 23:48:57 251					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Columna : ismayor
+
+2022/08/17 23:48:57 254					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:48:57 257					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo set: ismayor   IsMayor
+
+2022/08/17 23:48:57 263					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo get: ismayor   IsMayor
+
+2022/08/17 23:48:57 272					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo set: apellido   Apellido
+
+2022/08/17 23:48:57 260					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:48:57 269					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:48:57 266					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Columna : apellido
+
+2022/08/17 23:48:57 275					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:48:57 278					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo get: apellido   Apellido
+
+2022/08/17 23:48:57 281					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:48:57 284					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+*
+*
+*
+*
+*
+2022/08/17 23:49:44 226					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Comienza a verificar la existencia de la tabla
+
+2022/08/17 23:49:44 689					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:49:44 728					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Revisara el resultSet
+
+2022/08/17 23:49:44 744					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/17 23:49:44 748					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:49:44 815					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:49:44 847					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/17 23:49:44 850					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:49:44 894					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
+
+2022/08/17 23:49:44 903					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
+
+2022/08/17 23:49:44 908					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Inicializa el array list de los metodos set
+
+2022/08/17 23:49:44 935					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							obtuvo los metodos set
+
+2022/08/17 23:49:44 938					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de columnas : 4
+
+2022/08/17 23:49:44 941					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : name
+
+2022/08/17 23:49:44 944					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:49:44 954					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: name   Name
+
+2022/08/17 23:49:44 951					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:49:44 948					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: name   Name
+
+2022/08/17 23:49:44 963					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : id
+
+2022/08/17 23:49:44 967					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:49:44 970					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: id   Id
+
+2022/08/17 23:49:44 973					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:49:44 976					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: id   Id
+
+2022/08/17 23:49:44 983					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:49:44 980					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : ismayor
+
+2022/08/17 23:49:44 988					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: ismayor   IsMayor
+
+2022/08/17 23:49:44 991					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:49:44 994					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: ismayor   IsMayor
+
+2022/08/17 23:49:44 998					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : apellido
+
+2022/08/17 23:49:45 002					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:49:45 005					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: apellido   Apellido
+
+2022/08/17 23:49:45 009					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:49:45 013					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: apellido   Apellido
+
+2022/08/17 23:49:45 016					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
+
+2022/08/17 23:49:45 019					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Inicializa el array list de los metodos set
+
+2022/08/17 23:49:45 022					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							obtuvo los metodos set
+
+2022/08/17 23:49:45 025					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de columnas : 4
+
+2022/08/17 23:49:45 028					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : name
+
+2022/08/17 23:49:45 031					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:49:45 034					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: name   Name
+
+2022/08/17 23:49:45 037					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:49:45 040					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: name   Name
+
+2022/08/17 23:49:45 046					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:49:45 043					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : id
+
+2022/08/17 23:49:45 049					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: id   Id
+
+2022/08/17 23:49:45 052					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:49:45 055					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: id   Id
+
+2022/08/17 23:49:45 060					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : ismayor
+
+2022/08/17 23:49:45 063					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:49:45 066					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: ismayor   IsMayor
+
+2022/08/17 23:49:45 069					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:49:45 072					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: ismayor   IsMayor
+
+2022/08/17 23:49:45 075					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : apellido
+
+2022/08/17 23:49:45 078					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:49:45 081					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: apellido   Apellido
+
+2022/08/17 23:49:45 084					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:49:45 087					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: apellido   Apellido
+
+2022/08/17 23:49:45 090					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
+
+2022/08/17 23:49:45 093					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Inicializa el array list de los metodos set
+
+2022/08/17 23:49:45 096					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							obtuvo los metodos set
+
+2022/08/17 23:49:45 099					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de columnas : 4
+
+2022/08/17 23:49:45 102					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : name
+
+2022/08/17 23:49:45 105					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:49:45 108					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: name   Name
+
+2022/08/17 23:49:45 111					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:49:45 114					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: name   Name
+
+2022/08/17 23:49:45 117					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : id
+
+2022/08/17 23:49:45 120					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:49:45 123					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: id   Id
+
+2022/08/17 23:49:45 126					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:49:45 161					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: apellido   Apellido
+
+2022/08/17 23:49:45 158					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:49:45 155					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: apellido   Apellido
+
+2022/08/17 23:49:45 152					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:49:45 148					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : apellido
+
+2022/08/17 23:49:45 145					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: ismayor   IsMayor
+
+2022/08/17 23:49:45 141					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:49:45 138					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: ismayor   IsMayor
+
+2022/08/17 23:49:45 135					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:49:45 132					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : ismayor
+
+2022/08/17 23:49:45 129					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: id   Id
+
+2022/08/17 23:49:45 185					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:49:45 196					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
+
+2022/08/17 23:49:45 193					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
+
+2022/08/17 23:49:45 189					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+*
+*
+*
+*
+*
+2022/08/17 23:51:09 690					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Comienza a verificar la existencia de la tabla
+
+2022/08/17 23:51:10 186					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:51:10 226					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					TRACE  							Revisara el resultSet
+
+2022/08/17 23:51:10 243					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/17 23:51:10 248					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:51:10 314					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/17 23:51:10 367					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/17 23:51:10 370					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:51:10 389					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
+
+2022/08/17 23:51:10 403					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Inicializa el array list de los metodos set
+
+2022/08/17 23:51:10 464					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : name
+
+2022/08/17 23:51:10 454					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de columnas : 4
+
+2022/08/17 23:51:10 419					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							obtuvo los metodos set
+
+2022/08/17 23:51:10 475					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:51:10 400					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
+
+2022/08/17 23:51:10 489					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: name   Name
+
+2022/08/17 23:51:10 498					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: name   Name
+
+2022/08/17 23:51:10 493					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:51:10 508					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : id
+
+2022/08/17 23:51:10 511					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:51:10 519					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:51:10 522					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: id   Id
+
+2022/08/17 23:51:10 525					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : ismayor
+
+2022/08/17 23:51:10 514					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: id   Id
+
+2022/08/17 23:51:10 528					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:51:10 531					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: ismayor   IsMayor
+
+2022/08/17 23:51:10 534					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:51:10 537					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: ismayor   IsMayor
+
+2022/08/17 23:51:10 540					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : apellido
+
+2022/08/17 23:51:10 543					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:51:10 546					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: apellido   Apellido
+
+2022/08/17 23:51:10 549					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:51:10 553					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: apellido   Apellido
+
+2022/08/17 23:51:10 558					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
+
+2022/08/17 23:51:10 561					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Inicializa el array list de los metodos set
+
+2022/08/17 23:51:10 566					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							obtuvo los metodos set
+
+2022/08/17 23:51:10 576					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de columnas : 4
+
+2022/08/17 23:51:10 580					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : name
+
+2022/08/17 23:51:10 584					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:51:10 588					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: name   Name
+
+2022/08/17 23:51:10 591					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:51:10 594					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: name   Name
+
+2022/08/17 23:51:10 597					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : id
+
+2022/08/17 23:51:10 600					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:51:10 603					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: id   Id
+
+2022/08/17 23:51:10 606					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:51:10 609					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: id   Id
+
+2022/08/17 23:51:10 613					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : ismayor
+
+2022/08/17 23:51:10 616					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:51:10 619					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: ismayor   IsMayor
+
+2022/08/17 23:51:10 622					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:51:10 625					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: ismayor   IsMayor
+
+2022/08/17 23:51:10 628					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : apellido
+
+2022/08/17 23:51:10 631					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:51:10 634					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: apellido   Apellido
+
+2022/08/17 23:51:10 637					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:51:10 640					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: apellido   Apellido
+
+2022/08/17 23:51:10 643					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
+
+2022/08/17 23:51:10 646					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Inicializa el array list de los metodos set
+
+2022/08/17 23:51:10 649					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							obtuvo los metodos set
+
+2022/08/17 23:51:10 652					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de columnas : 4
+
+2022/08/17 23:51:10 655					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : name
+
+2022/08/17 23:51:10 658					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:51:10 661					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: name   Name
+
+2022/08/17 23:51:10 671					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:51:10 674					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: name   Name
+
+2022/08/17 23:51:10 683					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: id   Id
+
+2022/08/17 23:51:10 680					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:51:10 677					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : id
+
+2022/08/17 23:51:10 701					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: id   Id
+
+2022/08/17 23:51:10 686					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:51:10 705					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : ismayor
+
+2022/08/17 23:51:10 708					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:51:10 711					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: ismayor   IsMayor
+
+2022/08/17 23:51:10 715					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:51:10 718					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: ismayor   IsMayor
+
+2022/08/17 23:51:10 721					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Columna : apellido
+
+2022/08/17 23:51:10 726					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
+
+2022/08/17 23:51:10 741					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+
+2022/08/17 23:51:10 738					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/17 23:51:10 735					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: apellido   Apellido
+
+2022/08/17 23:51:10 732					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
+
+2022/08/17 23:51:10 747					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
+
+2022/08/17 23:51:10 752					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
+
+2022/08/17 23:51:10 729					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: apellido   Apellido

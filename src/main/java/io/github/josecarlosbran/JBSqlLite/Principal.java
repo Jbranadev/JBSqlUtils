@@ -3,6 +3,7 @@ package io.github.josecarlosbran.JBSqlLite;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
+import io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.LogsJB.LogsJB;
@@ -62,7 +63,7 @@ public class Principal {
             //new Principal().SQLServer(new Test());
 
         } catch (DataBaseUndefind | PropertiesDBUndefined | InterruptedException | ValorUndefined |
-                 InstantiationException | IllegalAccessException
+                 InstantiationException | IllegalAccessException | ModelNotFound
                 /*|IllegalAccessException|InvocationTargetException*/ e) {
             LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -116,7 +117,7 @@ public class Principal {
 
     }
 
-    void PostgreSQL(Test test) throws InterruptedException, ValorUndefined, DataBaseUndefind, PropertiesDBUndefined, InstantiationException, IllegalAccessException {
+    void PostgreSQL(Test test) throws InterruptedException, ValorUndefined, DataBaseUndefind, PropertiesDBUndefined, InstantiationException, IllegalAccessException, ModelNotFound {
         test.setGetPropertySystem(false);
         test.setPort("5075");
         test.setHost("localhost");
@@ -166,7 +167,9 @@ public class Principal {
         //test.get(where(expresion(expresion("name", Operator.IGUAL_QUE, "'Jose Carlos'"), Operator.AND, expresion("isMayor", Operator.IGUAL_QUE, "false"))));
         List<Test> lista=new ArrayList<>();
         //lista=test.getALL(test, where(expresion(expresion("name", Operator.LIKE, "'Jose%'"), Operator.AND, expresion("isMayor", Operator.IGUAL_QUE, "true"))));
-        lista=test.where("name", Operator.LIKE, "'Jose%'").and("isMayor", Operator.IGUAL_QUE, "true").getAll(test);
+        lista=test.where("name", Operator.IGUAL_QUE, "'Jose'").and("isMayor", Operator.IGUAL_QUE, "true").getAll(test);
+        //test.where("name", Operator.IGUAL_QUE, "'Jose'").and("isMayor", Operator.IGUAL_QUE, "true").get(test);
+        //lista.add(test);
         //Thread.sleep(5000);
         //test.where("",null, "").and("", null, "").or("", null, "").and("").getAll();
         while (!test.getTaskIsReady()){
