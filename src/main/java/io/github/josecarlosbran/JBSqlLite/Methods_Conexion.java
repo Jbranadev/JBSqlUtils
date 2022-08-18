@@ -712,19 +712,14 @@ public class Methods_Conexion extends Conexion {
                     if (modelo.getTableExist()) {
 
                         //Obtener cual es la clave primaria de la tabla
+                        String namePrimaryKey=modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
 
-                        for(int i=0; i < modelo.getTabla().getColumnas().size(); i++){
-                            ColumnsSQL columna=modelo.getTabla().getColumnas().get(i);
-                            String columnName=columna.getCOLUMN_NAME();
-                            String columnType=columna.getTYPE_NAME();
-                            LogsJB.trace("Columna : "+columnName);
-                        }
-
-
-                        String sql = "UPDATE " + modelo.getClass().getSimpleName() + "(";
+                        String sql = "UPDATE " + modelo.getTableName() + " SET";
                         List<Method> metodos = new ArrayList<>();
                         metodos = modelo.getMethodsGetOfModel(modelo.getMethodsModel());
                         int datos = 0;
+                        List<Integer> indicemetodos = new ArrayList<>();
+                        int indicePrimarykey=0;
                         //Llena la información de las columnas que se insertaran
                         for (int i = 0; i < metodos.size(); i++) {
                             //Obtengo el metodo
@@ -733,38 +728,35 @@ public class Methods_Conexion extends Conexion {
                             Column columnsSQL = (Column) metodo.invoke(modelo, null);
                             String columnName = metodo.getName();
                             columnName = StringUtils.remove(columnName, "get");
+                            if(StringUtils.equalsIgnoreCase(namePrimaryKey, columnName)){
+                                indicePrimarykey=i;
+                                continue;
+                            }
                             if (Objects.isNull(columnsSQL.getValor())) {
                                 continue;
                             }
+                            if(datos==0){
+                                sql=sql+" "+columnName+"=?";
+                            }else{
+                                sql=", "+sql+" "+columnName+"=?";
+                            }
                             datos++;
-                            sql = sql + columnName;
-                            int temporal = metodos.size() - 1;
-                            if (i < temporal) {
-                                sql = sql + ", ";
-                            } else if (i == temporal) {
-                                sql = sql + ") VALUES (";
-                            }
+                            indicemetodos.add(i);
                         }
 
-                        //Llena los espacios con la información de los datos que serán agregados
-                        for (int i = 0; i < datos; i++) {
-                            sql = sql + "?";
-                            int temporal = datos - 1;
-                            if (i < temporal) {
-                                sql = sql + ", ";
-                            } else if (i == temporal) {
-                                sql = sql + ");";
-                            }
-                        }
+                        //Colocamos el where
+                        sql=sql+" WHERE "+namePrimaryKey+"=?;";
+
+
+
                         LogsJB.info(sql);
-
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         //LogsJB.info("Creo la instancia del PreparedStatement");
                         //Llena el prepareStatement
                         int auxiliar = 1;
-                        for (int i = 0; i < metodos.size(); i++) {
+                        for (int i = 0; i < indicemetodos.size(); i++) {
                             //Obtengo el metodo
-                            Method metodo = metodos.get(i);
+                            Method metodo = metodos.get(indicemetodos.get(i));
                             //Obtengo la información de la columna
                             Column columnsSQL = (Column) metodo.invoke(modelo, null);
                             if (Objects.isNull(columnsSQL.getValor())) {
@@ -773,6 +765,16 @@ public class Methods_Conexion extends Conexion {
                             convertJavaToSQL(columnsSQL, ejecutor, auxiliar);
                             auxiliar++;
                         }
+
+                        //Colocamos la información del where
+                        //Obtengo el metodo
+                        Method metodo = metodos.get(indicemetodos.get(indicePrimarykey));
+                        //Obtengo la información de la columna
+                        Column columnsSQL = (Column) metodo.invoke(modelo, null);
+                        if (Objects.isNull(columnsSQL.getValor())) {
+
+                        }
+                        convertJavaToSQL(columnsSQL, ejecutor, auxiliar);
 
                         if (ejecutor.executeUpdate() == 1) {
                             int filas = ejecutor.getUpdateCount();
@@ -796,7 +798,12 @@ public class Methods_Conexion extends Conexion {
                 }
             };
             ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            ejecutor.submit(Save);
+            if(modelo.getModelExist()){
+                ejecutor.submit(Update);
+            }
+            if(!modelo.getModelExist()){
+                ejecutor.submit(Save);
+            }
             ejecutor.shutdown();
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
@@ -861,7 +868,6 @@ public class Methods_Conexion extends Conexion {
 
 
     public <T extends Methods_Conexion> void procesarResultSetOneResult(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException {
-        modelo.setTabla(modelo.getTabla());
         modelo.setModelExist(true);
         LogsJB.info("Obtuvo un resultado de BD's, procedera a llenar el modelo");
         List<Method> metodosSet = new ArrayList<>();

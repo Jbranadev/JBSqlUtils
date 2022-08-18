@@ -184,7 +184,7 @@ public class Principal {
         //test.getConnection();
         //test.refresh();
         //LogsJB.fatal("Invocara los metodos que almacena los modelos en BD's");
-        //test.saveALL(lista);
+        test.saveALL(lista);
 
         //LogsJB.fatal("Termino de invocar los metodos que almacena los modelos en BD's");
 

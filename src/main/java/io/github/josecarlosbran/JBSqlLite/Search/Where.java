@@ -26,9 +26,6 @@ public class Where extends GET {
     public Where(String columna, Operator operador, String valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         String respuesta = "";
-        /*if(stringIsNullOrEmpty(respuesta)){
-            respuesta = "SELECT * FROM " + this.getTableName();
-        }*/
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
         }
@@ -45,6 +42,8 @@ public class Where extends GET {
         super();
 
     }
+
+
 
 
     public void getFirst() {
@@ -132,6 +131,8 @@ public class Where extends GET {
     public <T extends Methods_Conexion> List<T> getAll(T modelo) throws InstantiationException, IllegalAccessException {
         return super.getAll(modelo, this.sql);
     }
+
+
 
 
 
