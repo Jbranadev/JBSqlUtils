@@ -41,6 +41,11 @@ public enum Constraint {
 
 
     /**
+     * Indica que la columna tendra un valor por default
+     */
+    DEFAULT("DEFAULT"),
+
+    /**
      * Indica que la columna autoincrementara su valor cada vez que se almacene un registro en la tabla correspondiente al modelo.
      */
     AUTO_INCREMENT("AUTO_INCREMENT");

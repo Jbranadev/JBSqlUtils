@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Optimización del modelo SaveALL">
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Conexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Conexion.java" afterDir="false" />
+    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Se agrego el metodo getSystemProperties que se encarga de inicializar las propiedades de conexión del modelo,&#10;las cuales las obtiene de las propiedades del sistema Java.">
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Column.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Column.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -302,7 +302,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660947832603</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Se agrego el metodo getSystemProperties que se encarga de inicializar las propiedades de conexión del modelo,&#10;las cuales las obtiene de las propiedades del sistema Java.">
+      <created>1660948257155</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1660948257155</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -340,6 +347,7 @@
     <MESSAGE value="Se modificaron las clases relacionadas a la metadata del modelo" />
     <MESSAGE value="Se agrego la funcionalidad de actualizar al metodo save" />
     <MESSAGE value="Optimización del modelo SaveALL" />
-    <option name="LAST_COMMIT_MESSAGE" value="Optimización del modelo SaveALL" />
+    <MESSAGE value="Se agrego el metodo getSystemProperties que se encarga de inicializar las propiedades de conexión del modelo,&#10;las cuales las obtiene de las propiedades del sistema Java." />
+    <option name="LAST_COMMIT_MESSAGE" value="Se agrego el metodo getSystemProperties que se encarga de inicializar las propiedades de conexión del modelo,&#10;las cuales las obtiene de las propiedades del sistema Java." />
   </component>
 </project>

@@ -14,6 +14,8 @@ public class Column<T> {
 
     private T valor=null;
 
+    private T default_value=null;
+
     private DataType dataTypeSQL=null;
 
     private Constraint[] restriccion =null;
@@ -59,6 +61,35 @@ public class Column<T> {
         this.setDataTypeSQL(tipo_de_dato);
         this.setRestriccion(restriccion);
     }
+
+
+    /**
+     * Inicializa la columna indicando el valor, el tipo de dato SQL que tendra la columna y las restricciones
+     * SQL que tendra.
+     * @param Valor Valor que tendra la columna.
+     * @param tipo_de_dato DataType que indica el tipo de dato SQL que almacenara la columna.
+     * @param restriccion Indica las restricciones SQL que tendra este campo.
+     * @param default_value Indica el valor por default que tendra la columna en BD's
+     */
+    Column(T Valor, DataType tipo_de_dato, Constraint[] restriccion, T default_value){
+        this.setValor(Valor);
+        this.setDataTypeSQL(tipo_de_dato);
+        this.setRestriccion(restriccion);
+        this.setDefault_value(default_value);
+    }
+
+    /**
+     * Inicializa la columna indicando el tipo de dato SQL  que tendra la columna y las restricciones SQL que tendra
+     * @param tipo_de_dato DataType que indica el tipo de dato SQL que almacenara la columna.
+     * @param restriccion Indica las restricciones SQL que tendra este campo.
+     * @param default_value Indica el valor por default que tendra la columna en BD's
+     */
+    Column(DataType tipo_de_dato, Constraint[] restriccion, T default_value){
+        this.setDataTypeSQL(tipo_de_dato);
+        this.setRestriccion(restriccion);
+        this.setDefault_value(default_value);
+    }
+
 
     /**
      * Obtiene el valor de la columna
@@ -106,5 +137,21 @@ public class Column<T> {
      */
     public void setRestriccion(Constraint[] restriccion) {
         this.restriccion = restriccion;
+    }
+
+    /**
+     * Obtiene el valor por default establecido para la columna.
+     * @return Retorna el valor por default establecido para la columna.
+     */
+    public T getDefault_value() {
+        return default_value;
+    }
+
+    /**
+     * Setea el valor por default para la columna
+     * @param default_value Valor por default establecido para la columna
+     */
+    public void setDefault_value(T default_value) {
+        this.default_value = default_value;
     }
 }
