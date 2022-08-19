@@ -439,7 +439,9 @@ public class Methods_Conexion extends Conexion {
      * @throws SQLException Lanza esta excepción si sucede algun problema al setear el valor Java en el ejecutor.
      */
     protected void convertJavaToSQL(Column columnsSQL, PreparedStatement ejecutor, int auxiliar) throws SQLException {
-
+        LogsJB.debug("DataType de la columna: "+columnsSQL.getDataTypeSQL());
+        LogsJB.debug("Indice donde insertara la columna: "+auxiliar);
+        LogsJB.debug("Valor de la columna: "+columnsSQL.getValor());
         if ((columnsSQL.getDataTypeSQL() == DataType.CHAR) || (columnsSQL.getDataTypeSQL() == DataType.VARCHAR)
                 || (columnsSQL.getDataTypeSQL() == DataType.LONGVARCHAR)) {
             //Caracteres y cadenas de Texto
@@ -513,6 +515,7 @@ public class Methods_Conexion extends Conexion {
                 || (StringUtils.equalsIgnoreCase(columnType, DataType.TINYINT.name()))
                 || (StringUtils.equalsIgnoreCase(columnType, DataType.INTEGER.name()))
                 || (StringUtils.equalsIgnoreCase(columnType, DataType.IDENTITY.name()))
+                || (StringUtils.equalsIgnoreCase(columnType, DataType.INT.name()))
                 || (StringUtils.equalsIgnoreCase(columnType, DataType.SERIAL.name()))) {
             //Valores Enteros
             columnaSql.setValor(resultado.getInt(columnName));
@@ -735,11 +738,14 @@ public class Methods_Conexion extends Conexion {
                             if (Objects.isNull(columnsSQL.getValor())) {
                                 continue;
                             }
-                            if(datos==0){
-                                sql=sql+" "+columnName+"=?";
+
+
+                            if(StringUtils.containsIgnoreCase(sql, "?")){
+                                sql=sql+", "+columnName+"=?";
                             }else{
-                                sql=", "+sql+" "+columnName+"=?";
+                                sql=sql+" "+columnName+"=?";
                             }
+
                             datos++;
                             indicemetodos.add(i);
                         }
@@ -753,6 +759,7 @@ public class Methods_Conexion extends Conexion {
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         //LogsJB.info("Creo la instancia del PreparedStatement");
                         //Llena el prepareStatement
+                        LogsJB.debug("Llenara la información de las columnas: "+indicemetodos.size());
                         int auxiliar = 1;
                         for (int i = 0; i < indicemetodos.size(); i++) {
                             //Obtengo el metodo
@@ -766,9 +773,11 @@ public class Methods_Conexion extends Conexion {
                             auxiliar++;
                         }
 
+                        LogsJB.debug("Termino de llenar la información de las columnas: "+auxiliar);
+
                         //Colocamos la información del where
                         //Obtengo el metodo
-                        Method metodo = metodos.get(indicemetodos.get(indicePrimarykey));
+                        Method metodo = metodos.get(indicePrimarykey);
                         //Obtengo la información de la columna
                         Column columnsSQL = (Column) metodo.invoke(modelo, null);
                         if (Objects.isNull(columnsSQL.getValor())) {
@@ -798,6 +807,7 @@ public class Methods_Conexion extends Conexion {
                 }
             };
             ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            LogsJB.debug("El modelo existe: "+modelo.getModelExist());
             if(modelo.getModelExist()){
                 ejecutor.submit(Update);
             }
@@ -913,6 +923,7 @@ public class Methods_Conexion extends Conexion {
                 }
             }
         }
+
     }
 
 }

@@ -20,29 +20,12 @@ import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.where;
 
 public class Principal {
 
-    /*
-    public static void main(String[] args){
-        List<String> cadenas= new ArrayList<>();
-        addDato(cadenas, "Jose");
-        addDato(cadenas, "Carlos");
-        addDato(cadenas, "Alfredo");
-        addDato(cadenas, "Bran");
-        addDato(cadenas, "Aguirre");
-        List<Integer> numeros= new ArrayList<>();
-        numeros.add(50);
-        numeros.add(100);
-        System.out.println("primer numero de la lista: "+getObject(0, numeros));
-        System.out.println("3 Cadena de la lista: "+getObject(2, cadenas));
-        getall(1, 5, 10).forEach(System.out::println);
-
-    }*/
-
     public static void main(String[] args) {
         try {
 
-            LogsJB.setGradeLog(NivelLog.TRACE);
+            LogsJB.setGradeLog(NivelLog.INFO);
             String DB = "JBSQLUTILS";
-            setDataBaseTypeGlobal(DataBase.PostgreSQL);
+            setDataBaseTypeGlobal(DataBase.MySQL);
             //setDataBaseGlobal(BDSqlite);
             setDataBaseGlobal(DB);
             //setDataBaseTypeGlobal(DataBase.MySQL);
@@ -53,17 +36,54 @@ public class Principal {
             setPasswordGlobal("Bran");
             //LogsJB.info(BDSqlite);
 
+
             Test test = new Test();
             //new Principal().SQLITE(new Test());
 
             //new Principal().MySQL(new Test());
 
-            new Principal().PostgreSQL(new Test());
+            //new Principal().PostgreSQL(new Test());
 
             //new Principal().SQLServer(new Test());
 
-        } catch (DataBaseUndefind | PropertiesDBUndefined | InterruptedException | ValorUndefined |
-                 InstantiationException | IllegalAccessException | ModelNotFound
+            //Tarjeta_NFC tarjetaNfc=new Tarjeta_NFC();
+            //tarjetaNfc.dropTableIfExist();
+            //tarjetaNfc.crateTable();
+
+            Empleado empleado = new Empleado();
+            //empleado.dropTableIfExist();
+            //empleado.crateTable();
+            /*empleado.getFicha().setValor(120682);
+            empleado.getNombre().setValor("Luis Bladimir");
+            empleado.getPuesto().setValor("La Victima");
+            empleado.save();*/
+
+            empleado.where("Ficha", Operator.IGUAL_QUE, "120682").get();
+            while (!empleado.getTaskIsReady()){
+
+            }
+            empleado.getPuesto().setValor("El Victimario");
+            empleado.getNombre().setValor("Luis Fernando Bladimir");
+            LogsJB.debug("El modelo existe principal: "+empleado.getModelExist());
+            empleado.save();
+
+
+/*
+            Usuario user= new Usuario();
+            user.dropTableIfExist();
+            user.crateTable();
+
+            new Material().dropTableIfExist();
+            new Material().crateTable();
+
+            new Registro().dropTableIfExist();
+            new Registro().crateTable();*/
+
+
+
+
+        } catch (DataBaseUndefind | PropertiesDBUndefined | /*InterruptedException | InstantiationException |
+                 IllegalAccessException | ModelNotFound |*/ ValorUndefined
                 /*|IllegalAccessException|InvocationTargetException*/ e) {
             LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -167,7 +187,9 @@ public class Principal {
         //test.get(where(expresion(expresion("name", Operator.IGUAL_QUE, "'Jose Carlos'"), Operator.AND, expresion("isMayor", Operator.IGUAL_QUE, "false"))));
         List<Test> lista=new ArrayList<>();
         //lista=test.getALL(test, where(expresion(expresion("name", Operator.LIKE, "'Jose%'"), Operator.AND, expresion("isMayor", Operator.IGUAL_QUE, "true"))));
-        lista=test.where("name", Operator.IGUAL_QUE, "'Jose'").and("isMayor", Operator.IGUAL_QUE, "true").getAll(test);
+        //lista=test.where("name", Operator.IGUAL_QUE, "'Jose'").and("isMayor", Operator.IGUAL_QUE, "true").getAll(test);
+        lista=test.where("name", Operator.IGUAL_QUE, "'Jose'").and("isMayor", Operator.IGUAL_QUE, "true").getAll();
+
         //test.where("name", Operator.IGUAL_QUE, "'Jose'").and("isMayor", Operator.IGUAL_QUE, "true").get(test);
         //lista.add(test);
         //Thread.sleep(5000);
@@ -184,7 +206,7 @@ public class Principal {
         //test.getConnection();
         //test.refresh();
         //LogsJB.fatal("Invocara los metodos que almacena los modelos en BD's");
-        test.saveALL(lista);
+        //test.saveALL(lista);
 
         //LogsJB.fatal("Termino de invocar los metodos que almacena los modelos en BD's");
 

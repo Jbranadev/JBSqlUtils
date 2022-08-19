@@ -4,17 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Se modificaron las clases relacionadas a la metadata del modelo">
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Wherer.java" afterDir="false" />
+    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Metodos Get 100%, falta adaptarlos para el resto de BD's y crearlos">
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Empleado.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Material.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Registro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Andr.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Tarjeta_NFC.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Usuario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_08_2022_12_58_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_08_2022_18_58_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_08_2022_20_40__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_08_2022_20_40__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_08_2022_07_57__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_08_2022_07_57__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Enumerations/DataType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Enumerations/DataType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/JBSqlUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/JBSqlUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods_Conexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods_Conexion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/And.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/And.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Or.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Or.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/OrderBy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/OrderBy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Where.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Where.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Wherer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Wherer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +58,7 @@
                 <list>
                   <RecentBranch>
                     <option name="branchName" value="JBranTemp" />
-                    <option name="lastUsedInstant" value="1660749979" />
+                    <option name="lastUsedInstant" value="1660790431" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="JBran" />
@@ -290,14 +299,21 @@
       <option name="project" value="LOCAL" />
       <updated>1660772946385</updated>
     </task>
-    <task id="LOCAL-00021" summary="Se modificaron las clases relacionadas a la metadata del modelo">
-      <created>1660776684264</created>
+    <task id="LOCAL-00021" summary="Se logro hacer funcionar el metodo GetALL">
+      <created>1660800128643</created>
       <option name="number" value="00021" />
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
-      <updated>1660776684265</updated>
+      <updated>1660800128643</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Metodos Get 100%, falta adaptarlos para el resto de BD's y crearlos">
+      <created>1660801917845</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1660801917845</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -332,7 +348,8 @@
     <MESSAGE value="Adecuaciones de los metodos para asegurar un mejor rendimiento y poder dar un mejor seguimiento." />
     <MESSAGE value="Creación de los atributos por default para el manejo de TimeStamp" />
     <MESSAGE value="Metodos para generar consultas personalizadas terminados" />
-    <MESSAGE value="Se modificaron las clases relacionadas a la metadata del modelo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se modificaron las clases relacionadas a la metadata del modelo" />
+    <MESSAGE value="Se logro hacer funcionar el metodo GetALL" />
+    <MESSAGE value="Metodos Get 100%, falta adaptarlos para el resto de BD's y crearlos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Metodos Get 100%, falta adaptarlos para el resto de BD's y crearlos" />
   </component>
 </project>

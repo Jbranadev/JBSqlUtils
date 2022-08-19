@@ -77,6 +77,11 @@ public enum DataType {
     INTEGER(""),
 
     /**
+     * Entero de 32 bits con signo
+     */
+    INT(""),
+
+    /**
      * Tipo de dato auto incrementable en SQL Server
      */
     IDENTITY("1,1"),

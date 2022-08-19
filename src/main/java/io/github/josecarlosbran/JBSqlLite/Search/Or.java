@@ -14,10 +14,11 @@ import java.util.Objects;
 
 import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
-public class Or extends GET{
+public class Or<T> extends GET{
     private String sql;
+    private T modelo;
 
-    protected Or(String sql, String columna, Operator operador, String valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected Or(String sql, String columna, Operator operador, String valor, T modelo) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
@@ -28,50 +29,58 @@ public class Or extends GET{
         if (Objects.isNull(operador)) {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
+        this.modelo=modelo;
         this.sql = sql+Operator.OR.getOperador()+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + valor+Operator.CLOSE_PARENTESIS.getOperador();
     }
 
-    protected Or(String sql, String expresion) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    protected Or(String sql, String expresion, T modelo) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         super();
         if (stringIsNullOrEmpty(expresion)) {
             throw new ValorUndefined("La expresion proporcionada esta vacía o es NULL");
         }
+        this.modelo= modelo;
         this.sql = sql+Operator.OR.getOperador()+Operator.OPEN_PARENTESIS.getOperador()+expresion+Operator.CLOSE_PARENTESIS.getOperador();
     }
 
     public And and(String columna, Operator operador, String valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        return new And(this.sql, columna, operador, valor);
+        return new And(this.sql, columna, operador, valor, this.modelo);
     }
 
     public Or or(String columna, Operator operador, String valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        return new Or(this.sql, columna, operador, valor);
+        return new Or(this.sql, columna, operador, valor, this.modelo);
     }
 
     public And and(String expresion) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        return new And(this.sql, expresion);
+        return new And(this.sql, expresion, this.modelo);
     }
 
     public Or or(String expresion) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        return new Or(this.sql, expresion);
+        return new Or(this.sql, expresion, this.modelo);
     }
 
     public OrderBy orderBy(String columna, OrderType orderType) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        return new OrderBy(this.sql, columna, orderType);
-    }
-    public <T extends Methods_Conexion> void get(T modelo){
-        super.get(modelo, this.sql);
+        return new OrderBy(this.sql, columna, orderType, this.modelo);
     }
 
-    public <T extends Methods_Conexion> T first(T modelo){
-        return (T) super.first(modelo, this.sql);
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public <T extends Methods_Conexion> void get(){
+        super.get((T)this.modelo, this.sql);
     }
 
-    public <T extends Methods_Conexion> T firstOrFail(T modelo) throws ModelNotFound {
-        return (T) super.firstOrFail(modelo, this.sql);
+    public <T extends Methods_Conexion> T first(){
+        return (T) super.first((T) this.modelo, this.sql);
     }
 
-    public <T extends Methods_Conexion> List<T> getAll(T modelo) throws InstantiationException, IllegalAccessException {
-        return super.getAll(modelo, this.sql);
+    public <T extends Methods_Conexion> T firstOrFail() throws ModelNotFound {
+        return (T) super.firstOrFail((T)this.modelo, this.sql);
+    }
+
+    public <T extends Methods_Conexion> List<T> getAll() throws InstantiationException, IllegalAccessException {
+        return (List<T>) super.getAll((T)this.modelo, this.sql);
     }
 
 

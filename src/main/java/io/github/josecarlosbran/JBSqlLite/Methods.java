@@ -8,7 +8,6 @@ import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlLite.Search.Where;
-import io.github.josecarlosbran.JBSqlLite.Search.Wherer;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 import org.apache.commons.lang3.StringUtils;
 
@@ -20,9 +19,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
-
-public class Methods extends Where {
+public class Methods extends Methods_Conexion {
     public Methods() throws DataBaseUndefind, PropertiesDBUndefined {
         super();
     }
@@ -378,26 +375,12 @@ public class Methods extends Where {
 
 
     public Where where(String columna, Operator operador, String valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        return new Where(columna, operador, valor);
+        return new Where(columna, operador, valor, this);
     }
 
 
 
-    public <T extends Methods_Conexion> Wherer wherer(String columna, Operator operador, String valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
 
-        String respuesta = "";
-        if (stringIsNullOrEmpty(columna)) {
-            throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
-        }
-        if (stringIsNullOrEmpty(valor)) {
-            throw new ValorUndefined("El valor proporcionado esta vacío o es NULL");
-        }
-        if (Objects.isNull(operador)) {
-            throw new ValorUndefined("El operador proporcionado es NULL");
-        }
-        String sql = respuesta+" WHERE "+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + valor+Operator.CLOSE_PARENTESIS.getOperador();
-        return new Wherer(columna, operador, valor, this);
-    }
 
 
 }
