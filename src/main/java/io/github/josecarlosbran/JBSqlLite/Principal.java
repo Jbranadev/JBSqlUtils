@@ -42,48 +42,17 @@ public class Principal {
 
             //new Principal().MySQL(new Test());
 
-            //new Principal().PostgreSQL(new Test());
+            new Principal().PostgreSQL(new Test());
 
             //new Principal().SQLServer(new Test());
 
-            //Tarjeta_NFC tarjetaNfc=new Tarjeta_NFC();
-            //tarjetaNfc.dropTableIfExist();
-            //tarjetaNfc.crateTable();
-
-            Empleado empleado = new Empleado();
-            //empleado.dropTableIfExist();
-            //empleado.crateTable();
-            /*empleado.getFicha().setValor(120682);
-            empleado.getNombre().setValor("Luis Bladimir");
-            empleado.getPuesto().setValor("La Victima");
-            empleado.save();*/
-
-            empleado.where("Ficha", Operator.IGUAL_QUE, "120682").get();
-            while (!empleado.getTaskIsReady()){
-
-            }
-            empleado.getPuesto().setValor("El Victimario");
-            empleado.getNombre().setValor("Luis Fernando Bladimir");
-            LogsJB.debug("El modelo existe principal: "+empleado.getModelExist());
-            empleado.save();
-
-
-/*
-            Usuario user= new Usuario();
-            user.dropTableIfExist();
-            user.crateTable();
-
-            new Material().dropTableIfExist();
-            new Material().crateTable();
-
-            new Registro().dropTableIfExist();
-            new Registro().crateTable();*/
 
 
 
 
-        } catch (DataBaseUndefind | PropertiesDBUndefined | /*InterruptedException | InstantiationException |
-                 IllegalAccessException | ModelNotFound |*/ ValorUndefined
+
+        } catch (DataBaseUndefind | PropertiesDBUndefined | InterruptedException | InstantiationException |
+                 IllegalAccessException | ModelNotFound |ValorUndefined
                 /*|IllegalAccessException|InvocationTargetException*/ e) {
             LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());

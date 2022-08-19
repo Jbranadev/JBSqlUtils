@@ -4,26 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Metodos Get 100%, falta adaptarlos para el resto de BD's y crearlos">
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Empleado.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Material.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Registro.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Andr.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Tarjeta_NFC.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_08_2022_07_57__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_08_2022_07_57__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Enumerations/DataType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Enumerations/DataType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/JBSqlUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/JBSqlUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods_Conexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods_Conexion.java" afterDir="false" />
+    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Adaptación de las clases que permiten la busqueda personalizada">
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Empleado.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Material.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/And.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/And.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Or.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Or.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/OrderBy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/OrderBy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Where.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Where.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Wherer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Wherer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Registro.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Tarjeta_NFC.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Usuario.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="JBran" />
+        <entry key="$PROJECT_DIR$" value="Tablas_Bladimir" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -58,7 +45,11 @@
                 <list>
                   <RecentBranch>
                     <option name="branchName" value="JBranTemp" />
-                    <option name="lastUsedInstant" value="1660790431" />
+                    <option name="lastUsedInstant" value="1660887111" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="Tablas_Bladimir" />
+                    <option name="lastUsedInstant" value="1660887098" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="JBran" />
@@ -313,7 +304,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660801917845</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Adaptación de las clases que permiten la busqueda personalizada">
+      <created>1660887041501</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1660887041501</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -350,6 +348,7 @@
     <MESSAGE value="Metodos para generar consultas personalizadas terminados" />
     <MESSAGE value="Se logro hacer funcionar el metodo GetALL" />
     <MESSAGE value="Metodos Get 100%, falta adaptarlos para el resto de BD's y crearlos" />
-    <option name="LAST_COMMIT_MESSAGE" value="Metodos Get 100%, falta adaptarlos para el resto de BD's y crearlos" />
+    <MESSAGE value="Adaptación de las clases que permiten la busqueda personalizada" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adaptación de las clases que permiten la busqueda personalizada" />
   </component>
 </project>
