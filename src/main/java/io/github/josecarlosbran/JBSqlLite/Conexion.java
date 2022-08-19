@@ -142,6 +142,24 @@ public class Conexion {
     }
 
 
+    /**
+     * Metodo que se encarga de inicializar las propiedades de conexión del modelo,
+     * las cuales las obtiene de las propiedades del sistema Java.
+     * @throws DataBaseUndefind Lanza esta excepción si el tipo de BD's a la cual se conectara el modelo no ha sido definida entre
+     * las propiedades del sistema Java.
+     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión no han sido definidas.
+     */
+    public void getSystemProperties() throws DataBaseUndefind, PropertiesDBUndefined {
+        this.setGetPropertySystem(true);
+        this.setDataBaseType(setearDBType());
+        this.setBD(setearBD());
+        this.setHost(setearHost());
+        this.setPort(setearPort());
+        this.setUser(setearUser());
+        this.setPassword(setearPassword());
+    }
+
+
 
 
     /**
