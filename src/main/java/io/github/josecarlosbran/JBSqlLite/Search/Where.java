@@ -43,58 +43,6 @@ public class Where<T> extends GET {
 
 
 
-
-
-    public void getFirst() {
-        try {
-            this.setTaskIsReady(false);
-            if (!this.getTableExist()) {
-                this.refresh();
-            }
-            Connection connect = this.getConnection();
-            Runnable get = () -> {
-                try {
-                    if (this.getTableExist()) {
-                        String sql = "SELECT * FROM " + this.getClass().getSimpleName();
-                        if (!stringIsNullOrEmpty(this.sql)) {
-                            sql = sql + this.sql;
-                        }
-                        sql = sql + ";";
-                        LogsJB.info(sql);
-                        PreparedStatement ejecutor = connect.prepareStatement(sql);
-                        ResultSet registros = ejecutor.executeQuery();
-                        if (registros.next()) {
-                            procesarResultSet(this, registros);
-                        }
-                        this.closeConnection(connect);
-                    } else {
-                        LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
-                                "recuperar el Registro");
-                    }
-                    this.setTaskIsReady(true);
-                } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's: " + e.toString());
-                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-                    this.setTaskIsReady(true);
-                }
-            };
-            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            ejecutor.submit(get);
-            ejecutor.shutdown();
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-        }
-    }
-
-
-
     public And and(String columna, Operator operador, String valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         return new And(this.sql, columna, operador, valor, this.modelo);
     }

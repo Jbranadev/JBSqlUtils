@@ -24,8 +24,6 @@ public class Methods extends Methods_Conexion {
         super();
     }
 
-
-
     /**
      * Crea la tabla correspondiente al modelo en BD's si esta no existe.
      *
@@ -220,126 +218,23 @@ public class Methods extends Methods_Conexion {
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
     }
-    /*
-    public void get(String expresion) {
-        try {
-            this.setTaskIsReady(false);
-            if (!this.getTableExist()) {
-                this.refresh();
-            }
-            Connection connect = this.getConnection();
-            Runnable get = () -> {
-                try {
-                    if (this.getTableExist()) {
-                        String sql = "SELECT * FROM " + this.getClass().getSimpleName();
-                        if (!stringIsNullOrEmpty(expresion)) {
-                            sql = sql + expresion;
-                        }
-                        sql = sql + ";";
-                        LogsJB.info(sql);
-                        PreparedStatement ejecutor = connect.prepareStatement(sql);
-                        ResultSet registros = ejecutor.executeQuery();
-                        if (registros.next()) {
-                            procesarResultSet(this, registros);
-
-                        }
-                        this.closeConnection(connect);
-                    } else {
-                        LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
-                                "recuperar el Registro");
-                    }
-                    this.setTaskIsReady(true);
-                } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's: " + e.toString());
-                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-                    this.setTaskIsReady(true);
-                }
-            };
-            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            ejecutor.submit(get);
-            ejecutor.shutdown();
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-        }
-    }
-    */
-
-/*
-    public <T extends Methods_Conexion> List<T> getALL(T modelo) {
-
-        return this.getALL(modelo, "");
-    }
-*/
-    /*
-    public <T extends Methods_Conexion> List<T> getALL(T modelo, String expresion) {
-        modelo.setTaskIsReady(false);
-        List<T> lista = new ArrayList<>();
-        try {
-            if (!modelo.getTableExist()) {
-                modelo.refresh();
-            }
-            Connection connect = modelo.getConnection();
-            Runnable get = () -> {
-                try {
-                    if (modelo.getTableExist()) {
-                        String sql = "SELECT * FROM " + this.getClass().getSimpleName();
-                        if (!stringIsNullOrEmpty(expresion)) {
-                            sql = sql + expresion;
-                        }
-                        sql = sql + ";";
-                        LogsJB.info(sql);
-                        PreparedStatement ejecutor = connect.prepareStatement(sql);
-                        ResultSet registros = ejecutor.executeQuery();
-
-                        while(registros.next()) {
-                            lista.add(procesarResultSet(modelo, registros));
-                        }
-
-                        modelo.closeConnection(connect);
-                    } else {
-                        LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
-                                "recuperar el Registro");
-                    }
-                    modelo.setTaskIsReady(true);
-                } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
-                            "SQL de la BD's: " + e.toString());
-                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-                    modelo.setTaskIsReady(true);
-                }
-            };
-            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            ejecutor.submit(get);
-            ejecutor.shutdown();
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-
-        }
-        return lista;
-    }
-*/
-
-
-
 
 
     public <T extends Methods_Conexion> void saveALL(List<T> modelos){
         try{
+            T temp;
             for(T modelo: modelos){
+                //Optimización de los tiempos de inserción de cada modelo.
+                temp = (T) modelo.getClass().newInstance();
+                if (!modelo.getTableExist()) {
+                    modelo.refresh();
+                    temp.setTableExist(modelo.getTableExist());
+                    temp.setTabla(modelo.getTabla());
+                }else{
+                    modelo.setTabla(temp.getTabla());
+                    modelo.setTableExist(temp.getTableExist());
+                }
+
                 modelo.saveModel(modelo);
             }
         }catch (Exception e) {
@@ -352,7 +247,6 @@ public class Methods extends Methods_Conexion {
     }
 
 
-/*
     public Boolean saveBoolean(){
         Boolean result = false;
         try{
@@ -370,16 +264,11 @@ public class Methods extends Methods_Conexion {
         return result;
     }
 
-*/
-
 
 
     public Where where(String columna, Operator operador, String valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         return new Where(columna, operador, valor, this);
     }
-
-
-
 
 
 

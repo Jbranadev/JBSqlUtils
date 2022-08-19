@@ -4,13 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Adaptación de las clases que permiten la busqueda personalizada">
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Empleado.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Material.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Registro.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Tarjeta_NFC.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Usuario.java" beforeDir="false" />
+    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Se agrego la funcionalidad de actualizar al metodo save">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_08_2022_09_19_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_08_2022_09_19__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_08_2022_20_08__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_08_2022_20_08__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods_Conexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods_Conexion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Where.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Where.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Tablas_Bladimir" />
+        <entry key="$PROJECT_DIR$" value="JBran" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -45,11 +47,7 @@
                 <list>
                   <RecentBranch>
                     <option name="branchName" value="JBranTemp" />
-                    <option name="lastUsedInstant" value="1660887111" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="Tablas_Bladimir" />
-                    <option name="lastUsedInstant" value="1660887098" />
+                    <option name="lastUsedInstant" value="1660749979" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="JBran" />
@@ -290,28 +288,21 @@
       <option name="project" value="LOCAL" />
       <updated>1660772946385</updated>
     </task>
-    <task id="LOCAL-00021" summary="Se logro hacer funcionar el metodo GetALL">
-      <created>1660800128643</created>
+    <task id="LOCAL-00021" summary="Se modificaron las clases relacionadas a la metadata del modelo">
+      <created>1660776684264</created>
       <option name="number" value="00021" />
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
-      <updated>1660800128643</updated>
+      <updated>1660776684265</updated>
     </task>
-    <task id="LOCAL-00022" summary="Metodos Get 100%, falta adaptarlos para el resto de BD's y crearlos">
-      <created>1660801917845</created>
+    <task id="LOCAL-00022" summary="Se agrego la funcionalidad de actualizar al metodo save">
+      <created>1660856260816</created>
       <option name="number" value="00022" />
       <option name="presentableId" value="LOCAL-00022" />
       <option name="project" value="LOCAL" />
-      <updated>1660801917845</updated>
+      <updated>1660856260816</updated>
     </task>
-    <task id="LOCAL-00023" summary="Adaptación de las clases que permiten la busqueda personalizada">
-      <created>1660887041501</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1660887041501</updated>
-    </task>
-    <option name="localTasksCounter" value="24" />
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,9 +337,8 @@
     <MESSAGE value="Adecuaciones de los metodos para asegurar un mejor rendimiento y poder dar un mejor seguimiento." />
     <MESSAGE value="Creación de los atributos por default para el manejo de TimeStamp" />
     <MESSAGE value="Metodos para generar consultas personalizadas terminados" />
-    <MESSAGE value="Se logro hacer funcionar el metodo GetALL" />
-    <MESSAGE value="Metodos Get 100%, falta adaptarlos para el resto de BD's y crearlos" />
-    <MESSAGE value="Adaptación de las clases que permiten la busqueda personalizada" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adaptación de las clases que permiten la busqueda personalizada" />
+    <MESSAGE value="Se modificaron las clases relacionadas a la metadata del modelo" />
+    <MESSAGE value="Se agrego la funcionalidad de actualizar al metodo save" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se agrego la funcionalidad de actualizar al metodo save" />
   </component>
 </project>

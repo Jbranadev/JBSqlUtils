@@ -825,10 +825,19 @@ public class Methods_Conexion extends Conexion {
     }
 
 
-    public <T extends Methods_Conexion> T procesarResultSet(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException {
+    public <T extends Methods_Conexion> T procesarResultSet(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException, DataBaseUndefind, PropertiesDBUndefined {
         T temp = (T) modelo.getClass().newInstance();
         temp.setTabla(modelo.getTabla());
         temp.setModelExist(true);
+
+        //Seteamos las propiedades del Modelo que obtuvo la conexión
+        temp.setDataBaseType(modelo.getDataBaseType());
+        temp.setBD(modelo.getBD());
+        temp.setUser(modelo.getUser());
+        temp.setPassword(modelo.getPassword());
+        temp.setPort(modelo.getPort());
+        temp.setHost(modelo.getHost());
+
         LogsJB.info("Obtuvo un resultado de BD's, procedera a llenar el modelo");
         List<Method> metodosSet = new ArrayList<>();
         LogsJB.trace("Inicializa el array list de los metodos set");
