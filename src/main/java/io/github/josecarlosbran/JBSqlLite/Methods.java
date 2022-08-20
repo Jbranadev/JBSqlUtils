@@ -222,19 +222,29 @@ public class Methods extends Methods_Conexion {
 
     public <T extends Methods_Conexion> void saveALL(List<T> modelos){
         try{
-            T temp;
+            T temp=null;
             for(T modelo: modelos){
                 //Optimización de los tiempos de inserción de cada modelo.
-                temp = (T) modelo.getClass().newInstance();
-                if (!modelo.getTableExist()) {
-                    modelo.refresh();
-                    temp.setTableExist(modelo.getTableExist());
-                    temp.setTabla(modelo.getTabla());
-                }else{
+                if(!Objects.isNull(temp)){
                     modelo.setTabla(temp.getTabla());
                     modelo.setTableExist(temp.getTableExist());
+                    modelo.setTableName(temp.getTableName());
+                    LogsJB.info("Modelo Ya había sido inicializado");
+                }else{
+                    temp=(T) modelo.getClass().newInstance();
+                    LogsJB.warning("Modelo era Null, crea una nueva instancia");
                 }
+                if (!modelo.getTableExist()) {
+                    LogsJB.info("Obtendra la información de conexión de la BD's");
+                    modelo.refresh();
+                    while(modelo.getTabla().getColumnas().size()==0){
 
+                    }
+                    LogsJB.info("Ya obtuvo la información de BD's'");
+                    temp.setTableExist(modelo.getTableExist());
+                    temp.setTableName(modelo.getTableName());
+                    temp.setTabla(modelo.getTabla());
+                }
                 modelo.saveModel(modelo);
             }
         }catch (Exception e) {

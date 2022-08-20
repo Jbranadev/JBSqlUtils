@@ -266,7 +266,7 @@ public class Methods_Conexion extends Conexion {
         try {
             Callable<Boolean> VerificarExistencia = () -> {
                 try {
-                    LogsJB.trace("Comienza a verificar la existencia de la tabla");
+                    LogsJB.info("Comienza a verificar la existencia de la tabla");
                     Connection connect = this.getConnection();
                     DatabaseMetaData metaData = connect.getMetaData();
                     ResultSet tables = metaData.getTables(null, null, "%", null);
@@ -344,6 +344,7 @@ public class Methods_Conexion extends Conexion {
             }
             executor.shutdown();
             result = future.get();
+
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -391,9 +392,6 @@ public class Methods_Conexion extends Conexion {
                     temp.setIS_AUTOINCREMENT(columnas.getString(23));
                     temp.setIS_GENERATEDCOLUMN(columnas.getString(24));
                     this.getTabla().getColumnas().add(temp);
-                    //this.getColumnas().add(temp);
-                    //Types.ARRAY
-
                 }
                 LogsJB.info("Información de las columnas de la tabla correspondiente al modelo obtenida");
                 columnas.close();
@@ -828,6 +826,8 @@ public class Methods_Conexion extends Conexion {
     public <T extends Methods_Conexion> T procesarResultSet(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException, DataBaseUndefind, PropertiesDBUndefined {
         T temp = (T) modelo.getClass().newInstance();
         temp.setTabla(modelo.getTabla());
+        temp.setTableExist(modelo.getTableExist());
+        temp.setTableName(modelo.getTableName());
         temp.setModelExist(true);
 
         //Seteamos las propiedades del Modelo que obtuvo la conexión

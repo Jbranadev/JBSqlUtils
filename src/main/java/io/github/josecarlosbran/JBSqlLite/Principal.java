@@ -115,27 +115,9 @@ public class Principal {
         test.setBD("JBSQLUTILS");
         test.setDataBaseType(DataBase.PostgreSQL);
 
-        //test.closeConnection(test.getConnection());
-        //test.refresh();
-        //Thread.sleep(1500);
-        /*Consumer<ColumnsSQL> showColumnas = columna -> {
-
-            System.out.println(columna.getCOLUMN_NAME()+"   "+columna.getORDINAL_POSITION()+"   "+columna.getTYPE_NAME());
-
-        };
-
-        Thread.sleep(3000);
-        test.getColumnas().forEach(showColumnas);*/
-
-
         //test.dropTableIfExist();
         //test.crateTable();
 
-
-        /*test.getName().setValor("Jose Alfredo");
-        test.getApellido().setValor("Bran Lara");
-        test.getIsMayor().setValor(false);
-        test.save();*/
 
         Consumer<Test> showFilas = fila -> {
 /*
@@ -149,38 +131,42 @@ public class Principal {
             fila.setDataBaseType(DataBase.SQLite);
             fila.setTableExist(false);
             fila.getId().setValor(null);*/
+            fila.getIsMayor().setValor(!fila.getIsMayor().getValor());
             LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor());
 
         };
 
-        //test.get(where(expresion(expresion("name", Operator.IGUAL_QUE, "'Jose Carlos'"), Operator.AND, expresion("isMayor", Operator.IGUAL_QUE, "false"))));
         List<Test> lista=new ArrayList<>();
-        //lista=test.getALL(test, where(expresion(expresion("name", Operator.LIKE, "'Jose%'"), Operator.AND, expresion("isMayor", Operator.IGUAL_QUE, "true"))));
-        //lista=test.where("name", Operator.IGUAL_QUE, "'Jose'").and("isMayor", Operator.IGUAL_QUE, "true").getAll(test);
-        lista=test.where("name", Operator.IGUAL_QUE, "'Jose'").and("isMayor", Operator.IGUAL_QUE, "true").getAll();
-
+        //lista=test.where("name", Operator.IGUAL_QUE, "'Jose'").and("isMayor", Operator.IGUAL_QUE, "false").getAll();
+        lista=test.where("name", Operator.LIKE, "'Jose%'").getAll();
         //test.where("name", Operator.IGUAL_QUE, "'Jose'").and("isMayor", Operator.IGUAL_QUE, "true").get(test);
         //lista.add(test);
-        //Thread.sleep(5000);
+
         //test.where("",null, "").and("", null, "").or("", null, "").and("").getAll();
         while (!test.getTaskIsReady()){
 
         }
-        /*LogsJB.info("Resultado es: "+test.getId().getValor()+"    "+test.getName().getValor()+"    "
-        +test.getApellido().getValor()+"    "
-        +test.getIsMayor().getValor()+"    ");*/
-        //LogsJB.info("Tamaño de la lista obtenida: "+lista.size());
+
+        LogsJB.info("Cantidad de resultado lista: "+lista.size());
+
         lista.forEach(showFilas);
+        long inicio = System.currentTimeMillis();
 
-        //test.getConnection();
-        //test.refresh();
-        //LogsJB.fatal("Invocara los metodos que almacena los modelos en BD's");
-        //test.saveALL(lista);
+        test.saveALL(lista);
 
+        long fin = System.currentTimeMillis();
+        //double tiempo = (double) ((fin - inicio)/1000);
+        double tiempo = (double) ((fin - inicio));
+        LogsJB.fatal(tiempo +" mili segundos");
         //LogsJB.fatal("Termino de invocar los metodos que almacena los modelos en BD's");
 
     }
 
+
+    void refrescar(Test test){
+        //test.closeConnection(test.getConnection());
+        test.refresh();
+    }
 
     void SQLServer(Test test){
         test.setGetPropertySystem(false);
