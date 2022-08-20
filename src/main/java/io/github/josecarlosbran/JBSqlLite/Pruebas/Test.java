@@ -1,13 +1,15 @@
-package io.github.josecarlosbran.JBSqlLite;
+package io.github.josecarlosbran.JBSqlLite.Pruebas;
 
+import io.github.josecarlosbran.JBSqlLite.Column;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlLite.JBSqlUtils;
 
-public class Test extends JBSqlUtils{
+public class Test extends JBSqlUtils {
     public Test() throws DataBaseUndefind, PropertiesDBUndefined {
-        super();
+        super(false);
     }
 
     private Column<Integer> id=new Column<>(DataType.INTEGER, new Constraint[]{Constraint.AUTO_INCREMENT,Constraint.PRIMARY_KEY});

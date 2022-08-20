@@ -24,7 +24,7 @@ public class Column<T> {
      * Inicializa la columna indicando el tipo de dato SQL que tendra la columna
      * @param tipo_de_dato DataType que indica el tipo de dato SQL que almacenara la columna.
      */
-    Column(DataType tipo_de_dato){
+    public Column(DataType tipo_de_dato){
         this.setDataTypeSQL(tipo_de_dato);
     }
 
@@ -33,7 +33,7 @@ public class Column<T> {
      * @param Valor Valor que tendra la columna.
      * @param tipo_de_dato DataType que indica el tipo de dato SQL que almacenara la columna.
      */
-    Column(T Valor, DataType tipo_de_dato){
+    public Column(T Valor, DataType tipo_de_dato){
         this.setValor(Valor);
         this.setDataTypeSQL(tipo_de_dato);
     }
@@ -46,7 +46,7 @@ public class Column<T> {
      * @param tipo_de_dato DataType que indica el tipo de dato SQL que almacenara la columna.
      * @param restriccion Indica las restricciones SQL que tendra este campo.
      */
-    Column(T Valor, DataType tipo_de_dato, Constraint[] restriccion){
+    public Column(T Valor, DataType tipo_de_dato, Constraint[] restriccion){
         this.setValor(Valor);
         this.setDataTypeSQL(tipo_de_dato);
         this.setRestriccion(restriccion);
@@ -57,7 +57,7 @@ public class Column<T> {
      * @param tipo_de_dato DataType que indica el tipo de dato SQL que almacenara la columna.
      * @param restriccion Indica las restricciones SQL que tendra este campo.
      */
-    Column(DataType tipo_de_dato, Constraint[] restriccion){
+    public Column(DataType tipo_de_dato, Constraint[] restriccion){
         this.setDataTypeSQL(tipo_de_dato);
         this.setRestriccion(restriccion);
     }
@@ -71,7 +71,7 @@ public class Column<T> {
      * @param restriccion Indica las restricciones SQL que tendra este campo.
      * @param default_value Indica el valor por default que tendra la columna en BD's
      */
-    Column(T Valor, DataType tipo_de_dato, Constraint[] restriccion, T default_value){
+    public Column(T Valor, DataType tipo_de_dato, Constraint[] restriccion, T default_value){
         this.setValor(Valor);
         this.setDataTypeSQL(tipo_de_dato);
         this.setRestriccion(restriccion);
@@ -84,7 +84,7 @@ public class Column<T> {
      * @param restriccion Indica las restricciones SQL que tendra este campo.
      * @param default_value Indica el valor por default que tendra la columna en BD's
      */
-    Column(DataType tipo_de_dato, Constraint[] restriccion, T default_value){
+    public Column(DataType tipo_de_dato, Constraint[] restriccion, T default_value){
         this.setDataTypeSQL(tipo_de_dato);
         this.setRestriccion(restriccion);
         this.setDefault_value(default_value);

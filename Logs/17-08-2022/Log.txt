@@ -3,13 +3,13 @@
 *
 *
 *
-2022/08/17 20:46:01 825					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Tipo de Excepción : class java.lang.InstantiationException
+2022/08/17 20:46:01 825					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							FATAL  							Tipo de Excepción : class java.lang.InstantiationException
 
-2022/08/17 20:46:01 828					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Causa de la Excepción : java.lang.NoSuchMethodException: io.github.josecarlosbran.JBSqlLite.Search.And.<init>()
+2022/08/17 20:46:01 828					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							FATAL  							Causa de la Excepción : java.lang.NoSuchMethodException: io.github.josecarlosbran.JBSqlLite.Search.And.<init>()
 
-2022/08/17 20:46:01 842					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@446cdf90
+2022/08/17 20:46:01 842					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@446cdf90
 
-2022/08/17 20:46:01 834					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Mensaje de la Excepción : io.github.josecarlosbran.JBSqlLite.Search.And
+2022/08/17 20:46:01 834					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							FATAL  							Mensaje de la Excepción : io.github.josecarlosbran.JBSqlLite.Search.And
 *
 *
 *
@@ -45,11 +45,11 @@
 
 2022/08/17 20:51:15 562					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@2ef1e4fa
 
-2022/08/17 20:51:15 567					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
+2022/08/17 20:51:15 567					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
 
 2022/08/17 20:51:15 567					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						WARNING							Tabla correspondiente al modelo no existe en BD's por esa razón no se pudorecuperar el Registro
 
-2022/08/17 20:51:15 570					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
+2022/08/17 20:51:15 570					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
 *
 *
 *
@@ -81,11 +81,11 @@
 2022/08/17 20:57:36 128					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						FATAL  							Mensaje de la Excepción : ERROR: error de sintaxis en o cerca de «Where»
   Position: 15
 
-2022/08/17 20:57:36 135					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
+2022/08/17 20:57:36 135					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
 
 2022/08/17 20:57:36 131					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@65f744b1
 
-2022/08/17 20:57:36 138					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
+2022/08/17 20:57:36 138					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
 *
 *
 *
@@ -116,12 +116,12 @@
 
 2022/08/17 21:02:09 656					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						FATAL  							Tipo de Excepción : class org.postgresql.util.PSQLException
 
-2022/08/17 21:02:09 668					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
+2022/08/17 21:02:09 668					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
 
 2022/08/17 21:02:09 662					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						FATAL  							Mensaje de la Excepción : ERROR: error de sintaxis en o cerca de «Where»
   Position: 15
 
-2022/08/17 21:02:09 673					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
+2022/08/17 21:02:09 673					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
 *
 *
 *
@@ -153,9 +153,9 @@
 
 2022/08/17 21:04:30 669					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@69cc7a39
 
-2022/08/17 21:04:30 672					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
+2022/08/17 21:04:30 672					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
 
-2022/08/17 21:04:30 680					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
+2022/08/17 21:04:30 680					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
 *
 *
 *
@@ -186,12 +186,12 @@
 
 2022/08/17 21:07:53 141					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/17 21:07:53 173					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
+2022/08/17 21:07:53 173					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
 
 2022/08/17 21:07:53 164					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						FATAL  							Mensaje de la Excepción : ERROR: error de sintaxis en o cerca de «Where»
   Position: 15
 
-2022/08/17 21:07:53 182					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
+2022/08/17 21:07:53 182					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
 *
 *
 *
@@ -225,9 +225,9 @@
 
 2022/08/17 21:09:04 012					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@734296d0
 
-2022/08/17 21:09:04 023					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
+2022/08/17 21:09:04 023					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
 
-2022/08/17 21:09:04 019					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
+2022/08/17 21:09:04 019					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
 *
 *
 *
@@ -261,9 +261,9 @@
 
 2022/08/17 21:10:15 898					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						FATAL  							Causa de la Excepción : null
 
-2022/08/17 21:10:15 907					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
+2022/08/17 21:10:15 907					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
 
-2022/08/17 21:10:15 910					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
+2022/08/17 21:10:15 910					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
 *
 *
 *
@@ -293,11 +293,11 @@
 2022/08/17 21:12:00 297					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						FATAL  							Mensaje de la Excepción : ERROR: error de sintaxis en o cerca de «WHERE»
   Position: 2
 
-2022/08/17 21:12:00 303					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
+2022/08/17 21:12:00 303					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
 
 2022/08/17 21:12:00 300					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@60c2b0c5
 
-2022/08/17 21:12:00 308					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
+2022/08/17 21:12:00 308					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
 *
 *
 *
@@ -329,11 +329,11 @@
 
 2022/08/17 21:12:30 522					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						FATAL  							Causa de la Excepción : null
 
-2022/08/17 21:12:30 531					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
+2022/08/17 21:12:30 531					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
 
 2022/08/17 21:12:30 528					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@2eccf58d
 
-2022/08/17 21:12:30 551					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
+2022/08/17 21:12:30 551					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
 *
 *
 *
@@ -367,9 +367,9 @@
 
 2022/08/17 21:16:16 710					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						FATAL  							Mensaje de la Excepción : object is not an instance of declaring class
 
-2022/08/17 21:16:16 725					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
+2022/08/17 21:16:16 725					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
 
-2022/08/17 21:16:16 728					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
+2022/08/17 21:16:16 728					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
 *
 *
 *
@@ -399,9 +399,9 @@
 
 2022/08/17 21:16:45 189					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Coincide el nombre de los metodos con la columna: name
 
-2022/08/17 21:16:45 218					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
+2022/08/17 21:16:45 218					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Termino de invocar los metodos que almacena los modelos en BD's
 
-2022/08/17 21:16:45 210					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
+2022/08/17 21:16:45 210					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							FATAL  							Invocara los metodos que almacena los modelos en BD's
 
 2022/08/17 21:16:45 205					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@4f8f0b34
 
@@ -3879,13 +3879,13 @@
 
 2022/08/17 23:07:58 059					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/17 23:07:58 062					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							null   null   null   false
+2022/08/17 23:07:58 062					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							null   null   null   false
 
-2022/08/17 23:07:58 069					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							null   null   null   false
+2022/08/17 23:07:58 069					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							null   null   null   false
 
-2022/08/17 23:07:58 072					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							null   null   null   false
+2022/08/17 23:07:58 072					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							null   null   null   false
 
-2022/08/17 23:07:58 078					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							null   null   null   false
+2022/08/17 23:07:58 078					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							null   null   null   false
 *
 *
 *
@@ -4203,11 +4203,11 @@
 
 2022/08/17 23:11:38 220					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/17 23:11:38 223					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							5   Jose Alfredo   Bran Lara   true
+2022/08/17 23:11:38 223					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							5   Jose Alfredo   Bran Lara   true
 
-2022/08/17 23:11:38 231					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							5   Jose Alfredo   Bran Lara   true
+2022/08/17 23:11:38 231					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							5   Jose Alfredo   Bran Lara   true
 
-2022/08/17 23:11:38 234					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							5   Jose Alfredo   Bran Lara   true
+2022/08/17 23:11:38 234					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							5   Jose Alfredo   Bran Lara   true
 *
 *
 *
@@ -4423,13 +4423,13 @@
 
 2022/08/17 23:14:50 551					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: apellido   Apellido
 
-2022/08/17 23:14:50 560					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							5   Jose Alfredo   Bran Lara   true
+2022/08/17 23:14:50 560					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							5   Jose Alfredo   Bran Lara   true
 
 2022/08/17 23:14:50 555					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/17 23:14:50 567					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							5   Jose Alfredo   Bran Lara   true
+2022/08/17 23:14:50 567					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							5   Jose Alfredo   Bran Lara   true
 
-2022/08/17 23:14:50 570					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							5   Jose Alfredo   Bran Lara   true
+2022/08/17 23:14:50 570					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							5   Jose Alfredo   Bran Lara   true
 *
 *
 *
@@ -4687,13 +4687,13 @@
 
 2022/08/17 23:17:42 783					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/17 23:17:42 789					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+2022/08/17 23:17:42 789					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
 
-2022/08/17 23:17:42 794					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
+2022/08/17 23:17:42 794					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
 
-2022/08/17 23:17:42 796					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
+2022/08/17 23:17:42 796					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
 
-2022/08/17 23:17:42 804					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							5   Jose Alfredo   Bran Lara   true
+2022/08/17 23:17:42 804					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							5   Jose Alfredo   Bran Lara   true
 *
 *
 *
@@ -4911,13 +4911,13 @@
 
 2022/08/17 23:18:29 515					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/17 23:18:29 522					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+2022/08/17 23:18:29 522					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
 
-2022/08/17 23:18:29 526					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
+2022/08/17 23:18:29 526					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
 
-2022/08/17 23:18:29 530					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
+2022/08/17 23:18:29 530					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
 
-2022/08/17 23:18:29 535					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							5   Jose Alfredo   Bran Lara   true
+2022/08/17 23:18:29 535					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							5   Jose Alfredo   Bran Lara   true
 *
 *
 *
@@ -4991,7 +4991,7 @@
 
 2022/08/17 23:31:06 139					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: ismayor   IsMayor
 
-2022/08/17 23:31:06 164					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							null   null   null   false
+2022/08/17 23:31:06 164					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							null   null   null   false
 *
 *
 *
@@ -5065,7 +5065,7 @@
 
 2022/08/17 23:37:33 136					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/17 23:37:33 140					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+2022/08/17 23:37:33 140					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
 *
 *
 *
@@ -5139,7 +5139,7 @@
 
 2022/08/17 23:39:19 799					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/17 23:39:19 804					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+2022/08/17 23:39:19 804					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
 *
 *
 *
@@ -5159,7 +5159,7 @@
 
 2022/08/17 23:39:45 343					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$first$1 						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
-2022/08/17 23:39:45 362					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							null   null   null   false
+2022/08/17 23:39:45 362					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							null   null   null   false
 
 2022/08/17 23:39:45 347					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
@@ -5189,15 +5189,15 @@
 
 2022/08/17 23:40:29 871					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/17 23:40:29 875					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Excepción disparada al obtener la conexión a la BD's proporcionada: io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound: No existe un modelo en BD's que corresponda a los criterios de la consulta sql:  WHERE  (name = 'Jose' ) AND  (isMayor = false )
+2022/08/17 23:40:29 875					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							FATAL  							Excepción disparada al obtener la conexión a la BD's proporcionada: io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound: No existe un modelo en BD's que corresponda a los criterios de la consulta sql:  WHERE  (name = 'Jose' ) AND  (isMayor = false )
 
-2022/08/17 23:40:29 884					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Tipo de Excepción : class io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound
+2022/08/17 23:40:29 884					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							FATAL  							Tipo de Excepción : class io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound
 
-2022/08/17 23:40:29 890					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Causa de la Excepción : null
+2022/08/17 23:40:29 890					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							FATAL  							Causa de la Excepción : null
 
-2022/08/17 23:40:29 895					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Mensaje de la Excepción : No existe un modelo en BD's que corresponda a los criterios de la consulta sql:  WHERE  (name = 'Jose' ) AND  (isMayor = false )
+2022/08/17 23:40:29 895					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							FATAL  							Mensaje de la Excepción : No existe un modelo en BD's que corresponda a los criterios de la consulta sql:  WHERE  (name = 'Jose' ) AND  (isMayor = false )
 
-2022/08/17 23:40:29 901					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@421faab1
+2022/08/17 23:40:29 901					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@421faab1
 *
 *
 *
@@ -5221,17 +5221,17 @@
 
 2022/08/17 23:46:01 808					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
-2022/08/17 23:46:01 806					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Causa de la Excepción : null
+2022/08/17 23:46:01 806					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							FATAL  							Causa de la Excepción : null
 
-2022/08/17 23:46:01 798					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Tipo de Excepción : class io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound
+2022/08/17 23:46:01 798					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							FATAL  							Tipo de Excepción : class io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound
 
 2022/08/17 23:46:01 786					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/17 23:46:01 765					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Excepción disparada al obtener la conexión a la BD's proporcionada: io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound: No existe un modelo en BD's que corresponda a los criterios de la consulta sql: SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false )
+2022/08/17 23:46:01 765					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							FATAL  							Excepción disparada al obtener la conexión a la BD's proporcionada: io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound: No existe un modelo en BD's que corresponda a los criterios de la consulta sql: SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false )
 
-2022/08/17 23:46:01 816					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@421faab1
+2022/08/17 23:46:01 816					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@421faab1
 
-2022/08/17 23:46:01 813					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							FATAL  							Mensaje de la Excepción : No existe un modelo en BD's que corresponda a los criterios de la consulta sql: SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false )
+2022/08/17 23:46:01 813					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							FATAL  							Mensaje de la Excepción : No existe un modelo en BD's que corresponda a los criterios de la consulta sql: SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false )
 
 2022/08/17 23:46:01 812					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 *
@@ -5259,7 +5259,7 @@
 
 2022/08/17 23:47:53 178					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/17 23:47:53 185					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							null   null   null   false
+2022/08/17 23:47:53 185					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							null   null   null   false
 *
 *
 *
@@ -5333,7 +5333,7 @@
 
 2022/08/17 23:48:08 492					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				TRACE  							Nombre de la columna, nombre del metodo get: apellido   Apellido
 
-2022/08/17 23:48:08 498					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+2022/08/17 23:48:08 498					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
 *
 *
 *
@@ -5407,7 +5407,7 @@
 
 2022/08/17 23:48:57 281					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/17 23:48:57 284					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+2022/08/17 23:48:57 284					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
 *
 *
 *
@@ -5577,11 +5577,11 @@
 
 2022/08/17 23:49:45 185					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/17 23:49:45 196					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
+2022/08/17 23:49:45 196					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
 
-2022/08/17 23:49:45 193					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
+2022/08/17 23:49:45 193					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
 
-2022/08/17 23:49:45 189					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+2022/08/17 23:49:45 189					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
 *
 *
 *
@@ -5743,7 +5743,7 @@
 
 2022/08/17 23:51:10 726					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 6
 
-2022/08/17 23:51:10 741					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+2022/08/17 23:51:10 741					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
 
 2022/08/17 23:51:10 738					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
@@ -5751,8 +5751,8 @@
 
 2022/08/17 23:51:10 732					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
 
-2022/08/17 23:51:10 747					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
+2022/08/17 23:51:10 747					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
 
-2022/08/17 23:51:10 752					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
+2022/08/17 23:51:10 752					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
 
 2022/08/17 23:51:10 729					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: apellido   Apellido

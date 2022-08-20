@@ -1,11 +1,11 @@
-package io.github.josecarlosbran.JBSqlLite;
+package io.github.josecarlosbran.JBSqlLite.Pruebas;
 
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
-import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
+import io.github.josecarlosbran.JBSqlLite.Pruebas.Test;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 
@@ -15,15 +15,13 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import static io.github.josecarlosbran.JBSqlLite.JBSqlUtils.*;
-import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.expresion;
-import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.where;
 
 public class Principal {
 
     public static void main(String[] args) {
         try {
 
-            LogsJB.setGradeLog(NivelLog.INFO);
+            LogsJB.setGradeLog(NivelLog.DEBUG);
             String DB = "JBSQLUTILS";
             setDataBaseTypeGlobal(DataBase.MySQL);
             //setDataBaseGlobal(BDSqlite);
@@ -115,8 +113,14 @@ public class Principal {
         test.setBD("JBSQLUTILS");
         test.setDataBaseType(DataBase.PostgreSQL);
 
-        //test.dropTableIfExist();
-        //test.crateTable();
+        test.dropTableIfExist();
+        test.crateTable();
+
+
+        test.getName().setValor("Jose");
+        test.getApellido().setValor("Bran");
+        test.getIsMayor().setValor(true);
+        test.save();
 
 
         Consumer<Test> showFilas = fila -> {
@@ -138,7 +142,7 @@ public class Principal {
 
         List<Test> lista=new ArrayList<>();
         //lista=test.where("name", Operator.IGUAL_QUE, "'Jose'").and("isMayor", Operator.IGUAL_QUE, "false").getAll();
-        lista=test.where("name", Operator.LIKE, "'Jose%'").getAll();
+        //lista=test.where("name", Operator.LIKE, "'Jose%'").getAll();
         //test.where("name", Operator.IGUAL_QUE, "'Jose'").and("isMayor", Operator.IGUAL_QUE, "true").get(test);
         //lista.add(test);
 
@@ -149,15 +153,15 @@ public class Principal {
 
         LogsJB.info("Cantidad de resultado lista: "+lista.size());
 
-        lista.forEach(showFilas);
+        //lista.forEach(showFilas);
         long inicio = System.currentTimeMillis();
 
-        test.saveALL(lista);
+        //test.saveALL(lista);
 
         long fin = System.currentTimeMillis();
         //double tiempo = (double) ((fin - inicio)/1000);
         double tiempo = (double) ((fin - inicio));
-        LogsJB.fatal(tiempo +" mili segundos");
+        LogsJB.warning(tiempo +" mili segundos");
         //LogsJB.fatal("Termino de invocar los metodos que almacena los modelos en BD's");
 
     }

@@ -151,11 +151,11 @@
 
 2022/08/18 20:15:03 952					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo get: apellido   Apellido
 
-2022/08/18 20:15:03 967					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
+2022/08/18 20:15:03 967					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
 
 2022/08/18 20:15:03 916					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: id   Id
 
-2022/08/18 20:15:03 958					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+2022/08/18 20:15:03 958					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
 
 2022/08/18 20:15:03 899					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Nombre de la columna, nombre del metodo set: name   Name
 
@@ -171,7 +171,7 @@
 
 2022/08/18 20:15:03 919					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					TRACE  							Cantidad de metodos get: 6
 
-2022/08/18 20:15:03 974					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
+2022/08/18 20:15:03 974					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
 *
 *
 *
@@ -197,11 +197,11 @@
 
 2022/08/18 20:16:19 466					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/18 20:16:19 512					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
+2022/08/18 20:16:19 512					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
 
-2022/08/18 20:16:19 507					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+2022/08/18 20:16:19 507					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
 
-2022/08/18 20:16:19 515					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
+2022/08/18 20:16:19 515					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
 *
 *
 *
@@ -293,7 +293,7 @@
 
 2022/08/18 20:26:40 873					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
-2022/08/18 20:26:40 942					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+2022/08/18 20:26:40 942					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
 
 2022/08/18 20:26:40 938					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
@@ -305,9 +305,9 @@
 
 2022/08/18 20:26:40 908					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
-2022/08/18 20:26:40 952					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
+2022/08/18 20:26:40 952					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
 
-2022/08/18 20:26:40 985					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
+2022/08/18 20:26:40 985					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
 *
 *
 *
@@ -333,11 +333,11 @@
 
 2022/08/18 20:27:41 082					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/18 20:27:41 085					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+2022/08/18 20:27:41 085					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
 
-2022/08/18 20:27:41 088					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
+2022/08/18 20:27:41 088					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
 
-2022/08/18 20:27:41 092					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
+2022/08/18 20:27:41 092					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
 *
 *
 *
@@ -1191,7 +1191,7 @@
 
 2022/08/18 22:13:18 870					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/18 22:13:18 839					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							INFO							El modelo existe principal: false
+2022/08/18 22:13:18 839					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							INFO							El modelo existe principal: false
 
 2022/08/18 22:13:18 886					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
@@ -1239,7 +1239,7 @@
 
 2022/08/18 22:15:37 620					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
-2022/08/18 22:15:37 644					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							INFO							El modelo existe principal: true
+2022/08/18 22:15:37 644					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							INFO							El modelo existe principal: true
 
 2022/08/18 22:15:37 641					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 *
@@ -1267,7 +1267,7 @@
 
 2022/08/18 22:15:54 175					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/18 22:15:54 178					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							INFO							El modelo existe principal: true
+2022/08/18 22:15:54 178					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							INFO							El modelo existe principal: true
 
 2022/08/18 22:15:54 211					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
@@ -1309,7 +1309,7 @@
 
 2022/08/18 22:17:42 153					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/18 22:17:42 157					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							INFO							El modelo existe principal: true
+2022/08/18 22:17:42 157					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							INFO							El modelo existe principal: true
 
 2022/08/18 22:17:42 187					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
@@ -1351,7 +1351,7 @@
 
 2022/08/18 22:25:58 500					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/18 22:25:58 504					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							INFO							El modelo existe principal: true
+2022/08/18 22:25:58 504					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							INFO							El modelo existe principal: true
 
 2022/08/18 22:25:58 564					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
@@ -1393,7 +1393,7 @@
 
 2022/08/18 22:27:28 226					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/18 22:27:28 229					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							INFO							El modelo existe principal: true
+2022/08/18 22:27:28 229					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							INFO							El modelo existe principal: true
 
 2022/08/18 22:27:28 276					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
@@ -1435,7 +1435,7 @@
 
 2022/08/18 22:31:15 544					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
-2022/08/18 22:31:15 565					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							INFO							El modelo existe principal: true
+2022/08/18 22:31:15 565					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							INFO							El modelo existe principal: true
 
 2022/08/18 22:31:15 592					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
@@ -1479,7 +1479,7 @@
 
 2022/08/18 22:36:38 374					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/18 22:36:38 381					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							INFO							El modelo existe principal: true
+2022/08/18 22:36:38 381					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							INFO							El modelo existe principal: true
 
 2022/08/18 22:36:38 455					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
@@ -1537,7 +1537,7 @@
 
 2022/08/18 22:39:15 150					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/18 22:39:15 153					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							INFO							El modelo existe principal: true
+2022/08/18 22:39:15 153					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							INFO							El modelo existe principal: true
 
 2022/08/18 22:39:15 189					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
@@ -1595,7 +1595,7 @@
 
 2022/08/18 22:41:04 566					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/18 22:41:04 569					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							INFO							El modelo existe principal: true
+2022/08/18 22:41:04 569					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							INFO							El modelo existe principal: true
 
 2022/08/18 22:41:04 633					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
@@ -1629,7 +1629,7 @@
 
 2022/08/18 22:42:31 697					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/18 22:42:31 700					josec  							io.github.josecarlosbran.JBSqlLite.Principal		main							INFO							El modelo existe principal: true
+2022/08/18 22:42:31 700					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		main							INFO							El modelo existe principal: true
 
 2022/08/18 22:42:31 756					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		saveModel  							INFO							El modelo existe: true
 
@@ -1655,9 +1655,9 @@
 
 2022/08/18 23:23:01 191					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/18 23:23:01 256					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
+2022/08/18 23:23:01 256					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
 
-2022/08/18 23:23:01 244					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+2022/08/18 23:23:01 244					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
 
 2022/08/18 23:23:01 236					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -1665,7 +1665,7 @@
 
 2022/08/18 23:23:01 206					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
-2022/08/18 23:23:01 264					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
+2022/08/18 23:23:01 264					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
 
 2022/08/18 23:23:01 192					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
 
@@ -1723,11 +1723,11 @@
 
 2022/08/18 23:23:19 440					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/18 23:23:19 444					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+2022/08/18 23:23:19 444					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
 
-2022/08/18 23:23:19 448					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
+2022/08/18 23:23:19 448					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
 
-2022/08/18 23:23:19 455					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
+2022/08/18 23:23:19 455					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
 
 2022/08/18 23:23:19 931					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
@@ -1779,11 +1779,11 @@
 
 2022/08/18 23:27:36 309					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/18 23:27:36 313					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
+2022/08/18 23:27:36 313					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
 
-2022/08/18 23:27:36 330					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
+2022/08/18 23:27:36 330					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   true
 
-2022/08/18 23:27:36 355					josec  							io.github.josecarlosbran.JBSqlLite.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
+2022/08/18 23:27:36 355					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							4   Jose   Bran   true
 
 2022/08/18 23:27:36 856					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 

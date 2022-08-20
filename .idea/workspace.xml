@@ -4,14 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Se eliminaron las clases temporales relacionadas a la BD's de Bladimir">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_08_2022_09_42__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_08_2022_09_42__Changes_.xml" afterDir="false" />
+    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Mejoras en el rendimiento del metodo saveall">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaDoc/io/github/josecarlosbran/JBSqlLite/Principal.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/io/github/josecarlosbran/JBSqlLite/Principal.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaDoc/io/github/josecarlosbran/JBSqlLite/Test.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/io/github/josecarlosbran/JBSqlLite/Test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/15-08-2022/Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/15-08-2022/Log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/16-08-2022/Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/16-08-2022/Log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/17-08-2022/Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/17-08-2022/Log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/18-08-2022/Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/18-08-2022/Log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/19-08-2022/Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/19-08-2022/Log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Column.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Column.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Conexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Conexion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/JBSqlUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/JBSqlUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods_Conexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods_Conexion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Where.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Search/Where.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Pruebas/Principal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Pruebas/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +119,7 @@
       </method>
     </configuration>
     <configuration name="Principal" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="io.github.josecarlosbran.JBSqlLite.Principal" />
+      <option name="MAIN_CLASS_NAME" value="io.github.josecarlosbran.JBSqlLite.Pruebas.Principal" />
       <module name="JBSqlUtils" />
       <extension name="coverage">
         <pattern>
@@ -319,7 +327,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660887263917</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Mejoras en el rendimiento del metodo saveall">
+      <created>1660967761631</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1660967761631</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -358,6 +373,7 @@
     <MESSAGE value="Metodos Get 100%, falta adaptarlos para el resto de BD's y crearlos" />
     <MESSAGE value="Adaptación de las clases que permiten la busqueda personalizada" />
     <MESSAGE value="Se eliminaron las clases temporales relacionadas a la BD's de Bladimir" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se eliminaron las clases temporales relacionadas a la BD's de Bladimir" />
+    <MESSAGE value="Mejoras en el rendimiento del metodo saveall" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mejoras en el rendimiento del metodo saveall" />
   </component>
 </project>

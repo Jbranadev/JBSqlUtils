@@ -42,6 +42,7 @@ public class Methods extends Methods_Conexion {
                         String sql = "CREATE TABLE " + this.getClass().getSimpleName() + "(";
                         List<Method> metodos = new ArrayList<>();
                         metodos = this.getMethodsGetOfModel(this.getMethodsModel());
+                        int datos = 0;
                         for (int i = 0; i < metodos.size(); i++) {
                             //Obtengo el metodo
                             Method metodo = metodos.get(i);
@@ -76,18 +77,30 @@ public class Methods extends Methods_Conexion {
                                 }
                             }
 
+                            //Si el modelo tiene seteado que no se manejaran las timestamps entonces
+                            //Ignora el guardar esas columnas
+                            if((!this.getTimestamps())&&((StringUtils.equalsIgnoreCase(columnName, "created_at"))
+                                    ||(StringUtils.equalsIgnoreCase(columnName, "updated_at")))){
+                                continue;
+                            }
+
                             String columna = columnName + " " + tipo_de_columna + " " + restricciones;
 
+                            datos++;
+                            if(datos>1){
+                                sql = sql + ", ";
+                            }
 
                             sql = sql + columna;
-                            int temporal = metodos.size() - 1;
+                            /*int temporal = metodos.size() - 1;
                             if (i < temporal) {
                                 sql = sql + ", ";
                             } else if (i == temporal) {
                                 sql = sql + ");";
-                            }
+                            }*/
 
                         }
+                        sql = sql + ");";
                         Connection connect = this.getConnection();
                         Statement ejecutor = connect.createStatement();
                         LogsJB.info(sql);

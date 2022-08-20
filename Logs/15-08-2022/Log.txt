@@ -11,7 +11,7 @@
 
 2022/08/15 18:48:24 361					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/15 18:48:24 366					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: false
+2022/08/15 18:48:24 366					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: false
 
 2022/08/15 18:48:24 384					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
@@ -115,7 +115,7 @@
 
 2022/08/15 22:20:49 617					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 22:20:52 582					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false    
+2022/08/15 22:20:52 582					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false
 *
 *
 *
@@ -149,7 +149,7 @@
 
 2022/08/15 22:23:05 576					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 22:23:08 464					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false    
+2022/08/15 22:23:08 464					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false
 *
 *
 *
@@ -171,7 +171,7 @@
 
 2022/08/15 22:23:50 673					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 22:23:53 636					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false    
+2022/08/15 22:23:53 636					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false
 *
 *
 *
@@ -193,7 +193,7 @@
 
 2022/08/15 22:26:11 346					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 22:26:14 273					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false    
+2022/08/15 22:26:14 273					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false
 *
 *
 *
@@ -215,7 +215,7 @@
 
 2022/08/15 22:26:41 625					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 22:26:44 547					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false    
+2022/08/15 22:26:44 547					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false
 *
 *
 *
@@ -243,7 +243,7 @@
 
 2022/08/15 22:29:31 862					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$get$2							FATAL  							Obtuvo un resultado de BD's
 
-2022/08/15 22:29:33 356					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false    
+2022/08/15 22:29:33 356					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false
 *
 *
 *
@@ -271,7 +271,7 @@
 
 2022/08/15 22:32:22 577					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$get$2							FATAL  							Obtuvo un resultado de BD's
 
-2022/08/15 22:32:25 576					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false    
+2022/08/15 22:32:25 576					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false
 *
 *
 *
@@ -301,7 +301,7 @@
 
 2022/08/15 22:34:08 536					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$get$2							FATAL  							Inicializa el array list de los metodos set
 
-2022/08/15 22:34:11 522					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false    
+2022/08/15 22:34:11 522					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false
 *
 *
 *
@@ -345,7 +345,7 @@
 
 2022/08/15 22:37:12 463					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 22:37:15 427					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false    
+2022/08/15 22:37:15 427					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false
 *
 *
 *
@@ -389,7 +389,7 @@
 
 2022/08/15 22:38:25 151					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 22:38:28 107					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false    
+2022/08/15 22:38:28 107					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false
 *
 *
 *
@@ -417,7 +417,7 @@
 
 2022/08/15 22:39:41 065					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 22:39:44 049					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false    
+2022/08/15 22:39:44 049					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false
 *
 *
 *
@@ -457,7 +457,7 @@
 
 2022/08/15 22:40:58 788					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 22:41:01 755					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false    
+2022/08/15 22:41:01 755					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false
 *
 *
 *
@@ -529,7 +529,7 @@
 
 2022/08/15 22:43:53 859					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 22:43:56 778					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false    
+2022/08/15 22:43:56 778					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false
 *
 *
 *
@@ -601,7 +601,7 @@
 
 2022/08/15 22:45:13 089					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 22:45:16 001					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false    
+2022/08/15 22:45:16 001					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false
 *
 *
 *
@@ -649,7 +649,7 @@
 
 2022/08/15 22:46:02 131					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 22:46:05 082					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false    
+2022/08/15 22:46:05 082					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false
 *
 *
 *
@@ -733,7 +733,7 @@
 
 2022/08/15 22:48:29 337					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 22:48:32 228					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false    
+2022/08/15 22:48:32 228					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false
 *
 *
 *
@@ -833,7 +833,7 @@
 
 2022/08/15 22:50:54 396					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 22:50:57 271					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: 5    Jose Alfredo    Bran Lara    false    
+2022/08/15 22:50:57 271					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: 5    Jose Alfredo    Bran Lara    false
 *
 *
 *
@@ -909,7 +909,7 @@
 
 2022/08/15 22:51:40 915					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 22:51:43 822					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: 5    Jose Alfredo    Bran Lara    false    
+2022/08/15 22:51:43 822					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: 5    Jose Alfredo    Bran Lara    false
 *
 *
 *
@@ -985,7 +985,7 @@
 
 2022/08/15 22:52:27 400					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 22:52:30 312					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: 5    Jose Alfredo    Bran Lara    false    
+2022/08/15 22:52:30 312					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: 5    Jose Alfredo    Bran Lara    false
 *
 *
 *
@@ -999,7 +999,7 @@
 
 2022/08/15 22:55:39 844					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/15 22:55:39 849					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false    
+2022/08/15 22:55:39 849					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false
 
 2022/08/15 22:55:39 866					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
@@ -1035,7 +1035,7 @@
 
 2022/08/15 22:56:29 356					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/15 22:56:29 361					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false    
+2022/08/15 22:56:29 361					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false
 
 2022/08/15 22:56:29 361					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$get$2							INFO							SELECT * FROM test WHERE name = 'Jose Alfredo' AND isMayor = true
 
@@ -1075,7 +1075,7 @@
 
 2022/08/15 22:57:23 262					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 22:57:26 230					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: 5    Jose Alfredo    Bran Lara    false    
+2022/08/15 22:57:26 230					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: 5    Jose Alfredo    Bran Lara    false
 *
 *
 *
@@ -1099,7 +1099,7 @@
 
 2022/08/15 22:58:56 701					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertSQLtoJava						WARNING							Debido a que ninguno de los metodos corresponde al tipo de dato SQL: bool
 
-2022/08/15 22:58:56 708					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: 5    Jose Alfredo    Bran Lara    false    
+2022/08/15 22:58:56 708					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: 5    Jose Alfredo    Bran Lara    false
 
 2022/08/15 22:58:56 704					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 *
@@ -1127,7 +1127,7 @@
 
 2022/08/15 23:01:03 836					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 23:01:03 843					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: 5    Jose Alfredo    Bran Lara    false    
+2022/08/15 23:01:03 843					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: 5    Jose Alfredo    Bran Lara    false
 *
 *
 *
@@ -1149,7 +1149,7 @@
 
 2022/08/15 23:01:41 764					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$get$2							INFO							SELECT * FROM test WHERE name = 'Jose Alfredo' AND isMayor = true
 
-2022/08/15 23:01:41 802					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: 5    Jose Alfredo    Bran Lara    true    
+2022/08/15 23:01:41 802					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: 5    Jose Alfredo    Bran Lara    true
 
 2022/08/15 23:01:41 797					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 *
@@ -1173,7 +1173,7 @@
 
 2022/08/15 23:04:09 923					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 23:04:09 926					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: 5    Jose Alfredo    Bran Lara    true    
+2022/08/15 23:04:09 926					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: 5    Jose Alfredo    Bran Lara    true
 *
 *
 *
@@ -1195,7 +1195,7 @@
 
 2022/08/15 23:05:39 773					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 23:05:39 776					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: 6    Jose Alfredo    Bran Lara    false    
+2022/08/15 23:05:39 776					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: 6    Jose Alfredo    Bran Lara    false
 *
 *
 *
@@ -1217,7 +1217,7 @@
 
 2022/08/15 23:09:53 184					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 23:09:53 187					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false    
+2022/08/15 23:09:53 187					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: null    null    null    false
 *
 *
 *
@@ -1241,7 +1241,7 @@
 
 2022/08/15 23:17:33 455					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 23:17:33 458					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: 6    Jose Alfredo    Bran Lara    false    
+2022/08/15 23:17:33 458					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: 6    Jose Alfredo    Bran Lara    false
 *
 *
 *
@@ -1263,7 +1263,7 @@
 
 2022/08/15 23:17:49 847					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/15 23:17:49 856					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: 6    Jose Alfredo    Bran Lara    false    
+2022/08/15 23:17:49 856					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: 6    Jose Alfredo    Bran Lara    false
 *
 *
 *
@@ -1285,4 +1285,4 @@
 
 2022/08/15 23:18:29 117					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
-2022/08/15 23:18:29 181					josec  							io.github.josecarlosbran.JBSqlLite.Principal		PostgreSQL 							INFO							Resultado es: 1    Jose Carlos    Bran Aguirre    false    
+2022/08/15 23:18:29 181					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Resultado es: 1    Jose Carlos    Bran Aguirre    false

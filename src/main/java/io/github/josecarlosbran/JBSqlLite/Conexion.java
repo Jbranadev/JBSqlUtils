@@ -707,7 +707,7 @@ public class Conexion {
     /**
      * Obtiene la bandera que define si el modelo desea que JBSqlUtils maneje las timestamps Created_at, Update_at.
      */
-    public Boolean getTimestamps() {
+    protected Boolean getTimestamps() {
         return timestamps;
     }
 
@@ -716,7 +716,7 @@ public class Conexion {
      * @param timestamps True si las timestamps serán manejadas por JBSqlUtils, False, si el modelo no tiene estas
      *                   columnas.
      */
-    public void setTimestamps(Boolean timestamps) {
+    protected void setTimestamps(Boolean timestamps) {
         this.timestamps = timestamps;
     }
 

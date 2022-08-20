@@ -637,6 +637,7 @@ public class Methods_Conexion extends Conexion {
                         List<Method> metodos = new ArrayList<>();
                         metodos = modelo.getMethodsGetOfModel(modelo.getMethodsModel());
                         int datos = 0;
+                        List<Integer> indicemetodos = new ArrayList<>();
                         //Llena la información de las columnas que se insertaran
                         for (int i = 0; i < metodos.size(); i++) {
                             //Obtengo el metodo
@@ -646,37 +647,46 @@ public class Methods_Conexion extends Conexion {
                             String columnName = metodo.getName();
                             columnName = StringUtils.remove(columnName, "get");
                             if (Objects.isNull(columnsSQL.getValor())) {
+
                                 continue;
                             }
-                            datos++;
-                            sql = sql + columnName;
-                            int temporal = metodos.size() - 1;
-                            if (i < temporal) {
-                                sql = sql + ", ";
-                            } else if (i == temporal) {
-                                sql = sql + ") VALUES (";
+                            //Si el modelo tiene seteado que no se manejaran las timestamps entonces
+                            //Ignora el guardar esas columnas
+                            if((!this.getTimestamps())&&((StringUtils.equalsIgnoreCase(columnName, "created_at"))
+                            ||(StringUtils.equalsIgnoreCase(columnName, "updated_at")))){
+                                continue;
                             }
+
+                            datos++;
+                            if(datos>1){
+                                sql = sql + ", ";
+                            }
+                            sql = sql + columnName;
+                            indicemetodos.add(i);
                         }
 
+                        sql = sql + ") VALUES (";
                         //Llena los espacios con la información de los datos que serán agregados
-                        for (int i = 0; i < datos; i++) {
+                        for (int i = 0; i < indicemetodos.size(); i++) {
                             sql = sql + "?";
-                            int temporal = datos - 1;
+                            int temporal = indicemetodos.size() - 1;
                             if (i < temporal) {
                                 sql = sql + ", ";
                             } else if (i == temporal) {
                                 sql = sql + ");";
                             }
                         }
+
                         LogsJB.info(sql);
 
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         //LogsJB.info("Creo la instancia del PreparedStatement");
                         //Llena el prepareStatement
+                        LogsJB.debug("Llenara la información de las columnas: "+indicemetodos.size());
                         int auxiliar = 1;
-                        for (int i = 0; i < metodos.size(); i++) {
+                        for (int i = 0; i < indicemetodos.size(); i++) {
                             //Obtengo el metodo
-                            Method metodo = metodos.get(i);
+                            Method metodo = metodos.get(indicemetodos.get(i));
                             //Obtengo la información de la columna
                             Column columnsSQL = (Column) metodo.invoke(modelo, null);
                             if (Objects.isNull(columnsSQL.getValor())) {
@@ -734,6 +744,13 @@ public class Methods_Conexion extends Conexion {
                                 continue;
                             }
                             if (Objects.isNull(columnsSQL.getValor())) {
+                                continue;
+                            }
+
+                            //Si el modelo tiene seteado que no se manejaran las timestamps entonces
+                            //Ignora el guardar esas columnas
+                            if((!this.getTimestamps())&&((StringUtils.equalsIgnoreCase(columnName, "created_at"))
+                                    ||(StringUtils.equalsIgnoreCase(columnName, "updated_at")))){
                                 continue;
                             }
 
