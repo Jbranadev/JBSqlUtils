@@ -1,0 +1,820 @@
+*
+*
+*
+*
+*
+2022/08/20 08:03:38 044					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							Comienza a verificar la existencia de la tabla
+
+2022/08/20 08:03:38 107					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:03:38 170					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/20 08:03:38 174					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:03:38 180					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$1  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/20 08:03:38 195					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$1  				INFO							Sentencia para eliminar tabla de la BD's ejecutada exitosamente
+
+2022/08/20 08:03:38 198					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$1  				INFO							Tabla Test Eliminada exitosamente
+
+2022/08/20 08:03:38 201					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$dropTableIfExist$1  				INFO							DROP TABLE IF EXISTS Test
+
+2022/08/20 08:03:38 272					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							Comienza a verificar la existencia de la tabla
+
+2022/08/20 08:03:38 304					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:03:38 300					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/20 08:03:38 279					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:03:38 768					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:03:38 931					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							Comienza a verificar la existencia de la tabla
+
+2022/08/20 08:03:39 013					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:03:39 032					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, No existe en BD's
+
+2022/08/20 08:03:39 035					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:03:39 203					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:03:39 206					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$0					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id SERIAL PRIMARY KEY , IsMayor BOOLEAN , Apellido VARCHAR(254) , Created_at TIMESTAMP , Updated_at TIMESTAMP );
+
+2022/08/20 08:03:39 229					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$0					INFO							Sentencia para crear tabla de la BD's ejecutada exitosamente
+
+2022/08/20 08:03:39 235					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$0					INFO							CREATE TABLE Test(Name VARCHAR(254) , Id SERIAL PRIMARY KEY , IsMayor BOOLEAN , Apellido VARCHAR(254) , Created_at TIMESTAMP , Updated_at TIMESTAMP );
+
+2022/08/20 08:03:39 238					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:03:39 232					josec  							io.github.josecarlosbran.JBSqlLite.Methods 		lambda$crateTable$0					INFO							Tabla Test Creada exitosamente
+
+2022/08/20 08:03:39 291					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							Comienza a verificar la existencia de la tabla
+
+2022/08/20 08:03:39 596					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							WARNING							0.0 mili segundos
+
+2022/08/20 08:03:39 585					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/20 08:03:39 592					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Cantidad de resultado lista: 0
+
+2022/08/20 08:03:39 589					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:03:39 563					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:03:39 708					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:03:39 732					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/20 08:03:39 735					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/20 08:05:30 131					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							Comienza a verificar la existencia de la tabla
+
+2022/08/20 08:05:30 718					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:05:30 828					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/20 08:05:30 833					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:05:30 905					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		saveModel  							DEBUG  							El modelo existe: false
+
+2022/08/20 08:05:30 933					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:05:30 986					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:05:30 981					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/20 08:05:30 898					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:05:31 115					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$2 					INFO							INSERT INTO Test(Name, IsMayor, Apellido) VALUES (?, ?, ?);
+
+2022/08/20 08:05:31 122					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$2 					DEBUG  							Llenara la información de las columnas: 3
+
+2022/08/20 08:05:31 132					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: Jose
+
+2022/08/20 08:05:31 129					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 1
+
+2022/08/20 08:05:31 126					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: VARCHAR(254)
+
+2022/08/20 08:05:31 135					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: BIT
+
+2022/08/20 08:05:31 138					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 2
+
+2022/08/20 08:05:31 169					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: true
+
+2022/08/20 08:05:31 179					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: Bran
+
+2022/08/20 08:05:31 172					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: VARCHAR(254)
+
+2022/08/20 08:05:31 176					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 3
+
+2022/08/20 08:05:31 200					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Cantidad de resultado lista: 0
+
+2022/08/20 08:05:31 193					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:05:31 189					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$2 					INFO							Filas actualizadas: 1
+
+2022/08/20 08:05:31 209					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							WARNING							0.0 mili segundos
+*
+*
+*
+*
+*
+2022/08/20 08:10:13 132					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							Comienza a verificar la existencia de la tabla
+
+2022/08/20 08:10:13 685					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:10:13 742					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/20 08:10:13 747					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:10:13 815					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:10:13 850					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/20 08:10:13 853					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:10:13 871					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (apellido = Bran );
+
+2022/08/20 08:10:13 916					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							FATAL  							Mensaje de la Excepción : ERROR: no existe la columna «bran»
+  Position: 61
+
+2022/08/20 08:10:13 919					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@250e4842
+
+2022/08/20 08:10:13 913					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							FATAL  							Causa de la Excepción : null
+
+2022/08/20 08:10:13 909					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							FATAL  							Tipo de Excepción : class org.postgresql.util.PSQLException
+
+2022/08/20 08:10:13 905					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							FATAL  							Excepción disparada en el método que Obtiene la información del modelo de la BD's: org.postgresql.util.PSQLException: ERROR: no existe la columna «bran»
+  Position: 61
+
+2022/08/20 08:10:14 070					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:10:14 075					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		saveModel  							DEBUG  							El modelo existe: false
+
+2022/08/20 08:10:14 080					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							WARNING							156.0 mili segundos
+
+2022/08/20 08:10:14 099					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$2 					INFO							INSERT INTO Test(Name, IsMayor, Apellido, Created_at, Updated_at) VALUES (?, ?, ?, ?, ?);
+
+2022/08/20 08:10:14 103					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$2 					DEBUG  							Llenara la información de las columnas: 5
+
+2022/08/20 08:10:14 106					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: VARCHAR(254)
+
+2022/08/20 08:10:14 110					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 1
+
+2022/08/20 08:10:14 120					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: BIT
+
+2022/08/20 08:10:14 117					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: Jose
+
+2022/08/20 08:10:14 126					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: false
+
+2022/08/20 08:10:14 123					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 2
+
+2022/08/20 08:10:14 130					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: VARCHAR(254)
+
+2022/08/20 08:10:14 133					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 3
+
+2022/08/20 08:10:14 137					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: Bran
+
+2022/08/20 08:10:14 155					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: TIMESTAMP
+
+2022/08/20 08:10:14 178					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 5
+
+2022/08/20 08:10:14 172					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: TIMESTAMP
+
+2022/08/20 08:10:14 166					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: 2022-08-20 08:10:14.154
+
+2022/08/20 08:10:14 163					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 4
+
+2022/08/20 08:10:14 198					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$2 					INFO							Filas Insertadas en BD's': 1
+
+2022/08/20 08:10:14 212					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:10:14 185					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: 2022-08-20 08:10:14.172
+*
+*
+*
+*
+*
+2022/08/20 08:19:08 723					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							Comienza a verificar la existencia de la tabla
+
+2022/08/20 08:19:09 315					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:19:09 380					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/20 08:19:09 384					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:19:09 465					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:19:09 512					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/20 08:19:09 517					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:19:09 545					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (apellido = Bran );
+
+2022/08/20 08:19:09 591					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							null   null   null   false
+
+2022/08/20 08:19:09 588					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@134b81d8
+
+2022/08/20 08:19:09 585					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							FATAL  							Mensaje de la Excepción : ERROR: no existe la columna «bran»
+  Position: 61
+
+2022/08/20 08:19:09 579					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							FATAL  							Causa de la Excepción : null
+
+2022/08/20 08:19:09 574					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							FATAL  							Tipo de Excepción : class org.postgresql.util.PSQLException
+
+2022/08/20 08:19:09 570					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							FATAL  							Excepción disparada en el método que Obtiene la información del modelo de la BD's: org.postgresql.util.PSQLException: ERROR: no existe la columna «bran»
+  Position: 61
+
+2022/08/20 08:19:09 773					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							WARNING							90.0 mili segundos
+
+2022/08/20 08:19:09 765					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:19:09 769					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		saveModel  							DEBUG  							El modelo existe: false
+
+2022/08/20 08:19:09 889					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$2 					INFO							INSERT INTO Test(IsMayor, Updated_at, Created_at) VALUES (?, ?, ?);
+
+2022/08/20 08:19:09 895					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: BIT
+
+2022/08/20 08:19:09 892					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$2 					DEBUG  							Llenara la información de las columnas: 3
+
+2022/08/20 08:19:09 901					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: true
+
+2022/08/20 08:19:09 898					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 1
+
+2022/08/20 08:19:09 904					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: TIMESTAMP
+
+2022/08/20 08:19:09 910					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: 2022-08-20 08:19:09.904
+
+2022/08/20 08:19:09 914					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: TIMESTAMP
+
+2022/08/20 08:19:09 918					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 3
+
+2022/08/20 08:19:09 907					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 2
+
+2022/08/20 08:19:09 922					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: 2022-08-20 08:19:09.913
+
+2022/08/20 08:19:09 933					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$2 					INFO							Filas Insertadas en BD's': 1
+
+2022/08/20 08:19:09 936					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/20 08:22:21 362					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							Comienza a verificar la existencia de la tabla
+
+2022/08/20 08:22:21 906					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:22:21 958					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/20 08:22:21 962					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:22:22 061					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:22:22 088					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/20 08:22:22 091					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:22:22 110					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (apellido = Bran );
+
+2022/08/20 08:22:22 160					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							FATAL  							Excepción disparada en el método que Obtiene la información del modelo de la BD's: org.postgresql.util.PSQLException: ERROR: no existe la columna «bran»
+  Position: 61
+
+2022/08/20 08:22:22 166					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							FATAL  							Causa de la Excepción : null
+
+2022/08/20 08:22:22 170					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							FATAL  							Mensaje de la Excepción : ERROR: no existe la columna «bran»
+  Position: 61
+
+2022/08/20 08:22:22 163					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							FATAL  							Tipo de Excepción : class org.postgresql.util.PSQLException
+
+2022/08/20 08:22:22 183					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							WARNING							0.0 mili segundos
+
+2022/08/20 08:22:22 176					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							null   null   null   false
+
+2022/08/20 08:22:22 173					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@2619075a
+*
+*
+*
+*
+*
+2022/08/20 08:23:04 401					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							Comienza a verificar la existencia de la tabla
+
+2022/08/20 08:23:04 858					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:23:04 910					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/20 08:23:04 914					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:23:04 978					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:23:05 012					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/20 08:23:05 029					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (apellido = 'Bran' );
+
+2022/08/20 08:23:05 015					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:23:05 038					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
+
+2022/08/20 08:23:05 052					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de columnas : 6
+
+2022/08/20 08:23:05 059					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/20 08:23:05 066					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/20 08:23:05 099					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:23:05 105					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							WARNING							0.0 mili segundos
+
+2022/08/20 08:23:05 102					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							1   Jose   Bran   true
+*
+*
+*
+*
+*
+2022/08/20 08:28:50 554					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							Comienza a verificar la existencia de la tabla
+
+2022/08/20 08:28:51 122					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:28:51 190					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/20 08:28:51 194					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:28:51 300					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:28:51 330					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/20 08:28:51 336					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:28:51 361					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (apellido = 'Bran' );
+
+2022/08/20 08:28:51 407					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de columnas : 6
+
+2022/08/20 08:28:51 525					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							1   Jose   Bran   true
+
+2022/08/20 08:28:51 382					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
+
+2022/08/20 08:28:51 493					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:28:51 417					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/20 08:28:51 598					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:28:51 604					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		saveModel  							DEBUG  							El modelo existe: true
+
+2022/08/20 08:28:51 738					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$3 					INFO							UPDATE test SET Name=?, Apellido=?, IsMayor=?, Created_at=?, Updated_at=? WHERE id=?;
+
+2022/08/20 08:28:51 756					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$3 					DEBUG  							Llenara la información de las columnas: 5
+
+2022/08/20 08:28:51 761					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: VARCHAR(254)
+
+2022/08/20 08:28:51 766					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 1
+
+2022/08/20 08:28:51 769					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: Jose
+
+2022/08/20 08:28:51 773					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: VARCHAR(254)
+
+2022/08/20 08:28:51 777					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 2
+
+2022/08/20 08:28:51 780					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: Bran
+
+2022/08/20 08:28:51 790					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: false
+
+2022/08/20 08:28:51 787					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 3
+
+2022/08/20 08:28:51 783					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: BIT
+
+2022/08/20 08:28:51 797					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 4
+
+2022/08/20 08:28:51 794					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: TIMESTAMP
+
+2022/08/20 08:28:51 818					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: INTEGER
+
+2022/08/20 08:28:51 815					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$3 					DEBUG  							Termino de llenar la información de las columnas: 6
+
+2022/08/20 08:28:51 810					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: 2022-08-20 08:28:51.803
+
+2022/08/20 08:28:51 807					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 5
+
+2022/08/20 08:28:51 803					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: TIMESTAMP
+
+2022/08/20 08:28:51 800					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: 2022-08-20 08:28:51.794
+
+2022/08/20 08:28:51 821					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 6
+
+2022/08/20 08:28:51 824					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: 1
+
+2022/08/20 08:28:51 835					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$3 					INFO							Filas actualizadas: 1
+
+2022/08/20 08:28:51 842					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							WARNING							314.0 mili segundos
+
+2022/08/20 08:28:51 838					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/20 08:36:30 094					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							Comienza a verificar la existencia de la tabla
+
+2022/08/20 08:36:30 621					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:36:30 676					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/20 08:36:30 680					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:36:30 744					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:36:30 784					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/20 08:36:30 788					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:36:30 795					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (apellido = 'Bran' );
+
+2022/08/20 08:36:30 806					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
+
+2022/08/20 08:36:30 823					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/20 08:36:30 820					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de columnas : 6
+
+2022/08/20 08:36:30 834					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/20 08:36:30 901					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/20 08:36:30 923					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:36:30 927					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							1   Jose   Bran   false
+
+2022/08/20 08:36:31 011					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:36:31 015					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		saveModel  							DEBUG  							El modelo existe: true
+
+2022/08/20 08:36:31 023					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$3 					INFO							UPDATE test SET Name=?, Apellido=?, IsMayor=?, Updated_at=? WHERE id=?;
+
+2022/08/20 08:36:31 027					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$3 					DEBUG  							Llenara la información de las columnas: 4
+
+2022/08/20 08:36:31 030					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: VARCHAR(254)
+
+2022/08/20 08:36:31 034					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 1
+
+2022/08/20 08:36:31 037					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: Jose
+
+2022/08/20 08:36:31 040					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: VARCHAR(254)
+
+2022/08/20 08:36:31 043					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 2
+
+2022/08/20 08:36:31 046					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: Bran
+
+2022/08/20 08:36:31 050					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: BIT
+
+2022/08/20 08:36:31 053					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 3
+
+2022/08/20 08:36:31 056					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: true
+
+2022/08/20 08:36:31 064					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 4
+
+2022/08/20 08:36:31 060					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: TIMESTAMP
+
+2022/08/20 08:36:31 067					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: 2022-08-20 08:36:31.06
+
+2022/08/20 08:36:31 070					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$3 					DEBUG  							Termino de llenar la información de las columnas: 5
+
+2022/08/20 08:36:31 077					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 5
+
+2022/08/20 08:36:31 074					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: INTEGER
+
+2022/08/20 08:36:31 096					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							WARNING							165.0 mili segundos
+
+2022/08/20 08:36:31 092					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:36:31 088					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$3 					INFO							Filas actualizadas: 1
+
+2022/08/20 08:36:31 080					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: 1
+*
+*
+*
+*
+*
+2022/08/20 08:37:10 058					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							Comienza a verificar la existencia de la tabla
+
+2022/08/20 08:37:10 537					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:37:10 591					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/20 08:37:10 595					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:37:10 659					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:37:10 689					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:37:10 744					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/20 08:37:10 741					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de columnas : 6
+
+2022/08/20 08:37:10 727					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
+
+2022/08/20 08:37:10 711					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:37:10 707					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/20 08:37:10 690					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (apellido = 'Bran' );
+
+2022/08/20 08:37:10 760					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/20 08:37:10 799					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/20 08:37:10 805					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:37:10 808					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							1   Jose   Bran   true
+
+2022/08/20 08:37:10 904					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:37:10 908					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		saveModel  							DEBUG  							El modelo existe: true
+
+2022/08/20 08:37:10 929					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$3 					INFO							UPDATE test SET Name=?, Apellido=?, IsMayor=? WHERE id=?;
+
+2022/08/20 08:37:10 933					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$3 					DEBUG  							Llenara la información de las columnas: 3
+
+2022/08/20 08:37:10 936					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: VARCHAR(254)
+
+2022/08/20 08:37:10 939					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 1
+
+2022/08/20 08:37:10 942					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: Jose
+
+2022/08/20 08:37:10 945					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: VARCHAR(254)
+
+2022/08/20 08:37:10 948					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 2
+
+2022/08/20 08:37:10 951					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: Bran
+
+2022/08/20 08:37:10 954					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: BIT
+
+2022/08/20 08:37:10 957					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 3
+
+2022/08/20 08:37:10 960					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: false
+
+2022/08/20 08:37:10 963					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$3 					DEBUG  							Termino de llenar la información de las columnas: 4
+
+2022/08/20 08:37:10 966					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: INTEGER
+
+2022/08/20 08:37:10 973					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: 1
+
+2022/08/20 08:37:10 969					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 4
+
+2022/08/20 08:37:10 984					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:37:10 981					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$3 					INFO							Filas actualizadas: 1
+
+2022/08/20 08:37:10 990					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							WARNING							160.0 mili segundos
+*
+*
+*
+*
+*
+2022/08/20 08:37:26 438					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							Comienza a verificar la existencia de la tabla
+
+2022/08/20 08:37:26 882					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:37:26 937					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/20 08:37:26 941					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:37:27 013					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:37:27 044					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/20 08:37:27 047					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:37:27 066					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (apellido = 'Bran' );
+
+2022/08/20 08:37:27 092					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/20 08:37:27 088					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de columnas : 6
+
+2022/08/20 08:37:27 075					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
+
+2022/08/20 08:37:27 098					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/20 08:37:27 112					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/20 08:37:27 134					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							1   Jose   Bran   false
+
+2022/08/20 08:37:27 121					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/20 08:37:27 131					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:37:27 216					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 08:37:27 220					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		saveModel  							DEBUG  							El modelo existe: true
+
+2022/08/20 08:37:27 284					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$3 					INFO							UPDATE test SET Name=?, IsMayor=?, Apellido=?, Updated_at=? WHERE id=?;
+
+2022/08/20 08:37:27 287					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$3 					DEBUG  							Llenara la información de las columnas: 4
+
+2022/08/20 08:37:27 291					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: VARCHAR(254)
+
+2022/08/20 08:37:27 294					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 1
+
+2022/08/20 08:37:27 300					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: BIT
+
+2022/08/20 08:37:27 297					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: Jose
+
+2022/08/20 08:37:27 303					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 2
+
+2022/08/20 08:37:27 311					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: true
+
+2022/08/20 08:37:27 315					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: VARCHAR(254)
+
+2022/08/20 08:37:27 318					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 3
+
+2022/08/20 08:37:27 321					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: Bran
+
+2022/08/20 08:37:27 330					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: 2022-08-20 08:37:27.324
+
+2022/08/20 08:37:27 327					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 4
+
+2022/08/20 08:37:27 324					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: TIMESTAMP
+
+2022/08/20 08:37:27 333					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$3 					DEBUG  							Termino de llenar la información de las columnas: 5
+
+2022/08/20 08:37:27 337					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: INTEGER
+
+2022/08/20 08:37:27 340					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 5
+
+2022/08/20 08:37:27 344					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: 1
+
+2022/08/20 08:37:27 354					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$saveModel$3 					INFO							Filas actualizadas: 1
+
+2022/08/20 08:37:27 361					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 08:37:27 367					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							WARNING							227.0 mili segundos
+*
+*
+*
+*
+*
+2022/08/20 09:00:14 249					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							Comienza a verificar la existencia de la tabla
+
+2022/08/20 09:00:14 690					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 09:00:14 740					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/20 09:00:14 744					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 09:00:14 820					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 09:00:14 844					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/20 09:00:14 850					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 09:00:14 848					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 09:00:14 874					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (apellido = 'Bran' );
+
+2022/08/20 09:00:14 888					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
+
+2022/08/20 09:00:14 902					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de columnas : 6
+
+2022/08/20 09:00:14 908					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSetOneResult 				DEBUG  							Cantidad de metodos set: 6
+
+2022/08/20 09:00:14 998					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							1   Jose   Bran   true
+
+2022/08/20 09:00:14 994					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 09:00:15 067					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 09:00:15 098					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					INFO							DELETE FROM test WHERE id=?;
+
+2022/08/20 09:00:15 101					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					DEBUG  							Colocara la información del where: 1
+
+2022/08/20 09:00:15 104					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					DEBUG  							Indice del metodo donde esta la información del where: 1
+
+2022/08/20 09:00:15 107					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							DataType de la columna: INTEGER
+
+2022/08/20 09:00:15 110					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Indice donde insertara la columna: 1
+
+2022/08/20 09:00:15 113					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		convertJavaToSQL						DEBUG  							Valor de la columna: 1
+
+2022/08/20 09:00:15 124					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					INFO							Filas Eliminadas: 1
+
+2022/08/20 09:00:15 134					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							WARNING							130.0 mili segundos
+
+2022/08/20 09:00:15 127					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+*
+*
+*
+*
+*
+2022/08/20 09:01:01 505					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							Comienza a verificar la existencia de la tabla
+
+2022/08/20 09:01:02 001					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 09:01:02 055					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/20 09:01:02 059					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 09:01:02 128					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 09:01:02 173					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 09:01:02 179					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 09:01:02 152					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (apellido = 'Bran' );
+
+2022/08/20 09:01:02 176					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							null   null   null   false
+
+2022/08/20 09:01:02 200					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/20 09:01:02 203					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 09:01:02 327					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 09:01:02 388					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					INFO							DELETE FROM test WHERE id=?;
+
+2022/08/20 09:01:02 391					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					DEBUG  							Colocara la información del where: 1
+
+2022/08/20 09:01:02 410					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					FATAL  							Causa de la Excepción : null
+
+2022/08/20 09:01:02 407					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					FATAL  							Tipo de Excepción : class org.postgresql.util.PSQLException
+
+2022/08/20 09:01:02 413					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					FATAL  							Mensaje de la Excepción : No se ha especificado un valor para el parámetro 1.
+
+2022/08/20 09:01:02 420					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							WARNING							241.0 mili segundos
+
+2022/08/20 09:01:02 417					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@2254e033
+
+2022/08/20 09:01:02 395					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					DEBUG  							Indice del metodo donde esta la información del where: 1
+
+2022/08/20 09:01:02 404					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					FATAL  							Excepción disparada en el método que Guarda el modelo en la BD's: org.postgresql.util.PSQLException: No se ha especificado un valor para el parámetro 1.
+*
+*
+*
+*
+*
+2022/08/20 09:03:33 318					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							Comienza a verificar la existencia de la tabla
+
+2022/08/20 09:03:33 791					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 09:03:33 856					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/20 09:03:33 861					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 09:03:33 943					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 09:03:33 976					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/20 09:03:33 979					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 09:03:34 004					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (apellido = 'Bran' );
+
+2022/08/20 09:03:34 016					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 09:03:34 021					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							null   null   null   false
+
+2022/08/20 09:03:34 162					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 09:03:34 190					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					INFO							DELETE FROM test WHERE id=?;
+
+2022/08/20 09:03:34 194					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					DEBUG  							Colocara la información del where: 1
+
+2022/08/20 09:03:34 198					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					DEBUG  							Indice del metodo donde esta la información del where: 1
+
+2022/08/20 09:03:34 201					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					WARNING							El modelo proporcionado no tiene definido el valor de la clave id Por lo cual no se puede eliminar el modelo
+*
+*
+*
+*
+*
+2022/08/20 09:05:34 026					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							Comienza a verificar la existencia de la tabla
+
+2022/08/20 09:05:34 464					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 09:05:34 516					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$tableExist$0					INFO							La tabla correspondiente a este modelo, existe en BD's
+
+2022/08/20 09:05:34 520					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 09:05:34 608					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 09:05:34 647					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
+
+2022/08/20 09:05:34 649					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$get$0							INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (apellido = 'Bran' );
+
+2022/08/20 09:05:34 650					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 09:05:34 661					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
+
+2022/08/20 09:05:34 667					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							null   null   null   false
+
+2022/08/20 09:05:34 782					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
+
+2022/08/20 09:05:34 834					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					INFO							DELETE FROM test WHERE id=?;
+
+2022/08/20 09:05:34 837					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					DEBUG  							Colocara la información del where: 1
+
+2022/08/20 09:05:34 840					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					DEBUG  							Indice del metodo donde esta la información del where: 1
+
+2022/08/20 09:05:34 843					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$deleteModel$4					WARNING							El modelo proporcionado no tiene definido el valor de la clave id Por lo cual no se puede eliminar el modelo
+
+2022/08/20 09:05:34 847					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							WARNING							174.0 mili segundos

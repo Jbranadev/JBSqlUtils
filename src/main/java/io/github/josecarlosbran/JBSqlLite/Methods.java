@@ -270,6 +270,56 @@ public class Methods extends Methods_Conexion {
     }
 
 
+    public void delete() {
+        try {
+            deleteModel(this);
+        } catch (Exception e) {
+            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
+    }
+
+
+    public <T extends Methods_Conexion> void deleteALL(List<T> modelos){
+        try{
+            T temp=null;
+            for(T modelo: modelos){
+                //Optimización de los tiempos de inserción de cada modelo.
+                if(!Objects.isNull(temp)){
+                    modelo.setTabla(temp.getTabla());
+                    modelo.setTableExist(temp.getTableExist());
+                    modelo.setTableName(temp.getTableName());
+                    LogsJB.info("Modelo Ya había sido inicializado");
+                }else{
+                    temp=(T) modelo.getClass().newInstance();
+                    LogsJB.warning("Modelo era Null, crea una nueva instancia");
+                }
+                if (!modelo.getTableExist()) {
+                    LogsJB.info("Obtendra la información de conexión de la BD's");
+                    modelo.refresh();
+                    while(modelo.getTabla().getColumnas().size()==0){
+
+                    }
+                    LogsJB.info("Ya obtuvo la información de BD's'");
+                    temp.setTableExist(modelo.getTableExist());
+                    temp.setTableName(modelo.getTableName());
+                    temp.setTabla(modelo.getTabla());
+                }
+                modelo.deleteModel(modelo);
+            }
+        }catch (Exception e) {
+            LogsJB.fatal("Excepción disparada en el método que Guarda la lista de modelos en la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
+    }
+
+
     public Boolean saveBoolean(){
         Boolean result = false;
         try{

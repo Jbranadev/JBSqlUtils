@@ -4,22 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Mejoras en el rendimiento del metodo saveall">
+    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Implementación de TimeStamps en la creación de un tabla e inserción de registros">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/io/github/josecarlosbran/JBSqlLite/Principal.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/io/github/josecarlosbran/JBSqlLite/Principal.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/io/github/josecarlosbran/JBSqlLite/Test.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/io/github/josecarlosbran/JBSqlLite/Test.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/15-08-2022/Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/15-08-2022/Log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/16-08-2022/Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/16-08-2022/Log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/17-08-2022/Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/17-08-2022/Log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/18-08-2022/Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/18-08-2022/Log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/19-08-2022/Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/19-08-2022/Log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Column.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Column.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Conexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Conexion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/JBSqlUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/JBSqlUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods_Conexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods_Conexion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Pruebas/Principal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Pruebas/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Pruebas/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Pruebas/Principal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Pruebas/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Pruebas/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,6 +88,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="io.github.josecarlosbran.JBSqlLite.Pruebas" />
       <recent name="io.github.josecarlosbran.JBSqlLite.Exception" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -334,7 +325,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660967761631</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Implementación de TimeStamps en la creación de un tabla e inserción de registros">
+      <created>1660971906439</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1660971906439</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,6 +372,7 @@
     <MESSAGE value="Adaptación de las clases que permiten la busqueda personalizada" />
     <MESSAGE value="Se eliminaron las clases temporales relacionadas a la BD's de Bladimir" />
     <MESSAGE value="Mejoras en el rendimiento del metodo saveall" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mejoras en el rendimiento del metodo saveall" />
+    <MESSAGE value="Implementación de TimeStamps en la creación de un tabla e inserción de registros" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementación de TimeStamps en la creación de un tabla e inserción de registros" />
   </component>
 </project>

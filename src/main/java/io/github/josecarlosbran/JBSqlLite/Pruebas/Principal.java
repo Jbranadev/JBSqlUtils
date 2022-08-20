@@ -1,6 +1,7 @@
 package io.github.josecarlosbran.JBSqlLite.Pruebas;
 
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
+import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
@@ -113,14 +114,14 @@ public class Principal {
         test.setBD("JBSQLUTILS");
         test.setDataBaseType(DataBase.PostgreSQL);
 
-        test.dropTableIfExist();
-        test.crateTable();
+        //test.dropTableIfExist();
+        //test.crateTable();
 
 
-        test.getName().setValor("Jose");
-        test.getApellido().setValor("Bran");
-        test.getIsMayor().setValor(true);
-        test.save();
+        //test.getName().setValor("Jose");
+        //test.getApellido().setValor("Bran");
+        //test.getIsMayor().setValor(true);
+        //test.save();
 
 
         Consumer<Test> showFilas = fila -> {
@@ -147,16 +148,25 @@ public class Principal {
         //lista.add(test);
 
         //test.where("",null, "").and("", null, "").or("", null, "").and("").getAll();
+        test.where("name", Operator.IGUAL_QUE, "'Jose'").and("apellido", Operator.IGUAL_QUE, "'Bran'").get();
         while (!test.getTaskIsReady()){
 
         }
+        LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.getApellido().getValor()+"   "+test.getIsMayor().getValor());
 
-        LogsJB.info("Cantidad de resultado lista: "+lista.size());
+        //test.getIsMayor().setValor(!test.getIsMayor().getValor());
+
+        //LogsJB.info("Cantidad de resultado lista: "+lista.size());
 
         //lista.forEach(showFilas);
         long inicio = System.currentTimeMillis();
 
         //test.saveALL(lista);
+        //test.save();
+        test.delete();
+        while (!test.getTaskIsReady()){
+
+        }
 
         long fin = System.currentTimeMillis();
         //double tiempo = (double) ((fin - inicio)/1000);
