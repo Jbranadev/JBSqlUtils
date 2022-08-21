@@ -4,12 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Implementación de TimeStamps en la creación de un tabla e inserción de registros">
+    <list default="true" id="7d2e39f6-e9d7-4af1-9cfa-90bd43499dfb" name="Changes" comment="Documentación de metodos y clases 100% a excepción de los de la Clase Methods">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_08_2022_14_29__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_08_2022_14_29__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_08_2022_09_30__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_08_2022_09_30__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_08_2022_20_15__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_08_2022_20_15__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_08_2022_08_49__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_08_2022_08_49__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_08_2022_20_40__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_08_2022_20_40__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_08_2022_07_57__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_08_2022_07_57__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_08_2022_20_08__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_08_2022_20_08__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_08_2022_09_42__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_08_2022_09_42__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_08_2022_19_49__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_08_2022_19_49__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods_Conexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Methods_Conexion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Pruebas/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Pruebas/Principal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Pruebas/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/josecarlosbran/JBSqlLite/Pruebas/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +34,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Tablas_Bladimir" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -43,16 +50,8 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="JBranTemp" />
-                    <option name="lastUsedInstant" value="1660887111" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="Tablas_Bladimir" />
-                    <option name="lastUsedInstant" value="1660887098" />
-                  </RecentBranch>
-                  <RecentBranch>
                     <option name="branchName" value="JBran" />
-                    <option name="lastUsedInstant" value="1659714243" />
+                    <option name="lastUsedInstant" value="1660528951" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="master" />
@@ -70,6 +69,16 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
   <component name="ProjectId" id="2CXYW5WhLFzOV3DJkFKowhUpe6v" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -78,21 +87,18 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Project.color&quot;: &quot;27361a&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/josec/IdeaProjects/JBSqlUtils&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="io.github.josecarlosbran.JBSqlLite.Pruebas" />
       <recent name="io.github.josecarlosbran.JBSqlLite.Exception" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="io.github.josecarlosbran.JBSqlLite.Search" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Principal">
@@ -110,14 +116,25 @@
       </method>
     </configuration>
     <configuration name="Principal" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="io.github.josecarlosbran.JBSqlLite.Pruebas.Principal" />
+      <option name="MAIN_CLASS_NAME" value="io.github.josecarlosbran.JBSqlLite.Principal" />
       <module name="JBSqlUtils" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="io.github.josecarlosbran.JBSqlLite.Search.*" />
+          <option name="PATTERN" value="io.github.josecarlosbran.JBSqlLite.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -241,98 +258,63 @@
       <option name="project" value="LOCAL" />
       <updated>1660078083981</updated>
     </task>
-    <task id="LOCAL-00014" summary="Creación de metodo para crear tabla correspondiente al modelo 10%">
-      <created>1660086214771</created>
+    <task id="LOCAL-00014" summary="Metodos para obtener los metodos del modelo completados">
+      <created>1660105994765</created>
       <option name="number" value="00014" />
       <option name="presentableId" value="LOCAL-00014" />
       <option name="project" value="LOCAL" />
-      <updated>1660086214772</updated>
+      <updated>1660105994765</updated>
     </task>
-    <task id="LOCAL-00015" summary="Creación de metodo para crear tabla correspondiente al modelo 15%">
-      <created>1660172839357</created>
+    <task id="LOCAL-00015" summary="Metodos para eliminar y crear Tabla correspondiente al modelo 100%">
+      <created>1660195525111</created>
       <option name="number" value="00015" />
       <option name="presentableId" value="LOCAL-00015" />
       <option name="project" value="LOCAL" />
-      <updated>1660172839357</updated>
+      <updated>1660195525111</updated>
     </task>
-    <task id="LOCAL-00016" summary="Se realizo el machote de la optimización de lectura de datos GetAll()">
-      <created>1660679021381</created>
+    <task id="LOCAL-00016" summary="Adaptación a PostGreSQL">
+      <created>1660278525953</created>
       <option name="number" value="00016" />
       <option name="presentableId" value="LOCAL-00016" />
       <option name="project" value="LOCAL" />
-      <updated>1660679021381</updated>
+      <updated>1660278525953</updated>
     </task>
-    <task id="LOCAL-00017" summary="Se realizo el machote de la optimización de lectura de datos GetAll()">
-      <created>1660679101113</created>
+    <task id="LOCAL-00017" summary="adaptación SQLServer 10%">
+      <created>1660311347346</created>
       <option name="number" value="00017" />
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
-      <updated>1660679101113</updated>
+      <updated>1660311347346</updated>
     </task>
-    <task id="LOCAL-00018" summary="Adecuaciones de los metodos para asegurar un mejor rendimiento y poder dar un mejor seguimiento.">
-      <created>1660749851740</created>
+    <task id="LOCAL-00018" summary="Creación metodo Save SQLServer y PostgreSQL finalizada">
+      <created>1660373925685</created>
       <option name="number" value="00018" />
       <option name="presentableId" value="LOCAL-00018" />
       <option name="project" value="LOCAL" />
-      <updated>1660749851740</updated>
+      <updated>1660373925685</updated>
     </task>
-    <task id="LOCAL-00019" summary="Creación de los atributos por default para el manejo de TimeStamp">
-      <created>1660755315330</created>
+    <task id="LOCAL-00019" summary="Creación de metodo que permita almacenar un modelo generico">
+      <created>1660531285409</created>
       <option name="number" value="00019" />
       <option name="presentableId" value="LOCAL-00019" />
       <option name="project" value="LOCAL" />
-      <updated>1660755315330</updated>
+      <updated>1660531285409</updated>
     </task>
-    <task id="LOCAL-00020" summary="Metodos para generar consultas personalizadas terminados">
-      <created>1660772946385</created>
+    <task id="LOCAL-00020" summary="Documentación de numeraciónes realizadas">
+      <created>1660533211020</created>
       <option name="number" value="00020" />
       <option name="presentableId" value="LOCAL-00020" />
       <option name="project" value="LOCAL" />
-      <updated>1660772946385</updated>
+      <updated>1660533211020</updated>
     </task>
-    <task id="LOCAL-00021" summary="Se logro hacer funcionar el metodo GetALL">
-      <created>1660800128643</created>
+    <task id="LOCAL-00021" summary="Documentación de metodos y clases 100% a excepción de los de la Clase Methods">
+      <created>1660584690333</created>
       <option name="number" value="00021" />
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
-      <updated>1660800128643</updated>
+      <updated>1660584690334</updated>
     </task>
-    <task id="LOCAL-00022" summary="Metodos Get 100%, falta adaptarlos para el resto de BD's y crearlos">
-      <created>1660801917845</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1660801917845</updated>
-    </task>
-    <task id="LOCAL-00023" summary="Adaptación de las clases que permiten la busqueda personalizada">
-      <created>1660887041501</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1660887041501</updated>
-    </task>
-    <task id="LOCAL-00024" summary="Se eliminaron las clases temporales relacionadas a la BD's de Bladimir">
-      <created>1660887263917</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1660887263917</updated>
-    </task>
-    <task id="LOCAL-00025" summary="Mejoras en el rendimiento del metodo saveall">
-      <created>1660967761631</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1660967761631</updated>
-    </task>
-    <task id="LOCAL-00026" summary="Implementación de TimeStamps en la creación de un tabla e inserción de registros">
-      <created>1660971906439</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1660971906439</updated>
-    </task>
-    <option name="localTasksCounter" value="27" />
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -362,17 +344,14 @@
     <MESSAGE value="Se comenzo a trabajar el metodo encargado de Retornar el tipo de dato correcto" />
     <MESSAGE value="Se comenzo a trabajar el metodo encargado de Retornar el tipo de dato correcto 10%" />
     <MESSAGE value="Creación de metodo para crear tabla correspondiente al modelo 10%" />
-    <MESSAGE value="Creación de metodo para crear tabla correspondiente al modelo 15%" />
-    <MESSAGE value="Se realizo el machote de la optimización de lectura de datos GetAll()" />
-    <MESSAGE value="Adecuaciones de los metodos para asegurar un mejor rendimiento y poder dar un mejor seguimiento." />
-    <MESSAGE value="Creación de los atributos por default para el manejo de TimeStamp" />
-    <MESSAGE value="Metodos para generar consultas personalizadas terminados" />
-    <MESSAGE value="Se logro hacer funcionar el metodo GetALL" />
-    <MESSAGE value="Metodos Get 100%, falta adaptarlos para el resto de BD's y crearlos" />
-    <MESSAGE value="Adaptación de las clases que permiten la busqueda personalizada" />
-    <MESSAGE value="Se eliminaron las clases temporales relacionadas a la BD's de Bladimir" />
-    <MESSAGE value="Mejoras en el rendimiento del metodo saveall" />
-    <MESSAGE value="Implementación de TimeStamps en la creación de un tabla e inserción de registros" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementación de TimeStamps en la creación de un tabla e inserción de registros" />
+    <MESSAGE value="Metodos para obtener los metodos del modelo completados" />
+    <MESSAGE value="Metodos para eliminar y crear Tabla correspondiente al modelo 100%" />
+    <MESSAGE value="Adaptación a PostGreSQL" />
+    <MESSAGE value="adaptación SQLServer 10%" />
+    <MESSAGE value="Creación metodo Save SQLServer y PostgreSQL finalizada" />
+    <MESSAGE value="Creación de metodo que permita almacenar un modelo generico" />
+    <MESSAGE value="Documentación de numeraciónes realizadas" />
+    <MESSAGE value="Documentación de metodos y clases 100% a excepción de los de la Clase Methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="Documentación de metodos y clases 100% a excepción de los de la Clase Methods" />
   </component>
 </project>
