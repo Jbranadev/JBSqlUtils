@@ -1,4 +1,4 @@
-package io.github.josecarlosbran.JBSqlLite.Search;
+package io.github.josecarlosbran.JBSqlLite.DataBase;
 
 
 import io.github.josecarlosbran.JBSqlLite.Enumerations.OrderType;

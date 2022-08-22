@@ -14,7 +14,7 @@ public class Column<T> {
 
     private T valor=null;
 
-    private T default_value=null;
+    private String default_value=null;
 
     private DataType dataTypeSQL=null;
 
@@ -71,7 +71,7 @@ public class Column<T> {
      * @param restriccion Indica las restricciones SQL que tendra este campo.
      * @param default_value Indica el valor por default que tendra la columna en BD's
      */
-    public Column(T Valor, DataType tipo_de_dato, Constraint[] restriccion, T default_value){
+    public Column(T Valor, DataType tipo_de_dato, Constraint[] restriccion, String default_value){
         this.setValor(Valor);
         this.setDataTypeSQL(tipo_de_dato);
         this.setRestriccion(restriccion);
@@ -84,7 +84,7 @@ public class Column<T> {
      * @param restriccion Indica las restricciones SQL que tendra este campo.
      * @param default_value Indica el valor por default que tendra la columna en BD's
      */
-    public Column(DataType tipo_de_dato, Constraint[] restriccion, T default_value){
+    public Column(DataType tipo_de_dato, Constraint[] restriccion, String default_value){
         this.setDataTypeSQL(tipo_de_dato);
         this.setRestriccion(restriccion);
         this.setDefault_value(default_value);
@@ -143,7 +143,7 @@ public class Column<T> {
      * Obtiene el valor por default establecido para la columna.
      * @return Retorna el valor por default establecido para la columna.
      */
-    public T getDefault_value() {
+    public String getDefault_value() {
         return default_value;
     }
 
@@ -151,7 +151,7 @@ public class Column<T> {
      * Setea el valor por default para la columna
      * @param default_value Valor por default establecido para la columna
      */
-    public void setDefault_value(T default_value) {
+    public void setDefault_value(String default_value) {
         this.default_value = default_value;
     }
 }

@@ -46,7 +46,7 @@ public class Methods_Conexion extends Conexion {
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Retorna una lista de los metodos pertenecientes al modelo.
      */
-    public synchronized <T> List<Method> getMethodsModel() {
+    protected synchronized <T> List<Method> getMethodsModel() {
         Method[] metodos = this.getClass().getMethods();
         List<Method> result = new ArrayList<>();
         // Los muestro en consola
@@ -80,7 +80,7 @@ public class Methods_Conexion extends Conexion {
         return result;
     }
 
-    public <T> Method getMethodModel(String nombre) throws NoSuchMethodException {
+    protected <T> Method getMethodModel(String nombre) throws NoSuchMethodException {
         Method metodo = this.getClass().getMethod(nombre);
         // Los muestro en consola
         //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+returntype);
@@ -97,7 +97,7 @@ public class Methods_Conexion extends Conexion {
      * @param <T>     Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Lista de los metodos get del modelo que lo invoca.
      */
-    public <T> List<Method> getMethodsGetOfModel(List<Method> metodos) {
+    protected  <T> List<Method> getMethodsGetOfModel(List<Method> metodos) {
         // Los muestro en consola
         int i = 0;
         //System.out.println("Inicia a obtener los metodos get");
@@ -124,7 +124,7 @@ public class Methods_Conexion extends Conexion {
      * @param <T>     Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Lista de los metodos set del modelo que lo invoca.
      */
-    public <T> List<Method> getMethodsSetOfModel(List<Method> metodos) {
+    protected <T> List<Method> getMethodsSetOfModel(List<Method> metodos) {
         List<Method> result = new ArrayList<>();
         for (Method metodo : metodos) {
             Parameter[] parametros = metodo.getParameters();
@@ -221,7 +221,7 @@ public class Methods_Conexion extends Conexion {
                 connect.close();
                 LogsJB.info("Conexión a BD's cerrada");
             } else {
-                LogsJB.info("Conexión a BD's ya estaba cerrada");
+                LogsJB.warning("Conexión a BD's ya estaba cerrada");
             }
         } catch (ConexionUndefind e) {
             LogsJB.warning("El modelo no estaba conectado a la BD's por lo cual no se cerrara la conexión");
@@ -243,7 +243,7 @@ public class Methods_Conexion extends Conexion {
                 this.getConnect().close();
                 LogsJB.info("Conexión a BD's cerrada");
             } else {
-                LogsJB.info("Conexión a BD's ya estaba cerrada");
+                LogsJB.warning("Conexión a BD's ya estaba cerrada");
             }
         } catch (ConexionUndefind e) {
             LogsJB.warning("El modelo no estaba conectado a la BD's por lo cual no se cerrara la conexión");
@@ -622,7 +622,7 @@ public class Methods_Conexion extends Conexion {
      * @param modelo Modelo que será almacenado en BD's
      * @param <T>    Expresión que hace que el metodo sea generico y pueda ser utilizado por cualquier objeto que herede la Clase JBSqlUtils
      */
-    public <T extends Methods_Conexion> void saveModel(T modelo) {
+    protected <T extends Methods_Conexion> void saveModel(T modelo) {
         try {
             modelo.setTaskIsReady(false);
             if (!modelo.getTableExist()) {
@@ -850,7 +850,7 @@ public class Methods_Conexion extends Conexion {
     }
 
 
-    public <T extends Methods_Conexion> void deleteModel(T modelo) {
+    protected <T extends Methods_Conexion> void deleteModel(T modelo) {
         try {
             modelo.setTaskIsReady(false);
             if (!modelo.getTableExist()) {
@@ -950,7 +950,7 @@ public class Methods_Conexion extends Conexion {
     }
 
 
-    public <T extends Methods_Conexion> T procesarResultSet(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException, DataBaseUndefind, PropertiesDBUndefined {
+    protected <T extends Methods_Conexion> T procesarResultSet(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException, DataBaseUndefind, PropertiesDBUndefined {
         T temp = (T) modelo.getClass().newInstance();
         temp.setTabla(modelo.getTabla());
         temp.setTableExist(modelo.getTableExist());
@@ -1013,7 +1013,7 @@ public class Methods_Conexion extends Conexion {
     }
 
 
-    public <T extends Methods_Conexion> void procesarResultSetOneResult(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException {
+    protected <T extends Methods_Conexion> void procesarResultSetOneResult(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException {
         modelo.setModelExist(true);
         LogsJB.info("Obtuvo un resultado de BD's, procedera a llenar el modelo");
         List<Method> metodosSet = new ArrayList<>();

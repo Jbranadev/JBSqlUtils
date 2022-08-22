@@ -1,7 +1,6 @@
-package io.github.josecarlosbran.JBSqlLite.Search;
+package io.github.josecarlosbran.JBSqlLite.DataBase;
 
 
-import io.github.josecarlosbran.JBSqlLite.DataBase.Execute;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.OrderType;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
@@ -15,11 +14,11 @@ import java.util.Objects;
 
 import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
-public class Or<T> extends Get {
+public class Where<T> extends Get {
     private String sql;
     private T modelo=null;
 
-    protected Or(String sql, String columna, Operator operador, String valor, T modelo) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    public Where(String columna, Operator operador, String valor, T modelo) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
@@ -31,20 +30,10 @@ public class Or<T> extends Get {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
         this.modelo=modelo;
-        this.sql = sql+Operator.OR.getOperador()+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + valor+Operator.CLOSE_PARENTESIS.getOperador();
+        this.sql = " WHERE "+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + valor+Operator.CLOSE_PARENTESIS.getOperador();
     }
 
-    protected Or(String sql, String expresion, T modelo) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        super();
-        if (stringIsNullOrEmpty(expresion)) {
-            throw new ValorUndefined("La expresion proporcionada esta vacía o es NULL");
-        }
-        this.modelo= modelo;
-        this.sql = sql+Operator.OR.getOperador()+Operator.OPEN_PARENTESIS.getOperador()+expresion+Operator.CLOSE_PARENTESIS.getOperador();
-    }
-
-
-    protected Or(String sql, String columna, Operator operador, String valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    public Where(String columna, Operator operador, String valor, String sql) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
@@ -55,17 +44,11 @@ public class Or<T> extends Get {
         if (Objects.isNull(operador)) {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
-        this.sql = sql+Operator.OR.getOperador()+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + valor+Operator.CLOSE_PARENTESIS.getOperador();
+        this.sql = sql+" WHERE "+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + valor+Operator.CLOSE_PARENTESIS.getOperador();
     }
 
 
-    protected Or(String sql, String expresion) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        super();
-        if (stringIsNullOrEmpty(expresion)) {
-            throw new ValorUndefined("La expresion proporcionada esta vacía o es NULL");
-        }
-        this.sql = sql+Operator.OR.getOperador()+Operator.OPEN_PARENTESIS.getOperador()+expresion+Operator.CLOSE_PARENTESIS.getOperador();
-    }
+
 
 
     public And and(String columna, Operator operador, String valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
@@ -101,11 +84,10 @@ public class Or<T> extends Get {
 
     }
 
+
     public OrderBy orderBy(String columna, OrderType orderType) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         return new OrderBy(this.sql, columna, orderType, this.modelo);
     }
-
-
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -127,11 +109,23 @@ public class Or<T> extends Get {
     }
 
 
+
+    
+
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     public int execute() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         return new Execute(this.sql).execute();
     }
+
+
+
+
+
+
+
+
 
 }

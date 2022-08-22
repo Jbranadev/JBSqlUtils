@@ -3,8 +3,6 @@ package io.github.josecarlosbran.JBSqlLite.Utilities;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class UtilitiesJB {
@@ -110,27 +108,4 @@ public class UtilitiesJB {
     }
 
 
-
-
-    //Obtener un objeto generico de una lista
-    public static <T> T getObject(int id, List<T> lista){
-        return lista.get(id);
-    }
-
-    //agregar un objeto generico de una lista
-    public static <T> void addDato(List<T> lista, T dato){
-        lista.add(dato);
-    }
-
-    public static <T> List<T> getall(T a, T b, T c){
-        List<T> lista=new ArrayList<>();
-        lista.add(a);
-        lista.add(b);
-        lista.add(c);
-        return lista;
-    }
-
-    public void imprimirnombreclase(){
-        System.out.println("Nombre de la clase: "+this.getClass().getName());
-    }
 }

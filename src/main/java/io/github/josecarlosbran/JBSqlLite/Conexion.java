@@ -12,7 +12,7 @@ import java.util.Objects;
 
 import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
-public class Conexion {
+class Conexion {
 
 
     /**
@@ -632,7 +632,7 @@ public class Conexion {
      * Setea la bandera que indica si la tabla correspondiente al modelo existe en BD's
      * @param tableExist True si la tabla correspondiente al modelo existe en BD's, de lo contrario False.
      */
-    public void setTableExist(Boolean tableExist) {
+    protected void setTableExist(Boolean tableExist) {
         this.tableExist = tableExist;
     }
 
@@ -648,7 +648,7 @@ public class Conexion {
      * Setea el nombre de la tabla en BD's correspondiente al modelo.
      * @param tableName Nombre de la tabla en BD's correspondiente al modelo.
      */
-    public void setTableName(String tableName) {
+    protected void setTableName(String tableName) {
         this.tableName = tableName;
     }
 
@@ -779,18 +779,22 @@ public class Conexion {
      * @param modelExist Bandera que sirve para identificar si el modelo existe en BD's, TRUE indica que el modelo fue obtenido de BD's
      *                   False indica que el modelo no existe en BD's
      */
-    public void setModelExist(Boolean modelExist) {
+    protected void setModelExist(Boolean modelExist) {
         this.modelExist = modelExist;
     }
 
     /**
      * Representa la metadata de la tabla correspondiente al modelo en BD's
      */
-    public TablesSQL getTabla() {
+    protected TablesSQL getTabla() {
         return tabla;
     }
 
-    public void setTabla(TablesSQL tabla) {
+    /**
+     * Setea la tabla que representa al modelo en BD's
+     * @param tabla Objeto TableSQL que contiene parte de la meta data de la tabla correspondiente al modelo
+     */
+    protected void setTabla(TablesSQL tabla) {
         this.tabla = tabla;
     }
 }
