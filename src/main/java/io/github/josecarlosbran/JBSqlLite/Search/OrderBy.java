@@ -1,13 +1,11 @@
 package io.github.josecarlosbran.JBSqlLite.Search;
 
 
-import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.OrderType;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.JBSqlLite.Methods;
 import io.github.josecarlosbran.JBSqlLite.Methods_Conexion;
 
 import java.util.List;
@@ -15,7 +13,7 @@ import java.util.Objects;
 
 import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
-public class OrderBy<T> extends GET{
+public class OrderBy<T> extends Get {
     private String sql;
     private T modelo;
 

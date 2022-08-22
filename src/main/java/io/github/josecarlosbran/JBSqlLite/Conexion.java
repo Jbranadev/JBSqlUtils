@@ -4,13 +4,10 @@ import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
-import io.github.josecarlosbran.JBSqlLite.Utilities.ColumnsSQL;
 import io.github.josecarlosbran.JBSqlLite.Utilities.TablesSQL;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;

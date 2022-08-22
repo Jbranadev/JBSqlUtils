@@ -17,7 +17,7 @@
 
 2022/08/19 19:57:10 098					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
 
-2022/08/19 19:57:10 049					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
+2022/08/19 19:57:10 049					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
 
 2022/08/19 19:57:10 061					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -39,7 +39,7 @@
 
 2022/08/19 19:58:21 006					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/19 19:58:21 022					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
+2022/08/19 19:58:21 022					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
 
 2022/08/19 19:58:21 003					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
@@ -73,7 +73,7 @@
 
 2022/08/19 19:59:18 287					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/19 19:59:18 298					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
+2022/08/19 19:59:18 298					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
 
 2022/08/19 19:59:18 311					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -169,7 +169,7 @@
 
 2022/08/19 20:00:41 638					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
-2022/08/19 20:00:41 624					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
+2022/08/19 20:00:41 624					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
 
 2022/08/19 20:00:41 677					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							3   Jose   Bran   false
 
@@ -251,7 +251,7 @@
 
 2022/08/19 20:13:31 172					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/19 20:13:31 184					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
+2022/08/19 20:13:31 184					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
 
 2022/08/19 20:13:31 193					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 *
@@ -269,7 +269,7 @@
 
 2022/08/19 20:14:36 225					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
-2022/08/19 20:14:36 227					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:14:36 227					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:14:36 229					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
@@ -357,18 +357,18 @@
 
 2022/08/19 20:21:43 423					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/19 20:21:43 516					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = ture );
+2022/08/19 20:21:43 516					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = ture );
 
-2022/08/19 20:21:43 544					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@2619075a
+2022/08/19 20:21:43 544					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						FATAL  							Trace de la Excepción : [Ljava.lang.StackTraceElement;@2619075a
 
-2022/08/19 20:21:43 541					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						FATAL  							Mensaje de la Excepción : ERROR: no existe la columna «ture»
+2022/08/19 20:21:43 541					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						FATAL  							Mensaje de la Excepción : ERROR: no existe la columna «ture»
   Position: 60
 
-2022/08/19 20:21:43 538					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						FATAL  							Causa de la Excepción : null
+2022/08/19 20:21:43 538					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						FATAL  							Causa de la Excepción : null
 
-2022/08/19 20:21:43 535					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						FATAL  							Tipo de Excepción : class org.postgresql.util.PSQLException
+2022/08/19 20:21:43 535					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						FATAL  							Tipo de Excepción : class org.postgresql.util.PSQLException
 
-2022/08/19 20:21:43 532					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						FATAL  							Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentenciaSQL de la BD's: org.postgresql.util.PSQLException: ERROR: no existe la columna «ture»
+2022/08/19 20:21:43 532					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						FATAL  							Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentenciaSQL de la BD's: org.postgresql.util.PSQLException: ERROR: no existe la columna «ture»
   Position: 60
 
 2022/08/19 20:21:43 553					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
@@ -393,7 +393,7 @@
 
 2022/08/19 20:22:14 805					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/19 20:22:14 804					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
+2022/08/19 20:22:14 804					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
 
 2022/08/19 20:22:14 816					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 *
@@ -413,7 +413,7 @@
 
 2022/08/19 20:22:43 443					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
-2022/08/19 20:22:43 466					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:22:43 466					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:22:43 477					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -505,7 +505,7 @@
 
 2022/08/19 20:23:46 135					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
-2022/08/19 20:23:46 125					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:23:46 125					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:23:46 153					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -589,7 +589,7 @@
 
 2022/08/19 20:27:29 352					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/19 20:27:29 351					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:27:29 351					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:27:29 348					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
@@ -657,7 +657,7 @@
 
 2022/08/19 20:28:30 627					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/19 20:28:30 685					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:28:30 685					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:28:30 694					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -749,7 +749,7 @@
 
 2022/08/19 20:29:24 854					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/19 20:29:24 913					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:29:24 913					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:29:24 924					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -781,7 +781,7 @@
 
 2022/08/19 20:30:40 010					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/19 20:30:40 104					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:30:40 104					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:30:40 067					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
@@ -815,7 +815,7 @@
 
 2022/08/19 20:31:41 990					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/19 20:31:42 059					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:31:42 059					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:31:42 069					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -841,7 +841,7 @@
 
 2022/08/19 20:31:57 155					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/19 20:31:57 212					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:31:57 212					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:31:57 182					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
@@ -875,7 +875,7 @@
 
 2022/08/19 20:32:02 906					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/19 20:32:02 964					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:32:02 964					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:32:02 974					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -901,7 +901,7 @@
 
 2022/08/19 20:32:08 692					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/19 20:32:08 753					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:32:08 753					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:32:08 795					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
@@ -933,7 +933,7 @@
 
 2022/08/19 20:32:17 213					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/19 20:32:17 331					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:32:17 331					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:32:17 302					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
@@ -965,7 +965,7 @@
 
 2022/08/19 20:32:23 080					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
-2022/08/19 20:32:23 081					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:32:23 081					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:32:23 083					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
@@ -993,7 +993,7 @@
 
 2022/08/19 20:32:29 281					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/19 20:32:29 364					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:32:29 364					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:32:29 316					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
@@ -1027,7 +1027,7 @@
 
 2022/08/19 20:32:39 143					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/19 20:32:39 213					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:32:39 213					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:32:39 223					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -1057,7 +1057,7 @@
 
 2022/08/19 20:32:55 518					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/19 20:32:55 563					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:32:55 563					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:32:55 572					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -1089,7 +1089,7 @@
 
 2022/08/19 20:33:01 253					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/19 20:33:01 312					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:33:01 312					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:33:01 321					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -1123,7 +1123,7 @@
 
 2022/08/19 20:33:06 734					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/19 20:33:06 801					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:33:06 801					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:33:06 815					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -1151,7 +1151,7 @@
 
 2022/08/19 20:33:12 698					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
-2022/08/19 20:33:12 728					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:33:12 728					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:33:12 738					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -1179,7 +1179,7 @@
 
 2022/08/19 20:33:56 097					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/19 20:33:56 149					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:33:56 149					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:33:56 158					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -1209,7 +1209,7 @@
 
 2022/08/19 20:34:00 780					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/19 20:34:00 826					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:34:00 826					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:34:00 836					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -1241,7 +1241,7 @@
 
 2022/08/19 20:34:10 611					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/19 20:34:10 651					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:34:10 651					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:34:10 660					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -1271,7 +1271,7 @@
 
 2022/08/19 20:34:20 916					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/19 20:34:20 948					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:34:20 948					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:34:20 999					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		lambda$PostgreSQL$0					INFO							2   Jose   Bran   true
 
@@ -1343,7 +1343,7 @@
 
 2022/08/19 20:36:04 171					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/19 20:36:04 204					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:36:04 204					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:36:04 215					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 *
@@ -1363,7 +1363,7 @@
 
 2022/08/19 20:36:25 921					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
-2022/08/19 20:36:25 976					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
+2022/08/19 20:36:25 976					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = true );
 
 2022/08/19 20:36:25 987					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -1435,7 +1435,7 @@
 
 2022/08/19 20:39:51 903					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
-2022/08/19 20:39:51 936					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
+2022/08/19 20:39:51 936					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name = 'Jose' ) AND  (isMayor = false );
 
 2022/08/19 20:39:51 906					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
@@ -1509,7 +1509,7 @@
 
 2022/08/19 20:45:26 217					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/19 20:45:26 231					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 20:45:26 231					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 20:45:26 249					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
@@ -1541,7 +1541,7 @@
 
 2022/08/19 20:46:07 827					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/19 20:46:07 838					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 20:46:07 838					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 20:46:07 865					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -1567,7 +1567,7 @@
 
 2022/08/19 20:47:56 779					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
-2022/08/19 20:47:56 781					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 20:47:56 781					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 20:47:56 782					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
@@ -1597,7 +1597,7 @@
 
 2022/08/19 20:49:15 335					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/19 20:49:15 344					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 20:49:15 344					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 20:49:15 331					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
@@ -1913,7 +1913,7 @@
 
 2022/08/19 20:52:45 998					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
-2022/08/19 20:52:46 025					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 20:52:46 025					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 20:52:46 048					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de columnas : 4
 
@@ -1985,7 +1985,7 @@
 
 2022/08/19 20:53:13 908					josec  							io.github.josecarlosbran.JBSqlLite.Pruebas.Principal		PostgreSQL 							INFO							Cantidad de resultado lista: 0
 
-2022/08/19 20:53:13 956					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 20:53:13 956					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 20:53:13 936					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
@@ -2083,7 +2083,7 @@
 
 2022/08/19 20:56:10 856					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
-2022/08/19 20:56:10 845					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 20:56:10 845					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 20:56:10 989					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					DEBUG  							Cantidad de metodos set: 4
 
@@ -2157,7 +2157,7 @@
 
 2022/08/19 20:56:33 612					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/19 20:56:33 556					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 20:56:33 556					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 *
 *
 *
@@ -2181,7 +2181,7 @@
 
 2022/08/19 20:58:10 140					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
-2022/08/19 20:58:10 130					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 20:58:10 130					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 20:58:10 185					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -2223,7 +2223,7 @@
 
 2022/08/19 20:58:22 995					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/19 20:58:23 137					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 20:58:23 137					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 20:58:23 148					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -2271,7 +2271,7 @@
 
 2022/08/19 21:01:43 642					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/19 21:01:43 710					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 21:01:43 710					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 21:01:43 737					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -2405,7 +2405,7 @@
 
 2022/08/19 21:07:13 445					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
-2022/08/19 21:07:13 499					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 21:07:13 499					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 21:07:13 510					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -2539,7 +2539,7 @@
 
 2022/08/19 21:09:35 142					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/19 21:09:35 216					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 21:09:35 216					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 21:09:35 253					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -2677,7 +2677,7 @@
 
 2022/08/19 21:13:27 913					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
-2022/08/19 21:13:27 904					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 21:13:27 904					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 21:13:27 957					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -2797,7 +2797,7 @@
 
 2022/08/19 21:13:38 114					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
-2022/08/19 21:13:38 104					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 21:13:38 104					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 21:13:38 138					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -2917,7 +2917,7 @@
 
 2022/08/19 21:20:18 267					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
-2022/08/19 21:20:18 257					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 21:20:18 257					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 21:20:18 296					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -3041,7 +3041,7 @@
 
 2022/08/19 21:21:14 323					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/19 21:21:14 437					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 21:21:14 437					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 21:21:14 448					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -3167,7 +3167,7 @@
 
 2022/08/19 21:25:22 132					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
-2022/08/19 21:25:22 104					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 21:25:22 104					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 21:25:22 113					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -3293,7 +3293,7 @@
 
 2022/08/19 21:25:28 856					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
-2022/08/19 21:25:28 828					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 21:25:28 828					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 21:25:28 881					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -3411,7 +3411,7 @@
 
 2022/08/19 21:25:34 098					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		closeConnection						INFO							Conexión a BD's cerrada
 
-2022/08/19 21:25:34 150					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 21:25:34 150					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 21:25:34 159					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -3533,7 +3533,7 @@
 
 2022/08/19 21:25:39 278					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		getConnection  						INFO							Conexión a BD's JBSQLUTILS Realizada exitosamente
 
-2022/08/19 21:25:39 408					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 21:25:39 408					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 21:25:39 418					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 
@@ -3659,7 +3659,7 @@
 
 2022/08/19 21:27:35 619					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		lambda$getColumnsTable$1					INFO							Información de las columnas de la tabla correspondiente al modelo obtenida
 
-2022/08/19 21:27:35 683					josec  							io.github.josecarlosbran.JBSqlLite.Search.GET  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
+2022/08/19 21:27:35 683					josec  							io.github.josecarlosbran.JBSqlLite.Search.Get  		lambda$getAll$3						INFO							SELECT * FROM test WHERE  (name LIKE 'Jose%' );
 
 2022/08/19 21:27:35 692					josec  							io.github.josecarlosbran.JBSqlLite.Methods_Conexion		procesarResultSet  					INFO							Obtuvo un resultado de BD's, procedera a llenar el modelo
 

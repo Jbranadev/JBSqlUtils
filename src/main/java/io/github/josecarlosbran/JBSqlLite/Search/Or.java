@@ -1,6 +1,7 @@
 package io.github.josecarlosbran.JBSqlLite.Search;
 
 
+import io.github.josecarlosbran.JBSqlLite.DataBase.Execute;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.OrderType;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
@@ -14,9 +15,9 @@ import java.util.Objects;
 
 import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
-public class Or<T> extends GET{
+public class Or<T> extends Get {
     private String sql;
-    private T modelo;
+    private T modelo=null;
 
     protected Or(String sql, String columna, Operator operador, String valor, T modelo) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
@@ -42,20 +43,62 @@ public class Or<T> extends GET{
         this.sql = sql+Operator.OR.getOperador()+Operator.OPEN_PARENTESIS.getOperador()+expresion+Operator.CLOSE_PARENTESIS.getOperador();
     }
 
+
+    protected Or(String sql, String columna, Operator operador, String valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+        super();
+        if (stringIsNullOrEmpty(columna)) {
+            throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
+        }
+        if (stringIsNullOrEmpty(valor)) {
+            throw new ValorUndefined("El valor proporcionado esta vacío o es NULL");
+        }
+        if (Objects.isNull(operador)) {
+            throw new ValorUndefined("El operador proporcionado es NULL");
+        }
+        this.sql = sql+Operator.OR.getOperador()+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + valor+Operator.CLOSE_PARENTESIS.getOperador();
+    }
+
+
+    protected Or(String sql, String expresion) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+        super();
+        if (stringIsNullOrEmpty(expresion)) {
+            throw new ValorUndefined("La expresion proporcionada esta vacía o es NULL");
+        }
+        this.sql = sql+Operator.OR.getOperador()+Operator.OPEN_PARENTESIS.getOperador()+expresion+Operator.CLOSE_PARENTESIS.getOperador();
+    }
+
+
     public And and(String columna, Operator operador, String valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        return new And(this.sql, columna, operador, valor, this.modelo);
+        if(Objects.isNull(this.modelo)){
+            return new And(this.sql, columna, operador, valor);
+        }else{
+            return new And(this.sql, columna, operador, valor, this.modelo);
+        }
     }
 
     public Or or(String columna, Operator operador, String valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        return new Or(this.sql, columna, operador, valor, this.modelo);
+        if(Objects.isNull(this.modelo)){
+            return new Or(this.sql, columna, operador, valor);
+        }else{
+            return new Or(this.sql, columna, operador, valor, this.modelo);
+        }
     }
 
     public And and(String expresion) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        return new And(this.sql, expresion, this.modelo);
+        if(Objects.isNull(this.modelo)){
+            return new And(this.sql, expresion);
+        }else{
+            return new And(this.sql, expresion, this.modelo);
+        }
     }
 
     public Or or(String expresion) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        return new Or(this.sql, expresion, this.modelo);
+        if(Objects.isNull(this.modelo)){
+            return new Or(this.sql, expresion);
+        }else{
+            return new Or(this.sql, expresion, this.modelo);
+        }
+
     }
 
     public OrderBy orderBy(String columna, OrderType orderType) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
@@ -83,5 +126,12 @@ public class Or<T> extends GET{
         return (List<T>) super.getAll((T)this.modelo, this.sql);
     }
 
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public int execute() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+        return new Execute(this.sql).execute();
+    }
 
 }
