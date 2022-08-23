@@ -1,5 +1,6 @@
 package io.github.josecarlosbran.JBSqlLite.Pruebas;
 
+import com.google.gson.Gson;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
@@ -117,11 +118,19 @@ public class Principal {
         //test.dropTableIfExist();
         //test.crateTable();
 
-
-        //test.getName().setValor("Jose");
-        //test.getApellido().setValor("Bran");
+/*
+        test.getName().setValor("Ligia");
+        test.getApellido().setValor("Camey");
         //test.getIsMayor().setValor(true);
-        //test.save();
+        test.save();
+        while (!test.getTaskIsReady()){
+
+        }
+
+        test.getName().setValor("Isabel");
+        test.getApellido().setValor("Peralta");
+        test.getIsMayor().setValor(false);
+        test.save();*/
 
 
         Consumer<Test> showFilas = fila -> {
@@ -143,30 +152,29 @@ public class Principal {
 
         List<Test> lista=new ArrayList<>();
         //lista=test.where("name", Operator.IGUAL_QUE, "'Jose'").and("isMayor", Operator.IGUAL_QUE, "false").getAll();
-        //lista=test.where("name", Operator.LIKE, "'Jose%'").getAll();
-        //test.where("name", Operator.IGUAL_QUE, "'Jose'").and("isMayor", Operator.IGUAL_QUE, "true").get(test);
-        //lista.add(test);
+        lista=test.where("isMayor", Operator.IGUAL_QUE, "true").take(2).get();
+
 
         //test.where("",null, "").and("", null, "").or("", null, "").and("").getAll();
-        test.where("name", Operator.IGUAL_QUE, "'Jose'").and("apellido", Operator.IGUAL_QUE, "'Bran'").get();
+        //test.where("name", Operator.IGUAL_QUE, "'Jose'").and("apellido", Operator.IGUAL_QUE, "'Bran'").get();
         while (!test.getTaskIsReady()){
 
         }
-        LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.getApellido().getValor()+"   "+test.getIsMayor().getValor());
+        //LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.getApellido().getValor()+"   "+test.getIsMayor().getValor());
 
         //test.getIsMayor().setValor(!test.getIsMayor().getValor());
 
         //LogsJB.info("Cantidad de resultado lista: "+lista.size());
 
-        //lista.forEach(showFilas);
+        lista.forEach(showFilas);
         long inicio = System.currentTimeMillis();
 
         //test.saveALL(lista);
         //test.save();
-        test.delete();
-        while (!test.getTaskIsReady()){
+        //test.delete();
+        /*while (!test.getTaskIsReady()){
 
-        }
+        }*/
 
         long fin = System.currentTimeMillis();
         //double tiempo = (double) ((fin - inicio)/1000);

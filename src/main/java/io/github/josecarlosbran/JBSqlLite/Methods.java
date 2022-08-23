@@ -74,9 +74,14 @@ class Methods extends Methods_Conexion {
                                     } else if ((DataBase.SQLite == this.getDataBaseType()) &&
                                             (restriccion == Constraint.AUTO_INCREMENT)) {
                                         restricciones = restricciones + "";
+                                    } else if(restriccion==Constraint.DEFAULT){
+                                        restricciones=restricciones+restriccion.getRestriccion()+" "+columnsSQL.getDefault_value()+" ";
+
                                     } else {
                                         restricciones = restricciones + restriccion.getRestriccion() + " ";
                                     }
+
+
                                 }
                             }
 

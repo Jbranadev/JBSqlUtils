@@ -110,6 +110,14 @@ public class And<T> extends Get {
     }
 
 
+    public Take take(int limite) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+        if(Objects.isNull(this.modelo)){
+            return new Take(this.sql, limite);
+        }else{
+            return new Take(this.sql, limite, this.modelo);
+        }
+    }
+
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////

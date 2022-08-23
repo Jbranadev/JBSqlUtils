@@ -97,13 +97,19 @@ public class Or<T> extends Get {
         }else{
             return new Or(this.sql, expresion, this.modelo);
         }
-
     }
 
     public OrderBy orderBy(String columna, OrderType orderType) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         return new OrderBy(this.sql, columna, orderType, this.modelo);
     }
 
+    public Take take(int limite) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+        if(Objects.isNull(this.modelo)){
+            return new Take(this.sql, limite);
+        }else{
+            return new Take(this.sql, limite, this.modelo);
+        }
+    }
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////

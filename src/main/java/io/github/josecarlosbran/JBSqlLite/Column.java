@@ -46,9 +46,10 @@ public class Column<T> {
      * @param tipo_de_dato DataType que indica el tipo de dato SQL que almacenara la columna.
      * @param restriccion Indica las restricciones SQL que tendra este campo.
      */
-    public Column(T Valor, DataType tipo_de_dato, Constraint[] restriccion){
+    public Column(T Valor, DataType tipo_de_dato, Constraint ... restriccion){
         this.setValor(Valor);
         this.setDataTypeSQL(tipo_de_dato);
+        Constraint[] restricciones=new Constraint[restriccion.length];
         this.setRestriccion(restriccion);
     }
 
@@ -57,7 +58,7 @@ public class Column<T> {
      * @param tipo_de_dato DataType que indica el tipo de dato SQL que almacenara la columna.
      * @param restriccion Indica las restricciones SQL que tendra este campo.
      */
-    public Column(DataType tipo_de_dato, Constraint[] restriccion){
+    public Column(DataType tipo_de_dato, Constraint ... restriccion){
         this.setDataTypeSQL(tipo_de_dato);
         this.setRestriccion(restriccion);
     }
@@ -71,7 +72,7 @@ public class Column<T> {
      * @param restriccion Indica las restricciones SQL que tendra este campo.
      * @param default_value Indica el valor por default que tendra la columna en BD's
      */
-    public Column(T Valor, DataType tipo_de_dato, Constraint[] restriccion, String default_value){
+    public Column(T Valor, DataType tipo_de_dato,  String default_value, Constraint ... restriccion){
         this.setValor(Valor);
         this.setDataTypeSQL(tipo_de_dato);
         this.setRestriccion(restriccion);
@@ -84,7 +85,7 @@ public class Column<T> {
      * @param restriccion Indica las restricciones SQL que tendra este campo.
      * @param default_value Indica el valor por default que tendra la columna en BD's
      */
-    public Column(DataType tipo_de_dato, Constraint[] restriccion, String default_value){
+    public Column(DataType tipo_de_dato,  String default_value, Constraint ... restriccion){
         this.setDataTypeSQL(tipo_de_dato);
         this.setRestriccion(restriccion);
         this.setDefault_value(default_value);

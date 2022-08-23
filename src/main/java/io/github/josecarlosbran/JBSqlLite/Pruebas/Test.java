@@ -12,11 +12,11 @@ public class Test extends JBSqlUtils {
         super(true);
     }
 
-    private Column<Integer> id=new Column<>(DataType.INTEGER, new Constraint[]{Constraint.AUTO_INCREMENT,Constraint.PRIMARY_KEY});
+    private Column<Integer> id=new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
 
-    private Column<String> name=new Column<>(DataType.VARCHAR);
-    private Column<String> apellido=new Column<>(DataType.VARCHAR);;
-    private Column<Boolean> isMayor=new Column<>(Boolean.FALSE, DataType.BIT);;
+    private Column<String> name=new Column<>(DataType.VARCHAR, "'Daniel'", Constraint.DEFAULT);
+    private Column<String> apellido=new Column<>(DataType.VARCHAR);
+    private Column<Boolean> isMayor=new Column<>(DataType.BIT, "true", Constraint.DEFAULT);;
 
     public Column<Integer> getId() {
         return id;
