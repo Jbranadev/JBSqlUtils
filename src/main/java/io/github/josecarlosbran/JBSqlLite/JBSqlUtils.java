@@ -1,9 +1,12 @@
 package io.github.josecarlosbran.JBSqlLite;
 
+import io.github.josecarlosbran.JBSqlLite.DataBase.Delete;
+import io.github.josecarlosbran.JBSqlLite.DataBase.Update;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import java.sql.Timestamp;
@@ -173,6 +176,29 @@ public class JBSqlUtils extends Methods{
      */
     private void setTimestampss(Boolean timestamps) {
         super.setTimestamps(timestamps);
+    }
+
+
+    /**
+     * Actualiza las filas de la tabla proporcionada, de acuerdo a la logica de la consulta generada.
+     * @param tableName Nombre de la tabla que deseamos actualizar
+     * @return Retorna un objeto de la clase Update que proporciona los metodos y lógica necesaria para realizar la
+     * actualización de registros en BD's sin haberlos recuperados.
+     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado esta Vacío o es NULL.
+     */
+    public static Update update(String tableName) throws ValorUndefined {
+        return new Update(tableName);
+    }
+
+    /**
+     * Elimina las filas de la tabla proporcionada, de acuerdo a la consulta generada.
+     * @param tableName Nombre de la tabla de la cual queremos eliminar los registros que posee
+     * @return Retorna un objeto de la clase Delete que proporciona los metodos y lógica necesaria para eliminar los
+     * registros en BD's sin haberlos recuperados.
+     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado esta Vacío o es NULL.
+     */
+    public static Delete delete(String tableName) throws ValorUndefined {
+        return new Delete(tableName);
     }
 
 

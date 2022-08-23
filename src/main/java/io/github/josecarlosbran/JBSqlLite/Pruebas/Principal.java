@@ -1,6 +1,5 @@
 package io.github.josecarlosbran.JBSqlLite.Pruebas;
 
-import com.google.gson.Gson;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
