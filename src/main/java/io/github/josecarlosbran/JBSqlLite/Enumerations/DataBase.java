@@ -6,9 +6,24 @@ package io.github.josecarlosbran.JBSqlLite.Enumerations;
  */
 public enum DataBase {
 
+    /**
+     * SQLite
+     */
     SQLite("sqlite"),
+
+    /**
+     * MySQL
+     */
     MySQL("mysql"),
+
+    /**
+     * SQL Server
+     */
     SQLServer("sqlserver"),
+
+    /**
+     * PostgreSQL
+     */
     PostgreSQL("postgresql");
 
     private String DBType;
@@ -17,6 +32,10 @@ public enum DataBase {
         this.setDBType(s);
     }
 
+    /**
+     * Retorna el tipo de BD's a la que se estara conectando JBSqlUtils
+     * @return Retorna el tipo de BD's a la que se estara conectando JBSqlUtils en un String
+     */
     public String getDBType() {
         return DBType;
     }

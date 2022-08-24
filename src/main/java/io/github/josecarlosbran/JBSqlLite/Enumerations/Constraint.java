@@ -57,6 +57,10 @@ public enum Constraint {
     }
 
 
+    /**
+     * Obtiene la restricción correspondiente a la numeración.
+     * @return Retorna la numeración correspondiente como un String.
+     */
     public String getRestriccion() {
         return restriccion;
     }

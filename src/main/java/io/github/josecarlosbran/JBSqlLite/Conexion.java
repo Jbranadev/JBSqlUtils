@@ -12,6 +12,11 @@ import java.util.Objects;
 
 import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
+/**
+ * @author Jose Bran
+ * Clase que tiene todas las variables y procedimientos necesarios para que un modelo se conecte a la BD's
+ * especificada.
+ */
 class Conexion {
 
 

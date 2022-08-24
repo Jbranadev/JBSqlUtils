@@ -4,7 +4,10 @@ import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
 
 import java.util.Objects;
-
+/**
+ * @author Jose Bran
+ * Clase que brinda acceso a funcionalidades comunes, sin necesidad de crear una instancia de la misma
+ */
 public class UtilitiesJB {
     /*
     try{
@@ -57,7 +60,12 @@ public class UtilitiesJB {
     }
 
 
-
+    /**
+     * Retorna una clausala where la cual puede ser utilizada para filtrar resultados de BD's
+     * @param expresion Expresión que contendra el Where
+     * @return " WHERE "+ expresion;
+     * @throws ValorUndefined Lanza esta excepción si alguno de los valores proporcionados esta vacío o es Null
+     */
     public static String where(String expresion) throws ValorUndefined {
         String respuesta = "";
         if (stringIsNullOrEmpty(expresion)) {
@@ -69,6 +77,14 @@ public class UtilitiesJB {
         return respuesta;
     }
 
+    /**
+     * Retorna una expresión SQL util para usar en una clausula Where
+     * @param columna Columna, que desea evaluar
+     * @param operador Operador bajo el cual se evaluara la columna
+     * @param valor Valor contra el que se evaluara la columna
+     * @return columna + operador.getOperador() + valor;
+     * @throws ValorUndefined Lanza esta excepción si alguno de los valores proporcionados esta vacío o es Null
+     */
     public static String expresion(String columna, Operator operador, String valor) throws ValorUndefined {
         String respuesta = "";
         if (stringIsNullOrEmpty(columna)) {
@@ -85,6 +101,13 @@ public class UtilitiesJB {
     }
 
 
+    /**
+     * Función que permite realizar una expreción Between
+     * @param valorInferior Valor inferior
+     * @param valorSuperior Valor superior
+     * @return "Between " + valorInferior + Operator.AND.getOperador() + valorSuperior;
+     * @throws ValorUndefined Lanza esta excepción si alguno de los valores proporcionados esta vacío o es Null
+     */
     public static String between(String valorInferior, String valorSuperior) throws ValorUndefined {
         String respuesta = "";
 
@@ -99,10 +122,20 @@ public class UtilitiesJB {
         return respuesta;
     }
 
+    /**
+     * Funcion que inserta una apertura de parentesis, esta puede ser utilizada cuando se desea crear una expresión
+     * y envíarla como parametro a una consulta
+     * @return (
+     */
     public static String openParentesis(){
         return " (";
     }
 
+    /**
+     * Funcion que inserta un cierre de parentesis, esta puede ser utilizada cuando se desea crear una expresión
+     * y envíarla como parametro a una consulta
+     * @return )
+     */
     public static String cerrarParentesis(){
         return " )";
     }

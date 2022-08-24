@@ -12,14 +12,32 @@ import io.github.josecarlosbran.LogsJB.LogsJB;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+/**
+ * @author Jose Bran
+ * Clase a ser heredada por los modelos, la cual brinda acceso a los metodos necesarios para que el modelo
+ * se pegue a la BD's especifícada y pueda realizar las operaciónes necesarias sobre la misma.
+ */
 public class JBSqlUtils extends Methods{
 
     private Column<Timestamp> created_at=new Column<>(DataType.TIMESTAMP);
 
     private Column<Timestamp> updated_at=new Column<>(DataType.TIMESTAMP);
 
-    public JBSqlUtils(Boolean timestamps) throws DataBaseUndefind, PropertiesDBUndefined {
+    /**
+     * Constructor por defecto de la Clase JBSqlUtils
+     * @param timestamps Bandera que indica si deseamos que JBSqlUtils, realice el manejo de las TimeStamps
+     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     * BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     * propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta excepción si la bandera proporcionada es Null
+     */
+    public JBSqlUtils(Boolean timestamps) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         super();
+        if (Objects.isNull(timestamps)) {
+            throw new ValorUndefined("El valor proporcionado para el manejo de los timestamps por parte" +
+                    "de JBSqlUtils, no puede ser Null, tiene que ser True o False");
+        }
         this.setTimestampss(timestamps);
     }
 
@@ -136,7 +154,7 @@ public class JBSqlUtils extends Methods{
 
 
     /**
-     * TimeStamp correspondiente a la fecha de creación del registro en BD's
+     * @return TimeStamp correspondiente a la fecha de creación del registro en BD's
      */
     public Column<Timestamp> getCreated_at() {
         if(Objects.isNull(created_at.getValor())){
@@ -156,7 +174,7 @@ public class JBSqlUtils extends Methods{
     }
 
     /**
-     * TimeStamp correspondiente a la fecha de actualización del registro en BD's
+     * @return TimeStamp correspondiente a la fecha de actualización del registro en BD's
      */
     public Column<Timestamp> getUpdated_at() {
         if(Objects.isNull(updated_at.getValor())){
