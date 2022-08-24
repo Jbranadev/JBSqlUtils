@@ -10,6 +10,7 @@ import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 public class JBSqlUtils extends Methods{
 
@@ -138,8 +139,11 @@ public class JBSqlUtils extends Methods{
      * TimeStamp correspondiente a la fecha de creación del registro en BD's
      */
     public Column<Timestamp> getCreated_at() {
-        Long datetime = System.currentTimeMillis();
-        created_at.setValor(new Timestamp(datetime));
+        if(Objects.isNull(created_at.getValor())){
+            Long datetime = System.currentTimeMillis();
+            created_at.setValor(new Timestamp(datetime));
+            return created_at;
+        }
         return created_at;
     }
 
@@ -155,8 +159,11 @@ public class JBSqlUtils extends Methods{
      * TimeStamp correspondiente a la fecha de actualización del registro en BD's
      */
     public Column<Timestamp> getUpdated_at() {
-        Long datetime = System.currentTimeMillis();
-        updated_at.setValor(new Timestamp(datetime));
+        if(Objects.isNull(updated_at.getValor())){
+            Long datetime = System.currentTimeMillis();
+            updated_at.setValor(new Timestamp(datetime));
+            return updated_at;
+        }
         return updated_at;
     }
 

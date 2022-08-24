@@ -54,6 +54,10 @@ class Methods extends Methods_Conexion {
                             String columnName = metodo.getName();
                             columnName = StringUtils.remove(columnName, "get");
                             DataType columnType = columnsSQL.getDataTypeSQL();
+                            //Manejo de tipo de dato TimeStamp en SQLServer
+                            if((columnType== DataType.TIMESTAMP)&&(this.getDataBaseType() == DataBase.SQLServer)){
+                                columnType=DataType.DATETIME;
+                            }
                             Constraint[] columnRestriccion = columnsSQL.getRestriccion();
                             String restricciones = "";
                             String tipo_de_columna = columnType.toString();

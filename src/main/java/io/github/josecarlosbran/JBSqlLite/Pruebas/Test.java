@@ -16,7 +16,7 @@ public class Test extends JBSqlUtils {
 
     private Column<String> name=new Column<>(DataType.VARCHAR, "'Daniel'", Constraint.DEFAULT);
     private Column<String> apellido=new Column<>(DataType.VARCHAR);
-    private Column<Boolean> isMayor=new Column<>(DataType.BIT, "true", Constraint.DEFAULT);;
+    private Column<Boolean> isMayor=new Column<>(DataType.BIT, "'true'", Constraint.DEFAULT);;
 
     public Column<Integer> getId() {
         return id;

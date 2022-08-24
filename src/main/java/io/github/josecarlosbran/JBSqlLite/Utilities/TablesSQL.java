@@ -83,7 +83,7 @@ public class TablesSQL {
      * Obtiene la lista de las columnas que posee la tabla correspondiente al modelo.
      * @return Lista de las columnas que posee la tabla correspondiente al modelo.
      */
-    public List<ColumnsSQL> getColumnas() {
+    public synchronized List<ColumnsSQL> getColumnas() {
         return this.Columnas;
     }
 

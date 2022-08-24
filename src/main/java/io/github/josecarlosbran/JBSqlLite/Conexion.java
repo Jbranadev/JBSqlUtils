@@ -640,7 +640,7 @@ class Conexion {
      * Obtiene el nombre de la tabla en BD's correspondiente al modelo.
      * @return Retorna el nombre de la tabla en BD's correspondiente al modelo.
      */
-    public String getTableName() {
+    public synchronized String getTableName() {
         return tableName;
     }
 
@@ -779,14 +779,14 @@ class Conexion {
      * @param modelExist Bandera que sirve para identificar si el modelo existe en BD's, TRUE indica que el modelo fue obtenido de BD's
      *                   False indica que el modelo no existe en BD's
      */
-    protected void setModelExist(Boolean modelExist) {
+    public void setModelExist(Boolean modelExist) {
         this.modelExist = modelExist;
     }
 
     /**
      * Representa la metadata de la tabla correspondiente al modelo en BD's
      */
-    protected TablesSQL getTabla() {
+    protected synchronized TablesSQL getTabla() {
         return tabla;
     }
 
