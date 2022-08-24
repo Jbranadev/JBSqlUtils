@@ -1,11 +1,13 @@
-package io.github.josecarlosbran.JBSqlLite.Search;
+package io.github.josecarlosbran.JBSqlLite.DataBase;
 
 
+import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Methods_Conexion;
 import io.github.josecarlosbran.LogsJB.LogsJB;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
@@ -194,6 +196,31 @@ public class Get extends Methods_Conexion {
                     if (modelo.getTableExist()) {
                         String sql="SELECT * FROM " + modelo.getTableName();
                         sql = sql+Sql + ";";
+
+                        //Si es sql server y trae la palabra limit verificara y modificara la sentencia
+                        if(modelo.getDataBaseType()== DataBase.SQLServer){
+                            if(StringUtils.containsIgnoreCase(sql, "LIMIT")){
+                                String temporal;
+                                LogsJB.info("Sentencia SQL a modificar: "+sql);
+                                int indice_limite= StringUtils.lastIndexOfIgnoreCase(sql, "LIMIT");
+                                LogsJB.debug("Indice limite: "+indice_limite);
+                                LogsJB.debug("Longitud de la sentencia: "+sql.length());
+                                String temporal_limite=StringUtils.substring(sql, indice_limite);
+                                sql=sql.replace(temporal_limite, ";");
+                                LogsJB.debug("Sentencia SQL despues de eliminar el limite: "+sql);
+                                LogsJB.trace("Temporal Limite: "+temporal_limite);
+                                temporal_limite=StringUtils.remove(temporal_limite, "LIMIT");
+                                LogsJB.trace("Temporal Limite: "+temporal_limite);
+                                temporal_limite=StringUtils.remove(temporal_limite, ";");
+                                LogsJB.trace("Temporal Limite: "+temporal_limite);
+                                temporal=sql;
+                                LogsJB.trace("Temporal SQL: "+temporal);
+                                String select="SELECT TOP "+temporal_limite+" * FROM ";
+                                sql=temporal.replace("SELECT * FROM ", select);
+                                LogsJB.info("Se modifico la sentencia SQL para que unicamente obtenga la cantidad de " +
+                                        "registros especificados por el usuario: "+sql);
+                            }
+                        }
                         LogsJB.info(sql);
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         ResultSet registros = ejecutor.executeQuery();

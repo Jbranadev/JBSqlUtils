@@ -16,7 +16,7 @@ import java.util.concurrent.Future;
 
 import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
-public class Execute extends Methods_Conexion {
+class Execute extends Methods_Conexion {
     private String sql;
 
     public Execute(String sql) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {

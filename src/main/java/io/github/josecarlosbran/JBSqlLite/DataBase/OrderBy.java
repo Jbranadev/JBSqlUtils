@@ -1,4 +1,4 @@
-package io.github.josecarlosbran.JBSqlLite.Search;
+package io.github.josecarlosbran.JBSqlLite.DataBase;
 
 
 import io.github.josecarlosbran.JBSqlLite.Enumerations.OrderType;
@@ -27,6 +27,14 @@ public class OrderBy<T> extends Get {
         }
         this.modelo = modelo;
         this.sql=sql+" ORDER BY "+columna+orden.getValor();
+    }
+
+    public Take take(int limite) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+        if(Objects.isNull(this.modelo)){
+            return new Take(this.sql, limite);
+        }else{
+            return new Take(this.sql, limite, this.modelo);
+        }
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////

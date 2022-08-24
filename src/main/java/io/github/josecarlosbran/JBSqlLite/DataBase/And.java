@@ -1,7 +1,6 @@
-package io.github.josecarlosbran.JBSqlLite.Search;
+package io.github.josecarlosbran.JBSqlLite.DataBase;
 
 
-import io.github.josecarlosbran.JBSqlLite.DataBase.Execute;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.OrderType;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
@@ -15,12 +14,14 @@ import java.util.Objects;
 
 import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
-public class Or<T> extends Get {
-    private String sql;
+public class And<T> extends Get {
     private T modelo=null;
 
-    protected Or(String sql, String columna, Operator operador, String valor, T modelo) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    private String sql;
+
+    protected And(String sql, String columna, Operator operador, String valor, T modelo) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
+        System.out.println("Nombre de la clase pasada como modelo: "+modelo.getClass().getSimpleName());
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
         }
@@ -31,21 +32,22 @@ public class Or<T> extends Get {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
         this.modelo=modelo;
-        this.sql = sql+Operator.OR.getOperador()+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + valor+Operator.CLOSE_PARENTESIS.getOperador();
+        this.sql = sql+Operator.AND.getOperador()+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + valor+Operator.CLOSE_PARENTESIS.getOperador();
     }
 
-    protected Or(String sql, String expresion, T modelo) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    protected And(String sql, String expresion, T modelo) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         super();
         if (stringIsNullOrEmpty(expresion)) {
             throw new ValorUndefined("La expresion proporcionada esta vacía o es NULL");
         }
-        this.modelo= modelo;
-        this.sql = sql+Operator.OR.getOperador()+Operator.OPEN_PARENTESIS.getOperador()+expresion+Operator.CLOSE_PARENTESIS.getOperador();
+        this.modelo = modelo;
+        this.sql = sql+Operator.AND.getOperador()+Operator.OPEN_PARENTESIS.getOperador()+expresion+Operator.CLOSE_PARENTESIS.getOperador();
     }
 
 
-    protected Or(String sql, String columna, Operator operador, String valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected And(String sql, String columna, Operator operador, String valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
+        System.out.println("Nombre de la clase pasada como modelo: "+modelo.getClass().getSimpleName());
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
         }
@@ -55,17 +57,18 @@ public class Or<T> extends Get {
         if (Objects.isNull(operador)) {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
-        this.sql = sql+Operator.OR.getOperador()+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + valor+Operator.CLOSE_PARENTESIS.getOperador();
+        this.sql = sql+Operator.AND.getOperador()+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + valor+Operator.CLOSE_PARENTESIS.getOperador();
     }
 
 
-    protected Or(String sql, String expresion) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    public And(String sql, String expresion) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         super();
         if (stringIsNullOrEmpty(expresion)) {
             throw new ValorUndefined("La expresion proporcionada esta vacía o es NULL");
         }
-        this.sql = sql+Operator.OR.getOperador()+Operator.OPEN_PARENTESIS.getOperador()+expresion+Operator.CLOSE_PARENTESIS.getOperador();
+        this.sql = sql+Operator.AND.getOperador()+Operator.OPEN_PARENTESIS.getOperador()+expresion+Operator.CLOSE_PARENTESIS.getOperador();
     }
+
 
 
     public And and(String columna, Operator operador, String valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
@@ -101,10 +104,19 @@ public class Or<T> extends Get {
 
     }
 
+
     public OrderBy orderBy(String columna, OrderType orderType) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         return new OrderBy(this.sql, columna, orderType, this.modelo);
     }
 
+
+    public Take take(int limite) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+        if(Objects.isNull(this.modelo)){
+            return new Take(this.sql, limite);
+        }else{
+            return new Take(this.sql, limite, this.modelo);
+        }
+    }
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,6 @@
 package io.github.josecarlosbran.JBSqlLite;
 
+import io.github.josecarlosbran.JBSqlLite.DataBase.Where;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
@@ -7,7 +8,6 @@ import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.JBSqlLite.Search.Where;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,7 +22,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class Methods extends Methods_Conexion {
+class Methods extends Methods_Conexion {
     public Methods() throws DataBaseUndefind, PropertiesDBUndefined {
         super();
     }
@@ -54,6 +54,10 @@ public class Methods extends Methods_Conexion {
                             String columnName = metodo.getName();
                             columnName = StringUtils.remove(columnName, "get");
                             DataType columnType = columnsSQL.getDataTypeSQL();
+                            //Manejo de tipo de dato TimeStamp en SQLServer
+                            if((columnType== DataType.TIMESTAMP)&&(this.getDataBaseType() == DataBase.SQLServer)){
+                                columnType=DataType.DATETIME;
+                            }
                             Constraint[] columnRestriccion = columnsSQL.getRestriccion();
                             String restricciones = "";
                             String tipo_de_columna = columnType.toString();
@@ -74,9 +78,14 @@ public class Methods extends Methods_Conexion {
                                     } else if ((DataBase.SQLite == this.getDataBaseType()) &&
                                             (restriccion == Constraint.AUTO_INCREMENT)) {
                                         restricciones = restricciones + "";
+                                    } else if(restriccion==Constraint.DEFAULT){
+                                        restricciones=restricciones+restriccion.getRestriccion()+" "+columnsSQL.getDefault_value()+" ";
+
                                     } else {
                                         restricciones = restricciones + restriccion.getRestriccion() + " ";
                                     }
+
+
                                 }
                             }
 

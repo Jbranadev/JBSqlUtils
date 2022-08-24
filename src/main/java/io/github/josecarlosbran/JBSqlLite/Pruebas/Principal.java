@@ -18,10 +18,11 @@ import static io.github.josecarlosbran.JBSqlLite.JBSqlUtils.*;
 
 public class Principal {
 
+
     public static void main(String[] args) {
         try {
 
-            LogsJB.setGradeLog(NivelLog.DEBUG);
+            LogsJB.setGradeLog(NivelLog.INFO);
             String DB = "JBSQLUTILS";
             setDataBaseTypeGlobal(DataBase.MySQL);
             //setDataBaseGlobal(BDSqlite);
@@ -40,17 +41,17 @@ public class Principal {
 
             //new Principal().MySQL(new Test());
 
-            new Principal().PostgreSQL(new Test());
+            //new Principal().PostgreSQL(new Test());
 
-            //new Principal().SQLServer(new Test());
-
-
+            new Principal().SQLServer(new Test());
 
 
 
 
-        } catch (DataBaseUndefind | PropertiesDBUndefined | InterruptedException | InstantiationException |
-                 IllegalAccessException | ModelNotFound |ValorUndefined
+
+
+        } catch (DataBaseUndefind | PropertiesDBUndefined  | InstantiationException |
+                 IllegalAccessException  |ValorUndefined
                 /*|IllegalAccessException|InvocationTargetException*/ e) {
             LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -62,7 +63,7 @@ public class Principal {
     }
 
 
-    void SQLITE(Test test) {
+    void SQLITE(Test test) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined, InstantiationException, IllegalAccessException {
         String separador=System.getProperty("file.separator");
         String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
                 "BD" +
@@ -71,18 +72,73 @@ public class Principal {
         test.setGetPropertySystem(false);
         test.setBD(BDSqlite);
         test.setDataBaseType(DataBase.SQLite);
+        long inicio = System.currentTimeMillis();
+        //test.dropTableIfExist();
+        //test.crateTable();
 
-        //test.closeConnection(test.getConnection());
-        test.dropTableIfExist();
-        test.crateTable();
-
-        test.getName().setValor("Jose");
+/*
+        test.getName().setValor("Alfredo");
         test.getApellido().setValor("Bran");
+        test.getIsMayor().setValor(false);
+        test.save();
+        while (!test.getTaskIsReady()){
+
+        }
+
+        test.getName().setValor("Porfirio");
+        test.getApellido().setValor("Quiñonez");
         test.getIsMayor().setValor(true);
+        test.save();*/
+
+
+        Consumer<Test> showFilas = fila -> {
+            /*fila.setModelExist(false);
+            fila.setGetPropertySystem(false);
+            fila.setPort("5076");
+            fila.setHost("localhost");
+            fila.setUser("Bran");
+            fila.setPassword("Bran");
+            fila.setBD("JBSQLUTILS");
+            fila.setDataBaseType(DataBase.MySQL);*/
+            fila.getIsMayor().setValor(!fila.getIsMayor().getValor());
+            LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
+
+        };
+
+        List<Test> lista=new ArrayList<>();
+        lista=test.where("id", Operator.MAYOR_QUE, "0").getAll();
+        //lista=test.where("isMayor", Operator.IGUAL_QUE, "true").take(3).get();
+
+
+        //test.where("",null, "").and("", null, "").or("", null, "").and("").getAll();
+        //test.where("name", Operator.IGUAL_QUE, "'Jose'").and("apellido", Operator.IGUAL_QUE, "'Bran'").get();
+        while (!test.getTaskIsReady()){
+
+        }
+        //LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.getApellido().getValor()+"   "+test.getIsMayor().getValor());
+
+        //test.getIsMayor().setValor(!test.getIsMayor().getValor());
+
+        //LogsJB.info("Cantidad de resultado lista: "+lista.size());
+
+        lista.forEach(showFilas);
+
+
+        test.saveALL(lista);
         //test.save();
+        //test.delete();
+        while (!test.getTaskIsReady()){
+
+        }
+
+        long fin = System.currentTimeMillis();
+        //double tiempo = (double) ((fin - inicio)/1000);
+        double tiempo = (double) ((fin - inicio));
+        LogsJB.warning(tiempo +" mili segundos");
+        //LogsJB.fatal("Termino de invocar los metodos que almacena los modelos en BD's");
     }
 
-    void MySQL(Test test) {
+    void MySQL(Test test) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined, InstantiationException, IllegalAccessException {
 
         test.setGetPropertySystem(false);
         test.setPort("5076");
@@ -91,16 +147,73 @@ public class Principal {
         test.setPassword("Bran");
         test.setBD("JBSQLUTILS");
         test.setDataBaseType(DataBase.MySQL);
+        long inicio = System.currentTimeMillis();
 
-
-        //test.closeConnection(test.getConnection());
         //test.dropTableIfExist();
         //test.crateTable();
 
-        test.getName().setValor("Jose");
-        test.getApellido().setValor("Bran");
-        test.getIsMayor().setValor(true);
+/*
+        test.getName().setValor("Ligia");
+        test.getApellido().setValor("Camey");
+        //test.getIsMayor().setValor(true);
         test.save();
+        while (!test.getTaskIsReady()){
+
+        }
+
+        test.getName().setValor("Isabel");
+        test.getApellido().setValor("Peralta");
+        test.getIsMayor().setValor(false);
+        test.save();*/
+
+
+        Consumer<Test> showFilas = fila -> {
+/*
+            String separador=System.getProperty("file.separator");
+            String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
+                    "BD" +
+                    separador +
+                    "JBSqlUtils.db");
+            fila.setGetPropertySystem(false);
+            fila.setBD(BDSqlite);
+            fila.setDataBaseType(DataBase.SQLite);
+            fila.setTableExist(false);
+            fila.getId().setValor(null);*/
+            fila.getIsMayor().setValor(!fila.getIsMayor().getValor());
+            LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
+        };
+
+        List<Test> lista=new ArrayList<>();
+        lista=test.where("id", Operator.MAYOR_QUE, "0").getAll();
+        //lista=test.where("id", Operator.MAYOR_QUE, "0").take(4).get();
+
+
+        //test.where("",null, "").and("", null, "").or("", null, "").and("").getAll();
+        //test.where("name", Operator.IGUAL_QUE, "'Jose'").and("apellido", Operator.IGUAL_QUE, "'Bran'").get();
+        while (!test.getTaskIsReady()){
+
+        }
+        //LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.getApellido().getValor()+"   "+test.getIsMayor().getValor());
+
+        //test.getIsMayor().setValor(!test.getIsMayor().getValor());
+
+        //LogsJB.info("Cantidad de resultado lista: "+lista.size());
+
+        lista.forEach(showFilas);
+
+
+        test.saveALL(lista);
+        //test.save();
+        //test.delete();
+        while (!test.getTaskIsReady()){
+
+        }
+
+        long fin = System.currentTimeMillis();
+        //double tiempo = (double) ((fin - inicio)/1000);
+        double tiempo = (double) ((fin - inicio));
+        LogsJB.warning(tiempo +" mili segundos");
+        //LogsJB.fatal("Termino de invocar los metodos que almacena los modelos en BD's");
 
     }
 
@@ -116,11 +229,19 @@ public class Principal {
         //test.dropTableIfExist();
         //test.crateTable();
 
-
-        //test.getName().setValor("Jose");
-        //test.getApellido().setValor("Bran");
+/*
+        test.getName().setValor("Ligia");
+        test.getApellido().setValor("Camey");
         //test.getIsMayor().setValor(true);
-        //test.save();
+        test.save();
+        while (!test.getTaskIsReady()){
+
+        }
+
+        test.getName().setValor("Isabel");
+        test.getApellido().setValor("Peralta");
+        test.getIsMayor().setValor(false);
+        test.save();*/
 
 
         Consumer<Test> showFilas = fila -> {
@@ -142,30 +263,29 @@ public class Principal {
 
         List<Test> lista=new ArrayList<>();
         //lista=test.where("name", Operator.IGUAL_QUE, "'Jose'").and("isMayor", Operator.IGUAL_QUE, "false").getAll();
-        //lista=test.where("name", Operator.LIKE, "'Jose%'").getAll();
-        //test.where("name", Operator.IGUAL_QUE, "'Jose'").and("isMayor", Operator.IGUAL_QUE, "true").get(test);
-        //lista.add(test);
+        lista=test.where("isMayor", Operator.IGUAL_QUE, "true").take(2).get();
+
 
         //test.where("",null, "").and("", null, "").or("", null, "").and("").getAll();
-        test.where("name", Operator.IGUAL_QUE, "'Jose'").and("apellido", Operator.IGUAL_QUE, "'Bran'").get();
+        //test.where("name", Operator.IGUAL_QUE, "'Jose'").and("apellido", Operator.IGUAL_QUE, "'Bran'").get();
         while (!test.getTaskIsReady()){
 
         }
-        LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.getApellido().getValor()+"   "+test.getIsMayor().getValor());
+        //LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.getApellido().getValor()+"   "+test.getIsMayor().getValor());
 
         //test.getIsMayor().setValor(!test.getIsMayor().getValor());
 
         //LogsJB.info("Cantidad de resultado lista: "+lista.size());
 
-        //lista.forEach(showFilas);
+        lista.forEach(showFilas);
         long inicio = System.currentTimeMillis();
 
         //test.saveALL(lista);
         //test.save();
-        test.delete();
-        while (!test.getTaskIsReady()){
+        //test.delete();
+        /*while (!test.getTaskIsReady()){
 
-        }
+        }*/
 
         long fin = System.currentTimeMillis();
         //double tiempo = (double) ((fin - inicio)/1000);
@@ -176,12 +296,8 @@ public class Principal {
     }
 
 
-    void refrescar(Test test){
-        //test.closeConnection(test.getConnection());
-        test.refresh();
-    }
 
-    void SQLServer(Test test){
+    void SQLServer(Test test) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined, InstantiationException, IllegalAccessException {
         test.setGetPropertySystem(false);
         test.setPort("5077");
         test.setHost("localhost");
@@ -190,14 +306,75 @@ public class Principal {
         test.setBD("JBSQLUTILS");
         test.setDataBaseType(DataBase.SQLServer);
 
-        //test.closeConnection(test.getConnection());
-        //test.dropTableIfExist();
-        test.crateTable();
+        long inicio = System.currentTimeMillis();
 
-        test.getName().setValor("Jose");
-        test.getApellido().setValor("Bran");
-        test.getIsMayor().setValor(true);
+        //test.refresh();
+
+        //test.dropTableIfExist();
+        //test.crateTable();
+
+
+        /*test.getName().setValor("Arturo");
+        test.getApellido().setValor("Camey");
+        //test.getIsMayor().setValor(true);
+        test.save();
+        while (!test.getTaskIsReady()){
+
+        }
+
+        test.getName().setValor(null);
+        test.getApellido().setValor("Peralta");
+        test.getIsMayor().setValor(false);
+        test.save();*/
+
+
+        Consumer<Test> showFilas = fila -> {
+/*
+            String separador=System.getProperty("file.separator");
+            String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
+                    "BD" +
+                    separador +
+                    "JBSqlUtils.db");
+            fila.setGetPropertySystem(false);
+            fila.setBD(BDSqlite);
+            fila.setDataBaseType(DataBase.SQLite);
+            fila.setTableExist(false);
+            fila.getId().setValor(null);*/
+            fila.getIsMayor().setValor(!fila.getIsMayor().getValor());
+            LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
+        };
+
+        List<Test> lista=new ArrayList<>();
+        //lista=test.where("id", Operator.MAYOR_QUE, "0").getAll();
+        lista=test.where("id", Operator.MAYOR_QUE, "0").take(10).get();
+
+
+        //test.where("",null, "").and("", null, "").or("", null, "").and("").getAll();
+        //test.where("name", Operator.IGUAL_QUE, "'Jose'").and("apellido", Operator.IGUAL_QUE, "'Bran'").get();
+        while (!test.getTaskIsReady()){
+
+        }
+        //LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.getApellido().getValor()+"   "+test.getIsMayor().getValor());
+
+        //test.getIsMayor().setValor(!test.getIsMayor().getValor());
+
+        //LogsJB.info("Cantidad de resultado lista: "+lista.size());
+
+        lista.forEach(showFilas);
+
+
+        test.saveALL(lista);
         //test.save();
+        //test.delete();
+        while (!test.getTaskIsReady()){
+
+        }
+
+        long fin = System.currentTimeMillis();
+        //double tiempo = (double) ((fin - inicio)/1000);
+        double tiempo = (double) ((fin - inicio));
+        LogsJB.warning(tiempo +" mili segundos");
+        //LogsJB.fatal("Termino de invocar los metodos que almacena los modelos en BD's");
 
     }
 
