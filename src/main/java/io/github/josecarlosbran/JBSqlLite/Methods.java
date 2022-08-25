@@ -1,5 +1,6 @@
 package io.github.josecarlosbran.JBSqlLite;
 
+import io.github.josecarlosbran.JBSqlLite.DataBase.Get;
 import io.github.josecarlosbran.JBSqlLite.DataBase.Where;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
@@ -13,6 +14,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Method;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -398,6 +401,69 @@ class Methods extends Methods_Conexion {
     public Where where(String columna, Operator operador, String valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         return new Where(columna, operador, valor, this);
     }
+
+
+    /**
+     * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
+     * proporcionada
+     * @return Retorna una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
+     * proporcionada
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @throws InstantiationException Lanza esta excepción si ocurre un error al crear una nueva instancia
+     * del tipo de modelo proporcionado
+     * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     */
+    public <T extends Methods_Conexion> List<T> getAll() throws InstantiationException, IllegalAccessException {
+        this.setTaskIsReady(false);
+        List<T> lista = new ArrayList<>();
+        try {
+            if (!this.getTableExist()) {
+                this.refresh();
+            }
+            Connection connect = this.getConnection();
+            //T finalTemp = temp;
+            Runnable get = () -> {
+                try {
+                    if (this.getTableExist()) {
+                        String sql="SELECT * FROM " + this.getTableName();
+                        sql = sql+ ";";
+                        LogsJB.info(sql);
+                        PreparedStatement ejecutor = connect.prepareStatement(sql);
+                        ResultSet registros = ejecutor.executeQuery();
+                        while(registros.next()) {
+                            lista.add(procesarResultSet((T)this, registros));
+                            //procesarResultSet(modelo, registros);
+                        }
+                        this.closeConnection(connect);
+                    } else {
+                        LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
+                                "recuperar el Registro");
+                    }
+                    this.setTaskIsReady(true);
+                } catch (Exception e) {
+                    LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
+                            "SQL de la BD's: " + e.toString());
+                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    this.setTaskIsReady(true);
+                }
+            };
+            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            ejecutor.submit(get);
+            ejecutor.shutdown();
+        } catch (Exception e) {
+            LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+
+        }
+        return lista;
+    }
+
 
 
 }

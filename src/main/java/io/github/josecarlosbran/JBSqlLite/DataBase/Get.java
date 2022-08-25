@@ -21,14 +21,30 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+/**
+ * @author Jose Bran
+ * Clase que proporciona los metodos que obtienen los registros de BD's
+ */
 public class Get extends Methods_Conexion {
 
-
+    /**
+     * Constructor por default de la clase Get, que inicializa la clase
+     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     * BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     * propiedades de conexión necesarias para conectarse a la BD's especificada.
+     */
     protected Get() throws DataBaseUndefind, PropertiesDBUndefined {
         super();
     }
 
 
+    /**
+     * Llena el modelo que invoca este metodo con la información que obtiene de BD's
+     * @param modelo Modelo que será llenado
+     * @param Sql Sentencia SQL para obtener el modelo
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     */
     protected  <T extends Methods_Conexion> void get(T modelo, String Sql){
         try {
             modelo.setTaskIsReady(false);
@@ -75,6 +91,13 @@ public class Get extends Methods_Conexion {
         }
     }
 
+    /**
+     * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's
+     * @param modelo Modelo que esta invocando el metodo
+     * @param Sql Sentencia SQL para obtener el modelo
+     * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     */
     protected <T extends Methods_Conexion> T first(T modelo, String Sql){
         try {
             modelo.setTaskIsReady(false);
@@ -122,6 +145,15 @@ public class Get extends Methods_Conexion {
         return modelo;
     }
 
+    /**
+     * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's
+     * @param modelo Modelo que esta invocando el metodo
+     * @param Sql Sentencia SQL para obtener el modelo
+     * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @throws ModelNotFound Lanza esta excepción si no logra encontrar el registro correspondiente a la consulta
+     * SQL realizada.
+     */
     protected <T extends Methods_Conexion> T firstOrFail(T modelo, String Sql) throws ModelNotFound {
             modelo.setTaskIsReady(false);
             if (!modelo.getTableExist()) {
@@ -182,6 +214,18 @@ public class Get extends Methods_Conexion {
         return modelo;
     }
 
+    /**
+     * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
+     * proporcionada
+     * @param modelo Modelo que esta invocando el metodo
+     * @param Sql Sentencia SQL para obtener el modelo
+     * @return Retorna una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
+     * proporcionada
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @throws InstantiationException Lanza esta excepción si ocurre un error al crear una nueva instancia
+     * del tipo de modelo proporcionado
+     * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     */
     protected <T extends Methods_Conexion> List<T> getAll(T modelo, String Sql) throws InstantiationException, IllegalAccessException {
         modelo.setTaskIsReady(false);
         List<T> lista = new ArrayList<>();
