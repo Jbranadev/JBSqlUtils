@@ -1,5 +1,6 @@
 package io.github.josecarlosbran.JBSqlLite;
 
+import io.github.josecarlosbran.JBSqlLite.DataBase.Get;
 import io.github.josecarlosbran.JBSqlLite.DataBase.Where;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
@@ -13,6 +14,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Method;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +25,20 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+/**
+ * @author Jose Bran
+ * Clase que proporciona metodos que permiten al modelo ejecutar sentencias DML, así como crear o eliminar la tabla
+ * correspondiente al modelo
+ */
 class Methods extends Methods_Conexion {
+
+    /**
+     * Constructor por default de la clase Methods
+     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     * BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     * propiedades de conexión necesarias para conectarse a la BD's especificada.
+     */
     public Methods() throws DataBaseUndefind, PropertiesDBUndefined {
         super();
     }
@@ -55,8 +71,8 @@ class Methods extends Methods_Conexion {
                             columnName = StringUtils.remove(columnName, "get");
                             DataType columnType = columnsSQL.getDataTypeSQL();
                             //Manejo de tipo de dato TimeStamp en SQLServer
-                            if((columnType== DataType.TIMESTAMP)&&(this.getDataBaseType() == DataBase.SQLServer)){
-                                columnType=DataType.DATETIME;
+                            if ((columnType == DataType.TIMESTAMP) && (this.getDataBaseType() == DataBase.SQLServer)) {
+                                columnType = DataType.DATETIME;
                             }
                             Constraint[] columnRestriccion = columnsSQL.getRestriccion();
                             String restricciones = "";
@@ -78,8 +94,8 @@ class Methods extends Methods_Conexion {
                                     } else if ((DataBase.SQLite == this.getDataBaseType()) &&
                                             (restriccion == Constraint.AUTO_INCREMENT)) {
                                         restricciones = restricciones + "";
-                                    } else if(restriccion==Constraint.DEFAULT){
-                                        restricciones=restricciones+restriccion.getRestriccion()+" "+columnsSQL.getDefault_value()+" ";
+                                    } else if (restriccion == Constraint.DEFAULT) {
+                                        restricciones = restricciones + restriccion.getRestriccion() + " " + columnsSQL.getDefault_value() + " ";
 
                                     } else {
                                         restricciones = restricciones + restriccion.getRestriccion() + " ";
@@ -91,15 +107,15 @@ class Methods extends Methods_Conexion {
 
                             //Si el modelo tiene seteado que no se manejaran las timestamps entonces
                             //Ignora el guardar esas columnas
-                            if((!this.getTimestamps())&&((StringUtils.equalsIgnoreCase(columnName, "created_at"))
-                                    ||(StringUtils.equalsIgnoreCase(columnName, "updated_at")))){
+                            if ((!this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, "created_at"))
+                                    || (StringUtils.equalsIgnoreCase(columnName, "updated_at")))) {
                                 continue;
                             }
 
                             String columna = columnName + " " + tipo_de_columna + " " + restricciones;
 
                             datos++;
-                            if(datos>1){
+                            if (datos > 1) {
                                 sql = sql + ", ";
                             }
 
@@ -245,24 +261,30 @@ class Methods extends Methods_Conexion {
     }
 
 
-    public <T extends Methods_Conexion> void saveALL(List<T> modelos){
-        try{
-            T temp=null;
-            for(T modelo: modelos){
+    /**
+     * Almacena la información de los modelos proporcionados en BD's
+     * @param modelos Lista de modelos que serán Insertados o Actualizados
+     * @param <T> Tipo de parametro que hace que el metodo sea generico para poder ser
+     *           llamado por diferentes tipos de objetos, siempre y cuando estos hereden la clase Methods Conexion.
+     */
+    public <T extends Methods_Conexion> void saveALL(List<T> modelos) {
+        try {
+            T temp = null;
+            for (T modelo : modelos) {
                 //Optimización de los tiempos de inserción de cada modelo.
-                if(!Objects.isNull(temp)){
+                if (!Objects.isNull(temp)) {
                     modelo.setTabla(temp.getTabla());
                     modelo.setTableExist(temp.getTableExist());
                     modelo.setTableName(temp.getTableName());
                     LogsJB.info("Modelo Ya había sido inicializado");
-                }else{
-                    temp=(T) modelo.getClass().newInstance();
+                } else {
+                    temp = (T) modelo.getClass().newInstance();
                     LogsJB.warning("Modelo era Null, crea una nueva instancia");
                 }
                 if (!modelo.getTableExist()) {
                     LogsJB.info("Obtendra la información de conexión de la BD's");
                     modelo.refresh();
-                    while(modelo.getTabla().getColumnas().size()==0){
+                    while (modelo.getTabla().getColumnas().size() == 0) {
 
                     }
                     LogsJB.info("Ya obtuvo la información de BD's'");
@@ -272,7 +294,7 @@ class Methods extends Methods_Conexion {
                 }
                 modelo.saveModel(modelo);
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Guarda la lista de modelos en la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
@@ -282,6 +304,9 @@ class Methods extends Methods_Conexion {
     }
 
 
+    /**
+     * Elimina la información del modelo que hace el llamado en BD´s
+     */
     public void delete() {
         try {
             deleteModel(this);
@@ -294,25 +319,30 @@ class Methods extends Methods_Conexion {
         }
     }
 
-
-    public <T extends Methods_Conexion> void deleteALL(List<T> modelos){
-        try{
-            T temp=null;
-            for(T modelo: modelos){
+    /**
+     * Elimina la información de los modelos proporcionados en BD's
+     * @param modelos Lista de modelos que serán Eliminados
+     * @param <T> Tipo de parametro que hace que el metodo sea generico para poder ser
+     *           llamado por diferentes tipos de objetos, siempre y cuando estos hereden la clase Methods Conexion.
+     */
+    public <T extends Methods_Conexion> void deleteALL(List<T> modelos) {
+        try {
+            T temp = null;
+            for (T modelo : modelos) {
                 //Optimización de los tiempos de inserción de cada modelo.
-                if(!Objects.isNull(temp)){
+                if (!Objects.isNull(temp)) {
                     modelo.setTabla(temp.getTabla());
                     modelo.setTableExist(temp.getTableExist());
                     modelo.setTableName(temp.getTableName());
                     LogsJB.info("Modelo Ya había sido inicializado");
-                }else{
-                    temp=(T) modelo.getClass().newInstance();
+                } else {
+                    temp = (T) modelo.getClass().newInstance();
                     LogsJB.warning("Modelo era Null, crea una nueva instancia");
                 }
                 if (!modelo.getTableExist()) {
                     LogsJB.info("Obtendra la información de conexión de la BD's");
                     modelo.refresh();
-                    while(modelo.getTabla().getColumnas().size()==0){
+                    while (modelo.getTabla().getColumnas().size() == 0) {
 
                     }
                     LogsJB.info("Ya obtuvo la información de BD's'");
@@ -322,7 +352,7 @@ class Methods extends Methods_Conexion {
                 }
                 modelo.deleteModel(modelo);
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Guarda la lista de modelos en la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
@@ -332,14 +362,18 @@ class Methods extends Methods_Conexion {
     }
 
 
-    public Boolean saveBoolean(){
+    /**
+     * Almacena la información del modelo que hace el llamado, esperando a que la operación termine de ser realizada
+     * @return Retorna True cuando se a terminado de insertar o actualizar la información del modelo en BD's
+     */
+    public Boolean saveBoolean() {
         Boolean result = false;
-        try{
+        try {
             saveModel(this);
-            while(!this.getTaskIsReady()){
+            while (!this.getTaskIsReady()) {
             }
             result = this.getTaskIsReady();
-        }catch (Exception e) {
+        } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
@@ -350,9 +384,84 @@ class Methods extends Methods_Conexion {
     }
 
 
-
+    /**
+     * Proporciona un punto de entrada para obtener uno o mas modelos del tipo de modelo que invoca este procedimiento
+     * @param columna Columna que sera evaluada
+     * @param operador Operador por medio del cual se evaluara la columna
+     * @param valor Valor contra el cual se evaluara la columna
+     * @return Punto de entrada a metodos que permiten seguir modificando la expresión de filtro u obtener el o los
+     * modelos que hacen match con la consulta generada
+     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     * BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     * propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta excepción si alguno de los parametros proporcionados esta
+     * Vacío o es Null
+     */
     public Where where(String columna, Operator operador, String valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         return new Where(columna, operador, valor, this);
+    }
+
+
+    /**
+     * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
+     * proporcionada
+     * @return Retorna una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
+     * proporcionada
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @throws InstantiationException Lanza esta excepción si ocurre un error al crear una nueva instancia
+     * del tipo de modelo proporcionado
+     * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     */
+    public <T extends Methods_Conexion> List<T> getAll() throws InstantiationException, IllegalAccessException {
+        this.setTaskIsReady(false);
+        List<T> lista = new ArrayList<>();
+        try {
+            if (!this.getTableExist()) {
+                this.refresh();
+            }
+            Connection connect = this.getConnection();
+            //T finalTemp = temp;
+            Runnable get = () -> {
+                try {
+                    if (this.getTableExist()) {
+                        String sql="SELECT * FROM " + this.getTableName();
+                        sql = sql+ ";";
+                        LogsJB.info(sql);
+                        PreparedStatement ejecutor = connect.prepareStatement(sql);
+                        ResultSet registros = ejecutor.executeQuery();
+                        while(registros.next()) {
+                            lista.add(procesarResultSet((T)this, registros));
+                            //procesarResultSet(modelo, registros);
+                        }
+                        this.closeConnection(connect);
+                    } else {
+                        LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
+                                "recuperar el Registro");
+                    }
+                    this.setTaskIsReady(true);
+                } catch (Exception e) {
+                    LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
+                            "SQL de la BD's: " + e.toString());
+                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    this.setTaskIsReady(true);
+                }
+            };
+            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            ejecutor.submit(get);
+            ejecutor.shutdown();
+        } catch (Exception e) {
+            LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+
+        }
+        return lista;
     }
 
 

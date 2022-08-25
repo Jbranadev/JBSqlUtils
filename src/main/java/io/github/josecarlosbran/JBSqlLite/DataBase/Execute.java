@@ -16,9 +16,23 @@ import java.util.concurrent.Future;
 
 import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
+/**
+ * @author Jose Bran
+ * Clase que proporciona el metodo para ejecutar sentencias SQL sin necesidad de instanciar
+ * un modelo u obtenerlo de BD's
+ */
 class Execute extends Methods_Conexion {
     private String sql;
 
+    /**
+     * Constructor que recibe como parametro:
+     * @param sql Sentencia SQL a ser Ejecutada
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     * BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     * propiedades de conexión necesarias para conectarse a la BD's especificada.
+     */
     public Execute(String sql) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(sql)) {
@@ -27,7 +41,10 @@ class Execute extends Methods_Conexion {
         this.sql=sql;
     }
 
-
+    /**
+     * Ejecuta la sentencia SQL que recibe la clase al ser instanciada.
+     * @return Retorna la cantidad de filas que se han visto afectadas al ejecutar la sentencia SQL.
+     */
     public int execute(){
         int result = 0;
         try {

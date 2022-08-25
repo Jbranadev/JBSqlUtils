@@ -5,10 +5,15 @@ import io.github.josecarlosbran.JBSqlLite.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlLite.JBSqlUtils;
 
+/**
+ * @author Jose Bran
+ * Clase de Pruebas
+ */
 public class Test extends JBSqlUtils {
-    public Test() throws DataBaseUndefind, PropertiesDBUndefined {
+    public Test() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         super(true);
     }
 

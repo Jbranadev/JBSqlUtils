@@ -24,16 +24,24 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+
+
+/**
+ * @author Jose Bran
+ * Clase que proporciona los metodos de conexión necesarios para que el modelo pueda realizar
+ * la conversion de datos entre java y sql, así mismo proporciona metodos de logica del manejor del resultado
+ * como de envíar valores a BD's
+ */
 public class Methods_Conexion extends Conexion {
 
 
     /**
      * Constructor de la clase Conexión que se encarga de inicializar las propiedades de conexión del modelo,
      * las cuales las obtiene de las propiedades del sistema Java.
-     *
-     * @throws DataBaseUndefind      Lanza esta excepción si el tipo de BD's a la cual se conectara el modelo no ha sido definida entre
-     *                               las propiedades del sistema Java.
-     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión no han sido definidas.
+     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     * BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     * propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     public Methods_Conexion() throws DataBaseUndefind, PropertiesDBUndefined {
         super();
@@ -42,7 +50,6 @@ public class Methods_Conexion extends Conexion {
 
     /**
      * Obtiene la lista de metodos pertenecientes al modelo que lo invoca.
-     *
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Retorna una lista de los metodos pertenecientes al modelo.
      */
@@ -80,19 +87,12 @@ public class Methods_Conexion extends Conexion {
         return result;
     }
 
-    protected <T> Method getMethodModel(String nombre) throws NoSuchMethodException {
-        Method metodo = this.getClass().getMethod(nombre);
-        // Los muestro en consola
-        //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+returntype);
 
-        return metodo;
-    }
 
-    //Obtener unicamente los metodos get del modelo
+
 
     /**
      * Obtiene la lista de los metodos get del modelo que lo invoca.
-     *
      * @param metodos Lista de metodos que tiene el modelo, sobre los cuales se filtraran los metodos get.
      * @param <T>     Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Lista de los metodos get del modelo que lo invoca.
@@ -119,7 +119,6 @@ public class Methods_Conexion extends Conexion {
 
     /**
      * Obtiene la lista de los metodos set del modelo que lo invoca.
-     *
      * @param metodos Lista de metodos que tiene el modelo, sobre los cuales se filtraran los metodos set.
      * @param <T>     Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Lista de los metodos set del modelo que lo invoca.
@@ -146,7 +145,6 @@ public class Methods_Conexion extends Conexion {
 
     /**
      * Obtiene la conexión del modelo a la BD's con las propiedades definidas.
-     *
      * @return Retorna la conexión del modelo a la BD's con las propiedades definidas.
      */
     public synchronized Connection getConnection() {
@@ -208,7 +206,6 @@ public class Methods_Conexion extends Conexion {
 
     /**
      * Cierra la conexión a BD's
-     *
      * @param connect Conexión que se desea cerrar
      */
     public void closeConnection(Connection connect) {
@@ -258,7 +255,6 @@ public class Methods_Conexion extends Conexion {
 
     /**
      * Verifica la existencia de la tabla correspondiente al modelo en BD's
-     *
      * @return True si la tabla correspondiente al modelo existe en BD's, de lo contrario False.
      */
     protected Boolean tableExist() {
@@ -270,8 +266,7 @@ public class Methods_Conexion extends Conexion {
                     Connection connect = this.getConnection();
                     DatabaseMetaData metaData = connect.getMetaData();
                     ResultSet tables = metaData.getTables(null, null, "%", null);
-                    //Obtener las tablas disponibles
-                    TablesSQL.getTablas().clear();
+
                     LogsJB.trace("Revisara el resultSet");
                     while (tables.next()) {
                         TablesSQL temp = new TablesSQL();
@@ -355,67 +350,6 @@ public class Methods_Conexion extends Conexion {
         return result;
     }
 
-    /**
-     * Obtiene las columnas que tiene la tabla correspondiente al modelo en BD's.
-     */
-    /*protected void getColumnsTable() {
-        Runnable ObtenerColumnas = () -> {
-            try {
-                Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
-                LogsJB.info("Comienza a obtener las columnas que le pertenecen a la tabla");
-                Connection connect = this.getConnection();
-                LogsJB.info("Obtuvo el objeto conexión");
-                DatabaseMetaData metaData = connect.getMetaData();
-                LogsJB.info("Ya tiene el MetaData de la BD's");
-                ResultSet columnas = metaData.getColumns(null, null, this.getTableName(), null);
-                LogsJB.info("Ya tiene el resultset con las columnas de la tabla");
-                //Obtener las tablas disponibles
-                this.getTabla().getColumnas().clear();
-                while (columnas.next()) {
-                    ColumnsSQL temp = new ColumnsSQL();
-                    temp.setTABLE_CAT(columnas.getString(1));
-                    temp.setTABLE_SCHEM(columnas.getString(2));
-                    temp.setTABLE_NAME(columnas.getString(3));
-                    temp.setCOLUMN_NAME(columnas.getString(4));
-                    temp.setDATA_TYPE(columnas.getInt(5));
-                    temp.setTYPE_NAME(columnas.getString(6));
-                    temp.setCOLUMN_SIZE(columnas.getInt(7));
-
-                    temp.setDECIMAL_DIGITS(columnas.getInt(9));
-                    temp.setNUM_PREC_RADIX(columnas.getInt(10));
-                    temp.setNULLABLE(columnas.getInt(11));
-                    temp.setREMARKS(columnas.getString(12));
-                    temp.setCOLUMN_DEF(columnas.getString(13));
-
-                    temp.setCHAR_OCTET_LENGTH(columnas.getInt(16));
-                    temp.setORDINAL_POSITION(columnas.getInt(17));
-                    temp.setIS_NULLABLE(columnas.getString(18));
-                    temp.setSCOPE_CATALOG(columnas.getString(19));
-                    temp.setSCOPE_SCHEMA(columnas.getString(20));
-                    temp.setSCOPE_TABLE(columnas.getString(21));
-                    temp.setSOURCE_DATA_TYPE(columnas.getShort(22));
-                    temp.setIS_AUTOINCREMENT(columnas.getString(23));
-                    temp.setIS_GENERATEDCOLUMN(columnas.getString(24));
-                    this.getTabla().getColumnas().add(temp);
-                }
-                LogsJB.info("Información de las columnas de la tabla correspondiente al modelo obtenida");
-                columnas.close();
-                this.closeConnection(connect);
-                this.getTabla().getColumnas().stream().sorted(Comparator.comparing(ColumnsSQL::getORDINAL_POSITION));
-            } catch (Exception e) {
-                LogsJB.fatal("Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo: " + e.toString());
-                LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-            }
-        };
-        ExecutorService executorColumnas = Executors.newFixedThreadPool(1);
-        executorColumnas.submit(ObtenerColumnas);
-        executorColumnas.shutdown();
-
-
-    }*/
 
     /**
      * Obtiene las columnas que tiene la tabla correspondiente al modelo en BD's.
@@ -496,7 +430,6 @@ public class Methods_Conexion extends Conexion {
 
     /**
      * Metodo que setea la información de la columna Java en el respectivo tipo de Dato SQL
-     *
      * @param columnsSQL Columna java que será analizada
      * @param ejecutor   PreparedStatement sobre el cual se estara envíando la información de la columna
      * @param auxiliar   Indice que indica la posición del parametro en el ejecutor.
@@ -551,7 +484,17 @@ public class Methods_Conexion extends Conexion {
         }
     }
 
-
+    /**
+     * Metodo que convierte la información obtenida de BD's a Java
+     * @param columna Columna del modelo
+     * @param resultado ResulSet que esta siendo evaludo
+     * @param metodo Metodo Set en el que se seteara la columna del modelo
+     * @param columnaSql Columna SQL que corresponde a la columna del modelo
+     * @param invocador Invocador del metodo
+     * @throws SQLException Lanza esta excepción de suceder algun problema con el ResultSet
+     * @throws InvocationTargetException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     */
     protected void convertSQLtoJava(ColumnsSQL columna, ResultSet resultado, Method metodo, Column columnaSql, Object invocador) throws SQLException, InvocationTargetException, IllegalAccessException {
         String columnName = columna.getCOLUMN_NAME();
         String columnType = columna.getTYPE_NAME();
@@ -620,7 +563,16 @@ public class Methods_Conexion extends Conexion {
 
     }
 
-
+    /**
+     * Metodo que convierte la información obtenida de BD's a Java
+     * @param columna Columna del modelo
+     * @param resultado ResulSet que esta siendo evaludo
+     * @param metodo Metodo Set en el que se seteara la columna del modelo
+     * @param columnaSql Columna SQL que corresponde a la columna del modelo
+     * @throws SQLException Lanza esta excepción de suceder algun problema con el ResultSet
+     * @throws InvocationTargetException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     */
     protected void convertSQLtoJava(ColumnsSQL columna, ResultSet resultado, Method metodo, Column columnaSql) throws SQLException, InvocationTargetException, IllegalAccessException {
         String columnName = columna.getCOLUMN_NAME();
         String columnType = columna.getTYPE_NAME();
@@ -686,9 +638,8 @@ public class Methods_Conexion extends Conexion {
     }
 
     /**
-     * Almacena el modelo proporcionado.
-     *
-     * @param modelo Modelo que será almacenado en BD's
+     * Almacena el modelo proporcionado en BD's.
+     * @param modelo Modelo que será insertado o actualizado en BD's
      * @param <T>    Expresión que hace que el metodo sea generico y pueda ser utilizado por cualquier objeto que herede la Clase JBSqlUtils
      */
     protected <T extends Methods_Conexion> void saveModel(T modelo) {
@@ -927,7 +878,12 @@ public class Methods_Conexion extends Conexion {
         }
     }
 
-
+    /**
+     * Elimina la información del modelo proporcionado en BD's
+     * @param modelo Modelo del cual se desea eliminar la información en BD's
+     * @param <T>    Expresión que hace que el metodo sea generico y pueda ser utilizado por cualquier
+     *           objeto que herede la Clase JBSqlUtils
+     */
     protected <T extends Methods_Conexion> void deleteModel(T modelo) {
         try {
             modelo.setTaskIsReady(false);
@@ -1027,7 +983,25 @@ public class Methods_Conexion extends Conexion {
         }
     }
 
-
+    /**
+     * Obtiene un nuevo modelo del tipo de modelo proporcionado para procesar el ResultSet
+     * con la información de BD's
+     * @param modelo Modelo que invoca el metodo.
+     * @param registros Resulset que contiene la información obtenida de BD's
+     * @return Retorna un nuevo modelo del tipo de modelo proporcionado para procesar el ResultSet
+     * con la información de BD's
+     * @param <T>    Expresión que hace que el metodo sea generico y pueda ser utilizado por cualquier
+     *           objeto que herede la Clase JBSqlUtils
+     * @throws InstantiationException Lanza esta excepción si ocurre un error al crear una nueva instancia
+     * del tipo de modelo proporcionado
+     * @throws SQLException Lanza esta excepción de suceder algun problema con el ResultSet
+     * @throws InvocationTargetException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     * BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     * propiedades de conexión necesarias para conectarse a la BD's especificada.
+     */
     protected <T extends Methods_Conexion> T procesarResultSet(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException, DataBaseUndefind, PropertiesDBUndefined {
         T temp = (T) modelo.getClass().newInstance();
         temp.setTabla(modelo.getTabla());
@@ -1090,7 +1064,19 @@ public class Methods_Conexion extends Conexion {
         return temp;
     }
 
+    /**
+     * Llena el modelo proporcionado con la Información Obtenida de BD's
+     * @param modelo Modelo que invoca el metodo.
+     * @param registros Resulset que contiene la información obtenida de BD's
+     * @param <T> * @param <T>    Expresión que hace que el metodo sea generico y pueda ser utilizado por cualquier
+     *      objeto que herede la Clase JBSqlUtils
+     * @throws InstantiationException Lanza esta excepción si ocurre un error al crear una nueva instancia
+     * del tipo de modelo proporcionado
+     * @throws SQLException Lanza esta excepción de suceder algun problema con el ResultSet
+     * @throws InvocationTargetException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
 
+     */
     protected <T extends Methods_Conexion> void procesarResultSetOneResult(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException {
         modelo.setModelExist(true);
         LogsJB.info("Obtuvo un resultado de BD's, procedera a llenar el modelo");
