@@ -37,7 +37,7 @@ public class Principal {
 
 
             Test test = new Test();
-            //new Principal().SQLITE(new Test());
+            new Principal().SQLITE(new Test());
 
             //new Principal().MySQL(new Test());
 
