@@ -127,20 +127,29 @@ variables de conexión.
 
 ***
 
-### ¿Configuración de JBSqlUtils de acuerdo a las necesidades de mi implementación?
+### ¿Como utilizar JBSqlUtils como un generador de consultas?
 
-JBSqlUtils puede ser configurada de acuerdo a las necesidades de la implementación que usted esté realizando.
+JBSqlUtils puede ser utilizada como un generador de consultas, para actualizar o eliminar registros en 
+una determinada tabla de forma masiva, de acuerdo a la lógica que se le de a la consulta.
 
-- Modificar la ruta de almacenamiento de los registros.
+- Actualizar registros.
 
-Usted puede modificar la ruta de almacenamiento de los registros de su implementación de la siguiente manera.
+Para actualizar registros sin necesidad de instanciar un modelo, puede hacerlo a travez del update metodo estatico de la clase
+JBSqlUtils, el cual brinda los metodos necesarios, para poder llegar al metodo execute, el cual ejecuta la sentencia SQL
+generada y retorna el numero de filas afectadas por la ejecución de la sentencia SQL.
 
 ~~~
 /**
- * Setea la ruta en la cual se desea que escriba el Log.
- * @param Ruta Ruta del archivo .Txt donde se desea escribir el Log.
- */
-JBSqlUtils.setRuta(Ruta);
+         * El metodo update recibe como parametro el nombre de la tabla que se desea actualizar y proporciona acceso
+         * al metodo set el cual recibe como primer parametro el nombre de la columna que se desea modificar y el valor
+         * que se desea setear a la columna, el metodo set proporciona acceso al metodo execute el cual se encarga de 
+         * ejecutar la sentencia SQL generada y retorna el numero de filas afectadas.
+         */
+        int rows_afected=update("Test").set("name", "Jose Bran").execute();
+
+
+
+
 ~~~
 
 - Modificar el tamaño máximo que puede tener su archivo de registros.

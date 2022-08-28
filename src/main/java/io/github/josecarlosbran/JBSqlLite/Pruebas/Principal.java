@@ -37,7 +37,7 @@ public class Principal {
 
 
             Test test = new Test();
-            new Principal().SQLITE(new Test());
+            //new Principal().SQLITE(new Test());
 
             //new Principal().MySQL(new Test());
 
@@ -375,6 +375,14 @@ public class Principal {
         double tiempo = (double) ((fin - inicio));
         LogsJB.warning(tiempo +" mili segundos");
         //LogsJB.fatal("Termino de invocar los metodos que almacena los modelos en BD's");
+
+        /**
+         * El metodo update recibe como parametro el nombre de la tabla que se desea actualizar y proporciona acceso
+         * al metodo set el cual recibe como primer parametro el nombre de la columna que se desea modificar y el valor
+         * que se desea setear a la columna, el metodo set proporciona acceso al metodo execute el cual se encarga de
+         * ejecutar la sentencia SQL generada y retorna el numero de filas afectadas.
+         */
+        int rows_afected=update("Test").set("name", "Jose Bran").execute();
 
     }
 
