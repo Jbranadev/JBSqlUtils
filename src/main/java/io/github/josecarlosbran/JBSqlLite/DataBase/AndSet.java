@@ -28,7 +28,7 @@ import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsN
  * @author Jose Bran
  * Clase que proporciona la lógica para setear otro valor antes de ejecutar la sentencia Update.
  */
-class AndSet {
+public class AndSet {
     private String sql;
 
     /**
