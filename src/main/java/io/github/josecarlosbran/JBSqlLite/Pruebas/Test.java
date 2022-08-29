@@ -1,3 +1,18 @@
+/***
+ * Copyright (C) 2022 El proyecto de código abierto JBSqlUtils de José Bran
+ *
+ * Con licencia de Apache License, Versión 2.0 (la "Licencia");
+ * no puede usar este archivo excepto de conformidad con la Licencia.
+ * Puede obtener una copia de la Licencia en
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * A menos que lo exija la ley aplicable o se acuerde por escrito, el software
+ * distribuido bajo la Licencia se distribuye "TAL CUAL",
+ * SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas.
+ * Consulte la Licencia para conocer el idioma específico que rige los permisos y
+ * limitaciones bajo la Licencia.
+ */
 package io.github.josecarlosbran.JBSqlLite.Pruebas;
 
 import io.github.josecarlosbran.JBSqlLite.Column;
@@ -13,12 +28,63 @@ import io.github.josecarlosbran.JBSqlLite.JBSqlUtils;
  * Clase de Pruebas
  */
 public class Test extends JBSqlUtils {
+
+    /**
+     * En el constructor de nuestra clase que utilizaremos como modelo al heredar la clase JBSqlutils
+     * hacemos el llamado al constructor de la clase JBSqlUtils la cual inicializara el modelo para poder
+     * ser utilizado, una vez instanciado el modelo, podremos obtener uno o varios registros de la tabla
+     * correspondiente al modelo, insertar, actualizar o eliminar registros.
+     *
+     * Es importante que antes de instanciar un modelo que herede la clase JBSqlUtils se hayan definido
+     * las propiedades de conexión como variables del sistema.
+     *
+     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     * BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     * propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta excepción si la bandera proporcionada es Null
+     */
     public Test() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        //super(true);
+        /**
+         * Hacemos el llamado al constructor de la Clase JBSqlUtils
+         */
         super();
     }
 
+    /**
+     * Para poder utilizar JBSqlUtils es necesario que los miembros de la clase modelo, que correspondan
+     * a una columna de la tabla correspondiente al modelo, sean del tipo Column, especificando el tipo de dato
+     * en java y por medio del constructor del objeto Column se pase como parametro el tipo de dato SQL
+     * de la columna, adicional a esto se pueden definir restricciones, como valor por defecto para la columna
+     * si se desea utilizar el modelo para crear la tabla en BD's, pero estos últimos son opcionales
+     * el único parametro obligatorio es el DataType de la columna en BD's.
+     *
+     * Por convención el nombre de cada miembro correspondiente a una columna en BD's debe tener el mismo
+     * nombre que la columna en BD's. y estos deben tener sus respectivos metodos set an get, teniendo estos
+     * por convención el nombre setColumnName, getColumName.
+     *
+     * Por ejemplo, para la columna Id = El miembro del modelo será Id, JBSqlUtils no es case sensitive,
+     * así que en BD's la columna puede ser ID y en el modelo id, que JBSqlUtils hará el match entre la columna
+     * y el miembro de la clase modelo.
+     *
+     */
+
+
+    /**
+     * Declara un miembro del modelo, el cual en java almacenara un dato de tipo Integer, se define Integer,
+     * ya que la clase Column es una clase generica y no puede trabajar con datos primivitos como int, pero si con
+     * clases contenedoras como Integer.
+     *
+     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
+     * Integer.
+     *
+     * Agregamos dos restricciones SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
+     * desde nuestra aplicación en caso esta no exista, de lo contrario no es necesario que agreguemos restricciones.
+     */
     private Column<Integer> id=new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
+
+
+
 
     private Column<String> name=new Column<>(DataType.VARCHAR, "'Daniel'", Constraint.DEFAULT);
     private Column<String> apellido=new Column<>(DataType.VARCHAR);

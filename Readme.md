@@ -195,9 +195,13 @@ int rows_afected=delete("Test").where("Id", Operator.MAYOR_IGUAL_QUE, "2").execu
 
 ## ¿Cómo Crear y utilizar modelos a través de JBSqlUtils?
 
-Para poder crear clases que funcionen como modelos en nuestra aplicación, unicamente es necesario heredar la clase
+Para poder crear clases que funcionen como modelos en nuestra aplicación, únicamente es necesario heredar la clase
 JBSqlUtils
 
+~~~
+
+
+~~~
 
 
 * * *
