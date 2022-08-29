@@ -27,6 +27,7 @@ import io.github.josecarlosbran.JBSqlLite.Methods_Conexion;
 import java.util.List;
 import java.util.Objects;
 
+import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.sqlFilter;
 import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 /**
  * @author Jose Bran
@@ -60,7 +61,7 @@ public class Where<T> extends Get {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
         this.modelo=modelo;
-        this.sql = " WHERE "+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + valor+Operator.CLOSE_PARENTESIS.getOperador();
+        this.sql = " WHERE "+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + sqlFilter(valor) +Operator.CLOSE_PARENTESIS.getOperador();
     }
 
     /**
@@ -86,7 +87,7 @@ public class Where<T> extends Get {
         if (Objects.isNull(operador)) {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
-        this.sql = sql+" WHERE "+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + valor+Operator.CLOSE_PARENTESIS.getOperador();
+        this.sql = sql+" WHERE "+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + sqlFilter(valor) +Operator.CLOSE_PARENTESIS.getOperador();
     }
 
 

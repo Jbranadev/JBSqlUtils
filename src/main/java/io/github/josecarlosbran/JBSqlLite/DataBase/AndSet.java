@@ -22,6 +22,7 @@ import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
+import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.sqlFilter;
 import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
 /**
@@ -49,7 +50,7 @@ public class AndSet {
             LogsJB.warning(columName);
             LogsJB.warning(value);
         }
-        this.sql= sql + ", "+columName+"="+value;
+        this.sql= sql + ", "+columName+"="+sqlFilter(value);
     }
 
     /**

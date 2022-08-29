@@ -22,6 +22,7 @@ import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
+import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.sqlFilter;
 import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 /**
  * @author Jose Bran
@@ -46,7 +47,7 @@ public class Set {
         if (stringIsNullOrEmpty(value)) {
             LogsJB.warning("El valor proporcionado para la columna esta vacío o es NULL");
         }
-        this.sql= sql + "SET "+columName+"="+value;
+        this.sql= sql + "SET "+columName+"="+sqlFilter(value);
     }
 
     /**

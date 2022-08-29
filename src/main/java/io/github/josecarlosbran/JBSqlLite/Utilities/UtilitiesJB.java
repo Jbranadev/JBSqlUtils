@@ -26,6 +26,12 @@ import java.util.Objects;
  */
 public class UtilitiesJB {
 
+    /**
+     * Filtra los caracteres especiales de los valores pasados como parametros
+     * @param valor Valor a evaluar
+     * @return Retorna el String del valor proporcionado, habiendo removido comentarios,
+     *         todo lo que este despues de un punto y coma, todo lo que lleve un operador OR
+     */
     public static String sqlFilter(String valor){
         //int index=StringUtils.indexOfIgnoreCase(valor, ";");
         valor= StringUtils.substringBefore(valor, ";");
@@ -113,7 +119,7 @@ public class UtilitiesJB {
         if (Objects.isNull(operador)) {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
-        respuesta = columna + operador.getOperador() + valor;
+        respuesta = columna + operador.getOperador() + sqlFilter(valor);
         return respuesta;
     }
 
@@ -134,7 +140,7 @@ public class UtilitiesJB {
         if (stringIsNullOrEmpty(valorSuperior)) {
             throw new ValorUndefined("El valor superior proporcionado esta vacío o es NULL");
         }
-        respuesta = "Between " + valorInferior + Operator.AND.getOperador() + valorSuperior;
+        respuesta = "Between " + valorInferior + Operator.AND.getOperador() + sqlFilter(valorSuperior);
 
         return respuesta;
     }
