@@ -32,6 +32,8 @@ public class UtilitiesJB {
         valor= StringUtils.substringBefore(valor, "--");
         valor= StringUtils.substringBefore(valor, "/*");
 
+        valor= StringUtils.substringBefore(valor, Operator.OR.getOperador());
+
         return valor;
     }
 
