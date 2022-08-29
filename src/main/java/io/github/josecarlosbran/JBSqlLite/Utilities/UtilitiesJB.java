@@ -17,6 +17,7 @@ package io.github.josecarlosbran.JBSqlLite.Utilities;
 
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
 /**
@@ -24,6 +25,15 @@ import java.util.Objects;
  * Clase que brinda acceso a funcionalidades comunes, sin necesidad de crear una instancia de la misma
  */
 public class UtilitiesJB {
+
+    public static String sqlFilter(String valor){
+        //int index=StringUtils.indexOfIgnoreCase(valor, ";");
+        valor= StringUtils.substringBefore(valor, ";");
+        valor= StringUtils.substringBefore(valor, "--");
+        valor= StringUtils.substringBefore(valor, "/*");
+
+        return valor;
+    }
 
 
     /****
