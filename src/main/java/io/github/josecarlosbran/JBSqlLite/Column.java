@@ -35,6 +35,8 @@ public class Column<T> {
 
     private Constraint[] restriccion =null;
 
+    private Boolean columnExist=false;
+
     /**
      * Inicializa la columna indicando el tipo de dato SQL que tendra la columna
      * @param tipo_de_dato DataType que indica el tipo de dato SQL que almacenara la columna.
@@ -169,5 +171,21 @@ public class Column<T> {
      */
     public void setDefault_value(String default_value) {
         this.default_value = default_value;
+    }
+
+    /**
+     * Obtiene la bandera que indica si la columna Existe en BD's.
+     * @return True si la columna existe en la tabla correspondiente al modelo.
+     */
+    protected Boolean getColumnExist() {
+        return columnExist;
+    }
+
+    /**
+     * Setea la bandera que indica si la columna existe en BD's
+     * @param columnExist True si la columna existe, False si la columna no existe
+     */
+    protected void setColumnExist(Boolean columnExist) {
+        this.columnExist = columnExist;
     }
 }

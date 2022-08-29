@@ -112,7 +112,7 @@ public class Methods_Conexion extends Conexion {
      * @param <T>     Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Lista de los metodos get del modelo que lo invoca.
      */
-    protected  <T> List<Method> getMethodsGetOfModel(List<Method> metodos) {
+    protected synchronized <T> List<Method> getMethodsGetOfModel(List<Method> metodos) {
         // Los muestro en consola
         int i = 0;
         //System.out.println("Inicia a obtener los metodos get");
@@ -138,7 +138,7 @@ public class Methods_Conexion extends Conexion {
      * @param <T>     Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Lista de los metodos set del modelo que lo invoca.
      */
-    protected <T> List<Method> getMethodsSetOfModel(List<Method> metodos) {
+    protected synchronized <T> List<Method> getMethodsSetOfModel(List<Method> metodos) {
         List<Method> result = new ArrayList<>();
         for (Method metodo : metodos) {
             Parameter[] parametros = metodo.getParameters();
@@ -387,6 +387,9 @@ public class Methods_Conexion extends Conexion {
                     temp.setTABLE_SCHEM(columnas.getString(2));
                     temp.setTABLE_NAME(columnas.getString(3));
                     temp.setCOLUMN_NAME(columnas.getString(4));
+                    //Seteara que la columna si existe en BD's
+                    columnaExist(columnas.getString(4));
+
                     temp.setDATA_TYPE(columnas.getInt(5));
                     temp.setTYPE_NAME(columnas.getString(6));
                     temp.setCOLUMN_SIZE(columnas.getInt(7));
@@ -426,6 +429,95 @@ public class Methods_Conexion extends Conexion {
 
 
     }
+
+
+    /**
+     * Si el modelo tiene una columna correspondiente al nombre de la columna especificada en el
+     * parametro, setea entre los valores de la columna que esta si existe en BD's.
+     * @param nameColumn Nombre de la columna en BD's
+     */
+    protected void columnaExist(String  nameColumn){
+        try{
+            Runnable columnexist = () -> {
+                try{
+                    LogsJB.debug("Buscara si la columna tiene un atributo en el modelo actual: "+nameColumn);
+                    List<Method> metodosSet = new ArrayList<>();
+                    LogsJB.trace("Inicializa el array list de los metodos set");
+                    metodosSet = this.getMethodsSetOfModel(this.getMethodsModel());
+                    LogsJB.trace("obtuvo los metodos set");
+                    //Llena la información del modelo
+                    LogsJB.trace("Columna : " + nameColumn);
+                    LogsJB.debug("Cantidad de metodos set: " + metodosSet.size());
+                    //Recorrera los metodos set del modelo para ver cual es el que corresponde a la columna
+                    for (int j = 0; j < metodosSet.size(); j++) {
+                        Method metodo = metodosSet.get(j);
+                        String metodoName = metodo.getName();
+                        metodoName = StringUtils.remove(metodoName, "set");
+                        //Si el nombre del metodo coincide con el nombre de la columna
+                        if (StringUtils.equalsIgnoreCase(metodoName, nameColumn)) {
+                            LogsJB.trace("Nombre de la columna, nombre del metodo set: " + nameColumn + "   " + metodoName);
+                            List<Method> metodosget = new ArrayList<>();
+                            metodosget = this.getMethodsGetOfModel(this.getMethodsModel());
+                            LogsJB.trace("Cantidad de metodos get: " + metodosget.size());
+                            //Llena la información de las columnas que se insertaran
+                            for (int a = 0; a < metodosget.size(); a++) {
+                                //Obtengo el metodo
+                                Method metodoget = metodosget.get(a);
+                                //Obtengo la información de la columna
+                                Column columnsSQL = (Column) metodoget.invoke(this, null);
+                                String NameMetodoGet = metodoget.getName();
+                                NameMetodoGet = StringUtils.remove(NameMetodoGet, "get");
+                                if (StringUtils.equalsIgnoreCase(NameMetodoGet, nameColumn)) {
+                                    columnsSQL.setColumnExist(true);
+                                    LogsJB.debug("Seteara que la columna existe en BD's: " + nameColumn + "   " + NameMetodoGet);
+                                    //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
+                                    metodo.invoke(this, columnsSQL);
+                                }else if(StringUtils.equalsIgnoreCase(NameMetodoGet, "created_at")){
+                                    if(StringUtils.equalsIgnoreCase(nameColumn, this.getCreatedAt())){
+                                        columnsSQL.setColumnExist(true);
+                                        LogsJB.debug("Seteara que la columna existe en BD's: " + nameColumn + "   " + this.getCreatedAt());
+                                        //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
+                                        metodo.invoke(this, columnsSQL);
+                                    }
+                                }else if(StringUtils.equalsIgnoreCase(NameMetodoGet, "updated_at")){
+                                    if(StringUtils.equalsIgnoreCase(nameColumn, this.getUpdateAT())){
+                                        columnsSQL.setColumnExist(true);
+                                        LogsJB.debug("Seteara que la columna existe en BD's: " + nameColumn + "   " + this.getUpdateAT());
+                                        //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
+                                        metodo.invoke(this, columnsSQL);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }catch (Exception e) {
+                    LogsJB.fatal("Excepción disparada en el método que setea si la columna existe en BD's'" +
+                            "SQL de la BD's: " + e.toString());
+                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+
+                }
+            };
+            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            ejecutor.submit(columnexist);
+            ejecutor.shutdown();
+        }catch (Exception e) {
+            LogsJB.fatal("Excepción disparada en el método que setea si la columna existe en BD's'" +
+                    "SQL de la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+
+        }
+
+
+
+
+    }
+
 
     /**
      * Metodo que actualiza la información que el modelo tiene sobre lo que existe en BD's'
@@ -685,11 +777,30 @@ public class Methods_Conexion extends Conexion {
 
                                 continue;
                             }
+
+                            //Si la columna no tiene seteado que existe en BD's no la va a envíar
+                            if(!columnsSQL.getColumnExist()){
+                                continue;
+                            }
+
                             //Si el modelo tiene seteado que no se manejaran las timestamps entonces
                             //Ignora el guardar esas columnas
                             if ((!this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, "created_at"))
                                     || (StringUtils.equalsIgnoreCase(columnName, "updated_at")))) {
                                 continue;
+                            }
+
+
+                            //Setea el nombre de la columna Created_at
+                            if ((this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, "created_at"))
+                                    )) {
+                                columnName=this.getCreatedAt();
+                            }
+
+                            //Setea el nombre de la columna Update_at
+                            if ((this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, "updated_at"))
+                            )) {
+                                columnName=this.getUpdateAT();
                             }
 
                             datos++;
@@ -784,6 +895,11 @@ public class Methods_Conexion extends Conexion {
                                 continue;
                             }
 
+                            //Si la columna no tiene seteado que existe en BD's no la va a envíar
+                            if(!columnsSQL.getColumnExist()){
+                                continue;
+                            }
+
                             //Si el modelo tiene seteado que no se manejaran las timestamps entonces
                             //Ignora el guardar esas columnas
                             if ((!this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, "created_at"))
@@ -796,6 +912,12 @@ public class Methods_Conexion extends Conexion {
                                     ((StringUtils.equalsIgnoreCase(columnName, "created_at")))
                             ) {
                                 continue;
+                            }
+
+                            //Setea el nombre de la columna Update_at
+                            if ((this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, "updated_at"))
+                            )) {
+                                columnName=this.getUpdateAT();
                             }
 
 
@@ -1070,6 +1192,7 @@ public class Methods_Conexion extends Conexion {
                         if (StringUtils.equalsIgnoreCase(NameMetodoGet, columnName)) {
                             LogsJB.trace("Nombre de la columna, nombre del metodo get: " + columnName + "   " + NameMetodoGet);
                             //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
+                            columnsSQL.setColumnExist(true);
                             convertSQLtoJava(columna, registros, metodo, columnsSQL, temp);
                         }
                     }
@@ -1132,6 +1255,7 @@ public class Methods_Conexion extends Conexion {
                         if (StringUtils.equalsIgnoreCase(NameMetodoGet, columnName)) {
                             LogsJB.trace("Nombre de la columna, nombre del metodo get: " + columnName + "   " + NameMetodoGet);
                             //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
+                            columnsSQL.setColumnExist(true);
                             convertSQLtoJava(columna, registros, metodo, columnsSQL, modelo);
                         }
                     }

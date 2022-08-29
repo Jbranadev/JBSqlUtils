@@ -1,11 +1,11 @@
 # JBSqlUtils :computer:
 
-JBSqlUtiLs es una librería java que permite crear modelos de BD's en su aplicación por medio de los cuales tendra
+JBSqlUtiLs es una librería java que permite crear modelos de BD's en su aplicación por medio de los cuales tendrá
 acceso a un CRUD, configurando únicamente la conexión del modelo, los atributos que posee la tabla en BD's como
 variables que pertenecerán al modelo en su aplicación.
 
 JBSqlUtils también proporciona un potente generador de consultas que le permitira actualizar o eliminar registros
-de una tabla en su BD's sin necesidad de instanciar un objeto como tal, unicamente tendra que configurar previamente
+de una tabla en su BD's sin necesidad de instanciar un objeto como tal, unicamente tendrá que configurar previamente
 la conexión a su BD's.
 * * *
 
@@ -127,119 +127,80 @@ variables de conexión.
 
 ***
 
-### ¿Como utilizar JBSqlUtils como un generador de consultas?
+## ¿Como utilizar JBSqlUtils como un generador de consultas?
 
 JBSqlUtils puede ser utilizada como un generador de consultas, para actualizar o eliminar registros en 
 una determinada tabla de forma masiva, de acuerdo a la lógica que se le de a la consulta.
 
 - Actualizar registros.
 
-Para actualizar registros sin necesidad de instanciar un modelo, puede hacerlo a travez del update metodo estatico de la clase
-JBSqlUtils, el cual brinda los metodos necesarios, para poder llegar al metodo execute, el cual ejecuta la sentencia SQL
-generada y retorna el numero de filas afectadas por la ejecución de la sentencia SQL.
+Para actualizar registros sin necesidad de instanciar un modelo, puede hacerlo a través  del 
+update método estático de la clase JBSqlUtils, el cual brinda los métodos necesarios, para poder 
+llegar al método execute, el cual ejecuta la sentencia SQL generada y retorna el número de 
+filas afectadas por la ejecución de la sentencia SQL.
 
 ~~~
+
 /**
-         * El metodo update recibe como parametro el nombre de la tabla que se desea actualizar y proporciona acceso
-         * al metodo set el cual recibe como primer parametro el nombre de la columna que se desea modificar y el valor
-         * que se desea setear a la columna, el metodo set proporciona acceso al metodo execute el cual se encarga de 
-         * ejecutar la sentencia SQL generada y retorna el numero de filas afectadas.
-         */
-        int rows_afected=update("Test").set("name", "Jose Bran").execute();
-
-
-
-
-~~~
-
-- Modificar el tamaño máximo que puede tener su archivo de registros.
-
-Usted puede modificar el tamaño que desea que tenga cada archivo de registros de su implementación.
-
-~~~
-/***
- * Setea el tamaño maximo para el archivo Log de la aplicación actual.
- * @param SizeLog Tamaño maximo del archivo sobre el cual se estara escribiendo el Log.
- *      * Little_Little = 125Mb,
- *      * Little = 250Mb,
- *      * Small_Medium = 500Mb,
- *      * Medium = 1,000Mb,
- *      * Small_Large = 2,000Mb,
- *      * Large = 4,000Mb.
- * El valor por defaul es Little_Little.
+ * Actualizar todas las filas de una tabla X (Test), senteando un valor Y(Jose Carlos) a una columna Z(name).
+ * El método update recibe como parametro el nombre de la tabla que se desea actualizar y proporciona acceso
+ * al método set el cual recibe como primer parametro el nombre de la columna que se desea modificar y el valor
+ * que se desea setear a la columna, el método set proporciona acceso al método execute el cual se encarga de
+ * ejecutar la sentencia SQL generada y retorna el numero de filas afectadas.
  */
-JBSqlUtils.setSizeLog(SizeLog.Little_Little);
-~~~
+int rows_afected=update("Test").set("name", "Jose Carlos").execute();
 
-- Modificar el grado de registros que se estarán reportando.
-
-~~~
-/***
- * Setea el NivelLog desde el cual deseamos se escriba en el Log de la aplicación actual.
- * @param GradeLog Nivel Log desde el cual hacía arriba en la jerarquia de logs, deseamos se reporten
- *      * Trace = 200,
- *      * Debug = 400,
- *      * Info = 500,
- *      * Warning = 600,
- *      * Error = 800,
- *      * Fatal = 1000.
- * El valor por defaul es Info. Lo cual hace que se reporten los Logs de grado Info, Warning, Error y Fatal.
+/**
+ * Podemos agregar una sentencia Where, por medio del cual podemos acceder a los métodos necesarios para
+ * filtrar la cantidad de filas que queremos modificar, una vez hemos terminado de brindar la logica hacemos el
+ * llamado al método execute el cual se encarga de ejecutar la sentencia SQL generada y retorna el numero de filas
+ * afectadas.
  */
-JBSqlUtils.setGradeLog(NivelLog.INFO);
-~~~
+rows_afected=update("Test").set("name", "Jose Carlos").where("Id", Operator.MAYOR_QUE, "2").and("apellido", Operator.LIKE, "Bran%").execute();
 
-- Modificar el usuario que se graba en el registro.
 
-~~~
-/***
- * Setea el nombre del usuario del sistema sobre el cual corre la aplicación
- * @param Usuario Usuario actual del sistema que se desea indicar al Log.
+/**
+ * Podemos actualizar mas de una columna a través  del método andSet, el cual nos proporciona la capacidad de
+ * modificar el valor de otra columna y acceso a los métodos andSet para setear otro valor a otra columna y el método
+ * where por medio del cual podemos filtrar las filas que se veran afectadas al llamar al método execute, el cual
+ * se encargara de ejecutar la sentencia SQL generada y retorna el numero de filas afectadas.
  */
-JBSqlUtils.setUsuario(Usuario);
+rows_afected=update("Test").set("name", "Jose Carlos").andSet("IsMayor", "true").execute();
+
+~~~
+
+- Eliminar registros.
+
+Para eliminar registros sin necesidad de instanciar un modelo, puede hacerlo a través del
+delete método estático de la clase JBSqlUtils, el cual brinda los métodos necesarios, para poder
+llegar al método execute, el cual ejecuta la sentencia SQL generada y retorna el número de
+filas afectadas por la ejecución de la sentencia SQL.
+
+~~~
+
+/**
+ * Eliminar todas las filas de una tabla X (Test), donde la columna Y(Id) tiene un valor MAYOR O IGUAL a Z(2).
+ * El método delete recibe como parametro el nombre de la tabla que se desea eliminar registros y proporciona acceso
+ * al método Where, por medio del cual podemos acceder a los métodos necesarios para
+ * filtrar la cantidad de filas que queremos eliminar, una vez hemos terminado de brindar la lógica hacemos el
+ * llamado al método execute el cual se encarga de ejecutar la sentencia SQL generada y retorna el numero de filas
+ * afectadas.
+ */
+int rows_afected=delete("Test").where("Id", Operator.MAYOR_IGUAL_QUE, "2").execute();
+
 ~~~
 
 * * *
 
-## ¿Cómo usar JBSqlUtils?
+## ¿Cómo Crear y utilizar modelos a través de JBSqlUtils?
 
-Usar JBSqlUtils es más fácil que hacer un llamado a System.out.println(mensaje), ya que al llamar a los métodos de
-registro
-de JBSqlUtils se escribe el mensaje en la salida de la terminal del programa y en el archivo Log.txt, con menos esfuerzo
-del necesario
-para hacer un System.out.println(mensaje).
+Para poder crear clases que funcionen como modelos en nuestra aplicación, unicamente es necesario heredar la clase
+JBSqlUtils
 
-~~~
-/**
-* Una vez se a importado los métodos estáticos de JBSqlUtils
-* Se puede hacer el llamado invocando al método estático de las siguientes dos maneras:
-* JBSqlUtils.debug(Mensaje);
-* debug(Mensaje);
-* @param Mensaje es un String que indica el mensaje que queremos registrar en la salida de la terminal,
-* como en el archivo Logs.txt
-*/
- 
-//Comentario grado Trace
-trace( "Primer comentario grado Trace");
-//Comentario grado Debug
-debug( "Primer comentario grado Debug");
-//Comentario grado Info
-info( "Primer comentario grado Info");
-//Comentario grado Warning
-warning( "Primer comentario grado Warning");
-//Comentario grado Error
-error( "Primer comentario grado Error");
-//Comentario grado Fatal
-fatal( "Primer comentario grado Fatal"); 
-~~~
-
-Salida en la terminal
-![](Imagenes/Terminal_output.png)
-
-Salida en Log.txt
-![](Imagenes/Txt_output.png)
 
 
 * * *
+
 
 ## ¿Cómo Obtener JBSqlUtils para usarlo en mi proyecto?
 
@@ -251,14 +212,14 @@ Maven
 <dependency>
     <groupId>io.github.josecarlosbran</groupId>
     <artifactId>JBSqlUtils</artifactId>
-    <version>0.5</version>
+    <version>1.0</version>
 </dependency>
 ~~~
 
 Gradle
 
 ~~~
-implementation 'io.github.josecarlosbran:JBSqlUtils:0.5'
+implementation 'io.github.josecarlosbran:JBSqlUtils:1.0'
 ~~~
 
 Para mayor información sobre como descargar JBSqlUtils desde otros

@@ -4,16 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>io.github.josecarlosbran</groupId>
     <artifactId>JBSqlUtils</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>JBSqlUtils es una librería java que permite gestionar BD's Sql, de una manera fácil y rápida
-        sin interrumpir la ejecución del hilo principal del programa, lo cual la hace una potente herramienta
-        para aplicaciones android y sistemas empresariales que tengan la necesidad de una BD's portatil, cabe mencionar
-        que para ello utiliza el SQLite JDBC de org.xerial. Para mayor información, consultar el siguiente
+    <description>JBSqlUtils es una librería java que permite gestionar BD's SQLite, MySQL, PostgreSQL y SQLServer, de una manera fácil y rápida
+        sin interrumpir la ejecución del hilo principal del programa, lo cual la hace un potente ORM
+        para aplicaciones android y sistemas empresariales que tengan la necesidad de poder conectarse
+        a alguna de estas 4 tipos de BD's, cabe mencionar
+        que para ello utiliza el SQLite JDBC de org.xerial, org.postgresql, mysql y com.microsoft.sqlserver.
+        Para mayor información, consultar el siguiente
         enlace https://github.com/JoseCarlosBran/JBSqlUtils/blob/master/Readme.md</description>
     <!-- FIXME change it to the project's website -->
     <url>https://github.com/JoseCarlosBran/JBSqlUtils/blob/master/Readme.md</url>
@@ -158,12 +160,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.10.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <!--
-                    <source>16</source>
-                    <target>16</target>
-                    -->
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
 

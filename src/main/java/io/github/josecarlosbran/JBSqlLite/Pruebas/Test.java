@@ -14,7 +14,8 @@ import io.github.josecarlosbran.JBSqlLite.JBSqlUtils;
  */
 public class Test extends JBSqlUtils {
     public Test() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        super(true);
+        //super(true);
+        super();
     }
 
     private Column<Integer> id=new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);

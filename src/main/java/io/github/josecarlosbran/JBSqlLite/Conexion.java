@@ -118,12 +118,12 @@ class Conexion {
     /**
      * Define el nombre de la columna correspondiente a la TimeStamp CreateAT
      */
-    private String createdAt = null;
+    private String createdAt = "created_at";
 
     /**
      * Define el nombre de la columna correspondiente a la TimeStamp UpdateAT
      */
-    private String updateAT = null;
+    private String updateAT = "updated_at";
 
     /**
      * Bandera que sirve para identificar si el modelo existe en BD's, de existir cuando se llame al metodo save se procedera a actualizar el modelo
@@ -733,7 +733,7 @@ class Conexion {
      * @param timestamps True si las timestamps serán manejadas por JBSqlUtils, False, si el modelo no tiene estas
      *                   columnas.
      */
-    protected void setTimestamps(Boolean timestamps) {
+    public void setTimestamps(Boolean timestamps) {
         this.timestamps = timestamps;
     }
 

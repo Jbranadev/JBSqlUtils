@@ -69,10 +69,10 @@ class Execute extends Methods_Conexion {
                     Connection connect=this.getConnection();
                     LogsJB.info(this.sql);
                     PreparedStatement ejecutor = connect.prepareStatement(this.sql);
-                    if (ejecutor.executeUpdate() == 1) {
-                        filas = ejecutor.getUpdateCount();
-                        LogsJB.info("Cantidad de filas afectadas: " + filas);
-                    }
+                    ejecutor.executeUpdate();
+                    filas = ejecutor.getUpdateCount();
+                    LogsJB.info("Cantidad de filas afectadas: " + filas);
+
                     this.closeConnection(connect);
                     return filas;
 

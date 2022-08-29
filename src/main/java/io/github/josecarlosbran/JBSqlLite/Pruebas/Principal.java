@@ -24,16 +24,23 @@ public class Principal {
 
             LogsJB.setGradeLog(NivelLog.INFO);
             String DB = "JBSQLUTILS";
-            setDataBaseTypeGlobal(DataBase.MySQL);
-            //setDataBaseGlobal(BDSqlite);
-            setDataBaseGlobal(DB);
             //setDataBaseTypeGlobal(DataBase.MySQL);
-            setHostGlobal("localhost");
-            setPortGlobal("5076");
-            setUserGlobal("Bran");
+            //setDataBaseGlobal(BDSqlite);
+            //setDataBaseGlobal(DB);
+            //setDataBaseTypeGlobal(DataBase.MySQL);
+            //setHostGlobal("localhost");
+            //setPortGlobal("5076");
+            //setUserGlobal("Bran");
             //setUserGlobal("postgres");
-            setPasswordGlobal("Bran");
+            //setPasswordGlobal("Bran");
             //LogsJB.info(BDSqlite);
+
+            setPortGlobal("5077");
+            setHostGlobal("localhost");
+            setUserGlobal("Bran");
+            setPasswordGlobal("Bran");
+            setDataBaseGlobal("JBSQLUTILS");
+            setDataBaseTypeGlobal(DataBase.SQLServer);
 
 
             Test test = new Test();
@@ -309,23 +316,23 @@ public class Principal {
         long inicio = System.currentTimeMillis();
 
         //test.refresh();
-
+        //test.setTimestamps(false);
         //test.dropTableIfExist();
         //test.crateTable();
 
 
-        /*test.getName().setValor("Arturo");
-        test.getApellido().setValor("Camey");
+        test.getName().setValor("Jose");
+        test.getApellido().setValor("Bran");
         //test.getIsMayor().setValor(true);
         test.save();
         while (!test.getTaskIsReady()){
 
         }
 
-        test.getName().setValor(null);
-        test.getApellido().setValor("Peralta");
+        test.getName().setValor("Isabel");
+        test.getApellido().setValor("Quiñonez");
         test.getIsMayor().setValor(false);
-        test.save();*/
+        test.save();
 
 
         Consumer<Test> showFilas = fila -> {
@@ -346,35 +353,31 @@ public class Principal {
 
         List<Test> lista=new ArrayList<>();
         //lista=test.where("id", Operator.MAYOR_QUE, "0").getAll();
-        lista=test.where("id", Operator.MAYOR_QUE, "0").take(10).get();
+        //lista=test.where("id", Operator.MAYOR_QUE, "0").take(10).get();
 
 
         //test.where("",null, "").and("", null, "").or("", null, "").and("").getAll();
         //test.where("name", Operator.IGUAL_QUE, "'Jose'").and("apellido", Operator.IGUAL_QUE, "'Bran'").get();
-        while (!test.getTaskIsReady()){
+        /*while (!test.getTaskIsReady()){
 
-        }
+        }*/
         //LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.getApellido().getValor()+"   "+test.getIsMayor().getValor());
 
         //test.getIsMayor().setValor(!test.getIsMayor().getValor());
 
         //LogsJB.info("Cantidad de resultado lista: "+lista.size());
 
-        lista.forEach(showFilas);
+        //lista.forEach(showFilas);
 
 
-        test.saveALL(lista);
+        //test.saveALL(lista);
         //test.save();
         //test.delete();
-        while (!test.getTaskIsReady()){
+        /*while (!test.getTaskIsReady()){
 
-        }
+        }*/
 
-        long fin = System.currentTimeMillis();
-        //double tiempo = (double) ((fin - inicio)/1000);
-        double tiempo = (double) ((fin - inicio));
-        LogsJB.warning(tiempo +" mili segundos");
-        //LogsJB.fatal("Termino de invocar los metodos que almacena los modelos en BD's");
+
 
         /**
          * Actualizar todas las filas de una tabla X (Test), senteando un valor Y(Jose Carlos) a una columna Z(name).
@@ -383,15 +386,15 @@ public class Principal {
          * que se desea setear a la columna, el metodo set proporciona acceso al metodo execute el cual se encarga de
          * ejecutar la sentencia SQL generada y retorna el numero de filas afectadas.
          */
-        int rows_afected=update("Test").set("name", "Jose Carlos").execute();
+        //int rows_afected=update("Test").set("name", "Jose Carlos").execute();
 
         /**
-         * Podemos agregar una sentencia Where, por medio de la cual podemos acceder a los metodos necesarios para
-         * filtrar la cantidad de filas que queremos modificar, una vez hemos terminado de brindar la logica hacemos el
+         * Podemos agregar una sentencia Where, por medio del cual podemos acceder a los metodos necesarios para
+         * filtrar la cantidad de filas que queremos modificar, una vez hemos terminado de brindar la lógica hacemos el
          * llamado al metodo execute el cual se encarga de ejecutar la sentencia SQL generada y retorna el numero de filas
          * afectadas.
          */
-        rows_afected=update("Test").set("name", "Jose Carlos").where("Id", Operator.MAYOR_QUE, "2").and("apellido", Operator.LIKE, "Bran%").execute();
+        //int rows_afected=update("Test").set("IsMayor", "1").where("Id", Operator.MAYOR_QUE, "6").execute();
 
 
         /**
@@ -400,8 +403,24 @@ public class Principal {
          * where por medio del cual podemos filtrar las filas que se veran afectadas al llamar al metodo execute, el cual
          * se encargara de ejecutar la sentencia SQL generada y retorna el numero de filas afectadas.
          */
-        rows_afected=update("Test").set("name", "Jose Carlos").andSet("IsMayor", "true").execute();
+        //rows_afected=update("Test").set("name", "Jose Carlos").andSet("IsMayor", "true").execute();
 
+
+        /**
+         * Eliminar todas las filas de una tabla X (Test), donde la columna Y(Id) tiene un valor MAYOR O IGUAL a Z(2).
+         * El metodo delete recibe como parametro el nombre de la tabla que se desea eliminar registros y proporciona acceso
+         * al metodo Where, por medio del cual podemos acceder a los metodos necesarios para
+         * filtrar la cantidad de filas que queremos eliminar, una vez hemos terminado de brindar la lógica hacemos el
+         * llamado al metodo execute el cual se encarga de ejecutar la sentencia SQL generada y retorna el numero de filas
+         * afectadas.
+         */
+        //rows_afected=delete("Test").where("Id", Operator.MAYOR_IGUAL_QUE, "1").or("apellido", Operator.LIKE, "'Camey%'").execute();
+
+        long fin = System.currentTimeMillis();
+        //double tiempo = (double) ((fin - inicio)/1000);
+        double tiempo = (double) ((fin - inicio));
+        LogsJB.warning(tiempo +" mili segundos");
+        //LogsJB.warning("Filas afectadas por el update: "+rows_afected);
 
     }
 

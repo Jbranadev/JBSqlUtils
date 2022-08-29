@@ -47,13 +47,26 @@ public class JBSqlUtils extends Methods{
      * propiedades de conexión necesarias para conectarse a la BD's especificada.
      * @throws ValorUndefined Lanza esta excepción si la bandera proporcionada es Null
      */
-    public JBSqlUtils(Boolean timestamps) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    /*public JBSqlUtils(Boolean timestamps) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         super();
         if (Objects.isNull(timestamps)) {
             throw new ValorUndefined("El valor proporcionado para el manejo de los timestamps por parte" +
                     "de JBSqlUtils, no puede ser Null, tiene que ser True o False");
         }
         this.setTimestampss(timestamps);
+    }*/
+
+    /**
+     * Constructor por defecto de la Clase JBSqlUtils
+     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     * BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     * propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta excepción si la bandera proporcionada es Null
+     */
+    public JBSqlUtils() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+        super();
+
     }
 
     /**
