@@ -37,7 +37,7 @@ public class Principal {
 
 
             Test test = new Test();
-            new Principal().SQLITE(new Test());
+            //new Principal().SQLITE(new Test());
 
             //new Principal().MySQL(new Test());
 
@@ -375,6 +375,33 @@ public class Principal {
         double tiempo = (double) ((fin - inicio));
         LogsJB.warning(tiempo +" mili segundos");
         //LogsJB.fatal("Termino de invocar los metodos que almacena los modelos en BD's");
+
+        /**
+         * Actualizar todas las filas de una tabla X (Test), senteando un valor Y(Jose Carlos) a una columna Z(name).
+         * El metodo update recibe como parametro el nombre de la tabla que se desea actualizar y proporciona acceso
+         * al metodo set el cual recibe como primer parametro el nombre de la columna que se desea modificar y el valor
+         * que se desea setear a la columna, el metodo set proporciona acceso al metodo execute el cual se encarga de
+         * ejecutar la sentencia SQL generada y retorna el numero de filas afectadas.
+         */
+        int rows_afected=update("Test").set("name", "Jose Carlos").execute();
+
+        /**
+         * Podemos agregar una sentencia Where, por medio de la cual podemos acceder a los metodos necesarios para
+         * filtrar la cantidad de filas que queremos modificar, una vez hemos terminado de brindar la logica hacemos el
+         * llamado al metodo execute el cual se encarga de ejecutar la sentencia SQL generada y retorna el numero de filas
+         * afectadas.
+         */
+        rows_afected=update("Test").set("name", "Jose Carlos").where("Id", Operator.MAYOR_QUE, "2").and("apellido", Operator.LIKE, "Bran%").execute();
+
+
+        /**
+         * Podemos actualizar mas de una columna a travez del metodo andSet, el cual nos proporciona la capacidad de
+         * modificar el valor de otra columna y acceso a los metodos andSet para setear otro valor a otra columna y el metodo
+         * where por medio del cual podemos filtrar las filas que se veran afectadas al llamar al metodo execute, el cual
+         * se encargara de ejecutar la sentencia SQL generada y retorna el numero de filas afectadas.
+         */
+        rows_afected=update("Test").set("name", "Jose Carlos").andSet("IsMayor", "true").execute();
+
 
     }
 
