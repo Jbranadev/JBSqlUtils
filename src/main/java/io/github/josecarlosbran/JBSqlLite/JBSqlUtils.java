@@ -38,23 +38,7 @@ public class JBSqlUtils extends Methods{
 
     private Column<Timestamp> updated_at=new Column<>(DataType.TIMESTAMP);
 
-    /**
-     * Constructor por defecto de la Clase JBSqlUtils
-     * @param timestamps Bandera que indica si deseamos que JBSqlUtils, realice el manejo de las TimeStamps
-     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     * BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     * propiedades de conexión necesarias para conectarse a la BD's especificada.
-     * @throws ValorUndefined Lanza esta excepción si la bandera proporcionada es Null
-     */
-    /*public JBSqlUtils(Boolean timestamps) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        super();
-        if (Objects.isNull(timestamps)) {
-            throw new ValorUndefined("El valor proporcionado para el manejo de los timestamps por parte" +
-                    "de JBSqlUtils, no puede ser Null, tiene que ser True o False");
-        }
-        this.setTimestampss(timestamps);
-    }*/
+
 
     /**
      * Constructor por defecto de la Clase JBSqlUtils
@@ -222,14 +206,6 @@ public class JBSqlUtils extends Methods{
     }
 
 
-    /**
-     * Setea la bandera que define si el modelo desea que JBSqlUtils maneje las timestamps Created_at, Update_at.
-     * @param timestamps True si las timestamps serán manejadas por JBSqlUtils, False, si el modelo no tiene estas
-     *                   columnas.
-     */
-    private void setTimestampss(Boolean timestamps) {
-        super.setTimestamps(timestamps);
-    }
 
 
     /**
