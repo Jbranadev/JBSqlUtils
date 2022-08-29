@@ -381,6 +381,7 @@ public class Methods_Conexion extends Conexion {
                 LogsJB.debug("Ya tiene el resultset con las columnas de la tabla");
                 //Obtener las tablas disponibles
                 this.getTabla().getColumnas().clear();
+                this.getTabla().getColumnsExist().clear();
                 while (columnas.next()) {
                     ColumnsSQL temp = new ColumnsSQL();
                     temp.setTABLE_CAT(columnas.getString(1));
@@ -388,7 +389,8 @@ public class Methods_Conexion extends Conexion {
                     temp.setTABLE_NAME(columnas.getString(3));
                     temp.setCOLUMN_NAME(columnas.getString(4));
                     //Seteara que la columna si existe en BD's
-                    columnaExist(columnas.getString(4));
+                    //columnaExist(columnas.getString(4));
+                    this.getTabla().getColumnsExist().add(columnas.getString(4).toUpperCase());
 
                     temp.setDATA_TYPE(columnas.getInt(5));
                     temp.setTYPE_NAME(columnas.getString(6));
@@ -779,9 +781,13 @@ public class Methods_Conexion extends Conexion {
                             }
 
                             //Si la columna no tiene seteado que existe en BD's no la va a envíar
-                            if(!columnsSQL.getColumnExist()){
+                            /*if(!columnsSQL.getColumnExist()){
+                                continue;
+                            }*/
+                            if(!this.getTabla().getColumnsExist().contains(columnName.toUpperCase())){
                                 continue;
                             }
+
 
                             //Si el modelo tiene seteado que no se manejaran las timestamps entonces
                             //Ignora el guardar esas columnas
@@ -896,7 +902,10 @@ public class Methods_Conexion extends Conexion {
                             }
 
                             //Si la columna no tiene seteado que existe en BD's no la va a envíar
-                            if(!columnsSQL.getColumnExist()){
+                            /*if(!columnsSQL.getColumnExist()){
+                                continue;
+                            }*/
+                            if(!this.getTabla().getColumnsExist().contains(columnName.toUpperCase())){
                                 continue;
                             }
 

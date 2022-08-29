@@ -87,6 +87,11 @@ public class TablesSQL {
      */
     protected List<ColumnsSQL> Columnas = new ArrayList<>();
 
+    /**
+     * Lista de los nombres de las columnas que existen
+     */
+    private List<String> columnsExist = new ArrayList<>();
+
 
 
     /**
@@ -286,6 +291,24 @@ public class TablesSQL {
      */
     public void setREF_GENERATION(String REF_GENERATION) {
         this.REF_GENERATION = REF_GENERATION;
+    }
+
+
+
+    /**
+     * Lista de los nombres de las columnas que existen
+     * @return Retorna una lista de los nombres de las columnas que existen en BD's
+     */
+    public List<String> getColumnsExist() {
+        return columnsExist;
+    }
+
+    /**
+     * Setea una lista de los nombres de las columnas que existen en BD's
+     * @param columnsExist Lista de los nombres de las columnas que existen en BD's
+     */
+    public void setColumnsExist(List<String> columnsExist) {
+        this.columnsExist = columnsExist;
     }
 }
 
