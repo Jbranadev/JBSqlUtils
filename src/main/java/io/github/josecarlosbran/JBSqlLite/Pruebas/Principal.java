@@ -58,6 +58,9 @@ public class Principal {
             setDataBaseTypeGlobal(DataBase.SQLServer);
 
 
+            /**
+             * Instanciamos el modelo
+             */
             Test test = new Test();
             //new Principal().SQLITE(new Test());
 
@@ -157,7 +160,7 @@ public class Principal {
         //double tiempo = (double) ((fin - inicio)/1000);
         double tiempo = (double) ((fin - inicio));
         LogsJB.warning(tiempo +" mili segundos");
-        //LogsJB.fatal("Termino de invocar los metodos que almacena los modelos en BD's");
+        //LogsJB.fatal("Termino de invocar los métodos que almacena los modelos en BD's");
     }
 
     void MySQL(Test test) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined, InstantiationException, IllegalAccessException {
@@ -235,7 +238,7 @@ public class Principal {
         //double tiempo = (double) ((fin - inicio)/1000);
         double tiempo = (double) ((fin - inicio));
         LogsJB.warning(tiempo +" mili segundos");
-        //LogsJB.fatal("Termino de invocar los metodos que almacena los modelos en BD's");
+        //LogsJB.fatal("Termino de invocar los métodos que almacena los modelos en BD's");
 
     }
 
@@ -313,7 +316,7 @@ public class Principal {
         //double tiempo = (double) ((fin - inicio)/1000);
         double tiempo = (double) ((fin - inicio));
         LogsJB.warning(tiempo +" mili segundos");
-        //LogsJB.fatal("Termino de invocar los metodos que almacena los modelos en BD's");
+        //LogsJB.fatal("Termino de invocar los métodos que almacena los modelos en BD's");
 
     }
 
@@ -331,23 +334,78 @@ public class Principal {
         long inicio = System.currentTimeMillis();
 
         //test.refresh();
+        /**
+         * Setea la bandera que define si el modelo desea que JBSqlUtils maneje las timestamps Created_at, Update_at.
+         * @param timestamps True si las timestamps serán manejadas por JBSqlUtils, False, si el modelo no tiene estas
+         *                   columnas.
+         */
         //test.setTimestamps(false);
+        /**
+         * Elimina la tabla correspondiente al modelo en BD's
+         *
+         * @return True si la tabla correspondiente al modelo en BD's existe y fue eliminada, de no existir la tabla correspondiente
+         * en BD's retorna False.
+         */
         //test.dropTableIfExist();
+
+        /**
+         * Crea la tabla correspondiente al modelo en BD's si esta no existe.
+         * @return True si la tabla correspondiente al modelo en BD's no existe y fue creada exitosamente,
+         * False si la tabla correspondiente al modelo ya existe en BD's
+         */
         //test.crateTable();
 
+        /**
+         * Asignamos valores a las columnas del modelo, luego llamamos al método save(),
+         * el cual se encarga de insertar un registro en la tabla correspondiente al modelo con la información del mismo
+         * si este no existe, de existir actualiza el registro por medio de la clave primaria del modelo.
+         */
+        /*test.getName().setValor("Jose");
+        test.getApellido().setValor("Bran");*/
+        //test.getIsMayor().setValor(false);
+        /**
+         * En este primer ejemplo no seteamos un valor a la columna IsMayor, para comprobar que el valor
+         * por default configurado al crear la tabla, se este asignando a la respectiva columna.
+         */
+        //test.save();
 
-        test.getName().setValor("Jose");
-        test.getApellido().setValor("Bran");
-        //test.getIsMayor().setValor(true);
-        test.save();
-        while (!test.getTaskIsReady()){
+        /**
+         * Si queremos utilizar el mismo modelo para insertar otro registro con valores diferentes,
+         * es necesario que esperemos a que el modelo no este realizando ninguna tarea, relacionada con lectura o
+         * escritura en la BD's, debido a que estas tareas JBSqlUtils las realiza en segundo plano, para no interrumpir
+         * el hilo de ejecución principal y entregar un mejor rendimiento, por si necesitamos realizar alguna otra
+         * instrucción mientras el modelo esta trabajando en segundo plano. para poder saber si el modelo actualmente esta
+         * ocupado, podemos hacerlo a traves del método getTaskIsReady(), el cual obtiene la bandera que indica si
+         * la tarea que estaba realizando el modelo ha sido terminada
+         * @return True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
+         * actualmente.
+         *
+         * De utilizar otro modelo, no es necesario esperar a que el primer modelo este libre.
+         *
+         */
+        /*while (!test.getTaskIsReady()){
 
-        }
+        }*/
 
-        test.getName().setValor("Isabel");
+        /**
+         * Una vez hemos comprobado que el modelo no esta escribiendo u obteniendo información en segundo plano
+         * podemos utilizarlo, para insertar otro registro totalmente diferente al que insertamos anteriormente.
+         */
+        /*test.getName().setValor("Daniel");
         test.getApellido().setValor("Quiñonez");
-        test.getIsMayor().setValor(false);
-        test.save();
+        test.getIsMayor().setValor(false);*/
+
+        /**
+         * Le indicamos a JBSqlUtils que de este segundo registro a insertar, no queremos que maneje
+         * las columnas created_at y updated_at.
+         */
+        //test.setTimestamps(false);
+
+        /**
+         * En este segundo ejemplo si seteamos un valor a la columna IsMayor, ya que no queremos que esta
+         * tenga el valor configurado por default para esta columna al momento de crear la tabla.
+         */
+        //test.save();
 
 
         Consumer<Test> showFilas = fila -> {
@@ -372,11 +430,29 @@ public class Principal {
 
 
         //test.where("",null, "").and("", null, "").or("", null, "").and("").getAll();
-        //test.where("name", Operator.IGUAL_QUE, "'Jose'").and("apellido", Operator.IGUAL_QUE, "'Bran'").get();
-        /*while (!test.getTaskIsReady()){
 
-        }*/
-        //LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.getApellido().getValor()+"   "+test.getIsMayor().getValor());
+        /**
+         * Podemos obtener un registro de la tabla correspondiente al modelo en BD's a través del método first()
+         * el cual obtiene un nuevo modelo del tipo que realiza la invocación del método con la información obtenida,
+         * unicamente casteamos el resultado al tipo de modelo que recibira la información.
+         *
+         * Para poder filtrar la busqueda y tener acceso al método first(), es necesario que llamemos al método
+         * where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
+         * brindar una lógica un poco más compleja a la busqueda del registro que deseamos obtener.
+         */
+        Test test2= (Test) test.where("isMayor", Operator.IGUAL_QUE, "0").first();
+
+        /**
+         * Esperamos a que el modelo termine de obtener la información de BD's
+         */
+        while (!test.getTaskIsReady()){
+
+        }
+        /**
+         * Mostramos la información obtenida
+         */
+        LogsJB.info(test2.getId().getValor()+"   "+test2.getName().getValor()+"   "+test2.getApellido().getValor()
+                +"   "+test2.getIsMayor().getValor()+"   "+test2.getCreated_at().getValor()+"   "+test2.getUpdated_at().getValor());
 
         //test.getIsMayor().setValor(!test.getIsMayor().getValor());
 
@@ -396,26 +472,26 @@ public class Principal {
 
         /**
          * Actualizar todas las filas de una tabla X (Test), senteando un valor Y(Jose Carlos) a una columna Z(name).
-         * El metodo update recibe como parametro el nombre de la tabla que se desea actualizar y proporciona acceso
-         * al metodo set el cual recibe como primer parametro el nombre de la columna que se desea modificar y el valor
-         * que se desea setear a la columna, el metodo set proporciona acceso al metodo execute el cual se encarga de
+         * El método update recibe como parametro el nombre de la tabla que se desea actualizar y proporciona acceso
+         * al método set el cual recibe como primer parametro el nombre de la columna que se desea modificar y el valor
+         * que se desea setear a la columna, el método set proporciona acceso al método execute el cual se encarga de
          * ejecutar la sentencia SQL generada y retorna el numero de filas afectadas.
          */
         //int rows_afected=update("Test").set("name", "Jose Carlos").execute();
 
         /**
-         * Podemos agregar una sentencia Where, por medio del cual podemos acceder a los metodos necesarios para
+         * Podemos agregar una sentencia Where, por medio del cual podemos acceder a los métodos necesarios para
          * filtrar la cantidad de filas que queremos modificar, una vez hemos terminado de brindar la lógica hacemos el
-         * llamado al metodo execute el cual se encarga de ejecutar la sentencia SQL generada y retorna el numero de filas
+         * llamado al método execute el cual se encarga de ejecutar la sentencia SQL generada y retorna el numero de filas
          * afectadas.
          */
         //int rows_afected=update("Test").set("IsMayor", "1").where("Id", Operator.MAYOR_QUE, "6").execute();
 
 
         /**
-         * Podemos actualizar mas de una columna a travez del metodo andSet, el cual nos proporciona la capacidad de
-         * modificar el valor de otra columna y acceso a los metodos andSet para setear otro valor a otra columna y el metodo
-         * where por medio del cual podemos filtrar las filas que se veran afectadas al llamar al metodo execute, el cual
+         * Podemos actualizar mas de una columna a travez del método andSet, el cual nos proporciona la capacidad de
+         * modificar el valor de otra columna y acceso a los métodos andSet para setear otro valor a otra columna y el método
+         * where por medio del cual podemos filtrar las filas que se veran afectadas al llamar al método execute, el cual
          * se encargara de ejecutar la sentencia SQL generada y retorna el numero de filas afectadas.
          */
         //rows_afected=update("Test").set("name", "Jose Carlos").andSet("IsMayor", "true").execute();
@@ -423,10 +499,10 @@ public class Principal {
 
         /**
          * Eliminar todas las filas de una tabla X (Test), donde la columna Y(Id) tiene un valor MAYOR O IGUAL a Z(2).
-         * El metodo delete recibe como parametro el nombre de la tabla que se desea eliminar registros y proporciona acceso
-         * al metodo Where, por medio del cual podemos acceder a los metodos necesarios para
+         * El método delete recibe como parametro el nombre de la tabla que se desea eliminar registros y proporciona acceso
+         * al método Where, por medio del cual podemos acceder a los métodos necesarios para
          * filtrar la cantidad de filas que queremos eliminar, una vez hemos terminado de brindar la lógica hacemos el
-         * llamado al metodo execute el cual se encarga de ejecutar la sentencia SQL generada y retorna el numero de filas
+         * llamado al método execute el cual se encarga de ejecutar la sentencia SQL generada y retorna el numero de filas
          * afectadas.
          */
         //rows_afected=delete("Test").where("Id", Operator.MAYOR_IGUAL_QUE, "1").or("apellido", Operator.LIKE, "'Camey%'").execute();

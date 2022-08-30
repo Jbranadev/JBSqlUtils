@@ -355,6 +355,230 @@ public class Test extends JBSqlUtils {
 * * *
 
 
+
+## ¿Cómo eliminar la tabla correspondiente a un modelo?
+
+Para poder eliminar la tabla correspondiente a un modelo únicamente necesitamos crear una
+instancia del mismo y llamar al método dropTableIfExist().
+
+~~~
+
+/**
+* Instanciamos el modelo
+*/
+Test test = new Test();
+
+/**
+* Elimina la tabla correspondiente al modelo en BD's
+* @return True si la tabla correspondiente al modelo en BD's existe y fue eliminada, de no existir la tabla correspondiente
+* en BD's retorna False.
+*/
+test.dropTableIfExist();
+
+~~~
+
+* * *
+
+## ¿Cómo crear la tabla correspondiente a un modelo?
+
+Para poder crear la tabla correspondiente a un modelo únicamente necesitamos crear una
+instancia del mismo y llamar al método crateTable().
+
+~~~
+
+/**
+* Instanciamos el modelo
+*/
+Test test = new Test();
+
+/**
+* Crea la tabla correspondiente al modelo en BD's si esta no existe.
+* @return True si la tabla correspondiente al modelo en BD's no existe y fue creada exitosamente,
+* False si la tabla correspondiente al modelo ya existe en BD's
+*/
+test.crateTable();
+
+~~~
+
+![](Imagenes/Table1.jpg)
+
+Por default la tabla correspondiente al modelo, incluirá las columnas created_at y update_at
+
+
+Si deseamos que JBSqlUtils no gestione las columnas created_at y update_at, al momento de crear la tabla,
+insertar o actualizar un registro, basta con llamar el método setTimestamps(false), enviando como parametro true
+si queremos que JBSqlUtils gestione las columnas o false si queremos que JBSqlUtils No gestione estas columnas.
+por default JBSqlUtils esta configurada para manejar la columnas created_at y update_at.
+~~~
+
+/**
+* Setea la bandera que define si el modelo desea que JBSqlUtils maneje las timestamps Created_at, Update_at.
+* @param timestamps True si las timestamps serán manejadas por JBSqlUtils, False, si el modelo no tiene estas
+*                   columnas.
+*/
+test.setTimestamps(false);
+
+
+/**
+* Crea la tabla correspondiente al modelo en BD's si esta no existe.
+* @return True si la tabla correspondiente al modelo en BD's no existe y fue creada exitosamente,
+* False si la tabla correspondiente al modelo ya existe en BD's
+*/
+test.crateTable();
+
+~~~
+
+![](Imagenes/Table2.jpg)
+
+* * *
+
+
+
+## ¿Cómo almacenar un modelo en BD's?
+
+Para poder insertar un modelo en la tabla correspondiente al mismo en BD's unicamente necesitamos llamar
+al metodo save(), una vez estemos seguros que el modelo posee la información necesaria para insertar el registro.
+
+~~~
+
+/**
+* Asignamos valores a las columnas del modelo, luego llamamos al metodo save(),
+* el cual se encarga de insertar un registro en la tabla correspondiente al modelo con la información del mismo
+* si este no existe, de existir actualiza el registro por medio de la clave primaria del modelo.
+*/
+test.getName().setValor("Jose");
+test.getApellido().setValor("Bran");
+/**
+* En este primer ejemplo no seteamos un valor a la columna IsMayor, para comprobar que el valor
+* por default configurado al crear la tabla, se este asignando a la respectiva columna.
+*/
+test.save();
+
+/**
+ * Si queremos utilizar el mismo modelo para insertar otro registro con valores diferentes,
+ * es necesario que esperemos a que el modelo no este realizando ninguna tarea, relacionada con lectura o
+ * escritura en la BD's, debido a que estas tareas JBSqlUtils las realiza en segundo plano, para no interrumpir
+ * el hilo de ejecución principal y entregar un mejor rendimiento, por si necesitamos realizar alguna otra
+ * instrucción mientras el modelo esta trabajando en segundo plano. para poder saber si el modelo actualmente esta
+ * ocupado, podemos hacerlo a traves del metodo getTaskIsReady(), el cual obtiene la bandera que indica si
+ * la tarea que estaba realizando el modelo ha sido terminada
+ * @return True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
+ * actualmente.
+ * 
+ * De utilizar otro modelo, no es necesario esperar a que el primer modelo este libre.
+ * 
+ */
+while (!test.getTaskIsReady()){
+
+}
+
+/**
+* Una vez hemos comprobado que el modelo no esta escribiendo u obteniendo información en segundo plano
+* podemos utilizarlo, para insertar otro registro totalmente diferente al que insertamos anteriormente.
+*/
+test.getName().setValor("Daniel");
+test.getApellido().setValor("Quiñonez");
+test.getIsMayor().setValor(false);
+
+/**
+* Le indicamos a JBSqlUtils que de este segundo registro a insertar, no queremos que maneje
+* las columnas created_at y updated_at.
+*/
+test.setTimestamps(false);
+
+/**
+* En este segundo ejemplo si seteamos un valor a la columna IsMayor, ya que no queremos que esta
+* tenga el valor configurado por default para esta columna al momento de crear la tabla.
+*/
+test.save();
+
+~~~
+
+![](Imagenes/Insertar.jpg)
+
+* * *
+
+## ¿Cómo obtener un registro de BD's?
+
+Para obtener un registro de BD's JBSqlUtils proporciona diferentes metodos los cuales veremos a continuación.
+
+### Obtener el registro en el modelo que realiza la búsqueda.
+
+~~~
+
+/**
+* Podemos obtener un registro de la tabla correspondiente al modelo en BD's a través del metodo get()
+* el cual llena el modelo que realiza la invocación del metodo con la información obtenida.
+*
+* Para poder filtrar la búsqueda y tener acceso al metodo get(), es necesario que llamemos al metodo
+* where() el cual nos proporciona un punto de entrada para otros metodos, por medio de los cuales podemos
+* brindar una lógica un poco más compleja a la búsqueda del registro que deseamos obtener.
+*/
+test.where("name", Operator.LIKE, "'Jos%'").and("apellido", Operator.IGUAL_QUE, "'Bran'").get();
+
+/**
+* Esperamos a que el modelo termine de obtener la información de BD's
+*/
+while (!test.getTaskIsReady()){
+
+}
+
+/**
+* Mostramos la información obtenida
+*/
+LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.getApellido().getValor()
+    +"   "+test.getIsMayor().getValor()+"   "+test.getCreated_at().getValor()+"   "+test.getUpdated_at().getValor());
+
+~~~
+
+![](Imagenes/getmodel.jpg)
+
+* * *
+
+### Obtener el registro en un modelo diferente al modelo que realiza la búsqueda.
+
+~~~
+
+/**
+* Podemos obtener un registro de la tabla correspondiente al modelo en BD's a través del método first()
+* el cual obtiene un nuevo modelo del tipo que realiza la invocación del método con la información obtenida,
+* unicamente casteamos el resultado al tipo de modelo que recibira la información.
+*
+* Para poder filtrar la búsqueda y tener acceso al método first(), es necesario que llamemos al método
+* where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
+* brindar una lógica un poco más compleja a la búsqueda del registro que deseamos obtener.
+*/
+Test test2= (Test) test.where("isMayor", Operator.IGUAL_QUE, "0").first();
+
+/**
+* Esperamos a que el modelo termine de obtener la información de BD's
+*/
+while (!test.getTaskIsReady()){
+
+}
+/**
+* Mostramos la información obtenida
+*/
+LogsJB.info(test2.getId().getValor()+"   "+test2.getName().getValor()+"   "+test2.getApellido().getValor()
+    +"   "+test2.getIsMayor().getValor()+"   "+test2.getCreated_at().getValor()+"   "+test2.getUpdated_at().getValor());
+
+~~~
+
+![](Imagenes/first.jpg)
+
+Vemos que la columna created_at y update_at retornan como valor la fecha y hora actual, debido a que en BD's 
+estas no poseen un valor, entonces el valor de la columna es Null y por defecto el modelo retorna la fecha y
+hora actual.
+
+* * *
+
+* * *
+
+
+
+
+
+
 ## ¿Cómo obtener JBSqlUtils para usarlo en mi proyecto?
 
 Puedes obtener la librería JBSqlUtils de la siguiente manera
