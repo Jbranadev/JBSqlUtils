@@ -83,12 +83,47 @@ public class Test extends JBSqlUtils {
      */
     private Column<Integer> id=new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
 
-
-
-
+    /**
+     * Declara un miembro del modelo, el cual en java almacenara un dato de tipo String.
+     *
+     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
+     * Varchar.
+     *
+     * Agregamos un parametro extra el cual es el default_value antes de indicar las restricciones,
+     * este parametro es de tipo String, por medio de este parametro podemos definir el valor que deseamos tenga la
+     * columna por default (Puede ser un valor del tipo de dato SQL, o una funcion SQL que retorne un valor del
+     * tipo de dato SQL de la columna) cuando se inserte un registro y no se especifique un dato para esa columna,
+     * este unicamente funcionara cuando tenga la restriccion DEFAULT definida y se definira unicamente si se
+     * crea la tabla en BD's desde nuestra aplicación a través del metodo modelo.crateTable().
+     *
+     * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
+     * desde nuestra aplicación en caso esta no exista a través del metodo modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
+     */
     private Column<String> name=new Column<>(DataType.VARCHAR, "'Daniel'", Constraint.DEFAULT);
+
+    /**
+     * Declara un miembro del modelo, el cual en java almacenara un dato de tipo String.
+     *
+     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
+     * Varchar.
+     *
+     */
     private Column<String> apellido=new Column<>(DataType.VARCHAR);
-    private Column<Boolean> isMayor=new Column<>(DataType.BIT, "'true'", Constraint.DEFAULT);;
+
+    /**
+     * Declara un miembro del modelo, el cual en java almacenara un dato de tipo Boolean.
+     *
+     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
+     * BIT.
+     *
+     * En este ejemplo seteamos 'true' como default_value, debido a que este modelo se conectara a un SQLServer,
+     * en PostgreSQL la sintaxis es true. Por lo cual es importante tener claro la sintaxis de la BD's a la cual
+     * se estará conectando el modelo.
+     *
+     * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
+     * desde nuestra aplicación en caso esta no exista a través del metodo modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
+     */
+    private Column<Boolean> isMayor=new Column<>(DataType.BIT, "'true'", Constraint.DEFAULT);
 
     public Column<Integer> getId() {
         return id;
