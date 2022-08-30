@@ -15,10 +15,16 @@
  */
 package io.github.josecarlosbran.JBSqlLite.Utilities;
 
+import io.github.josecarlosbran.JBSqlLite.Column;
+import io.github.josecarlosbran.JBSqlLite.Enumerations.Constraint;
+import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
 import org.apache.commons.lang3.StringUtils;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Objects;
 /**
  * @author Jose Bran
@@ -161,6 +167,54 @@ public class UtilitiesJB {
      */
     public static String cerrarParentesis(){
         return " )";
+    }
+
+    /**
+     * Retorna una columna SQL correspondiente al objeto envíado como parametro
+     * @param valor Valor del cual se extraera la columna
+     * @return Retorna la Columna generada.
+     */
+    public static Column getColumn(Object valor){
+        if(valor instanceof String){
+            Column<String> columna=new Column<>(DataType.VARCHAR);
+            columna.setValor((String) valor);
+            return columna;
+        }else if(valor instanceof Double){
+            Column<Double> columna=new Column<>(DataType.DOUBLE);
+            columna.setValor((Double) valor);
+            return columna;
+        }else if(valor instanceof Boolean){
+            Column<Boolean> columna=new Column<>(DataType.BOOLEAN);
+            columna.setValor((Boolean) valor);
+            return columna;
+        }else if(valor instanceof Integer){
+            Column<Integer> columna=new Column<>(DataType.INTEGER);
+            columna.setValor((Integer) valor);
+            return columna;
+        }else if(valor instanceof Float){
+            Column<Float> columna=new Column<>(DataType.FLOAT);
+            columna.setValor((Float) valor);
+            return columna;
+        }else if(valor instanceof byte[]){
+            Column<byte[]> columna=new Column<>(DataType.VARBINARY);
+            columna.setValor((byte[]) valor);
+            return columna;
+        }else if(valor instanceof Date){
+            Column<Date> columna=new Column<>(DataType.DATE);
+            columna.setValor((Date) valor);
+            return columna;
+        }else if(valor instanceof Time){
+            Column<Time> columna=new Column<>(DataType.TIME);
+            columna.setValor((Time) valor);
+            return columna;
+        }else if(valor instanceof Timestamp){
+            Column<Timestamp> columna=new Column<>(DataType.TIMESTAMP);
+            columna.setValor((Timestamp) valor);
+            return columna;
+        }
+        Column<Object> temp=new Column<>(DataType.OBJECT);
+        temp.setValor((Object) valor);
+        return temp;
     }
 
 

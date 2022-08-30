@@ -123,7 +123,7 @@ public class Test extends JBSqlUtils {
      * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
      * desde nuestra aplicación en caso esta no exista a través del metodo modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
      */
-    private Column<Boolean> isMayor=new Column<>(DataType.BIT, "'true'", Constraint.DEFAULT);
+    private Column<Boolean> isMayor=new Column<>(DataType.BIT, "true", Constraint.DEFAULT);
 
     public Column<Integer> getId() {
         return id;

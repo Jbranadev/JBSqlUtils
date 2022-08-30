@@ -211,7 +211,8 @@ public class Principal {
          * where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
          * brindar una lógica un poco más compleja a la busqueda del registro que deseamos obtener.
          */
-        Test test2= (Test) test.where("Name", Operator.IGUAL_QUE, "'Jose'").and("IsMayor", Operator.IGUAL_QUE, "false").firstOrFail();
+        Test test2= (Test) test.where("IsMayor", Operator.IGUAL_QUE, false).firstOrFail();
+
 
         /**
          * Esperamos a que el modelo termine de obtener la información de BD's
@@ -225,6 +226,8 @@ public class Principal {
         LogsJB.info(test2.getId().getValor()+"   "+test2.getName().getValor()+"   "+test2.getApellido().getValor()
                 +"   "+test2.getIsMayor().getValor()+"   "+test2.getCreated_at().getValor()+"   "+test2.getUpdated_at().getValor());
 
+        test2.getIsMayor().setValor(true);
+        //test2.save();
         //test.getIsMayor().setValor(!test.getIsMayor().getValor());
 
         //LogsJB.info("Cantidad de resultado lista: "+lista.size());

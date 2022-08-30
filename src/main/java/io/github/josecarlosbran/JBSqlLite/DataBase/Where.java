@@ -16,6 +16,9 @@
 package io.github.josecarlosbran.JBSqlLite.DataBase;
 
 
+import io.github.josecarlosbran.JBSqlLite.Column;
+import io.github.josecarlosbran.JBSqlLite.Enumerations.Constraint;
+import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.OrderType;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
@@ -23,12 +26,15 @@ import io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlLite.Methods_Conexion;
+import io.github.josecarlosbran.JBSqlLite.Utilities.ColumnsSQL;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.sqlFilter;
-import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
+import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.*;
+
 /**
  * @author Jose Bran
  * Clase que proporciona la logica para agregar una sentencia WHERE a la consulta a realizar.
@@ -36,6 +42,11 @@ import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsN
 public class Where<T> extends Get {
     private String sql;
     private T modelo=null;
+
+    /**
+     * Lista de los parametros a envíar
+     */
+    protected List<Column> parametros = new ArrayList<>();
 
     /**
      * Constructor que recibe como parametro:
@@ -49,20 +60,23 @@ public class Where<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      * propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public Where(String columna, Operator operador, String valor, T modelo) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    public Where(String columna, Operator operador, Object valor, T modelo) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
         }
-        if (stringIsNullOrEmpty(valor)) {
+        if (Objects.isNull(valor)) {
             throw new ValorUndefined("El valor proporcionado esta vacío o es NULL");
         }
         if (Objects.isNull(operador)) {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
-        this.modelo=modelo;
-        this.sql = " WHERE "+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + sqlFilter(valor) +Operator.CLOSE_PARENTESIS.getOperador();
+        this.modelo = modelo;
+        this.parametros.add(getColumn(valor));
+        this.sql = " WHERE "+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + "?" +Operator.CLOSE_PARENTESIS.getOperador();
     }
+
+
 
     /**
      * Constructor que recibe como parametro:
@@ -76,18 +90,19 @@ public class Where<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      * propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public Where(String columna, Operator operador, String valor, String sql) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    public Where(String columna, Operator operador, Object valor, String sql) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
         }
-        if (stringIsNullOrEmpty(valor)) {
+        if (Objects.isNull(valor)) {
             throw new ValorUndefined("El valor proporcionado esta vacío o es NULL");
         }
         if (Objects.isNull(operador)) {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
-        this.sql = sql+" WHERE "+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + sqlFilter(valor) +Operator.CLOSE_PARENTESIS.getOperador();
+        this.parametros.add(getColumn(valor));
+        this.sql = sql+" WHERE "+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + "?" +Operator.CLOSE_PARENTESIS.getOperador();
     }
 
 
@@ -206,7 +221,7 @@ public class Where<T> extends Get {
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      */
     public <T extends Methods_Conexion> void get(){
-        super.get((T)this.modelo, this.sql);
+        super.get((T)this.modelo, this.sql, this.parametros);
     }
 
     /**
@@ -215,7 +230,7 @@ public class Where<T> extends Get {
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      */
     public <T extends Methods_Conexion> T first(){
-        return (T) super.first((T) this.modelo, this.sql);
+        return (T) super.first((T) this.modelo, this.sql, this.parametros);
     }
 
     /**
@@ -226,7 +241,7 @@ public class Where<T> extends Get {
      * SQL realizada.
      */
     public <T extends Methods_Conexion> T firstOrFail() throws ModelNotFound {
-        return (T) super.firstOrFail((T)this.modelo, this.sql);
+        return (T) super.firstOrFail((T)this.modelo, this.sql, this.parametros);
     }
 
     /**
@@ -240,7 +255,7 @@ public class Where<T> extends Get {
      * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
      */
     public <T extends Methods_Conexion> List<T> getAll() throws InstantiationException, IllegalAccessException {
-        return (List<T>) super.getAll((T)this.modelo, this.sql);
+        return (List<T>) super.getAll((T)this.modelo, this.sql, this.parametros);
     }
 
 

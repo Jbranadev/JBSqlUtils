@@ -416,7 +416,7 @@ class Methods extends Methods_Conexion {
      * @throws ValorUndefined Lanza esta excepción si alguno de los parametros proporcionados esta
      * Vacío o es Null
      */
-    public Where where(String columna, Operator operador, String valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    public Where where(String columna, Operator operador, Object valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         return new Where(columna, operador, valor, this);
     }
 

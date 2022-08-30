@@ -168,9 +168,15 @@ public enum DataType {
     DATETIME(""),
 
     /**
+     * Setea que el tipo de dato será un Object
+     */
+    OBJECT(""),
+
+    /**
      * Valor de tiempo con campo adicional de nanosegundos
      */
     DATETIME2("");
+
     private String size;
 
     private DataType(String Size){
