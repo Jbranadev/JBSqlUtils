@@ -23,6 +23,7 @@ import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Utilities.ColumnsSQL;
 import io.github.josecarlosbran.JBSqlLite.Utilities.PrimaryKey;
 import io.github.josecarlosbran.JBSqlLite.Utilities.TablesSQL;
+import io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 import org.apache.commons.lang3.StringUtils;
 
@@ -39,6 +40,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.getBooleanfromInt;
 
 
 /**
@@ -548,6 +550,7 @@ public class Methods_Conexion extends Conexion {
         LogsJB.debug("DataType de la columna: " + columnsSQL.getDataTypeSQL());
         LogsJB.debug("Indice donde insertara la columna: " + auxiliar);
         LogsJB.debug("Valor de la columna: " + columnsSQL.getValor());
+
         if ((columnsSQL.getDataTypeSQL() == DataType.CHAR) || (columnsSQL.getDataTypeSQL() == DataType.VARCHAR)
                 || (columnsSQL.getDataTypeSQL() == DataType.LONGVARCHAR)) {
             //Caracteres y cadenas de Texto
@@ -607,6 +610,8 @@ public class Methods_Conexion extends Conexion {
     protected void convertSQLtoJava(ColumnsSQL columna, ResultSet resultado, Method metodo, Column columnaSql, Object invocador) throws SQLException, InvocationTargetException, IllegalAccessException {
         String columnName = columna.getCOLUMN_NAME();
         String columnType = columna.getTYPE_NAME();
+        LogsJB.trace("DataType de la columna: " + columna.getTYPE_NAME());
+        LogsJB.trace("Valor de la columna: " + resultado.getObject(columnName));
         if ((StringUtils.containsIgnoreCase(columnType, DataType.CHAR.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.LONGVARCHAR.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.VARCHAR.name()))
@@ -623,10 +628,19 @@ public class Methods_Conexion extends Conexion {
             columnaSql.setValor(resultado.getDouble(columnName));
             metodo.invoke(invocador, columnaSql);
         } else if ((StringUtils.containsIgnoreCase(columnType, DataType.BIT.name()))
-                || (StringUtils.containsIgnoreCase(columnType, DataType.BOOLEAN.name()))
+                ||(StringUtils.containsIgnoreCase(columnType, DataType.BOOLEAN.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.BOOL.name()))) {
             //Valores Booleanos
-            columnaSql.setValor(resultado.getBoolean(columnName));
+            Object valor=resultado.getObject(columnName);
+            LogsJB.trace("Tipo de dato del valor obtenido: "+valor.getClass());
+            LogsJB.trace("valor obtenido: "+valor);
+            if((valor instanceof String)){
+                columnaSql.setValor(Boolean.valueOf((String) valor));
+            }else if(valor instanceof Integer){
+                columnaSql.setValor(getBooleanfromInt((int)valor));
+            }else{
+                columnaSql.setValor(resultado.getBoolean(columnName));
+            }
             metodo.invoke(invocador, columnaSql);
         } else if ((StringUtils.containsIgnoreCase(columnType, DataType.SMALLINT.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.TINYINT.name()))
@@ -685,42 +699,54 @@ public class Methods_Conexion extends Conexion {
     protected void convertSQLtoJava(ColumnsSQL columna, ResultSet resultado, Method metodo, Column columnaSql) throws SQLException, InvocationTargetException, IllegalAccessException {
         String columnName = columna.getCOLUMN_NAME();
         String columnType = columna.getTYPE_NAME();
-        if ((StringUtils.equalsIgnoreCase(columnType, DataType.CHAR.name()))
-                || (StringUtils.equalsIgnoreCase(columnType, DataType.VARCHAR.name()))
-                || (StringUtils.equalsIgnoreCase(columnType, DataType.LONGVARCHAR.name()))) {
+        LogsJB.trace("DataType de la columna: " + columna.getTYPE_NAME());
+        LogsJB.trace("Valor de la columna: " + resultado.getObject(columnName));
+        if ((StringUtils.containsIgnoreCase(columnType, DataType.CHAR.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.LONGVARCHAR.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.VARCHAR.name()))
+        ) {
             //Caracteres y cadenas de Texto
             columnaSql.setValor(resultado.getString(columnName));
             metodo.invoke(this, columnaSql);
-        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.NUMERIC.name()))
-                || (StringUtils.equalsIgnoreCase(columnType, DataType.DECIMAL.name()))
-                || (StringUtils.equalsIgnoreCase(columnType, DataType.MONEY.name()))
-                || (StringUtils.equalsIgnoreCase(columnType, DataType.SMALLMONEY.name()))
-                || (StringUtils.equalsIgnoreCase(columnType, DataType.DOUBLE.name()))) {
+        } else if ((StringUtils.containsIgnoreCase(columnType, DataType.NUMERIC.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.DECIMAL.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.MONEY.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.SMALLMONEY.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.DOUBLE.name()))) {
             //Dinero y numericos que tienen decimales
             columnaSql.setValor(resultado.getDouble(columnName));
             metodo.invoke(this, columnaSql);
-        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.BIT.name()))
-                || (StringUtils.equalsIgnoreCase(columnType, DataType.BOOLEAN.name()))
-                || (StringUtils.equalsIgnoreCase(columnType, DataType.BOOL.name()))) {
+        }  else if ((StringUtils.containsIgnoreCase(columnType, DataType.BIT.name()))
+                ||(StringUtils.containsIgnoreCase(columnType, DataType.BOOLEAN.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.BOOL.name()))) {
             //Valores Booleanos
-            columnaSql.setValor(resultado.getBoolean(columnName));
+            Object valor=resultado.getObject(columnName);
+            LogsJB.trace("Tipo de dato del valor obtenido: "+valor.getClass());
+            if((valor instanceof String)){
+                columnaSql.setValor(Boolean.valueOf((String) valor));
+            }else if(valor instanceof Integer){
+                columnaSql.setValor(getBooleanfromInt((int)valor));
+            }else{
+                columnaSql.setValor(resultado.getBoolean(columnName));
+            }
             metodo.invoke(this, columnaSql);
-        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.SMALLINT.name()))
-                || (StringUtils.equalsIgnoreCase(columnType, DataType.TINYINT.name()))
-                || (StringUtils.equalsIgnoreCase(columnType, DataType.INTEGER.name()))
-                || (StringUtils.equalsIgnoreCase(columnType, DataType.IDENTITY.name()))
-                || (StringUtils.equalsIgnoreCase(columnType, DataType.SERIAL.name()))) {
+        } else if ((StringUtils.containsIgnoreCase(columnType, DataType.SMALLINT.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.TINYINT.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.INTEGER.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.IDENTITY.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.INT.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.SERIAL.name()))) {
             //Valores Enteros
             columnaSql.setValor(resultado.getInt(columnName));
             metodo.invoke(this, columnaSql);
-        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.REAL.name()))
-                || (StringUtils.equalsIgnoreCase(columnType, DataType.FLOAT.name()))) {
+        } else if ((StringUtils.containsIgnoreCase(columnType, DataType.REAL.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.FLOAT.name()))) {
             //Valores Flotantes
             columnaSql.setValor(resultado.getFloat(columnName));
             metodo.invoke(this, columnaSql);
-        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.BINARY.name()))
-                || (StringUtils.equalsIgnoreCase(columnType, DataType.VARBINARY.name()))
-                || (StringUtils.equalsIgnoreCase(columnType, DataType.LONGVARBINARY.name()))) {
+        } else if ((StringUtils.containsIgnoreCase(columnType, DataType.BINARY.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.VARBINARY.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.LONGVARBINARY.name()))) {
             //Valores binarios
             columnaSql.setValor(resultado.getBytes(columnName));
             metodo.invoke(this, columnaSql);
@@ -732,17 +758,20 @@ public class Methods_Conexion extends Conexion {
             //Time
             columnaSql.setValor(resultado.getTime(columnName));
             metodo.invoke(this, columnaSql);
-        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.TIMESTAMP.name()))
-                || (StringUtils.equalsIgnoreCase(columnType, DataType.DATETIME.name()))
-                || (StringUtils.equalsIgnoreCase(columnType, DataType.SMALLDATETIME.name()))
-                || (StringUtils.equalsIgnoreCase(columnType, DataType.DATETIME2.name()))) {
+        } else if ((StringUtils.containsIgnoreCase(columnType, DataType.TIMESTAMP.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.DATETIME.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.SMALLDATETIME.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.DATETIME2.name()))) {
             //TimeStamp
             columnaSql.setValor(resultado.getTimestamp(columnName));
             metodo.invoke(this, columnaSql);
         } else {
+            columnaSql.setValor(resultado.getObject(columnName));
+            metodo.invoke(this, columnaSql);
             LogsJB.warning("No se pudo setear el valor de la columna: " + columnName);
             LogsJB.warning("Debido a que ninguno de los metodos corresponde al tipo de dato SQL: " + columnType);
         }
+
 
     }
 

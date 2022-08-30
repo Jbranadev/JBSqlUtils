@@ -283,10 +283,10 @@ public class Test extends JBSqlUtils {
      * columna por default (Puede ser un valor del tipo de dato SQL, o una funcion SQL que retorne un valor del
      * tipo de dato SQL de la columna) cuando se inserte un registro y no se especifique un dato para esa columna,
      * este únicamente funcionara cuando tenga la restriccion DEFAULT definida y se definira únicamente si se
-     * crea la tabla en BD's desde nuestra aplicación a través del metodo modelo.crateTable().
+     * crea la tabla en BD's desde nuestra aplicación a través del método modelo.crateTable().
      *
      * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
-     * desde nuestra aplicación en caso esta no exista a través del metodo modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
+     * desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
      */
     private Column<String> name=new Column<>(DataType.VARCHAR, "'Daniel'", Constraint.DEFAULT);
 
@@ -310,7 +310,7 @@ public class Test extends JBSqlUtils {
      * se estará conectando el modelo.
      *
      * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
-     * desde nuestra aplicación en caso esta no exista a través del metodo modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
+     * desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
      */
     private Column<Boolean> isMayor=new Column<>(DataType.BIT, "'true'", Constraint.DEFAULT);
 
@@ -437,12 +437,12 @@ test.crateTable();
 ## ¿Cómo almacenar un modelo en BD's?
 
 Para poder insertar un modelo en la tabla correspondiente al mismo en BD's unicamente necesitamos llamar
-al metodo save(), una vez estemos seguros que el modelo posee la información necesaria para insertar el registro.
+al método save(), una vez estemos seguros que el modelo posee la información necesaria para insertar el registro.
 
 ~~~
 
 /**
-* Asignamos valores a las columnas del modelo, luego llamamos al metodo save(),
+* Asignamos valores a las columnas del modelo, luego llamamos al método save(),
 * el cual se encarga de insertar un registro en la tabla correspondiente al modelo con la información del mismo
 * si este no existe, de existir actualiza el registro por medio de la clave primaria del modelo.
 */
@@ -460,7 +460,7 @@ test.save();
  * escritura en la BD's, debido a que estas tareas JBSqlUtils las realiza en segundo plano, para no interrumpir
  * el hilo de ejecución principal y entregar un mejor rendimiento, por si necesitamos realizar alguna otra
  * instrucción mientras el modelo esta trabajando en segundo plano. para poder saber si el modelo actualmente esta
- * ocupado, podemos hacerlo a traves del metodo getTaskIsReady(), el cual obtiene la bandera que indica si
+ * ocupado, podemos hacerlo a traves del método getTaskIsReady(), el cual obtiene la bandera que indica si
  * la tarea que estaba realizando el modelo ha sido terminada
  * @return True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
  * actualmente.
@@ -507,10 +507,10 @@ Para obtener un registro de BD's JBSqlUtils proporciona diferentes metodos los c
 ~~~
 
 /**
-* Podemos obtener un registro de la tabla correspondiente al modelo en BD's a través del metodo get()
-* el cual llena el modelo que realiza la invocación del metodo con la información obtenida.
+* Podemos obtener un registro de la tabla correspondiente al modelo en BD's a través del método get()
+* el cual llena el modelo que realiza la invocación del método con la información obtenida.
 *
-* Para poder filtrar la búsqueda y tener acceso al metodo get(), es necesario que llamemos al metodo
+* Para poder filtrar la búsqueda y tener acceso al método get(), es necesario que llamemos al metodo
 * where() el cual nos proporciona un punto de entrada para otros metodos, por medio de los cuales podemos
 * brindar una lógica un poco más compleja a la búsqueda del registro que deseamos obtener.
 */
@@ -571,6 +571,98 @@ estas no poseen un valor, entonces el valor de la columna es Null y por defecto 
 hora actual.
 
 * * *
+
+### Obtener el registro en un modelo, en caso de no encontrarlo lanzar una excepción.
+
+Si lo que necesitamos es buscar un registro y obtenerlo en un modelo, pero en caso de no existir, deseamos se 
+dispare una excepción, podemos utilizar el método firstOrFail(), el cual lanza un ModelNotFound Excepción en caso
+de no encontrar el registro para el modelo.
+
+- En el siguiente Ejemplo obtendrá la información para el modelo
+
+~~~
+
+/**
+* Podemos obtener un registro de la tabla correspondiente al modelo en BD's a través del método firstOrFail()
+* el cual obtiene un nuevo modelo del tipo que realiza la invocación del método con la información obtenida,
+* unicamente casteamos el resultado al tipo de modelo que recibira la información.
+*
+* En caso de no encontrar el registro que se desea obtener lanzara una excepción ModelNotFound, la cual
+* nos indicará que no fue posible encontrar la información para el modelo.
+*
+* Para poder filtrar la busqueda y tener acceso al método firstOrFail(), es necesario que llamemos al método
+* where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
+* brindar una lógica un poco más compleja a la busqueda del registro que deseamos obtener.
+*/
+Test test2= (Test) test.where("Name", Operator.IGUAL_QUE, "'Jose'").firstOrFail();
+
+/**
+* Esperamos a que el modelo termine de obtener la información de BD's
+*/
+while (!test.getTaskIsReady()){
+
+}
+/**
+* Mostramos la información obtenida
+*/
+LogsJB.info(test2.getId().getValor()+"   "+test2.getName().getValor()+"   "+test2.getApellido().getValor()
+    +"   "+test2.getIsMayor().getValor()+"   "+test2.getCreated_at().getValor()+"   "+test2.getUpdated_at().getValor());
+
+
+~~~
+
+Información en BD's SQLite
+![](Imagenes/firstorfail.jpg)
+
+Información obtenida por el modelo
+![](Imagenes/firstorfail1.jpg)
+
+
+- En el siguiente Ejemplo Lanzara la excepción ModelNotFound
+
+~~~
+
+/**
+* Podemos obtener un registro de la tabla correspondiente al modelo en BD's a través del método firstOrFail()
+* el cual obtiene un nuevo modelo del tipo que realiza la invocación del método con la información obtenida,
+* unicamente casteamos el resultado al tipo de modelo que recibira la información.
+*
+* En caso de no encontrar el registro que se desea obtener lanzara una excepción ModelNotFound, la cual
+* nos indicará que no fue posible encontrar la información para el modelo.
+*
+* Para poder filtrar la busqueda y tener acceso al método firstOrFail(), es necesario que llamemos al método
+* where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
+* brindar una lógica un poco más compleja a la busqueda del registro que deseamos obtener.
+*/
+Test test2= (Test) test.where("Name", Operator.IGUAL_QUE, "'Jose'").and("IsMayor", Operator.IGUAL_QUE, "false").firstOrFail();
+
+
+/**
+* Esperamos a que el modelo termine de obtener la información de BD's
+*/
+while (!test.getTaskIsReady()){
+
+}
+/**
+* Mostramos la información obtenida
+*/
+LogsJB.info(test2.getId().getValor()+"   "+test2.getName().getValor()+"   "+test2.getApellido().getValor()
+    +"   "+test2.getIsMayor().getValor()+"   "+test2.getCreated_at().getValor()+"   "+test2.getUpdated_at().getValor());
+
+
+~~~
+
+Información en BD's SQLite
+![](Imagenes/firstorfail.jpg)
+
+Excepción disparada, manejo la excepción para que me muestre la información y causa de la
+misma.
+![](Imagenes/firstorfail2.jpg)
+
+
+
+* * *
+
 
 * * *
 
