@@ -1,12 +1,12 @@
 # JBSqlUtils :computer:
 
-JBSqlUtils es una librería java que permite gestionar BD's SQLite, MySQL, PostgreSQL y SQLServer, de una manera fácil y rápida
-sin interrumpir la ejecución del hilo principal del programa, lo cual la hace un potente ORM, por medio del cual tendrá
-acceso a un CRUD, configurando únicamente la conexión del modelo, los atributos que posee la tabla en BD's como
-variables que pertenecerán al modelo en su aplicación.
+JBSqlUtils es un ORM desarrollado en java por José Carlos Alfredo Bran Aguirre, que permite gestionar BD's SQLite, MySQL, 
+PostgreSQL y SQLServer, de una manera fácil y rápida sin interrumpir la ejecución del hilo principal del programa, 
+lo cual la hace un potente ORM, por medio del cual tendrá acceso a un CRUD, configurando únicamente la conexión del modelo, 
+los atributos que posee la tabla en BD's cómo variables que pertenecerán al modelo en su aplicación.
 
-JBSqlUtils también proporciona un potente generador de consultas que le permitira actualizar o eliminar registros
-de una tabla en su BD's sin necesidad de instanciar un objeto como tal, únicamente tendrá que configurar previamente
+JBSqlUtils también proporciona un potente generador de consultas que le permitirá actualizar o eliminar registros
+de una tabla en su BD's sin necesidad de instanciar un objeto cómo tal, únicamente tendrá que configurar previamente
 la conexión a su BD's.
 * * *
 
@@ -24,7 +24,7 @@ Utilizar JBSqlUtils es muy fácil.
 
 - Lo primero es setear las variables globales de conexión
 
-Al setear las variables globales de conexión estas se almacenan como variables del sistema
+Al setear las variables globales de conexión estas se almacenan cómo variables del sistema
 del entorno de ejecución de la aplicación, las cuales no pueden ser accedidas más que por la misma aplicación
 que las configuro y se eliminan, cuando la aplicación termina su ejecución.
 
@@ -34,15 +34,15 @@ Configuración necesaria para SQLite:
 /*En este ejemplo, se estaría utilizando una BD's SQLite en el directorio de la aplicación, dentro
 del cual existe una carpeta llamada BD y dentro de esta carpeta se crearía la BD's JBSqlUtils al establecer
 la conexión si esta no existiera, de existir, únicamente se establecería la conexión.
-*/  
+*/ 
 
-           
+      
 String separador=System.getProperty("file.separator");
 String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
-        "BD" +
-        separador +
-        "JBSqlUtils.db");
-      
+    "BD" +
+    separador +
+    "JBSqlUtils.db");
+   
 /**
  * Setea el nombre de la Base de Datos global a la que se conectaran los modelos que no tengan una configuración
  * personalizada.
@@ -51,12 +51,12 @@ String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separ
 setDataBaseGlobal(BDSqlite);
 
 /**
- * Setea el tipo de BD's global a la cual se estaran conectando los modelos que no tengan una configuración personalizada.
- * @param dataBase Tipo de BD's a la cual se estaran los modelos que no tengan una configuración personalizada, los tipos disponibles son
- *                 MySQL,
- *                 SQLServer,
- *                 PostgreSQL,
- *                 SQLite.
+ * Setea el tipo de BD's global a la cual se estarán conectando los modelos que no tengan una configuración personalizada.
+ * @param dataBase Tipo de BD's a la cual se estarán los modelos que no tengan una configuración personalizada, los tipos disponibles son
+ *         MySQL,
+ *         SQLServer,
+ *         PostgreSQL,
+ *         SQLite.
  */
 setDataBaseTypeGlobal(DataBase.SQLite);
 ~~~
@@ -67,9 +67,9 @@ Configuración necesaria para MySQL, PostgreSQL y SQLServer:
 ~~~ 
 /*En este ejemplo, se estaría utilizando una BD's que tiene que existir en el servidor con las
 caracteristicas especificadas.
-*/  
-      
-      
+*/ 
+   
+   
 /**
  * Setea el nombre de la Base de Datos global a la que se conectaran los modelos que no tengan una configuración
  * personalizada.
@@ -107,35 +107,35 @@ public static void setHostGlobal(String host);
 
 
 /**
- * Setea el tipo de BD's global a la cual se estaran conectando los modelos que no tengan una configuración personalizada.
- * @param dataBase Tipo de BD's a la cual se estaran los modelos que no tengan una configuración personalizada, los tipos disponibles son
- *                 MySQL,
- *                 SQLServer,
- *                 PostgreSQL,
- *                 SQLite.
+ * Setea el tipo de BD's global a la cual se estarán conectando los modelos que no tengan una configuración personalizada.
+ * @param dataBase Tipo de BD's a la cual se estarán los modelos que no tengan una configuración personalizada, los tipos disponibles son
+ *         MySQL,
+ *         SQLServer,
+ *         PostgreSQL,
+ *         SQLite.
  */
 public static void setDataBaseTypeGlobal(DataBase dataBase);
 ~~~
 
-Al haber configurado las variables de conexión globales, su aplicación estara lista
-para instanciar objetos que hereden la clase JBSqlUtils, los cuales fungiran como modelos y le permitiran
+Al haber configurado las variables de conexión globales, su aplicación estará lista
+para instanciar objetos que hereden la clase JBSqlUtils, los cuales fungirán cómo modelos y le permitirán
 realizar operaciones sobre la tabla correspondiente a cada modelo.
 
-De no desear usar Modelos en su aplicación hasta este punto, podra utilizar JBSqlUtils como un generador de
-sentencias SQL que le permitiran actualizar o eliminar registros de una tabla de acuerdo a la logica que brinde a la
+De no desear usar Modelos en su aplicación hasta este punto, podrá utilizar JBSqlUtils cómo un generador de
+sentencias SQL que le permitirán actualizar o eliminar registros de una tabla de acuerdo a la lógica que brinde a la
 sentencia SQL a ejecutar, todo esto sin necesidad de instanciar un modelo, únicamente habiendo configurado sus 
 variables de conexión.
 
 ***
 
-## ¿Como utilizar JBSqlUtils como un generador de consultas?
+## ¿cómo utilizar JBSqlUtils cómo un generador de consultas?
 
-JBSqlUtils puede ser utilizada como un generador de consultas, para actualizar o eliminar registros en 
-una determinada tabla de forma masiva, de acuerdo a la lógica que se le de a la consulta.
+JBSqlUtils puede ser utilizada cómo un generador de consultas, para actualizar o eliminar registros en 
+una determinada tabla de forma masiva, de acuerdo a la lógica que se le dé a la consulta.
 
 - Actualizar registros.
 
-Para actualizar registros sin necesidad de instanciar un modelo, puede hacerlo a través  del 
+Para actualizar registros sin necesidad de instanciar un modelo, puede hacerlo a través del 
 update método estático de la clase JBSqlUtils, el cual brinda los métodos necesarios, para poder 
 llegar al método execute, el cual ejecuta la sentencia SQL generada y retorna el número de 
 filas afectadas por la ejecución de la sentencia SQL.
@@ -144,8 +144,8 @@ filas afectadas por la ejecución de la sentencia SQL.
 
 /**
  * Actualizar todas las filas de una tabla X (Test), senteando un valor Y(Jose Carlos) a una columna Z(name).
- * El método update recibe como parametro el nombre de la tabla que se desea actualizar y proporciona acceso
- * al método set el cual recibe como primer parametro el nombre de la columna que se desea modificar y el valor
+ * El método update recibe cómo parametro el nombre de la tabla que se desea actualizar y proporciona acceso
+ * al método set el cual recibe cómo primer parametro el nombre de la columna que se desea modificar y el valor
  * que se desea setear a la columna, el método set proporciona acceso al método execute el cual se encarga de
  * ejecutar la sentencia SQL generada y retorna el numero de filas afectadas.
  */
@@ -153,7 +153,7 @@ int rows_afected=update("Test").set("name", "Jose Carlos").execute();
 
 /**
  * Podemos agregar una sentencia Where, por medio del cual podemos acceder a los métodos necesarios para
- * filtrar la cantidad de filas que queremos modificar, una vez hemos terminado de brindar la logica hacemos el
+ * filtrar la cantidad de filas que queremos modificar, una vez hemos terminado de brindar la lógica hacemos el
  * llamado al método execute el cual se encarga de ejecutar la sentencia SQL generada y retorna el numero de filas
  * afectadas.
  */
@@ -161,7 +161,7 @@ rows_afected=update("Test").set("name", "Jose Carlos").where("Id", Operator.MAYO
 
 
 /**
- * Podemos actualizar mas de una columna a través  del método andSet, el cual nos proporciona la capacidad de
+ * Podemos actualizar mas de una columna a través del método andSet, el cual nos proporciona la capacidad de
  * modificar el valor de otra columna y acceso a los métodos andSet para setear otro valor a otra columna y el método
  * where por medio del cual podemos filtrar las filas que se veran afectadas al llamar al método execute, el cual
  * se encargara de ejecutar la sentencia SQL generada y retorna el numero de filas afectadas.
@@ -181,7 +181,7 @@ filas afectadas por la ejecución de la sentencia SQL.
 
 /**
  * Eliminar todas las filas de una tabla X (Test), donde la columna Y(Id) tiene un valor MAYOR O IGUAL a Z(2).
- * El método delete recibe como parametro el nombre de la tabla que se desea eliminar registros y proporciona acceso
+ * El método delete recibe cómo parametro el nombre de la tabla que se desea eliminar registros y proporciona acceso
  * al método Where, por medio del cual podemos acceder a los métodos necesarios para
  * filtrar la cantidad de filas que queremos eliminar, una vez hemos terminado de brindar la lógica hacemos el
  * llamado al método execute el cual se encarga de ejecutar la sentencia SQL generada y retorna el numero de filas
@@ -195,7 +195,7 @@ int rows_afected=delete("Test").where("Id", Operator.MAYOR_IGUAL_QUE, 2).execute
 
 ## ¿Cómo crear modelos a través de JBSqlUtils?
 
-Para poder crear clases que funcionen como modelos en nuestra aplicación, 
+Para poder crear clases que funcionen cómo modelos en nuestra aplicación, 
 únicamente es necesario heredar la clase JBSqlUtils, declarar los miembros de la clase
 que corresponden a cada una de las columnas de la tabla con las que queremos poder interactuar, 
 acá vemos un ejemplo:
@@ -218,142 +218,140 @@ import io.github.josecarlosbran.JBSqlLite.JBSqlUtils;
  */
 public class Test extends JBSqlUtils {
 
+  /**
+   * En el constructor de nuestra clase que utilizaremos cómo modelo al heredar la clase JBSqlutils
+   * hacemos el llamado al constructor de la clase JBSqlUtils la cual inicializara el modelo para poder
+   * ser utilizado, una vez instanciado el modelo, podremos obtener uno o varios registros de la tabla
+   * correspondiente al modelo, insertar, actualizar o eliminar registros.
+   *
+   * Es importante que antes de instanciar un modelo que herede la clase JBSqlUtils se hayan definido
+   * las propiedades de conexión cómo variables del sistema.
+   *
+   * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+   * BD's a la cual se conectara el modelo.
+   * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+   * propiedades de conexión necesarias para conectarse a la BD's especificada.
+   * @throws ValorUndefined Lanza esta excepción si la bandera proporcionada es Null
+   */
+  public Test() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
     /**
-     * En el constructor de nuestra clase que utilizaremos como modelo al heredar la clase JBSqlutils
-     * hacemos el llamado al constructor de la clase JBSqlUtils la cual inicializara el modelo para poder
-     * ser utilizado, una vez instanciado el modelo, podremos obtener uno o varios registros de la tabla
-     * correspondiente al modelo, insertar, actualizar o eliminar registros.
-     *
-     * Es importante que antes de instanciar un modelo que herede la clase JBSqlUtils se hayan definido
-     * las propiedades de conexión como variables del sistema.
-     *
-     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     * BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     * propiedades de conexión necesarias para conectarse a la BD's especificada.
-     * @throws ValorUndefined Lanza esta excepción si la bandera proporcionada es Null
+     * Hacemos el llamado al constructor de la Clase JBSqlUtils
      */
-    public Test() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        /**
-         * Hacemos el llamado al constructor de la Clase JBSqlUtils
-         */
-        super();
-    }
+    super();
+  }
 
-    /**
-     * Para poder utilizar JBSqlUtils es necesario que los miembros de la clase modelo, que correspondan
-     * a una columna de la tabla correspondiente al modelo, sean del tipo Column, especificando el tipo de dato
-     * en java y por medio del constructor del objeto Column se pase como parametro el tipo de dato SQL
-     * de la columna, adicional a esto se pueden definir restricciones, como valor por defecto para la columna
-     * si se desea utilizar el modelo para crear la tabla en BD's, pero estos últimos son opcionales
-     * el único parametro obligatorio es el DataType de la columna en BD's.
-     *
-     * Por convención el nombre de cada miembro correspondiente a una columna en BD's debe tener el mismo
-     * nombre que la columna en BD's. y estos deben tener sus respectivos métodos set an get, teniendo estos
-     * por convención el nombre setColumnName, getColumName.
-     *
-     * Por ejemplo, para la columna Id = El miembro del modelo será Id, JBSqlUtils no es case sensitive,
-     * así que en BD's la columna puede ser ID y en el modelo id, que JBSqlUtils hará el match entre la columna
-     * y el miembro de la clase modelo.
-     *
-     */
+  /**
+   * Para poder utilizar JBSqlUtils es necesario que los miembros de la clase modelo, que correspondan
+   * a una columna de la tabla correspondiente al modelo, sean del tipo Column, especificando el tipo de dato
+   * en java y por medio del constructor del objeto Column se pase cómo parametro el tipo de dato SQL
+   * de la columna, adicional a esto se pueden definir restricciones, cómo valor por defecto para la columna
+   * si se desea utilizar el modelo para crear la tabla en BD's, pero estos últimos son opcionales
+   * el único parametro obligatorio es el DataType de la columna en BD's.
+   *
+   * Por convención el nombre de cada miembro correspondiente a una columna en BD's debe tener el mismo
+   * nombre que la columna en BD's. y estos deben tener sus respectivos métodos set an get, teniendo estos
+   * por convención el nombre setColumnName, getColumName.
+   *
+   * Por ejemplo, para la columna Id = El miembro del modelo será Id, JBSqlUtils no es case sensitive,
+   * así que en BD's la columna puede ser ID y en el modelo id, que JBSqlUtils hará el match entre la columna
+   * y el miembro de la clase modelo.
+   *
+   */
 
 
-    /**
-     * Declara un miembro del modelo, el cual en java almacenara un dato de tipo Integer, se define Integer,
-     * ya que la clase Column es una clase generica y no puede trabajar con datos primivitos como int, pero si con
-     * clases contenedoras como Integer.
-     *
-     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
-     * Integer.
-     *
-     * Agregamos dos restricciones SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
-     * desde nuestra aplicación en caso esta no exista, de lo contrario no es necesario que agreguemos restricciones.
-     */
-    private Column<Integer> id=new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
+  /**
+   * Declara un miembro del modelo, el cual en java almacenara un dato de tipo Integer, se define Integer,
+   * ya que la clase Column es una clase generica y no puede trabajar con datos primivitos cómo int, pero si con
+   * clases contenedoras cómo Integer.
+   *
+   * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
+   * Integer.
+   *
+   * Agregamos dos restricciones SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
+   * desde nuestra aplicación en caso esta no exista, de lo contrario no es necesario que agreguemos restricciones.
+   */
+  private Column<Integer> id=new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
 
-    /**
-     * Declara un miembro del modelo, el cual en java almacenara un dato de tipo String.
-     *
-     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
-     * Varchar.
-     *
-     * Agregamos un parametro extra el cual es el default_value antes de indicar las restricciones,
-     * este parametro es de tipo String, por medio de este parametro podemos definir el valor que deseamos tenga la
-     * columna por default (Puede ser un valor del tipo de dato SQL, o una funcion SQL que retorne un valor del
-     * tipo de dato SQL de la columna) cuando se inserte un registro y no se especifique un dato para esa columna,
-     * este únicamente funcionara cuando tenga la restriccion DEFAULT definida y se definira únicamente si se
-     * crea la tabla en BD's desde nuestra aplicación a través del método modelo.crateTable().
-     *
-     * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
-     * desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
-     */
-    private Column<String> name=new Column<>(DataType.VARCHAR, "'Daniel'", Constraint.DEFAULT);
+  /**
+   * Declara un miembro del modelo, el cual en java almacenara un dato de tipo String.
+   *
+   * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
+   * Varchar.
+   *
+   * Agregamos un parametro extra el cual es el default_value antes de indicar las restricciones,
+   * este parametro es de tipo String, por medio de este parametro podemos definir el valor que deseamos tenga la
+   * columna por default (Puede ser un valor del tipo de dato SQL, o una funcion SQL que retorne un valor del
+   * tipo de dato SQL de la columna) cuando se inserte un registro y no se especifique un dato para esa columna,
+   * este únicamente funcionara cuando tenga la restriccion DEFAULT definida y se definira únicamente si se
+   * crea la tabla en BD's desde nuestra aplicación a través del método modelo.crateTable().
+   *
+   * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
+   * desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
+   */
+  private Column<String> name=new Column<>(DataType.VARCHAR, "'Daniel'", Constraint.DEFAULT);
 
-    /**
-     * Declara un miembro del modelo, el cual en java almacenara un dato de tipo String.
-     *
-     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
-     * Varchar.
-     *
-     */
-    private Column<String> apellido=new Column<>(DataType.VARCHAR);
+  /**
+   * Declara un miembro del modelo, el cual en java almacenara un dato de tipo String.
+   *
+   * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
+   * Varchar.
+   *
+   */
+  private Column<String> apellido=new Column<>(DataType.VARCHAR);
 
-    /**
-     * Declara un miembro del modelo, el cual en java almacenara un dato de tipo Boolean.
-     *
-     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
-     * BIT.
-     *
-     * En este ejemplo seteamos 'true' como default_value, debido a que este modelo se conectara a un SQLServer,
-     * en PostgreSQL y SQLite la sintaxis es true. Por lo cual es importante tener claro la sintaxis de la BD's a la cual
-     * se estará conectando el modelo.
-     *
-     * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
-     * desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
-     */
-    private Column<Boolean> isMayor=new Column<>(DataType.BIT, "'true'", Constraint.DEFAULT);
+  /**
+   * Declara un miembro del modelo, el cual en java almacenara un dato de tipo Boolean.
+   *
+   * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
+   * BIT.
+   *
+   * En este ejemplo seteamos 'true' cómo default_value, debido a que este modelo se conectara a un SQLServer,
+   * en PostgreSQL y SQLite la sintaxis es true. Por lo cual es importante tener claro la sintaxis de la BD's a la cual
+   * se estará conectando el modelo.
+   *
+   * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
+   * desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
+   */
+  private Column<Boolean> isMayor=new Column<>(DataType.BIT, "'true'", Constraint.DEFAULT);
 
-    public Column<Integer> getId() {
-        return id;
-    }
+  public Column<Integer> getId() {
+    return id;
+  }
 
 
-    public void setId(Column<Integer> id) {
-        this.id = id;
-    }
+  public void setId(Column<Integer> id) {
+    this.id = id;
+  }
 
-    public Column<String> getName() {
-        return name;
-    }
+  public Column<String> getName() {
+    return name;
+  }
 
-    public void setName(Column<String> name) {
-        this.name = name;
-    }
+  public void setName(Column<String> name) {
+    this.name = name;
+  }
 
-    public Column<String> getApellido() {
-        return apellido;
-    }
+  public Column<String> getApellido() {
+    return apellido;
+  }
 
-    public void setApellido(Column<String> apellido) {
-        this.apellido = apellido;
-    }
+  public void setApellido(Column<String> apellido) {
+    this.apellido = apellido;
+  }
 
-    public Column<Boolean> getIsMayor() {
-        return isMayor;
-    }
+  public Column<Boolean> getIsMayor() {
+    return isMayor;
+  }
 
-    public void setIsMayor(Column<Boolean> isMayor) {
-        this.isMayor = isMayor;
-    }
+  public void setIsMayor(Column<Boolean> isMayor) {
+    this.isMayor = isMayor;
+  }
 }
-
 
 ~~~
 
 
 * * *
-
 
 
 ## ¿Cómo eliminar la tabla correspondiente a un modelo?
@@ -406,7 +404,7 @@ Por default la tabla correspondiente al modelo, incluirá las columnas created_a
 
 
 Si deseamos que JBSqlUtils no gestione las columnas created_at y update_at, al momento de crear la tabla,
-insertar o actualizar un registro, basta con llamar el método setTimestamps(false), enviando como parametro true
+insertar o actualizar un registro, basta con llamar el método setTimestamps(false), enviando cómo parametro true
 si queremos que JBSqlUtils gestione las columnas o false si queremos que JBSqlUtils No gestione estas columnas.
 por default JBSqlUtils esta configurada para manejar la columnas created_at y update_at.
 ~~~
@@ -414,7 +412,7 @@ por default JBSqlUtils esta configurada para manejar la columnas created_at y up
 /**
 * Setea la bandera que define si el modelo desea que JBSqlUtils maneje las timestamps Created_at, Update_at.
 * @param timestamps True si las timestamps serán manejadas por JBSqlUtils, False, si el modelo no tiene estas
-*                   columnas.
+*          columnas.
 */
 test.setTimestamps(false);
 
@@ -436,8 +434,8 @@ test.crateTable();
 
 ## ¿Cómo almacenar un modelo en BD's?
 
-Para poder insertar un modelo en la tabla correspondiente al mismo en BD's unicamente necesitamos llamar
-al método save(), una vez estemos seguros que el modelo posee la información necesaria para insertar el registro.
+Para poder insertar un modelo en la tabla correspondiente al mismo en BD's únicamente necesitamos llamar
+al método save(), una vez estemos seguros de que el modelo posee la información necesaria para insertar el registro.
 
 ~~~
 
@@ -526,8 +524,8 @@ while (!test.getTaskIsReady()){
 /**
 * Mostramos la información obtenida
 */
-LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.getApellido().getValor()
-    +"   "+test.getIsMayor().getValor()+"   "+test.getCreated_at().getValor()+"   "+test.getUpdated_at().getValor());
+LogsJB.info(test.getId().getValor()+"  "+test.getName().getValor()+"  "+test.getApellido().getValor()
+  +"  "+test.getIsMayor().getValor()+"  "+test.getCreated_at().getValor()+"  "+test.getUpdated_at().getValor());
 
 ~~~
 
@@ -542,7 +540,7 @@ LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.g
 /**
 * Podemos obtener un registro de la tabla correspondiente al modelo en BD's a través del método first()
 * el cual obtiene un nuevo modelo del tipo que realiza la invocación del método con la información obtenida,
-* unicamente casteamos el resultado al tipo de modelo que recibira la información.
+* únicamente casteamos el resultado al tipo de modelo que recibira la información.
 *
 * Para poder filtrar la búsqueda y tener acceso al método first(), es necesario que llamemos al método
 * where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
@@ -559,14 +557,14 @@ while (!test.getTaskIsReady()){
 /**
 * Mostramos la información obtenida
 */
-LogsJB.info(test2.getId().getValor()+"   "+test2.getName().getValor()+"   "+test2.getApellido().getValor()
-    +"   "+test2.getIsMayor().getValor()+"   "+test2.getCreated_at().getValor()+"   "+test2.getUpdated_at().getValor());
+LogsJB.info(test2.getId().getValor()+"  "+test2.getName().getValor()+"  "+test2.getApellido().getValor()
+  +"  "+test2.getIsMayor().getValor()+"  "+test2.getCreated_at().getValor()+"  "+test2.getUpdated_at().getValor());
 
 ~~~
 
 ![](Imagenes/first.jpg)
 
-Vemos que la columna created_at y update_at retornan como valor la fecha y hora actual, debido a que en BD's 
+Vemos que la columna created_at y update_at retornan cómo valor la fecha y hora actual, debido a que en BD's 
 estas no poseen un valor, entonces el valor de la columna es Null y por defecto el modelo retorna la fecha y
 hora actual.
 
@@ -585,7 +583,7 @@ de no encontrar el registro para el modelo.
 /**
 * Podemos obtener un registro de la tabla correspondiente al modelo en BD's a través del método firstOrFail()
 * el cual obtiene un nuevo modelo del tipo que realiza la invocación del método con la información obtenida,
-* unicamente casteamos el resultado al tipo de modelo que recibira la información.
+* únicamente casteamos el resultado al tipo de modelo que recibira la información.
 *
 * En caso de no encontrar el registro que se desea obtener lanzara una excepción ModelNotFound, la cual
 * nos indicará que no fue posible encontrar la información para el modelo.
@@ -605,8 +603,8 @@ while (!test.getTaskIsReady()){
 /**
 * Mostramos la información obtenida
 */
-LogsJB.info(test2.getId().getValor()+"   "+test2.getName().getValor()+"   "+test2.getApellido().getValor()
-    +"   "+test2.getIsMayor().getValor()+"   "+test2.getCreated_at().getValor()+"   "+test2.getUpdated_at().getValor());
+LogsJB.info(test2.getId().getValor()+"  "+test2.getName().getValor()+"  "+test2.getApellido().getValor()
+  +"  "+test2.getIsMayor().getValor()+"  "+test2.getCreated_at().getValor()+"  "+test2.getUpdated_at().getValor());
 
 
 ~~~
@@ -627,7 +625,7 @@ Información obtenida por el modelo
 /**
 * Podemos obtener un registro de la tabla correspondiente al modelo en BD's a través del método firstOrFail()
 * el cual obtiene un nuevo modelo del tipo que realiza la invocación del método con la información obtenida,
-* unicamente casteamos el resultado al tipo de modelo que recibira la información.
+* únicamente casteamos el resultado al tipo de modelo que recibira la información.
 *
 * En caso de no encontrar el registro que se desea obtener lanzara una excepción ModelNotFound, la cual
 * nos indicará que no fue posible encontrar la información para el modelo.
@@ -648,8 +646,8 @@ while (!test.getTaskIsReady()){
 /**
 * Mostramos la información obtenida
 */
-LogsJB.info(test2.getId().getValor()+"   "+test2.getName().getValor()+"   "+test2.getApellido().getValor()
-    +"   "+test2.getIsMayor().getValor()+"   "+test2.getCreated_at().getValor()+"   "+test2.getUpdated_at().getValor());
+LogsJB.info(test2.getId().getValor()+"  "+test2.getName().getValor()+"  "+test2.getApellido().getValor()
+  +"  "+test2.getIsMayor().getValor()+"  "+test2.getCreated_at().getValor()+"  "+test2.getUpdated_at().getValor());
 
 
 ~~~
@@ -695,12 +693,12 @@ while (!test.getTaskIsReady()){
 }
 
 /**
-* Declaramos una función anonima que recibira como parametro un obtjeto del tipo Test
+* Declaramos una función anonima que recibira cómo parametro un obtjeto del tipo Test
 * el cual es el tipo de modelo que obtendremos y dentro de esta función imprimiremos
 * la información del modelo.
 */
 Consumer<Test> showFilas = fila -> {
-LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
+LogsJB.info(fila.getId().getValor()+"  "+fila.getName().getValor()+"  "+fila.getApellido().getValor()+"  "+fila.getIsMayor().getValor()+"  "+fila.getCreated_at().getValor()+"  "+fila.getUpdated_at().getValor());
 };
 
 /**
@@ -751,12 +749,12 @@ while (!test.getTaskIsReady()){
 }
 
 /**
-* Declaramos una función anonima que recibira como parametro un obtjeto del tipo Test
+* Declaramos una función anonima que recibira cómo parametro un obtjeto del tipo Test
 * el cual es el tipo de modelo que obtendremos y dentro de esta función imprimiremos
 * la información del modelo.
 */
 Consumer<Test> showFilas = fila -> {
-LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
+LogsJB.info(fila.getId().getValor()+"  "+fila.getName().getValor()+"  "+fila.getApellido().getValor()+"  "+fila.getIsMayor().getValor()+"  "+fila.getCreated_at().getValor()+"  "+fila.getUpdated_at().getValor());
 };
 
 /**
@@ -787,7 +785,7 @@ Podemos ordenar los registros que serán obtenidos de BD's por medio del método
 
 - Método orderBy()
 
-Ordena los registros obtenidos de BD's de acuerdo a la columna que enviamos como parametro y el 
+Ordena los registros obtenidos de BD's de acuerdo a la columna que enviamos cómo parametro y el 
 tipo de ordenamiento que le especificamos.
 
 ~~~
@@ -799,7 +797,7 @@ List<Test> lista=new ArrayList<>();
 
 /**
 * Obtenemos todos los registros cuyos Id son mayores a 2, el método orderBy() los ordena de acuerdo a la columna
-* que enviamos como parametro y el tipo de ordenamiento que le especificamos.
+* que enviamos cómo parametro y el tipo de ordenamiento que le especificamos.
 * El método orderBy() proporciona acceso a todos los métodos que hemos visto anteriormente, los cuales nos
 * permiten obtener uno o multiples registros, de acuerdo a la lógica que brindemos a nuestra sentencia SQL.
 */
@@ -813,12 +811,12 @@ while (!test.getTaskIsReady()){
 }
 
 /**
-* Declaramos una función anonima que recibira como parametro un obtjeto del tipo Test
+* Declaramos una función anonima que recibira cómo parametro un obtjeto del tipo Test
 * el cual es el tipo de modelo que obtendremos y dentro de esta función imprimiremos
 * la información del modelo.
 */
 Consumer<Test> showFilas = fila -> {
-LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
+LogsJB.info(fila.getId().getValor()+"  "+fila.getName().getValor()+"  "+fila.getApellido().getValor()+"  "+fila.getIsMayor().getValor()+"  "+fila.getCreated_at().getValor()+"  "+fila.getUpdated_at().getValor());
 };
 
 /**
@@ -850,7 +848,7 @@ que para que se actualice el registro, este haya sido obtenido de BD's, de esa m
 un valor válido en su atributo correspondiente a la primaryKey de la tabla en BD's y la propiedad ModelExist 
 estará configurada con un valor true.
 
-En caso no hayamos obtenido el modelo de BD's es importante que configuremos la propiedad ModelExist como true,
+En caso no hayamos obtenido el modelo de BD's es importante que configuremos la propiedad ModelExist cómo true,
 lo cual podemos hacerlo a través del método setModelExist(), adicional a esto, debemos asegurarnos, de que el 
 modelo en su columna correspondiente a la primaryKey, tenga el valor del registro que queremos actualizar.
 
@@ -871,8 +869,8 @@ while (!test.getTaskIsReady()){
 /**
 * Mostramos la información obtenida
 */
-LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.getApellido().getValor()
-    +"   "+test.getIsMayor().getValor()+"   "+test.getCreated_at().getValor()+"   "+test.getUpdated_at().getValor());
+LogsJB.info(test.getId().getValor()+"  "+test.getName().getValor()+"  "+test.getApellido().getValor()
+  +"  "+test.getIsMayor().getValor()+"  "+test.getCreated_at().getValor()+"  "+test.getUpdated_at().getValor());
 
 
 /**
@@ -909,7 +907,7 @@ que para que se actualice el registro, este haya sido obtenido de BD's, de esa m
 un valor válido en su atributo correspondiente a la primaryKey de la tabla en BD's y la propiedad ModelExist
 estará configurada con un valor true.
 
-En caso no hayamos obtenido los modelos de BD's es importante que configuremos la propiedad ModelExist como true en 
+En caso no hayamos obtenido los modelos de BD's es importante que configuremos la propiedad ModelExist cómo true en 
 cada uno de los modelos que vayamos a actualizar, lo cual podemos hacerlo a través del método setModelExist(), 
 adicional a esto, debemos asegurarnos, de que cada uno de los modelos en su columna correspondiente a la primaryKey, 
 tenga el valor del registro que queremos actualizar.
@@ -934,14 +932,14 @@ while (!test.getTaskIsReady()){
 }
 
 /**
-* Declaramos una función anonima que recibira como parametro un obtjeto del tipo Test
+* Declaramos una función anonima que recibira cómo parametro un obtjeto del tipo Test
 * el cual es el tipo de modelo que obtendremos y dentro de esta función imprimiremos
 * la información del modelo y modificaremos el valor de la columna Is mayor, de ser True
 * ahora será False, de ser False, ahora será True.
 */
 Consumer<Test> showFilas = fila -> {
-//Mostramos la Información          
-LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
+//Mostramos la Información     
+LogsJB.info(fila.getId().getValor()+"  "+fila.getName().getValor()+"  "+fila.getApellido().getValor()+"  "+fila.getIsMayor().getValor()+"  "+fila.getCreated_at().getValor()+"  "+fila.getUpdated_at().getValor());
 //Modificamos el valor de la columna IsMayor
 fila.getIsMayor().setValor(!fila.getIsMayor().getValor());
 };
@@ -958,7 +956,7 @@ lista.forEach(showFilas);
 * @param modelos Lista de modelos que serán Insertados o Actualizados
 */
 test.saveALL(lista);
-        
+    
 
 ~~~
 
@@ -966,7 +964,7 @@ Información en BD's SQLite antes de actualizar los registros
 
 ![](Imagenes/updateall.jpg)
 
-Actividad registrada por JBSqlUtils, Cómo JBSqlUtils ejecuta las operaciones de escritura como de lectura en segundo plano
+Actividad registrada por JBSqlUtils, Cómo JBSqlUtils ejecuta las operaciones de escritura cómo de lectura en segundo plano
 para que el hilo de ejecución principal no se vea afectado y pueda realizar alguna otra actividad en paralelo, por cada modelo
 que se actualiza, JBSqlUtils crea un subproceso para cada modelo, de esta manera las operaciones de escritura en BD's
 se realizan en paralelo, mejorando el rendimiento de nuestra aplicación.
@@ -1010,8 +1008,8 @@ while (!test.getTaskIsReady()){
 /**
 * Mostramos la información obtenida
 */
-LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.getApellido().getValor()
-    +"   "+test.getIsMayor().getValor()+"   "+test.getCreated_at().getValor()+"   "+test.getUpdated_at().getValor());
+LogsJB.info(test.getId().getValor()+"  "+test.getName().getValor()+"  "+test.getApellido().getValor()
+  +"  "+test.getIsMayor().getValor()+"  "+test.getCreated_at().getValor()+"  "+test.getUpdated_at().getValor());
 
 /**
 * LLamamos al metodo delete, el cual se encargará de eliminar el registro en BD's.
@@ -1046,7 +1044,7 @@ modelos que queremos eliminar tengan en su columna correspondiente a la primaryK
 
 ~~~
 
-       
+    
 
 ~~~
 
@@ -1054,7 +1052,7 @@ Información en BD's SQLite antes de eliminar los registros
 
 ![](Imagenes/deleteall.jpg)
 
-Actividad registrada por JBSqlUtils, Cómo JBSqlUtils ejecuta las operaciones de escritura como de lectura en segundo plano
+Actividad registrada por JBSqlUtils, Cómo JBSqlUtils ejecuta las operaciones de escritura cómo de lectura en segundo plano
 para que el hilo de ejecución principal no se vea afectado y pueda realizar alguna otra actividad en paralelo, por cada modelo
 que se elimina, JBSqlUtils crea un subproceso para cada modelo, de esta manera las operaciones de escritura en BD's
 se realizan en paralelo, mejorando el rendimiento de nuestra aplicación.
@@ -1087,9 +1085,9 @@ Puedes obtener la librería LogsJB de la siguiente manera
 Maven
 ~~~
 <dependency>
-    <groupId>io.github.josecarlosbran</groupId>
-    <artifactId>LogsJB</artifactId>
-    <version>0.5</version>
+  <groupId>io.github.josecarlosbran</groupId>
+  <artifactId>LogsJB</artifactId>
+  <version>0.5</version>
 </dependency>
 ~~~
 
@@ -1105,12 +1103,12 @@ Modificar el Nivel de Log que queremos tener sobre JBSqlUtils
 /***
 * Setea el NivelLog desde el cual deseamos se escriba en el Log de la aplicación actual.
 * @param GradeLog Nivel Log desde el cual hacía arriba en la jerarquia de logs, deseamos se reporten
-*      * Trace = 200,
-*      * Debug = 400,
-*      * Info = 500,
-*      * Warning = 600,
-*      * Error = 800,
-*      * Fatal = 1000.
+*   * Trace = 200,
+*   * Debug = 400,
+*   * Info = 500,
+*   * Warning = 600,
+*   * Error = 800,
+*   * Fatal = 1000.
 * El valor por defaul es Info. Lo cual hace que se reporten los Logs de grado Info, Warning, Error y Fatal.
 */
 LogsJB.setGradeLog(NivelLog.INFO);
@@ -1137,9 +1135,9 @@ Maven
 
 ~~~
 <dependency>
-    <groupId>io.github.josecarlosbran</groupId>
-    <artifactId>JBSqlUtils</artifactId>
-    <version>1.0</version>
+  <groupId>io.github.josecarlosbran</groupId>
+  <artifactId>JBSqlUtils</artifactId>
+  <version>1.0</version>
 </dependency>
 ~~~
 
@@ -1149,7 +1147,7 @@ Gradle
 implementation 'io.github.josecarlosbran:JBSqlUtils:1.0'
 ~~~
 
-Para mayor información sobre como descargar JBSqlUtils desde otros
+Para mayor información sobre cómo descargar JBSqlUtils desde otros
 administradores de paquetes, puedes ir al siguiente Link
 <https://search.maven.org/artifact/io.github.josecarlosbran/JBSqlUtils>
 
@@ -1157,10 +1155,10 @@ administradores de paquetes, puedes ir al siguiente Link
 
 ## Licencia :balance_scale:
 
-JBSqlUtils es una librería open source desarrollada por José Bran, para la administración
-de los registros de un programa, con licencia de Apache License, Versión 2.0;
+JBSqlUtils es un ORM open source desarrollado por José Bran, para gestionar BD's SQLite,
+MySQL, PostgreSQL y SQLServer, de una manera fácil y rápida, con licencia de Apache License, Versión 2.0;
 
-No puede usar esta librería excepto de conformidad con la Licencia.
+No puede usar este ORM excepto de conformidad con la Licencia.
 Puede obtener una copia de la Licencia en http://www.apache.org/licenses/LICENSE-2.0
 
 A menos que lo exija la ley aplicable o se acuerde por escrito, el software
