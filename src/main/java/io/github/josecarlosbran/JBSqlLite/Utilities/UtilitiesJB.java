@@ -16,7 +16,6 @@
 package io.github.josecarlosbran.JBSqlLite.Utilities;
 
 import io.github.josecarlosbran.JBSqlLite.Column;
-import io.github.josecarlosbran.JBSqlLite.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;

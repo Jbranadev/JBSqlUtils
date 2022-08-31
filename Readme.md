@@ -677,38 +677,38 @@ Podemos obtener multiples registros de BD's a través de los siguientes métodos
 Obtiene una lista de modelos que coinciden con la búsqueda realizada por medio de la consulta SQL
 ~~~
 
-        /**
-         * Declaramos una lista de modelos del tipo Test, en la cual almacenaremos la información obtenida de BD's'
-         */
-        List<Test> lista=new ArrayList<>();
+/**
+* Declaramos una lista de modelos del tipo Test, en la cual almacenaremos la información obtenida de BD's'
+*/
+List<Test> lista=new ArrayList<>();
 
-        /**
-         * Obtenemos todos los registros cuyos Id son mayores a 2, el método getALL()
-         * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
-         */
-        lista=test.where("id", Operator.MAYOR_QUE, 2).getAll();
-        
-        /**
-         * Esperamos a que el modelo termine de obtener la información de BD's
-         */
-        while (!test.getTaskIsReady()){
+/**
+* Obtenemos todos los registros cuyos Id son mayores a 2, el método getALL()
+* Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
+*/
+lista=test.where("id", Operator.MAYOR_QUE, 2).getAll();
 
-        }
-        
-        /**
-         * Declaramos una función anonima que recibira como parametro un obtjeto del tipo Test
-         * el cual es el tipo de modelo que obtendremos y dentro de esta función imprimiremos
-         * la información del modelo.
-         */
-        Consumer<Test> showFilas = fila -> {
-            LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
-        };
+/**
+* Esperamos a que el modelo termine de obtener la información de BD's
+*/
+while (!test.getTaskIsReady()){
 
-        /**
-         * Mostramos la información obtenida iterando sobre los modelos obtenidos de BD's y mostrando
-         * su contenido por medio de la función anonima que declaramos ateriormente.
-         */
-        lista.forEach(showFilas);
+}
+
+/**
+* Declaramos una función anonima que recibira como parametro un obtjeto del tipo Test
+* el cual es el tipo de modelo que obtendremos y dentro de esta función imprimiremos
+* la información del modelo.
+*/
+Consumer<Test> showFilas = fila -> {
+LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
+};
+
+/**
+* Mostramos la información obtenida iterando sobre los modelos obtenidos de BD's y mostrando
+* su contenido por medio de la función anonima que declaramos ateriormente.
+*/
+lista.forEach(showFilas);
 
 
 
@@ -732,39 +732,39 @@ Obtiene una lista de modelos que coinciden con la búsqueda realizada por medio 
 por la cantidad de registros especificados en el método take()
 ~~~
 
-        /**
-         * Declaramos una lista de modelos del tipo Test, en la cual almacenaremos la información obtenida de BD's'
-         */
-        List<Test> lista=new ArrayList<>();
+/**
+* Declaramos una lista de modelos del tipo Test, en la cual almacenaremos la información obtenida de BD's'
+*/
+List<Test> lista=new ArrayList<>();
 
-        /**
-         * Obtenemos todos los registros cuyos Id son mayores a 2, el metodo take(Cantidad).get();
-         * Obtiene una lista de modelos que coinciden con la búsqueda realizada por medio de la consulta SQL
-         * limitada a la cantidad de registros especificados en el método take().
-         */
-        lista=test.where("id", Operator.MAYOR_QUE, 2).take(2).get();
-        
-        /**
-         * Esperamos a que el modelo termine de obtener la información de BD's
-         */
-        while (!test.getTaskIsReady()){
+/**
+* Obtenemos todos los registros cuyos Id son mayores a 2, el método take(Cantidad).get();
+* Obtiene una lista de modelos que coinciden con la búsqueda realizada por medio de la consulta SQL
+* limitada a la cantidad de registros especificados en el método take().
+*/
+lista=test.where("id", Operator.MAYOR_QUE, 2).take(2).get();
 
-        }
-        
-        /**
-         * Declaramos una función anonima que recibira como parametro un obtjeto del tipo Test
-         * el cual es el tipo de modelo que obtendremos y dentro de esta función imprimiremos
-         * la información del modelo.
-         */
-        Consumer<Test> showFilas = fila -> {
-            LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
-        };
+/**
+* Esperamos a que el modelo termine de obtener la información de BD's
+*/
+while (!test.getTaskIsReady()){
 
-        /**
-         * Mostramos la información obtenida iterando sobre los modelos obtenidos de BD's y mostrando
-         * su contenido por medio de la función anonima que declaramos ateriormente.
-         */
-        lista.forEach(showFilas);
+}
+
+/**
+* Declaramos una función anonima que recibira como parametro un obtjeto del tipo Test
+* el cual es el tipo de modelo que obtendremos y dentro de esta función imprimiremos
+* la información del modelo.
+*/
+Consumer<Test> showFilas = fila -> {
+LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
+};
+
+/**
+* Mostramos la información obtenida iterando sobre los modelos obtenidos de BD's y mostrando
+* su contenido por medio de la función anonima que declaramos ateriormente.
+*/
+lista.forEach(showFilas);
 
 
 
@@ -778,8 +778,67 @@ Lista de modelos obtenidos de BD's
 
 ![](Imagenes/take.jpg)
 
+* * *
 
 
+
+## ¿Cómo ordenar los registros obtenidos de BD's?
+
+Podemos ordenar los registros que serán obtenidos de BD's por medio del método orderBy()
+
+- Método orderBy()
+
+Ordena los registros obtenidos de BD's de acuerdo a la columna que enviamos como parametro y el 
+tipo de ordenamiento que le especificamos.
+
+~~~
+
+/**
+* Declaramos una lista de modelos del tipo Test, en la cual almacenaremos la información obtenida de BD's'
+*/
+List<Test> lista=new ArrayList<>();
+
+/**
+* Obtenemos todos los registros cuyos Id son mayores a 2, el metodo orderBy() los ordena de acuerdo a la columna
+* que enviamos como parametro y el tipo de ordenamiento que le especificamos.
+* El método orderBy() proporciona acceso a todos los métodos que hemos visto anteriormente, los cuales nos
+* permiten obtener uno o multiples registros, de acuerdo a la lógica que brindemos a nuestra sentencia SQL.
+*/
+lista=test.where("id", Operator.MAYOR_QUE, 2).orderBy("id", OrderType.DESC).take(2).get();
+
+/**
+* Esperamos a que el modelo termine de obtener la información de BD's
+*/
+while (!test.getTaskIsReady()){
+
+}
+
+/**
+* Declaramos una función anonima que recibira como parametro un obtjeto del tipo Test
+* el cual es el tipo de modelo que obtendremos y dentro de esta función imprimiremos
+* la información del modelo.
+*/
+Consumer<Test> showFilas = fila -> {
+LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
+};
+
+/**
+* Mostramos la información obtenida iterando sobre los modelos obtenidos de BD's y mostrando
+* su contenido por medio de la función anonima que declaramos ateriormente.
+*/
+lista.forEach(showFilas);
+
+
+
+~~~
+
+Información en BD's SQLite
+
+![](Imagenes/getall.jpg)
+
+Lista de modelos obtenidos de BD's
+
+![](Imagenes/orderBy.jpg)
 
 * * *
 

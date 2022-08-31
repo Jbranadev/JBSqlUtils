@@ -27,7 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.*;
+import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.getColumn;
+import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
 /**
  * @author Jose Bran

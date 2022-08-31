@@ -17,8 +17,6 @@ package io.github.josecarlosbran.JBSqlLite.DataBase;
 
 
 import io.github.josecarlosbran.JBSqlLite.Column;
-import io.github.josecarlosbran.JBSqlLite.Enumerations.Constraint;
-import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.OrderType;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
@@ -26,14 +24,13 @@ import io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlLite.Methods_Conexion;
-import io.github.josecarlosbran.JBSqlLite.Utilities.ColumnsSQL;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.*;
+import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.getColumn;
+import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
 /**
  * @author Jose Bran

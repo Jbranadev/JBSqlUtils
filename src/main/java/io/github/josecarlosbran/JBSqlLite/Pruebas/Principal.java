@@ -17,6 +17,7 @@ package io.github.josecarlosbran.JBSqlLite.Pruebas;
 
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
+import io.github.josecarlosbran.JBSqlLite.Enumerations.OrderType;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
@@ -182,11 +183,12 @@ public class Principal {
         List<Test> lista=new ArrayList<>();
 
         /**
-         * Obtenemos todos los registros cuyos Id son mayores a 2, el metodo take(Cantidad).get();
-         * Obtiene una lista de modelos que coinciden con la búsqueda realizada por medio de la consulta SQL
-         * limitada a la cantidad de registros especificados en el método take().
+         * Obtenemos todos los registros cuyos Id son mayores a 2, el metodo orderBy() los ordena de acuerdo a la columna
+         * que enviamos como parametro y el tipo de ordenamiento que le especificamos.
+         * El método orderBy() proporciona acceso a todos los métodos que hemos visto anteriormente, los cuales nos
+         * permiten obtener uno o multiples registros, de acuerdo a la lógica que brindemos a nuestra sentencia SQL.
          */
-        lista=test.where("id", Operator.MAYOR_QUE, 2).take(2).get();
+        lista=test.where("id", Operator.MAYOR_QUE, 2).orderBy("id", OrderType.DESC).getAll();
         //lista=test.where("id", Operator.MAYOR_QUE, "0").take(10).get();
 
 

@@ -23,7 +23,6 @@ import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Utilities.ColumnsSQL;
 import io.github.josecarlosbran.JBSqlLite.Utilities.PrimaryKey;
 import io.github.josecarlosbran.JBSqlLite.Utilities.TablesSQL;
-import io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 import org.apache.commons.lang3.StringUtils;
 
