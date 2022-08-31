@@ -71,6 +71,9 @@ public class Where<T> extends Get {
         if (Objects.isNull(operador)) {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
+        if (Objects.isNull(modelo)) {
+            throw new ValorUndefined("El Modelo proporcionado es NULL");
+        }
         this.modelo = modelo;
         this.parametros.add(getColumn(valor));
         this.sql = " WHERE "+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + "?" +Operator.CLOSE_PARENTESIS.getOperador();
@@ -119,11 +122,11 @@ public class Where<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      * propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public And and(String columna, Operator operador, String valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    public And and(String columna, Operator operador, Object valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         if(Objects.isNull(this.modelo)){
-            return new And(this.sql, columna, operador, valor);
+            return new And(this.sql, columna, operador, valor, this.parametros);
         }else{
-            return new And(this.sql, columna, operador, valor, this.modelo);
+            return new And(this.sql, columna, operador, valor, this.modelo, this.parametros);
         }
     }
 
@@ -138,48 +141,15 @@ public class Where<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      * propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public Or or(String columna, Operator operador, String valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    public Or or(String columna, Operator operador, Object valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         if(Objects.isNull(this.modelo)){
-            return new Or(this.sql, columna, operador, valor);
+            return new Or(this.sql, columna, operador, valor, this.parametros);
         }else{
-            return new Or(this.sql, columna, operador, valor, this.modelo);
+            return new Or(this.sql, columna, operador, valor, this.modelo, this.parametros);
         }
     }
 
-    /**
-     * Retorna un objeto del tipo AND que permite agregar esta expresión a la sentencia SQL
-     * @param expresion Expresion que se desea Evalue la sentencia AND
-     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     * BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     * propiedades de conexión necesarias para conectarse a la BD's especificada.
-     */
-    public And and(String expresion) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        if(Objects.isNull(this.modelo)){
-            return new And(this.sql, expresion);
-        }else{
-            return new And(this.sql, expresion, this.modelo);
-        }
-    }
 
-    /**
-     * Retorna un objeto del tipo OR que permite agregar esta expresión a la sentencia SQL
-     * @param expresion Expresion que se desea Evalue la sentencia OR
-     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     * BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     * propiedades de conexión necesarias para conectarse a la BD's especificada.
-     */
-    public Or or(String expresion) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        if(Objects.isNull(this.modelo)){
-            return new Or(this.sql, expresion);
-        }else{
-            return new Or(this.sql, expresion, this.modelo);
-        }
-
-    }
 
     /**
      * Retorna un objeto del tipo ORDER BY que permite agregar esta expresión a la sentencia SQL
@@ -192,7 +162,7 @@ public class Where<T> extends Get {
      * propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     public OrderBy orderBy(String columna, OrderType orderType) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        return new OrderBy(this.sql, columna, orderType, this.modelo);
+        return new OrderBy(this.sql, columna, orderType, this.modelo, this.parametros);
     }
 
     /**
@@ -207,9 +177,9 @@ public class Where<T> extends Get {
      */
     public Take take(int limite) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         if(Objects.isNull(this.modelo)){
-            return new Take(this.sql, limite);
+            return new Take(this.sql, limite, this.parametros);
         }else{
-            return new Take(this.sql, limite, this.modelo);
+            return new Take(this.sql, limite, this.modelo, this.parametros);
         }
     }
 
