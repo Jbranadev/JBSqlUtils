@@ -128,8 +128,8 @@ public class Principal {
          * el cual se encarga de insertar un registro en la tabla correspondiente al modelo con la información del mismo
          * si este no existe, de existir actualiza el registro por medio de la clave primaria del modelo.
          */
-        /*test.getName().setValor("Jose");
-        test.getApellido().setValor("Bran");*/
+        /*test.getName().setValor("Marcos");
+        test.getApellido().setValor("Cabrera");*/
         //test.getIsMayor().setValor(false);
         /**
          * En este primer ejemplo no seteamos un valor a la columna IsMayor, para comprobar que el valor
@@ -159,8 +159,8 @@ public class Principal {
          * Una vez hemos comprobado que el modelo no esta escribiendo u obteniendo información en segundo plano
          * podemos utilizarlo, para insertar otro registro totalmente diferente al que insertamos anteriormente.
          */
-        /*test.getName().setValor("Daniel");
-        test.getApellido().setValor("Quiñonez");
+        /*test.getName().setValor("Elsa");
+        test.getApellido().setValor("Aguirre");
         test.getIsMayor().setValor(false);*/
 
         /**
@@ -176,24 +176,17 @@ public class Principal {
         //test.save();
 
 
-        Consumer<Test> showFilas = fila -> {
-/*
-            String separador=System.getProperty("file.separator");
-            String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
-                    "BD" +
-                    separador +
-                    "JBSqlUtils.db");
-            fila.setGetPropertySystem(false);
-            fila.setBD(BDSqlite);
-            fila.setDataBaseType(DataBase.SQLite);
-            fila.setTableExist(false);
-            fila.getId().setValor(null);*/
-            fila.getIsMayor().setValor(!fila.getIsMayor().getValor());
-            LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
-        };
-
+        /**
+         * Declaramos una lista de modelos del tipo Test, en la cual almacenaremos la información obtenida de BD's'
+         */
         List<Test> lista=new ArrayList<>();
-        //lista=test.where("id", Operator.MAYOR_QUE, "0").getAll();
+
+        /**
+         * Obtenemos todos los registros cuyos Id son mayores a 2, el metodo take(Cantidad).get();
+         * Obtiene una lista de modelos que coinciden con la búsqueda realizada por medio de la consulta SQL
+         * limitada a la cantidad de registros especificados en el método take().
+         */
+        lista=test.where("id", Operator.MAYOR_QUE, 2).take(2).get();
         //lista=test.where("id", Operator.MAYOR_QUE, "0").take(10).get();
 
 
@@ -211,7 +204,7 @@ public class Principal {
          * where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
          * brindar una lógica un poco más compleja a la busqueda del registro que deseamos obtener.
          */
-        Test test2= (Test) test.where("IsMayor", Operator.IGUAL_QUE, false).firstOrFail();
+        //Test test2= (Test) test.where("Name", Operator.IGUAL_QUE, "Jose").and("IsMayor", Operator.IGUAL_QUE, false).firstOrFail();
 
 
         /**
@@ -223,16 +216,41 @@ public class Principal {
         /**
          * Mostramos la información obtenida
          */
-        LogsJB.info(test2.getId().getValor()+"   "+test2.getName().getValor()+"   "+test2.getApellido().getValor()
+        /*LogsJB.info(test2.getId().getValor()+"   "+test2.getName().getValor()+"   "+test2.getApellido().getValor()
                 +"   "+test2.getIsMayor().getValor()+"   "+test2.getCreated_at().getValor()+"   "+test2.getUpdated_at().getValor());
 
-        test2.getIsMayor().setValor(true);
+        test2.getIsMayor().setValor(true);*/
         //test2.save();
         //test.getIsMayor().setValor(!test.getIsMayor().getValor());
 
         //LogsJB.info("Cantidad de resultado lista: "+lista.size());
 
-        //lista.forEach(showFilas);
+        /**
+         * Declaramos una función anonima que recibira como parametro un obtjeto del tipo Test
+         * el cual es el tipo de modelo que obtendremos y dentro de esta función imprimiremos
+         * la información del modelo.
+         */
+        Consumer<Test> showFilas = fila -> {
+/*
+            String separador=System.getProperty("file.separator");
+            String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
+                    "BD" +
+                    separador +
+                    "JBSqlUtils.db");
+            fila.setGetPropertySystem(false);
+            fila.setBD(BDSqlite);
+            fila.setDataBaseType(DataBase.SQLite);
+            fila.setTableExist(false);
+            fila.getId().setValor(null);
+            fila.getIsMayor().setValor(!fila.getIsMayor().getValor());*/
+            LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
+        };
+
+        /**
+         * Mostramos la información obtenida iterando sobre los modelos obtenidos de BD's y mostrando
+         * su contenido por medio de la función anonima que declaramos ateriormente.
+         */
+        lista.forEach(showFilas);
 
 
         //test.saveALL(lista);
@@ -566,7 +584,7 @@ public class Principal {
          * where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
          * brindar una lógica un poco más compleja a la busqueda del registro que deseamos obtener.
          */
-        Test test2= (Test) test.where("isMayor", Operator.IGUAL_QUE, "0").firstOrFail();
+        Test test2= (Test) test.where("name", Operator.LIKE, "Jos%").and("apellido", Operator.IGUAL_QUE, "Bran").first();
 
         /**
          * Esperamos a que el modelo termine de obtener la información de BD's

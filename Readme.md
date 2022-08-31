@@ -157,7 +157,7 @@ int rows_afected=update("Test").set("name", "Jose Carlos").execute();
  * llamado al método execute el cual se encarga de ejecutar la sentencia SQL generada y retorna el numero de filas
  * afectadas.
  */
-rows_afected=update("Test").set("name", "Jose Carlos").where("Id", Operator.MAYOR_QUE, "2").and("apellido", Operator.LIKE, "Bran%").execute();
+rows_afected=update("Test").set("name", "Jose Carlos").where("Id", Operator.MAYOR_QUE, 2).and("apellido", Operator.LIKE, "Bran%").execute();
 
 
 /**
@@ -166,7 +166,7 @@ rows_afected=update("Test").set("name", "Jose Carlos").where("Id", Operator.MAYO
  * where por medio del cual podemos filtrar las filas que se veran afectadas al llamar al método execute, el cual
  * se encargara de ejecutar la sentencia SQL generada y retorna el numero de filas afectadas.
  */
-rows_afected=update("Test").set("name", "Jose Carlos").andSet("IsMayor", "true").execute();
+rows_afected=update("Test").set("name", "Jose Carlos").andSet("IsMayor", true).execute();
 
 ~~~
 
@@ -187,7 +187,7 @@ filas afectadas por la ejecución de la sentencia SQL.
  * llamado al método execute el cual se encarga de ejecutar la sentencia SQL generada y retorna el numero de filas
  * afectadas.
  */
-int rows_afected=delete("Test").where("Id", Operator.MAYOR_IGUAL_QUE, "2").execute();
+int rows_afected=delete("Test").where("Id", Operator.MAYOR_IGUAL_QUE, 2).execute();
 
 ~~~
 
@@ -249,7 +249,7 @@ public class Test extends JBSqlUtils {
      * el único parametro obligatorio es el DataType de la columna en BD's.
      *
      * Por convención el nombre de cada miembro correspondiente a una columna en BD's debe tener el mismo
-     * nombre que la columna en BD's. y estos deben tener sus respectivos metodos set an get, teniendo estos
+     * nombre que la columna en BD's. y estos deben tener sus respectivos métodos set an get, teniendo estos
      * por convención el nombre setColumnName, getColumName.
      *
      * Por ejemplo, para la columna Id = El miembro del modelo será Id, JBSqlUtils no es case sensitive,
@@ -306,7 +306,7 @@ public class Test extends JBSqlUtils {
      * BIT.
      *
      * En este ejemplo seteamos 'true' como default_value, debido a que este modelo se conectara a un SQLServer,
-     * en PostgreSQL la sintaxis es true. Por lo cual es importante tener claro la sintaxis de la BD's a la cual
+     * en PostgreSQL y SQLite la sintaxis es true. Por lo cual es importante tener claro la sintaxis de la BD's a la cual
      * se estará conectando el modelo.
      *
      * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
@@ -500,7 +500,7 @@ test.save();
 
 ## ¿Cómo obtener un registro de BD's?
 
-Para obtener un registro de BD's JBSqlUtils proporciona diferentes metodos los cuales veremos a continuación.
+Para obtener un registro de BD's JBSqlUtils proporciona diferentes métodos los cuales veremos a continuación.
 
 ### Obtener el registro en el modelo que realiza la búsqueda.
 
@@ -510,11 +510,11 @@ Para obtener un registro de BD's JBSqlUtils proporciona diferentes metodos los c
 * Podemos obtener un registro de la tabla correspondiente al modelo en BD's a través del método get()
 * el cual llena el modelo que realiza la invocación del método con la información obtenida.
 *
-* Para poder filtrar la búsqueda y tener acceso al método get(), es necesario que llamemos al metodo
-* where() el cual nos proporciona un punto de entrada para otros metodos, por medio de los cuales podemos
+* Para poder filtrar la búsqueda y tener acceso al método get(), es necesario que llamemos al método
+* where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
 * brindar una lógica un poco más compleja a la búsqueda del registro que deseamos obtener.
 */
-test.where("name", Operator.LIKE, "'Jos%'").and("apellido", Operator.IGUAL_QUE, "'Bran'").get();
+test.where("name", Operator.LIKE, "Jos%").and("apellido", Operator.IGUAL_QUE, "Bran").get();
 
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
@@ -548,7 +548,7 @@ LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.g
 * where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
 * brindar una lógica un poco más compleja a la búsqueda del registro que deseamos obtener.
 */
-Test test2= (Test) test.where("isMayor", Operator.IGUAL_QUE, "0").first();
+Test test2= (Test) test.where("isMayor", Operator.IGUAL_QUE, false).first();
 
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
@@ -594,7 +594,7 @@ de no encontrar el registro para el modelo.
 * where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
 * brindar una lógica un poco más compleja a la busqueda del registro que deseamos obtener.
 */
-Test test2= (Test) test.where("Name", Operator.IGUAL_QUE, "'Jose'").firstOrFail();
+Test test2= (Test) test.where("Name", Operator.IGUAL_QUE, "Jose").firstOrFail();
 
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
@@ -612,9 +612,11 @@ LogsJB.info(test2.getId().getValor()+"   "+test2.getName().getValor()+"   "+test
 ~~~
 
 Información en BD's SQLite
+
 ![](Imagenes/firstorfail.jpg)
 
 Información obtenida por el modelo
+
 ![](Imagenes/firstorfail1.jpg)
 
 
@@ -634,7 +636,7 @@ Información obtenida por el modelo
 * where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
 * brindar una lógica un poco más compleja a la busqueda del registro que deseamos obtener.
 */
-Test test2= (Test) test.where("Name", Operator.IGUAL_QUE, "'Jose'").and("IsMayor", Operator.IGUAL_QUE, "false").firstOrFail();
+Test test2= (Test) test.where("Name", Operator.IGUAL_QUE, "Jose").and("IsMayor", Operator.IGUAL_QUE, false).firstOrFail();
 
 
 /**
@@ -653,15 +655,130 @@ LogsJB.info(test2.getId().getValor()+"   "+test2.getName().getValor()+"   "+test
 ~~~
 
 Información en BD's SQLite
+
 ![](Imagenes/firstorfail.jpg)
 
 Excepción disparada, manejo la excepción para que me muestre la información y causa de la
 misma.
+
 ![](Imagenes/firstorfail2.jpg)
 
-
+* * *
 
 * * *
+
+
+## ¿Cómo obtener multiples registros de BD's?
+
+Podemos obtener multiples registros de BD's a través de los siguientes métodos
+
+- Método getALL()
+
+Obtiene una lista de modelos que coinciden con la búsqueda realizada por medio de la consulta SQL
+~~~
+
+        /**
+         * Declaramos una lista de modelos del tipo Test, en la cual almacenaremos la información obtenida de BD's'
+         */
+        List<Test> lista=new ArrayList<>();
+
+        /**
+         * Obtenemos todos los registros cuyos Id son mayores a 2, el método getALL()
+         * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
+         */
+        lista=test.where("id", Operator.MAYOR_QUE, 2).getAll();
+        
+        /**
+         * Esperamos a que el modelo termine de obtener la información de BD's
+         */
+        while (!test.getTaskIsReady()){
+
+        }
+        
+        /**
+         * Declaramos una función anonima que recibira como parametro un obtjeto del tipo Test
+         * el cual es el tipo de modelo que obtendremos y dentro de esta función imprimiremos
+         * la información del modelo.
+         */
+        Consumer<Test> showFilas = fila -> {
+            LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
+        };
+
+        /**
+         * Mostramos la información obtenida iterando sobre los modelos obtenidos de BD's y mostrando
+         * su contenido por medio de la función anonima que declaramos ateriormente.
+         */
+        lista.forEach(showFilas);
+
+
+
+~~~
+
+Información en BD's SQLite
+
+![](Imagenes/getall.jpg)
+
+Lista de modelos obtenidos de BD's
+
+![](Imagenes/getall1.jpg)
+
+Si deseamos limitar la cantidad de resultados, podemos hacerlo a través del método take(Cantidad).get()
+el cual retornara una lista de modelos coincidentes con la consulta SQL menor o igual a la cantidad especificada
+en el método take, ya que la cantidad de registros obtenidos, depende de los registros que coinciden en BD's
+
+- Método take()
+
+Obtiene una lista de modelos que coinciden con la búsqueda realizada por medio de la consulta SQL, limitada
+por la cantidad de registros especificados en el método take()
+~~~
+
+        /**
+         * Declaramos una lista de modelos del tipo Test, en la cual almacenaremos la información obtenida de BD's'
+         */
+        List<Test> lista=new ArrayList<>();
+
+        /**
+         * Obtenemos todos los registros cuyos Id son mayores a 2, el metodo take(Cantidad).get();
+         * Obtiene una lista de modelos que coinciden con la búsqueda realizada por medio de la consulta SQL
+         * limitada a la cantidad de registros especificados en el método take().
+         */
+        lista=test.where("id", Operator.MAYOR_QUE, 2).take(2).get();
+        
+        /**
+         * Esperamos a que el modelo termine de obtener la información de BD's
+         */
+        while (!test.getTaskIsReady()){
+
+        }
+        
+        /**
+         * Declaramos una función anonima que recibira como parametro un obtjeto del tipo Test
+         * el cual es el tipo de modelo que obtendremos y dentro de esta función imprimiremos
+         * la información del modelo.
+         */
+        Consumer<Test> showFilas = fila -> {
+            LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
+        };
+
+        /**
+         * Mostramos la información obtenida iterando sobre los modelos obtenidos de BD's y mostrando
+         * su contenido por medio de la función anonima que declaramos ateriormente.
+         */
+        lista.forEach(showFilas);
+
+
+
+~~~
+
+Información en BD's SQLite
+
+![](Imagenes/getall.jpg)
+
+Lista de modelos obtenidos de BD's
+
+![](Imagenes/take.jpg)
+
+
 
 
 * * *
