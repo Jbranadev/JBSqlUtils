@@ -88,7 +88,6 @@ class Conexion {
     private String tableName = null;
 
 
-
     /**
      * Bandera que sirve para identificar si la tarea que estaba realizando el modelo a sido terminada
      */
@@ -136,16 +135,12 @@ class Conexion {
     private TablesSQL tabla = null;
 
 
-
-
-
-
-
     /**
      * Constructor de la clase Conexión que se encarga de inicializar las propiedades de conexión del modelo,
      * las cuales las obtiene de las propiedades del sistema Java.
-     * @throws DataBaseUndefind Lanza esta excepción si el tipo de BD's a la cual se conectara el modelo no ha sido definida entre
-     * las propiedades del sistema Java.
+     *
+     * @throws DataBaseUndefind      Lanza esta excepción si el tipo de BD's a la cual se conectara el modelo no ha sido definida entre
+     *                               las propiedades del sistema Java.
      * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión no han sido definidas.
      */
     public Conexion() throws DataBaseUndefind, PropertiesDBUndefined {
@@ -162,8 +157,9 @@ class Conexion {
     /**
      * Metodo que se encarga de inicializar las propiedades de conexión del modelo,
      * las cuales las obtiene de las propiedades del sistema Java.
-     * @throws DataBaseUndefind Lanza esta excepción si el tipo de BD's a la cual se conectara el modelo no ha sido definida entre
-     * las propiedades del sistema Java.
+     *
+     * @throws DataBaseUndefind      Lanza esta excepción si el tipo de BD's a la cual se conectara el modelo no ha sido definida entre
+     *                               las propiedades del sistema Java.
      * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión no han sido definidas.
      */
     public void getSystemProperties() throws DataBaseUndefind, PropertiesDBUndefined {
@@ -175,8 +171,6 @@ class Conexion {
         this.setUser(setearUser());
         this.setPassword(setearPassword());
     }
-
-
 
 
     /**
@@ -641,6 +635,7 @@ class Conexion {
 
     /**
      * Obtiene la bandera que indica si la tabla correspondiente al modelo en BD's
+     *
      * @return True si la tabla correspondiente al modelo existe en BD's, de lo contrario retorna
      * False.
      */
@@ -650,6 +645,7 @@ class Conexion {
 
     /**
      * Setea la bandera que indica si la tabla correspondiente al modelo existe en BD's
+     *
      * @param tableExist True si la tabla correspondiente al modelo existe en BD's, de lo contrario False.
      */
     protected void setTableExist(Boolean tableExist) {
@@ -658,6 +654,7 @@ class Conexion {
 
     /**
      * Obtiene el nombre de la tabla en BD's correspondiente al modelo.
+     *
      * @return Retorna el nombre de la tabla en BD's correspondiente al modelo.
      */
     public synchronized String getTableName() {
@@ -666,6 +663,7 @@ class Conexion {
 
     /**
      * Setea el nombre de la tabla en BD's correspondiente al modelo.
+     *
      * @param tableName Nombre de la tabla en BD's correspondiente al modelo.
      */
     protected void setTableName(String tableName) {
@@ -674,6 +672,7 @@ class Conexion {
 
     /**
      * Obtiene la bandera que indica si la tarea que estaba realizando el modelo ha sido terminada
+     *
      * @return True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
      * actualmente.
      */
@@ -683,8 +682,9 @@ class Conexion {
 
     /**
      * Setea el valor de la bandera que indica si el modelo actual esta realizando una tarea
+     *
      * @param taskIsReady True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
-     * actualmente.
+     *                    actualmente.
      */
     public synchronized void setTaskIsReady(Boolean taskIsReady) {
         this.taskIsReady = taskIsReady;
@@ -699,6 +699,7 @@ class Conexion {
 
     /**
      * Setea la clave primaria del modelo
+     *
      * @param primaryKey Nombre de la columna que sirve como clave primaria del modelo
      */
     public void setPrimaryKey(String primaryKey) {
@@ -707,6 +708,7 @@ class Conexion {
 
     /**
      * Obtiene la bandera que indica si la clave primaria del modelo es autoincrementable.
+     *
      * @return Retorna True si la clave primaria es autoincrementable.
      */
     public Boolean getPrimaryKeyIsIncremental() {
@@ -715,6 +717,7 @@ class Conexion {
 
     /**
      * Setea la información sobre si la clave primaria es autoincrementable.
+     *
      * @param primaryKeyIsIncremental True si la clave primaria es autoincrementable, False si no lo es.
      */
     public void setPrimaryKeyIsIncremental(Boolean primaryKeyIsIncremental) {
@@ -730,6 +733,7 @@ class Conexion {
 
     /**
      * Setea la bandera que define si el modelo desea que JBSqlUtils maneje las timestamps Created_at, Update_at.
+     *
      * @param timestamps True si las timestamps serán manejadas por JBSqlUtils, False, si el modelo no tiene estas
      *                   columnas.
      */
@@ -746,6 +750,7 @@ class Conexion {
 
     /**
      * Setea el formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
+     *
      * @param dateFormat Formato de fecha en el que se desea se almacenen las TimeStamp
      */
     public void setDateFormat(String dateFormat) {
@@ -761,6 +766,7 @@ class Conexion {
 
     /**
      * Setea el nombre de la columna correspondiente a la TimeStamp CreateAT
+     *
      * @param createdAt Nombre de la columna correspondiente a la TimeStamp CreateAT
      */
     public void setCreatedAt(String createdAt) {
@@ -773,8 +779,10 @@ class Conexion {
     public String getUpdateAT() {
         return updateAT;
     }
+
     /**
      * Setea el nombre de la columna correspondiente a la TimeStamp UpdateAT
+     *
      * @param updateAT Nombre de la columna correspondiente a la TimeStamp UpdateAT
      */
     public void setUpdateAT(String updateAT) {
@@ -782,10 +790,10 @@ class Conexion {
     }
 
 
-
     /**
      * Obtiene la Bandera que sirve para identificar si el modelo existe en BD's, de existir cuando se
      * llame al metodo save se procedera a actualizar el modelo
+     *
      * @return TRUE indica que el modelo fue obtenido de BD's,
      * False indica que el modelo no existe en BD's
      */
@@ -796,6 +804,7 @@ class Conexion {
     /**
      * Setea la Bandera que sirve para identificar si el modelo existe en BD's, de existir cuando se llame
      * al metodo save se procedera a actualizar el modelo
+     *
      * @param modelExist Bandera que sirve para identificar si el modelo existe en BD's, TRUE indica que el modelo fue obtenido de BD's
      *                   False indica que el modelo no existe en BD's
      */
@@ -812,6 +821,7 @@ class Conexion {
 
     /**
      * Setea la tabla que representa al modelo en BD's
+     *
      * @param tabla Objeto TableSQL que contiene parte de la meta data de la tabla correspondiente al modelo
      */
     protected void setTabla(TablesSQL tabla) {

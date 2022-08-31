@@ -49,6 +49,7 @@ public enum DataBase {
 
     /**
      * Retorna el tipo de BD's a la que se estara conectando JBSqlUtils
+     *
      * @return Retorna el tipo de BD's a la que se estara conectando JBSqlUtils en un String
      */
     public String getDBType() {

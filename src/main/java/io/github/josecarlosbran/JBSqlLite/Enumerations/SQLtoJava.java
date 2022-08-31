@@ -145,8 +145,8 @@ public enum SQLtoJava {
     DATETIME2("java.sql.Timestamp");
     private String typeJava;
 
-    private SQLtoJava(String tipo){
-        this.typeJava=tipo;
+    private SQLtoJava(String tipo) {
+        this.typeJava = tipo;
     }
 
     /***

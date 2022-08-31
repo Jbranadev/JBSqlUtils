@@ -1,8 +1,10 @@
 # JBSqlUtils :computer:
 
-JBSqlUtils es un ORM desarrollado en java por José Carlos Alfredo Bran Aguirre, que permite gestionar BD's SQLite, MySQL, 
-PostgreSQL y SQLServer, de una manera fácil y rápida sin interrumpir la ejecución del hilo principal del programa, 
-lo cual la hace un potente ORM, por medio del cual tendrá acceso a un CRUD, configurando únicamente la conexión del modelo, 
+JBSqlUtils es un ORM desarrollado en java por José Carlos Alfredo Bran Aguirre, que permite gestionar BD's SQLite,
+MySQL,
+PostgreSQL y SQLServer, de una manera fácil y rápida sin interrumpir la ejecución del hilo principal del programa,
+lo cual la hace un potente ORM, por medio del cual tendrá acceso a un CRUD, configurando únicamente la conexión del
+modelo,
 los atributos que posee la tabla en BD's cómo variables que pertenecerán al modelo en su aplicación.
 
 JBSqlUtils también proporciona un potente generador de consultas que le permitirá actualizar o eliminar registros
@@ -60,7 +62,6 @@ setDataBaseGlobal(BDSqlite);
  */
 setDataBaseTypeGlobal(DataBase.SQLite);
 ~~~
-
 
 Configuración necesaria para MySQL, PostgreSQL y SQLServer:
 
@@ -123,21 +124,21 @@ realizar operaciones sobre la tabla correspondiente a cada modelo.
 
 De no desear usar Modelos en su aplicación hasta este punto, podrá utilizar JBSqlUtils cómo un generador de
 sentencias SQL que le permitirán actualizar o eliminar registros de una tabla de acuerdo a la lógica que brinde a la
-sentencia SQL a ejecutar, todo esto sin necesidad de instanciar un modelo, únicamente habiendo configurado sus 
+sentencia SQL a ejecutar, todo esto sin necesidad de instanciar un modelo, únicamente habiendo configurado sus
 variables de conexión.
 
 ***
 
 ## ¿cómo utilizar JBSqlUtils cómo un generador de consultas?
 
-JBSqlUtils puede ser utilizada cómo un generador de consultas, para actualizar o eliminar registros en 
+JBSqlUtils puede ser utilizada cómo un generador de consultas, para actualizar o eliminar registros en
 una determinada tabla de forma masiva, de acuerdo a la lógica que se le dé a la consulta.
 
 - Actualizar registros.
 
-Para actualizar registros sin necesidad de instanciar un modelo, puede hacerlo a través del 
-update método estático de la clase JBSqlUtils, el cual brinda los métodos necesarios, para poder 
-llegar al método execute, el cual ejecuta la sentencia SQL generada y retorna el número de 
+Para actualizar registros sin necesidad de instanciar un modelo, puede hacerlo a través del
+update método estático de la clase JBSqlUtils, el cual brinda los métodos necesarios, para poder
+llegar al método execute, el cual ejecuta la sentencia SQL generada y retorna el número de
 filas afectadas por la ejecución de la sentencia SQL.
 
 ~~~
@@ -195,9 +196,9 @@ int rows_afected=delete("Test").where("Id", Operator.MAYOR_IGUAL_QUE, 2).execute
 
 ## ¿Cómo crear modelos a través de JBSqlUtils?
 
-Para poder crear clases que funcionen cómo modelos en nuestra aplicación, 
+Para poder crear clases que funcionen cómo modelos en nuestra aplicación,
 únicamente es necesario heredar la clase JBSqlUtils, declarar los miembros de la clase
-que corresponden a cada una de las columnas de la tabla con las que queremos poder interactuar, 
+que corresponden a cada una de las columnas de la tabla con las que queremos poder interactuar,
 acá vemos un ejemplo:
 
 ~~~
@@ -350,9 +351,7 @@ public class Test extends JBSqlUtils {
 
 ~~~
 
-
 * * *
-
 
 ## ¿Cómo eliminar la tabla correspondiente a un modelo?
 
@@ -402,11 +401,11 @@ test.crateTable();
 
 Por default la tabla correspondiente al modelo, incluirá las columnas created_at y update_at
 
-
 Si deseamos que JBSqlUtils no gestione las columnas created_at y update_at, al momento de crear la tabla,
 insertar o actualizar un registro, basta con llamar el método setTimestamps(false), enviando cómo parametro true
 si queremos que JBSqlUtils gestione las columnas o false si queremos que JBSqlUtils No gestione estas columnas.
 por default JBSqlUtils esta configurada para manejar la columnas created_at y update_at.
+
 ~~~
 
 /**
@@ -429,8 +428,6 @@ test.crateTable();
 ![](Imagenes/Table2.jpg)
 
 * * *
-
-
 
 ## ¿Cómo almacenar un modelo en BD's?
 
@@ -564,7 +561,7 @@ LogsJB.info(test2.getId().getValor()+"  "+test2.getName().getValor()+"  "+test2.
 
 ![](Imagenes/first.jpg)
 
-Vemos que la columna created_at y update_at retornan cómo valor la fecha y hora actual, debido a que en BD's 
+Vemos que la columna created_at y update_at retornan cómo valor la fecha y hora actual, debido a que en BD's
 estas no poseen un valor, entonces el valor de la columna es Null y por defecto el modelo retorna la fecha y
 hora actual.
 
@@ -572,7 +569,7 @@ hora actual.
 
 ### Obtener el registro en un modelo, en caso de no encontrarlo lanzar una excepción.
 
-Si lo que necesitamos es buscar un registro y obtenerlo en un modelo, pero en caso de no existir, deseamos se 
+Si lo que necesitamos es buscar un registro y obtenerlo en un modelo, pero en caso de no existir, deseamos se
 dispare una excepción, podemos utilizar el método firstOrFail(), el cual lanza un ModelNotFound Excepción en caso
 de no encontrar el registro para el modelo.
 
@@ -616,7 +613,6 @@ Información en BD's SQLite
 Información obtenida por el modelo
 
 ![](Imagenes/firstorfail1.jpg)
-
 
 - En el siguiente Ejemplo Lanzara la excepción ModelNotFound
 
@@ -663,8 +659,6 @@ misma.
 
 * * *
 
-
-
 ## ¿Cómo obtener multiples registros de BD's?
 
 Podemos obtener multiples registros de BD's a través de los siguientes métodos
@@ -672,6 +666,7 @@ Podemos obtener multiples registros de BD's a través de los siguientes métodos
 - Método getALL()
 
 Obtiene una lista de modelos que coinciden con la búsqueda realizada por medio de la consulta SQL
+
 ~~~
 
 /**
@@ -727,6 +722,7 @@ en el método take, ya que la cantidad de registros obtenidos, depende de los re
 
 Obtiene una lista de modelos que coinciden con la búsqueda realizada por medio de la consulta SQL, limitada
 por la cantidad de registros especificados en el método take()
+
 ~~~
 
 /**
@@ -777,15 +773,13 @@ Lista de modelos obtenidos de BD's
 
 * * *
 
-
-
 ## ¿Cómo ordenar los registros obtenidos de BD's?
 
 Podemos ordenar los registros que serán obtenidos de BD's por medio del método orderBy()
 
 - Método orderBy()
 
-Ordena los registros obtenidos de BD's de acuerdo a la columna que enviamos cómo parametro y el 
+Ordena los registros obtenidos de BD's de acuerdo a la columna que enviamos cómo parametro y el
 tipo de ordenamiento que le especificamos.
 
 ~~~
@@ -839,19 +833,16 @@ Lista de modelos obtenidos de BD's
 
 * * *
 
-
-
 ## ¿Cómo actualizar un Modelo en BD's?
 
 Podemos actualizar un modelo que hayamos obtenido de BD's, a través del método save(), es importante
-que para que se actualice el registro, este haya sido obtenido de BD's, de esa manera el modelo tendrá 
-un valor válido en su atributo correspondiente a la primaryKey de la tabla en BD's y la propiedad ModelExist 
+que para que se actualice el registro, este haya sido obtenido de BD's, de esa manera el modelo tendrá
+un valor válido en su atributo correspondiente a la primaryKey de la tabla en BD's y la propiedad ModelExist
 estará configurada con un valor true.
 
 En caso no hayamos obtenido el modelo de BD's es importante que configuremos la propiedad ModelExist cómo true,
-lo cual podemos hacerlo a través del método setModelExist(), adicional a esto, debemos asegurarnos, de que el 
+lo cual podemos hacerlo a través del método setModelExist(), adicional a esto, debemos asegurarnos, de que el
 modelo en su columna correspondiente a la primaryKey, tenga el valor del registro que queremos actualizar.
-
 
 ~~~
 
@@ -889,7 +880,7 @@ Información en BD's SQLite antes de actualizar el registro
 
 ![](Imagenes/update.jpg)
 
-Actividad registrada por JBSqlUtils 
+Actividad registrada por JBSqlUtils
 
 ![](Imagenes/update1.jpg)
 
@@ -899,7 +890,6 @@ Información en BD's SQLite después de actualizar el registro
 
 * * *
 
-
 ## ¿Cómo actualizar multiples Modelos en BD's?
 
 Podemos actualizar multiples modelos que hayamos obtenido de BD's, a través del método saveALL(), es importante
@@ -907,9 +897,9 @@ que para que se actualice el registro, este haya sido obtenido de BD's, de esa m
 un valor válido en su atributo correspondiente a la primaryKey de la tabla en BD's y la propiedad ModelExist
 estará configurada con un valor true.
 
-En caso no hayamos obtenido los modelos de BD's es importante que configuremos la propiedad ModelExist cómo true en 
-cada uno de los modelos que vayamos a actualizar, lo cual podemos hacerlo a través del método setModelExist(), 
-adicional a esto, debemos asegurarnos, de que cada uno de los modelos en su columna correspondiente a la primaryKey, 
+En caso no hayamos obtenido los modelos de BD's es importante que configuremos la propiedad ModelExist cómo true en
+cada uno de los modelos que vayamos a actualizar, lo cual podemos hacerlo a través del método setModelExist(),
+adicional a esto, debemos asegurarnos, de que cada uno de los modelos en su columna correspondiente a la primaryKey,
 tenga el valor del registro que queremos actualizar.
 
 ~~~
@@ -964,14 +954,16 @@ Información en BD's SQLite antes de actualizar los registros
 
 ![](Imagenes/updateall.jpg)
 
-Actividad registrada por JBSqlUtils, Cómo JBSqlUtils ejecuta las operaciones de escritura cómo de lectura en segundo plano
-para que el hilo de ejecución principal no se vea afectado y pueda realizar alguna otra actividad en paralelo, por cada modelo
+Actividad registrada por JBSqlUtils, Cómo JBSqlUtils ejecuta las operaciones de escritura cómo de lectura en segundo
+plano
+para que el hilo de ejecución principal no se vea afectado y pueda realizar alguna otra actividad en paralelo, por cada
+modelo
 que se actualiza, JBSqlUtils crea un subproceso para cada modelo, de esta manera las operaciones de escritura en BD's
 se realizan en paralelo, mejorando el rendimiento de nuestra aplicación.
 
-Desde que se hizo el llamado al método saveAll(), hasta que se actualizó el último registro a JBSqlUtils le tomo 
-40 milésimas de segundo actualizar 5 registros en BD's, es un tiempo insignificante, considerando, que se realizó la 
-conexión a BD's, se fabricó la sentencia SQL a ejecutar, se preparó el preparedStatement, se ejecutó la instrucción y 
+Desde que se hizo el llamado al método saveAll(), hasta que se actualizó el último registro a JBSqlUtils le tomo
+40 milésimas de segundo actualizar 5 registros en BD's, es un tiempo insignificante, considerando, que se realizó la
+conexión a BD's, se fabricó la sentencia SQL a ejecutar, se preparó el preparedStatement, se ejecutó la instrucción y
 cerro la conexión a BD's.
 
 ![](Imagenes/updateall1.jpg)
@@ -981,7 +973,6 @@ Información en BD's SQLite después de actualizar los registros
 ![](Imagenes/updateall2.jpg)
 
 * * *
-
 
 ## ¿Cómo eliminar un Modelo en BD's?
 
@@ -1032,7 +1023,6 @@ Información en BD's SQLite después de eliminar el registro
 
 * * *
 
-
 ## ¿Cómo eliminar multiples Modelos en BD's?
 
 Podemos eliminar multiples modelos que hayamos obtenido de BD's, a través del método deleteALL(), es importante
@@ -1040,7 +1030,8 @@ que para que se elimine el registro, este haya sido obtenido de BD's, de esa man
 un valor válido en su atributo correspondiente a la primaryKey de la tabla en BD's.
 
 En caso no hayamos obtenido los modelos de BD's es importante asegurarnos de que cada uno de los
-modelos que queremos eliminar tengan en su columna correspondiente a la primaryKey, el valor del registro que queremos eliminar.
+modelos que queremos eliminar tengan en su columna correspondiente a la primaryKey, el valor del registro que queremos
+eliminar.
 
 ~~~
 
@@ -1052,8 +1043,10 @@ Información en BD's SQLite antes de eliminar los registros
 
 ![](Imagenes/deleteall.jpg)
 
-Actividad registrada por JBSqlUtils, Cómo JBSqlUtils ejecuta las operaciones de escritura cómo de lectura en segundo plano
-para que el hilo de ejecución principal no se vea afectado y pueda realizar alguna otra actividad en paralelo, por cada modelo
+Actividad registrada por JBSqlUtils, Cómo JBSqlUtils ejecuta las operaciones de escritura cómo de lectura en segundo
+plano
+para que el hilo de ejecución principal no se vea afectado y pueda realizar alguna otra actividad en paralelo, por cada
+modelo
 que se elimina, JBSqlUtils crea un subproceso para cada modelo, de esta manera las operaciones de escritura en BD's
 se realizan en paralelo, mejorando el rendimiento de nuestra aplicación.
 
@@ -1070,19 +1063,19 @@ Información en BD's SQLite después de eliminar los registros
 
 * * *
 
-
 ## ¿Cómo poder hacer un seguimiento a lo que sucede dentro de JBSqlUtils?
 
 JBSqlUtils utiliza la librería LogsJB, para el registro de todo lo que sucede al momento
-de realizar una inserción, actualización, consulta o eliminar un registro en BD's, por default se 
+de realizar una inserción, actualización, consulta o eliminar un registro en BD's, por default se
 registra toda aquella actividad de nivel INFO y superior, si desea debuggear o modificar el nivel
-de log que reporta JBSqlUtils será necesario que importe en su proyecto la librería LogsJB y 
-llame al método LogsJB.setGradeLog(), enviando cómo parametro el grado de Log, desde el cual 
+de log que reporta JBSqlUtils será necesario que importe en su proyecto la librería LogsJB y
+llame al método LogsJB.setGradeLog(), enviando cómo parametro el grado de Log, desde el cual
 desea que JBSqlUtils registre su actividad.
 
 Puedes obtener la librería LogsJB de la siguiente manera
 
 Maven
+
 ~~~
 <dependency>
   <groupId>io.github.josecarlosbran</groupId>
@@ -1092,6 +1085,7 @@ Maven
 ~~~
 
 Gradle
+
 ~~~
 implementation 'io.github.josecarlosbran:LogsJB:0.5'
 ~~~
@@ -1116,16 +1110,14 @@ LogsJB.setGradeLog(NivelLog.INFO);
 ~~~
 
 Encontraremos los Logs de JBSqlUtils en el directorio de nuestra aplicación en ejecución, se creará la carpeta
-Logs, dentro de la cual se creara una carpeta por cada día y dentro de la misma se almacenaran los Logs de la 
+Logs, dentro de la cual se creara una carpeta por cada día y dentro de la misma se almacenaran los Logs de la
 aplicación, para mayor información visitar el siguiente Link
 
 <https://github.com/JoseCarlosBran/LogsJB/blob/master/Readme.md>
 
-
 ![](Imagenes/Logs.jpg)
 
 * * *
-
 
 ## ¿Cómo obtener JBSqlUtils para usarlo en mi proyecto?
 

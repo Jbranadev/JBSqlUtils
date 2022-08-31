@@ -67,13 +67,14 @@ public enum Constraint {
 
     private String restriccion;
 
-    private Constraint(String Restriccion){
+    private Constraint(String Restriccion) {
         this.setRestriccion(Restriccion);
     }
 
 
     /**
      * Obtiene la restricción correspondiente a la numeración.
+     *
      * @return Retorna la numeración correspondiente como un String.
      */
     public String getRestriccion() {

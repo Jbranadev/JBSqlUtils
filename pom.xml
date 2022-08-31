@@ -11,7 +11,8 @@
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>
-        JBSqlUtils es un ORM desarrollado en java por José Carlos Alfredo Bran Aguirre que permite gestionar BD's SQLite,
+        JBSqlUtils es un ORM desarrollado en java por José Carlos Alfredo Bran Aguirre que permite gestionar BD's
+        SQLite,
         MySQL, PostgreSQL y SQLServer, de una manera fácil y rápida sin interrumpir la ejecución del hilo principal
         del programa, lo cual la hace un potente ORM para aplicaciones android y sistemas empresariales que tengan
         la necesidad de poder conectarse a alguna de estas 4 tipos de BD's, cabe mencionar que para ello utiliza
@@ -192,7 +193,6 @@
                     </execution>
                 </executions>
             </plugin>
-
 
 
             <plugin>

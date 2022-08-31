@@ -48,10 +48,11 @@ class Methods extends Methods_Conexion {
 
     /**
      * Constructor por default de la clase Methods
-     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     * BD's a la cual se conectara el modelo.
+     *
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     * propiedades de conexión necesarias para conectarse a la BD's especificada.
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     public Methods() throws DataBaseUndefind, PropertiesDBUndefined {
         super();
@@ -277,9 +278,10 @@ class Methods extends Methods_Conexion {
 
     /**
      * Almacena la información de los modelos proporcionados en BD's
+     *
      * @param modelos Lista de modelos que serán Insertados o Actualizados
-     * @param <T> Tipo de parametro que hace que el metodo sea generico para poder ser
-     *           llamado por diferentes tipos de objetos, siempre y cuando estos hereden la clase Methods Conexion.
+     * @param <T>     Tipo de parametro que hace que el metodo sea generico para poder ser
+     *                llamado por diferentes tipos de objetos, siempre y cuando estos hereden la clase Methods Conexion.
      */
     public <T extends Methods_Conexion> void saveALL(List<T> modelos) {
         try {
@@ -340,9 +342,10 @@ class Methods extends Methods_Conexion {
 
     /**
      * Elimina la información de los modelos proporcionados en BD's
+     *
      * @param modelos Lista de modelos que serán Eliminados
-     * @param <T> Tipo de parametro que hace que el metodo sea generico para poder ser
-     *           llamado por diferentes tipos de objetos, siempre y cuando estos hereden la clase Methods Conexion.
+     * @param <T>     Tipo de parametro que hace que el metodo sea generico para poder ser
+     *                llamado por diferentes tipos de objetos, siempre y cuando estos hereden la clase Methods Conexion.
      */
     public <T extends Methods_Conexion> void deleteALL(List<T> modelos) {
         try {
@@ -383,6 +386,7 @@ class Methods extends Methods_Conexion {
 
     /**
      * Almacena la información del modelo que hace el llamado, esperando a que la operación termine de ser realizada
+     *
      * @return Retorna True cuando se a terminado de insertar o actualizar la información del modelo en BD's
      */
     public Boolean saveBoolean() {
@@ -405,17 +409,18 @@ class Methods extends Methods_Conexion {
 
     /**
      * Proporciona un punto de entrada para obtener uno o mas modelos del tipo de modelo que invoca este procedimiento
-     * @param columna Columna que sera evaluada
+     *
+     * @param columna  Columna que sera evaluada
      * @param operador Operador por medio del cual se evaluara la columna
-     * @param valor Valor contra el cual se evaluara la columna
+     * @param valor    Valor contra el cual se evaluara la columna
      * @return Punto de entrada a metodos que permiten seguir modificando la expresión de filtro u obtener el o los
      * modelos que hacen match con la consulta generada
-     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     * BD's a la cual se conectara el modelo.
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     * propiedades de conexión necesarias para conectarse a la BD's especificada.
-     * @throws ValorUndefined Lanza esta excepción si alguno de los parametros proporcionados esta
-     * Vacío o es Null
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined        Lanza esta excepción si alguno de los parametros proporcionados esta
+     *                               Vacío o es Null
      */
     public Where where(String columna, Operator operador, Object valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         return new Where(columna, operador, valor, this);
@@ -425,11 +430,12 @@ class Methods extends Methods_Conexion {
     /**
      * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
+     *
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Retorna una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @throws InstantiationException Lanza esta excepción si ocurre un error al crear una nueva instancia
-     * del tipo de modelo proporcionado
+     *                                del tipo de modelo proporcionado
      * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
      */
     public <T extends Methods_Conexion> List<T> getAll() throws InstantiationException, IllegalAccessException {
@@ -444,13 +450,13 @@ class Methods extends Methods_Conexion {
             Runnable get = () -> {
                 try {
                     if (this.getTableExist()) {
-                        String sql="SELECT * FROM " + this.getTableName();
-                        sql = sql+ ";";
+                        String sql = "SELECT * FROM " + this.getTableName();
+                        sql = sql + ";";
                         LogsJB.info(sql);
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         ResultSet registros = ejecutor.executeQuery();
-                        while(registros.next()) {
-                            lista.add(procesarResultSet((T)this, registros));
+                        while (registros.next()) {
+                            lista.add(procesarResultSet((T) this, registros));
                             //procesarResultSet(modelo, registros);
                         }
                         this.closeConnection(connect);
@@ -482,7 +488,6 @@ class Methods extends Methods_Conexion {
         }
         return lista;
     }
-
 
 
 }

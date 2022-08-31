@@ -45,10 +45,11 @@ public class Get extends Methods_Conexion {
 
     /**
      * Constructor por default de la clase Get, que inicializa la clase
-     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     * BD's a la cual se conectara el modelo.
+     *
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     * propiedades de conexión necesarias para conectarse a la BD's especificada.
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     protected Get() throws DataBaseUndefind, PropertiesDBUndefined {
         super();
@@ -57,12 +58,13 @@ public class Get extends Methods_Conexion {
 
     /**
      * Llena el modelo que invoca este metodo con la información que obtiene de BD's
-     * @param modelo Modelo que será llenado
-     * @param Sql Sentencia SQL para obtener el modelo
+     *
+     * @param modelo     Modelo que será llenado
+     * @param Sql        Sentencia SQL para obtener el modelo
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      */
-    protected  <T extends Methods_Conexion> void get(T modelo, String Sql, List<Column> parametros){
+    protected <T extends Methods_Conexion> void get(T modelo, String Sql, List<Column> parametros) {
         try {
             modelo.setTaskIsReady(false);
             if (!modelo.getTableExist()) {
@@ -72,14 +74,14 @@ public class Get extends Methods_Conexion {
             Runnable get = () -> {
                 try {
                     if (modelo.getTableExist()) {
-                        String sql="SELECT * FROM " + modelo.getTableName();
-                        sql = sql+Sql + ";";
+                        String sql = "SELECT * FROM " + modelo.getTableName();
+                        sql = sql + Sql + ";";
                         //LogsJB.info(sql);
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
-                        for(int i=0; i< parametros.size(); i++){
+                        for (int i = 0; i < parametros.size(); i++) {
                             //Obtengo la información de la columna
                             Column columnsSQL = parametros.get(i);
-                            convertJavaToSQL(columnsSQL, ejecutor, i+1);
+                            convertJavaToSQL(columnsSQL, ejecutor, i + 1);
                         }
 
                         LogsJB.info(ejecutor.toString());
@@ -118,13 +120,14 @@ public class Get extends Methods_Conexion {
 
     /**
      * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's
-     * @param modelo Modelo que esta invocando el metodo
-     * @param Sql Sentencia SQL para obtener el modelo
+     *
+     * @param modelo     Modelo que esta invocando el metodo
+     * @param Sql        Sentencia SQL para obtener el modelo
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
+     * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      */
-    protected <T extends Methods_Conexion> T first(T modelo, String Sql, List<Column> parametros){
+    protected <T extends Methods_Conexion> T first(T modelo, String Sql, List<Column> parametros) {
         try {
             modelo.setTaskIsReady(false);
             if (!modelo.getTableExist()) {
@@ -134,14 +137,14 @@ public class Get extends Methods_Conexion {
             Runnable get = () -> {
                 try {
                     if (modelo.getTableExist()) {
-                        String sql="SELECT * FROM " + modelo.getTableName();
-                        sql = sql+Sql + ";";
+                        String sql = "SELECT * FROM " + modelo.getTableName();
+                        sql = sql + Sql + ";";
                         //LogsJB.info(sql);
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
-                        for(int i=0; i< parametros.size(); i++){
+                        for (int i = 0; i < parametros.size(); i++) {
                             //Obtengo la información de la columna
                             Column columnsSQL = parametros.get(i);
-                            convertJavaToSQL(columnsSQL, ejecutor, i+1);
+                            convertJavaToSQL(columnsSQL, ejecutor, i + 1);
                         }
                         LogsJB.info(ejecutor.toString());
                         ResultSet registros = ejecutor.executeQuery();
@@ -179,13 +182,14 @@ public class Get extends Methods_Conexion {
 
     /**
      * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's
-     * @param modelo Modelo que esta invocando el metodo
-     * @param Sql Sentencia SQL para obtener el modelo
+     *
+     * @param modelo     Modelo que esta invocando el metodo
+     * @param Sql        Sentencia SQL para obtener el modelo
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
+     * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @throws ModelNotFound Lanza esta excepción si no logra encontrar el registro correspondiente a la consulta
-     * SQL realizada.
+     *                       SQL realizada.
      */
     protected <T extends Methods_Conexion> T firstOrFail(T modelo, String Sql, List<Column> parametros) throws ModelNotFound {
         modelo.setTaskIsReady(false);
@@ -195,24 +199,24 @@ public class Get extends Methods_Conexion {
 
         Connection connect = modelo.getConnection();
         Callable<Boolean> get = () -> {
-            Boolean respuesta=false;
+            Boolean respuesta = false;
             try {
                 if (modelo.getTableExist()) {
-                    String sql="SELECT * FROM " + modelo.getTableName();
-                    sql = sql+Sql + ";";
+                    String sql = "SELECT * FROM " + modelo.getTableName();
+                    sql = sql + Sql + ";";
                     //LogsJB.info(sql);
                     PreparedStatement ejecutor = connect.prepareStatement(sql);
 
-                    for(int i=0; i< parametros.size(); i++){
+                    for (int i = 0; i < parametros.size(); i++) {
                         //Obtengo la información de la columna
                         Column columnsSQL = parametros.get(i);
-                        convertJavaToSQL(columnsSQL, ejecutor, i+1);
+                        convertJavaToSQL(columnsSQL, ejecutor, i + 1);
                     }
                     LogsJB.info(ejecutor.toString());
                     ResultSet registros = ejecutor.executeQuery();
                     if (registros.next()) {
                         procesarResultSetOneResult(modelo, registros);
-                        respuesta=true;
+                        respuesta = true;
                     }
                     modelo.closeConnection(connect);
                 } else {
@@ -237,19 +241,19 @@ public class Get extends Methods_Conexion {
 
         }
         ejecutor.shutdown();
-        Boolean result=false;
-        try{
+        Boolean result = false;
+        try {
             result = future.get();
-        }catch (Exception e){
+        } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
-        if(!result){
-            String sql="SELECT * FROM " + modelo.getTableName();
-            throw new ModelNotFound("No existe un modelo en BD's que corresponda a los criterios de la consulta sql: "+sql+Sql);
+        if (!result) {
+            String sql = "SELECT * FROM " + modelo.getTableName();
+            throw new ModelNotFound("No existe un modelo en BD's que corresponda a los criterios de la consulta sql: " + sql + Sql);
         }
         return modelo;
     }
@@ -257,14 +261,15 @@ public class Get extends Methods_Conexion {
     /**
      * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
-     * @param modelo Modelo que esta invocando el metodo
-     * @param Sql Sentencia SQL para obtener el modelo
+     *
+     * @param modelo     Modelo que esta invocando el metodo
+     * @param Sql        Sentencia SQL para obtener el modelo
+     * @param parametros Lista de parametros a ser agregados a la sentencia SQL
+     * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Retorna una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
-     * @param parametros Lista de parametros a ser agregados a la sentencia SQL
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @throws InstantiationException Lanza esta excepción si ocurre un error al crear una nueva instancia
-     * del tipo de modelo proporcionado
+     *                                del tipo de modelo proporcionado
      * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
      */
     protected <T extends Methods_Conexion> List<T> getAll(T modelo, String Sql, List<Column> parametros) throws InstantiationException, IllegalAccessException {
@@ -279,46 +284,46 @@ public class Get extends Methods_Conexion {
             Runnable get = () -> {
                 try {
                     if (modelo.getTableExist()) {
-                        String sql="SELECT * FROM " + modelo.getTableName();
-                        sql = sql+Sql + ";";
+                        String sql = "SELECT * FROM " + modelo.getTableName();
+                        sql = sql + Sql + ";";
 
                         //Si es sql server y trae la palabra limit verificara y modificara la sentencia
-                        if(modelo.getDataBaseType()== DataBase.SQLServer){
-                            if(StringUtils.containsIgnoreCase(sql, "LIMIT")){
+                        if (modelo.getDataBaseType() == DataBase.SQLServer) {
+                            if (StringUtils.containsIgnoreCase(sql, "LIMIT")) {
                                 String temporal;
-                                LogsJB.info("Sentencia SQL a modificar: "+sql);
-                                int indice_limite= StringUtils.lastIndexOfIgnoreCase(sql, "LIMIT");
-                                LogsJB.debug("Indice limite: "+indice_limite);
-                                LogsJB.debug("Longitud de la sentencia: "+sql.length());
-                                String temporal_limite=StringUtils.substring(sql, indice_limite);
-                                sql=sql.replace(temporal_limite, ";");
-                                LogsJB.debug("Sentencia SQL despues de eliminar el limite: "+sql);
-                                LogsJB.trace("Temporal Limite: "+temporal_limite);
-                                temporal_limite=StringUtils.remove(temporal_limite, "LIMIT");
-                                LogsJB.trace("Temporal Limite: "+temporal_limite);
-                                temporal_limite=StringUtils.remove(temporal_limite, ";");
-                                LogsJB.trace("Temporal Limite: "+temporal_limite);
-                                temporal=sql;
-                                LogsJB.trace("Temporal SQL: "+temporal);
-                                String select="SELECT TOP "+temporal_limite+" * FROM ";
-                                sql=temporal.replace("SELECT * FROM ", select);
+                                LogsJB.info("Sentencia SQL a modificar: " + sql);
+                                int indice_limite = StringUtils.lastIndexOfIgnoreCase(sql, "LIMIT");
+                                LogsJB.debug("Indice limite: " + indice_limite);
+                                LogsJB.debug("Longitud de la sentencia: " + sql.length());
+                                String temporal_limite = StringUtils.substring(sql, indice_limite);
+                                sql = sql.replace(temporal_limite, ";");
+                                LogsJB.debug("Sentencia SQL despues de eliminar el limite: " + sql);
+                                LogsJB.trace("Temporal Limite: " + temporal_limite);
+                                temporal_limite = StringUtils.remove(temporal_limite, "LIMIT");
+                                LogsJB.trace("Temporal Limite: " + temporal_limite);
+                                temporal_limite = StringUtils.remove(temporal_limite, ";");
+                                LogsJB.trace("Temporal Limite: " + temporal_limite);
+                                temporal = sql;
+                                LogsJB.trace("Temporal SQL: " + temporal);
+                                String select = "SELECT TOP " + temporal_limite + " * FROM ";
+                                sql = temporal.replace("SELECT * FROM ", select);
                                 LogsJB.info("Se modifico la sentencia SQL para que unicamente obtenga la cantidad de " +
-                                        "registros especificados por el usuario: "+sql);
+                                        "registros especificados por el usuario: " + sql);
                             }
                         }
                         //LogsJB.info(sql);
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
 
-                        for(int i=0; i< parametros.size(); i++){
+                        for (int i = 0; i < parametros.size(); i++) {
                             //Obtengo la información de la columna
                             Column columnsSQL = parametros.get(i);
-                            convertJavaToSQL(columnsSQL, ejecutor, i+1);
+                            convertJavaToSQL(columnsSQL, ejecutor, i + 1);
                         }
                         LogsJB.info(ejecutor.toString());
 
                         ResultSet registros = ejecutor.executeQuery();
 
-                        while(registros.next()) {
+                        while (registros.next()) {
                             lista.add(procesarResultSet(modelo, registros));
                             //procesarResultSet(modelo, registros);
                         }
@@ -351,7 +356,6 @@ public class Get extends Methods_Conexion {
         }
         return lista;
     }
-
 
 
 }

@@ -33,15 +33,16 @@ public enum OrderType {
 
     private String valor;
 
-    private OrderType(String s){
-        this.valor=s;
+    private OrderType(String s) {
+        this.valor = s;
     }
 
     /**
      * Obtiene el valor de ordenamiento correspondiente a la numeración.
+     *
      * @return Retorna el valor de ordenamiento correspondiente a la numeración.
      */
-    public String getValor(){
+    public String getValor() {
         return this.valor;
     }
 

@@ -17,7 +17,6 @@ package io.github.josecarlosbran.JBSqlLite.Pruebas;
 
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
-import io.github.josecarlosbran.JBSqlLite.Enumerations.OrderType;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
@@ -80,14 +79,10 @@ public class Principal {
 
             //new Principal().PostgreSQL(new Test());
 
-           // new Principal().SQLServer(new Test());
+            // new Principal().SQLServer(new Test());
 
 
-
-
-
-
-        } catch (DataBaseUndefind | PropertiesDBUndefined |InstantiationException | IllegalAccessException |
+        } catch (DataBaseUndefind | PropertiesDBUndefined | InstantiationException | IllegalAccessException |
                  ValorUndefined | ModelNotFound
                 /*|IllegalAccessException|InvocationTargetException*/ e) {
             LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: " + e.toString());
@@ -101,7 +96,7 @@ public class Principal {
 
 
     void SQLITE(Test test) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined, InstantiationException, IllegalAccessException, ModelNotFound {
-        String separador=System.getProperty("file.separator");
+        String separador = System.getProperty("file.separator");
         String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
                 "BD" +
                 separador +
@@ -117,7 +112,6 @@ public class Principal {
         //test.setBD(BDSqlite);
         //test.setDataBaseType(DataBase.SQLite);
         long inicio = System.currentTimeMillis();
-
 
 
         //test.refresh();
@@ -198,12 +192,12 @@ public class Principal {
         /**
          * Declaramos una lista de modelos del tipo Test, en la cual almacenaremos la información obtenida de BD's'
          */
-        List<Test> lista=new ArrayList<>();
+        List<Test> lista = new ArrayList<>();
 
         /**
          * Obtenemos todos los modelos que su Id se encuentra entre 1 y 5
          */
-        lista=test.where("id", Operator.MAYOR_IGUAL_QUE, 1).and("id", Operator.MENOR_IGUAL_QUE, 5).getAll();
+        lista = test.where("id", Operator.MAYOR_IGUAL_QUE, 1).and("id", Operator.MENOR_IGUAL_QUE, 5).getAll();
         //lista=test.where("id", Operator.MAYOR_QUE, "0").take(10).get();
 
 
@@ -231,7 +225,7 @@ public class Principal {
         /**
          * Esperamos a que el modelo termine de obtener la información de BD's
          */
-        while (!test.getTaskIsReady()){
+        while (!test.getTaskIsReady()) {
 
         }
         /**
@@ -246,7 +240,6 @@ public class Principal {
          */
         //test.getIsMayor().setValor(true);
 
-        
 
         /**
          * LLamamos al método delete, el cual se encargará de eliminar el registro en BD's.
@@ -272,7 +265,7 @@ public class Principal {
             fila.setDataBaseType(DataBase.MySQL);*/
 
 
-            LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
+            LogsJB.info(fila.getId().getValor() + "   " + fila.getName().getValor() + "   " + fila.getApellido().getValor() + "   " + fila.getIsMayor().getValor() + "   " + fila.getCreated_at().getValor() + "   " + fila.getUpdated_at().getValor());
             //fila.getIsMayor().setValor(!fila.getIsMayor().getValor());
             /*fila.getId().setValor(null);
             fila.setModelExist(false);*/
@@ -300,7 +293,6 @@ public class Principal {
         /*while (!test.getTaskIsReady()){
 
         }*/
-
 
 
         /**
@@ -346,7 +338,7 @@ public class Principal {
          * Imprime el tiempo de ejecución que llevo eliminar los modelos en BD's
          */
         double tiempo = (double) ((fin - deleteall));
-        LogsJB.warning(tiempo +" mili segundos");
+        LogsJB.warning(tiempo + " mili segundos");
         //LogsJB.warning("Filas afectadas por el update: "+rows_afected);
 
     }
@@ -361,7 +353,6 @@ public class Principal {
         test.setBD("JBSQLUTILS");
         test.setDataBaseType(DataBase.MySQL);
         long inicio = System.currentTimeMillis();
-
 
 
         //test.refresh();
@@ -442,7 +433,7 @@ public class Principal {
         /**
          * Declaramos una lista de modelos del tipo Test, en la cual almacenaremos la información obtenida de BD's'
          */
-        List<Test> lista=new ArrayList<>();
+        List<Test> lista = new ArrayList<>();
 
         /**
          * Obtenemos todos los registros cuyos Id son mayores a 2, el método orderBy() los ordena de acuerdo a la columna
@@ -507,7 +498,7 @@ public class Principal {
             fila.setTableExist(false);
             fila.getId().setValor(null);
             fila.getIsMayor().setValor(!fila.getIsMayor().getValor());*/
-            LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
+            LogsJB.info(fila.getId().getValor() + "   " + fila.getName().getValor() + "   " + fila.getApellido().getValor() + "   " + fila.getIsMayor().getValor() + "   " + fila.getCreated_at().getValor() + "   " + fila.getUpdated_at().getValor());
         };
 
         /**
@@ -523,7 +514,6 @@ public class Principal {
         /*while (!test.getTaskIsReady()){
 
         }*/
-
 
 
         /**
@@ -561,12 +551,12 @@ public class Principal {
          * llamado al método execute el cual se encarga de ejecutar la sentencia SQL generada y retorna el numero de filas
          * afectadas.
          */
-        int rows_afected=delete("Test").where("id", Operator.MAYOR_IGUAL_QUE, 14).execute();
+        int rows_afected = delete("Test").where("id", Operator.MAYOR_IGUAL_QUE, 14).execute();
 
         long fin = System.currentTimeMillis();
         //double tiempo = (double) ((fin - inicio)/1000);
         double tiempo = (double) ((fin - inicio));
-        LogsJB.warning(tiempo +" mili segundos");
+        LogsJB.warning(tiempo + " mili segundos");
         //LogsJB.warning("Filas afectadas por el update: "+rows_afected);
 
     }
@@ -611,18 +601,18 @@ public class Principal {
             fila.setTableExist(false);
             fila.getId().setValor(null);*/
             fila.getIsMayor().setValor(!fila.getIsMayor().getValor());
-            LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor());
+            LogsJB.info(fila.getId().getValor() + "   " + fila.getName().getValor() + "   " + fila.getApellido().getValor() + "   " + fila.getIsMayor().getValor());
 
         };
 
-        List<Test> lista=new ArrayList<>();
+        List<Test> lista = new ArrayList<>();
         //lista=test.where("name", Operator.IGUAL_QUE, "'Jose'").and("isMayor", Operator.IGUAL_QUE, "false").getAll();
-        lista=test.where("isMayor", Operator.IGUAL_QUE, "true").take(2).get();
+        lista = test.where("isMayor", Operator.IGUAL_QUE, "true").take(2).get();
 
 
         //test.where("",null, "").and("", null, "").or("", null, "").and("").getAll();
         //test.where("name", Operator.IGUAL_QUE, "'Jose'").and("apellido", Operator.IGUAL_QUE, "'Bran'").get();
-        while (!test.getTaskIsReady()){
+        while (!test.getTaskIsReady()) {
 
         }
         //LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.getApellido().getValor()+"   "+test.getIsMayor().getValor());
@@ -644,11 +634,10 @@ public class Principal {
         long fin = System.currentTimeMillis();
         //double tiempo = (double) ((fin - inicio)/1000);
         double tiempo = (double) ((fin - inicio));
-        LogsJB.warning(tiempo +" mili segundos");
+        LogsJB.warning(tiempo + " mili segundos");
         //LogsJB.fatal("Termino de invocar los métodos que almacena los modelos en BD's");
 
     }
-
 
 
     void SQLServer(Test test) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined, InstantiationException, IllegalAccessException, ModelNotFound {
@@ -750,10 +739,10 @@ public class Principal {
             fila.setTableExist(false);
             fila.getId().setValor(null);*/
             fila.getIsMayor().setValor(!fila.getIsMayor().getValor());
-            LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
+            LogsJB.info(fila.getId().getValor() + "   " + fila.getName().getValor() + "   " + fila.getApellido().getValor() + "   " + fila.getIsMayor().getValor() + "   " + fila.getCreated_at().getValor() + "   " + fila.getUpdated_at().getValor());
         };
 
-        List<Test> lista=new ArrayList<>();
+        List<Test> lista = new ArrayList<>();
         //lista=test.where("id", Operator.MAYOR_QUE, "0").getAll();
         //lista=test.where("id", Operator.MAYOR_QUE, "0").take(10).get();
 
@@ -769,19 +758,19 @@ public class Principal {
          * where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
          * brindar una lógica un poco más compleja a la busqueda del registro que deseamos obtener.
          */
-        Test test2= (Test) test.where("name", Operator.LIKE, "Jos%").and("apellido", Operator.IGUAL_QUE, "Bran").first();
+        Test test2 = (Test) test.where("name", Operator.LIKE, "Jos%").and("apellido", Operator.IGUAL_QUE, "Bran").first();
 
         /**
          * Esperamos a que el modelo termine de obtener la información de BD's
          */
-        while (!test.getTaskIsReady()){
+        while (!test.getTaskIsReady()) {
 
         }
         /**
          * Mostramos la información obtenida
          */
-        LogsJB.info(test2.getId().getValor()+"   "+test2.getName().getValor()+"   "+test2.getApellido().getValor()
-                +"   "+test2.getIsMayor().getValor()+"   "+test2.getCreated_at().getValor()+"   "+test2.getUpdated_at().getValor());
+        LogsJB.info(test2.getId().getValor() + "   " + test2.getName().getValor() + "   " + test2.getApellido().getValor()
+                + "   " + test2.getIsMayor().getValor() + "   " + test2.getCreated_at().getValor() + "   " + test2.getUpdated_at().getValor());
 
         //test.getIsMayor().setValor(!test.getIsMayor().getValor());
 
@@ -796,7 +785,6 @@ public class Principal {
         /*while (!test.getTaskIsReady()){
 
         }*/
-
 
 
         /**
@@ -839,7 +827,7 @@ public class Principal {
         long fin = System.currentTimeMillis();
         //double tiempo = (double) ((fin - inicio)/1000);
         double tiempo = (double) ((fin - inicio));
-        LogsJB.warning(tiempo +" mili segundos");
+        LogsJB.warning(tiempo + " mili segundos");
         //LogsJB.warning("Filas afectadas por el update: "+rows_afected);
 
     }

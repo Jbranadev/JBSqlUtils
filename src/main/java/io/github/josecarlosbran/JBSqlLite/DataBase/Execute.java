@@ -49,12 +49,13 @@ class Execute extends Methods_Conexion {
 
     /**
      * Constructor que recibe como parametro:
+     *
      * @param sql Sentencia SQL a ser Ejecutada
-     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     * BD's a la cual se conectara el modelo.
+     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     * propiedades de conexión necesarias para conectarse a la BD's especificada.
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     public Execute(String sql, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
@@ -62,29 +63,30 @@ class Execute extends Methods_Conexion {
             throw new ValorUndefined("La cadena que contiene la sentencia SQL esta vacío o es NULL");
         }
         this.parametros = parametros;
-        this.sql=sql;
+        this.sql = sql;
     }
 
     /**
      * Ejecuta la sentencia SQL que recibe la clase al ser instanciada.
+     *
      * @return Retorna la cantidad de filas que se han visto afectadas al ejecutar la sentencia SQL.
      */
-    public int execute(){
+    public int execute() {
         int result = 0;
         try {
             Callable<Integer> Ejecutar_Sentencia = () -> {
-                int filas=0;
+                int filas = 0;
                 try {
-                    Connection connect=this.getConnection();
-                    this.sql=this.sql+";";
+                    Connection connect = this.getConnection();
+                    this.sql = this.sql + ";";
                     //LogsJB.info(this.sql);
                     PreparedStatement ejecutor = connect.prepareStatement(this.sql);
 
                     //Setea los parametros de la consulta
-                    for(int i=0; i< this.parametros.size(); i++){
+                    for (int i = 0; i < this.parametros.size(); i++) {
                         //Obtengo la información de la columna
                         Column columnsSQL = this.parametros.get(i);
-                        convertJavaToSQL(columnsSQL, ejecutor, i+1);
+                        convertJavaToSQL(columnsSQL, ejecutor, i + 1);
                     }
 
                     LogsJB.info(ejecutor.toString());
@@ -123,7 +125,6 @@ class Execute extends Methods_Conexion {
         }
         return result;
     }
-
 
 
 }

@@ -27,60 +27,60 @@ public class TablesSQL {
     /**
      * TABLE_CAT String => catálogo de tablas (puede ser nulo)
      */
-    private String TABLE_CAT =null;
+    private String TABLE_CAT = null;
 
     /**
      * TABLE_SCHEM String => esquema de tabla (puede ser nulo)
      */
-    private String TABLE_SCHEM =null;
+    private String TABLE_SCHEM = null;
 
     /**
      * TABLE_NAME Cadena => nombre de la tabla
      */
-    private String TABLE_NAME =null;
+    private String TABLE_NAME = null;
 
     /**
      * TABLE_TYPE Cadena => tipo de tabla. Los tipos típicos son "TABLE", "VIEW", "SYSTEM TABLE",
      * "GLOBAL TEMPORARY", "LOCAL TEMPORARY", "ALIAS", "SYNONYM".
      * OBSERVACIONES String => comentario explicativo sobre la tabla
      */
-    private String TABLE_TYPE =null;
+    private String TABLE_TYPE = null;
 
     /**
      * String => explanatory comment on the table
      */
-    private String REMARKS =null;
+    private String REMARKS = null;
 
     /**
      * TYPE_CAT String => el catálogo de tipos (puede ser nulo)
      */
-    private String TYPE_CAT =null;
+    private String TYPE_CAT = null;
 
     /**
      * TYPE_SCHEM String => el esquema de tipos (puede ser nulo)
      */
-    private String TYPE_SCHEM =null;
+    private String TYPE_SCHEM = null;
 
     /**
      * TYPE_NAME Cadena => nombre de tipo (puede ser nulo)
      */
-    private String TYPE_NAME =null;
+    private String TYPE_NAME = null;
 
     /**
      * SELF_REFERENCING_COL_NAME Cadena => nombre de la columna de "identificador"
      * designada de una tabla escrita (puede ser nulo)
      */
-    private String SELF_REFERENCING_COL_NAME=null;
+    private String SELF_REFERENCING_COL_NAME = null;
     /**
      * REF_GENERATION String => especifica cómo se crean los valores en SELF_REFERENCING_COL_NAME.
      * Los valores son "SISTEMA", "USUARIO", "DERIVADO". (puede ser nulo)
      */
-    private String REF_GENERATION =null;
+    private String REF_GENERATION = null;
 
     /**
      * Clave Primaria correspondiente a la tabla
      */
-    private PrimaryKey claveprimaria=null;
+    private PrimaryKey claveprimaria = null;
 
     /**
      * Lista de las columnas que tiene la tabla correspondiente al modelo
@@ -93,9 +93,9 @@ public class TablesSQL {
     private List<String> columnsExist = new ArrayList<>();
 
 
-
     /**
      * Obtiene la lista de las columnas que posee la tabla correspondiente al modelo.
+     *
      * @return Lista de las columnas que posee la tabla correspondiente al modelo.
      */
     public synchronized List<ColumnsSQL> getColumnas() {
@@ -104,14 +104,16 @@ public class TablesSQL {
 
     /**
      * Setea la lista de las columnas SQL que posee la tabla en BD's
+     *
      * @param columnas Lista de las columnas que posee la tabla en BD's
      */
     public void setColumnas(List<ColumnsSQL> columnas) {
-        this.Columnas=columnas;
+        this.Columnas = columnas;
     }
 
     /**
      * Obtiene la Clave Primaria correspondiente a la tabla
+     *
      * @return Clave Primaria correspondiente a la tabla
      */
     public PrimaryKey getClaveprimaria() {
@@ -120,6 +122,7 @@ public class TablesSQL {
 
     /**
      * Setea la clave primaria de la tabla
+     *
      * @param claveprimaria Clave primaria de la tabla en BD's
      */
     public void setClaveprimaria(PrimaryKey claveprimaria) {
@@ -128,6 +131,7 @@ public class TablesSQL {
 
     /**
      * TABLE_CAT String => catálogo de tablas (puede ser nulo)
+     *
      * @return TABLE_CAT String => catálogo de tablas (puede ser nulo)
      */
     public String getTABLE_CAT() {
@@ -136,6 +140,7 @@ public class TablesSQL {
 
     /**
      * Setea la categoría de la tabla en BD's
+     *
      * @param TABLE_CAT TABLE_CAT String => catálogo de tablas (puede ser nulo)
      */
     public void setTABLE_CAT(String TABLE_CAT) {
@@ -144,6 +149,7 @@ public class TablesSQL {
 
     /**
      * TABLE_SCHEM String => esquema de tabla (puede ser nulo)
+     *
      * @return Retorna el esquema de la tabla en BD's
      */
     public String getTABLE_SCHEM() {
@@ -152,6 +158,7 @@ public class TablesSQL {
 
     /**
      * Setea el table Schem en BD's
+     *
      * @param TABLE_SCHEM TABLE_SCHEM String => esquema de tabla (puede ser nulo)
      */
     public void setTABLE_SCHEM(String TABLE_SCHEM) {
@@ -160,6 +167,7 @@ public class TablesSQL {
 
     /**
      * TABLE_NAME Cadena => nombre de la tabla
+     *
      * @return retorna el nombre de la tabla en BD's
      */
     public String getTABLE_NAME() {
@@ -168,6 +176,7 @@ public class TablesSQL {
 
     /**
      * Setea el nombre de la tabla a la cual pertenece la columna
+     *
      * @param TABLE_NAME TABLE_NAME String → table name
      */
     public void setTABLE_NAME(String TABLE_NAME) {
@@ -176,6 +185,7 @@ public class TablesSQL {
 
     /**
      * Obtiene el tipo de tabla que es.
+     *
      * @return TABLE_TYPE Cadena => tipo de tabla. Los tipos típicos son "TABLE", "VIEW", "SYSTEM TABLE",
      * "GLOBAL TEMPORARY", "LOCAL TEMPORARY", "ALIAS", "SYNONYM".
      * OBSERVACIONES String => comentario explicativo sobre la tabla
@@ -186,9 +196,10 @@ public class TablesSQL {
 
     /**
      * Setea el tipo de tabla en BD's
+     *
      * @param TABLE_TYPE TABLE_TYPE Cadena => tipo de tabla. Los tipos típicos son "TABLE", "VIEW", "SYSTEM TABLE",
-     *      * "GLOBAL TEMPORARY", "LOCAL TEMPORARY", "ALIAS", "SYNONYM".
-     *      * OBSERVACIONES String => comentario explicativo sobre la tabla
+     *                   * "GLOBAL TEMPORARY", "LOCAL TEMPORARY", "ALIAS", "SYNONYM".
+     *                   * OBSERVACIONES String => comentario explicativo sobre la tabla
      */
     public void setTABLE_TYPE(String TABLE_TYPE) {
         this.TABLE_TYPE = TABLE_TYPE;
@@ -196,6 +207,7 @@ public class TablesSQL {
 
     /**
      * Obtiene el comentario de la tabla
+     *
      * @return String => explanatory comment on the table
      */
     public String getREMARKS() {
@@ -204,6 +216,7 @@ public class TablesSQL {
 
     /**
      * Setea el comentario correspondiente a la tabla
+     *
      * @param REMARKS String => explanatory comment on the table
      */
     public void setREMARKS(String REMARKS) {
@@ -212,6 +225,7 @@ public class TablesSQL {
 
     /**
      * Obtiene el catalogo de tipos
+     *
      * @return TYPE_CAT String => el catálogo de tipos (puede ser nulo)
      */
     public String getTYPE_CAT() {
@@ -220,6 +234,7 @@ public class TablesSQL {
 
     /**
      * Setea el TYPE_CAT String => el catálogo de tipos (puede ser nulo)
+     *
      * @param TYPE_CAT TYPE_CAT String => el catálogo de tipos (puede ser nulo)
      */
     public void setTYPE_CAT(String TYPE_CAT) {
@@ -228,6 +243,7 @@ public class TablesSQL {
 
     /**
      * Obtiene el tipo de esquema
+     *
      * @return TYPE_SCHEM String => el esquema de tipos (puede ser nulo)
      */
     public String getTYPE_SCHEM() {
@@ -236,6 +252,7 @@ public class TablesSQL {
 
     /**
      * Setea el tipo de esquema.
+     *
      * @param TYPE_SCHEM TYPE_SCHEM String => el esquema de tipos (puede ser nulo)
      */
     public void setTYPE_SCHEM(String TYPE_SCHEM) {
@@ -244,6 +261,7 @@ public class TablesSQL {
 
     /**
      * Retorna el nombre de tipo de la tabla en BD's
+     *
      * @return TYPE_NAME Cadena => nombre de tipo (puede ser nulo)
      */
     public String getTYPE_NAME() {
@@ -252,6 +270,7 @@ public class TablesSQL {
 
     /**
      * Setea el nombre de tipo de la tabla en BD's
+     *
      * @param TYPE_NAME TYPE_NAME Cadena => nombre de tipo (puede ser nulo)
      */
     public void setTYPE_NAME(String TYPE_NAME) {
@@ -260,6 +279,7 @@ public class TablesSQL {
 
     /**
      * Obtiene el nombre de la columna de identificación de la tabla
+     *
      * @return SELF_REFERENCING_COL_NAME Cadena => nombre de la columna de "identificador"
      * designada de una tabla escrita (puede ser nulo)
      */
@@ -269,8 +289,9 @@ public class TablesSQL {
 
     /**
      * Setea el nombre de la columna de identificación de la tabla
+     *
      * @param SELF_REFERENCING_COL_NAME SELF_REFERENCING_COL_NAME Cadena => nombre de la columna de "identificador"
-     *      * designada de una tabla escrita (puede ser nulo)
+     *                                  * designada de una tabla escrita (puede ser nulo)
      */
     public void setSELF_REFERENCING_COL_NAME(String SELF_REFERENCING_COL_NAME) {
         this.SELF_REFERENCING_COL_NAME = SELF_REFERENCING_COL_NAME;
@@ -286,17 +307,18 @@ public class TablesSQL {
 
     /**
      * Setea como se crean los valores de referencia
+     *
      * @param REF_GENERATION REF_GENERATION String => especifica cómo se crean los valores en SELF_REFERENCING_COL_NAME.
-     *      * Los valores son "SISTEMA", "USUARIO", "DERIVADO". (puede ser nulo)
+     *                       * Los valores son "SISTEMA", "USUARIO", "DERIVADO". (puede ser nulo)
      */
     public void setREF_GENERATION(String REF_GENERATION) {
         this.REF_GENERATION = REF_GENERATION;
     }
 
 
-
     /**
      * Lista de los nombres de las columnas que existen
+     *
      * @return Retorna una lista de los nombres de las columnas que existen en BD's
      */
     public List<String> getColumnsExist() {
@@ -305,6 +327,7 @@ public class TablesSQL {
 
     /**
      * Setea una lista de los nombres de las columnas que existen en BD's
+     *
      * @param columnsExist Lista de los nombres de las columnas que existen en BD's
      */
     public void setColumnsExist(List<String> columnsExist) {

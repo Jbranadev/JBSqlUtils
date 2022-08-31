@@ -80,18 +80,15 @@ public enum Operator {
     NOT(" NOT ");
 
 
-
-
-
     private String operador;
-    private Operator(String s){
-        this.operador=s;
+
+    private Operator(String s) {
+        this.operador = s;
     }
 
     public String getOperador() {
         return operador;
     }
-
 
 
 }
