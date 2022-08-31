@@ -93,7 +93,7 @@ public class Where<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      * propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public Where(String columna, Operator operador, Object valor, String sql) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    public Where(String columna, Operator operador, Object valor, String sql, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
@@ -104,6 +104,7 @@ public class Where<T> extends Get {
         if (Objects.isNull(operador)) {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
+        this.parametros= parametros;
         this.parametros.add(getColumn(valor));
         this.sql = sql+" WHERE "+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + "?" +Operator.CLOSE_PARENTESIS.getOperador();
     }
@@ -244,7 +245,7 @@ public class Where<T> extends Get {
      * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     public int execute() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        return new Execute(this.sql).execute();
+        return new Execute(this.sql, this.parametros).execute();
     }
 
 

@@ -16,6 +16,7 @@
 package io.github.josecarlosbran.JBSqlLite.DataBase;
 
 
+import io.github.josecarlosbran.JBSqlLite.Column;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
@@ -24,6 +25,8 @@ import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -40,6 +43,11 @@ class Execute extends Methods_Conexion {
     private String sql;
 
     /**
+     * Lista de los parametros a envíar
+     */
+    protected List<Column> parametros = new ArrayList<>();
+
+    /**
      * Constructor que recibe como parametro:
      * @param sql Sentencia SQL a ser Ejecutada
      * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
@@ -48,11 +56,12 @@ class Execute extends Methods_Conexion {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      * propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public Execute(String sql) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    public Execute(String sql, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(sql)) {
             throw new ValorUndefined("La cadena que contiene la sentencia SQL esta vacío o es NULL");
         }
+        this.parametros = parametros;
         this.sql=sql;
     }
 
@@ -69,6 +78,14 @@ class Execute extends Methods_Conexion {
                     Connection connect=this.getConnection();
                     LogsJB.info(this.sql);
                     PreparedStatement ejecutor = connect.prepareStatement(this.sql);
+
+                    //Setea los parametros de la consulta
+                    for(int i=0; i< this.parametros.size(); i++){
+                        //Obtengo la información de la columna
+                        Column columnsSQL = this.parametros.get(i);
+                        convertJavaToSQL(columnsSQL, ejecutor, i+1);
+                    }
+
                     ejecutor.executeUpdate();
                     filas = ejecutor.getUpdateCount();
                     LogsJB.info("Cantidad de filas afectadas: " + filas);

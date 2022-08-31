@@ -16,14 +16,19 @@
 package io.github.josecarlosbran.JBSqlLite.DataBase;
 
 
+import io.github.josecarlosbran.JBSqlLite.Column;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.LogsJB.LogsJB;
 
-import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.sqlFilter;
-import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.stringIsNullOrEmpty;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import static io.github.josecarlosbran.JBSqlLite.Utilities.UtilitiesJB.*;
+
 /**
  * @author Jose Bran
  * Clase que proporciona la lógica para setear un valor antes de ejecutar la sentencia Update.
@@ -33,6 +38,11 @@ public class Set {
     private String sql;
 
     /**
+     * Lista de los parametros a envíar
+     */
+    protected List<Column> parametros = new ArrayList<>();
+
+    /**
      * Constructor que recibe como parametro:
      * @param columName El nombre de la columna a la cual se asignara el valor porporcionado.
      * @param value Valor que se asignara a la columna.
@@ -40,14 +50,19 @@ public class Set {
      * @throws ValorUndefined ValorUndefined Lanza esta Excepción si
      * alguno de los parametros proporcionados esta vacío o es Null
      */
-    protected Set(String columName, String value, String sql) throws ValorUndefined {
+    protected Set(String columName, Object value, String sql) throws ValorUndefined {
         if (stringIsNullOrEmpty(columName)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
         }
-        if (stringIsNullOrEmpty(value)) {
+        if (Objects.isNull(value)) {
             LogsJB.warning("El valor proporcionado para la columna esta vacío o es NULL");
+            LogsJB.warning(sql);
+            LogsJB.warning(columName);
+            LogsJB.warning((String) value);
+            throw new ValorUndefined("El valor proporcionado esta vacío o es NULL");
         }
-        this.sql= sql + "SET "+columName+"="+sqlFilter(value);
+        this.parametros.add(getColumn(value));
+        this.sql= sql + "SET "+columName+"="+"?";
     }
 
     /**
@@ -59,8 +74,8 @@ public class Set {
      * @throws ValorUndefined ValorUndefined ValorUndefined Lanza esta Excepción si
      * alguno de los parametros proporcionados esta vacío o es Null
      */
-    public AndSet andSet(String columName, String value) throws ValorUndefined {
-        return new AndSet(columName,value, this.sql);
+    public AndSet andSet(String columName, Object value) throws ValorUndefined {
+        return new AndSet(columName,value, this.sql, this.parametros);
     }
 
     /**
@@ -78,8 +93,8 @@ public class Set {
      * @throws ValorUndefined Lanza esta excepción si alguno de los parametros proporcionados esta
      * Vacío o es Null
      */
-    public Where where(String columna, Operator operador, String value) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        return new Where(columna, operador, value, this.sql);
+    public Where where(String columna, Operator operador, Object value) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+        return new Where(columna, operador, value, this.sql, this.parametros);
     }
 
 
@@ -96,7 +111,7 @@ public class Set {
      * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     public int execute() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        return new Execute(this.sql).execute();
+        return new Execute(this.sql, this.parametros).execute();
     }
 
 

@@ -255,7 +255,7 @@ public class Or<T> extends Get {
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     public int execute() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        return new Execute(this.sql).execute();
+        return new Execute(this.sql, this.parametros).execute();
     }
 
 }
