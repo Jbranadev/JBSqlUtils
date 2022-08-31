@@ -842,6 +842,151 @@ Lista de modelos obtenidos de BD's
 * * *
 
 
+
+## ¿Cómo actualizar un Modelo en BD's?
+
+Podemos actualizar un modelo que hayamos obtenido de BD's, a través del método save(), es importante
+que para que se actualice el registro, este haya sido obtenido de BD's, de esa manera el modelo tendrá 
+un valor válido en su atributo correspondiente a la primaryKey de la tabla en BD's y la propiedad ModelExist 
+estará configurada con un valor true.
+
+En caso no hayamos obtenido el modelo de BD's es importante que configuremos la propiedad ModelExist como true,
+lo cual podemos hacerlo a través del método setModelExist(), adicional a esto, debemos asegurarnos, de que el 
+modelo en su columna correspondiente a la primaryKey, tenga el valor del registro que queremos actualizar.
+
+
+~~~
+
+/**
+*Obtenemos el registro que coincide con la sentencia SQL generada por el modelo
+*/
+test.where("Apellido", Operator.IGUAL_QUE, "Cabrera").and("IsMayor", Operator.IGUAL_QUE, false).get();
+
+/**
+* Esperamos a que el modelo termine de obtener la información de BD's
+*/
+while (!test.getTaskIsReady()){
+
+}
+/**
+* Mostramos la información obtenida
+*/
+LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.getApellido().getValor()
+    +"   "+test.getIsMayor().getValor()+"   "+test.getCreated_at().getValor()+"   "+test.getUpdated_at().getValor());
+
+
+/**
+* Modificamos el valor de la columna IsMayor a true
+*/
+test.getIsMayor().setValor(true);
+
+/**
+* LLamamos al método save, el cual se encargará de actualizar el registro en BD's.
+*/
+test.save();
+
+~~~
+
+Información en BD's SQLite antes de actualizar el registro
+
+![](Imagenes/update.jpg)
+
+Actividad registrada por JBSqlUtils 
+
+![](Imagenes/update1.jpg)
+
+Información en BD's SQLite después de actualizar el registro
+
+![](Imagenes/update2.jpg)
+
+* * *
+
+
+## ¿Cómo actualizar multiples Modelos en BD's?
+
+Podemos actualizar multiples modelos que hayamos obtenido de BD's, a través del método saveALL(), es importante
+que para que se actualice el registro, este haya sido obtenido de BD's, de esa manera el modelo tendrá
+un valor válido en su atributo correspondiente a la primaryKey de la tabla en BD's y la propiedad ModelExist
+estará configurada con un valor true.
+
+En caso no hayamos obtenido los modelos de BD's es importante que configuremos la propiedad ModelExist como true en 
+cada uno de los modelos que vayamos a actualizar, lo cual podemos hacerlo a través del método setModelExist(), 
+adicional a esto, debemos asegurarnos, de que cada uno de los modelos en su columna correspondiente a la primaryKey, 
+tenga el valor del registro que queremos actualizar.
+
+
+~~~
+
+/**
+* Declaramos una lista de modelos del tipo Test, en la cual almacenaremos la información obtenida de BD's'
+*/
+List<Test> lista=new ArrayList<>();
+
+/**
+* Obtenemos todos los modelos que su Id se encuentra entre 1 y 5
+*/
+lista=test.where("id", Operator.MAYOR_IGUAL_QUE, 1).and("id", Operator.MENOR_IGUAL_QUE, 5).getAll();
+
+/**
+* Esperamos a que el modelo termine de obtener la información de BD's
+*/
+while (!test.getTaskIsReady()){
+
+}
+
+/**
+* Declaramos una función anonima que recibira como parametro un obtjeto del tipo Test
+* el cual es el tipo de modelo que obtendremos y dentro de esta función imprimiremos
+* la información del modelo y modificaremos el valor de la columna Is mayor, de ser True
+* ahora será False, de ser False, ahora será True.
+*/
+Consumer<Test> showFilas = fila -> {
+//Mostramos la Información          
+LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
+//Modificamos el valor de la columna IsMayor
+fila.getIsMayor().setValor(!fila.getIsMayor().getValor());
+};
+
+/**
+* Mostramos la información obtenida iterando sobre los modelos obtenidos de BD's y mostrando
+* su contenido por medio de la función anonima que declaramos ateriormente.
+*/
+lista.forEach(showFilas);
+
+
+/**
+* Almacena la información de los modelos proporcionados en BD's
+* @param modelos Lista de modelos que serán Insertados o Actualizados
+*/
+test.saveALL(lista);
+        
+
+~~~
+
+Información en BD's SQLite antes de actualizar el registro
+
+![](Imagenes/updateall.jpg)
+
+Actividad registrada por JBSqlUtils, Cómo JBSqlUtils ejecuta las operaciones de escritura como de lectura en segundo plano
+para que el hilo de ejecución principal no se vea afectado y pueda realizar alguna otra actividad en paralelo, por cada modelo
+que se actualiza, JBSqlUtils crea un subproceso para cada modelo, de esta manera las operaciones de escritura en BD's
+se realizan en paralelo, mejorando el rendimiento de nuestra aplicación.
+
+Desde que se hizo el llamado al método saveAll(), hasta que se actualizó el último registro a JBSqlUtils le tomo 
+40 milésimas de segundo actualizar 5 registros en BD's, es un tiempo insignificante, considerando, que se realizó la 
+conexión a BD's, se fabricó la sentencia SQL a ejecutar, se preparó el preparedStatement, se ejecutó la instrucción y 
+cerro la conexión a BD's.
+
+![](Imagenes/updateall1.jpg)
+
+Información en BD's SQLite después de actualizar el registro
+
+![](Imagenes/updateall2.jpg)
+
+* * *
+
+
+
 ## ¿Cómo poder hacer un seguimiento a lo que sucede dentro de JBSqlUtils?
 
 JBSqlUtils utiliza la librería LogsJB, para el registro de todo lo que sucede al momento

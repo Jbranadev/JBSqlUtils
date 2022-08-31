@@ -201,12 +201,9 @@ public class Principal {
         List<Test> lista=new ArrayList<>();
 
         /**
-         * Obtenemos todos los registros cuyos Id son mayores a 2, el metodo orderBy() los ordena de acuerdo a la columna
-         * que enviamos como parametro y el tipo de ordenamiento que le especificamos.
-         * El método orderBy() proporciona acceso a todos los métodos que hemos visto anteriormente, los cuales nos
-         * permiten obtener uno o multiples registros, de acuerdo a la lógica que brindemos a nuestra sentencia SQL.
+         * Obtenemos todos los modelos que su Id se encuentra entre 1 y 5
          */
-        //lista=test.where("id", Operator.MAYOR_QUE, 0).orderBy("id", OrderType.DESC).getAll();
+        lista=test.where("id", Operator.MAYOR_IGUAL_QUE, 1).and("id", Operator.MENOR_IGUAL_QUE, 5).getAll();
         //lista=test.where("id", Operator.MAYOR_QUE, "0").take(10).get();
 
 
@@ -226,21 +223,33 @@ public class Principal {
          */
         //Test test2= (Test) test.where("Name", Operator.IGUAL_QUE, "Jose").and("IsMayor", Operator.IGUAL_QUE, false).firstOrFail();
 
+        /**
+         *Obtenemos el registro que coincide con la sentencia SQL generada por el modelo
+         */
+        //test.where("Apellido", Operator.IGUAL_QUE, "Cabrera").and("IsMayor", Operator.IGUAL_QUE, false).get();
 
         /**
          * Esperamos a que el modelo termine de obtener la información de BD's
          */
-        /*while (!test.getTaskIsReady()){
+        while (!test.getTaskIsReady()){
 
-        }*/
+        }
         /**
          * Mostramos la información obtenida
          */
-        /*LogsJB.info(test2.getId().getValor()+"   "+test2.getName().getValor()+"   "+test2.getApellido().getValor()
-                +"   "+test2.getIsMayor().getValor()+"   "+test2.getCreated_at().getValor()+"   "+test2.getUpdated_at().getValor());
+        /*LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.getApellido().getValor()
+                +"   "+test.getIsMayor().getValor()+"   "+test.getCreated_at().getValor()+"   "+test.getUpdated_at().getValor());
 
-        test2.getIsMayor().setValor(true);*/
-        //test2.save();
+        */
+        /**
+         * Modificamos el valor de la columna IsMayor a true
+         */
+        //test.getIsMayor().setValor(true);
+
+        /**
+         * LLamamos al metodo save, el cual se encargará de actualizar el registro en BD's.
+         */
+        //test.save();
         //test.getIsMayor().setValor(!test.getIsMayor().getValor());
 
         //LogsJB.info("Cantidad de resultado lista: "+lista.size());
@@ -248,7 +257,8 @@ public class Principal {
         /**
          * Declaramos una función anonima que recibira como parametro un obtjeto del tipo Test
          * el cual es el tipo de modelo que obtendremos y dentro de esta función imprimiremos
-         * la información del modelo.
+         * la información del modelo y modificaremos el valor de la columna Is mayor, de ser True
+         * ahora será False, de ser False, ahora será True.
          */
         Consumer<Test> showFilas = fila -> {
 
@@ -260,8 +270,9 @@ public class Principal {
             fila.setBD("JBSQLUTILS");
             fila.setDataBaseType(DataBase.MySQL);*/
 
-            //fila.getIsMayor().setValor(!fila.getIsMayor().getValor());*/
+
             LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
+            fila.getIsMayor().setValor(!fila.getIsMayor().getValor());
             /*fila.getId().setValor(null);
             fila.setModelExist(false);*/
         };
@@ -270,15 +281,20 @@ public class Principal {
          * Mostramos la información obtenida iterando sobre los modelos obtenidos de BD's y mostrando
          * su contenido por medio de la función anonima que declaramos ateriormente.
          */
-        //lista.forEach(showFilas);
+        lista.forEach(showFilas);
 
 
-        //test.saveALL(lista);
+        long saveall = System.currentTimeMillis();
+        /**
+         * Almacena la información de los modelos proporcionados en BD's
+         * @param modelos Lista de modelos que serán Insertados o Actualizados
+         */
+        test.saveALL(lista);
         //test.save();
         //test.delete();
-        /*while (!test.getTaskIsReady()){
+        while (!test.getTaskIsReady()){
 
-        }*/
+        }
 
 
 
