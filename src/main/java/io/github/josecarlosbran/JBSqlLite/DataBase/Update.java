@@ -49,7 +49,7 @@ public class Update{
      * @throws ValorUndefined ValorUndefined ValorUndefined Lanza esta Excepción si
      * alguno de los parametros proporcionados esta vacío o es Null
      */
-    public Set set(String columName, String value) throws ValorUndefined {
+    public Set set(String columName, Object value) throws ValorUndefined {
         return new Set(columName, value, this.sql);
     }
 

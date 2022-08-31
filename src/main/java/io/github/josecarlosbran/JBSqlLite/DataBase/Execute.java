@@ -76,6 +76,7 @@ class Execute extends Methods_Conexion {
                 int filas=0;
                 try {
                     Connection connect=this.getConnection();
+                    this.sql=this.sql+";";
                     LogsJB.info(this.sql);
                     PreparedStatement ejecutor = connect.prepareStatement(this.sql);
 

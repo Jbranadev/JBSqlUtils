@@ -106,6 +106,33 @@ public class Where<T> extends Get {
         this.sql = sql+" WHERE "+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + "?" +Operator.CLOSE_PARENTESIS.getOperador();
     }
 
+    /**
+     * Constructor que recibe como parametro:
+     * @param columna Columna a evaluar dentro de la sentencia WHERE
+     * @param operador Operador con el cual se evaluara la columna
+     * @param valor Valor contra el que se evaluara la columna
+     * @param sql Sentencia SQL a la cual se agregara la Sentencia WHERE
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     * BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     * propiedades de conexión necesarias para conectarse a la BD's especificada.
+     */
+    public Where(String columna, Operator operador, Object valor, String sql) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+        super();
+        if (stringIsNullOrEmpty(columna)) {
+            throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
+        }
+        if (Objects.isNull(valor)) {
+            throw new ValorUndefined("El valor proporcionado esta vacío o es NULL");
+        }
+        if (Objects.isNull(operador)) {
+            throw new ValorUndefined("El operador proporcionado es NULL");
+        }
+        this.parametros.add(getColumn(valor));
+        this.sql = sql+" WHERE"+Operator.OPEN_PARENTESIS.getOperador()+columna + operador.getOperador() + "?" +Operator.CLOSE_PARENTESIS.getOperador();
+    }
+
 
 
 

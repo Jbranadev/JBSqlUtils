@@ -594,6 +594,7 @@ public class Methods_Conexion extends Conexion {
             //TimeStamp
             ejecutor.setTimestamp(auxiliar, (Timestamp) columnsSQL.getValor());
         } else {
+            LogsJB.debug("No logro setear el tipo de dato");
             ejecutor.setObject(auxiliar, columnsSQL.getValor());
         }
     }

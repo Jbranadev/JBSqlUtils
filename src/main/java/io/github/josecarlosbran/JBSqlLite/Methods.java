@@ -296,6 +296,7 @@ class Methods extends Methods_Conexion {
                 } else {
                     temp = (T) modelo.getClass().newInstance();
                     LogsJB.warning("Modelo era Null, crea una nueva instancia");
+                    temp.refresh();
                 }
                 if (!modelo.getTableExist()) {
                     LogsJB.info("Obtendra la información de conexión de la BD's");

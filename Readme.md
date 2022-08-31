@@ -799,7 +799,7 @@ tipo de ordenamiento que le especificamos.
 List<Test> lista=new ArrayList<>();
 
 /**
-* Obtenemos todos los registros cuyos Id son mayores a 2, el metodo orderBy() los ordena de acuerdo a la columna
+* Obtenemos todos los registros cuyos Id son mayores a 2, el método orderBy() los ordena de acuerdo a la columna
 * que enviamos como parametro y el tipo de ordenamiento que le especificamos.
 * El método orderBy() proporciona acceso a todos los métodos que hemos visto anteriormente, los cuales nos
 * permiten obtener uno o multiples registros, de acuerdo a la lógica que brindemos a nuestra sentencia SQL.
@@ -842,6 +842,61 @@ Lista de modelos obtenidos de BD's
 
 * * *
 
+
+## ¿Cómo poder hacer un seguimiento a lo que sucede dentro de JBSqlUtils?
+
+JBSqlUtils incluye utiliza la librería LogsJB, para el registro de todo lo que sucede al momento
+de realizar una inserción, actualización, consulta o eliminar un registro en BD's, por default se 
+registra toda aquella actividad de nivel INFO y superior, si desea debuggear o modificar el nivel
+de log que reporta JBSqlUtils será necesario que importe en su proyecto la librería LogsJB y 
+llame al método LogsJB.setGradeLog(), enviando cómo parametro el grado de Log, desde el cual 
+desea que JBSqlUtils registre su actividad.
+
+Puedes obtener la librería LogsJB de la siguiente manera
+
+Maven
+~~~
+<dependency>
+    <groupId>io.github.josecarlosbran</groupId>
+    <artifactId>LogsJB</artifactId>
+    <version>0.5</version>
+</dependency>
+~~~
+
+Gradle
+~~~
+implementation 'io.github.josecarlosbran:LogsJB:0.5'
+~~~
+
+Modificar el Nivel de Log que queremos tener sobre JBSqlUtils
+
+~~~
+
+/***
+* Setea el NivelLog desde el cual deseamos se escriba en el Log de la aplicación actual.
+* @param GradeLog Nivel Log desde el cual hacía arriba en la jerarquia de logs, deseamos se reporten
+*      * Trace = 200,
+*      * Debug = 400,
+*      * Info = 500,
+*      * Warning = 600,
+*      * Error = 800,
+*      * Fatal = 1000.
+* El valor por defaul es Info. Lo cual hace que se reporten los Logs de grado Info, Warning, Error y Fatal.
+*/
+LogsJB.setGradeLog(NivelLog.INFO);
+
+~~~
+
+Encontraremos los Logs de JBSqlUtils en el directorio de nuestra aplicación en ejecución, se creará la carpeta
+Logs, dentro de la cual se creara una carpeta por cada día y dentro de la misma se almacenaran los Logs de la 
+aplicación, para mayor información visitar el siguiente Link
+
+<https://github.com/JoseCarlosBran/LogsJB/blob/master/Readme.md>
+
+
+![](Imagenes/Logs.jpg)
+
+* * *
 
 
 
