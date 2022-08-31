@@ -226,7 +226,7 @@ public class Principal {
         /**
          *Obtenemos el registro que coincide con la sentencia SQL generada por el modelo
          */
-        //test.where("Apellido", Operator.IGUAL_QUE, "Cabrera").and("IsMayor", Operator.IGUAL_QUE, false).get();
+        //test.where("Apellido", Operator.IGUAL_QUE, "Cabrera").and("Name", Operator.IGUAL_QUE, "Marleny").get();
 
         /**
          * Esperamos a que el modelo termine de obtener la información de BD's
@@ -240,16 +240,18 @@ public class Principal {
         /*LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.getApellido().getValor()
                 +"   "+test.getIsMayor().getValor()+"   "+test.getCreated_at().getValor()+"   "+test.getUpdated_at().getValor());
 
-        */
+*/
         /**
          * Modificamos el valor de la columna IsMayor a true
          */
         //test.getIsMayor().setValor(true);
 
+        
+
         /**
-         * LLamamos al metodo save, el cual se encargará de actualizar el registro en BD's.
+         * LLamamos al método delete, el cual se encargará de eliminar el registro en BD's.
          */
-        //test.save();
+        //test.delete();
         //test.getIsMayor().setValor(!test.getIsMayor().getValor());
 
         //LogsJB.info("Cantidad de resultado lista: "+lista.size());
@@ -257,8 +259,7 @@ public class Principal {
         /**
          * Declaramos una función anonima que recibira como parametro un obtjeto del tipo Test
          * el cual es el tipo de modelo que obtendremos y dentro de esta función imprimiremos
-         * la información del modelo y modificaremos el valor de la columna Is mayor, de ser True
-         * ahora será False, de ser False, ahora será True.
+         * la información del modelo.
          */
         Consumer<Test> showFilas = fila -> {
 
@@ -272,7 +273,7 @@ public class Principal {
 
 
             LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
-            fila.getIsMayor().setValor(!fila.getIsMayor().getValor());
+            //fila.getIsMayor().setValor(!fila.getIsMayor().getValor());
             /*fila.getId().setValor(null);
             fila.setModelExist(false);*/
         };
@@ -283,18 +284,22 @@ public class Principal {
          */
         lista.forEach(showFilas);
 
-
-        long saveall = System.currentTimeMillis();
         /**
-         * Almacena la información de los modelos proporcionados en BD's
-         * @param modelos Lista de modelos que serán Insertados o Actualizados
+         * Tomara el tiempo desde que se llama al método deleteAll(), hasta que se termina de eliminar el ulitmo modelo
+         * en BD's
          */
-        test.saveALL(lista);
+        long deleteall = System.currentTimeMillis();
+
+        /**
+         * Elimina la información de los modelos proporcionados en BD's
+         * @param modelos Lista de modelos que serán Eliminados
+         */
+        test.deleteALL(lista);
         //test.save();
         //test.delete();
-        while (!test.getTaskIsReady()){
+        /*while (!test.getTaskIsReady()){
 
-        }
+        }*/
 
 
 
@@ -337,7 +342,10 @@ public class Principal {
 
         long fin = System.currentTimeMillis();
         //double tiempo = (double) ((fin - inicio)/1000);
-        double tiempo = (double) ((fin - inicio));
+        /**
+         * Imprime el tiempo de ejecución que llevo eliminar los modelos en BD's
+         */
+        double tiempo = (double) ((fin - deleteall));
         LogsJB.warning(tiempo +" mili segundos");
         //LogsJB.warning("Filas afectadas por el update: "+rows_afected);
 
@@ -437,7 +445,7 @@ public class Principal {
         List<Test> lista=new ArrayList<>();
 
         /**
-         * Obtenemos todos los registros cuyos Id son mayores a 2, el metodo orderBy() los ordena de acuerdo a la columna
+         * Obtenemos todos los registros cuyos Id son mayores a 2, el método orderBy() los ordena de acuerdo a la columna
          * que enviamos como parametro y el tipo de ordenamiento que le especificamos.
          * El método orderBy() proporciona acceso a todos los métodos que hemos visto anteriormente, los cuales nos
          * permiten obtener uno o multiples registros, de acuerdo a la lógica que brindemos a nuestra sentencia SQL.

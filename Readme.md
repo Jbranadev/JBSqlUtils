@@ -914,7 +914,6 @@ cada uno de los modelos que vayamos a actualizar, lo cual podemos hacerlo a trav
 adicional a esto, debemos asegurarnos, de que cada uno de los modelos en su columna correspondiente a la primaryKey, 
 tenga el valor del registro que queremos actualizar.
 
-
 ~~~
 
 /**
@@ -963,7 +962,7 @@ test.saveALL(lista);
 
 ~~~
 
-Información en BD's SQLite antes de actualizar el registro
+Información en BD's SQLite antes de actualizar los registros
 
 ![](Imagenes/updateall.jpg)
 
@@ -979,12 +978,99 @@ cerro la conexión a BD's.
 
 ![](Imagenes/updateall1.jpg)
 
-Información en BD's SQLite después de actualizar el registro
+Información en BD's SQLite después de actualizar los registros
 
 ![](Imagenes/updateall2.jpg)
 
 * * *
 
+
+## ¿Cómo eliminar un Modelo en BD's?
+
+Podemos eliminar un modelo que hayamos obtenido de BD's, a través del método delete(), es importante
+que para que se elimine el registro, este haya sido obtenido de BD's, de esa manera el modelo tendrá
+un valor válido en su atributo correspondiente a la primaryKey de la tabla en BD's.
+
+En caso no hayamos obtenido el modelo de BD's es importante asegurarnos de que el
+modelo en su columna correspondiente a la primaryKey, tenga el valor del registro que queremos eliminar.
+
+~~~
+
+/**
+*Obtenemos el registro que coincide con la sentencia SQL generada por el modelo
+*/
+test.where("Apellido", Operator.IGUAL_QUE, "Cabrera").and("Name", Operator.IGUAL_QUE, "Marleny").get();
+
+/**
+* Esperamos a que el modelo termine de obtener la información de BD's
+*/
+while (!test.getTaskIsReady()){
+
+}
+/**
+* Mostramos la información obtenida
+*/
+LogsJB.info(test.getId().getValor()+"   "+test.getName().getValor()+"   "+test.getApellido().getValor()
+    +"   "+test.getIsMayor().getValor()+"   "+test.getCreated_at().getValor()+"   "+test.getUpdated_at().getValor());
+
+/**
+* LLamamos al metodo delete, el cual se encargará de eliminar el registro en BD's.
+*/
+test.delete();
+
+~~~
+
+Información en BD's SQLite antes de eliminar el registro
+
+![](Imagenes/delete.jpg)
+
+Actividad registrada por JBSqlUtils
+
+![](Imagenes/delete1.jpg)
+
+Información en BD's SQLite después de eliminar el registro
+
+![](Imagenes/delete2.jpg)
+
+* * *
+
+
+## ¿Cómo eliminar multiples Modelos en BD's?
+
+Podemos eliminar multiples modelos que hayamos obtenido de BD's, a través del método deleteALL(), es importante
+que para que se elimine el registro, este haya sido obtenido de BD's, de esa manera el modelo tendrá
+un valor válido en su atributo correspondiente a la primaryKey de la tabla en BD's.
+
+En caso no hayamos obtenido los modelos de BD's es importante asegurarnos de que cada uno de los
+modelos que queremos eliminar tengan en su columna correspondiente a la primaryKey, el valor del registro que queremos eliminar.
+
+~~~
+
+       
+
+~~~
+
+Información en BD's SQLite antes de eliminar los registros
+
+![](Imagenes/deleteall.jpg)
+
+Actividad registrada por JBSqlUtils, Cómo JBSqlUtils ejecuta las operaciones de escritura como de lectura en segundo plano
+para que el hilo de ejecución principal no se vea afectado y pueda realizar alguna otra actividad en paralelo, por cada modelo
+que se elimina, JBSqlUtils crea un subproceso para cada modelo, de esta manera las operaciones de escritura en BD's
+se realizan en paralelo, mejorando el rendimiento de nuestra aplicación.
+
+Desde que se hizo el llamado al método deleteALL(), hasta que se eliminó el último registro a JBSqlUtils le tomo
+60 milésimas de segundo eliminar 5 registros en BD's, es un tiempo insignificante, considerando, que se realizó la
+conexión a BD's, se fabricó la sentencia SQL a ejecutar, se preparó el preparedStatement, se ejecutó la instrucción y
+cerro la conexión a BD's.
+
+![](Imagenes/deleteall1.jpg)
+
+Información en BD's SQLite después de eliminar los registros
+
+![](Imagenes/deleteall2.jpg)
+
+* * *
 
 
 ## ¿Cómo poder hacer un seguimiento a lo que sucede dentro de JBSqlUtils?
@@ -1041,9 +1127,6 @@ aplicación, para mayor información visitar el siguiente Link
 ![](Imagenes/Logs.jpg)
 
 * * *
-
-
-
 
 
 ## ¿Cómo obtener JBSqlUtils para usarlo en mi proyecto?
