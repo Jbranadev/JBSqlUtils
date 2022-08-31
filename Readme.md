@@ -665,7 +665,6 @@ misma.
 
 * * *
 
-* * *
 
 
 ## ¿Cómo obtener multiples registros de BD's?
@@ -845,7 +844,7 @@ Lista de modelos obtenidos de BD's
 
 ## ¿Cómo poder hacer un seguimiento a lo que sucede dentro de JBSqlUtils?
 
-JBSqlUtils incluye utiliza la librería LogsJB, para el registro de todo lo que sucede al momento
+JBSqlUtils utiliza la librería LogsJB, para el registro de todo lo que sucede al momento
 de realizar una inserción, actualización, consulta o eliminar un registro en BD's, por default se 
 registra toda aquella actividad de nivel INFO y superior, si desea debuggear o modificar el nivel
 de log que reporta JBSqlUtils será necesario que importe en su proyecto la librería LogsJB y 

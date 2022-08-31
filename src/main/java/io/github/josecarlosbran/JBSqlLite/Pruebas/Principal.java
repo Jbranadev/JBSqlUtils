@@ -147,8 +147,8 @@ public class Principal {
          * el cual se encarga de insertar un registro en la tabla correspondiente al modelo con la información del mismo
          * si este no existe, de existir actualiza el registro por medio de la clave primaria del modelo.
          */
-        /*test.getName().setValor("Marcos");
-        test.getApellido().setValor("Cabrera");*/
+        /*test.getName().setValor("Dayrin");
+        test.getApellido().setValor("Sanchez");*/
         //test.getIsMayor().setValor(false);
         /**
          * En este primer ejemplo no seteamos un valor a la columna IsMayor, para comprobar que el valor
@@ -178,8 +178,8 @@ public class Principal {
          * Una vez hemos comprobado que el modelo no esta escribiendo u obteniendo información en segundo plano
          * podemos utilizarlo, para insertar otro registro totalmente diferente al que insertamos anteriormente.
          */
-        /*test.getName().setValor("Elsa");
-        test.getApellido().setValor("Aguirre");
+        /*test.getName().setValor("Marleny");
+        test.getApellido().setValor("Cabrera");
         test.getIsMayor().setValor(false);*/
 
         /**
