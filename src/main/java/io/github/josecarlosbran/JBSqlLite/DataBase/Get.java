@@ -74,7 +74,7 @@ public class Get extends Methods_Conexion {
                     if (modelo.getTableExist()) {
                         String sql="SELECT * FROM " + modelo.getTableName();
                         sql = sql+Sql + ";";
-                        LogsJB.info(sql);
+                        //LogsJB.info(sql);
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         for(int i=0; i< parametros.size(); i++){
                             //Obtengo la información de la columna
@@ -82,6 +82,7 @@ public class Get extends Methods_Conexion {
                             convertJavaToSQL(columnsSQL, ejecutor, i+1);
                         }
 
+                        LogsJB.info(ejecutor.toString());
 
                         ResultSet registros = ejecutor.executeQuery();
                         if (registros.next()) {
@@ -135,13 +136,14 @@ public class Get extends Methods_Conexion {
                     if (modelo.getTableExist()) {
                         String sql="SELECT * FROM " + modelo.getTableName();
                         sql = sql+Sql + ";";
-                        LogsJB.info(sql);
+                        //LogsJB.info(sql);
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         for(int i=0; i< parametros.size(); i++){
                             //Obtengo la información de la columna
                             Column columnsSQL = parametros.get(i);
                             convertJavaToSQL(columnsSQL, ejecutor, i+1);
                         }
+                        LogsJB.info(ejecutor.toString());
                         ResultSet registros = ejecutor.executeQuery();
                         if (registros.next()) {
                             procesarResultSetOneResult(modelo, registros);
@@ -198,7 +200,7 @@ public class Get extends Methods_Conexion {
                 if (modelo.getTableExist()) {
                     String sql="SELECT * FROM " + modelo.getTableName();
                     sql = sql+Sql + ";";
-                    LogsJB.info(sql);
+                    //LogsJB.info(sql);
                     PreparedStatement ejecutor = connect.prepareStatement(sql);
 
                     for(int i=0; i< parametros.size(); i++){
@@ -206,7 +208,7 @@ public class Get extends Methods_Conexion {
                         Column columnsSQL = parametros.get(i);
                         convertJavaToSQL(columnsSQL, ejecutor, i+1);
                     }
-
+                    LogsJB.info(ejecutor.toString());
                     ResultSet registros = ejecutor.executeQuery();
                     if (registros.next()) {
                         procesarResultSetOneResult(modelo, registros);
@@ -304,7 +306,7 @@ public class Get extends Methods_Conexion {
                                         "registros especificados por el usuario: "+sql);
                             }
                         }
-                        LogsJB.info(sql);
+                        //LogsJB.info(sql);
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
 
                         for(int i=0; i< parametros.size(); i++){
@@ -312,6 +314,7 @@ public class Get extends Methods_Conexion {
                             Column columnsSQL = parametros.get(i);
                             convertJavaToSQL(columnsSQL, ejecutor, i+1);
                         }
+                        LogsJB.info(ejecutor.toString());
 
                         ResultSet registros = ejecutor.executeQuery();
 

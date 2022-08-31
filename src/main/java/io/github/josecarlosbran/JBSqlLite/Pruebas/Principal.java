@@ -74,9 +74,9 @@ public class Principal {
              * Instanciamos el modelo
              */
             Test test = new Test();
-            //new Principal().SQLITE(new Test());
+            new Principal().SQLITE(new Test());
 
-            new Principal().MySQL(new Test());
+            //new Principal().MySQL(new Test());
 
             //new Principal().PostgreSQL(new Test());
 
@@ -87,8 +87,8 @@ public class Principal {
 
 
 
-        } catch (DataBaseUndefind | PropertiesDBUndefined | InstantiationException | IllegalAccessException |
-                 ValorUndefined /*| ModelNotFound*/
+        } catch (DataBaseUndefind | PropertiesDBUndefined |InstantiationException | IllegalAccessException |
+                 ValorUndefined | ModelNotFound
                 /*|IllegalAccessException|InvocationTargetException*/ e) {
             LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -106,9 +106,16 @@ public class Principal {
                 "BD" +
                 separador +
                 "JBSqlUtils.db");
-        test.setGetPropertySystem(false);
-        test.setBD(BDSqlite);
-        test.setDataBaseType(DataBase.SQLite);
+        setPortGlobal("");
+        setHostGlobal("");
+        setUserGlobal("");
+        setPasswordGlobal("");
+        setDataBaseGlobal(BDSqlite);
+        setDataBaseTypeGlobal(DataBase.SQLite);
+        test.getSystemProperties();
+        //test.setGetPropertySystem(false);
+        //test.setBD(BDSqlite);
+        //test.setDataBaseType(DataBase.SQLite);
         long inicio = System.currentTimeMillis();
 
 
@@ -199,7 +206,7 @@ public class Principal {
          * El método orderBy() proporciona acceso a todos los métodos que hemos visto anteriormente, los cuales nos
          * permiten obtener uno o multiples registros, de acuerdo a la lógica que brindemos a nuestra sentencia SQL.
          */
-        lista=test.where("id", Operator.MAYOR_QUE, 0).orderBy("id", OrderType.DESC).getAll();
+        //lista=test.where("id", Operator.MAYOR_QUE, 0).orderBy("id", OrderType.DESC).getAll();
         //lista=test.where("id", Operator.MAYOR_QUE, "0").take(10).get();
 
 
@@ -223,9 +230,9 @@ public class Principal {
         /**
          * Esperamos a que el modelo termine de obtener la información de BD's
          */
-        while (!test.getTaskIsReady()){
+        /*while (!test.getTaskIsReady()){
 
-        }
+        }*/
         /**
          * Mostramos la información obtenida
          */
@@ -245,33 +252,33 @@ public class Principal {
          */
         Consumer<Test> showFilas = fila -> {
 
-            fila.setGetPropertySystem(false);
+            /*fila.setGetPropertySystem(false);
             fila.setPort("5076");
             fila.setHost("localhost");
             fila.setUser("Bran");
             fila.setPassword("Bran");
             fila.setBD("JBSQLUTILS");
-            fila.setDataBaseType(DataBase.MySQL);
+            fila.setDataBaseType(DataBase.MySQL);*/
 
             //fila.getIsMayor().setValor(!fila.getIsMayor().getValor());*/
             LogsJB.info(fila.getId().getValor()+"   "+fila.getName().getValor()+"   "+fila.getApellido().getValor()+"   "+fila.getIsMayor().getValor()+"   "+fila.getCreated_at().getValor()+"   "+fila.getUpdated_at().getValor());
-            fila.getId().setValor(null);
-            fila.setModelExist(false);
+            /*fila.getId().setValor(null);
+            fila.setModelExist(false);*/
         };
 
         /**
          * Mostramos la información obtenida iterando sobre los modelos obtenidos de BD's y mostrando
          * su contenido por medio de la función anonima que declaramos ateriormente.
          */
-        lista.forEach(showFilas);
+        //lista.forEach(showFilas);
 
 
-        test.saveALL(lista);
+        //test.saveALL(lista);
         //test.save();
         //test.delete();
-        while (!test.getTaskIsReady()){
+        /*while (!test.getTaskIsReady()){
 
-        }
+        }*/
 
 
 
@@ -290,7 +297,7 @@ public class Principal {
          * llamado al método execute el cual se encarga de ejecutar la sentencia SQL generada y retorna el numero de filas
          * afectadas.
          */
-        //int rows_afected=update("Test").set("Name", "Enma").where("Name", Operator.IGUAL_QUE, "Elsa").execute();
+        //int rows_afected=update("Test").set("IsMayor", true).where("Name", Operator.IGUAL_QUE, "Enma").and("IsMayor", Operator.IGUAL_QUE, false).execute();
 
 
         /**

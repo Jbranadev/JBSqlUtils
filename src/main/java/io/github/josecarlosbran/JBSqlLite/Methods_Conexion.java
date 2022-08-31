@@ -773,7 +773,7 @@ public class Methods_Conexion extends Conexion {
                             }
                         }
 
-                        LogsJB.info(sql);
+                        //LogsJB.info(sql);
 
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         //LogsJB.info("Creo la instancia del PreparedStatement");
@@ -794,6 +794,7 @@ public class Methods_Conexion extends Conexion {
                             auxiliar++;
                         }
 
+                        LogsJB.info(ejecutor.toString());
                         if (ejecutor.executeUpdate() == 1) {
                             int filas = ejecutor.getUpdateCount();
                             LogsJB.info("Filas Insertadas en BD's': " + filas);
@@ -888,7 +889,7 @@ public class Methods_Conexion extends Conexion {
                         sql = sql + " WHERE " + namePrimaryKey + "=?;";
 
 
-                        LogsJB.info(sql);
+                        //LogsJB.info(sql);
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         //LogsJB.info("Creo la instancia del PreparedStatement");
                         //Llena el prepareStatement
@@ -929,6 +930,7 @@ public class Methods_Conexion extends Conexion {
                             convertJavaToSQL(columnsSQL, ejecutor, auxiliar);
                         }
 
+                        LogsJB.info(ejecutor.toString());
                         if (ejecutor.executeUpdate() == 1) {
                             int filas = ejecutor.getUpdateCount();
                             LogsJB.info("Filas actualizadas: " + filas);
@@ -1013,7 +1015,7 @@ public class Methods_Conexion extends Conexion {
                         sql = sql + " WHERE " + namePrimaryKey + "=?;";
 
 
-                        LogsJB.info(sql);
+                        //LogsJB.info(sql);
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         //LogsJB.info("Creo la instancia del PreparedStatement");
                         //Llena el prepareStatement
@@ -1037,7 +1039,7 @@ public class Methods_Conexion extends Conexion {
                                 convertJavaToSQL(columnsSQL, ejecutor, auxiliar);
                             }
                         }
-
+                        LogsJB.info(ejecutor.toString());
                         if (ejecutor.executeUpdate() == 1) {
                             int filas = ejecutor.getUpdateCount();
                             LogsJB.info("Filas Eliminadas: " + filas);

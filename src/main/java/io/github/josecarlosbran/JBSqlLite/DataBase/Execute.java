@@ -77,7 +77,7 @@ class Execute extends Methods_Conexion {
                 try {
                     Connection connect=this.getConnection();
                     this.sql=this.sql+";";
-                    LogsJB.info(this.sql);
+                    //LogsJB.info(this.sql);
                     PreparedStatement ejecutor = connect.prepareStatement(this.sql);
 
                     //Setea los parametros de la consulta
@@ -86,6 +86,8 @@ class Execute extends Methods_Conexion {
                         Column columnsSQL = this.parametros.get(i);
                         convertJavaToSQL(columnsSQL, ejecutor, i+1);
                     }
+
+                    LogsJB.info(ejecutor.toString());
 
                     ejecutor.executeUpdate();
                     filas = ejecutor.getUpdateCount();
