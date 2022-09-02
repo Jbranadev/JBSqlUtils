@@ -15,6 +15,7 @@
  */
 package io.github.josecarlosbran.JBSqlLite;
 
+import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind;
@@ -23,7 +24,6 @@ import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Utilities.ColumnsSQL;
 import io.github.josecarlosbran.JBSqlLite.Utilities.PrimaryKey;
 import io.github.josecarlosbran.JBSqlLite.Utilities.TablesSQL;
-import io.github.josecarlosbran.LogsJB.LogsJB;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.InvocationTargetException;

@@ -15,6 +15,7 @@
  */
 package io.github.josecarlosbran.JBSqlLite;
 
+import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlLite.DataBase.Where;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
@@ -23,7 +24,6 @@ import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.LogsJB.LogsJB;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Method;

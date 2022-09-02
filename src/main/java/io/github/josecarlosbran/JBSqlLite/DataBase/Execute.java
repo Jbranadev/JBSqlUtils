@@ -16,12 +16,12 @@
 package io.github.josecarlosbran.JBSqlLite.DataBase;
 
 
+import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlLite.Column;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlLite.Methods_Conexion;
-import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

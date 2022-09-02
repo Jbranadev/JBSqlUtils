@@ -6,7 +6,7 @@
 
     <groupId>io.github.josecarlosbran</groupId>
     <artifactId>JBSqlUtils</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
 
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -58,7 +58,7 @@
         <dependency>
             <groupId>io.github.josecarlosbran</groupId>
             <artifactId>LogsJB</artifactId>
-            <version>0.5.5</version>
+            <version>0.5.6</version>
         </dependency>
 
         <!-- Dependencia para el uso de JDBC SQLite-->

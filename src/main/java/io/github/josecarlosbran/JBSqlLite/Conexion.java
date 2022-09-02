@@ -15,12 +15,12 @@
  */
 package io.github.josecarlosbran.JBSqlLite;
 
+import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Utilities.TablesSQL;
-import io.github.josecarlosbran.LogsJB.LogsJB;
 
 import java.sql.Connection;
 import java.util.Objects;
