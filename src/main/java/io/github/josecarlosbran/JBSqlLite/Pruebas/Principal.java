@@ -15,14 +15,14 @@
  */
 package io.github.josecarlosbran.JBSqlLite.Pruebas;
 
+import com.josebran.LogsJB.LogsJB;
+import com.josebran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlLite.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.LogsJB.LogsJB;
-import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;

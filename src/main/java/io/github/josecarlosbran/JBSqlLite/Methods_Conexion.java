@@ -71,7 +71,7 @@ public class Methods_Conexion extends Conexion {
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Retorna una lista de los metodos pertenecientes al modelo.
      */
-    protected synchronized <T> List<Method> getMethodsModel() {
+    public synchronized <T> List<Method> getMethodsModel() {
         Method[] metodos = this.getClass().getMethods();
         List<Method> result = new ArrayList<>();
         // Los muestro en consola
@@ -113,7 +113,7 @@ public class Methods_Conexion extends Conexion {
      * @param <T>     Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Lista de los metodos get del modelo que lo invoca.
      */
-    protected synchronized <T> List<Method> getMethodsGetOfModel(List<Method> metodos) {
+    public synchronized <T> List<Method> getMethodsGetOfModel(List<Method> metodos) {
         // Los muestro en consola
         int i = 0;
         //System.out.println("Inicia a obtener los metodos get");
@@ -140,7 +140,7 @@ public class Methods_Conexion extends Conexion {
      * @param <T>     Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Lista de los metodos set del modelo que lo invoca.
      */
-    protected synchronized <T> List<Method> getMethodsSetOfModel(List<Method> metodos) {
+    public synchronized <T> List<Method> getMethodsSetOfModel(List<Method> metodos) {
         List<Method> result = new ArrayList<>();
         for (Method metodo : metodos) {
             Parameter[] parametros = metodo.getParameters();
@@ -200,6 +200,7 @@ public class Methods_Conexion extends Conexion {
                 String password = this.getPassword();
                 connect = DriverManager.getConnection(url, usuario, password);
             } else if (this.getDataBaseType() == DataBase.SQLite) {
+                Class.forName("org.sqlite.JDBC").newInstance();
                 url = null;
                 connect = null;
                 url = "jdbc:" + this.getDataBaseType().getDBType() + ":" + this.getBD();
