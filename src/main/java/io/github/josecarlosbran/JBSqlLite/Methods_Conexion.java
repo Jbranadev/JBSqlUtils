@@ -123,7 +123,7 @@ public class Methods_Conexion extends Conexion {
             //Method metodo = result.get(i);
             String returntype = metodo.getReturnType().getSimpleName();
             String nombre = metodo.getName();
-            if (returntype.equals("Column") && StringUtils.containsIgnoreCase(nombre, "Get")) {
+            if (returntype.equals("Column") && StringUtils.startsWithIgnoreCase(nombre, "Get")) {
                 //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + returntype);
                 result.add(metodo);
             } else {
@@ -150,7 +150,7 @@ public class Methods_Conexion extends Conexion {
                 ParametroType = parametros[0].getType().getSimpleName();
             }
             //System.out.println(nombre + "   " + metodo.getDeclaringClass() + "  " + ParametroType);
-            if ((StringUtils.containsIgnoreCase(nombre, "Set")) && (ParametroType.equals("Column"))) {
+            if ((StringUtils.startsWithIgnoreCase(nombre, "Set")) && (ParametroType.equals("Column"))) {
                 result.add(metodo);
                 //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+ParametroType);
             } else {
@@ -461,7 +461,7 @@ public class Methods_Conexion extends Conexion {
                     for (int j = 0; j < metodosSet.size(); j++) {
                         Method metodo = metodosSet.get(j);
                         String metodoName = metodo.getName();
-                        metodoName = StringUtils.remove(metodoName, "set");
+                        metodoName = StringUtils.removeStartIgnoreCase(metodoName, "set");
                         //Si el nombre del metodo coincide con el nombre de la columna
                         if (StringUtils.equalsIgnoreCase(metodoName, nameColumn)) {
                             LogsJB.trace("Nombre de la columna, nombre del metodo set: " + nameColumn + "   " + metodoName);
@@ -475,7 +475,7 @@ public class Methods_Conexion extends Conexion {
                                 //Obtengo la información de la columna
                                 Column columnsSQL = (Column) metodoget.invoke(this, null);
                                 String NameMetodoGet = metodoget.getName();
-                                NameMetodoGet = StringUtils.remove(NameMetodoGet, "get");
+                                NameMetodoGet = StringUtils.removeStartIgnoreCase(NameMetodoGet, "get");
                                 if (StringUtils.equalsIgnoreCase(NameMetodoGet, nameColumn)) {
                                     columnsSQL.setColumnExist(true);
                                     LogsJB.debug("Seteara que la columna existe en BD's: " + nameColumn + "   " + NameMetodoGet);
@@ -725,7 +725,7 @@ public class Methods_Conexion extends Conexion {
                             //Obtengo la información de la columna
                             Column columnsSQL = (Column) metodo.invoke(modelo, null);
                             String columnName = metodo.getName();
-                            columnName = StringUtils.remove(columnName, "get");
+                            columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
                             if (Objects.isNull(columnsSQL.getValor())) {
 
                                 continue;
@@ -844,7 +844,7 @@ public class Methods_Conexion extends Conexion {
                             //Obtengo la información de la columna
                             Column columnsSQL = (Column) metodo.invoke(modelo, null);
                             String columnName = metodo.getName();
-                            columnName = StringUtils.remove(columnName, "get");
+                            columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
                             if (StringUtils.equalsIgnoreCase(namePrimaryKey, columnName)) {
                                 indicePrimarykey = i;
                                 continue;
@@ -908,7 +908,7 @@ public class Methods_Conexion extends Conexion {
                             //Obtengo la información de la columna
                             Column columnsSQL = (Column) metodo.invoke(modelo, null);
                             String columnName = metodo.getName();
-                            columnName = StringUtils.remove(columnName, "get");
+                            columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
                             if ((StringUtils.equalsIgnoreCase(columnName, "updated_at"))) {
                                 Long datetime = System.currentTimeMillis();
                                 columnsSQL.setValor(new Timestamp(datetime));
@@ -1012,7 +1012,7 @@ public class Methods_Conexion extends Conexion {
                             //Obtengo la información de la columna
                             Column columnsSQL = (Column) metodo.invoke(modelo, null);
                             String columnName = metodo.getName();
-                            columnName = StringUtils.remove(columnName, "get");
+                            columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
                             if (StringUtils.equalsIgnoreCase(namePrimaryKey, columnName)) {
                                 indicePrimarykey = i;
                                 continue;
@@ -1136,7 +1136,7 @@ public class Methods_Conexion extends Conexion {
             for (int j = 0; j < metodosSet.size(); j++) {
                 Method metodo = metodosSet.get(j);
                 String metodoName = metodo.getName();
-                metodoName = StringUtils.remove(metodoName, "set");
+                metodoName = StringUtils.removeStartIgnoreCase(metodoName, "set");
 
                 if (StringUtils.equalsIgnoreCase(metodoName, columnName)) {
 
@@ -1152,7 +1152,7 @@ public class Methods_Conexion extends Conexion {
                         //Obtengo la información de la columna
                         Column columnsSQL = (Column) metodoget.invoke(temp, null);
                         String NameMetodoGet = metodoget.getName();
-                        NameMetodoGet = StringUtils.remove(NameMetodoGet, "get");
+                        NameMetodoGet = StringUtils.removeStartIgnoreCase(NameMetodoGet, "get");
                         if (StringUtils.equalsIgnoreCase(NameMetodoGet, columnName)) {
                             LogsJB.trace("Nombre de la columna, nombre del metodo get: " + columnName + "   " + NameMetodoGet);
                             //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
@@ -1199,7 +1199,7 @@ public class Methods_Conexion extends Conexion {
             for (int j = 0; j < metodosSet.size(); j++) {
                 Method metodo = metodosSet.get(j);
                 String metodoName = metodo.getName();
-                metodoName = StringUtils.remove(metodoName, "set");
+                metodoName = StringUtils.removeStartIgnoreCase(metodoName, "set");
 
                 if (StringUtils.equalsIgnoreCase(metodoName, columnName)) {
 
@@ -1215,7 +1215,7 @@ public class Methods_Conexion extends Conexion {
                         //Obtengo la información de la columna
                         Column columnsSQL = (Column) metodoget.invoke(modelo, null);
                         String NameMetodoGet = metodoget.getName();
-                        NameMetodoGet = StringUtils.remove(NameMetodoGet, "get");
+                        NameMetodoGet = StringUtils.removeStartIgnoreCase(NameMetodoGet, "get");
                         if (StringUtils.equalsIgnoreCase(NameMetodoGet, columnName)) {
                             LogsJB.trace("Nombre de la columna, nombre del metodo get: " + columnName + "   " + NameMetodoGet);
                             //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);

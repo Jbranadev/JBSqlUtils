@@ -83,7 +83,7 @@ class Methods extends Methods_Conexion {
                             //Obtengo la información de la columna
                             Column columnsSQL = (Column) metodo.invoke(this, null);
                             String columnName = metodo.getName();
-                            columnName = StringUtils.remove(columnName, "get");
+                            columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
                             DataType columnType = columnsSQL.getDataTypeSQL();
                             //Manejo de tipo de dato TimeStamp en SQLServer
                             if ((columnType == DataType.TIMESTAMP) && (this.getDataBaseType() == DataBase.SQLServer)) {

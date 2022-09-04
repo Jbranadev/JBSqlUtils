@@ -6,7 +6,7 @@
 
     <groupId>io.github.josecarlosbran</groupId>
     <artifactId>JBSqlUtils</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -57,8 +57,8 @@
         <!-- Dependencia para el manejo de los Logs -->
         <dependency>
             <groupId>io.github.josecarlosbran</groupId>
-            <artifactId>LogsJB</artifactId>
-            <version>0.5.6</version>
+            <artifactId>LogsJBSupport</artifactId>
+            <version>0.1</version>
             <scope>compile</scope>
         </dependency>
 
