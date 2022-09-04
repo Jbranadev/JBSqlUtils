@@ -32,6 +32,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
@@ -489,5 +490,183 @@ class Methods extends Methods_Conexion {
         return lista;
     }
 
+
+    /**
+     * Llena el modelo con la información del controlador
+     * @param controlador Controlador que debe poseer los atributos en java, que corresponden al modelo, con
+     *                    sus respectivos metodos setter y getter
+     * @param modelo Modelo que será llenado con la información del controlador
+     * @param <T> Tipo de dato del controlador, acepta cualquier Object
+     * @param <G> Tipo de dato del modelo, acepta unicamente aquellos que heredan de la clase JBSqlUtils
+     */
+    public static <T, G extends JBSqlUtils> void llenarModelo(T controlador, G modelo){
+        try{
+
+            List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getMethods()));
+            for(Method controladorMethod : controladorMethods){
+                String controllerName=controladorMethod.getName();
+                String claseMethod=controladorMethod.getDeclaringClass().getSimpleName();
+                LogsJB.debug("Nombre del metodo del controlador: "+controllerName+" Clase a la que pertenece: "+claseMethod);
+                //Si la clase donde se declaro el metodo pertenece a la clase Object
+                if(claseMethod.equalsIgnoreCase("Object")){
+                    continue;
+                }
+
+                //Si el metodo no es un metodo get o set salta a la siguiente iteración
+                if(!(StringUtils.startsWithIgnoreCase(controllerName, "get"))
+                        && !(StringUtils.startsWithIgnoreCase(controllerName, "set"))){
+                    continue;
+                }
+
+                //Si el metodo es un set, que continue, no tiene caso hacer lo siguiente
+                if(StringUtils.startsWithIgnoreCase(controllerName, "set")){
+                    continue;
+                }
+
+                int parametros=controladorMethod.getParameterCount();
+                LogsJB.trace("Cantidad de parametros: "+parametros);
+                if(parametros!=0){
+                    continue;
+                }
+
+                LogsJB.trace("Validara si el contenido es nullo: "+controllerName);
+                //Si el contenido es null, continua, no tiene caso hacer el resto
+                Object contenido=(Object) controladorMethod.invoke(controlador, null);
+                if(Objects.isNull(contenido)){
+                    continue;
+                }
+
+
+                //Obtiene los metodos get del modelo
+                List<Method> modelGetMethods=modelo.getMethodsGetOfModel(modelo.getMethodsModel());
+                LogsJB.debug("Obtuvo los metodos Get del modelo: "+controllerName);
+                for (Method modelGetMethod: modelGetMethods){
+                    String modelGetName=modelGetMethod.getName();
+                    /*Si el nombre del metodo get, no coincide con el nombre del metodo del
+                    controlador, continua
+                    * */
+                    LogsJB.debug("Nombre del metodo Get del modelo: "+modelGetName);
+                    if(!StringUtils.equalsIgnoreCase(controllerName, modelGetName)){
+                        continue;
+                    }
+                    LogsJB.debug("Obtiene la columna: "+modelGetName);
+                    //Obtengo la información de la columna
+                    Column columnsSQL = (Column) modelGetMethod.invoke(modelo, null);
+                    //Le meto la información a la columa
+                    LogsJB.debug("Setea el contenido a la columna: "+modelGetName);
+                    columnsSQL.setValor(contenido);
+                    String columnName = modelGetMethod.getName();
+                    columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
+                    LogsJB.debug("Nombre de la columna a validar: "+columnName);
+
+                    //Obtiene los metodos set del modelo
+                    List<Method> modelSetMethods=modelo.getMethodsSetOfModel(modelo.getMethodsModel());
+                    LogsJB.debug("Obtuvo los metodos Set del modelo: "+modelGetName);
+
+                    for (Method modelSetMethod: modelSetMethods){
+                        String modelSetName=modelSetMethod.getName();
+                        LogsJB.trace("Nombre del metodo: "+modelSetName);
+                        //Si el metodo es un get, que continue, no tiene caso hacer lo siguiente
+                        if(StringUtils.startsWithIgnoreCase(modelSetName, "get")){
+                            continue;
+                        }
+                        LogsJB.trace("Si es un metodo Set: "+modelSetName);
+
+                        modelSetName = StringUtils.removeStartIgnoreCase(modelSetName, "set");
+                        LogsJB.trace("Nombre del metodo set a validar: "+modelSetName);
+                        if(StringUtils.equalsIgnoreCase(modelSetName, columnName)){
+                            //Setea el valor del metodo
+                            modelSetMethod.invoke(modelo, columnsSQL);
+                            LogsJB.info("Ingreso la columna en el metodo set: "+modelSetName);
+                        }
+                    }
+                }
+            }
+
+        }catch (Exception e) {
+            LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
+
+    }
+
+    /**
+     *
+     * @param controlador Controlador que debe poseer los atributos en java, que corresponden al modelo, con
+     *                    sus respectivos metodos setter y getter
+     * @param modelo Modelo del cual se extraera la información para llenar el controlador
+     * @param <T> Tipo de dato del controlador, acepta cualquier Object
+     * @param <G> Tipo de dato del modelo, acepta unicamente aquellos que heredan de la clase JBSqlUtils
+     */
+    public static <T, G extends JBSqlUtils> void llenarControlador(T controlador, G modelo){
+        try{
+            //Obtiene los metodos get del modelo
+            List<Method> modelGetMethods=modelo.getMethodsGetOfModel(modelo.getMethodsModel());
+            LogsJB.debug("Obtuvo los metodos Get del modelo: ");
+            for (Method modelGetMethod: modelGetMethods){
+                String modelGetName=modelGetMethod.getName();
+                LogsJB.debug("Nombre del metodo Get del modelo: "+modelGetName);
+                //Obtengo la información de la columna
+                Column columnsSQL = (Column) modelGetMethod.invoke(modelo, null);
+                Object dato=columnsSQL.getValor();
+                //Si el valor de la columna esta Null, no tiene caso seguir, salta a la siguiente iteración
+                if(Objects.isNull(dato)){
+                    continue;
+                }
+                LogsJB.debug("Dato que se ingresara al controlador: "+dato);
+
+                List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getMethods()));
+                for(Method controladorMethod : controladorMethods){
+                    String controllerName=controladorMethod.getName();
+                    String claseMethod=controladorMethod.getDeclaringClass().getSimpleName();
+                    LogsJB.debug("Nombre del metodo del controlador: "+controllerName+" Clase a la que pertenece: "+claseMethod);
+                    //Si la clase donde se declaro el metodo pertenece a la clase Object
+                    if(claseMethod.equalsIgnoreCase("Object")){
+                        continue;
+                    }
+
+                    //Si el metodo no es un metodo get o set salta a la siguiente iteración
+                    if(!(StringUtils.startsWithIgnoreCase(controllerName, "get"))
+                            && !(StringUtils.startsWithIgnoreCase(controllerName, "set"))){
+                        continue;
+                    }
+
+                    //Si el metodo es un get, que continue, no tiene caso hacer lo siguiente
+                    if(StringUtils.startsWithIgnoreCase(controllerName, "get")){
+                        continue;
+                    }
+
+                    //Valida que el metodo Set, si o sí, reciba un unico parametro
+                    int parametros=controladorMethod.getParameterCount();
+                    LogsJB.trace("Cantidad de parametros: "+parametros);
+                    if((parametros<1)||(parametros>1)){
+                        continue;
+                    }
+
+                    /*Si el nombre del metodo Get del modelo coincide con el nombre del metodo Set
+                    Guardara la información en el controlador*/
+                    modelGetName = StringUtils.removeStartIgnoreCase(modelGetName, "get");
+                    controllerName = StringUtils.removeStartIgnoreCase(controllerName, "set");
+                    LogsJB.debug("Nombre de la columna en el modelo: "+modelGetName+", controlador: "+controllerName);
+                    if(StringUtils.equalsIgnoreCase(modelGetName, controllerName)){
+                        controladorMethod.invoke(controlador, dato);
+                        LogsJB.info("Lleno la columna "+controllerName+" Con la información del modelo: "+dato);
+                    }
+
+                }
+
+            }
+        }catch (Exception e) {
+            LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
+
+    }
 
 }
