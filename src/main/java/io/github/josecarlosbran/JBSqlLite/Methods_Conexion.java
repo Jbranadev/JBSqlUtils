@@ -84,19 +84,20 @@ public class Methods_Conexion extends Conexion {
                 ParametroType = parametros[0].getType().getSimpleName();
             }
 
-            if ((clase.equals("Object")
-                    || clase.equals("And")
-                    || clase.equals("GET")
-                    || clase.equals("Or")
-                    || clase.equals("OrderBy")
-                    || clase.equals("Where")
-                    || clase.equals("Conexion")
-                    || clase.equals("Methods")
-                    || clase.equals("Methods_Conexion"))
-                //&& !(returntype.equals("Column") ||ParametroType.equals("Column"))
+            if ((clase.equalsIgnoreCase("Object")
+                    || clase.equalsIgnoreCase("And")
+                    || clase.equalsIgnoreCase("GET")
+                    || clase.equalsIgnoreCase("Or")
+                    || clase.equalsIgnoreCase("OrderBy")
+                    || clase.equalsIgnoreCase("Where")
+                    || clase.equalsIgnoreCase("Conexion")
+                    || clase.equalsIgnoreCase("Take")
+                    || clase.equalsIgnoreCase("Methods")
+                    || clase.equalsIgnoreCase("Methods_Conexion"))
+                //&& !(returntype.equalsIgnoreCase("Column") ||ParametroType.equalsIgnoreCase("Column"))
             ) {
 
-            } else if ((returntype.equals("Column") || ParametroType.equals("Column"))) {
+            } else if ((returntype.equalsIgnoreCase("Column") || ParametroType.equalsIgnoreCase("Column"))) {
                 //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + returntype+"  " + ParametroType);
                 result.add(metodo);
             }
@@ -123,7 +124,7 @@ public class Methods_Conexion extends Conexion {
             //Method metodo = result.get(i);
             String returntype = metodo.getReturnType().getSimpleName();
             String nombre = metodo.getName();
-            if (returntype.equals("Column") && StringUtils.startsWithIgnoreCase(nombre, "Get")) {
+            if (returntype.equalsIgnoreCase("Column") && StringUtils.startsWithIgnoreCase(nombre, "Get")) {
                 //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + returntype);
                 result.add(metodo);
             } else {
@@ -150,7 +151,7 @@ public class Methods_Conexion extends Conexion {
                 ParametroType = parametros[0].getType().getSimpleName();
             }
             //System.out.println(nombre + "   " + metodo.getDeclaringClass() + "  " + ParametroType);
-            if ((StringUtils.startsWithIgnoreCase(nombre, "Set")) && (ParametroType.equals("Column"))) {
+            if ((StringUtils.startsWithIgnoreCase(nombre, "Set")) && (ParametroType.equalsIgnoreCase("Column"))) {
                 result.add(metodo);
                 //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+ParametroType);
             } else {
