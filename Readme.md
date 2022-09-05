@@ -203,15 +203,15 @@ acá vemos un ejemplo:
 
 ~~~
 
-package io.github.josecarlosbran.JBSqlLite.Pruebas;
+package io.github.josecarlosbran.JBSqlUtils.Pruebas;
 
-import io.github.josecarlosbran.JBSqlLite.Column;
-import io.github.josecarlosbran.JBSqlLite.Enumerations.Constraint;
-import io.github.josecarlosbran.JBSqlLite.Enumerations.DataType;
-import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
-import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
-import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.JBSqlLite.JBSqlUtils;
+import io.github.josecarlosbran.JBSqlUtils.Column;
+import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
+import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
+import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
+import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
+import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
 
 /**
  * @author Jose Bran
