@@ -75,6 +75,8 @@ public class Principal {
             Test test = new Test();
             new Principal().SQLITE(new Test());
 
+
+
             //new Principal().MySQL(new Test());
 
             //new Principal().PostgreSQL(new Test());
@@ -197,7 +199,7 @@ public class Principal {
         /**
          * Obtenemos todos los modelos que su Id se encuentra entre 1 y 5
          */
-        lista = test.where("id", Operator.MAYOR_IGUAL_QUE, 1).and("id", Operator.MENOR_IGUAL_QUE, 5).getAll();
+        //lista = test.where("id", Operator.MAYOR_IGUAL_QUE, 1).and("id", Operator.MENOR_IGUAL_QUE, 5).getAll();
         //lista=test.where("id", Operator.MAYOR_QUE, "0").take(10).get();
 
 
@@ -225,9 +227,9 @@ public class Principal {
         /**
          * Esperamos a que el modelo termine de obtener la información de BD's
          */
-        while (!test.getTaskIsReady()) {
+        /*while (!test.getTaskIsReady()) {
 
-        }
+        }*/
         /**
          * Mostramos la información obtenida
          */
@@ -275,7 +277,7 @@ public class Principal {
          * Mostramos la información obtenida iterando sobre los modelos obtenidos de BD's y mostrando
          * su contenido por medio de la función anonima que declaramos ateriormente.
          */
-        lista.forEach(showFilas);
+        //lista.forEach(showFilas);
 
         /**
          * Tomara el tiempo desde que se llama al método deleteAll(), hasta que se termina de eliminar el ulitmo modelo
@@ -287,7 +289,7 @@ public class Principal {
          * Elimina la información de los modelos proporcionados en BD's
          * @param modelos Lista de modelos que serán Eliminados
          */
-        test.deleteALL(lista);
+        //test.deleteALL(lista);
         //test.save();
         //test.delete();
         /*while (!test.getTaskIsReady()){
@@ -337,7 +339,7 @@ public class Principal {
         /**
          * Imprime el tiempo de ejecución que llevo eliminar los modelos en BD's
          */
-        double tiempo = (double) ((fin - deleteall));
+        double tiempo = (double) ((fin - inicio));
         LogsJB.warning(tiempo + " mili segundos");
         //LogsJB.warning("Filas afectadas por el update: "+rows_afected);
 

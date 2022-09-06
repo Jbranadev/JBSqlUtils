@@ -24,98 +24,76 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  */
 public enum DataType {
 
-    /**
-     * Cadena de caracteres de longitud fija
-     */
-    CHAR("1"),
-
-    /**
-     * Cadena de caracteres de longitud variable
-     */
-    VARCHAR("254"),
-
-    /**
-     * Cadenas de cualquier longitud (varios megabytes)
-     */
-    LONGVARCHAR(""),
-
-    /**
-     * Valores decimales de precisión absoluta
-     */
-    NUMERIC(""),
-
-    /**
-     * Valor decimal de precisión absoluta
-     */
-    DECIMAL(""),
-
-    /**
-     * Valor decimal de precisión absoluta
-     */
-    MONEY(""),
-
-    /**
-     * Valor decimal de precisión absoluta
-     */
-    SMALLMONEY(""),
-
-    /**
-     * Bit único/valor binario (activado o desactivado)
-     */
-    BIT(""),
-
-    /**
-     * Valor Booleano
-     */
-    BOOLEAN(""),
-
-    /**
-     * Valor Booleano
-     */
-    BOOL(""),
-
-    /**
-     * entero de 16 bits
-     */
-    SMALLINT(""),
-
-    /**
-     * entero de 16 bits
-     */
-    TINYINT(""),
-
     //java.lang.Integer
 
     /**
      * Entero de 32 bits con signo
      */
-    INTEGER(""),
+    INTEGER("", 1),
 
     /**
      * Entero de 32 bits con signo
      */
-    INT(""),
+    INT("", 1),
 
     /**
      * Tipo de dato auto incrementable en SQL Server
      */
-    IDENTITY("1,1"),
+    IDENTITY("1,1", 1),
 
     /**
      * Tipo de dato auto incrementable en PostgreSQL
      */
-    SERIAL("SERIAL"),
+    SERIAL("SERIAL",1),
     //java.lang.Integer
 
+
+
     /**
-     * Valor de coma flotante
+     * Cadena de caracteres de longitud fija
      */
-    REAL(""),
+    CHAR("1",2),
+
+    /**
+     * Cadena de caracteres de longitud variable
+     */
+    VARCHAR("21844",2),
+
+    /**
+     * Cadenas de cualquier longitud (varios megabytes), debe definir el tamaño que desea tenga la columna
+     * por medio del metodo setSize, para esta numeración en especifico.
+     */
+    LONGVARCHAR("",2),
+
+    /**
+     * Enum se tienen que definir las opciones disponibles a través del metodo setSize, envíando como parametro
+     * para esta numeración, las opciones que deseamos tenga disponible
+     */
+    ENUM("",2),
+
+
+
+    /**
+     * entero de 16 bits
+     */
+    SMALLINT("",3),
+
+    /**
+     * entero de 16 bits
+     */
+    TINYINT("",3),
+
+
 
     /**
      * Valor de coma flotante
      */
-    FLOAT(""),
+    REAL("",4),
+
+    /**
+     * Valor de coma flotante
+     */
+    FLOAT("",4),
 
     //double
 
@@ -124,63 +102,135 @@ public enum DataType {
     /**
      * Gran valor de punto flotante
      */
-    DOUBLE(""),
+    DOUBLE("38,3",4),
+
+
+    /**
+     * Valores decimales de precisión absoluta
+     */
+    NUMERIC("38,2",4),
+
+    /**
+     * Valor decimal de precisión absoluta
+     */
+    DECIMAL("38,3",4),
+
+    /**
+     * Valor decimal de precisión absoluta
+     */
+    MONEY("38,2",4),
+
+    /**
+     * Valor decimal de precisión absoluta
+     */
+    SMALLMONEY("18,2",4),
+
+
+
+
+    /**
+     * Bit único/valor binario (activado o desactivado)
+     */
+    BIT("",5),
+
+    /**
+     * Valor Booleano
+     */
+    BOOLEAN("",5),
+
+    /**
+     * Valor Booleano
+     */
+    BOOL("",5),
+
+
+
 
     /**
      * Matriz de valores binarios
      */
-    BINARY(""),
+    BINARY("1",6),
 
     /**
-     * Matriz de longitud variable de valores binarios
+     * Matriz de longitud variable de valores binarios, en mysql el valor maximo es de 21844
+     * pero en sql server es de 8000
      */
-    VARBINARY(""),
+    VARBINARY("8000",6),
 
     /**
      * Matriz de valores binarios de cualquier longitud (varios megabytes)
+     * SQL Server
      */
-    LONGVARBINARY(""),
+    LONGVARBINARY("MAX",6),
+
+
+    /**
+     * Cadena binaria de ancho variable
+     */
+    IMAGE("",6),
+
+
+
+
+    /**
+     * Setea que el tipo de dato será un Object
+     */
+    OBJECT("",7),
+
+    /**
+     * Setea que el tipo de dato será un JSON
+     */
+    JSON("",7),
+
+
 
 
     /**
      * Valor de fecha
      */
-    DATE(""),
+    DATE("",8),
+
+
 
     /**
      * Valor del tiempo
      */
-    TIME(""),
+    TIME("",9),
+
+
+
 
     /**
      * Valor de tiempo con campo adicional de nanosegundos
      */
-    TIMESTAMP(""),
+    TIMESTAMP("",10),
 
     /**
      * Valor de tiempo con campo adicional de nanosegundos
      */
-    SMALLDATETIME(""),
+    SMALLDATETIME("",10),
 
     /**
      * Valor de tiempo con campo adicional de nanosegundos
      */
-    DATETIME(""),
+    DATETIME("",10),
 
-    /**
-     * Setea que el tipo de dato será un Object
-     */
-    OBJECT(""),
 
     /**
      * Valor de tiempo con campo adicional de nanosegundos
      */
-    DATETIME2("");
+    DATETIME2("",10);
+
+
+
 
     private String size;
 
-    private DataType(String Size) {
+    private int orden;
+
+    private DataType(String Size, int orden) {
         this.size = Size;
+        this.orden = orden;
     }
 
     /**
@@ -219,5 +269,13 @@ public enum DataType {
      */
     public void setSize(String Size) {
         this.size = Size;
+    }
+
+    /**
+     * Obtiene el orden del tipo de dato
+     * @return Retorna el nivel de orden definido para el tipo de dato
+     */
+    public int getOrden() {
+        return orden;
     }
 }

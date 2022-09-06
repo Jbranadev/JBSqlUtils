@@ -26,6 +26,7 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import org.apache.commons.lang3.StringUtils;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -77,6 +78,38 @@ class Methods extends Methods_Conexion {
                         String sql = "CREATE TABLE " + this.getClass().getSimpleName() + "(";
                         List<Method> metodos = new ArrayList<>();
                         metodos = this.getMethodsGetOfModel(this.getMethodsModel());
+                        //Aquí vamos a ordenar la lista
+                        LogsJB.debug("Comienza a ordenar la lista");
+                        metodos.sort((metodo1,metodo2)->{
+                            try {
+
+                                Column columna1 = (Column) metodo1.invoke(this, null);
+                                Column columna2 = (Column) metodo2.invoke(this, null);
+                                LogsJB.trace("Columnas a evaluar: "+metodo1.getName()+"  "+metodo2.getName());
+                                if(columna1.getDataTypeSQL().getOrden()>columna2.getDataTypeSQL().getOrden()){
+                                    LogsJB.trace("Columna de metodo 1 es mayor");
+                                    return 1;
+                                }else if(columna2.getDataTypeSQL().getOrden()>columna1.getDataTypeSQL().getOrden()){
+                                    LogsJB.trace("Columna de metodo 2 es mayor");
+                                    return -1;
+                                }else{
+                                    LogsJB.trace("Columnas son iguales");
+                                    return 0;
+                                }
+                            } catch (Exception e) {
+                                LogsJB.fatal("Excepción disparada al tratar de ordenar los metodos get de la lista: " + e.toString());
+                                LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                                LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                                LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                                LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                            }
+                            return 0;
+                        });
+
+
+                        LogsJB.info("Termino de ordenar la lista");
+
+
                         int datos = 0;
                         for (int i = 0; i < metodos.size(); i++) {
                             //Obtengo el metodo
