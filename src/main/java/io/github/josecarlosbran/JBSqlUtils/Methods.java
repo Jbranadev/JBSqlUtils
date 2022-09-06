@@ -562,7 +562,7 @@ class Methods extends Methods_Conexion {
                     continue;
                 }
 
-                LogsJB.trace("Validara si el contenido es nullo: "+controllerName);
+                LogsJB.trace("Validara si el contenido es Null: "+controllerName);
                 //Si el contenido es null, continua, no tiene caso hacer el resto
                 Object contenido=(Object) controladorMethod.invoke(controlador, null);
                 if(Objects.isNull(contenido)){
