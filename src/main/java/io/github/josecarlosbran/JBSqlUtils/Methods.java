@@ -532,7 +532,7 @@ class Methods extends Methods_Conexion {
      * @param <T> Tipo de dato del controlador, acepta cualquier Object
      * @param <G> Tipo de dato del modelo, acepta unicamente aquellos que heredan de la clase JBSqlUtils
      */
-    public static <T, G extends JBSqlUtils> void llenarModelo(T controlador, G modelo){
+    public <T, G extends JBSqlUtils> void llenarModelo(T controlador, G modelo){
         try{
 
             List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getMethods()));
@@ -642,7 +642,7 @@ class Methods extends Methods_Conexion {
      * @param <T> Tipo de dato del controlador, acepta cualquier Object
      * @param <G> Tipo de dato del modelo, acepta unicamente aquellos que heredan de la clase JBSqlUtils
      */
-    public static <T, G extends JBSqlUtils> void llenarControlador(T controlador, G modelo){
+    public <T, G extends JBSqlUtils> void llenarControlador(T controlador, G modelo){
         try{
             //Obtiene los metodos get del modelo
             List<Method> modelGetMethods=modelo.getMethodsGetOfModel(modelo.getMethodsModel());
