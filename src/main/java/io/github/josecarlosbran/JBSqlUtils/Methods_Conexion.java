@@ -1016,7 +1016,7 @@ public class Methods_Conexion extends Conexion {
                             columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
                             if (StringUtils.equalsIgnoreCase(namePrimaryKey, columnName)) {
                                 indicePrimarykey = i;
-                                continue;
+                                break;
                             }
                         }
 
@@ -1159,6 +1159,7 @@ public class Methods_Conexion extends Conexion {
                             //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
                             columnsSQL.setColumnExist(true);
                             convertSQLtoJava(columna, registros, metodo, columnsSQL, temp);
+                            break;
                         }
                     }
                 }
@@ -1201,15 +1202,12 @@ public class Methods_Conexion extends Conexion {
                 Method metodo = metodosSet.get(j);
                 String metodoName = metodo.getName();
                 metodoName = StringUtils.removeStartIgnoreCase(metodoName, "set");
-
                 if (StringUtils.equalsIgnoreCase(metodoName, columnName)) {
-
                     LogsJB.trace("Nombre de la columna, nombre del metodo set: " + columnName + "   " + metodoName);
                     List<Method> metodosget = new ArrayList<>();
                     metodosget = modelo.getMethodsGetOfModel(modelo.getMethodsModel());
                     LogsJB.trace("Cantidad de metodos get: " + metodosget.size());
                     //Llena la información de las columnas que se insertaran
-
                     for (int a = 0; a < metodosget.size(); a++) {
                         //Obtengo el metodo
                         Method metodoget = metodosget.get(a);
@@ -1222,6 +1220,7 @@ public class Methods_Conexion extends Conexion {
                             //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
                             columnsSQL.setColumnExist(true);
                             convertSQLtoJava(columna, registros, metodo, columnsSQL, modelo);
+                            break;
                         }
                     }
                 }

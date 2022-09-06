@@ -563,6 +563,8 @@ class Methods extends Methods_Conexion {
                     List<Method> modelSetMethods=modelo.getMethodsSetOfModel(modelo.getMethodsModel());
                     LogsJB.debug("Obtuvo los metodos Set del modelo: "+modelGetName);
 
+                    Boolean isready = false;
+
                     for (Method modelSetMethod: modelSetMethods){
                         String modelSetName=modelSetMethod.getName();
                         LogsJB.trace("Nombre del metodo: "+modelSetName);
@@ -578,8 +580,14 @@ class Methods extends Methods_Conexion {
                             //Setea el valor del metodo
                             modelSetMethod.invoke(modelo, columnsSQL);
                             LogsJB.info("Ingreso la columna en el metodo set: "+modelSetName);
+                            isready=true;
+                            break;
                         }
                     }
+                    if(isready){
+                        break;
+                    }
+
                 }
             }
 
@@ -654,6 +662,7 @@ class Methods extends Methods_Conexion {
                     if(StringUtils.equalsIgnoreCase(modelGetName, controllerName)){
                         controladorMethod.invoke(controlador, dato);
                         LogsJB.info("Lleno la columna "+controllerName+" Con la información del modelo: "+dato);
+                        break;
                     }
 
                 }
