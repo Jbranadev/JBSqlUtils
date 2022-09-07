@@ -20,12 +20,14 @@ import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
+import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.ColumnsSQL;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.PrimaryKey;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.TablesSQL;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -204,6 +206,28 @@ public class Methods_Conexion extends Conexion {
                 Class.forName("org.sqlite.JDBC").newInstance();
                 url = null;
                 connect = null;
+                try{
+                    //Rutas de archivos
+                    File fichero = new File(this.getBD());
+                    //Verifica si existe la carpeta Logs, si no existe, la Crea
+                    String carpeta=fichero.getParent();
+                    if(!Objects.isNull(carpeta)){
+                        File directorio = new File(carpeta);
+                        if (!directorio.exists()) {
+                            if (directorio.mkdirs()) {
+                                LogsJB.debug("Crea el directorio donde estara la BD's SQLite: "+fichero.getParent());
+                            }
+                        }
+                    }
+
+                }catch (Exception e){
+                    LogsJB.fatal("Excepción disparada al intentar crear el directorio donde estará la BD's SQLite: " + e.toString());
+                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                }
+
                 url = "jdbc:" + this.getDataBaseType().getDBType() + ":" + this.getBD();
                 connect = DriverManager.getConnection(url);
             }
