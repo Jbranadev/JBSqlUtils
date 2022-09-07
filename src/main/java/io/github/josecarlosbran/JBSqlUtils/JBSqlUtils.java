@@ -46,9 +46,8 @@ public class JBSqlUtils extends Methods {
      *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
-     * @throws ValorUndefined        Lanza esta excepción si la bandera proporcionada es Null
      */
-    public JBSqlUtils() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    public JBSqlUtils() throws DataBaseUndefind, PropertiesDBUndefined {
         super();
 
     }
