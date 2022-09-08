@@ -49,7 +49,6 @@ public class JBSqlUtils extends Methods {
      */
     public JBSqlUtils() throws DataBaseUndefind, PropertiesDBUndefined {
         super();
-
     }
 
     /**

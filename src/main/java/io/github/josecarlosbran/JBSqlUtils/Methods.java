@@ -75,7 +75,7 @@ class Methods extends Methods_Conexion {
                         LogsJB.info("La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.");
                         return false;
                     } else {
-                        String sql = "CREATE TABLE " + this.getClass().getSimpleName() + "(";
+                        String sql = "CREATE TABLE " + this.getTableName() + "(";
                         List<Method> metodos = new ArrayList<>();
                         metodos = this.getMethodsGetOfModel(this.getMethodsModel());
                         //Aquí vamos a ordenar la lista
@@ -183,7 +183,7 @@ class Methods extends Methods_Conexion {
                         LogsJB.info(sql);
                         if (!ejecutor.execute(sql)) {
                             LogsJB.info("Sentencia para crear tabla de la BD's ejecutada exitosamente");
-                            LogsJB.info("Tabla " + this.getClass().getSimpleName() + " Creada exitosamente");
+                            LogsJB.info("Tabla " + this.getTableName() + " Creada exitosamente");
                             LogsJB.info(sql);
 
                             this.closeConnection(connect);
@@ -237,14 +237,14 @@ class Methods extends Methods_Conexion {
                     if (this.tableExist()) {
                         String sql = "";
                         if (this.getDataBaseType() == DataBase.MySQL || this.getDataBaseType() == DataBase.PostgreSQL || this.getDataBaseType() == DataBase.SQLite) {
-                            sql = "DROP TABLE IF EXISTS " + this.getClass().getSimpleName();
+                            sql = "DROP TABLE IF EXISTS " + this.getTableName();
                             //+ " RESTRICT";
                         } else if (this.getDataBaseType() == DataBase.SQLServer) {
                             sql = "if exists (select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = '" +
-                                    this.getClass().getSimpleName() +
+                                    this.getTableName() +
                                     "' AND TABLE_SCHEMA = 'dbo')\n" +
                                     "    drop table dbo." +
-                                    this.getClass().getSimpleName();
+                                    this.getTableName();
                             //+" RESTRICT;";
                         }
                         LogsJB.info(sql);
@@ -253,7 +253,7 @@ class Methods extends Methods_Conexion {
 
                         if (!ejecutor.execute(sql)) {
                             LogsJB.info("Sentencia para eliminar tabla de la BD's ejecutada exitosamente");
-                            LogsJB.info("Tabla " + this.getClass().getSimpleName() + " Eliminada exitosamente");
+                            LogsJB.info("Tabla " + this.getTableName() + " Eliminada exitosamente");
                             LogsJB.info(sql);
                             //this.setTableExist(false);
                             this.refresh();

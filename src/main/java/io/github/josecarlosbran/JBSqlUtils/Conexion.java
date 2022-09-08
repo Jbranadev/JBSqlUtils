@@ -151,8 +151,17 @@ class Conexion {
         this.setPort(setearPort());
         this.setUser(setearUser());
         this.setPassword(setearPassword());
+        this.setTableName();
     }
 
+    /**
+     * Si el nombre de la tabla no esta definido, setea el nombre del modelo, como nombre de la tabla
+     */
+    private void setTableName(){
+        if(stringIsNullOrEmpty(this.getTableName())){
+            this.setTableName(this.getClass().getSimpleName());
+        }
+    }
 
     /**
      * Metodo que se encarga de inicializar las propiedades de conexión del modelo,

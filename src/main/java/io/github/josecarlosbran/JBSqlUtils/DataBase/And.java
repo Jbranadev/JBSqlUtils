@@ -64,7 +64,6 @@ public class And<T> extends Get {
      */
     protected And(String sql, String columna, Operator operador, Object valor, T modelo, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
-        System.out.println("Nombre de la clase pasada como modelo: " + modelo.getClass().getSimpleName());
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
         }

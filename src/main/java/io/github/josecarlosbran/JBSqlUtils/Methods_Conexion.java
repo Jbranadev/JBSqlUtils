@@ -333,7 +333,7 @@ public class Methods_Conexion extends Conexion {
                         }
 
 
-                        String NameModel = this.getClass().getSimpleName();
+                        String NameModel = this.getTableName();
                         String NameTable = temp.getTABLE_NAME();
                         if (NameModel.equalsIgnoreCase(NameTable)) {
                             this.setTableExist(Boolean.TRUE);
@@ -738,7 +738,7 @@ public class Methods_Conexion extends Conexion {
                 try {
                     if (modelo.getTableExist()) {
 
-                        String sql = "INSERT INTO " + modelo.getClass().getSimpleName() + "(";
+                        String sql = "INSERT INTO " + modelo.getTableName() + "(";
                         List<Method> metodos = new ArrayList<>();
                         metodos = modelo.getMethodsGetOfModel(modelo.getMethodsModel());
                         int datos = 0;
