@@ -23,6 +23,7 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
+import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Methods_Conexion;
 
 import java.util.ArrayList;
@@ -200,7 +201,7 @@ public class And<T> extends Get {
      *
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      */
-    public <T extends Methods_Conexion> void get() {
+    public <T extends JBSqlUtils> void get() {
         super.get((T) this.modelo, this.sql, this.parametros);
     }
 
@@ -210,7 +211,7 @@ public class And<T> extends Get {
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
      */
-    public <T extends Methods_Conexion> T first() {
+    public <T extends JBSqlUtils> T first() {
         return (T) super.first((T) this.modelo, this.sql, this.parametros);
     }
 
@@ -222,7 +223,7 @@ public class And<T> extends Get {
      * @throws ModelNotFound Lanza esta excepción si no logra encontrar el registro correspondiente a la consulta
      *                       SQL realizada.
      */
-    public <T extends Methods_Conexion> T firstOrFail() throws ModelNotFound {
+    public <T extends JBSqlUtils> T firstOrFail() throws ModelNotFound {
         return (T) super.firstOrFail((T) this.modelo, this.sql, this.parametros);
     }
 
@@ -237,7 +238,7 @@ public class And<T> extends Get {
      *                                del tipo de modelo proporcionado
      * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
      */
-    public <T extends Methods_Conexion> List<T> getAll() throws InstantiationException, IllegalAccessException {
+    public <T extends JBSqlUtils> List<T> getAll() throws InstantiationException, IllegalAccessException {
         return (List<T>) super.getAll((T) this.modelo, this.sql, this.parametros);
     }
 

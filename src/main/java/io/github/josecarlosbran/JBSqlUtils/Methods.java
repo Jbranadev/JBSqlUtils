@@ -317,7 +317,7 @@ class Methods extends Methods_Conexion {
      * @param <T>     Tipo de parametro que hace que el metodo sea generico para poder ser
      *                llamado por diferentes tipos de objetos, siempre y cuando estos hereden la clase Methods Conexion.
      */
-    public <T extends Methods_Conexion> void saveALL(List<T> modelos) {
+    public <T extends JBSqlUtils> void saveALL(List<T> modelos) {
         try {
             T temp = null;
             for (T modelo : modelos) {
@@ -381,7 +381,7 @@ class Methods extends Methods_Conexion {
      * @param <T>     Tipo de parametro que hace que el metodo sea generico para poder ser
      *                llamado por diferentes tipos de objetos, siempre y cuando estos hereden la clase Methods Conexion.
      */
-    public <T extends Methods_Conexion> void deleteALL(List<T> modelos) {
+    public <T extends JBSqlUtils> void deleteALL(List<T> modelos) {
         try {
             T temp = null;
             for (T modelo : modelos) {
@@ -472,7 +472,7 @@ class Methods extends Methods_Conexion {
      *                                del tipo de modelo proporcionado
      * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
      */
-    public <T extends Methods_Conexion> List<T> getAll() throws InstantiationException, IllegalAccessException {
+    public <T extends JBSqlUtils> List<T> getAll() throws InstantiationException, IllegalAccessException {
         this.setTaskIsReady(false);
         List<T> lista = new ArrayList<>();
         try {

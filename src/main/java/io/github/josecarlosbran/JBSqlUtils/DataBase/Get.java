@@ -22,6 +22,7 @@ import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Methods_Conexion;
 import org.apache.commons.lang3.StringUtils;
 
