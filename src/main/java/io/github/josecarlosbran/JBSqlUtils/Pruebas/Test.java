@@ -42,13 +42,13 @@ public class Test extends JBSqlUtils {
      *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
-     * @throws ValorUndefined        Lanza esta excepción si la bandera proporcionada es Null
      */
-    public Test() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    public Test() throws DataBaseUndefind, PropertiesDBUndefined{
         /**
          * Hacemos el llamado al constructor de la Clase JBSqlUtils
          */
         super();
+        this.setTableName("testModel");
     }
 
     /**

@@ -144,6 +144,7 @@ class Conexion {
      * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión no han sido definidas.
      */
     public Conexion() throws DataBaseUndefind, PropertiesDBUndefined {
+        this.setTableName();
         this.setGetPropertySystem(true);
         this.setDataBaseType(setearDBType());
         this.setBD(setearBD());
@@ -151,7 +152,6 @@ class Conexion {
         this.setPort(setearPort());
         this.setUser(setearUser());
         this.setPassword(setearPassword());
-        this.setTableName();
     }
 
     /**
@@ -657,7 +657,7 @@ class Conexion {
      *
      * @param tableExist True si la tabla correspondiente al modelo existe en BD's, de lo contrario False.
      */
-    protected void setTableExist(Boolean tableExist) {
+    protected synchronized void setTableExist(Boolean tableExist) {
         this.tableExist = tableExist;
     }
 
