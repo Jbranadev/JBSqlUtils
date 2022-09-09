@@ -561,6 +561,14 @@ class Methods extends Methods_Conexion {
                     continue;
                 }
 
+                //Validara si es un void
+                if (controladorMethod.getReturnType().equals(Void.TYPE)){
+                    LogsJB.debug("El metodo "+controladorMethod.getName()+" No retorna ningun tipo" +
+                            "de dato por lo que no tiene caso continuar con la Iteración");
+                    continue;
+                }
+
+
                 LogsJB.trace("Validara si el contenido es Null: "+controllerName);
                 //Si el contenido es null, continua, no tiene caso hacer el resto
                 Object contenido=(Object) controladorMethod.invoke(controlador, null);
