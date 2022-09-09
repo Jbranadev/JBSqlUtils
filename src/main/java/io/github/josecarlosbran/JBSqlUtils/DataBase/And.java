@@ -24,7 +24,6 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
-import io.github.josecarlosbran.JBSqlUtils.Methods_Conexion;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -23,9 +23,14 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -72,8 +77,26 @@ public class Principal {
             /**
              * Instanciamos el modelo
              */
-            Test test = new Test();
-            new Principal().SQLITE(new Test());
+            //Test test = new Test();
+            //new Principal().SQLITE(new Test());
+
+            SecretKey clave = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+            String key=(Base64.getEncoder().encodeToString(clave.getEncoded()));
+
+            LogsJB.info("Algoritmo de la clave: "+clave.getAlgorithm());
+            LogsJB.info("Clave en texto: "+key);
+
+
+
+            byte[] decodedKey = Base64.getDecoder().decode(key);
+
+            SecretKey originalKey = new SecretKeySpec(decodedKey, "HmacSHA512");
+
+
+
+            if(originalKey.equals(clave)){
+                LogsJB.info("Las claves son iguales 2");
+            }
 
 
 
@@ -84,8 +107,8 @@ public class Principal {
             // new Principal().SQLServer(new Test());
 
 
-        } catch (DataBaseUndefind | PropertiesDBUndefined | InstantiationException | IllegalAccessException |
-                 ValorUndefined | ModelNotFound
+        } catch (/*DataBaseUndefind | PropertiesDBUndefined | InstantiationException | IllegalAccessException |
+                 ValorUndefined | ModelNotFound*/ Exception
                 /*|IllegalAccessException|InvocationTargetException*/ e) {
             LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());

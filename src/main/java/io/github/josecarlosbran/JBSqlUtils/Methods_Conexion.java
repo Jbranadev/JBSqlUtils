@@ -20,7 +20,6 @@ import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.ColumnsSQL;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.PrimaryKey;

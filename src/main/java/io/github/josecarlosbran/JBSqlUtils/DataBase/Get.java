@@ -65,7 +65,7 @@ public class Get extends Methods_Conexion {
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
      * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      */
-    protected <T extends Methods_Conexion> void get(T modelo, String Sql, List<Column> parametros) {
+    protected <T extends JBSqlUtils> void get(T modelo, String Sql, List<Column> parametros) {
         try {
             modelo.setTaskIsReady(false);
             if (!modelo.getTableExist()) {
@@ -128,7 +128,7 @@ public class Get extends Methods_Conexion {
      * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
      */
-    protected <T extends Methods_Conexion> T first(T modelo, String Sql, List<Column> parametros) {
+    protected <T extends JBSqlUtils> T first(T modelo, String Sql, List<Column> parametros) {
         try {
             modelo.setTaskIsReady(false);
             if (!modelo.getTableExist()) {
@@ -192,7 +192,7 @@ public class Get extends Methods_Conexion {
      * @throws ModelNotFound Lanza esta excepción si no logra encontrar el registro correspondiente a la consulta
      *                       SQL realizada.
      */
-    protected <T extends Methods_Conexion> T firstOrFail(T modelo, String Sql, List<Column> parametros) throws ModelNotFound {
+    protected <T extends JBSqlUtils> T firstOrFail(T modelo, String Sql, List<Column> parametros) throws ModelNotFound {
         modelo.setTaskIsReady(false);
         if (!modelo.getTableExist()) {
             modelo.refresh();
@@ -273,7 +273,7 @@ public class Get extends Methods_Conexion {
      *                                del tipo de modelo proporcionado
      * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
      */
-    protected <T extends Methods_Conexion> List<T> getAll(T modelo, String Sql, List<Column> parametros) throws InstantiationException, IllegalAccessException {
+    protected <T extends JBSqlUtils> List<T> getAll(T modelo, String Sql, List<Column> parametros) throws InstantiationException, IllegalAccessException {
         modelo.setTaskIsReady(false);
         List<T> lista = new ArrayList<>();
         try {

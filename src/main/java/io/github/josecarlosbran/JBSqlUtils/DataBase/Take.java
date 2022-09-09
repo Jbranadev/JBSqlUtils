@@ -19,7 +19,7 @@ import io.github.josecarlosbran.JBSqlUtils.Column;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.JBSqlUtils.Methods_Conexion;
+import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,7 +104,7 @@ public class Take<T> extends Get {
      *                                del tipo de modelo proporcionado
      * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
      */
-    public <T extends Methods_Conexion> List<T> get() throws InstantiationException, IllegalAccessException {
+    public <T extends JBSqlUtils> List<T> get() throws InstantiationException, IllegalAccessException {
         return (List<T>) super.getAll((T) this.modelo, this.sql, this.parametros);
     }
 
