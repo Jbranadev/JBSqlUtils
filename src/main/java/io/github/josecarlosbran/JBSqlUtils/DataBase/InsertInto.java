@@ -19,7 +19,7 @@ public class InsertInto {
         if (stringIsNullOrEmpty(TableName)) {
             throw new ValorUndefined("El nombre de la Tabla proporcionado esta vacío o es NULL");
         }
-        this.sql = "INSERT INTO " + TableName + " ";
+        this.sql = "INSERT INTO " + TableName + "";
     }
 
     /**

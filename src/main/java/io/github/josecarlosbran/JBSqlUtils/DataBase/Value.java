@@ -76,7 +76,7 @@ public class Value {
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     public int execute() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        String values=" Values (";
+        String values=" VALUES (";
         //Setea los parametros de la consulta
         for (int i = 0; i < this.parametros.size(); i++) {
             //Obtengo la información de la columna
