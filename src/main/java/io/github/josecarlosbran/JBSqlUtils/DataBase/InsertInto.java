@@ -11,7 +11,7 @@ public class InsertInto {
     /**
      * Constructor que recibe como parametro:
      *
-     * @param TableName El nombre de la tabla sobre la cual se desea realizar el Update.
+     * @param TableName El nombre de la tabla sobre la cual se desea realizar el Insert.
      * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado está vacío o es NULL
      */
     public InsertInto(String TableName) throws ValorUndefined {

@@ -25,6 +25,7 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Methods_Conexion;
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONObject;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
@@ -342,6 +343,102 @@ public class Get extends Methods_Conexion {
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
                     modelo.setTaskIsReady(true);
+                }
+            };
+            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            ejecutor.submit(get);
+            ejecutor.shutdown();
+        } catch (Exception e) {
+            LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+
+        }
+        return lista;
+    }
+
+
+    /**
+     * Obtiene una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
+     * Envíada como parametro
+     * @param Sql Sentencia SQL
+     * @param parametros Lista de parametros de la sentencia SQL
+     * @param columnas Lista con los nombres de las columnas que se desea recuperar, si se desea obtener
+     *                 todas las columnas de la tabla especificada envíar NULL como parametro
+     * @return Retorna una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
+     *      Envíada como parametro
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     */
+    protected List<JSONObject> get(String Sql, List<Column> parametros, List<String> columnas) throws InstantiationException, IllegalAccessException {
+        List<JSONObject> lista = new ArrayList<>();
+        String tableName=Sql.replace("SELECT * FROM ", "").split(" ")[0];
+        this.setTaskIsReady(false);
+        this.setTableName(tableName);
+        try {
+            if (!this.getTableExist()) {
+                this.refresh();
+            }
+            Connection connect = this.getConnection();
+            //T finalTemp = temp;
+            Runnable get = () -> {
+                try {
+                    if (this.getTableExist()) {
+                        String sql =Sql+ ";";
+                        //Si es sql server y trae la palabra limit verificara y modificara la sentencia
+                        if (this.getDataBaseType() == DataBase.SQLServer) {
+                            if (StringUtils.containsIgnoreCase(sql, "LIMIT")) {
+                                String temporal;
+                                LogsJB.info("Sentencia SQL a modificar: " + sql);
+                                int indice_limite = StringUtils.lastIndexOfIgnoreCase(sql, "LIMIT");
+                                LogsJB.debug("Indice limite: " + indice_limite);
+                                LogsJB.debug("Longitud de la sentencia: " + sql.length());
+                                String temporal_limite = StringUtils.substring(sql, indice_limite);
+                                sql = sql.replace(temporal_limite, ";");
+                                LogsJB.debug("Sentencia SQL despues de eliminar el limite: " + sql);
+                                LogsJB.trace("Temporal Limite: " + temporal_limite);
+                                temporal_limite = StringUtils.remove(temporal_limite, "LIMIT");
+                                LogsJB.trace("Temporal Limite: " + temporal_limite);
+                                temporal_limite = StringUtils.remove(temporal_limite, ";");
+                                LogsJB.trace("Temporal Limite: " + temporal_limite);
+                                temporal = sql;
+                                LogsJB.trace("Temporal SQL: " + temporal);
+                                String select = "SELECT TOP " + temporal_limite + " * FROM ";
+                                sql = temporal.replace("SELECT * FROM ", select);
+                                LogsJB.info("Se modifico la sentencia SQL para que unicamente obtenga la cantidad de " +
+                                        "registros especificados por el usuario: " + sql);
+                            }
+                        }
+                        //LogsJB.info(sql);
+                        PreparedStatement ejecutor = connect.prepareStatement(sql);
+
+                        for (int i = 0; i < parametros.size(); i++) {
+                            //Obtengo la información de la columna
+                            Column columnsSQL = parametros.get(i);
+                            convertJavaToSQL(columnsSQL, ejecutor, i + 1);
+                        }
+                        LogsJB.info(ejecutor.toString());
+                        ResultSet registros = ejecutor.executeQuery();
+                        while (registros.next()) {
+                            lista.add(this.procesarResultSetJSON(columnas, registros));
+                            //procesarResultSet(modelo, registros);
+                        }
+                        this.closeConnection(connect);
+                    } else {
+                        LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
+                                "recuperar el Registro");
+                    }
+                    this.setTaskIsReady(true);
+                } catch (Exception e) {
+                    LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
+                            "SQL de la BD's: " + e.toString());
+                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    this.setTaskIsReady(true);
                 }
             };
             ExecutorService ejecutor = Executors.newFixedThreadPool(1);

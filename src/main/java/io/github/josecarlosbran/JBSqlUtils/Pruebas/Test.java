@@ -20,7 +20,6 @@ import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
 
 /**

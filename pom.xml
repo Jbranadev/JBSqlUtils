@@ -103,7 +103,7 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- Dependencias Para JWT -->
+        <!-- Dependencias Para JWT
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
@@ -120,6 +120,14 @@
             <artifactId>jjwt-jackson</artifactId>
             <version>0.11.5</version>
             <scope>runtime</scope>
+        </dependency>
+        -->
+        <!-- Dependencias Para JSON-->
+        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20220924</version>
         </dependency>
 
 

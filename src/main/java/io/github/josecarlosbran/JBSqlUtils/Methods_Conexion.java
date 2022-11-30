@@ -25,6 +25,7 @@ import io.github.josecarlosbran.JBSqlUtils.Utilities.ColumnsSQL;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.PrimaryKey;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.TablesSQL;
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -349,7 +350,6 @@ public class Methods_Conexion extends Conexion {
                                 clave.setPK_NAME(clavePrimaria.getString(6));
                                 this.getTabla().setClaveprimaria(clave);
                             }
-
                             LogsJB.info("La tabla correspondiente a este modelo, existe en BD's");
                             tables.close();
                             this.closeConnection(connect);
@@ -1251,5 +1251,121 @@ public class Methods_Conexion extends Conexion {
         }
 
     }
+
+
+    /**
+     * Obtiene un Json Object con las columnas solicitadas como propiedades del json con sus respectivos valores
+     * @param columnas Lista de los nombres de las columnas que se desea recuperar, si se desea recuperar todas las columnas envíar NULL
+     * @param registros ResultSet del cual se obtendran los valores de las columnas
+     * @return Retorna un Json Object con las columnas solicitadas como propiedades del json con sus respectivos valores
+     * @throws SQLException Lanza esta excepción si sucede algun error al obtener el valor de cada una de las columnas solicitadas
+     */
+    protected JSONObject procesarResultSetJSON(List<String> columnas, ResultSet registros) throws SQLException{
+        JSONObject temp= new JSONObject();
+        LogsJB.info("Obtuvo un resultado de BD's, procedera a llenar el JSON");
+        LogsJB.debug("Cantidad de columnas : " + this.getTabla().getColumnas().size());
+        //Llena la información del modelo
+        for (int i = 0; i < this.getTabla().getColumnas().size(); i++) {
+            ColumnsSQL columna = this.getTabla().getColumnas().get(i);
+            String columnName = columna.getCOLUMN_NAME();
+            LogsJB.trace("Columna : " + columnName);
+            //Si no se especifica las columnas a obtener retorna todas las columnas
+            if(Objects.isNull(columnas)){
+                this.convertSQLtoJson(columna, registros, temp);
+            }else{
+                //Si se especificaron las columnas a obtener llena unicamente esas columnas
+                for(int j=0;j<columnas.size();j++) {
+                    if(columnName.equalsIgnoreCase(columnas.get(j))){
+                        this.convertSQLtoJson(columna, registros, temp);
+                    }
+                }
+
+            }
+
+        }
+        return temp;
+    }
+
+    /**
+     * Agrega la columna como una propiedad del Json Object envíado como parametro
+     * @param columna Columna que se obtendra.
+     * @param resultado ResultSet del cual se obtendra el valor para la columna.
+     * @param temp Json Object al cual se agregara el valor de la columna como una propiedad del JSON.
+     * @throws SQLException
+     */
+    protected void convertSQLtoJson(ColumnsSQL columna, ResultSet resultado, JSONObject temp) throws SQLException {
+        String columnName = columna.getCOLUMN_NAME();
+        String columnType = columna.getTYPE_NAME();
+        LogsJB.trace("DataType de la columna: " + columna.getTYPE_NAME());
+        LogsJB.trace("Valor de la columna: " + resultado.getObject(columnName));
+        if ((StringUtils.containsIgnoreCase(columnType, DataType.CHAR.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.LONGVARCHAR.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.VARCHAR.name()))
+        ) {
+            //Caracteres y cadenas de Texto
+            temp.put(columnName, resultado.getString(columnName));
+        } else if ((StringUtils.containsIgnoreCase(columnType, DataType.NUMERIC.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.DECIMAL.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.MONEY.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.SMALLMONEY.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.DOUBLE.name()))) {
+            //Dinero y numericos que tienen decimales
+            temp.put(columnName,resultado.getDouble(columnName));
+        } else if ((StringUtils.containsIgnoreCase(columnType, DataType.BIT.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.BOOLEAN.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.BOOL.name()))) {
+            //Valores Booleanos
+            Object valor = resultado.getObject(columnName);
+            LogsJB.trace("Tipo de dato del valor obtenido: " + valor.getClass());
+            LogsJB.trace("valor obtenido: " + valor);
+            if ((valor instanceof String)) {
+                temp.put(columnName,Boolean.valueOf((String) valor).booleanValue());
+            } else if (valor instanceof Integer) {
+                temp.put(columnName, getBooleanfromInt((int) valor));
+            } else {
+                temp.put(columnName, resultado.getBoolean(columnName));
+            }
+
+        } else if ((StringUtils.containsIgnoreCase(columnType, DataType.SMALLINT.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.TINYINT.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.INTEGER.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.IDENTITY.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.INT.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.SERIAL.name()))) {
+            //Valores Enteros
+            temp.put(columnName, resultado.getInt(columnName));
+
+        } else if ((StringUtils.containsIgnoreCase(columnType, DataType.REAL.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.FLOAT.name()))) {
+            //Valores Flotantes
+            temp.put(columnName, resultado.getFloat(columnName));
+        } else if ((StringUtils.containsIgnoreCase(columnType, DataType.BINARY.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.VARBINARY.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.LONGVARBINARY.name()))) {
+            //Valores binarios
+            temp.put(columnName, resultado.getBytes(columnName));
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.DATE.name()))) {
+            //DATE
+            temp.put(columnName, resultado.getDate(columnName));
+        } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.TIME.name()))) {
+            //Time
+            temp.put(columnName, resultado.getTime(columnName));
+
+        } else if ((StringUtils.containsIgnoreCase(columnType, DataType.TIMESTAMP.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.DATETIME.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.SMALLDATETIME.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.DATETIME2.name()))) {
+            //TimeStamp
+            temp.put(columnName, resultado.getTimestamp(columnName));
+        } else {
+            temp.put(columnName, resultado.getObject(columnName));
+            LogsJB.warning("No se pudo setear el valor de la columna: " + columnName);
+            LogsJB.warning("Debido a que ninguno de los metodos corresponde al tipo de dato SQL: " + columnType);
+        }
+    }
+
+
+
+
 
 }
