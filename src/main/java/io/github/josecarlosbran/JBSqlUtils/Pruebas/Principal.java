@@ -587,14 +587,14 @@ public class Principal {
          * @return True si la tabla correspondiente al modelo en BD's existe y fue eliminada, de no existir la tabla correspondiente
          * en BD's retorna False.
          */
-        //test.dropTableIfExist();
+        test.dropTableIfExist();
 
         /**
          * Crea la tabla correspondiente al modelo en BD's si esta no existe.
          * @return True si la tabla correspondiente al modelo en BD's no existe y fue creada exitosamente,
          * False si la tabla correspondiente al modelo ya existe en BD's
          */
-        //test.crateTable();
+        test.crateTable();
 
         /**
          * Asignamos valores a las columnas del modelo, luego llamamos al método save(),
@@ -640,7 +640,7 @@ public class Principal {
          * Le indicamos a JBSqlUtils que de este segundo registro a insertar, no queremos que maneje
          * las columnas created_at y updated_at.
          */
-        //test.setTimestamps(false);
+        test.setTimestamps(false);
 
         /**
          * En este segundo ejemplo si seteamos un valor a la columna IsMayor, ya que no queremos que esta

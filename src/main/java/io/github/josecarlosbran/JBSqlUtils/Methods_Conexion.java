@@ -1601,5 +1601,150 @@ public class Methods_Conexion extends Conexion {
     }
 
 
+    /**
+     * Crea la tabla solicitada correspondiente al modelo con las columnas especificadas como parametro
+     * @param columnas Lista de columnas que se desea sean creadas por JBSqlUtils
+     * @return Retorna True si logra crear la tabla, False en caso que la tabla ya exista en BD's o que
+     * haya sucedido un error al momento de ejecutar la sentencia SQL
+     */
+    protected Boolean crateTableJSON(List<Column> columnas) {
+        Boolean result = false;
+        try {
+            Callable<Boolean> createtabla = () -> {
+                try {
+                    if (this.tableExist()) {
+                        LogsJB.info("La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.");
+                        return false;
+                    } else {
+                        String sql = "CREATE TABLE " + this.getTableName() + "(";
+                        //Aquí vamos a ordenar la lista
+                        LogsJB.debug("Comienza a ordenar la lista");
+                        columnas.sort((columna1,columna2)->{
+                            try {
+                                LogsJB.trace("Columnas a evaluar: "+columna1.getName()+"  "+columna2.getName());
+                                if(columna1.getDataTypeSQL().getOrden()>columna2.getDataTypeSQL().getOrden()){
+                                    LogsJB.trace("Columna de metodo 1 es mayor");
+                                    return 1;
+                                }else if(columna2.getDataTypeSQL().getOrden()>columna1.getDataTypeSQL().getOrden()){
+                                    LogsJB.trace("Columna de metodo 2 es mayor");
+                                    return -1;
+                                }else{
+                                    LogsJB.trace("Columnas son iguales");
+                                    return 0;
+                                }
+                            } catch (Exception e) {
+                                LogsJB.fatal("Excepción disparada al tratar de ordenar los metodos get de la lista: " + e.toString());
+                                LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                                LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                                LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                                LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                            }
+                            return 0;
+                        });
+
+                        LogsJB.info("Termino de ordenar la lista");
+                        int datos = 0;
+                        for (int i = 0; i < columnas.size(); i++) {
+                            //Obtengo el metodo
+                            Column columnsSQL = columnas.get(i);
+                            //Obtengo la información de la columna
+                            String columnName = columnsSQL.getName();
+                            DataType columnType = columnsSQL.getDataTypeSQL();
+                            //Manejo de tipo de dato TimeStamp en SQLServer
+                            if ((columnType == DataType.TIMESTAMP) && (this.getDataBaseType() == DataBase.SQLServer)) {
+                                columnType = DataType.DATETIME;
+                            }
+                            Constraint[] columnRestriccion = columnsSQL.getRestriccion();
+                            String restricciones = "";
+                            String tipo_de_columna = columnType.toString();
+                            if ((((this.getDataBaseType() == DataBase.PostgreSQL)) || ((this.getDataBaseType() == DataBase.MySQL))
+                                    || ((this.getDataBaseType() == DataBase.SQLite))) &&
+                                    (columnType == DataType.BIT)) {
+                                tipo_de_columna = DataType.BOOLEAN.toString();
+                            }
+                            if (!Objects.isNull(columnRestriccion)) {
+                                for (Constraint restriccion : columnRestriccion) {
+                                    if ((DataBase.PostgreSQL == this.getDataBaseType()) &&
+                                            (restriccion == Constraint.AUTO_INCREMENT)) {
+                                        tipo_de_columna = DataType.SERIAL.name();
+                                    } else if ((DataBase.SQLServer == this.getDataBaseType()) &&
+                                            (restriccion == Constraint.AUTO_INCREMENT)) {
+                                        //tipo_de_columna = DataType.IDENTITY.toString();
+                                        restricciones = restricciones + DataType.IDENTITY.toString() + " ";
+                                    } else if ((DataBase.SQLite == this.getDataBaseType()) &&
+                                            (restriccion == Constraint.AUTO_INCREMENT)) {
+                                        restricciones = restricciones + "";
+                                    } else if (restriccion == Constraint.DEFAULT) {
+                                        restricciones = restricciones + restriccion.getRestriccion() + " " + columnsSQL.getDefault_value() + " ";
+
+                                    } else {
+                                        restricciones = restricciones + restriccion.getRestriccion() + " ";
+                                    }
+
+
+                                }
+                            }
+
+                            //Si el modelo tiene seteado que no se manejaran las timestamps entonces
+                            //Ignora el guardar esas columnas
+                            if ((!this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, "created_at"))
+                                    || (StringUtils.equalsIgnoreCase(columnName, "updated_at")))) {
+                                continue;
+                            }
+
+                            String columna = columnName + " " + tipo_de_columna + " " + restricciones;
+
+                            datos++;
+                            if (datos > 1) {
+                                sql = sql + ", ";
+                            }
+
+                            sql = sql + columna;
+
+                        }
+                        sql = sql + ");";
+                        Connection connect = this.getConnection();
+                        Statement ejecutor = connect.createStatement();
+                        LogsJB.info(sql);
+                        if (!ejecutor.execute(sql)) {
+                            LogsJB.info("Sentencia para crear tabla de la BD's ejecutada exitosamente");
+                            LogsJB.info("Tabla " + this.getTableName() + " Creada exitosamente");
+                            LogsJB.info(sql);
+                            this.closeConnection(connect);
+                            this.refresh();
+                            return true;
+                        }
+                        ejecutor.close();
+                        this.closeConnection(connect);
+                    }
+                    return false;
+                } catch (Exception e) {
+                    LogsJB.fatal("Excepción disparada en el método que Crea la tabla solicitada: " + e.toString());
+                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                }
+                return false;
+            };
+
+            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            Future<Boolean> future = ejecutor.submit(createtabla);
+            while (!future.isDone()) {
+
+            }
+            ejecutor.shutdown();
+            result = future.get();
+        } catch (Exception e) {
+            LogsJB.fatal("Excepción disparada en el método que Crea la tabla solicitada: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
+        return result;
+    }
+
+
 
 }

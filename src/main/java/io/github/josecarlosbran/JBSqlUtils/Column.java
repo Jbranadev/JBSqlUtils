@@ -27,6 +27,7 @@ import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
  */
 public class Column<T> {
 
+    private String name=null;
     private T valor = null;
 
     private String default_value = null;
@@ -203,5 +204,13 @@ public class Column<T> {
      */
     protected void setColumnExist(Boolean columnExist) {
         this.columnExist = columnExist;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
