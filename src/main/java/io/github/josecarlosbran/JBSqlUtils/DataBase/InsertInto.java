@@ -5,6 +5,10 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
+/**
+ * @author José Bran
+ * Clase que proporciona un punto de entrada para poder Insertar valores a una tabla en BD's
+ */
 public class InsertInto {
 
     private String sql;

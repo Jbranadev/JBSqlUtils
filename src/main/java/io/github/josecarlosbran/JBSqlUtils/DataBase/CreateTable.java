@@ -7,6 +7,10 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
+/**
+ * @author Jose Bran
+ * Clase que proporciona un punto de entrada para poder crear una tabla en BD's
+ */
 public class CreateTable {
 
     private String tableName;
@@ -26,6 +30,13 @@ public class CreateTable {
     }
 
 
+    /**
+     * Agrega una columna a la sentencia SQL a ejecutar al momento de llamar al metodo creteTable()
+     * @param columna Columna a agregar
+     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado está vacío o es NULL
+     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
+     * @throws DataBaseUndefind Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
+     */
     public AddColumn addColumn(Column columna) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         return new AddColumn(this.tableName, columna);
     }

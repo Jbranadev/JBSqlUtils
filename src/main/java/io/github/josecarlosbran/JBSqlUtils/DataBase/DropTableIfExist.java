@@ -8,6 +8,10 @@ import io.github.josecarlosbran.JBSqlUtils.Methods_Conexion;
 
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
+/**
+ * @author José Bran
+ * Clase que permite el poder eliminar una tabla en BD's a travez del metodo Execute()
+ */
 public class DropTableIfExist extends Methods_Conexion {
 
     /**
@@ -25,6 +29,11 @@ public class DropTableIfExist extends Methods_Conexion {
     }
 
 
+    /**
+     * Ejecuta la sentencia SQL encargada de eliminar la tabla en BD's
+     * @return True si la tabla fue eliminada en BD's, Flase si la tabla no existe en BD's o si
+     * sucede algun problema al ejecutar la sentencia SQL.
+     */
     public Boolean execute(){
         return this.dropTableIfExist();
     }

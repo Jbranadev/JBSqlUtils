@@ -14,6 +14,11 @@ import java.util.Objects;
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.getColumn;
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
+/**
+ * @author  José Bran
+ * Clase que proporciona la funcionalidad de setear un valor a una columna en una sentencia SQL
+ * al momento de se llamada a travez de un InsertInto
+ */
 public class Value {
 
 

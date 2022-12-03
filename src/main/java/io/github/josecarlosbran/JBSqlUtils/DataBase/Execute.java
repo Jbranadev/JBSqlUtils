@@ -68,7 +68,6 @@ class Execute extends Methods_Conexion {
 
     /**
      * Ejecuta la sentencia SQL que recibe la clase al ser instanciada.
-     *
      * @return Retorna la cantidad de filas que se han visto afectadas al ejecutar la sentencia SQL.
      */
     public int execute() {

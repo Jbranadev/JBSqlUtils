@@ -13,7 +13,11 @@ import java.util.Objects;
 
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.getColumn;
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
-
+/**
+ * @author Jose Bran
+ * Clase que proporciona la lógica para insertar otro valor a una columna a travez de la sentencia
+ * InsertInto
+ */
 public class AndValue {
 
 

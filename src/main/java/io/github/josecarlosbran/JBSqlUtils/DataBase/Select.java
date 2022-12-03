@@ -12,6 +12,10 @@ import java.util.List;
 
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
+/**
+ * @author José Bran
+ * Clase que proporciona un punto de entrada para poder obtener valores de BD's
+ */
 public class Select extends Get{
 
     private String sql;

@@ -57,6 +57,7 @@ public class Principal {
              * El valor por defaul es Info. Lo cual hace que se reporten los Logs de grado Info, Warning, Error y Fatal.
              */
             LogsJB.setGradeLog(NivelLog.INFO);
+            LogsJB.setIsAndroid(true);
             String DB = "JBSQLUTILS";
             //setDataBaseTypeGlobal(DataBase.MySQL);
             //setDataBaseGlobal(BDSqlite);
@@ -806,7 +807,7 @@ public class Principal {
          * afectadas.
          */
         //int rows_afected=delete("Test").where("id", Operator.MAYOR_IGUAL_QUE, 5).execute();
-
+        int registros=0;
 
         Column<Integer> Id = new Column<>("Id", DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
 
@@ -830,9 +831,13 @@ public class Principal {
         /*insertInto("Proveedor").value("Name", "Elsa").andValue("Apellido", "Aguirre")
                 .andValue("Estado", false).execute();*/
 
-        /*insertInto("Proveedor").value("Name", "Erick").andValue("Apellido", "Ramos")
+        /*int registros=insertInto("Proveedor").value("Name", "Erick").andValue("Apellido", "Ramos")
                 .execute();*/
 
+        /*registros=insertInto("Proveedor").value("Name", "Alex").andValue("Apellido", "Garcia")
+                .execute();*/
+
+        /*
         Take select = select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
                 .and("Apellido", Operator.LIKE, "%m%").take(3);
         List<String> columnas= new ArrayList<>();
@@ -846,6 +851,12 @@ public class Principal {
             LogsJB.info(fila.toString());
         });
 
+        */
+
+        registros=delete("Proveedor").where("Apellido", Operator.IGUAL_QUE, "Garcia")
+                .execute();
+
+
         long fin = System.currentTimeMillis();
         //double tiempo = (double) ((fin - inicio)/1000);
         /**
@@ -853,6 +864,8 @@ public class Principal {
          */
         double tiempo = (double) ((fin - inicio));
         LogsJB.warning(tiempo + " mili segundos");
+
+        LogsJB.warning("Registros afectados: " + registros);
         //LogsJB.warning("Filas afectadas por el update: "+rows_afected);
 
 
