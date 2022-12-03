@@ -87,7 +87,7 @@ public class Take<T> extends Get {
                     "realizar la consulta a BD's");
         }
         this.parametros = parametros;
-        this.sql = sql + "LIMIT " + limite;
+        this.sql = sql + " LIMIT " + limite;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////

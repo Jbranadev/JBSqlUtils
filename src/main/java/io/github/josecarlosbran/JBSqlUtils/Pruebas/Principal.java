@@ -18,6 +18,10 @@ package io.github.josecarlosbran.JBSqlUtils.Pruebas;
 import com.josebran.LogsJB.LogsJB;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.JBSqlUtils.Column;
+import io.github.josecarlosbran.JBSqlUtils.DataBase.And;
+import io.github.josecarlosbran.JBSqlUtils.DataBase.Select;
+import io.github.josecarlosbran.JBSqlUtils.DataBase.Take;
+import io.github.josecarlosbran.JBSqlUtils.DataBase.Where;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
@@ -26,6 +30,7 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
+import org.json.JSONObject;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -574,6 +579,14 @@ public class Principal {
         test.setBD("JBSQLUTILS");
         test.setDataBaseType(DataBase.PostgreSQL);
 
+
+        setPortGlobal("5075");
+        setHostGlobal("localhost");
+        setUserGlobal("postgres");
+        setPasswordGlobal("Bran");
+        setDataBaseGlobal("JBSQLUTILS");
+        setDataBaseTypeGlobal(DataBase.PostgreSQL);
+
         long inicio = System.currentTimeMillis();
 
 
@@ -795,18 +808,43 @@ public class Principal {
         //int rows_afected=delete("Test").where("id", Operator.MAYOR_IGUAL_QUE, 5).execute();
 
 
-        Column<Integer> Id = new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
+        Column<Integer> Id = new Column<>("Id", DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
 
-        Column<String> Name = new Column<>(DataType.VARCHAR);
+        Column<String> Name = new Column<>("Name", DataType.VARCHAR);
 
-        Column<String> Apellido = new Column<>(DataType.VARCHAR);
+        Column<String> Apellido = new Column<>("Apellido",DataType.VARCHAR);
 
-        Column<Boolean> Estado = new Column<>(DataType.BOOLEAN, "true");
+        Column<Boolean> Estado = new Column<>("Estado", DataType.BOOLEAN, "true", Constraint.DEFAULT);
 
+        //createTable("Proveedor").addColumn(Name).addColumn(Id).addColumn(Apellido).addColumn(Estado).createTable();
 
+        //dropTableIfExist("Proveedor").execute();
 
+        //insertInto("Proveedor").value("Name", "Jose Carlos").andValue("Apellido", "Bran Aguirre").execute();
 
+        //insertInto("Proveedor").value("Name", "Daniel").andValue("Apellido", "Quiñonez").andValue("Estado", false).execute();
 
+        /*insertInto("Proveedor").value("Name", "Ligia").andValue("Apellido", "Camey")
+                .andValue("Estado", true).andValue("Id", 3).execute();*/
+
+        /*insertInto("Proveedor").value("Name", "Elsa").andValue("Apellido", "Aguirre")
+                .andValue("Estado", false).execute();*/
+
+        /*insertInto("Proveedor").value("Name", "Erick").andValue("Apellido", "Ramos")
+                .execute();*/
+
+        Take select = select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
+                .and("Apellido", Operator.LIKE, "%m%").take(3);
+        List<String> columnas= new ArrayList<>();
+        columnas.add("Id");
+        columnas.add("Name");
+        List<JSONObject> lista= select.getInJsonObjects(null);
+        while(!select.getTaskIsReady()){
+
+        }
+        lista.forEach( fila -> {
+            LogsJB.info(fila.toString());
+        });
 
         long fin = System.currentTimeMillis();
         //double tiempo = (double) ((fin - inicio)/1000);

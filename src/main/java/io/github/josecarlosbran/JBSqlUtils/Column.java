@@ -117,6 +117,92 @@ public class Column<T> {
 
 
     /**
+     * Inicializa la columna indicando el tipo de dato SQL que tendra la columna
+     * @param name Nombre de la columna
+     * @param tipo_de_dato DataType que indica el tipo de dato SQL que almacenara la columna.
+     */
+    public Column(String name, DataType tipo_de_dato) {
+        this.setName(name);
+        this.setDataTypeSQL(tipo_de_dato);
+    }
+
+    /**
+     * Inicializa la columna indicando el valor y el tipo de dato SQL que tendra la columna
+     * @param name Nombre de la columna
+     * @param Valor        Valor que tendra la columna.
+     * @param tipo_de_dato DataType que indica el tipo de dato SQL que almacenara la columna.
+     */
+    public Column(String name, T Valor, DataType tipo_de_dato) {
+        this.setName(name);
+        this.setValor(Valor);
+        this.setDataTypeSQL(tipo_de_dato);
+    }
+
+
+    /**
+     * Inicializa la columna indicando el valor, el tipo de dato SQL que tendra la columna y las restricciones
+     * SQL que tendra.
+     * @param name Nombre de la columna
+     * @param Valor        Valor que tendra la columna.
+     * @param tipo_de_dato DataType que indica el tipo de dato SQL que almacenara la columna.
+     * @param restriccion  Indica las restricciones SQL que tendra este campo.
+     */
+    public Column(String name, T Valor, DataType tipo_de_dato, Constraint... restriccion) {
+        this.setName(name);
+        this.setValor(Valor);
+        this.setDataTypeSQL(tipo_de_dato);
+        Constraint[] restricciones = new Constraint[restriccion.length];
+        this.setRestriccion(restriccion);
+    }
+
+    /**
+     * Inicializa la columna indicando el tipo de dato SQL  que tendra la columna y las restricciones SQL que tendra
+     * @param name Nombre de la columna
+     * @param tipo_de_dato DataType que indica el tipo de dato SQL que almacenara la columna.
+     * @param restriccion  Indica las restricciones SQL que tendra este campo.
+     */
+    public Column(String name, DataType tipo_de_dato, Constraint... restriccion) {
+        this.setName(name);
+        this.setDataTypeSQL(tipo_de_dato);
+        this.setRestriccion(restriccion);
+    }
+
+
+    /**
+     * Inicializa la columna indicando el valor, el tipo de dato SQL que tendra la columna y las restricciones
+     * SQL que tendra.
+     * @param name Nombre de la columna
+     * @param Valor         Valor que tendra la columna.
+     * @param tipo_de_dato  DataType que indica el tipo de dato SQL que almacenara la columna.
+     * @param restriccion   Indica las restricciones SQL que tendra este campo.
+     * @param default_value Indica el valor por default que tendra la columna en BD's
+     */
+    public Column(String name, T Valor, DataType tipo_de_dato, String default_value, Constraint... restriccion) {
+        this.setName(name);
+        this.setValor(Valor);
+        this.setDataTypeSQL(tipo_de_dato);
+        this.setRestriccion(restriccion);
+        this.setDefault_value(default_value);
+    }
+
+    /**
+     * Inicializa la columna indicando el tipo de dato SQL  que tendra la columna y las restricciones SQL que tendra
+     * @param name Nombre de la columna
+     * @param tipo_de_dato  DataType que indica el tipo de dato SQL que almacenara la columna.
+     * @param restriccion   Indica las restricciones SQL que tendra este campo.
+     * @param default_value Indica el valor por default que tendra la columna en BD's
+     */
+    public Column(String name, DataType tipo_de_dato, String default_value, Constraint... restriccion) {
+        this.setName(name);
+        this.setDataTypeSQL(tipo_de_dato);
+        this.setRestriccion(restriccion);
+        this.setDefault_value(default_value);
+    }
+
+
+
+
+    /**
      * Obtiene el valor de la columna
      *
      * @return Retorna el valor almacenado en la columna.

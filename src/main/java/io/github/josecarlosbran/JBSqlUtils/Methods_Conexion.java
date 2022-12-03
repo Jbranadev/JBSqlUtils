@@ -1277,6 +1277,7 @@ public class Methods_Conexion extends Conexion {
                 //Si se especificaron las columnas a obtener llena unicamente esas columnas
                 for(int j=0;j<columnas.size();j++) {
                     if(columnName.equalsIgnoreCase(columnas.get(j))){
+                        //columna.setCOLUMN_NAME(columnas.get(j));
                         this.convertSQLtoJson(columna, registros, temp);
                     }
                 }
