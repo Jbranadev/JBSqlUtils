@@ -1,15 +1,25 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
+import io.github.josecarlosbran.JBSqlUtils.Column;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
-public class Select {
+public class Select extends Get{
 
     private String sql;
+
+    /**
+     * Lista de los parametros a envíar
+     */
+    protected List<Column> parametros = new ArrayList<>();
 
     /**
      * Constructor que recibe como parametro:
@@ -17,7 +27,8 @@ public class Select {
      * @param TableName El nombre de la tabla sobre la cual se desea realizar el Select.
      * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado está vacío o es NULL
      */
-    public Select(String TableName) throws ValorUndefined {
+    public Select(String TableName) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+        super();
         String respuesta = "";
         if (stringIsNullOrEmpty(TableName)) {
             throw new ValorUndefined("El nombre de la Tabla proporcionado esta vacío o es NULL");
@@ -46,6 +57,18 @@ public class Select {
         return new Where(columna, operador, value, this.sql);
     }
 
+
+    /**
+     * Obtiene una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
+     * Envíada como parametro
+     * @param columnas Lista con los nombres de las columnas que se desea recuperar, si se desea obtener
+     *      odas las columnas de la tabla especificada envíar NULL como parametro
+     * @return Retorna una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
+     *      Envíada como parametro
+     */
+    public List<JSONObject> getInJsonObjects(List<String> columnas) {
+        return super.get(this.sql, this.parametros, columnas);
+    }
 
 
 }

@@ -23,6 +23,7 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -143,5 +144,17 @@ public class OrderBy<T> extends Get {
         return (List<T>) super.getAll((T) this.modelo, this.sql, this.parametros);
     }
 
+
+    /**
+     * Obtiene una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
+     * Envíada como parametro
+     * @param columnas Lista con los nombres de las columnas que se desea recuperar, si se desea obtener
+     *      odas las columnas de la tabla especificada envíar NULL como parametro
+     * @return Retorna una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
+     *      Envíada como parametro
+     */
+    public List<JSONObject> getInJsonObjects(List<String> columnas) {
+        return super.get(this.sql, this.parametros, columnas);
+    }
 
 }

@@ -369,10 +369,8 @@ public class Get extends Methods_Conexion {
      *                 todas las columnas de la tabla especificada envíar NULL como parametro
      * @return Retorna una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
      *      Envíada como parametro
-     * @throws InstantiationException
-     * @throws IllegalAccessException
      */
-    protected List<JSONObject> get(String Sql, List<Column> parametros, List<String> columnas) throws InstantiationException, IllegalAccessException {
+    protected List<JSONObject> get(String Sql, List<Column> parametros, List<String> columnas) {
         List<JSONObject> lista = new ArrayList<>();
         String tableName=Sql.replace("SELECT * FROM ", "").split(" ")[0];
         this.setTaskIsReady(false);

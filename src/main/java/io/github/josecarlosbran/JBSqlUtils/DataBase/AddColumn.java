@@ -1,6 +1,5 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.github.josecarlosbran.JBSqlUtils.Column;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;

@@ -16,8 +16,7 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
 import com.josebran.LogsJB.LogsJB;
-import io.github.josecarlosbran.JBSqlUtils.DataBase.Delete;
-import io.github.josecarlosbran.JBSqlUtils.DataBase.Update;
+import io.github.josecarlosbran.JBSqlUtils.DataBase.*;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
@@ -237,4 +236,21 @@ public class JBSqlUtils extends Methods {
     }
 
 
+    public static CreateTable createTable(String tableName) throws ValorUndefined {
+        return new CreateTable(tableName);
+    }
+
+    public static DropTableIfExist dropTableIfExist(String tableName) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+        return new DropTableIfExist(tableName);
+    }
+
+
+    public static Select select(String tableName) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+        return new Select(tableName);
+    }
+
+
+    public static InsertInto insertInto(String tableName) throws ValorUndefined{
+        return new InsertInto(tableName);
+    }
 }

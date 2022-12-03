@@ -17,7 +17,10 @@ package io.github.josecarlosbran.JBSqlUtils.Pruebas;
 
 import com.josebran.LogsJB.LogsJB;
 import com.josebran.LogsJB.Numeracion.NivelLog;
+import io.github.josecarlosbran.JBSqlUtils.Column;
+import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
+import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
@@ -587,14 +590,14 @@ public class Principal {
          * @return True si la tabla correspondiente al modelo en BD's existe y fue eliminada, de no existir la tabla correspondiente
          * en BD's retorna False.
          */
-        test.dropTableIfExist();
+        //test.dropTableIfExist();
 
         /**
          * Crea la tabla correspondiente al modelo en BD's si esta no existe.
          * @return True si la tabla correspondiente al modelo en BD's no existe y fue creada exitosamente,
          * False si la tabla correspondiente al modelo ya existe en BD's
          */
-        test.crateTable();
+        //test.crateTable();
 
         /**
          * Asignamos valores a las columnas del modelo, luego llamamos al método save(),
@@ -640,7 +643,7 @@ public class Principal {
          * Le indicamos a JBSqlUtils que de este segundo registro a insertar, no queremos que maneje
          * las columnas created_at y updated_at.
          */
-        test.setTimestamps(false);
+        //test.setTimestamps(false);
 
         /**
          * En este segundo ejemplo si seteamos un valor a la columna IsMayor, ya que no queremos que esta
@@ -652,7 +655,7 @@ public class Principal {
         /**
          * Declaramos una lista de modelos del tipo Test, en la cual almacenaremos la información obtenida de BD's'
          */
-        List<Test> lista = new ArrayList<>();
+        //List<Test> lista = new ArrayList<>();
 
         /**
          * Obtenemos todos los modelos que su Id se encuentra entre 1 y 5
@@ -684,9 +687,9 @@ public class Principal {
         /**
          * Esperamos a que el modelo termine de obtener la información de BD's
          */
-        while (!test.getTaskIsReady()) {
+        /*while (!test.getTaskIsReady()) {
 
-        }
+        }*/
         /**
          * Mostramos la información obtenida
          */
@@ -746,7 +749,7 @@ public class Principal {
          * Elimina la información de los modelos proporcionados en BD's
          * @param modelos Lista de modelos que serán Eliminados
          */
-        test.deleteALL(lista);
+        //test.deleteALL(lista);
         //test.save();
         //test.delete();
         /*while (!test.getTaskIsReady()){
@@ -790,6 +793,20 @@ public class Principal {
          * afectadas.
          */
         //int rows_afected=delete("Test").where("id", Operator.MAYOR_IGUAL_QUE, 5).execute();
+
+
+        Column<Integer> Id = new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
+
+        Column<String> Name = new Column<>(DataType.VARCHAR);
+
+        Column<String> Apellido = new Column<>(DataType.VARCHAR);
+
+        Column<Boolean> Estado = new Column<>(DataType.BOOLEAN, "true");
+
+
+
+
+
 
         long fin = System.currentTimeMillis();
         //double tiempo = (double) ((fin - inicio)/1000);
