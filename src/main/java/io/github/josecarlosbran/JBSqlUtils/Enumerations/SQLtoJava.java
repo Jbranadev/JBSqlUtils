@@ -15,6 +15,9 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.Enumerations;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author Jose Bran
  * Enumeración que permite realizar la converción de datos de SQL a Java
@@ -155,6 +158,27 @@ public enum SQLtoJava {
      */
     public String getTypeJava() {
         return typeJava;
+    }
+
+
+    /**
+     * Retorna la numeración correspondiente al nombre proporcionado
+     * @param name Nombre de la Numeración que se desea obtener
+     * @return Numeración correspondiente al nombre proporcionado
+     */
+    public SQLtoJava getNumeracionforName(String name) {
+        SQLtoJava respuesta=SQLtoJava.INTEGER;
+        Class<SQLtoJava> esta=SQLtoJava.class;
+        SQLtoJava[] temp= esta.getEnumConstants();
+        List<SQLtoJava> numeraciones= Arrays.asList(temp);
+        for(SQLtoJava numeracion:numeraciones){
+            if(numeracion.name().equalsIgnoreCase(name)){
+                /*LogsJB.info("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
+                        +" operador: "+numeracion.getOperador());*/
+                respuesta=numeracion;
+            }
+        }
+        return respuesta;
     }
 
 

@@ -853,8 +853,8 @@ public class Principal {
 
         */
 
-        registros=delete("Proveedor").where("Apellido", Operator.IGUAL_QUE, "Garcia")
-                .execute();
+        /*registros=delete("Proveedor").where("Apellido", Operator.IGUAL_QUE, "Garcia")
+                .execute();*/
 
 
         long fin = System.currentTimeMillis();
@@ -866,6 +866,13 @@ public class Principal {
         LogsJB.warning(tiempo + " mili segundos");
 
         LogsJB.warning("Registros afectados: " + registros);
+
+        Operator temp=Operator.OR.getNumeracionforName("AND");
+
+        LogsJB.warning("Nuevo valor de la numeración: "+temp.name());
+        LogsJB.warning("Nuevo operador: "+temp.getOperador());
+        LogsJB.info("Nombre: "+temp.name()+" Posicion Ordinal: "+temp.ordinal()
+                +" operador: "+temp.getOperador());
         //LogsJB.warning("Filas afectadas por el update: "+rows_afected);
 
 

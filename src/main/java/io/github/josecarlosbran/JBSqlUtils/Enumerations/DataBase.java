@@ -15,6 +15,9 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.Enumerations;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author Jose Bran
  * Enumeración que permite indicar a que Base de Datos se estara conectando el modelo.
@@ -58,5 +61,25 @@ public enum DataBase {
 
     private void setDBType(String DBType) {
         this.DBType = DBType;
+    }
+
+    /**
+     * Retorna la numeración correspondiente al nombre proporcionado
+     * @param name Nombre de la Numeración que se desea obtener
+     * @return Numeración correspondiente al nombre proporcionado
+     */
+    public DataBase getNumeracionforName(String name) {
+        DataBase respuesta=DataBase.MySQL;
+        Class<DataBase> esta=DataBase.class;
+        DataBase[] temp= esta.getEnumConstants();
+        List<DataBase> numeraciones= Arrays.asList(temp);
+        for(DataBase numeracion:numeraciones){
+            if(numeracion.name().equalsIgnoreCase(name)){
+                /*LogsJB.info("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
+                        +" operador: "+numeracion.getOperador());*/
+                respuesta=numeracion;
+            }
+        }
+        return respuesta;
     }
 }
