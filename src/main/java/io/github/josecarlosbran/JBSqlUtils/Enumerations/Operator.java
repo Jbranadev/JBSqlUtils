@@ -15,6 +15,11 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.Enumerations;
 
+import com.josebran.LogsJB.LogsJB;
+
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author Jose Bran
  * Enumeración que proporciona acceso a los diferentes tipos de operadores disponibles para realizar
@@ -83,12 +88,30 @@ public enum Operator {
     private String operador;
 
     private Operator(String s) {
-        this.operador = s;
+        this.operador=s;
     }
 
     public String getOperador() {
         return operador;
     }
 
-
+    /**
+     * Retorna la numeración correspondiente al nombre proporcionado
+     * @param name Nombre de la Numeración que se desea obtener
+     * @return Numeración correspondiente al nombre proporcionado
+     */
+    public Operator getNumeracionforName(String name) {
+        Operator respuesta=Operator.OR;
+        Class<Operator> esta=Operator.class;
+        Operator[] temp= esta.getEnumConstants();
+        List<Operator> numeraciones= Arrays.asList(temp);
+        for(Operator numeracion:numeraciones){
+            if(numeracion.name().equalsIgnoreCase(name)){
+                /*LogsJB.info("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
+                        +" operador: "+numeracion.getOperador());*/
+                respuesta=numeracion;
+            }
+        }
+        return respuesta;
+    }
 }

@@ -15,6 +15,9 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.Enumerations;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author Jose Bran
  * Numeración que proporciona los tipos de ordenamiento SQL disponibles.
@@ -44,6 +47,27 @@ public enum OrderType {
      */
     public String getValor() {
         return this.valor;
+    }
+
+
+    /**
+     * Retorna la numeración correspondiente al nombre proporcionado
+     * @param name Nombre de la Numeración que se desea obtener
+     * @return Numeración correspondiente al nombre proporcionado
+     */
+    public OrderType getNumeracionforName(String name) {
+        OrderType respuesta=OrderType.ASC;
+        Class<OrderType> esta=OrderType.class;
+        OrderType[] temp= esta.getEnumConstants();
+        List<OrderType> numeraciones= Arrays.asList(temp);
+        for(OrderType numeracion:numeraciones){
+            if(numeracion.name().equalsIgnoreCase(name)){
+                /*LogsJB.info("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
+                        +" operador: "+numeracion.getOperador());*/
+                respuesta=numeracion;
+            }
+        }
+        return respuesta;
     }
 
 }

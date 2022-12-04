@@ -15,6 +15,9 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.Enumerations;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author Jose Bran
  * Enumeración que permite indicar las restricciones que puede tener una columna al momento de su creación.
@@ -84,6 +87,26 @@ public enum Constraint {
 
     private void setRestriccion(String restriccion) {
         this.restriccion = restriccion;
+    }
+
+    /**
+     * Retorna la numeración correspondiente al nombre proporcionado
+     * @param name Nombre de la Numeración que se desea obtener
+     * @return Numeración correspondiente al nombre proporcionado
+     */
+    public Constraint getNumeracionforName(String name) {
+        Constraint respuesta=Constraint.DEFAULT;
+        Class<Constraint> esta=Constraint.class;
+        Constraint[] temp= esta.getEnumConstants();
+        List<Constraint> numeraciones= Arrays.asList(temp);
+        for(Constraint numeracion:numeraciones){
+            if(numeracion.name().equalsIgnoreCase(name)){
+                /*LogsJB.info("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
+                        +" operador: "+numeracion.getOperador());*/
+                respuesta=numeracion;
+            }
+        }
+        return respuesta;
     }
 
 }

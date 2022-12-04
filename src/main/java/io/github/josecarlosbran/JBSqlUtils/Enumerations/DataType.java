@@ -16,6 +16,9 @@
 package io.github.josecarlosbran.JBSqlUtils.Enumerations;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
 /**
@@ -277,5 +280,26 @@ public enum DataType {
      */
     public int getOrden() {
         return orden;
+    }
+
+
+    /**
+     * Retorna la numeración correspondiente al nombre proporcionado
+     * @param name Nombre de la Numeración que se desea obtener
+     * @return Numeración correspondiente al nombre proporcionado
+     */
+    public DataType getNumeracionforName(String name) {
+        DataType respuesta=DataType.INTEGER;
+        Class<DataType> esta=DataType.class;
+        DataType[] temp= esta.getEnumConstants();
+        List<DataType> numeraciones= Arrays.asList(temp);
+        for(DataType numeracion:numeraciones){
+            if(numeracion.name().equalsIgnoreCase(name)){
+                /*LogsJB.info("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
+                        +" operador: "+numeracion.getOperador());*/
+                respuesta=numeracion;
+            }
+        }
+        return respuesta;
     }
 }
