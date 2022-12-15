@@ -795,7 +795,7 @@ public class Principal {
          * where por medio del cual podemos filtrar las filas que se veran afectadas al llamar al método execute, el cual
          * se encargara de ejecutar la sentencia SQL generada y retorna el numero de filas afectadas.
          */
-        //rows_afected=update("Test").set("name", "Jose Carlos").andSet("IsMayor", "true").execute();
+        int rows_afected=update("Test").set("name", "Jose Carlos").andSet("IsMayor", "true").execute();
 
 
         /**
@@ -817,11 +817,11 @@ public class Principal {
 
         Column<Boolean> Estado = new Column<>("Estado", DataType.BOOLEAN, "true", Constraint.DEFAULT);
 
-        //createTable("Proveedor").addColumn(Name).addColumn(Id).addColumn(Apellido).addColumn(Estado).createTable();
+        createTable("Proveedor").addColumn(Name).addColumn(Id).addColumn(Apellido).addColumn(Estado).createTable();
 
-        //dropTableIfExist("Proveedor").execute();
+        dropTableIfExist("Proveedor").execute();
 
-        //insertInto("Proveedor").value("Name", "Jose Carlos").andValue("Apellido", "Bran Aguirre").execute();
+        insertInto("Proveedor").value("Name", "Jose Carlos").andValue("Apellido", "Bran Aguirre").execute();
 
         //insertInto("Proveedor").value("Name", "Daniel").andValue("Apellido", "Quiñonez").andValue("Estado", false).execute();
 
