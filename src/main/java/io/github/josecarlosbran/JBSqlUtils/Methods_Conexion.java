@@ -178,6 +178,7 @@ public class Methods_Conexion extends Conexion {
                 url = null;
                 connect = null;
                 Class.forName("org.postgresql.Driver");
+                DriverManager.registerDriver(new org.postgresql.Driver());
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
                         this.getHost() + ":" + this.getPort() + "/" + this.getBD();
                 String usuario = this.getUser();
@@ -188,6 +189,7 @@ public class Methods_Conexion extends Conexion {
                 connect = null;
                 //Carga el controlador de MySQL
                 Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
                         this.getHost() + ":" + this.getPort() + "/" + this.getBD();
                 String usuario = this.getUser();
@@ -198,6 +200,7 @@ public class Methods_Conexion extends Conexion {
                 connect = null;
                 //Carga el controlador de SQLServer
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
                         this.getHost() + ":" + this.getPort() + ";databaseName=" + this.getBD() + ";TrustServerCertificate=True";
                 String usuario = this.getUser();
@@ -205,6 +208,7 @@ public class Methods_Conexion extends Conexion {
                 connect = DriverManager.getConnection(url, usuario, password);
             } else if (this.getDataBaseType() == DataBase.SQLite) {
                 Class.forName("org.sqlite.JDBC").newInstance();
+                DriverManager.registerDriver(new org.sqlite.JDBC());
                 url = null;
                 connect = null;
                 try{
