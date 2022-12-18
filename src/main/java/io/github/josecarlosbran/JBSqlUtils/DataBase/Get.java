@@ -381,7 +381,8 @@ public class Get extends Methods_Conexion {
             }
             Connection connect = this.getConnection();
             //T finalTemp = temp;
-            Runnable get = () -> {
+            Callable<List<JSONObject>> get = () -> {
+                List<JSONObject> temp = new ArrayList<>();
                 try {
                     if (this.getTableExist()) {
                         String sql =Sql+ ";";
@@ -420,13 +421,14 @@ public class Get extends Methods_Conexion {
                         LogsJB.info(ejecutor.toString());
                         ResultSet registros = ejecutor.executeQuery();
                         while (registros.next()) {
-                            lista.add(this.procesarResultSetJSON(columnas, registros));
+                            temp.add(this.procesarResultSetJSON(columnas, registros));
                             //procesarResultSet(modelo, registros);
                         }
                         this.closeConnection(connect);
+                        return temp;
                     } else {
                         LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
-                                "recuperar el Registro");
+                                "recuperar los Registros");
                     }
                     this.setTaskIsReady(true);
                 } catch (Exception e) {
@@ -438,10 +440,16 @@ public class Get extends Methods_Conexion {
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
                     this.setTaskIsReady(true);
                 }
+                return temp;
             };
             ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            ejecutor.submit(get);
+            Future<List<JSONObject>> future = ejecutor.submit(get);
+            while (!future.isDone()) {
+
+            }
+            //ejecutor.submit(get);
             ejecutor.shutdown();
+            lista = future.get();
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
