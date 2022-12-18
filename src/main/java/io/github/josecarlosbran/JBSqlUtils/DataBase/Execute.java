@@ -22,6 +22,7 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Methods_Conexion;
+import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -92,6 +93,9 @@ class Execute extends Methods_Conexion {
 
                     ejecutor.executeUpdate();
                     filas = ejecutor.getUpdateCount();
+                    if(StringUtils.containsIgnoreCase(this.sql, "INSERT INTO")) {
+                        filas=1;
+                    }
                     LogsJB.info("Cantidad de filas afectadas: " + filas);
 
                     this.closeConnection(connect);
