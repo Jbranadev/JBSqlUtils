@@ -168,7 +168,11 @@ public class And<T> extends Get {
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     public OrderBy orderBy(String columna, OrderType orderType) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        return new OrderBy(this.sql, columna, orderType, this.modelo, this.parametros);
+        if(Objects.isNull(this.modelo)){
+            return new OrderBy(this.sql, columna, orderType, this.parametros);
+        }else{
+            return new OrderBy(this.sql, columna, orderType, this.modelo, this.parametros);
+        }
     }
 
 

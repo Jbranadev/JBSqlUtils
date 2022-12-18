@@ -74,6 +74,36 @@ public class OrderBy<T> extends Get {
         this.sql = sql + " ORDER BY " + columna + orderType.getValor();
     }
 
+
+
+    /**
+     * Constructor que recibe como parametro:
+     *
+     * @param sql        Sentencia SQL a la que se agregara la logica ORDER BY
+     * @param columna    Columna a evaluar dentro de la sentencia ORDER BY
+     * @param orderType  Tipo de ordenamiento que se realizara
+     * @param parametros Lista de parametros a ser agregados a la sentencia SQL
+     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     */
+    protected OrderBy(String sql, String columna, OrderType orderType, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+        super();
+        if (stringIsNullOrEmpty(columna)) {
+            throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
+        }
+        if (Objects.isNull(orderType)) {
+            throw new ValorUndefined("El tipo de ordenamiento proporcionado es NULL");
+        }
+        this.parametros = parametros;
+        this.sql = sql + " ORDER BY " + columna + orderType.getValor();
+    }
+
+
+
+
     /**
      * Retorna un objeto del tipo Take que permite agregar esta sentencia a la Logica de la sentencia
      * SQL a ejecutar.
