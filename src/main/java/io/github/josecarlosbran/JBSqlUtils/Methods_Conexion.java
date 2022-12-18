@@ -194,7 +194,7 @@ public class Methods_Conexion extends Conexion {
                         this.getHost() + ":" + this.getPort() + "/" + this.getBD();
                 String usuario = this.getUser();
                 String password = this.getPassword();
-                LogsJB.info("Url de conexion a DB: "+url);
+                LogsJB.debug("Url de conexion a DB: "+url);
                 connect = DriverManager.getConnection(url, usuario, password);
             } else if (this.getDataBaseType() == DataBase.SQLServer) {
                 url = null;
@@ -206,7 +206,7 @@ public class Methods_Conexion extends Conexion {
                         this.getHost() + ":" + this.getPort() + ";databaseName=" + this.getBD() + ";TrustServerCertificate=True";
                 String usuario = this.getUser();
                 String password = this.getPassword();
-                LogsJB.info("Url de conexion a DB: "+url);
+                LogsJB.debug("Url de conexion a DB: "+url);
                 connect = DriverManager.getConnection(url, usuario, password);
             } else if (this.getDataBaseType() == DataBase.SQLite) {
                 Class.forName("org.sqlite.JDBC").newInstance();
@@ -236,7 +236,7 @@ public class Methods_Conexion extends Conexion {
                 }
 
                 url = "jdbc:" + this.getDataBaseType().getDBType() + ":" + this.getBD();
-                LogsJB.info("Url de conexion a DB: "+url);
+                LogsJB.debug("Url de conexion a DB: "+url);
                 connect = DriverManager.getConnection(url);
             }
 
