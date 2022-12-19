@@ -75,7 +75,6 @@ class Execute extends Methods_Conexion {
         int result = 0;
         try {
             Callable<Integer> Ejecutar_Sentencia = () -> {
-                int filas = 0;
                 try {
                     Connection connect = this.getConnection();
                     this.sql = this.sql + ";";
@@ -91,11 +90,11 @@ class Execute extends Methods_Conexion {
 
                     LogsJB.info(ejecutor.toString());
 
-                    ejecutor.executeUpdate();
-                    filas = ejecutor.getUpdateCount();
-                    if(StringUtils.containsIgnoreCase(this.sql, "INSERT INTO")) {
+                    int filas=ejecutor.executeUpdate();
+                    //filas = ejecutor.getUpdateCount();
+                    /*if(StringUtils.containsIgnoreCase(this.sql, "INSERT INTO")) {
                         filas=1;
-                    }
+                    }*/
                     LogsJB.info("Cantidad de filas afectadas: " + filas);
 
                     this.closeConnection(connect);
@@ -109,7 +108,7 @@ class Execute extends Methods_Conexion {
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
                     LogsJB.fatal("Sentencia SQL: " + this.sql);
                 }
-                return filas;
+                return 0;
             };
             ExecutorService executor = Executors.newFixedThreadPool(1);
             Future<Integer> future = executor.submit(Ejecutar_Sentencia);

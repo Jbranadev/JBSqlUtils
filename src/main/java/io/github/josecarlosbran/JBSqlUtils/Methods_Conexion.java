@@ -834,11 +834,8 @@ public class Methods_Conexion extends Conexion {
                         }
 
                         LogsJB.info(ejecutor.toString());
-                        if (ejecutor.executeUpdate() == 1) {
-                            int filas = ejecutor.getUpdateCount();
-                            LogsJB.info("Filas Insertadas en BD's': " + filas);
-                        }
-
+                        int filas=ejecutor.executeUpdate();
+                        LogsJB.info("Filas Insertadas en BD's': " + filas);
                         modelo.closeConnection(connect);
 
                     } else {
@@ -970,11 +967,8 @@ public class Methods_Conexion extends Conexion {
                         }
 
                         LogsJB.info(ejecutor.toString());
-                        if (ejecutor.executeUpdate() == 1) {
-                            int filas = ejecutor.getUpdateCount();
-                            LogsJB.info("Filas actualizadas: " + filas);
-                        }
-
+                        int filas=ejecutor.executeUpdate();
+                        LogsJB.info("Filas actualizadas: " + filas);
                         modelo.closeConnection(connect);
 
                     } else {
@@ -1080,10 +1074,8 @@ public class Methods_Conexion extends Conexion {
                             }
                         }
                         LogsJB.info(ejecutor.toString());
-                        if (ejecutor.executeUpdate() == 1) {
-                            int filas = ejecutor.getUpdateCount();
-                            LogsJB.info("Filas Eliminadas: " + filas);
-                        }
+                        int filas=ejecutor.executeUpdate();
+                        LogsJB.info("Filas actualizadas: " + filas);
                         modelo.closeConnection(connect);
 
                     } else {

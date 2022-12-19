@@ -795,7 +795,7 @@ public class Principal {
          * where por medio del cual podemos filtrar las filas que se veran afectadas al llamar al método execute, el cual
          * se encargara de ejecutar la sentencia SQL generada y retorna el numero de filas afectadas.
          */
-        int rows_afected=update("Test").set("name", "Jose Carlos").andSet("IsMayor", "true").execute();
+        //int rows_afected=update("Test").set("name", "Jose Carlos").andSet("IsMayor", "true").execute();
 
 
         /**
@@ -817,11 +817,11 @@ public class Principal {
 
         Column<Boolean> Estado = new Column<>("Estado", DataType.BOOLEAN, "true", Constraint.DEFAULT);
 
-        createTable("Proveedor").addColumn(Name).addColumn(Id).addColumn(Apellido).addColumn(Estado).createTable();
+        //createTable("Proveedor").addColumn(Name).addColumn(Id).addColumn(Apellido).addColumn(Estado).createTable();
 
-        dropTableIfExist("Proveedor").execute();
+        //dropTableIfExist("Proveedor").execute();
 
-        insertInto("Proveedor").value("Name", "Jose Carlos").andValue("Apellido", "Bran Aguirre").execute();
+        registros=insertInto("Proveedor").value("Name", "Dorcas").andValue("Apellido", "Gomez").execute();
 
         //insertInto("Proveedor").value("Name", "Daniel").andValue("Apellido", "Quiñonez").andValue("Estado", false).execute();
 
@@ -856,6 +856,9 @@ public class Principal {
         /*registros=delete("Proveedor").where("Apellido", Operator.IGUAL_QUE, "Garcia")
                 .execute();*/
 
+        /*registros=update("Proveedor").set("Apellido", "Pedroza de Bran").where("Name", Operator.IGUAL_QUE, "Rubi")
+                .execute();*/
+
 
         long fin = System.currentTimeMillis();
         //double tiempo = (double) ((fin - inicio)/1000);
@@ -867,12 +870,7 @@ public class Principal {
 
         LogsJB.warning("Registros afectados: " + registros);
 
-        Operator temp=Operator.OR.getNumeracionforName("AND");
 
-        LogsJB.warning("Nuevo valor de la numeración: "+temp.name());
-        LogsJB.warning("Nuevo operador: "+temp.getOperador());
-        LogsJB.info("Nombre: "+temp.name()+" Posicion Ordinal: "+temp.ordinal()
-                +" operador: "+temp.getOperador());
         //LogsJB.warning("Filas afectadas por el update: "+rows_afected);
 
 
