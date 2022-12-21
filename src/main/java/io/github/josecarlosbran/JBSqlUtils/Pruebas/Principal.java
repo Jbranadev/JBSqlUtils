@@ -18,10 +18,6 @@ package io.github.josecarlosbran.JBSqlUtils.Pruebas;
 import com.josebran.LogsJB.LogsJB;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.JBSqlUtils.Column;
-import io.github.josecarlosbran.JBSqlUtils.DataBase.And;
-import io.github.josecarlosbran.JBSqlUtils.DataBase.Select;
-import io.github.josecarlosbran.JBSqlUtils.DataBase.Take;
-import io.github.josecarlosbran.JBSqlUtils.DataBase.Where;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
@@ -30,7 +26,6 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
-import org.json.JSONObject;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;

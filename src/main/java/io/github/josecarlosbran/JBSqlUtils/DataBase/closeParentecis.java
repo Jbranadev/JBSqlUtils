@@ -1,20 +1,4 @@
-/***
- * Copyright (C) 2022 El proyecto de código abierto JBSqlUtils de José Bran
- *
- * Con licencia de Apache License, Versión 2.0 (la "Licencia");
- * no puede usar este archivo excepto de conformidad con la Licencia.
- * Puede obtener una copia de la Licencia en
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * A menos que lo exija la ley aplicable o se acuerde por escrito, el software
- * distribuido bajo la Licencia se distribuye "TAL CUAL",
- * SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas.
- * Consulte la Licencia para conocer el idioma específico que rige los permisos y
- * limitaciones bajo la Licencia.
- */
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
-
 
 import io.github.josecarlosbran.JBSqlUtils.Column;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
@@ -30,30 +14,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.getColumn;
-import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
 /**
  * @author Jose Bran
- * Clase que proporciona la logica para agregar una sentencia OR a una consulta personalizada del modelo
- * tomando como parametro la sentencia sql a la que se agregara la logica de la sentencia OR
+ * Clase que proporciona la logica para agregar un Cierre de Parentecis a una consulta SQL
  */
-public class Or<T> extends Get {
-    private String sql;
+public class closeParentecis<T> extends Get{
+
     private T modelo = null;
+
+    private String sql;
 
     /**
      * Lista de los parametros a envíar
      */
     protected List<Column> parametros = new ArrayList<>();
 
+
     /**
      * Constructor que recibe como parametro:
-     *
-     * @param sql        Sentencia SQL a la que se agregara la logica OR
-     * @param columna    Columna a evaluar dentro de la sentencia OR
-     * @param operador   Operador con el cual se evaluara la columna
-     * @param valor      Valor contra el que se evaluara la columna
+     * @param sql        Sentencia SQL a la que se agregara el cierre de parentecis
      * @param modelo     Modelo que invocara los metodos de esta clase
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
@@ -62,34 +42,21 @@ public class Or<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected Or(String sql, String columna, Operator operador, Object valor, T modelo, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected closeParentecis(String sql, T modelo, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
-        if (stringIsNullOrEmpty(columna)) {
-            throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
-        }
-        if (Objects.isNull(valor)) {
-            throw new ValorUndefined("El valor proporcionado esta vacío o es NULL");
-        }
-        if (Objects.isNull(operador)) {
-            throw new ValorUndefined("El operador proporcionado es NULL");
-        }
         if (Objects.isNull(modelo)) {
             throw new ValorUndefined("El Modelo proporcionado es NULL");
         }
         this.parametros = parametros;
         this.modelo = modelo;
-        this.parametros.add(getColumn(valor));
-        this.sql = sql + Operator.OR.getOperador() + Operator.OPEN_PARENTESIS.getOperador() + columna + operador.getOperador() + "?" + Operator.CLOSE_PARENTESIS.getOperador();
+        this.sql = sql + Operator.CLOSE_PARENTESIS;
     }
 
 
     /**
      * Constructor que recibe como parametro:
      *
-     * @param sql        Sentencia SQL a la que se agregara la logica OR
-     * @param columna    Columna a evaluar dentro de la sentencia OR
-     * @param operador   Operador con el cual se evaluara la columna
-     * @param valor      Valor contra el que se evaluara la columna
+     * @param sql        Sentencia SQL a la que se agregara el cierre de parentecis
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
@@ -97,21 +64,14 @@ public class Or<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected Or(String sql, String columna, Operator operador, Object valor, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected closeParentecis(String sql, List<Column> parametros) throws DataBaseUndefind, PropertiesDBUndefined {
         super();
-        if (stringIsNullOrEmpty(columna)) {
-            throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
-        }
-        if (Objects.isNull(valor)) {
-            throw new ValorUndefined("El valor proporcionado esta vacío o es NULL");
-        }
-        if (Objects.isNull(operador)) {
-            throw new ValorUndefined("El operador proporcionado es NULL");
-        }
         this.parametros = parametros;
-        this.parametros.add(getColumn(valor));
-        this.sql = sql + Operator.OR.getOperador() + Operator.OPEN_PARENTESIS.getOperador() + columna + operador.getOperador() + "?" + Operator.CLOSE_PARENTESIS.getOperador();
+        this.sql = sql + Operator.CLOSE_PARENTESIS;
     }
+
+
+
 
 
     /**
@@ -154,7 +114,6 @@ public class Or<T> extends Get {
         }
     }
 
-
     /**
      * Retorna un objeto del tipo ORDER BY que permite agregar esta expresión a la sentencia SQL
      *
@@ -173,6 +132,7 @@ public class Or<T> extends Get {
             return new OrderBy(this.sql, columna, orderType, this.modelo, this.parametros);
         }
     }
+
 
     /**
      * Retorna un objeto del tipo Take que permite agregar esta sentencia a la Logica de la sentencia
@@ -195,41 +155,6 @@ public class Or<T> extends Get {
 
 
 
-    /**
-     *
-     * @param operatorPrev Operador a colocar antes de la apertura de parentecis
-     * @param columna    Columna a evaluar dentro de la sentencia AND
-     * @param operador   Operador con el cual se evaluara la columna
-     * @param valor      Valor contra el que se evaluara la columna
-     * @return Retorna un objeto OpenParentecis el cual proporciona acceso a los metodos necesarios
-     * para filtrar de una mejor manera nuestra consulta, No olvide llamar al metodo close parentecis cuando
-     * haya finalizado la logica dentro de sus parentecis
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     */
-    public openParentecis openParentecis(Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined {
-        if (Objects.isNull(this.modelo)) {
-            return new openParentecis(this.sql,  this.parametros, operatorPrev, columna, operador, valor);
-        } else {
-            return new openParentecis(this.sql,  this.modelo, this.parametros, operatorPrev, columna, operador, valor);
-        }
-    }
-
-    /**
-     * Agrega la posibilidad de realizar un cierre de parentecis dentro de la logica de nuestra sentencia SQL
-     * @return Retorna un objeto closeParentecis, el cual da acceso al resto de metodos que podemos llamar.
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
-     */
-    public closeParentecis closeParentecis() throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
-        if (Objects.isNull(this.modelo)) {
-            return new closeParentecis(this.sql,  this.parametros);
-        } else {
-            return new closeParentecis(this.sql,  this.modelo, this.parametros);
-        }
-    }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -281,6 +206,41 @@ public class Or<T> extends Get {
         return (List<T>) super.getAll((T) this.modelo, this.sql, this.parametros);
     }
 
+    /**
+     *
+     * @param operatorPrev Operador a colocar antes de la apertura de parentecis
+     * @param columna    Columna a evaluar dentro de la sentencia AND
+     * @param operador   Operador con el cual se evaluara la columna
+     * @param valor      Valor contra el que se evaluara la columna
+     * @return Retorna un objeto OpenParentecis el cual proporciona acceso a los metodos necesarios
+     * para filtrar de una mejor manera nuestra consulta, No olvide llamar al metodo close parentecis cuando
+     * haya finalizado la logica dentro de sus parentecis
+     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     */
+    public openParentecis openParentecis(Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined {
+        if (Objects.isNull(this.modelo)) {
+            return new openParentecis(this.sql,  this.parametros, operatorPrev, columna, operador, valor);
+        } else {
+            return new openParentecis(this.sql,  this.modelo, this.parametros, operatorPrev, columna, operador, valor);
+        }
+    }
+
+    /**
+     * Agrega la posibilidad de realizar un cierre de parentecis dentro de la logica de nuestra sentencia SQL
+     * @return Retorna un objeto closeParentecis, el cual da acceso al resto de metodos que podemos llamar.
+     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     */
+    public closeParentecis closeParentecis() throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+        if (Objects.isNull(this.modelo)) {
+            return new closeParentecis(this.sql,  this.parametros);
+        } else {
+            return new closeParentecis(this.sql,  this.modelo, this.parametros);
+        }
+    }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -301,7 +261,6 @@ public class Or<T> extends Get {
         return new Execute(this.sql, this.parametros).execute();
     }
 
-
     /**
      * Obtiene una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
      * Envíada como parametro
@@ -313,5 +272,14 @@ public class Or<T> extends Get {
     public List<JSONObject> getInJsonObjects(List<String> columnas) {
         return super.get(this.sql, this.parametros, columnas);
     }
+
+
+
+
+
+
+
+
+
 
 }
