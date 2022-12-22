@@ -816,7 +816,7 @@ public class Principal {
 
         //dropTableIfExist("Proveedor").execute();
 
-        registros=insertInto("Proveedor").value("Name", "Dorcas").andValue("Apellido", "Gomez").execute();
+        //registros=insertInto("Proveedor").value("Name", "Dorcas").andValue("Apellido", "Gomez").execute();
 
         //insertInto("Proveedor").value("Name", "Daniel").andValue("Apellido", "Quiñonez").andValue("Estado", false).execute();
 
@@ -851,8 +851,10 @@ public class Principal {
         /*registros=delete("Proveedor").where("Apellido", Operator.IGUAL_QUE, "Garcia")
                 .execute();*/
 
-        /*registros=update("Proveedor").set("Apellido", "Pedroza de Bran").where("Name", Operator.IGUAL_QUE, "Rubi")
-                .execute();*/
+        registros=update("Proveedor").set("Apellido", "de Bran").andSet("Estado", true).where("Name", Operator.IGUAL_QUE, "Rubi").
+                openParentecis(Operator.OR, "Name", Operator.IGUAL_QUE, "Dorcas").and("Estado", Operator.IGUAL_QUE, true).
+                closeParentecis().
+                execute();
 
 
         long fin = System.currentTimeMillis();

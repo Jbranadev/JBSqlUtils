@@ -67,7 +67,7 @@ public class closeParentecis<T> extends Get{
     protected closeParentecis(String sql, List<Column> parametros) throws DataBaseUndefind, PropertiesDBUndefined {
         super();
         this.parametros = parametros;
-        this.sql = sql + Operator.CLOSE_PARENTESIS;
+        this.sql = sql + Operator.CLOSE_PARENTESIS.getOperador();
     }
 
 
