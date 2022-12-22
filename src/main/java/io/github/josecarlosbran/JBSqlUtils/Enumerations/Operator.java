@@ -15,8 +15,6 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.Enumerations;
 
-import com.josebran.LogsJB.LogsJB;
-
 import java.util.Arrays;
 import java.util.List;
 
