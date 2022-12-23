@@ -129,7 +129,7 @@ variables de conexión.
 
 ***
 
-## ¿cómo utilizar JBSqlUtils sin necesidad de crear un Modelo?
+## ¿Cómo utilizar JBSqlUtils sin necesidad de crear un Modelo?
 
 JBSqlUtils puede ser utilizada cómo un generador de sentencias SQL, para Crear, Eliminar tablas,
 Insertar, Actualizar, Eliminar o Seleccionar registros en
@@ -1251,17 +1251,19 @@ Puedes obtener la librería LogsJB de la siguiente manera
 Maven
 
 ~~~
-<dependency>
-  <groupId>io.github.josecarlosbran</groupId>
-  <artifactId>LogsJB</artifactId>
-  <version>0.5</version>
-</dependency>
+<!-- Dependencia para el manejo de los Logs -->
+    <dependency>
+        <groupId>io.github.josecarlosbran</groupId>
+        <artifactId>LogsJBSupport</artifactId>
+        <version>0.2</version>
+        <scope>compile</scope>
+    </dependency>
 ~~~
 
 Gradle
 
 ~~~
-implementation 'io.github.josecarlosbran:LogsJB:0.5'
+implementation 'io.github.josecarlosbran:LogsJBSupport:0.2'
 ~~~
 
 Modificar el Nivel de Log que queremos tener sobre JBSqlUtils
@@ -1303,14 +1305,14 @@ Maven
 <dependency>
   <groupId>io.github.josecarlosbran</groupId>
   <artifactId>JBSqlUtils</artifactId>
-  <version>1.0.4</version>
+  <version>1.1.4.5</version>
 </dependency>
 ~~~
 
 Gradle
 
 ~~~
-implementation 'io.github.josecarlosbran:JBSqlUtils:1.0.4'
+implementation 'io.github.josecarlosbran:JBSqlUtils:1.1.4.5'
 ~~~
 
 Para mayor información sobre cómo descargar JBSqlUtils desde otros
