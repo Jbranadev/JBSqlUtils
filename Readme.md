@@ -129,10 +129,143 @@ variables de conexión.
 
 ***
 
-## ¿cómo utilizar JBSqlUtils cómo un generador de consultas?
+## ¿cómo utilizar JBSqlUtils sin necesidad de crear un Modelo?
 
-JBSqlUtils puede ser utilizada cómo un generador de consultas, para actualizar o eliminar registros en
+JBSqlUtils puede ser utilizada cómo un generador de sentencias SQL, para Crear, Eliminar tablas,
+Insertar, Actualizar, Eliminar o Seleccionar registros en
 una determinada tabla de forma masiva, de acuerdo a la lógica que se le dé a la consulta.
+
+- Crear una tabla.
+
+Para crear una tabla utilizamos el metodo createTable despues de haber definido el nombre de la tabla que deseamos crear 
+y las columnas que deseamos tenga nuestra tabla.
+
+~~~
+
+/**
+* Definimos las columnas que deseamos posea nuestra tabla 
+*/
+ 
+/**
+* Para poder utilizar JBSqlUtils es necesario que los miembros de la clase modelo, que correspondan
+* a una columna de la tabla correspondiente al modelo, sean del tipo Column, especificando el tipo de dato
+* en java y por medio del constructor del objeto Column se pase cómo parametro el tipo de dato SQL
+* de la columna, adicional a esto se pueden definir restricciones, cómo valor por defecto para la columna 
+* para crear la tabla en BD's, pero estos últimos son opcionales
+* el único parametro obligatorio es el DataType de la columna en BD's.
+*
+* Por convención el nombre de cada miembro correspondiente a una columna en BD's debe tener el mismo
+* nombre que la columna en BD's. y estos deben tener sus respectivos métodos set an get, teniendo estos
+* por convención el nombre setColumnName, getColumName.
+*
+* Por ejemplo, para la columna Id = El miembro del modelo será Id, JBSqlUtils no es case sensitive,
+* así que en BD's la columna puede ser ID y en el modelo id, que JBSqlUtils hará el match entre la columna
+* y el miembro de la clase modelo.
+*
+*/
+
+
+
+/**
+* Declara un miembro de la tabla que deseamos crear, el cual en java almacenara un dato de tipo Integer, se define Integer,
+* ya que la clase Column es una clase generica y no puede trabajar con datos primivitos cómo int, pero si con
+* clases contenedoras cómo Integer.
+*
+* En el constructor mandamos como primer parametro el nombre que deseamos tenga la columna.
+*
+* En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
+* Integer.
+*
+* Agregamos dos restricciones SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
+* desde nuestra aplicación en caso esta no exista, de lo contrario no es necesario que agreguemos restricciones.
+*/
+Column<Integer> Id = new Column<>("Id", DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
+
+
+/**
+* Declara un miembro de la tabla, el cual en java almacenara un dato de tipo String.
+* <p>
+*
+* En el constructor mandamos como primer parametro el nombre que deseamos tenga la columna.
+*
+* En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
+* Varchar.
+*/
+Column<String> Name = new Column<>("Name", DataType.VARCHAR);
+
+
+/**
+* Declara un miembro de la tabla, el cual en java almacenara un dato de tipo String.
+* <p>
+*
+* En el constructor mandamos como primer parametro el nombre que deseamos tenga la columna.
+*
+* En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
+* Varchar.
+*/
+Column<String> Apellido = new Column<>("Apellido",DataType.VARCHAR);
+
+
+/**
+* Declara un miembro del modelo, el cual en java almacenara un dato de tipo Boolean.
+* <p>
+*
+* En el constructor mandamos como primer parametro el nombre que deseamos tenga la columna.
+*
+* En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
+* BOOLEAN.
+* <p>
+* En este ejemplo seteamos 'true' como default_value, debido a que este modelo se conectara a un SQLServer,
+* en PostgreSQL la sintaxis es true. Por lo cual es importante tener claro la sintaxis de la BD's a la cual
+* se estará conectando el modelo.
+* <p>
+* Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
+* desde nuestra aplicación en caso esta no exista a través del metodo modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
+*/
+Column<Boolean> Estado = new Column<>("Estado", DataType.BOOLEAN, "true", Constraint.DEFAULT);
+
+/**
+* Para crear una tabla utilizamos el metodo createTable despues de haber definido el nombre de la tabla que deseamos Crear 
+* y las columnas que deseamos tenga nuestra tabla
+*/
+createTable("Proveedor").addColumn(Name).addColumn(Id).addColumn(Apellido).addColumn(Estado).createTable();
+
+~~~
+
+
+- Eliminar una tabla.
+
+Para eliminar una tabla de BD's utilizamos el metodo execute de la clase dropTableIfExist a la cual mandamos como parametro 
+el nombre de la tabla que queremos eliminar.
+
+~~~
+
+/**
+* Para eliminar una tabla de BD's utilizamos el metodo execute de la clase dropTableIfExist a la cual mandamos como parametro
+* el nombre de la tabla que queremos eliminar.
+*/
+dropTableIfExist("Proveedor").execute();
+
+~~~
+
+- Insertar Registros en una tabla.
+
+Para insertar registros hacemos uso del metodo execute que esta disponible en la clase value y andValue a las cuales podemos acceder 
+a traves de la clase insertInto a la cual enviamos como parametro el nombre de la tabla a la que queremos insertar, a traves de los metodos value 
+y andValue definimos los valores que queremos insertar en determinada columna, el metodo execute retorna la cantidad de registros insertados.
+
+De suceder algun error durante la ejecución de la sentencia insertInto retorna 0, de lo contrario retorna 1, ya que solo se puede insertar un registro a la vez.
+
+~~~
+
+/**
+* Para insertar registros hacemos uso del metodo execute que esta disponible en la clase value y andValue a las cuales podemos acceder 
+* a traves de la clase insertInto a la cual enviamos como parametro el nombre de la tabla a la que queremos insertar, a traves de los metodos value
+* y andValue definimos los valores que queremos insertar en determinada columna.
+*/
+int registros=insertInto("Proveedor").value("Name", "Daniel").andValue("Apellido", "Quiñonez").andValue("Estado", false).execute();
+
+~~~
 
 - Actualizar registros.
 
@@ -189,6 +322,47 @@ filas afectadas por la ejecución de la sentencia SQL.
  * afectadas.
  */
 int rows_afected=delete("Test").where("Id", Operator.MAYOR_IGUAL_QUE, 2).execute();
+
+~~~
+
+
+- Seleccionar registros.
+
+Para obtener los registros de una tabla de BD's podemos hacerlo a traves del metodo select envíando como parametro 
+el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a traves del metodo 
+where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
+
+~~~
+
+/**
+* Si deseamos obtener todas las columnas de la tabla envíamos el parametro columnas del metodo 
+* getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parametro 
+* del metodo select
+*/
+List<String> columnas=null;
+
+/**
+* Si deseamos obtener unicamente determinadas columnas, es necesario envíar como parametro una lista de strings
+* con los nombres de las columnas que deseamos obtener del metodo getInJsonObjects
+*/
+columnas= new ArrayList<>();
+columnas.add("Id");
+columnas.add("Name");
+
+/**
+* Para obtener los registros de una tabla de BD's podemos hacerlo a traves del metodo select envíando como parametro
+* el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a traves del metodo 
+* where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
+*/
+List<JSONObject> lista=select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
+    .and("Apellido", Operator.LIKE, "%m%").take(3).getInJsonObjects(columnas);
+
+/**
+* Imprimimos los registros obtenidos
+*/
+lista.forEach( fila -> {
+LogsJB.info(fila.toString());
+});
 
 ~~~
 

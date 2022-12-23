@@ -18,6 +18,7 @@ package io.github.josecarlosbran.JBSqlUtils.Pruebas;
 import com.josebran.LogsJB.LogsJB;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.JBSqlUtils.Column;
+import io.github.josecarlosbran.JBSqlUtils.DataBase.Take;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
@@ -26,6 +27,7 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
+import org.json.JSONObject;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -804,6 +806,10 @@ public class Principal {
         //int rows_afected=delete("Test").where("id", Operator.MAYOR_IGUAL_QUE, 5).execute();
         int registros=0;
 
+
+        /**
+         * Definimos las columnas que deseamos posea nuestra tabla
+         */
         Column<Integer> Id = new Column<>("Id", DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
 
         Column<String> Name = new Column<>("Name", DataType.VARCHAR);
@@ -812,13 +818,28 @@ public class Principal {
 
         Column<Boolean> Estado = new Column<>("Estado", DataType.BOOLEAN, "true", Constraint.DEFAULT);
 
-        //createTable("Proveedor").addColumn(Name).addColumn(Id).addColumn(Apellido).addColumn(Estado).createTable();
+        /**
+         * Para crear una tabla utilizamos el metodo createTable despues de haber definido el nombre de la tabla que deseamos Crear
+         * y las columnas que deseamos tenga nuestra tabla
+         */
+        createTable("Proveedor").addColumn(Name).addColumn(Id).addColumn(Apellido).addColumn(Estado).createTable();
 
-        //dropTableIfExist("Proveedor").execute();
 
-        //registros=insertInto("Proveedor").value("Name", "Dorcas").andValue("Apellido", "Gomez").execute();
+        /**
+         * Para eliminar una tabla de BD's utilizamos el metodo execute de la clase dropTableIfExist a la cual mandamos como parametro
+         * el nombre de la tabla que queremos eliminar
+         */
+        dropTableIfExist("Proveedor").execute();
 
-        //insertInto("Proveedor").value("Name", "Daniel").andValue("Apellido", "Quiñonez").andValue("Estado", false).execute();
+
+        registros=insertInto("Proveedor").value("Name", "Dorcas").andValue("Apellido", "Gomez").execute();
+
+        /**
+         * Para insertar registros hacemos uso del metodo execute que esta disponible en la clase value y andValue a las cuales podemos acceder
+         * a traves de la clase insertInto a la cual enviamos como parametro el nombre de la tabla a la que queremos insertar, a traves de los metodos value
+         * y andValue definimos los valores que queremos insertar en determinada columna.
+         */
+        //registros=insertInto("Proveedor").value("Name", "Daniel").andValue("Apellido", "Quiñonez").andValue("Estado", false).execute();
 
         /*insertInto("Proveedor").value("Name", "Ligia").andValue("Apellido", "Camey")
                 .andValue("Estado", true).andValue("Id", 3).execute();*/
@@ -832,21 +853,40 @@ public class Principal {
         /*registros=insertInto("Proveedor").value("Name", "Alex").andValue("Apellido", "Garcia")
                 .execute();*/
 
-        /*
-        Take select = select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
-                .and("Apellido", Operator.LIKE, "%m%").take(3);
-        List<String> columnas= new ArrayList<>();
+
+
+
+        /**
+         * Si deseamos obtener todas las columnas de la tabla envíamos el parametro columnas del metodo
+         * getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parametro
+         * del metodo select
+         */
+        List<String> columnas=null;
+
+        /**
+         * Si deseamos obtener unicamente determinadas columnas, es necesario envíar como parametro una lista de strings
+         * con los nombres de las columnas que deseamos obtener del metodo getInJsonObjects
+         */
+        columnas= new ArrayList<>();
         columnas.add("Id");
         columnas.add("Name");
-        List<JSONObject> lista= select.getInJsonObjects(null);
-        while(!select.getTaskIsReady()){
 
-        }
+        /**
+         * Para obtener los registros de una tabla de BD's podemos hacerlo a traves del metodo select envíando como parametro
+         * el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a traves del metodo
+         * where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
+         */
+        List<JSONObject> lista=select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
+                .and("Apellido", Operator.LIKE, "%m%").take(3).getInJsonObjects(columnas);
+
+        /**
+         * Imprimimos los registros obtenidos
+         */
         lista.forEach( fila -> {
             LogsJB.info(fila.toString());
         });
 
-        */
+
 
         /*registros=delete("Proveedor").where("Apellido", Operator.IGUAL_QUE, "Garcia")
                 .execute();*/
