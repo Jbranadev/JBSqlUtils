@@ -167,7 +167,6 @@ public enum SQLtoJava {
      * @return Numeración correspondiente al nombre proporcionado
      */
     public SQLtoJava getNumeracionforName(String name) {
-        SQLtoJava respuesta=SQLtoJava.INTEGER;
         Class<SQLtoJava> esta=SQLtoJava.class;
         SQLtoJava[] temp= esta.getEnumConstants();
         List<SQLtoJava> numeraciones= Arrays.asList(temp);
@@ -175,10 +174,10 @@ public enum SQLtoJava {
             if(numeracion.name().equalsIgnoreCase(name)){
                 /*LogsJB.info("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
                         +" operador: "+numeracion.getOperador());*/
-                respuesta=numeracion;
+                return numeracion;
             }
         }
-        return respuesta;
+        return null;
     }
 
 
