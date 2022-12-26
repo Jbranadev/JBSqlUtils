@@ -72,6 +72,47 @@ public class closeParentecis<T> extends Get{
 
 
 
+    /**
+     * Constructor que recibe como parametro:
+     * @param sql        Sentencia SQL a la que se agregara el cierre de parentecis
+     * @param modelo     Modelo que invocara los metodos de esta clase
+     * @param parametros Lista de parametros a ser agregados a la sentencia SQL
+     * @param operatorPost Operador posterior a colocar despues del cierre de parentecis
+     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     */
+    protected closeParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPost) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+        super();
+        if (Objects.isNull(modelo)) {
+            throw new ValorUndefined("El Modelo proporcionado es NULL");
+        }
+        this.parametros = parametros;
+        this.modelo = modelo;
+        this.sql = sql + Operator.CLOSE_PARENTESIS+operatorPost.getOperador();
+    }
+
+
+    /**
+     * Constructor que recibe como parametro:
+     *
+     * @param sql        Sentencia SQL a la que se agregara el cierre de parentecis
+     * @param parametros Lista de parametros a ser agregados a la sentencia SQL
+     * @param operatorPost Operador posterior a colocar despues del cierre de parentecis
+     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     */
+    protected closeParentecis(String sql, List<Column> parametros, Operator operatorPost) throws DataBaseUndefind, PropertiesDBUndefined {
+        super();
+        this.parametros = parametros;
+        this.sql = sql + Operator.CLOSE_PARENTESIS.getOperador()+operatorPost.getOperador();
+    }
+
 
 
     /**
@@ -155,6 +196,63 @@ public class closeParentecis<T> extends Get{
 
 
 
+    /**
+     *
+     * @param operatorPrev Operador a colocar antes de la apertura de parentecis
+     * @param columna    Columna a evaluar dentro de la sentencia AND
+     * @param operador   Operador con el cual se evaluara la columna
+     * @param valor      Valor contra el que se evaluara la columna
+     * @return Retorna un objeto OpenParentecis el cual proporciona acceso a los metodos necesarios
+     * para filtrar de una mejor manera nuestra consulta, No olvide llamar al metodo close parentecis cuando
+     * haya finalizado la logica dentro de sus parentecis
+     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     */
+    public openParentecis openParentecis(Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined {
+        if (Objects.isNull(this.modelo)) {
+            if(Objects.isNull(operatorPrev)){
+                return new openParentecis(this.sql,  this.parametros, columna, operador, valor);
+            }else{
+                return new openParentecis(this.sql,  this.parametros, operatorPrev, columna, operador, valor);
+            }
+        } else {
+            if(Objects.isNull(operatorPrev)){
+                return new openParentecis(this.sql,  this.modelo, this.parametros, columna, operador, valor);
+            }else{
+                return new openParentecis(this.sql,  this.modelo, this.parametros, operatorPrev, columna, operador, valor);
+            }
+
+        }
+    }
+
+    /**
+     * Agrega la posibilidad de realizar un cierre de parentecis dentro de la logica de nuestra sentencia SQL
+     * @param operatorPost Operador a colocar despues del cierre de parentecis
+     * @return Retorna un objeto closeParentecis, el cual da acceso al resto de metodos que podemos llamar.
+     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     */
+    public closeParentecis closeParentecis(Operator operatorPost) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+        if (Objects.isNull(this.modelo)) {
+            if(Objects.isNull(operatorPost)){
+                return new closeParentecis(this.sql,  this.parametros);
+            }else{
+                return new closeParentecis(this.sql,  this.parametros, operatorPost);
+            }
+        } else {
+            if(Objects.isNull(operatorPost)){
+                return new closeParentecis(this.sql,  this.modelo, this.parametros);
+            }else{
+                return new closeParentecis(this.sql,  this.modelo, this.parametros, operatorPost);
+            }
+        }
+    }
+
+
+
+
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -206,41 +304,7 @@ public class closeParentecis<T> extends Get{
         return (List<T>) super.getAll((T) this.modelo, this.sql, this.parametros);
     }
 
-    /**
-     *
-     * @param operatorPrev Operador a colocar antes de la apertura de parentecis
-     * @param columna    Columna a evaluar dentro de la sentencia AND
-     * @param operador   Operador con el cual se evaluara la columna
-     * @param valor      Valor contra el que se evaluara la columna
-     * @return Retorna un objeto OpenParentecis el cual proporciona acceso a los metodos necesarios
-     * para filtrar de una mejor manera nuestra consulta, No olvide llamar al metodo close parentecis cuando
-     * haya finalizado la logica dentro de sus parentecis
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     */
-    public openParentecis openParentecis(Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined {
-        if (Objects.isNull(this.modelo)) {
-            return new openParentecis(this.sql,  this.parametros, operatorPrev, columna, operador, valor);
-        } else {
-            return new openParentecis(this.sql,  this.modelo, this.parametros, operatorPrev, columna, operador, valor);
-        }
-    }
 
-    /**
-     * Agrega la posibilidad de realizar un cierre de parentecis dentro de la logica de nuestra sentencia SQL
-     * @return Retorna un objeto closeParentecis, el cual da acceso al resto de metodos que podemos llamar.
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
-     */
-    public closeParentecis closeParentecis() throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
-        if (Objects.isNull(this.modelo)) {
-            return new closeParentecis(this.sql,  this.parametros);
-        } else {
-            return new closeParentecis(this.sql,  this.modelo, this.parametros);
-        }
-    }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////

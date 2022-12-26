@@ -893,7 +893,7 @@ public class Principal {
 
         registros=update("Proveedor").set("Apellido", "de Bran").andSet("Estado", true).where("Name", Operator.IGUAL_QUE, "Rubi").
                 openParentecis(Operator.OR, "Name", Operator.IGUAL_QUE, "Dorcas").and("Estado", Operator.IGUAL_QUE, true).
-                closeParentecis().
+                closeParentecis(null).
                 execute();
 
 
