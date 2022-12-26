@@ -69,7 +69,6 @@ public enum DataBase {
      * @return Numeración correspondiente al nombre proporcionado
      */
     public DataBase getNumeracionforName(String name) {
-        DataBase respuesta=DataBase.MySQL;
         Class<DataBase> esta=DataBase.class;
         DataBase[] temp= esta.getEnumConstants();
         List<DataBase> numeraciones= Arrays.asList(temp);
@@ -77,9 +76,9 @@ public enum DataBase {
             if(numeracion.name().equalsIgnoreCase(name)){
                 /*LogsJB.info("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
                         +" operador: "+numeracion.getOperador());*/
-                respuesta=numeracion;
+                return numeracion;
             }
         }
-        return respuesta;
+        return null;
     }
 }

@@ -289,7 +289,6 @@ public enum DataType {
      * @return Numeración correspondiente al nombre proporcionado
      */
     public DataType getNumeracionforName(String name) {
-        DataType respuesta=DataType.INTEGER;
         Class<DataType> esta=DataType.class;
         DataType[] temp= esta.getEnumConstants();
         List<DataType> numeraciones= Arrays.asList(temp);
@@ -297,9 +296,9 @@ public enum DataType {
             if(numeracion.name().equalsIgnoreCase(name)){
                 /*LogsJB.info("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
                         +" operador: "+numeracion.getOperador());*/
-                respuesta=numeracion;
+                return numeracion;
             }
         }
-        return respuesta;
+        return null;
     }
 }

@@ -195,6 +195,7 @@ public class Or<T> extends Get {
 
 
 
+
     /**
      *
      * @param operatorPrev Operador a colocar antes de la apertura de parentecis
@@ -208,14 +209,24 @@ public class Or<T> extends Get {
      */
     public openParentecis openParentecis(Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined {
         if (Objects.isNull(this.modelo)) {
-            return new openParentecis(this.sql,  this.parametros, operatorPrev, columna, operador, valor);
+            if(Objects.isNull(operatorPrev)){
+                return new openParentecis(this.sql,  this.parametros, columna, operador, valor);
+            }else{
+                return new openParentecis(this.sql,  this.parametros, operatorPrev, columna, operador, valor);
+            }
         } else {
-            return new openParentecis(this.sql,  this.modelo, this.parametros, operatorPrev, columna, operador, valor);
+            if(Objects.isNull(operatorPrev)){
+                return new openParentecis(this.sql,  this.modelo, this.parametros, columna, operador, valor);
+            }else{
+                return new openParentecis(this.sql,  this.modelo, this.parametros, operatorPrev, columna, operador, valor);
+            }
+
         }
     }
 
     /**
      * Agrega la posibilidad de realizar un cierre de parentecis dentro de la logica de nuestra sentencia SQL
+     * @param operatorPost Operador a colocar despues del cierre de parentecis
      * @return Retorna un objeto closeParentecis, el cual da acceso al resto de metodos que podemos llamar.
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
@@ -223,13 +234,23 @@ public class Or<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public closeParentecis closeParentecis() throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    public closeParentecis closeParentecis(Operator operatorPost) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         if (Objects.isNull(this.modelo)) {
-            return new closeParentecis(this.sql,  this.parametros);
+            if(Objects.isNull(operatorPost)){
+                return new closeParentecis(this.sql,  this.parametros);
+            }else{
+                return new closeParentecis(this.sql,  this.parametros, operatorPost);
+            }
         } else {
-            return new closeParentecis(this.sql,  this.modelo, this.parametros);
+            if(Objects.isNull(operatorPost)){
+                return new closeParentecis(this.sql,  this.modelo, this.parametros);
+            }else{
+                return new closeParentecis(this.sql,  this.modelo, this.parametros, operatorPost);
+            }
         }
     }
+
+
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////

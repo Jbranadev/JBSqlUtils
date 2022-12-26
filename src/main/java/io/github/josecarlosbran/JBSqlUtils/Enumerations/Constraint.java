@@ -95,7 +95,6 @@ public enum Constraint {
      * @return Numeración correspondiente al nombre proporcionado
      */
     public Constraint getNumeracionforName(String name) {
-        Constraint respuesta=Constraint.DEFAULT;
         Class<Constraint> esta=Constraint.class;
         Constraint[] temp= esta.getEnumConstants();
         List<Constraint> numeraciones= Arrays.asList(temp);
@@ -103,10 +102,10 @@ public enum Constraint {
             if(numeracion.name().equalsIgnoreCase(name)){
                 /*LogsJB.info("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
                         +" operador: "+numeracion.getOperador());*/
-                respuesta=numeracion;
+                return numeracion;
             }
         }
-        return respuesta;
+        return null;
     }
 
 }
