@@ -134,6 +134,40 @@ class Conexion {
      */
     private TablesSQL tabla = null;
 
+    private String propertisURL = null;
+
+    /**
+     * Setea las propiedades extra para la url de conexión a BD's
+     * @param propertisURL Propiedades extra para la url de conexión a BD's por ejemplo
+     *                     ?autoReconnect=true&useSSL=false
+     */
+    public void setPropertisURL(String propertisURL){
+        try {
+            this.propertisURL = propertisURL;
+            if (this.getGetPropertySystem() && !stringIsNullOrEmpty(propertisURL)) {
+                System.setProperty("DBpropertisUrl", propertisURL);
+                //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseUser"));
+            }
+        } catch (Exception e) {
+            LogsJB.fatal("Excepción disparada al setear las propiedades extra de conexión con la cual el modelo se conectara a la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
+
+    }
+
+    /**
+     * Obtiene la propiedades extra de la url de conexión a la BD's
+     * @return Propiedades extra de la url de conexión a la BD's
+     */
+    public String getPropertisURL(){
+        return this.propertisURL;
+    }
+
+
+
 
     /**
      * Constructor de la clase Conexión que se encarga de inicializar las propiedades de conexión del modelo,
@@ -145,13 +179,7 @@ class Conexion {
      */
     public Conexion() throws DataBaseUndefind, PropertiesDBUndefined {
         this.setTableName();
-        this.setGetPropertySystem(true);
-        this.setDataBaseType(setearDBType());
-        this.setBD(setearBD());
-        this.setHost(setearHost());
-        this.setPort(setearPort());
-        this.setUser(setearUser());
-        this.setPassword(setearPassword());
+        this.getSystemProperties();
     }
 
     /**
@@ -179,6 +207,7 @@ class Conexion {
         this.setPort(setearPort());
         this.setUser(setearUser());
         this.setPassword(setearPassword());
+        this.setPropertisURL(setearPropertisUrl());
     }
 
 
@@ -338,6 +367,18 @@ class Conexion {
                 }
             }
             return password;
+        }
+        return null;
+    }
+
+    /**
+     * Obtiene las propiedades de la url de conexión a la BD's
+     * @return Las propiedades de la url para la conexión a la BD's obtenida de las variables del sistema
+     */
+    private String setearPropertisUrl()  {
+        if (this.getGetPropertySystem()) {
+            String property = System.getProperty("DBpropertisUrl");
+            return property;
         }
         return null;
     }

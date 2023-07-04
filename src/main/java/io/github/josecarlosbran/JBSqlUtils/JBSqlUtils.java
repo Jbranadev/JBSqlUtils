@@ -26,6 +26,8 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
+
 /**
  * @author Jose Bran
  * Clase a ser heredada por los modelos, la cual brinda acceso a los metodos necesarios para que el modelo
@@ -167,6 +169,22 @@ public class JBSqlUtils extends Methods {
 
     }
 
+    /**
+     * Setea las propiedades extra de conexión url DB que pueden utilizar los modelos para conectarse a BD's
+     * @param propertisUrl Propiedades extra para la url de conexión a BD's por ejemplo
+     *      ?autoReconnect=true&useSSL=false
+     */
+    public static void setPropertisUrlConexionGlobal(String propertisUrl){
+        try {
+            System.setProperty("DBpropertisUrl", propertisUrl);
+        } catch (Exception e) {
+            LogsJB.fatal("Excepción disparada al setear las propiedades extra de conexión con la cual el modelo se conectara a la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
+    }
 
     /**
      * @return TimeStamp correspondiente a la fecha de creación del registro en BD's

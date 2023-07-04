@@ -43,6 +43,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.getBooleanfromInt;
+import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
 
 /**
@@ -183,6 +184,10 @@ public class Methods_Conexion extends Conexion {
                         this.getHost() + ":" + this.getPort() + "/" + this.getBD();
                 String usuario = this.getUser();
                 String password = this.getPassword();
+                if(!stringIsNullOrEmpty(this.getPropertisURL())){
+                    url=url+this.getPropertisURL();
+                }
+                LogsJB.debug("Url de conexion a DB: "+url);
                 connect = DriverManager.getConnection(url, usuario, password);
             } else if (this.getDataBaseType() == DataBase.MySQL) {
                 url = null;
@@ -194,6 +199,9 @@ public class Methods_Conexion extends Conexion {
                         this.getHost() + ":" + this.getPort() + "/" + this.getBD();
                 String usuario = this.getUser();
                 String password = this.getPassword();
+                if(!stringIsNullOrEmpty(this.getPropertisURL())){
+                    url=url+this.getPropertisURL();
+                }
                 LogsJB.debug("Url de conexion a DB: "+url);
                 connect = DriverManager.getConnection(url, usuario, password);
             } else if (this.getDataBaseType() == DataBase.SQLServer) {
@@ -206,6 +214,9 @@ public class Methods_Conexion extends Conexion {
                         this.getHost() + ":" + this.getPort() + ";databaseName=" + this.getBD() + ";TrustServerCertificate=True";
                 String usuario = this.getUser();
                 String password = this.getPassword();
+                if(!stringIsNullOrEmpty(this.getPropertisURL())){
+                    url=url+this.getPropertisURL();
+                }
                 LogsJB.debug("Url de conexion a DB: "+url);
                 connect = DriverManager.getConnection(url, usuario, password);
             } else if (this.getDataBaseType() == DataBase.SQLite) {

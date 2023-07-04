@@ -106,6 +106,11 @@ public static void setPortGlobal(String port);
  */
 public static void setHostGlobal(String host);
 
+/**
+* Setea las propiedades que puede tener la url de conexión a BD's
+*/
+setPropertisUrlConexionGlobal("?autoReconnect=true&useSSL=false");
+
 
 /**
  * Setea el tipo de BD's global a la cual se estarán conectando los modelos que no tengan una configuración personalizada.
@@ -1305,7 +1310,7 @@ Maven
 <dependency>
   <groupId>io.github.josecarlosbran</groupId>
   <artifactId>JBSqlUtils</artifactId>
-  <version>1.1.4.5</version>
+  <version>1.1.4.8</version>
 </dependency>
 ~~~
 

@@ -73,6 +73,10 @@ public class Principal {
             setPasswordGlobal("Bran");
             setDataBaseGlobal("JBSQLUTILS");
             setDataBaseTypeGlobal(DataBase.SQLServer);
+            /**
+             * Setea las propiedades que puede tener la url de conexión a BD's
+             */
+            setPropertisUrlConexionGlobal("?autoReconnect=true&useSSL=false");
 
 
             /**
