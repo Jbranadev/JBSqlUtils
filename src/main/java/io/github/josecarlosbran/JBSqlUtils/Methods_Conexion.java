@@ -354,7 +354,17 @@ public class Methods_Conexion extends Conexion {
 
                         String NameModel = this.getTableName();
                         String NameTable = temp.getTABLE_NAME();
-                        if (NameModel.equalsIgnoreCase(NameTable)) {
+                        //Valida que la tabla pertenezca a la BD's que pertenece el modelo
+                        String DatabaseName=this.getBD();
+                        String DatabaseTemp=temp.getTABLE_SCHEM();
+                        Boolean tablaisofDB=true;
+                        if(!stringIsNullOrEmpty(DatabaseTemp)){
+                            if(!DatabaseName.equalsIgnoreCase(DatabaseTemp)){
+                                tablaisofDB=false;
+                            }
+                        }
+
+                        if (NameModel.equalsIgnoreCase(NameTable)&&tablaisofDB) {
                             this.setTableExist(Boolean.TRUE);
                             this.setTableName(NameTable);
                             this.setTabla(temp);
