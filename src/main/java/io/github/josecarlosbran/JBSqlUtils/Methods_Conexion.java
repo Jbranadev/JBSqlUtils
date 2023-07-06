@@ -330,8 +330,8 @@ public class Methods_Conexion extends Conexion {
                     LogsJB.info("Comienza a verificar la existencia de la tabla");
                     Connection connect = this.getConnection();
                     DatabaseMetaData metaData = connect.getMetaData();
+                    String DatabaseName=this.getBD();
                     ResultSet tables = metaData.getTables(null, null, "%", null);
-
                     LogsJB.trace("Revisara el resultSet");
                     while (tables.next()) {
                         TablesSQL temp = new TablesSQL();
@@ -354,7 +354,25 @@ public class Methods_Conexion extends Conexion {
 
                         String NameModel = this.getTableName();
                         String NameTable = temp.getTABLE_NAME();
-                        if (NameModel.equalsIgnoreCase(NameTable)) {
+                        //Valida que la tabla pertenezca a la BD's que pertenece el modelo
+                        DatabaseName=this.getBD();
+                        String DatabaseTemp=tables.getString(1);
+                        String DatabaseTemp2=tables.getString(2);
+                        Boolean tablaisofDB=true;
+                        if(!stringIsNullOrEmpty(DatabaseTemp)){
+                            if(!DatabaseName.equalsIgnoreCase(DatabaseTemp)){
+                                tablaisofDB=false;
+                            }
+                        }
+                        if(!stringIsNullOrEmpty(DatabaseTemp2)){
+                            if(!DatabaseName.equalsIgnoreCase(DatabaseTemp2)){
+                                tablaisofDB=false;
+                            }
+                        }
+
+                        if (NameModel.equalsIgnoreCase(NameTable)&&tablaisofDB) {
+                            LogsJB.debug("Base de datos del modelo: "+DatabaseName
+                                    +" Base de datos del servidor3: "+DatabaseTemp);
                             this.setTableExist(Boolean.TRUE);
                             this.setTableName(NameTable);
                             this.setTabla(temp);
