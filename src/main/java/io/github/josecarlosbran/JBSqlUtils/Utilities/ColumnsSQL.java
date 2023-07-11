@@ -145,6 +145,9 @@ public class ColumnsSQL {
      * @return TABLE_CAT String → table catalog (may be null)
      */
     public String getTABLE_CAT() {
+        if(UtilitiesJB.stringIsNullOrEmpty(TABLE_CAT)){
+            return null;
+        }
         return TABLE_CAT;
     }
 
@@ -161,6 +164,9 @@ public class ColumnsSQL {
      * Obtiene TABLE_SCHEM String → table schema (may be null)
      */
     public String getTABLE_SCHEM() {
+        if(UtilitiesJB.stringIsNullOrEmpty(TABLE_SCHEM)){
+            return null;
+        }
         return TABLE_SCHEM;
     }
 
@@ -177,6 +183,9 @@ public class ColumnsSQL {
      * @return TABLE_NAME String → table name
      */
     public String getTABLE_NAME() {
+        if(UtilitiesJB.stringIsNullOrEmpty(TABLE_NAME)){
+            return null;
+        }
         return TABLE_NAME;
     }
 
@@ -193,6 +202,9 @@ public class ColumnsSQL {
      * @return COLUMN_NAME String → column name
      */
     public String getCOLUMN_NAME() {
+        if(UtilitiesJB.stringIsNullOrEmpty(COLUMN_NAME)){
+            return null;
+        }
         return COLUMN_NAME;
     }
 
@@ -225,6 +237,9 @@ public class ColumnsSQL {
      * @return TYPE_NAME String → Data source dependent type name, for a UDT the type name is fully qualified
      */
     public String getTYPE_NAME() {
+        if(UtilitiesJB.stringIsNullOrEmpty(TYPE_NAME)){
+            return null;
+        }
         return TYPE_NAME;
     }
 
@@ -311,6 +326,9 @@ public class ColumnsSQL {
      * @return REMARKS String → comment describing column (may be null)
      */
     public String getREMARKS() {
+        if(UtilitiesJB.stringIsNullOrEmpty(REMARKS)){
+            return null;
+        }
         return REMARKS;
     }
 
@@ -327,6 +345,9 @@ public class ColumnsSQL {
      * @return COLUMN_DEF String → default value for the column, which should be interpreted as a string when the value is enclosed in single quotes (may be null)
      */
     public String getCOLUMN_DEF() {
+        if(UtilitiesJB.stringIsNullOrEmpty(COLUMN_DEF)){
+            return null;
+        }
         return COLUMN_DEF;
     }
 
@@ -378,6 +399,9 @@ public class ColumnsSQL {
      * empty string --- if the nullability for the column is unknown
      */
     public String getIS_NULLABLE() {
+        if(UtilitiesJB.stringIsNullOrEmpty(IS_NULLABLE)){
+            return null;
+        }
         return IS_NULLABLE;
     }
 
@@ -397,6 +421,9 @@ public class ColumnsSQL {
      * @return SCOPE_CATALOG String → catalog of table that is the scope of a reference attribute (null if DATA_TYPE isn't REF)
      */
     public String getSCOPE_CATALOG() {
+        if(UtilitiesJB.stringIsNullOrEmpty(SCOPE_CATALOG)){
+            return null;
+        }
         return SCOPE_CATALOG;
     }
 
@@ -413,6 +440,9 @@ public class ColumnsSQL {
      * @return SCOPE_SCHEMA String → schema of table that is the scope of a reference attribute (null if the DATA_TYPE isn't REF)
      */
     public String getSCOPE_SCHEMA() {
+        if(UtilitiesJB.stringIsNullOrEmpty(SCOPE_SCHEMA)){
+            return null;
+        }
         return SCOPE_SCHEMA;
     }
 
@@ -429,6 +459,9 @@ public class ColumnsSQL {
      * @return SCOPE_TABLE String → table name that this the scope of a reference attribute (null if the DATA_TYPE isn't REF)
      */
     public String getSCOPE_TABLE() {
+        if(UtilitiesJB.stringIsNullOrEmpty(SCOPE_TABLE)){
+            return null;
+        }
         return SCOPE_TABLE;
     }
 
@@ -466,6 +499,9 @@ public class ColumnsSQL {
      * empty string --- if it cannot be determined whether the column is auto incremented
      */
     public String getIS_AUTOINCREMENT() {
+        if(UtilitiesJB.stringIsNullOrEmpty(IS_AUTOINCREMENT)){
+            return null;
+        }
         return IS_AUTOINCREMENT;
     }
 
@@ -488,6 +524,9 @@ public class ColumnsSQL {
      * empty string --- if it cannot be determined whether this is a generated column
      */
     public String getIS_GENERATEDCOLUMN() {
+        if(UtilitiesJB.stringIsNullOrEmpty(IS_GENERATEDCOLUMN)){
+            return null;
+        }
         return IS_GENERATEDCOLUMN;
     }
 
