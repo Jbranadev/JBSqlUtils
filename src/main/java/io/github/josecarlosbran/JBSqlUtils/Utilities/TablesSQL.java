@@ -135,6 +135,9 @@ public class TablesSQL {
      * @return TABLE_CAT String => catálogo de tablas (puede ser nulo)
      */
     public String getTABLE_CAT() {
+        if(UtilitiesJB.stringIsNullOrEmpty(TABLE_CAT)){
+            return null;
+        }
         return TABLE_CAT;
     }
 
@@ -153,6 +156,9 @@ public class TablesSQL {
      * @return Retorna el esquema de la tabla en BD's
      */
     public String getTABLE_SCHEM() {
+        if(UtilitiesJB.stringIsNullOrEmpty(TABLE_SCHEM)){
+            return null;
+        }
         return TABLE_SCHEM;
     }
 
@@ -171,6 +177,9 @@ public class TablesSQL {
      * @return retorna el nombre de la tabla en BD's
      */
     public String getTABLE_NAME() {
+        if(UtilitiesJB.stringIsNullOrEmpty(TABLE_NAME)){
+            return null;
+        }
         return TABLE_NAME;
     }
 
@@ -191,6 +200,9 @@ public class TablesSQL {
      * OBSERVACIONES String => comentario explicativo sobre la tabla
      */
     public String getTABLE_TYPE() {
+        if(UtilitiesJB.stringIsNullOrEmpty(TABLE_TYPE)){
+            return null;
+        }
         return TABLE_TYPE;
     }
 
@@ -211,6 +223,9 @@ public class TablesSQL {
      * @return String => explanatory comment on the table
      */
     public String getREMARKS() {
+        if(UtilitiesJB.stringIsNullOrEmpty(REMARKS)){
+            return null;
+        }
         return REMARKS;
     }
 
@@ -229,6 +244,9 @@ public class TablesSQL {
      * @return TYPE_CAT String => el catálogo de tipos (puede ser nulo)
      */
     public String getTYPE_CAT() {
+        if(UtilitiesJB.stringIsNullOrEmpty(TYPE_CAT)){
+            return null;
+        }
         return TYPE_CAT;
     }
 
@@ -247,6 +265,9 @@ public class TablesSQL {
      * @return TYPE_SCHEM String => el esquema de tipos (puede ser nulo)
      */
     public String getTYPE_SCHEM() {
+        if(UtilitiesJB.stringIsNullOrEmpty(TYPE_SCHEM)){
+            return null;
+        }
         return TYPE_SCHEM;
     }
 
@@ -265,6 +286,9 @@ public class TablesSQL {
      * @return TYPE_NAME Cadena => nombre de tipo (puede ser nulo)
      */
     public String getTYPE_NAME() {
+        if(UtilitiesJB.stringIsNullOrEmpty(TYPE_NAME)){
+            return null;
+        }
         return TYPE_NAME;
     }
 
@@ -284,7 +308,9 @@ public class TablesSQL {
      * designada de una tabla escrita (puede ser nulo)
      */
     public String getSELF_REFERENCING_COL_NAME() {
-        return SELF_REFERENCING_COL_NAME;
+        if(UtilitiesJB.stringIsNullOrEmpty(SELF_REFERENCING_COL_NAME)){
+            return null;
+        }return SELF_REFERENCING_COL_NAME;
     }
 
     /**
@@ -302,6 +328,9 @@ public class TablesSQL {
      * Los valores son "SISTEMA", "USUARIO", "DERIVADO". (puede ser nulo)
      */
     public String getREF_GENERATION() {
+        if(UtilitiesJB.stringIsNullOrEmpty(REF_GENERATION)){
+            return null;
+        }
         return REF_GENERATION;
     }
 

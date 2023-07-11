@@ -376,7 +376,7 @@ public class Methods_Conexion extends Conexion {
                             this.setTableExist(Boolean.TRUE);
                             this.setTableName(NameTable);
                             this.setTabla(temp);
-                            ResultSet clavePrimaria = metaData.getPrimaryKeys(null, null, NameTable);
+                            ResultSet clavePrimaria = metaData.getPrimaryKeys(temp.getTABLE_CAT(), temp.getTABLE_SCHEM(), NameTable);
                             if (clavePrimaria.next()) {
                                 PrimaryKey clave = new PrimaryKey();
                                 clave.setTABLE_CAT(clavePrimaria.getString(1));
@@ -444,7 +444,8 @@ public class Methods_Conexion extends Conexion {
             LogsJB.trace("Obtuvo el objeto conexión");
             DatabaseMetaData metaData = connect.getMetaData();
             LogsJB.trace("Ya tiene el MetaData de la BD's");
-            ResultSet columnas = metaData.getColumns(null, null, this.getTableName(), null);
+            ResultSet columnas = metaData.getColumns(this.getTabla().getTABLE_CAT(),
+                    this.getTabla().getTABLE_SCHEM(), this.getTableName(), null);
             LogsJB.debug("Ya tiene el resultset con las columnas de la tabla");
             //Obtener las tablas disponibles
             this.getTabla().getColumnas().clear();
