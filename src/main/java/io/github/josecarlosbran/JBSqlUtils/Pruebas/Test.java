@@ -48,6 +48,13 @@ public class Test extends JBSqlUtils {
          */
         super();
         this.setTableName("testModel");
+        /**
+         * Setear un tamaño especifico para una columna en BD's
+         * Esto nos permitira que cuando creemos la tabla desde nuestra aplicación podamos personalizar el tamaña de las columnas
+         * de acuerdo a las opciónes que nos brinda cada Servidor de BD's, en este caso es un VARCHAR(1000) al cual indicamos que deseamos
+         * tenga una longitud de mil
+         */
+        this.getName().setSize("1000");
     }
 
     /**

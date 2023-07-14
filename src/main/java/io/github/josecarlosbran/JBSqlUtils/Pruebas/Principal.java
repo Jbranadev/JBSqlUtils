@@ -27,11 +27,11 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
+import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
 import org.json.JSONObject;
 
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 
 import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.*;
@@ -67,28 +67,35 @@ public class Principal {
             //setPasswordGlobal("Bran");
             //LogsJB.info(BDSqlite);
 
-            setPortGlobal("5077");
+            /*setPortGlobal("5077");
             setHostGlobal("localhost");
             setUserGlobal("Bran");
             setPasswordGlobal("Bran");
             setDataBaseGlobal("JBSQLUTILS");
-            setDataBaseTypeGlobal(DataBase.SQLServer);
+            setDataBaseTypeGlobal(DataBase.SQLServer);*/
             /**
              * Setea las propiedades que puede tener la url de conexión a BD's
              */
-            setPropertisUrlConexionGlobal("?autoReconnect=true&useSSL=false");
-
+            //setPropertisUrlConexionGlobal("?autoReconnect=true&useSSL=false");
+            JBSqlUtils.setDataBaseGlobal("registerdaps");
+            JBSqlUtils.setPortGlobal("5076");
+            JBSqlUtils.setHostGlobal("127.0.0.1");
+            JBSqlUtils.setUserGlobal("Bran");
+            JBSqlUtils.setPasswordGlobal("Bran");
+            JBSqlUtils.setDataBaseTypeGlobal(DataBase.MySQL);
+            UserModel user = new UserModel();
+            user.crateTable();
 
             /**
              * Instanciamos el modelo
              */
-            Test test = new Test();
+            //Test test = new Test();
             //new Principal().SQLITE(new Test());
 
 
             //new Principal().MySQL(new Test());
 
-            new Principal().PostgreSQL(new Test());
+            //new Principal().PostgreSQL(new Test());
 
             // new Principal().SQLServer(new Test());
 
