@@ -350,11 +350,18 @@ public class Column<T> {
     }
 
 
-
+    /**
+     * Obtiene el nombre de la columna SQL
+     * @return Nombre de la columna SQL
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Setea el nombre de la Columna SQL
+     * @param name Nombre de la columna
+     */
     public void setName(String name) {
         this.name = name;
     }
