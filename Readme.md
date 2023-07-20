@@ -418,6 +418,15 @@ public class Test extends JBSqlUtils {
      * Hacemos el llamado al constructor de la Clase JBSqlUtils
      */
     super();
+    
+    /**
+     * Setear un tamaño especifico para una columna en BD's
+     * Esto nos permitira que cuando creemos la tabla desde nuestra aplicación podamos personalizar el tamaña de las columnas
+     * de acuerdo a las opciónes que nos brinda cada Servidor de BD's, en este caso es un VARCHAR(1000) al cual indicamos que deseamos
+     * tenga una longitud de mil
+     */
+    this.getName().setSize("1000");
+    
   }
 
   /**
@@ -1310,7 +1319,7 @@ Maven
 <dependency>
   <groupId>io.github.josecarlosbran</groupId>
   <artifactId>JBSqlUtils</artifactId>
-  <version>1.1.4.8</version>
+  <version>1.1.5.1</version>
 </dependency>
 ~~~
 

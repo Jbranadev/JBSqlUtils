@@ -252,7 +252,7 @@ public class Methods_Conexion extends Conexion {
             }
 
             if (!Objects.isNull(connect)) {
-                LogsJB.info("Conexión a BD's " + this.getBD() + " Realizada exitosamente");
+                LogsJB.info("Conexión a BD's " + this.getBD() + " Realizada exitosamente "+this.getClass().getSimpleName());
                 //this.setConnect(connect);
                 //tableExist(connect);
             }
@@ -280,9 +280,9 @@ public class Methods_Conexion extends Conexion {
             }
             if (!connect.isClosed()) {
                 connect.close();
-                LogsJB.info("Conexión a BD's cerrada");
+                LogsJB.info("Conexión a BD's cerrada "+this.getClass().getSimpleName());
             } else {
-                LogsJB.warning("Conexión a BD's ya estaba cerrada");
+                LogsJB.warning("Conexión a BD's ya estaba cerrada "+this.getClass().getSimpleName());
             }
         } catch (ConexionUndefind e) {
             LogsJB.warning("El modelo no estaba conectado a la BD's por lo cual no se cerrara la conexión");
@@ -302,9 +302,9 @@ public class Methods_Conexion extends Conexion {
         try {
             if (!this.getConnect().isClosed()) {
                 this.getConnect().close();
-                LogsJB.info("Conexión a BD's cerrada");
+                LogsJB.info("Conexión a BD's cerrada "+this.getClass().getSimpleName());
             } else {
-                LogsJB.warning("Conexión a BD's ya estaba cerrada");
+                LogsJB.warning("Conexión a BD's ya estaba cerrada "+this.getClass().getSimpleName());
             }
         } catch (ConexionUndefind e) {
             LogsJB.warning("El modelo no estaba conectado a la BD's por lo cual no se cerrara la conexión");
@@ -387,7 +387,7 @@ public class Methods_Conexion extends Conexion {
                                 clave.setPK_NAME(clavePrimaria.getString(6));
                                 this.getTabla().setClaveprimaria(clave);
                             }
-                            LogsJB.info("La tabla correspondiente a este modelo, existe en BD's");
+                            LogsJB.info("La tabla correspondiente a este modelo, existe en BD's "+this.getClass().getSimpleName());
                             tables.close();
                             this.closeConnection(connect);
                             getColumnsTable();
@@ -397,7 +397,7 @@ public class Methods_Conexion extends Conexion {
                     LogsJB.trace("Termino de Revisarar el resultSet");
                     tables.close();
                     if (!this.getTableExist()) {
-                        LogsJB.info("La tabla correspondiente a este modelo, No existe en BD's");
+                        LogsJB.info("La tabla correspondiente a este modelo, No existe en BD's "+this.getClass().getSimpleName());
 
                         this.closeConnection(connect);
 
@@ -439,7 +439,7 @@ public class Methods_Conexion extends Conexion {
     protected void getColumnsTable() {
         //Runnable ObtenerColumnas = () -> {
         try {
-            LogsJB.debug("Comienza a obtener las columnas que le pertenecen a la tabla");
+            LogsJB.debug("Comienza a obtener las columnas que le pertenecen a la tabla "+this.getTableName());
             Connection connect = this.getConnection();
             LogsJB.trace("Obtuvo el objeto conexión");
             DatabaseMetaData metaData = connect.getMetaData();
@@ -481,7 +481,7 @@ public class Methods_Conexion extends Conexion {
                 temp.setIS_GENERATEDCOLUMN(columnas.getString(24));
                 this.getTabla().getColumnas().add(temp);
             }
-            LogsJB.info("Información de las columnas de la tabla correspondiente al modelo obtenida");
+            LogsJB.info("Información de las columnas de la tabla correspondiente al modelo obtenida "+this.getClass().getSimpleName());
             columnas.close();
             this.closeConnection(connect);
             this.getTabla().getColumnas().stream().sorted(Comparator.comparing(ColumnsSQL::getORDINAL_POSITION));
@@ -751,7 +751,7 @@ public class Methods_Conexion extends Conexion {
         } else {
             columnaSql.setValor(resultado.getObject(columnName));
             metodo.invoke(invocador, columnaSql);
-            LogsJB.warning("No se pudo setear el valor de la columna: " + columnName);
+            LogsJB.warning("No se pudo setear el valor de la columna: " + columnName+" "+this.getTableName());
             LogsJB.warning("Debido a que ninguno de los metodos corresponde al tipo de dato SQL: " + columnType);
         }
 
@@ -865,7 +865,7 @@ public class Methods_Conexion extends Conexion {
 
                         LogsJB.info(ejecutor.toString());
                         int filas=ejecutor.executeUpdate();
-                        LogsJB.info("Filas Insertadas en BD's': " + filas);
+                        LogsJB.info("Filas Insertadas en BD's': " + filas+" "+this.getTableName());
                         modelo.closeConnection(connect);
 
                     } else {
@@ -998,7 +998,7 @@ public class Methods_Conexion extends Conexion {
 
                         LogsJB.info(ejecutor.toString());
                         int filas=ejecutor.executeUpdate();
-                        LogsJB.info("Filas actualizadas: " + filas);
+                        LogsJB.info("Filas actualizadas: " + filas+" "+this.getTableName());
                         modelo.closeConnection(connect);
 
                     } else {
@@ -1096,7 +1096,7 @@ public class Methods_Conexion extends Conexion {
                             Column columnsSQL = (Column) metodo.invoke(modelo, null);
                             if (Objects.isNull(columnsSQL.getValor())) {
                                 LogsJB.warning("El modelo proporcionado no tiene definido el valor de la clave " + namePrimaryKey
-                                        + " Por lo cual no se puede eliminar el modelo");
+                                        + " Por lo cual no se puede eliminar el modelo "+this.getTableName());
                                 modelo.setTaskIsReady(true);
                                 return;
                             } else {
@@ -1110,7 +1110,7 @@ public class Methods_Conexion extends Conexion {
 
                     } else {
                         LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
-                                "Eliminar el Registro");
+                                "Eliminar el Registro "+this.getClass().getSimpleName());
                     }
                     modelo.setTaskIsReady(true);
                 } catch (Exception e) {
@@ -1172,7 +1172,7 @@ public class Methods_Conexion extends Conexion {
         temp.setPort(modelo.getPort());
         temp.setHost(modelo.getHost());
 
-        LogsJB.info("Obtuvo un resultado de BD's, procedera a llenar el modelo");
+        LogsJB.info("Obtuvo un resultado de BD's, procedera a llenar el modelo "+temp.getClass().getSimpleName());
         List<Method> metodosSet = new ArrayList<>();
         LogsJB.trace("Inicializa el array list de los metodos set");
         metodosSet = temp.getMethodsSetOfModel(temp.getMethodsModel());
@@ -1236,7 +1236,7 @@ public class Methods_Conexion extends Conexion {
      */
     protected <T extends Methods_Conexion> void procesarResultSetOneResult(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException {
         modelo.setModelExist(true);
-        LogsJB.info("Obtuvo un resultado de BD's, procedera a llenar el modelo");
+        LogsJB.info("Obtuvo un resultado de BD's, procedera a llenar el modelo "+modelo.getTableName());
         List<Method> metodosSet = new ArrayList<>();
         LogsJB.trace("Inicializa el array list de los metodos set");
         metodosSet = modelo.getMethodsSetOfModel(modelo.getMethodsModel());
@@ -1443,7 +1443,7 @@ public class Methods_Conexion extends Conexion {
                         });
 
 
-                        LogsJB.info("Termino de ordenar la lista");
+                        LogsJB.debug("Termino de ordenar la lista");
 
 
                         int datos = 0;
@@ -1461,7 +1461,7 @@ public class Methods_Conexion extends Conexion {
                             }
                             Constraint[] columnRestriccion = columnsSQL.getRestriccion();
                             String restricciones = "";
-                            String tipo_de_columna = columnType.toString();
+                            String tipo_de_columna = columnsSQL.columnToString();
                             if ((((this.getDataBaseType() == DataBase.PostgreSQL)) || ((this.getDataBaseType() == DataBase.MySQL))
                                     || ((this.getDataBaseType() == DataBase.SQLite))) &&
                                     (columnType == DataType.BIT)) {
