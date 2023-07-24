@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="C:/Users/josec/IdeaProjects/JBSqlUtils/src/test/java/io/github/josecarlosbran/JBSqlUtils/JBSqlUtilsTestMySQL.java">
+        <classes>
+            <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL">
+                <methods><include name="testMySQL"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

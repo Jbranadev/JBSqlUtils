@@ -1,4 +1,4 @@
-package io.github.josecarlosbran.JBSqlUtils.Pruebas;
+package io.github.josecarlosbran.JBSqlUtils;
 
 
 import io.github.josecarlosbran.JBSqlUtils.Column;

@@ -322,7 +322,7 @@ public class Methods_Conexion extends Conexion {
      *
      * @return True si la tabla correspondiente al modelo existe en BD's, de lo contrario False.
      */
-    protected Boolean tableExist() {
+    public Boolean tableExist() {
         Boolean result = false;
         try {
             Callable<Boolean> VerificarExistencia = () -> {

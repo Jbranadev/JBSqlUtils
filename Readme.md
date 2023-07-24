@@ -551,14 +551,14 @@ instancia del mismo y llamar al método dropTableIfExist().
 /**
 * Instanciamos el modelo
 */
-Test test = new Test();
+Test testModel = new Test();
 
 /**
 * Elimina la tabla correspondiente al modelo en BD's
 * @return True si la tabla correspondiente al modelo en BD's existe y fue eliminada, de no existir la tabla correspondiente
 * en BD's retorna False.
 */
-test.dropTableIfExist();
+testModel.dropTableIfExist();
 
 ~~~
 
@@ -574,14 +574,14 @@ instancia del mismo y llamar al método crateTable().
 /**
 * Instanciamos el modelo
 */
-Test test = new Test();
+Test testModel = new Test();
 
 /**
 * Crea la tabla correspondiente al modelo en BD's si esta no existe.
 * @return True si la tabla correspondiente al modelo en BD's no existe y fue creada exitosamente,
 * False si la tabla correspondiente al modelo ya existe en BD's
 */
-test.crateTable();
+testModel.crateTable();
 
 ~~~
 
@@ -601,7 +601,7 @@ por default JBSqlUtils esta configurada para manejar la columnas created_at y up
 * @param timestamps True si las timestamps serán manejadas por JBSqlUtils, False, si el modelo no tiene estas
 *          columnas.
 */
-test.setTimestamps(false);
+testModel.setTimestamps(false);
 
 
 /**
@@ -609,7 +609,7 @@ test.setTimestamps(false);
 * @return True si la tabla correspondiente al modelo en BD's no existe y fue creada exitosamente,
 * False si la tabla correspondiente al modelo ya existe en BD's
 */
-test.crateTable();
+testModel.crateTable();
 
 ~~~
 
@@ -629,13 +629,13 @@ al método save(), una vez estemos seguros de que el modelo posee la informació
 * el cual se encarga de insertar un registro en la tabla correspondiente al modelo con la información del mismo
 * si este no existe, de existir actualiza el registro por medio de la clave primaria del modelo.
 */
-test.getName().setValor("Jose");
-test.getApellido().setValor("Bran");
+testModel.getName().setValor("Jose");
+testModel.getApellido().setValor("Bran");
 /**
 * En este primer ejemplo no seteamos un valor a la columna IsMayor, para comprobar que el valor
 * por default configurado al crear la tabla, se este asignando a la respectiva columna.
 */
-test.save();
+testModel.save();
 
 /**
  * Si queremos utilizar el mismo modelo para insertar otro registro con valores diferentes,
@@ -651,7 +651,7 @@ test.save();
  * De utilizar otro modelo, no es necesario esperar a que el primer modelo este libre.
  * 
  */
-while (!test.getTaskIsReady()){
+while (!testModel.getTaskIsReady()){
 
 }
 
@@ -659,21 +659,21 @@ while (!test.getTaskIsReady()){
 * Una vez hemos comprobado que el modelo no esta escribiendo u obteniendo información en segundo plano
 * podemos utilizarlo, para insertar otro registro totalmente diferente al que insertamos anteriormente.
 */
-test.getName().setValor("Daniel");
-test.getApellido().setValor("Quiñonez");
-test.getIsMayor().setValor(false);
+testModel.getName().setValor("Daniel");
+testModel.getApellido().setValor("Quiñonez");
+testModel.getIsMayor().setValor(false);
 
 /**
 * Le indicamos a JBSqlUtils que de este segundo registro a insertar, no queremos que maneje
 * las columnas created_at y updated_at.
 */
-test.setTimestamps(false);
+testModel.setTimestamps(false);
 
 /**
 * En este segundo ejemplo si seteamos un valor a la columna IsMayor, ya que no queremos que esta
 * tenga el valor configurado por default para esta columna al momento de crear la tabla.
 */
-test.save();
+testModel.save();
 
 ~~~
 
@@ -697,20 +697,20 @@ Para obtener un registro de BD's JBSqlUtils proporciona diferentes métodos los 
 * where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
 * brindar una lógica un poco más compleja a la búsqueda del registro que deseamos obtener.
 */
-test.where("name", Operator.LIKE, "Jos%").and("apellido", Operator.IGUAL_QUE, "Bran").get();
+testModel.where("name", Operator.LIKE, "Jos%").and("apellido", Operator.IGUAL_QUE, "Bran").get();
 
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!test.getTaskIsReady()){
+while (!testModel.getTaskIsReady()){
 
 }
 
 /**
 * Mostramos la información obtenida
 */
-LogsJB.info(test.getId().getValor()+"  "+test.getName().getValor()+"  "+test.getApellido().getValor()
-  +"  "+test.getIsMayor().getValor()+"  "+test.getCreated_at().getValor()+"  "+test.getUpdated_at().getValor());
+LogsJB.info(testModel.getId().getValor()+"  "+testModel.getName().getValor()+"  "+testModel.getApellido().getValor()
+  +"  "+testModel.getIsMayor().getValor()+"  "+testModel.getCreated_at().getValor()+"  "+testModel.getUpdated_at().getValor());
 
 ~~~
 
@@ -731,19 +731,19 @@ LogsJB.info(test.getId().getValor()+"  "+test.getName().getValor()+"  "+test.get
 * where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
 * brindar una lógica un poco más compleja a la búsqueda del registro que deseamos obtener.
 */
-Test test2= (Test) test.where("isMayor", Operator.IGUAL_QUE, false).first();
+Test testModel2= (Test) testModel.where("isMayor", Operator.IGUAL_QUE, false).first();
 
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!test.getTaskIsReady()){
+while (!testModel.getTaskIsReady()){
 
 }
 /**
 * Mostramos la información obtenida
 */
-LogsJB.info(test2.getId().getValor()+"  "+test2.getName().getValor()+"  "+test2.getApellido().getValor()
-  +"  "+test2.getIsMayor().getValor()+"  "+test2.getCreated_at().getValor()+"  "+test2.getUpdated_at().getValor());
+LogsJB.info(testModel2.getId().getValor()+"  "+testModel2.getName().getValor()+"  "+testModel2.getApellido().getValor()
+  +"  "+testModel2.getIsMayor().getValor()+"  "+testModel2.getCreated_at().getValor()+"  "+testModel2.getUpdated_at().getValor());
 
 ~~~
 
@@ -777,19 +777,19 @@ de no encontrar el registro para el modelo.
 * where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
 * brindar una lógica un poco más compleja a la busqueda del registro que deseamos obtener.
 */
-Test test2= (Test) test.where("Name", Operator.IGUAL_QUE, "Jose").firstOrFail();
+Test testModel2= (Test) testModel.where("Name", Operator.IGUAL_QUE, "Jose").firstOrFail();
 
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!test.getTaskIsReady()){
+while (!testModel.getTaskIsReady()){
 
 }
 /**
 * Mostramos la información obtenida
 */
-LogsJB.info(test2.getId().getValor()+"  "+test2.getName().getValor()+"  "+test2.getApellido().getValor()
-  +"  "+test2.getIsMayor().getValor()+"  "+test2.getCreated_at().getValor()+"  "+test2.getUpdated_at().getValor());
+LogsJB.info(testModel2.getId().getValor()+"  "+testModel2.getName().getValor()+"  "+testModel2.getApellido().getValor()
+  +"  "+testModel2.getIsMayor().getValor()+"  "+testModel2.getCreated_at().getValor()+"  "+testModel2.getUpdated_at().getValor());
 
 
 ~~~
@@ -818,20 +818,20 @@ Información obtenida por el modelo
 * where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
 * brindar una lógica un poco más compleja a la busqueda del registro que deseamos obtener.
 */
-Test test2= (Test) test.where("Name", Operator.IGUAL_QUE, "Jose").and("IsMayor", Operator.IGUAL_QUE, false).firstOrFail();
+Test testModel2= (Test) testModel.where("Name", Operator.IGUAL_QUE, "Jose").and("IsMayor", Operator.IGUAL_QUE, false).firstOrFail();
 
 
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!test.getTaskIsReady()){
+while (!testModel.getTaskIsReady()){
 
 }
 /**
 * Mostramos la información obtenida
 */
-LogsJB.info(test2.getId().getValor()+"  "+test2.getName().getValor()+"  "+test2.getApellido().getValor()
-  +"  "+test2.getIsMayor().getValor()+"  "+test2.getCreated_at().getValor()+"  "+test2.getUpdated_at().getValor());
+LogsJB.info(testModel2.getId().getValor()+"  "+testModel2.getName().getValor()+"  "+testModel2.getApellido().getValor()
+  +"  "+testModel2.getIsMayor().getValor()+"  "+testModel2.getCreated_at().getValor()+"  "+testModel2.getUpdated_at().getValor());
 
 
 ~~~
@@ -866,12 +866,12 @@ List<Test> lista=new ArrayList<>();
 * Obtenemos todos los registros cuyos Id son mayores a 2, el método getALL()
 * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
 */
-lista=test.where("id", Operator.MAYOR_QUE, 2).getAll();
+lista=testModel.where("id", Operator.MAYOR_QUE, 2).getAll();
 
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!test.getTaskIsReady()){
+while (!testModel.getTaskIsReady()){
 
 }
 
@@ -923,12 +923,12 @@ List<Test> lista=new ArrayList<>();
 * Obtiene una lista de modelos que coinciden con la búsqueda realizada por medio de la consulta SQL
 * limitada a la cantidad de registros especificados en el método take().
 */
-lista=test.where("id", Operator.MAYOR_QUE, 2).take(2).get();
+lista=testModel.where("id", Operator.MAYOR_QUE, 2).take(2).get();
 
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!test.getTaskIsReady()){
+while (!testModel.getTaskIsReady()){
 
 }
 
@@ -983,12 +983,12 @@ List<Test> lista=new ArrayList<>();
 * El método orderBy() proporciona acceso a todos los métodos que hemos visto anteriormente, los cuales nos
 * permiten obtener uno o multiples registros, de acuerdo a la lógica que brindemos a nuestra sentencia SQL.
 */
-lista=test.where("id", Operator.MAYOR_QUE, 2).orderBy("id", OrderType.DESC).take(2).get();
+lista=testModel.where("id", Operator.MAYOR_QUE, 2).orderBy("id", OrderType.DESC).take(2).get();
 
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!test.getTaskIsReady()){
+while (!testModel.getTaskIsReady()){
 
 }
 
@@ -1037,30 +1037,30 @@ modelo en su columna correspondiente a la primaryKey, tenga el valor del registr
 /**
 *Obtenemos el registro que coincide con la sentencia SQL generada por el modelo
 */
-test.where("Apellido", Operator.IGUAL_QUE, "Cabrera").and("IsMayor", Operator.IGUAL_QUE, false).get();
+testModel.where("Apellido", Operator.IGUAL_QUE, "Cabrera").and("IsMayor", Operator.IGUAL_QUE, false).get();
 
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!test.getTaskIsReady()){
+while (!testModel.getTaskIsReady()){
 
 }
 /**
 * Mostramos la información obtenida
 */
-LogsJB.info(test.getId().getValor()+"  "+test.getName().getValor()+"  "+test.getApellido().getValor()
-  +"  "+test.getIsMayor().getValor()+"  "+test.getCreated_at().getValor()+"  "+test.getUpdated_at().getValor());
+LogsJB.info(testModel.getId().getValor()+"  "+testModel.getName().getValor()+"  "+testModel.getApellido().getValor()
+  +"  "+testModel.getIsMayor().getValor()+"  "+testModel.getCreated_at().getValor()+"  "+testModel.getUpdated_at().getValor());
 
 
 /**
 * Modificamos el valor de la columna IsMayor a true
 */
-test.getIsMayor().setValor(true);
+testModel.getIsMayor().setValor(true);
 
 /**
 * LLamamos al método save, el cual se encargará de actualizar el registro en BD's.
 */
-test.save();
+testModel.save();
 
 ~~~
 
@@ -1100,12 +1100,12 @@ List<Test> lista=new ArrayList<>();
 /**
 * Obtenemos todos los modelos que su Id se encuentra entre 1 y 5
 */
-lista=test.where("id", Operator.MAYOR_IGUAL_QUE, 1).and("id", Operator.MENOR_IGUAL_QUE, 5).getAll();
+lista=testModel.where("id", Operator.MAYOR_IGUAL_QUE, 1).and("id", Operator.MENOR_IGUAL_QUE, 5).getAll();
 
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!test.getTaskIsReady()){
+while (!testModel.getTaskIsReady()){
 
 }
 
@@ -1133,7 +1133,7 @@ lista.forEach(showFilas);
 * Almacena la información de los modelos proporcionados en BD's
 * @param modelos Lista de modelos que serán Insertados o Actualizados
 */
-test.saveALL(lista);
+testModel.saveALL(lista);
     
 
 ~~~
@@ -1176,24 +1176,24 @@ modelo en su columna correspondiente a la primaryKey, tenga el valor del registr
 /**
 *Obtenemos el registro que coincide con la sentencia SQL generada por el modelo
 */
-test.where("Apellido", Operator.IGUAL_QUE, "Cabrera").and("Name", Operator.IGUAL_QUE, "Marleny").get();
+testModel.where("Apellido", Operator.IGUAL_QUE, "Cabrera").and("Name", Operator.IGUAL_QUE, "Marleny").get();
 
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!test.getTaskIsReady()){
+while (!testModel.getTaskIsReady()){
 
 }
 /**
 * Mostramos la información obtenida
 */
-LogsJB.info(test.getId().getValor()+"  "+test.getName().getValor()+"  "+test.getApellido().getValor()
-  +"  "+test.getIsMayor().getValor()+"  "+test.getCreated_at().getValor()+"  "+test.getUpdated_at().getValor());
+LogsJB.info(testModel.getId().getValor()+"  "+testModel.getName().getValor()+"  "+testModel.getApellido().getValor()
+  +"  "+testModel.getIsMayor().getValor()+"  "+testModel.getCreated_at().getValor()+"  "+testModel.getUpdated_at().getValor());
 
 /**
 * LLamamos al metodo delete, el cual se encargará de eliminar el registro en BD's.
 */
-test.delete();
+testModel.delete();
 
 ~~~
 

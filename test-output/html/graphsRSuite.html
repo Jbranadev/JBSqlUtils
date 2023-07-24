@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="" lang="">
+<head>
+	<script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript" src="js/canvasjs.min.js"></script>
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/reportng.css" />
+	<script>
+		window.onload = function () {
+			var chart = new CanvasJS.Chart("chartContainer", {
+animationEnabled: true,height: 600,indexLabelFontSize: 16,theme: "light2",title:{text: ""},axisX:{},axisY: {title: "Suite"},toolTip:{shared:true},legend:{cursor:"pointer",verticalAlign: "top",horizontalAlign: "left",dockInsidePlotArea: false, fontSize: 16},data: [
+{type: "stackedBar",showInLegend: true,name: "Pass",color: "green",dataPoints: [
+{ label: "Default Suite", y: 1 },
+]},
+{type: "stackedBar",showInLegend: true,name: "Fixed",color: "blue",dataPoints: [
+{ label: "Default Suite", y: 0 },
+]},
+{type: "stackedBar",showInLegend: true,name: "Known Defects",color: "orange",dataPoints: [
+{ label: "Default Suite", y: 0 },
+]},
+{type: "stackedBar",showInLegend: true,name: "Fail",color: "red",dataPoints: [
+{ label: "Default Suite", y: 0 },
+]},
+{type: "stackedBar",showInLegend: true,name: "Skip",color: "yellow",dataPoints: [
+{ label: "Default Suite", y: 0 },
+]}
+]});
+
+			chart.render();
+		}
+	</script>
+</head>
+<body>
+<div id="graphPerTime">
+	<h3 class="normal">Results Per Suite</h3>
+	<div id="chartContainer" style="height: 100%; max-width: 100%; margin: 0px auto;"></div>
+</div>			
+</body>
+</html>

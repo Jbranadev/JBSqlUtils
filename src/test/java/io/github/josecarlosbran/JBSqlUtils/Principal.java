@@ -13,12 +13,10 @@
  * Consulte la Licencia para conocer el idioma específico que rige los permisos y
  * limitaciones bajo la Licencia.
  */
-package io.github.josecarlosbran.JBSqlUtils.Pruebas;
+package io.github.josecarlosbran.JBSqlUtils;
 
 import com.josebran.LogsJB.LogsJB;
 import com.josebran.LogsJB.Numeracion.NivelLog;
-import io.github.josecarlosbran.JBSqlUtils.Column;
-import io.github.josecarlosbran.JBSqlUtils.DataBase.Take;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
@@ -27,7 +25,6 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
 import org.json.JSONObject;
 
 import java.nio.file.Paths;
@@ -113,7 +110,7 @@ public class Principal {
     }
 
 
-    void SQLITE(Test test) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined, InstantiationException, IllegalAccessException, ModelNotFound {
+    void SQLITE(TestModel testModel) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined, InstantiationException, IllegalAccessException, ModelNotFound {
         String separador = System.getProperty("file.separator");
         String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
                 "BD" +
@@ -125,7 +122,7 @@ public class Principal {
         setPasswordGlobal("");
         setDataBaseGlobal(BDSqlite);
         setDataBaseTypeGlobal(DataBase.SQLite);
-        test.getSystemProperties();
+        testModel.getSystemProperties();
         //test.setGetPropertySystem(false);
         //test.setBD(BDSqlite);
         //test.setDataBaseType(DataBase.SQLite);
@@ -210,7 +207,7 @@ public class Principal {
         /**
          * Declaramos una lista de modelos del tipo Test, en la cual almacenaremos la información obtenida de BD's'
          */
-        List<Test> lista = new ArrayList<>();
+        List<TestModel> lista = new ArrayList<>();
 
         /**
          * Obtenemos todos los modelos que su Id se encuentra entre 1 y 5
@@ -272,7 +269,7 @@ public class Principal {
          * el cual es el tipo de modelo que obtendremos y dentro de esta función imprimiremos
          * la información del modelo.
          */
-        Consumer<Test> showFilas = fila -> {
+        Consumer<TestModel> showFilas = fila -> {
 
             /*fila.setGetPropertySystem(false);
             fila.setPort("5076");
@@ -361,19 +358,19 @@ public class Principal {
 
     }
 
-    void MySQL(Test test) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined, InstantiationException, IllegalAccessException {
+    void MySQL(TestModel testModel) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined, InstantiationException, IllegalAccessException {
 
-        test.setGetPropertySystem(false);
-        test.setPort("5076");
-        test.setHost("localhost");
-        test.setUser("Bran");
-        test.setPassword("Bran");
-        test.setBD("JBSQLUTILS");
-        test.setDataBaseType(DataBase.MySQL);
+        testModel.setGetPropertySystem(false);
+        testModel.setPort("5076");
+        testModel.setHost("localhost");
+        testModel.setUser("Bran");
+        testModel.setPassword("Bran");
+        testModel.setBD("JBSQLUTILS");
+        testModel.setDataBaseType(DataBase.MySQL);
         long inicio = System.currentTimeMillis();
 
 
-        //test.refresh();
+        testModel.refresh();
         /**
          * Setea la bandera que define si el modelo desea que JBSqlUtils maneje las timestamps Created_at, Update_at.
          * @param timestamps True si las timestamps serán manejadas por JBSqlUtils, False, si el modelo no tiene estas
@@ -451,7 +448,7 @@ public class Principal {
         /**
          * Declaramos una lista de modelos del tipo Test, en la cual almacenaremos la información obtenida de BD's'
          */
-        List<Test> lista = new ArrayList<>();
+        List<TestModel> lista = new ArrayList<>();
 
         /**
          * Obtenemos todos los registros cuyos Id son mayores a 2, el método orderBy() los ordena de acuerdo a la columna
@@ -503,7 +500,7 @@ public class Principal {
          * el cual es el tipo de modelo que obtendremos y dentro de esta función imprimiremos
          * la información del modelo.
          */
-        Consumer<Test> showFilas = fila -> {
+        Consumer<TestModel> showFilas = fila -> {
 /*
             String separador=System.getProperty("file.separator");
             String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
@@ -579,14 +576,14 @@ public class Principal {
 
     }
 
-    void PostgreSQL(Test test) throws InterruptedException, ValorUndefined, DataBaseUndefind, PropertiesDBUndefined, InstantiationException, IllegalAccessException, ModelNotFound {
-        test.setGetPropertySystem(false);
-        test.setPort("5075");
-        test.setHost("localhost");
-        test.setUser("postgres");
-        test.setPassword("Bran");
-        test.setBD("JBSQLUTILS");
-        test.setDataBaseType(DataBase.PostgreSQL);
+    void PostgreSQL(TestModel testModel) throws InterruptedException, ValorUndefined, DataBaseUndefind, PropertiesDBUndefined, InstantiationException, IllegalAccessException, ModelNotFound {
+        testModel.setGetPropertySystem(false);
+        testModel.setPort("5075");
+        testModel.setHost("localhost");
+        testModel.setUser("postgres");
+        testModel.setPassword("Bran");
+        testModel.setBD("JBSQLUTILS");
+        testModel.setDataBaseType(DataBase.PostgreSQL);
 
 
         setPortGlobal("5075");
@@ -738,7 +735,7 @@ public class Principal {
          * el cual es el tipo de modelo que obtendremos y dentro de esta función imprimiremos
          * la información del modelo.
          */
-        Consumer<Test> showFilas = fila -> {
+        Consumer<TestModel> showFilas = fila -> {
 
             /*fila.setGetPropertySystem(false);
             fila.setPort("5076");
@@ -925,14 +922,14 @@ public class Principal {
     }
 
 
-    void SQLServer(Test test) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined, InstantiationException, IllegalAccessException, ModelNotFound {
-        test.setGetPropertySystem(false);
-        test.setPort("5077");
-        test.setHost("localhost");
-        test.setUser("Bran");
-        test.setPassword("Bran");
-        test.setBD("JBSQLUTILS");
-        test.setDataBaseType(DataBase.SQLServer);
+    void SQLServer(TestModel testModel) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined, InstantiationException, IllegalAccessException, ModelNotFound {
+        testModel.setGetPropertySystem(false);
+        testModel.setPort("5077");
+        testModel.setHost("localhost");
+        testModel.setUser("Bran");
+        testModel.setPassword("Bran");
+        testModel.setBD("JBSQLUTILS");
+        testModel.setDataBaseType(DataBase.SQLServer);
 
         long inicio = System.currentTimeMillis();
 
@@ -1011,7 +1008,7 @@ public class Principal {
         //test.save();
 
 
-        Consumer<Test> showFilas = fila -> {
+        Consumer<TestModel> showFilas = fila -> {
 /*
             String separador=System.getProperty("file.separator");
             String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
@@ -1027,7 +1024,7 @@ public class Principal {
             LogsJB.info(fila.getId().getValor() + "   " + fila.getName().getValor() + "   " + fila.getApellido().getValor() + "   " + fila.getIsMayor().getValor() + "   " + fila.getCreated_at().getValor() + "   " + fila.getUpdated_at().getValor());
         };
 
-        List<Test> lista = new ArrayList<>();
+        List<TestModel> lista = new ArrayList<>();
         //lista=test.where("id", Operator.MAYOR_QUE, "0").getAll();
         //lista=test.where("id", Operator.MAYOR_QUE, "0").take(10).get();
 
@@ -1043,19 +1040,19 @@ public class Principal {
          * where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
          * brindar una lógica un poco más compleja a la busqueda del registro que deseamos obtener.
          */
-        Test test2 = (Test) test.where("name", Operator.LIKE, "Jos%").and("apellido", Operator.IGUAL_QUE, "Bran").first();
+        TestModel testModel2 = (TestModel) testModel.where("name", Operator.LIKE, "Jos%").and("apellido", Operator.IGUAL_QUE, "Bran").first();
 
         /**
          * Esperamos a que el modelo termine de obtener la información de BD's
          */
-        while (!test.getTaskIsReady()) {
+        while (!testModel.getTaskIsReady()) {
 
         }
         /**
          * Mostramos la información obtenida
          */
-        LogsJB.info(test2.getId().getValor() + "   " + test2.getName().getValor() + "   " + test2.getApellido().getValor()
-                + "   " + test2.getIsMayor().getValor() + "   " + test2.getCreated_at().getValor() + "   " + test2.getUpdated_at().getValor());
+        LogsJB.info(testModel2.getId().getValor() + "   " + testModel2.getName().getValor() + "   " + testModel2.getApellido().getValor()
+                + "   " + testModel2.getIsMayor().getValor() + "   " + testModel2.getCreated_at().getValor() + "   " + testModel2.getUpdated_at().getValor());
 
         //test.getIsMayor().setValor(!test.getIsMayor().getValor());
 

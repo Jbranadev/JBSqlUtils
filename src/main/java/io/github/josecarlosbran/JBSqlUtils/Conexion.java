@@ -143,11 +143,12 @@ class Conexion {
      */
     public void setPropertisURL(String propertisURL){
         try {
-            this.propertisURL = propertisURL;
-            if (this.getGetPropertySystem() && !stringIsNullOrEmpty(propertisURL)) {
+            if(!stringIsNullOrEmpty(propertisURL))
+                this.propertisURL = propertisURL;
+            /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(propertisURL)) {
                 System.setProperty("DBpropertisUrl", propertisURL);
                 //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseUser"));
-            }
+            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear las propiedades extra de conexión con la cual el modelo se conectara a la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -411,11 +412,12 @@ class Conexion {
      */
     public void setDataBaseType(DataBase dataBase) {
         try {
-            this.dataBaseType = dataBase;
-            if (this.getGetPropertySystem()) {
+            if(!Objects.isNull(dataBase))
+                this.dataBaseType = dataBase;
+            /*if (this.getGetPropertySystem()) {
                 System.setProperty("DataBase", dataBase.name());
                 //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBase"));
-            }
+            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el tipo de BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -452,11 +454,12 @@ class Conexion {
      */
     public void setHost(String host) {
         try {
-            this.host = host;
-            if (this.getGetPropertySystem() && !stringIsNullOrEmpty(host)) {
+            if(!stringIsNullOrEmpty(host))
+                this.host = host;
+            /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(host)) {
                 System.setProperty("DataBaseHost", host);
                 //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseHost"));
-            }
+            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el host en el que se encuentra la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -493,11 +496,12 @@ class Conexion {
      */
     public void setPort(String port) {
         try {
-            this.port = port;
-            if (this.getGetPropertySystem() && !stringIsNullOrEmpty(port)) {
+            if(!stringIsNullOrEmpty(port))
+                this.port = port;
+            /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(port)) {
                 System.setProperty("DataBasePort", port);
                 //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBasePort"));
-            }
+            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el puerto en el cual se encuentra escuchando la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -533,11 +537,12 @@ class Conexion {
      */
     public void setUser(String user) {
         try {
-            this.user = user;
-            if (this.getGetPropertySystem() && !stringIsNullOrEmpty(user)) {
+            if(!stringIsNullOrEmpty(user))
+                this.user = user;
+            /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(user)) {
                 System.setProperty("DataBaseUser", user);
                 //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseUser"));
-            }
+            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el usuario con el cual el modelo se conectara a la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -572,11 +577,12 @@ class Conexion {
      */
     public void setPassword(String password) {
         try {
-            this.password = password;
-            if (this.getGetPropertySystem() && !stringIsNullOrEmpty(password)) {
+            if(!stringIsNullOrEmpty(password))
+                this.password = password;
+            /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(password)) {
                 System.setProperty("DataBasePassword", password);
                 //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBasePassword"));
-            }
+            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear la contraseña del usuario con el cual el modelo se conectara a la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -608,12 +614,13 @@ class Conexion {
      */
     public void setBD(String BD) {
         try {
-            this.BD = BD;
-            if (this.getGetPropertySystem() && !stringIsNullOrEmpty(BD)) {
+            if(!stringIsNullOrEmpty(BD))
+                this.BD = BD;
+            /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(BD)) {
                 //System.out.println("Base de datos a setear: " + BD);
                 System.setProperty("DataBaseBD", BD);
                 //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseBD"));
-            }
+            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el nombre de la Base de Datos a la que se conectara el modelo: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
