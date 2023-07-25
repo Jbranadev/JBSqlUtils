@@ -4,6 +4,7 @@ package io.github.josecarlosbran.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -36,10 +37,11 @@ public class JBSqlUtilsTestMySQL {
         testModel.setPropertisURL("");
     }
 
-    @Test
-    public void testMySQL(){
-        System.out.println("Prueba testng");
-
+    @Test(description = "Create Table")
+    public void createTable(){
+        this.testModel.dropTableIfExist();
+        Assert.assertTrue(this.testModel.crateTable(), "La Tabla No fue creada en BD's");
+        Assert.assertFalse(this.testModel.getTableExist(), "La tabla No existe en BD's ");
     }
 
 
