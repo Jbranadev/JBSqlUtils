@@ -44,6 +44,13 @@ public class JBSqlUtilsTestMySQL {
         Assert.assertFalse(this.testModel.getTableExist(), "La tabla No existe en BD's ");
     }
 
+    @Test(description = "Drop Table If Exists")
+    public void dropTableIfExists(){
+        this.testModel.crateTable();
+        Assert.assertTrue(this.testModel.dropTableIfExist(), "No se pudo eliminar la tabla en BD's");
+        Assert.assertFalse(this.testModel.dropTableIfExist(), "La tabla No existe en BD's y aun así responde que si la elimino");
+    }
+
 
 
 }

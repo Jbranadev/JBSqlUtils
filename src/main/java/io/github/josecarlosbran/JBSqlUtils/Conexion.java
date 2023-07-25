@@ -16,6 +16,7 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
 import com.josebran.LogsJB.LogsJB;
+import io.github.josecarlosbran.JBSqlUtils.Enumerations.ConeccionProperties;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
@@ -134,6 +135,7 @@ class Conexion {
      */
     private TablesSQL tabla = null;
 
+
     private String propertisURL = null;
 
     /**
@@ -223,7 +225,7 @@ class Conexion {
      */
     private DataBase setearDBType() throws DataBaseUndefind {
         if (this.getGetPropertySystem()) {
-            String dataBase = System.getProperty("DataBase");
+            String dataBase = System.getProperty(ConeccionProperties.DBTYPE.getPropiertie());
             if (stringIsNullOrEmpty(dataBase)) {
                 //Si la propiedad del sistema no esta definida, Lanza una Exepción
                 throw new DataBaseUndefind("No se a seteado la DataBase que índica a que BD's deseamos se pegue JBSqlUtils");
@@ -262,7 +264,7 @@ class Conexion {
      */
     private String setearHost() throws PropertiesDBUndefined, DataBaseUndefind {
         if (this.getGetPropertySystem()) {
-            String host = System.getProperty("DataBaseHost");
+            String host = System.getProperty(ConeccionProperties.DBHOST.getPropiertie());
             if (this.getDataBaseType() != DataBase.SQLite) {
                 if (stringIsNullOrEmpty(host)) {
                     //Si la propiedad del sistema no esta definida, Lanza una Exepción
@@ -288,7 +290,7 @@ class Conexion {
      */
     private String setearPort() throws PropertiesDBUndefined, DataBaseUndefind {
         if (this.getGetPropertySystem()) {
-            String port = System.getProperty("DataBasePort");
+            String port = System.getProperty(ConeccionProperties.DBPORT.getPropiertie());
             if (this.getDataBaseType() != DataBase.SQLite) {
                 if (stringIsNullOrEmpty(port)) {
                     //Si la propiedad del sistema no esta definida, Lanza una Exepción
@@ -314,7 +316,7 @@ class Conexion {
      */
     private String setearUser() throws PropertiesDBUndefined, DataBaseUndefind {
         if (this.getGetPropertySystem()) {
-            String user = System.getProperty("DataBaseUser");
+            String user = System.getProperty(ConeccionProperties.DBUSER.getPropiertie());
             if (this.getDataBaseType() != DataBase.SQLite) {
                 if (stringIsNullOrEmpty(user)) {
                     //Si la propiedad del sistema no esta definida, Lanza una Exepción
@@ -338,7 +340,7 @@ class Conexion {
      */
     private String setearBD() throws PropertiesDBUndefined {
         if (this.getGetPropertySystem()) {
-            String DB = System.getProperty("DataBaseBD");
+            String DB = System.getProperty(ConeccionProperties.DBNAME.getPropiertie());
             //System.out.println("BD seteada en system property: " + DB);
             if (stringIsNullOrEmpty(DB)) {
                 //Si la propiedad del sistema no esta definida, Lanza una Exepción
@@ -359,7 +361,7 @@ class Conexion {
      */
     private String setearPassword() throws PropertiesDBUndefined, DataBaseUndefind {
         if (this.getGetPropertySystem()) {
-            String password = System.getProperty("DataBasePassword");
+            String password = System.getProperty(ConeccionProperties.DBPASSWORD.getPropiertie());
             if (this.getDataBaseType() != DataBase.SQLite) {
                 if (stringIsNullOrEmpty(password)) {
                     //Si la propiedad del sistema no esta definida, Lanza una Exepción
@@ -378,7 +380,7 @@ class Conexion {
      */
     private String setearPropertisUrl()  {
         if (this.getGetPropertySystem()) {
-            String property = System.getProperty("DBpropertisUrl");
+            String property = System.getProperty(ConeccionProperties.DBPROPERTIESURL.getPropiertie());
             return property;
         }
         return null;

@@ -270,7 +270,7 @@ public enum DataType {
      *
      * @param Size Cadena que representa el contenido del tipo de dato entre Parentesis.
      */
-    public void setSize(String Size) {
+    private void setSize(String Size) {
         this.size = Size;
     }
 
