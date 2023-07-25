@@ -37,10 +37,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.getBooleanfromInt;
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
@@ -422,7 +419,7 @@ public class Methods_Conexion extends Conexion {
             executor.shutdown();
             result = future.get();
 
-        } catch (Exception e) {
+        } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
@@ -1548,7 +1545,7 @@ public class Methods_Conexion extends Conexion {
             }
             ejecutor.shutdown();
             result = future.get();
-        } catch (Exception e) {
+        } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que Crea la tabla correspondiente al modelo: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
@@ -1620,7 +1617,7 @@ public class Methods_Conexion extends Conexion {
             }
             ejecutor.shutdown();
             result = future.get();
-        } catch (Exception e) {
+        } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
@@ -1765,7 +1762,7 @@ public class Methods_Conexion extends Conexion {
             }
             ejecutor.shutdown();
             result = future.get();
-        } catch (Exception e) {
+        } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que Crea la tabla solicitada: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
