@@ -576,7 +576,7 @@ public class Principal {
 
     }
 
-    void PostgreSQL(TestModel testModel) throws InterruptedException, ValorUndefined, DataBaseUndefind, PropertiesDBUndefined, InstantiationException, IllegalAccessException, ModelNotFound {
+    void PostgreSQL(TestModel testModel) throws Exception {
         testModel.setGetPropertySystem(false);
         testModel.setPort("5075");
         testModel.setHost("localhost");

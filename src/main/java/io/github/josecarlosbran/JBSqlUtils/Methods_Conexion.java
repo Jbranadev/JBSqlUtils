@@ -318,11 +318,12 @@ public class Methods_Conexion extends Conexion {
      * Verifica la existencia de la tabla correspondiente al modelo en BD's
      *
      * @return True si la tabla correspondiente al modelo existe en BD's, de lo contrario False.
+     * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
-    public Boolean tableExist() {
+    public Boolean tableExist() throws Exception {
         Boolean result = false;
         try {
-            Callable<Boolean> VerificarExistencia = () -> {
+            Callable<ResultAsync<Boolean>> VerificarExistencia = () -> {
                 try {
                     LogsJB.info("Comienza a verificar la existencia de la tabla");
                     Connection connect = this.getConnection();
@@ -388,7 +389,7 @@ public class Methods_Conexion extends Conexion {
                             tables.close();
                             this.closeConnection(connect);
                             getColumnsTable();
-                            return true;
+                            return new ResultAsync<Boolean>(true, null);
                         }
                     }
                     LogsJB.trace("Termino de Revisarar el resultSet");
@@ -398,7 +399,7 @@ public class Methods_Conexion extends Conexion {
 
                         this.closeConnection(connect);
 
-                        return false;
+                        return new ResultAsync<Boolean>(false, null);
                     }
 
 
@@ -408,16 +409,21 @@ public class Methods_Conexion extends Conexion {
                     LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    new ResultAsync<Boolean>(false, e);
                 }
-                return false;
+                return new ResultAsync<Boolean>(false, null);
             };
             ExecutorService executor = Executors.newFixedThreadPool(1);
-            Future<Boolean> future = executor.submit(VerificarExistencia);
+            Future<ResultAsync<Boolean>> future = executor.submit(VerificarExistencia);
             while (!future.isDone()) {
 
             }
             executor.shutdown();
-            result = future.get();
+            ResultAsync<Boolean> resultado = future.get();
+            if(!Objects.isNull(resultado.getException())){
+                throw resultado.getException();
+            }
+            result = resultado.getResult();
 
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: " + e.toString());
@@ -1398,15 +1404,16 @@ public class Methods_Conexion extends Conexion {
      *
      * @return True si la tabla correspondiente al modelo en BD's no existe y fue creada exitosamente,
      * False si la tabla correspondiente al modelo ya existe en BD's
+     * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
-    public Boolean crateTable() {
+    public Boolean crateTable() throws Exception {
         Boolean result = false;
         try {
-            Callable<Boolean> createtabla = () -> {
+            Callable<ResultAsync<Boolean>> createtabla = () -> {
                 try {
                     if (this.tableExist()) {
                         LogsJB.info("La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.");
-                        return false;
+                        return new ResultAsync<Boolean>(false, null);
                     } else {
                         String sql = "CREATE TABLE " + this.getTableName() + "(";
                         List<Method> metodos = new ArrayList<>();
@@ -1521,30 +1528,35 @@ public class Methods_Conexion extends Conexion {
 
                             this.closeConnection(connect);
                             this.refresh();
-                            return true;
+                            return new ResultAsync<Boolean>(true, null);
                         }
                         ejecutor.close();
                         this.closeConnection(connect);
 
                     }
-                    return false;
+                    return new ResultAsync<Boolean>(false, null);
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Crea la tabla correspondiente al modelo: " + e.toString());
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                     LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    new ResultAsync<Boolean>(false, e);
                 }
-                return false;
+                return new ResultAsync<Boolean>(false, null);
             };
 
             ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            Future<Boolean> future = ejecutor.submit(createtabla);
+            Future<ResultAsync<Boolean>> future = ejecutor.submit(createtabla);
             while (!future.isDone()) {
 
             }
             ejecutor.shutdown();
-            result = future.get();
+            ResultAsync<Boolean> resultado=future.get();
+            if(!Objects.isNull(resultado.getException())){
+                throw resultado.getException();
+            }
+            result = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que Crea la tabla correspondiente al modelo: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -1560,12 +1572,13 @@ public class Methods_Conexion extends Conexion {
      *
      * @return True si la tabla correspondiente al modelo en BD's existe y fue eliminada, de no existir la tabla correspondiente
      * en BD's retorna False.
+     * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
-    public Boolean dropTableIfExist() {
+    public Boolean dropTableIfExist() throws Exception {
         Boolean result = false;
         try {
             Connection connect = this.getConnection();
-            Callable<Boolean> dropTable = () -> {
+            Callable<ResultAsync<Boolean>> dropTable = () -> {
                 try {
                     if (this.tableExist()) {
                         String sql = "";
@@ -1590,33 +1603,37 @@ public class Methods_Conexion extends Conexion {
                             LogsJB.info(sql);
                             //this.setTableExist(false);
                             this.refresh();
-                            return true;
+                            return new ResultAsync<Boolean>(true, null);
                         }
                         ejecutor.close();
                         this.closeConnection(connect);
 
                     } else {
                         LogsJB.info("Tabla correspondiente al modelo no existe en BD's por eso no pudo ser eliminada");
-                        return false;
+                        return new ResultAsync<Boolean>(false, null);
                     }
-                    return false;
+                    return new ResultAsync<Boolean>(false, null);
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo: " + e.toString());
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                     LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    return new ResultAsync<Boolean>(false, e);
                 }
-                return false;
             };
 
             ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            Future<Boolean> future = ejecutor.submit(dropTable);
+            Future<ResultAsync<Boolean>> future = ejecutor.submit(dropTable);
             while (!future.isDone()) {
 
             }
             ejecutor.shutdown();
-            result = future.get();
+            ResultAsync<Boolean> resultado=future.get();
+            if(!Objects.isNull(resultado.getException())){
+                throw resultado.getException();
+            }
+            result = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -1633,15 +1650,16 @@ public class Methods_Conexion extends Conexion {
      * @param columnas Lista de columnas que se desea sean creadas por JBSqlUtils
      * @return Retorna True si logra crear la tabla, False en caso que la tabla ya exista en BD's o que
      * haya sucedido un error al momento de ejecutar la sentencia SQL
+     * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
-    protected Boolean crateTableJSON(List<Column> columnas) {
+    protected Boolean crateTableJSON(List<Column> columnas) throws Exception {
         Boolean result = false;
         try {
-            Callable<Boolean> createtabla = () -> {
+            Callable<ResultAsync<Boolean>> createtabla = () -> {
                 try {
                     if (this.tableExist()) {
                         LogsJB.info("La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.");
-                        return false;
+                        return new ResultAsync<Boolean>(false, null);
                     } else {
                         String sql = "CREATE TABLE " + this.getTableName() + "(";
                         //Aquí vamos a ordenar la lista
@@ -1739,29 +1757,34 @@ public class Methods_Conexion extends Conexion {
                             LogsJB.info(sql);
                             this.closeConnection(connect);
                             this.refresh();
-                            return true;
+                            return new ResultAsync<Boolean>(true, null);
                         }
                         ejecutor.close();
                         this.closeConnection(connect);
                     }
-                    return false;
+                    return new ResultAsync<Boolean>(false, null);
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Crea la tabla solicitada: " + e.toString());
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                     LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    return new ResultAsync<Boolean>(false, e);
                 }
-                return false;
+
             };
 
             ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            Future<Boolean> future = ejecutor.submit(createtabla);
+            Future<ResultAsync<Boolean>> future = ejecutor.submit(createtabla);
             while (!future.isDone()) {
 
             }
             ejecutor.shutdown();
-            result = future.get();
+            ResultAsync<Boolean> resultado=future.get();
+            if(!Objects.isNull(resultado.getException())){
+                throw resultado.getException();
+            }
+            result = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que Crea la tabla solicitada: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());

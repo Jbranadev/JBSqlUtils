@@ -85,8 +85,9 @@ public class AddColumn extends Methods_Conexion {
      * Ejecuta la sentencia SQL para crear la tabla en la BD's especificada
      * @return True si la tabla a sido creada, false si la tabla ya existe en BD's o si sucede un error
      * al momento de ejecutar la sentencia SQL
+     * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
-    public Boolean createTable(){
+    public Boolean createTable() throws Exception {
         return this.crateTableJSON(this.columnas);
     }
 

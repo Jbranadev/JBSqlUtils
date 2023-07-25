@@ -38,14 +38,14 @@ public class JBSqlUtilsTestMySQL {
     }
 
     @Test(description = "Create Table")
-    public void createTable(){
+    public void createTable() throws Exception {
         this.testModel.dropTableIfExist();
         Assert.assertTrue(this.testModel.crateTable(), "La Tabla No fue creada en BD's");
         Assert.assertFalse(this.testModel.getTableExist(), "La tabla No existe en BD's ");
     }
 
     @Test(description = "Drop Table If Exists")
-    public void dropTableIfExists(){
+    public void dropTableIfExists() throws Exception {
         this.testModel.crateTable();
         Assert.assertTrue(this.testModel.dropTableIfExist(), "No se pudo eliminar la tabla en BD's");
         Assert.assertFalse(this.testModel.dropTableIfExist(), "La tabla No existe en BD's y aun así responde que si la elimino");
