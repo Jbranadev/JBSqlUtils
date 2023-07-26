@@ -54,6 +54,17 @@ public class JBSqlUtils extends Methods {
     }
 
     /**
+     * Constructor por defecto de la Clase JBSqlUtils
+     * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     */
+    public JBSqlUtils(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
+        super(getPropertySystem);
+    }
+    /**
      * Setea el nombre de la Base de Datos global a la que se conectaran los modelos que no tengan una configuración
      * personalizada.
      *

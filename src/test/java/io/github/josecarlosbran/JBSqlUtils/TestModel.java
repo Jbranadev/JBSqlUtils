@@ -41,6 +41,7 @@ public class TestModel extends JBSqlUtils {
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     public TestModel() throws DataBaseUndefind, PropertiesDBUndefined{
+
         /**
          * Hacemos el llamado al constructor de la Clase JBSqlUtils
          */
@@ -52,7 +53,15 @@ public class TestModel extends JBSqlUtils {
          * de acuerdo a las opciónes que nos brinda cada Servidor de BD's, en este caso es un VARCHAR(1000) al cual indicamos que deseamos
          * tenga una longitud de mil
          */
-        this.getName().setSize("1000");
+        this.getName().setSize("200");
+        this.getApellido().setSize("200");
+    }
+
+    public TestModel(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
+        super(getPropertySystem);
+        this.setTableName("testModel");
+        this.getName().setSize("200");
+        this.getApellido().setSize("200");
     }
 
     /**

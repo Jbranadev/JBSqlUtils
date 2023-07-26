@@ -185,6 +185,23 @@ class Conexion {
         this.getSystemProperties();
     }
 
+
+    /**
+     * Constructor de la clase Conexión que se encarga de inicializar las propiedades de conexión del modelo,
+     * las cuales las obtiene de las propiedades del sistema Java.
+     * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
+     * @throws DataBaseUndefind      Lanza esta excepción si el tipo de BD's a la cual se conectara el modelo no ha sido definida entre
+     *                               las propiedades del sistema Java.
+     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión no han sido definidas.
+     */
+    public Conexion(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
+        this.setTableName();
+        if(getPropertySystem){
+            this.getSystemProperties();
+        }
+
+    }
+
     /**
      * Si el nombre de la tabla no esta definido, setea el nombre del modelo, como nombre de la tabla
      */

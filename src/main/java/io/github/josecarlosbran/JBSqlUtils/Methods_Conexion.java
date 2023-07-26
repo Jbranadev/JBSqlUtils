@@ -67,6 +67,20 @@ public class Methods_Conexion extends Conexion {
 
 
     /**
+     * Constructor de la clase Conexión que se encarga de inicializar las propiedades de conexión del modelo,
+     * las cuales las obtiene de las propiedades del sistema Java.
+     * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
+     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *         BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *         propiedades de conexión necesarias para conectarse a la BD's especificada.
+     */
+    public Methods_Conexion(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
+        super(getPropertySystem);
+    }
+
+
+    /**
      * Obtiene la lista de metodos pertenecientes al modelo que lo invoca.
      *
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.

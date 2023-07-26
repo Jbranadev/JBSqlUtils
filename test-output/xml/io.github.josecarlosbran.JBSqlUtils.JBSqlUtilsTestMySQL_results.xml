@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="JBSqlUtils"
-           tests="1"
+           tests="2"
            failures="0"
            errors="0"
            skipped="0"
-           time="0.002">
+           time="1.576">
   <properties />
   
   
-            <testcase name="testMySQL" time="0.002" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+            <testcase name="dropTableIfExists" time="1.192" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="createTable" time="0.384" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
       
 </testsuite>
