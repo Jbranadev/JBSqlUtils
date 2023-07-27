@@ -75,7 +75,6 @@ public class OrderBy<T> extends Get {
     }
 
 
-
     /**
      * Constructor que recibe como parametro:
      *
@@ -100,8 +99,6 @@ public class OrderBy<T> extends Get {
         this.parametros = parametros;
         this.sql = sql + " ORDER BY " + columna + orderType.getValor();
     }
-
-
 
 
     /**
@@ -178,10 +175,11 @@ public class OrderBy<T> extends Get {
     /**
      * Obtiene una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
      * Envíada como parametro
+     *
      * @param columnas Lista con los nombres de las columnas que se desea recuperar, si se desea obtener
-     *      odas las columnas de la tabla especificada envíar NULL como parametro
+     *                 odas las columnas de la tabla especificada envíar NULL como parametro
      * @return Retorna una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
-     *      Envíada como parametro
+     * Envíada como parametro
      */
     public List<JSONObject> getInJsonObjects(List<String> columnas) {
         return super.get(this.sql, this.parametros, columnas);

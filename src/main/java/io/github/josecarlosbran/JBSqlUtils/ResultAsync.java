@@ -12,12 +12,13 @@ public class ResultAsync<T> {
     /**
      * Constructor por default del ResultAsync por medio del cual se recopilara la información de la operación
      * asyncrona
-     * @param result Resultado esperado de la operación
+     *
+     * @param result    Resultado esperado de la operación
      * @param exception Exception de la operación en caso sucediera, de lo contrario NULL
      */
     public ResultAsync(T result, Exception exception) {
-        this.result=result;
-        this.exception=exception;
+        this.result = result;
+        this.exception = exception;
     }
 
     /**

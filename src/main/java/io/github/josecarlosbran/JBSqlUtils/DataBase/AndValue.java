@@ -13,6 +13,7 @@ import java.util.Objects;
 
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.getColumn;
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
+
 /**
  * @author Jose Bran
  * Clase que proporciona la lógica para insertar otro valor a una columna a travez de la sentencia
@@ -51,7 +52,7 @@ public class AndValue {
         }
         this.parametros = parametros;
         this.parametros.add(getColumn(value));
-        String newcampo=", "+ columName + ")";
+        String newcampo = ", " + columName + ")";
         this.sql = sql.replace(")", newcampo);
     }
 
@@ -82,24 +83,21 @@ public class AndValue {
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     public int execute() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        String values=" VALUES (";
+        String values = " VALUES (";
         //Setea los parametros de la consulta
         for (int i = 0; i < this.parametros.size(); i++) {
             //Obtengo la información de la columna
-            if(i==0){
-                values=values+"?";
-            }else if(i==this.parametros.size()-1){
-                values=values+",?)";
-            }else{
-                values=values+",?";
+            if (i == 0) {
+                values = values + "?";
+            } else if (i == this.parametros.size() - 1) {
+                values = values + ",?)";
+            } else {
+                values = values + ",?";
             }
         }
-        this.sql=this.sql+values;
+        this.sql = this.sql + values;
         return new Execute(this.sql, this.parametros).execute();
     }
-
-
-
 
 
 }

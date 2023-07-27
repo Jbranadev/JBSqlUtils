@@ -12,6 +12,7 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
 public class InsertInto {
 
     private String sql;
+
     /**
      * Constructor que recibe como parametro:
      *

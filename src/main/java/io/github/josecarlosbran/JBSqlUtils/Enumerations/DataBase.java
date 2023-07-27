@@ -65,15 +65,16 @@ public enum DataBase {
 
     /**
      * Retorna la numeración correspondiente al nombre proporcionado
+     *
      * @param name Nombre de la Numeración que se desea obtener
      * @return Numeración correspondiente al nombre proporcionado
      */
     public DataBase getNumeracionforName(String name) {
-        Class<DataBase> esta=DataBase.class;
-        DataBase[] temp= esta.getEnumConstants();
-        List<DataBase> numeraciones= Arrays.asList(temp);
-        for(DataBase numeracion:numeraciones){
-            if(numeracion.name().equalsIgnoreCase(name)){
+        Class<DataBase> esta = DataBase.class;
+        DataBase[] temp = esta.getEnumConstants();
+        List<DataBase> numeraciones = Arrays.asList(temp);
+        for (DataBase numeracion : numeraciones) {
+            if (numeracion.name().equalsIgnoreCase(name)) {
                 /*LogsJB.info("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
                         +" operador: "+numeracion.getOperador());*/
                 return numeracion;

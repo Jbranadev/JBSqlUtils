@@ -58,7 +58,7 @@ public class PrimaryKey {
      * @return TABLE_CAT String => catálogo de tablas (puede ser nulo)
      */
     public String getTABLE_CAT() {
-        if(UtilitiesJB.stringIsNullOrEmpty(TABLE_CAT)){
+        if (UtilitiesJB.stringIsNullOrEmpty(TABLE_CAT)) {
             return null;
         }
         return TABLE_CAT;
@@ -77,7 +77,7 @@ public class PrimaryKey {
      * @return TABLE_SCHEM String => esquema de tabla (puede ser nulo)
      */
     public String getTABLE_SCHEM() {
-        if(UtilitiesJB.stringIsNullOrEmpty(TABLE_SCHEM)){
+        if (UtilitiesJB.stringIsNullOrEmpty(TABLE_SCHEM)) {
             return null;
         }
         return TABLE_SCHEM;
@@ -96,7 +96,7 @@ public class PrimaryKey {
      * @return TABLE_NAME Cadena => nombre de la tabla
      */
     public String getTABLE_NAME() {
-        if(UtilitiesJB.stringIsNullOrEmpty(TABLE_NAME)){
+        if (UtilitiesJB.stringIsNullOrEmpty(TABLE_NAME)) {
             return null;
         }
         return TABLE_NAME;
@@ -115,7 +115,7 @@ public class PrimaryKey {
      * @return COLUMN_NAME Cadena => nombre de columna
      */
     public String getCOLUMN_NAME() {
-        if(UtilitiesJB.stringIsNullOrEmpty(COLUMN_NAME)){
+        if (UtilitiesJB.stringIsNullOrEmpty(COLUMN_NAME)) {
             return null;
         }
         return COLUMN_NAME;
@@ -154,7 +154,7 @@ public class PrimaryKey {
      * @return PK_NAME Cadena => nombre de clave principal (puede ser nulo)
      */
     public String getPK_NAME() {
-        if(UtilitiesJB.stringIsNullOrEmpty(PK_NAME)){
+        if (UtilitiesJB.stringIsNullOrEmpty(PK_NAME)) {
             return null;
         }
         return PK_NAME;

@@ -27,8 +27,6 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import java.sql.Timestamp;
 import java.util.Objects;
 
-import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
-
 /**
  * @author Jose Bran
  * Clase a ser heredada por los modelos, la cual brinda acceso a los metodos necesarios para que el modelo
@@ -55,6 +53,7 @@ public class JBSqlUtils extends Methods {
 
     /**
      * Constructor por defecto de la Clase JBSqlUtils
+     *
      * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
      *                               BD's a la cual se conectara el modelo.
@@ -64,6 +63,7 @@ public class JBSqlUtils extends Methods {
     public JBSqlUtils(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
         super(getPropertySystem);
     }
+
     /**
      * Setea el nombre de la Base de Datos global a la que se conectaran los modelos que no tengan una configuración
      * personalizada.
@@ -183,10 +183,11 @@ public class JBSqlUtils extends Methods {
 
     /**
      * Setea las propiedades extra de conexión url DB que pueden utilizar los modelos para conectarse a BD's
+     *
      * @param propertisUrl Propiedades extra para la url de conexión a BD's por ejemplo
-     *      ?autoReconnect=true&useSSL=false
+     *                     ?autoReconnect=true&useSSL=false
      */
-    public static void setPropertisUrlConexionGlobal(String propertisUrl){
+    public static void setPropertisUrlConexionGlobal(String propertisUrl) {
         try {
             System.setProperty(ConeccionProperties.DBPROPERTIESURL.getPropiertie(), propertisUrl);
         } catch (Exception e) {
@@ -268,6 +269,7 @@ public class JBSqlUtils extends Methods {
 
     /**
      * Proporciona un metodo de entrada para crear una tabla en BD's a traves del generador SQL de JBSqlUtils
+     *
      * @param tableName Nombre de la Tabla que deseamos crear
      * @return Objeto que brinda acceso a los metodos con la logica para el execute
      * @throws ValorUndefined Si no se define tableName lanza esta excepción
@@ -278,13 +280,14 @@ public class JBSqlUtils extends Methods {
 
     /**
      * Proporciona un metodo de entrada para eliminar una tabla en BD's a traves del generador SQL de JBSqlUtils
+     *
      * @param tableName Nombre de la Tabla que deseamos eliminar
      * @return Objeto que brinda acceso a los metodos con la logica para el execute
-     * @throws ValorUndefined Si no se define tableName lanza esta excepción
-     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *      BD's a la cual se conectara el modelo.
+     * @throws ValorUndefined        Si no se define tableName lanza esta excepción
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *      propiedades de conexión necesarias para conectarse a la BD's especificada.
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     public static DropTableIfExist dropTableIfExist(String tableName) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         return new DropTableIfExist(tableName);
@@ -293,13 +296,14 @@ public class JBSqlUtils extends Methods {
 
     /**
      * Proporciona un metodo de entrada para realizar una consulta a una tabla en BD's a traves del generador SQL de JBSqlUtils
+     *
      * @param tableName Nombre de la tabla que deseamos consultar
      * @return Objeto que brinda acceso a los metodos con la logica para el execute
-     * @throws ValorUndefined Si no se define tableName lanza esta excepción
-     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *      BD's a la cual se conectara el modelo.
+     * @throws ValorUndefined        Si no se define tableName lanza esta excepción
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *      propiedades de conexión necesarias para conectarse a la BD's especificada.
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     public static Select select(String tableName) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         return new Select(tableName);
@@ -309,11 +313,12 @@ public class JBSqlUtils extends Methods {
     /**
      * Proporciona un metodo de entrada por medio del cual podemos insertar registros a una tabla en BD's a traves del
      * generador SQL de JBSqlUtils
+     *
      * @param tableName Nombre de la tabla a la que deseamos insertar registros
      * @return Objeto que brinda acceso a los metodos con la logica para el execute
      * @throws ValorUndefined Si no se define tableName lanza esta excepción
      */
-    public static InsertInto insertInto(String tableName) throws ValorUndefined{
+    public static InsertInto insertInto(String tableName) throws ValorUndefined {
         return new InsertInto(tableName);
     }
 }

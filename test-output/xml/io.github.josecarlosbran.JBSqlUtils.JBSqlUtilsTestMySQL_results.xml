@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="JBSqlUtils"
-           tests="2"
+           tests="5"
            failures="0"
            errors="0"
            skipped="0"
-           time="1.576">
-  <properties />
-  
-  
-            <testcase name="dropTableIfExists" time="1.192" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="createTable" time="0.384" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-      
+           time="0.985">
+    <properties/>
+
+
+    <testcase name="setPropertiesConexiontoModel" time="0.017"
+              classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL"/>
+    <testcase name="insertModel" time="0.021" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL"/>
+    <testcase name="dropTableIfExists" time="0.858"
+              classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL"/>
+    <testcase name="createTable" time="0.088" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL"/>
+    <testcase name="setPropertiesConexion" time="0.001"
+              classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL"/>
+
 </testsuite>

@@ -140,12 +140,13 @@ class Conexion {
 
     /**
      * Setea las propiedades extra para la url de conexión a BD's
+     *
      * @param propertisURL Propiedades extra para la url de conexión a BD's por ejemplo
      *                     ?autoReconnect=true&useSSL=false
      */
-    public void setPropertisURL(String propertisURL){
+    public void setPropertisURL(String propertisURL) {
         try {
-            if(!stringIsNullOrEmpty(propertisURL))
+            if (!stringIsNullOrEmpty(propertisURL))
                 this.propertisURL = propertisURL;
             /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(propertisURL)) {
                 System.setProperty("DBpropertisUrl", propertisURL);
@@ -163,13 +164,12 @@ class Conexion {
 
     /**
      * Obtiene la propiedades extra de la url de conexión a la BD's
+     *
      * @return Propiedades extra de la url de conexión a la BD's
      */
-    public String getPropertisURL(){
+    public String getPropertisURL() {
         return this.propertisURL;
     }
-
-
 
 
     /**
@@ -189,6 +189,7 @@ class Conexion {
     /**
      * Constructor de la clase Conexión que se encarga de inicializar las propiedades de conexión del modelo,
      * las cuales las obtiene de las propiedades del sistema Java.
+     *
      * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
      * @throws DataBaseUndefind      Lanza esta excepción si el tipo de BD's a la cual se conectara el modelo no ha sido definida entre
      *                               las propiedades del sistema Java.
@@ -196,7 +197,7 @@ class Conexion {
      */
     public Conexion(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
         this.setTableName();
-        if(getPropertySystem){
+        if (getPropertySystem) {
             this.getSystemProperties();
         }
 
@@ -205,8 +206,8 @@ class Conexion {
     /**
      * Si el nombre de la tabla no esta definido, setea el nombre del modelo, como nombre de la tabla
      */
-    private void setTableName(){
-        if(stringIsNullOrEmpty(this.getTableName())){
+    private void setTableName() {
+        if (stringIsNullOrEmpty(this.getTableName())) {
             this.setTableName(this.getClass().getSimpleName());
         }
     }
@@ -393,9 +394,10 @@ class Conexion {
 
     /**
      * Obtiene las propiedades de la url de conexión a la BD's
+     *
      * @return Las propiedades de la url para la conexión a la BD's obtenida de las variables del sistema
      */
-    private String setearPropertisUrl()  {
+    private String setearPropertisUrl() {
         if (this.getGetPropertySystem()) {
             String property = System.getProperty(ConeccionProperties.DBPROPERTIESURL.getPropiertie());
             return property;
@@ -431,7 +433,7 @@ class Conexion {
      */
     public void setDataBaseType(DataBase dataBase) {
         try {
-            if(!Objects.isNull(dataBase))
+            if (!Objects.isNull(dataBase))
                 this.dataBaseType = dataBase;
             /*if (this.getGetPropertySystem()) {
                 System.setProperty("DataBase", dataBase.name());
@@ -473,7 +475,7 @@ class Conexion {
      */
     public void setHost(String host) {
         try {
-            if(!stringIsNullOrEmpty(host))
+            if (!stringIsNullOrEmpty(host))
                 this.host = host;
             /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(host)) {
                 System.setProperty("DataBaseHost", host);
@@ -515,7 +517,7 @@ class Conexion {
      */
     public void setPort(String port) {
         try {
-            if(!stringIsNullOrEmpty(port))
+            if (!stringIsNullOrEmpty(port))
                 this.port = port;
             /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(port)) {
                 System.setProperty("DataBasePort", port);
@@ -556,7 +558,7 @@ class Conexion {
      */
     public void setUser(String user) {
         try {
-            if(!stringIsNullOrEmpty(user))
+            if (!stringIsNullOrEmpty(user))
                 this.user = user;
             /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(user)) {
                 System.setProperty("DataBaseUser", user);
@@ -596,7 +598,7 @@ class Conexion {
      */
     public void setPassword(String password) {
         try {
-            if(!stringIsNullOrEmpty(password))
+            if (!stringIsNullOrEmpty(password))
                 this.password = password;
             /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(password)) {
                 System.setProperty("DataBasePassword", password);
@@ -633,7 +635,7 @@ class Conexion {
      */
     public void setBD(String BD) {
         try {
-            if(!stringIsNullOrEmpty(BD))
+            if (!stringIsNullOrEmpty(BD))
                 this.BD = BD;
             /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(BD)) {
                 //System.out.println("Base de datos a setear: " + BD);

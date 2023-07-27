@@ -28,7 +28,8 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import org.json.JSONObject;
 
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.*;
@@ -812,7 +813,7 @@ public class Principal {
          * afectadas.
          */
         //int rows_afected=delete("Test").where("id", Operator.MAYOR_IGUAL_QUE, 5).execute();
-        int registros=0;
+        int registros = 0;
 
 
         /**
@@ -822,7 +823,7 @@ public class Principal {
 
         Column<String> Name = new Column<>("Name", DataType.VARCHAR);
 
-        Column<String> Apellido = new Column<>("Apellido",DataType.VARCHAR);
+        Column<String> Apellido = new Column<>("Apellido", DataType.VARCHAR);
 
         Column<Boolean> Estado = new Column<>("Estado", DataType.BOOLEAN, "true", Constraint.DEFAULT);
 
@@ -840,7 +841,7 @@ public class Principal {
         dropTableIfExist("Proveedor").execute();
 
 
-        registros=insertInto("Proveedor").value("Name", "Dorcas").andValue("Apellido", "Gomez").execute();
+        registros = insertInto("Proveedor").value("Name", "Dorcas").andValue("Apellido", "Gomez").execute();
 
         /**
          * Para insertar registros hacemos uso del metodo execute que esta disponible en la clase value y andValue a las cuales podemos acceder
@@ -862,20 +863,18 @@ public class Principal {
                 .execute();*/
 
 
-
-
         /**
          * Si deseamos obtener todas las columnas de la tabla envíamos el parametro columnas del metodo
          * getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parametro
          * del metodo select
          */
-        List<String> columnas=null;
+        List<String> columnas = null;
 
         /**
          * Si deseamos obtener unicamente determinadas columnas, es necesario envíar como parametro una lista de strings
          * con los nombres de las columnas que deseamos obtener del metodo getInJsonObjects
          */
-        columnas= new ArrayList<>();
+        columnas = new ArrayList<>();
         columnas.add("Id");
         columnas.add("Name");
 
@@ -884,13 +883,13 @@ public class Principal {
          * el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a traves del metodo
          * where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
          */
-        List<JSONObject> lista=select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
+        List<JSONObject> lista = select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
                 .and("Apellido", Operator.LIKE, "%m%").take(3).getInJsonObjects(columnas);
 
         /**
          * Imprimimos los registros obtenidos
          */
-        lista.forEach( fila -> {
+        lista.forEach(fila -> {
             LogsJB.info(fila.toString());
         });
 
@@ -899,7 +898,7 @@ public class Principal {
         /*registros=delete("Proveedor").where("Apellido", Operator.IGUAL_QUE, "Garcia")
                 .execute();*/
 
-        registros=update("Proveedor").set("Apellido", "de Bran").andSet("Estado", true).where("Name", Operator.IGUAL_QUE, "Rubi").
+        registros = update("Proveedor").set("Apellido", "de Bran").andSet("Estado", true).where("Name", Operator.IGUAL_QUE, "Rubi").
                 openParentecis(Operator.OR, "Name", Operator.IGUAL_QUE, "Dorcas").and("Estado", Operator.IGUAL_QUE, true).
                 closeParentecis(null).
                 execute();

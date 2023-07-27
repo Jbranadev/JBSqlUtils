@@ -19,11 +19,13 @@ import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
+import lombok.ToString;
 
 /**
  * @author Jose Bran
  * Clase de Pruebas
  */
+@ToString
 public class TestModel extends JBSqlUtils {
 
     /**
@@ -40,7 +42,7 @@ public class TestModel extends JBSqlUtils {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public TestModel() throws DataBaseUndefind, PropertiesDBUndefined{
+    public TestModel() throws DataBaseUndefind, PropertiesDBUndefined {
 
         /**
          * Hacemos el llamado al constructor de la Clase JBSqlUtils

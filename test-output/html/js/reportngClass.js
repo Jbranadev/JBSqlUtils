@@ -4,19 +4,19 @@ function toggleElement(elementId, displayStyle) {
 }
 
 function changeIcon(element) {
-	if ($(element).hasClass('glyphicon glyphicon-menu-down')){
-		$(element).removeClass('glyphicon glyphicon-menu-down').toggleClass('glyphicon glyphicon-menu-left');
-	}else{
-		$(element).removeClass('glyphicon glyphicon-menu-left').toggleClass('glyphicon glyphicon-menu-down');
-	}
+    if ($(element).hasClass('glyphicon glyphicon-menu-down')) {
+        $(element).removeClass('glyphicon glyphicon-menu-down').toggleClass('glyphicon glyphicon-menu-left');
+    } else {
+        $(element).removeClass('glyphicon glyphicon-menu-left').toggleClass('glyphicon glyphicon-menu-down');
+    }
 }
 
 function changeSingleIcon(elementId) {
-	if ($('#'+elementId).hasClass('glyphicon glyphicon-menu-down')){
-		$('#'+elementId).removeClass('glyphicon glyphicon-menu-down').toggleClass('glyphicon glyphicon-menu-left');
-	}else{
-		$('#'+elementId).removeClass('glyphicon glyphicon-menu-left').toggleClass('glyphicon glyphicon-menu-down');
-	}
+    if ($('#' + elementId).hasClass('glyphicon glyphicon-menu-down')) {
+        $('#' + elementId).removeClass('glyphicon glyphicon-menu-down').toggleClass('glyphicon glyphicon-menu-left');
+    } else {
+        $('#' + elementId).removeClass('glyphicon glyphicon-menu-left').toggleClass('glyphicon glyphicon-menu-down');
+    }
 }
 
 function getStyle(elementId, property) {
@@ -74,7 +74,7 @@ function parseValue(val, parent, level) {
     if (parent === null) parent = "";
     if (level === null) level = 1;
 
-    if (typeof(val) == "object") {
+    if (typeof (val) == "object") {
         if (level > nestingLevel) nestingLevel = level;
         if (val instanceof Array) {
             arrayCount++;
@@ -83,7 +83,7 @@ function parseValue(val, parent, level) {
             if (val.length > 0) {
                 out += "<table class='arraytable'>\n<tr><th>Index</th><th>Value</th></tr>\n";
                 for (var prop in val) {
-                    if (typeof(val[prop]) == "function") continue;
+                    if (typeof (val[prop]) == "function") continue;
                     out += "<tr><td>" + prop + "</td><td>" + parseValue(val[prop], parent, level + 1) + "</td></tr>\n";
                 }
                 out += "</table>\n";
@@ -96,14 +96,14 @@ function parseValue(val, parent, level) {
             objectCount++;
             i = 0;
             for (prop in val) {
-                if (typeof(val[prop]) != "function") i++;
+                if (typeof (val[prop]) != "function") i++;
             }
             parent = parent + (parent !== "" ? " > " : "") + "Object (" + i + " item" + (i != 1 ? "s)" : ")");
             var out = "<div class='wrapNo'>\n<div class='object'>\n<div class='widgets'></div>\n<h3><span class='titled' title='" + parent + "'>Object</span></h3>\n";
             if (i > 0) {
                 out += "<table class='objecttable'>\n<tr><th>Name</th><th>Value</th></tr>\n";
                 for (prop in val) {
-                    if (typeof(val[prop]) == "function") continue;
+                    if (typeof (val[prop]) == "function") continue;
                     out += "<tr><td>" + prop + "</td><td>" + parseValue(val[prop], parent, level + 1) + "</td></tr>\n";
                 }
                 out += "</table><div class='clear'></div>\n";
@@ -114,9 +114,9 @@ function parseValue(val, parent, level) {
             return out;
         }
     } else {
-        if (typeof(val) == "string") return "<span class='string'>" + wordwrap(val.replace(/\n/g, "<br />")) + "</span>";
-        else if (typeof(val) == "number") return "<span class='number'>" + val + "</span>";
-        else if (typeof(val) == "boolean") return "<span class='boolean'>" + val + "</span>";
+        if (typeof (val) == "string") return "<span class='string'>" + wordwrap(val.replace(/\n/g, "<br />")) + "</span>";
+        else if (typeof (val) == "number") return "<span class='number'>" + val + "</span>";
+        else if (typeof (val) == "boolean") return "<span class='boolean'>" + val + "</span>";
         else return "<span class='void'>(null)</span>";
     }
 }
@@ -173,74 +173,74 @@ function collapseExpand(element) {
     for (i = 0; i < allelementsIcons.length; i++) {
         changeIcon(allelementsIcons[i]);
     }
-    if ($("#hideResults").hasClass('btn-default')){
-		$("#hideResults").removeClass('btn-default').toggleClass('btn-danger');
-		$("#hideResults").text('Show Only Failures');
-	}else{
-		$("#hideResults").removeClass('btn-danger').toggleClass('btn-default');
-		$("#hideResults").text('Show All');
-	}
+    if ($("#hideResults").hasClass('btn-default')) {
+        $("#hideResults").removeClass('btn-default').toggleClass('btn-danger');
+        $("#hideResults").text('Show Only Failures');
+    } else {
+        $("#hideResults").removeClass('btn-danger').toggleClass('btn-default');
+        $("#hideResults").text('Show All');
+    }
 }
 
 function getPercentage(int1, int2, int3, int4, int5, variable) {
     var summary = (Number(int1) + Number(int2) + Number(int3) + Number(int4) + Number(int5));
-	var percentage = 100 * variable / summary;
-	if(percentage>0){
-		return percentage.toFixed(2);
-	}else{
-		return 0;
-	}
+    var percentage = 100 * variable / summary;
+    if (percentage > 0) {
+        return percentage.toFixed(2);
+    } else {
+        return 0;
+    }
 }
 
 function hidePass(element) {
-	var well = $('div.well');
-	var suite = $('div.suite');
-	var suitefooter = $('tr.suite');
-	for(var i = 0; i < suitefooter.length; i++){
-		var foundAllPass = 0;
-		var elements = suitefooter[i].parentElement.getElementsByTagName("td");
-		for(var j=5; j<elements.length-1; j++){
-   		if (elements[j].innerText != '0'){
-   			foundAllPass = 1;
-				break;
-   		}
-   	}
-   	if(foundAllPass==0){
-			toggleElement(suitefooter[i], '');
-			toggleElement(suitefooter[i].parentElement.parentElement, '');
-			toggleElement(suite[i], '');
-			toggleElement(well[i], '');
-		}
-	 }
-	
-	var test = $('tr.test');
-	for (var i = 0; i < test.length; i++) {
-		var pass = 0;
-		var elements = test[i].getElementsByTagName("td");
-   	for(var j=5; j<elements.length-1; j++){
-   		if (elements[j].innerText != '0'){
-   			pass = 1;
-				break;
-   		}
-   	}
-   	if(pass==0){
-			toggleElement(test[i], '');
-		}
-	}
-	
-	if ($("#hideResults").hasClass('btn-danger')){
-		$("#hideResults").removeClass('btn-danger').toggleClass('btn-default');
-		$("#hideResults").text('Show Only Failures');
-	}else{
-		$("#hideResults").removeClass('btn-default').toggleClass('btn-danger');
-		$("#hideResults").text('Show All');
-	}
+    var well = $('div.well');
+    var suite = $('div.suite');
+    var suitefooter = $('tr.suite');
+    for (var i = 0; i < suitefooter.length; i++) {
+        var foundAllPass = 0;
+        var elements = suitefooter[i].parentElement.getElementsByTagName("td");
+        for (var j = 5; j < elements.length - 1; j++) {
+            if (elements[j].innerText != '0') {
+                foundAllPass = 1;
+                break;
+            }
+        }
+        if (foundAllPass == 0) {
+            toggleElement(suitefooter[i], '');
+            toggleElement(suitefooter[i].parentElement.parentElement, '');
+            toggleElement(suite[i], '');
+            toggleElement(well[i], '');
+        }
+    }
+
+    var test = $('tr.test');
+    for (var i = 0; i < test.length; i++) {
+        var pass = 0;
+        var elements = test[i].getElementsByTagName("td");
+        for (var j = 5; j < elements.length - 1; j++) {
+            if (elements[j].innerText != '0') {
+                pass = 1;
+                break;
+            }
+        }
+        if (pass == 0) {
+            toggleElement(test[i], '');
+        }
+    }
+
+    if ($("#hideResults").hasClass('btn-danger')) {
+        $("#hideResults").removeClass('btn-danger').toggleClass('btn-default');
+        $("#hideResults").text('Show Only Failures');
+    } else {
+        $("#hideResults").removeClass('btn-default').toggleClass('btn-danger');
+        $("#hideResults").text('Show All');
+    }
 }
 
 function copyToClipboard(element) {
-	var $temp = $("<input>");
-  	$("body").append($temp);
-  	$temp.val($(element).text()).select();
-  	document.execCommand("copy");
-  	$temp.remove();
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
 }

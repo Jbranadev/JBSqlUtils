@@ -33,7 +33,7 @@ public enum ConeccionProperties {
 
     /**
      * Propiedades extra para la url de conexión a BD's por ejemplo
-     *      ?autoReconnect=true&useSSL=false
+     * ?autoReconnect=true&useSSL=false
      */
     DBPROPERTIESURL("DBpropertisUrl"),
 
@@ -41,7 +41,6 @@ public enum ConeccionProperties {
      * Nombre de la BD's a la cual nos conectaremos.
      */
     DBNAME("DataBaseBD");
-
 
 
     /**
@@ -52,6 +51,7 @@ public enum ConeccionProperties {
 
     /**
      * Constructor de la numeración
+     *
      * @param propiertie La propiedad correspondiente a la numeración seleccionada
      */
     private ConeccionProperties(String propiertie) {
@@ -61,6 +61,7 @@ public enum ConeccionProperties {
 
     /**
      * Obtiene la propiedad que posee la numeración
+     *
      * @return Propiedad que posee la numeración
      */
     public String getPropiertie() {
@@ -69,12 +70,12 @@ public enum ConeccionProperties {
 
     /**
      * Setea la propiedad de la numeración
+     *
      * @param propiertie Propiedad que se setea a la numeración
      */
     private void setPropiertie(String propiertie) {
         this.propiertie = propiertie;
     }
-
 
 
 }

@@ -65,6 +65,7 @@ class Execute extends Methods_Conexion {
 
     /**
      * Ejecuta la sentencia SQL que recibe la clase al ser instanciada.
+     *
      * @return Retorna la cantidad de filas que se han visto afectadas al ejecutar la sentencia SQL.
      */
     public int execute() {
@@ -86,7 +87,7 @@ class Execute extends Methods_Conexion {
 
                     LogsJB.info(ejecutor.toString());
 
-                    int filas=ejecutor.executeUpdate();
+                    int filas = ejecutor.executeUpdate();
                     //filas = ejecutor.getUpdateCount();
                     /*if(StringUtils.containsIgnoreCase(this.sql, "INSERT INTO")) {
                         filas=1;

@@ -142,7 +142,7 @@ una determinada tabla de forma masiva, de acuerdo a la lógica que se le dé a l
 
 - Crear una tabla.
 
-Para crear una tabla utilizamos el metodo createTable despues de haber definido el nombre de la tabla que deseamos crear 
+Para crear una tabla utilizamos el metodo createTable despues de haber definido el nombre de la tabla que deseamos crear
 y las columnas que deseamos tenga nuestra tabla.
 
 ~~~
@@ -237,10 +237,10 @@ createTable("Proveedor").addColumn(Name).addColumn(Id).addColumn(Apellido).addCo
 
 ~~~
 
-
 - Eliminar una tabla.
 
-Para eliminar una tabla de BD's utilizamos el metodo execute de la clase dropTableIfExist a la cual mandamos como parametro 
+Para eliminar una tabla de BD's utilizamos el metodo execute de la clase dropTableIfExist a la cual mandamos como
+parametro
 el nombre de la tabla que queremos eliminar.
 
 ~~~
@@ -255,11 +255,15 @@ dropTableIfExist("Proveedor").execute();
 
 - Insertar Registros en una tabla.
 
-Para insertar registros hacemos uso del metodo execute que esta disponible en la clase value y andValue a las cuales podemos acceder 
-a traves de la clase insertInto a la cual enviamos como parametro el nombre de la tabla a la que queremos insertar, a traves de los metodos value 
-y andValue definimos los valores que queremos insertar en determinada columna, el metodo execute retorna la cantidad de registros insertados.
+Para insertar registros hacemos uso del metodo execute que esta disponible en la clase value y andValue a las cuales
+podemos acceder
+a traves de la clase insertInto a la cual enviamos como parametro el nombre de la tabla a la que queremos insertar, a
+traves de los metodos value
+y andValue definimos los valores que queremos insertar en determinada columna, el metodo execute retorna la cantidad de
+registros insertados.
 
-De suceder algun error durante la ejecución de la sentencia insertInto retorna 0, de lo contrario retorna 1, ya que solo se puede insertar un registro a la vez.
+De suceder algun error durante la ejecución de la sentencia insertInto retorna 0, de lo contrario retorna 1, ya que solo
+se puede insertar un registro a la vez.
 
 ~~~
 
@@ -330,11 +334,11 @@ int rows_afected=delete("Test").where("Id", Operator.MAYOR_IGUAL_QUE, 2).execute
 
 ~~~
 
-
 - Seleccionar registros.
 
-Para obtener los registros de una tabla de BD's podemos hacerlo a traves del metodo select envíando como parametro 
-el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a traves del metodo 
+Para obtener los registros de una tabla de BD's podemos hacerlo a traves del metodo select envíando como parametro
+el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a traves del
+metodo
 where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
 
 ~~~

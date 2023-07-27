@@ -34,10 +34,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 /**
  * @author Jose Bran
@@ -246,7 +243,7 @@ public class Get extends Methods_Conexion {
         Boolean result = false;
         try {
             result = future.get();
-        } catch (Exception e) {
+        } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
@@ -363,16 +360,17 @@ public class Get extends Methods_Conexion {
     /**
      * Obtiene una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
      * Envíada como parametro
-     * @param Sql Sentencia SQL
+     *
+     * @param Sql        Sentencia SQL
      * @param parametros Lista de parametros de la sentencia SQL
-     * @param columnas Lista con los nombres de las columnas que se desea recuperar, si se desea obtener
-     *                 todas las columnas de la tabla especificada envíar NULL como parametro
+     * @param columnas   Lista con los nombres de las columnas que se desea recuperar, si se desea obtener
+     *                   todas las columnas de la tabla especificada envíar NULL como parametro
      * @return Retorna una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
-     *      Envíada como parametro
+     * Envíada como parametro
      */
     protected List<JSONObject> get(String Sql, List<Column> parametros, List<String> columnas) {
         List<JSONObject> lista = new ArrayList<>();
-        String tableName=Sql.replace("SELECT * FROM ", "").split(" ")[0];
+        String tableName = Sql.replace("SELECT * FROM ", "").split(" ")[0];
         this.setTaskIsReady(false);
         this.setTableName(tableName);
         try {
@@ -385,7 +383,7 @@ public class Get extends Methods_Conexion {
                 List<JSONObject> temp = new ArrayList<>();
                 try {
                     if (this.getTableExist()) {
-                        String sql =Sql+ ";";
+                        String sql = Sql + ";";
                         //Si es sql server y trae la palabra limit verificara y modificara la sentencia
                         if (this.getDataBaseType() == DataBase.SQLServer) {
                             if (StringUtils.containsIgnoreCase(sql, "LIMIT")) {
