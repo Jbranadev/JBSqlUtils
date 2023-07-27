@@ -69,6 +69,9 @@ class Methods extends Methods_Conexion {
 
     /**
      * Almacena la información del modelo que hace el llamado en BD's.'
+     * @return La cantidad de filas insertadas o actualizadas en BD's
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     * captura la excepción y la lanza en el hilo principal
      */
     public Integer save() throws Exception {
         return saveModel(this);
@@ -117,6 +120,9 @@ class Methods extends Methods_Conexion {
      * @param modelos Lista de modelos que serán Insertados o Actualizados
      * @param <T>     Tipo de parametro que hace que el metodo sea generico para poder ser
      *                llamado por diferentes tipos de objetos, siempre y cuando estos hereden la clase Methods Conexion.
+     * @return La cantidad de filas insertadas o actualizadas en BD's
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     * captura la excepción y la lanza en el hilo principal
      */
     public <T extends JBSqlUtils> Integer saveALL(List<T> modelos) throws Exception {
         Integer result = 0;
@@ -156,17 +162,13 @@ class Methods extends Methods_Conexion {
 
     /**
      * Elimina la información del modelo que hace el llamado en BD´s
+     * @return La cantidad de filas eliminadas en BD's
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     * captura la excepción y la lanza en el hilo principal
      */
-    public void delete() {
-        try {
-            deleteModel(this);
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-        }
+    public Integer delete() throws Exception {
+            return deleteModel(this);
+
     }
 
     /**
@@ -175,9 +177,12 @@ class Methods extends Methods_Conexion {
      * @param modelos Lista de modelos que serán Eliminados
      * @param <T>     Tipo de parametro que hace que el metodo sea generico para poder ser
      *                llamado por diferentes tipos de objetos, siempre y cuando estos hereden la clase Methods Conexion.
+     * @return La cantidad de filas eliminadas en BD's
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     * captura la excepción y la lanza en el hilo principal
      */
-    public <T extends JBSqlUtils> void deleteALL(List<T> modelos) {
-        try {
+    public <T extends JBSqlUtils> Integer deleteALL(List<T> modelos) throws Exception {
+        Integer result=0;
             T temp = null;
             for (T modelo : modelos) {
                 //Optimización de los tiempos de inserción de cada modelo.
@@ -201,15 +206,9 @@ class Methods extends Methods_Conexion {
                     temp.setTableName(modelo.getTableName());
                     temp.setTabla(modelo.getTabla());
                 }
-                modelo.deleteModel(modelo);
+                result=result+modelo.deleteModel(modelo);
             }
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el método que Guarda la lista de modelos en la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-        }
+        return result;
     }
 
 

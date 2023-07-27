@@ -4,9 +4,13 @@ package io.github.josecarlosbran.JBSqlUtils;
 import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.ConeccionProperties;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
+import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
+import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import org.testng.Assert;
+import org.testng.AssertJUnit;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -92,11 +96,8 @@ public class JBSqlUtilsTestMySQL {
         this.testModel.getName().setValor("Marcos");
         this.testModel.getApellido().setValor("Cabrera");
         this.testModel.getIsMayor().setValor(false);
-        /**
-         * En este primer ejemplo no seteamos un valor a la columna IsMayor, para comprobar que el valor
-         * por default configurado al crear la tabla, se este asignando a la respectiva columna.
-         */
         Integer rowsInsert = this.testModel.save();
+
         LogsJB.info("Filas insertadas en BD's: " + rowsInsert + " " + this.testModel.toString());
         /**
          * Esperamos se ejecute la instrucción en BD's
@@ -104,6 +105,47 @@ public class JBSqlUtilsTestMySQL {
         this.testModel.waitOperationComplete();
         Assert.assertTrue(rowsInsert == 1, "El registro no fue insertado en BD's");
 
+    }
+
+    @Test(description = "Update Model", dependsOnMethods = "insertModel")
+    public void updateModel() throws Exception {
+        /**
+         * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
+         */
+        this.testModel.where("Name", Operator.IGUAL_QUE, "Marcos").and("Apellido", Operator.IGUAL_QUE,
+                "Cabrera").firstOrFail();
+        /**
+         * Esperamos ejecute la operación en BD's
+         */
+        this.testModel.waitOperationComplete();
+        /**
+         * Actualizamos la información
+         */
+        this.testModel.getName().setValor("MarcosEfrain");
+        this.testModel.getIsMayor().setValor(true);
+        /**
+         * Eliminamos el modelo en BD's
+         */
+        Integer rowsUpdate=this.testModel.save();
+        Assert.assertTrue(rowsUpdate==1, "El registro no fue actualizado en la BD's");
+    }
+
+    @Test(description = "Delete Model", dependsOnMethods = "updateModel")
+    public void deleteModel() throws Exception {
+        /**
+         * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
+         */
+        this.testModel.where("Name", Operator.IGUAL_QUE, "MarcosEfrain").and("Apellido", Operator.IGUAL_QUE,
+                "Cabrera").and("isMayor", Operator.IGUAL_QUE, true).firstOrFail();
+        /**
+         * Esperamos ejecute la operación en BD's
+         */
+        this.testModel.waitOperationComplete();
+        /**
+         * Eliminamos el modelo en BD's
+         */
+        Integer rowsDelete=this.testModel.delete();
+        Assert.assertTrue(rowsDelete==1, "El registro no fue eliminado en la BD's");
     }
 
 

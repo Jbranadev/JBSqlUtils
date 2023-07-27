@@ -1076,21 +1076,20 @@ public class Methods_Conexion extends Conexion {
      * @param <T>    Expresión que hace que el metodo sea generico y pueda ser utilizado por cualquier
      *               objeto que herede la Clase JBSqlUtils
      */
-    protected <T extends Methods_Conexion> void deleteModel(T modelo) {
+    protected <T extends Methods_Conexion> Integer deleteModel(T modelo) throws Exception {
+        Integer result=0;
         try {
             modelo.setTaskIsReady(false);
             if (!modelo.getTableExist()) {
                 modelo.refresh();
             }
             Connection connect = modelo.getConnection();
-
-            Runnable Delete = () -> {
+            Callable<ResultAsync<Integer>> Delete = () -> {
                 try {
                     if (modelo.getTableExist()) {
 
                         //Obtener cual es la clave primaria de la tabla
                         String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
-
                         String sql = "DELETE FROM " + modelo.getTableName();
                         List<Method> metodos = new ArrayList<>();
                         metodos = modelo.getMethodsGetOfModel(modelo.getMethodsModel());
@@ -1110,20 +1109,15 @@ public class Methods_Conexion extends Conexion {
                                 break;
                             }
                         }
-
                         //Colocamos el where
                         sql = sql + " WHERE " + namePrimaryKey + "=?;";
-
-
                         //LogsJB.info(sql);
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         //LogsJB.info("Creo la instancia del PreparedStatement");
                         //Llena el prepareStatement
                         int auxiliar = 1;
-
                         LogsJB.debug("Colocara la información del where: " + auxiliar);
                         LogsJB.debug("Indice del metodo donde esta la información del where: " + indicePrimarykey);
-
                         //Colocamos la información del where si el indice es un indice valido
                         if (indicePrimarykey >= 0) {
                             //Obtengo el metodo
@@ -1134,21 +1128,23 @@ public class Methods_Conexion extends Conexion {
                                 LogsJB.warning("El modelo proporcionado no tiene definido el valor de la clave " + namePrimaryKey
                                         + " Por lo cual no se puede eliminar el modelo " + this.getTableName());
                                 modelo.setTaskIsReady(true);
-                                return;
+                                return new ResultAsync<>(0, null);
                             } else {
                                 convertJavaToSQL(columnsSQL, ejecutor, auxiliar);
                             }
                         }
                         LogsJB.info(ejecutor.toString());
-                        int filas = ejecutor.executeUpdate();
-                        LogsJB.info("Filas actualizadas: " + filas);
+                        Integer filas = ejecutor.executeUpdate();
+                        LogsJB.info("Filas eliminadas: " + filas);
                         modelo.closeConnection(connect);
-
+                        modelo.setTaskIsReady(true);
+                        return new ResultAsync<>(filas, null);
                     } else {
                         LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
                                 "Eliminar el Registro " + this.getClass().getSimpleName());
+                        modelo.setTaskIsReady(true);
+                        return new ResultAsync<>(0, null);
                     }
-                    modelo.setTaskIsReady(true);
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -1156,21 +1152,28 @@ public class Methods_Conexion extends Conexion {
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
                     modelo.setTaskIsReady(true);
+                    return new ResultAsync<>(0, e);
                 }
             };
             ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            Future<ResultAsync<Integer>> future= ejecutor.submit(Delete);
+            while (!future.isDone()){
 
-            ejecutor.submit(Delete);
-
-
+            }
             ejecutor.shutdown();
-        } catch (Exception e) {
+            ResultAsync<Integer> resultado= future.get();
+            if(!Objects.isNull(resultado.getException())){
+                throw resultado.getException();
+            }
+            result=resultado.getResult();
+        } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
+        return result;
     }
 
     /**
