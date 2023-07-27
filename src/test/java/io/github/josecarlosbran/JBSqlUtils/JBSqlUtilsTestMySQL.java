@@ -14,11 +14,14 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBSqlUtilsTestMySQL {
     TestModel testModel;
 
-    @Test(description = "Setear Properties Conexión Globales")
+    @Test(testName = "Setear Properties Conexión Globales")
     public void setPropertiesConexion() {
         JBSqlUtils.setDataBaseGlobal("JBSQLUTILS");
         JBSqlUtils.setPortGlobal("5076");
@@ -43,7 +46,7 @@ public class JBSqlUtilsTestMySQL {
                 "Propiedad Propiedades de conexión no ha sido seteada correctamente");
     }
 
-    @Test(description = "Setear Properties Conexión for Model")
+    @Test(testName = "Setear Properties Conexión for Model")
     public void setPropertiesConexiontoModel() throws DataBaseUndefind, PropertiesDBUndefined {
         this.testModel = new TestModel(false);
         this.testModel.setPort("5076");
@@ -69,7 +72,7 @@ public class JBSqlUtilsTestMySQL {
                 "Propiedad Propiedades de conexión no ha sido seteada correctamente");
     }
 
-    @Test(description = "Drop Table If Exists",
+    @Test(testName = "Drop Table If Exists",
             dependsOnMethods = {"setPropertiesConexiontoModel"})
     public void dropTableIfExists() throws Exception {
         //
@@ -78,14 +81,14 @@ public class JBSqlUtilsTestMySQL {
         Assert.assertFalse(this.testModel.getTableExist(), "La tabla No existe en BD's y aun así responde que si la elimino");
     }
 
-    @Test(description = "Create Table",
+    @Test(testName = "Create Table",
             dependsOnMethods = "dropTableIfExists")
     public void createTable() throws Exception {
         Assert.assertTrue(this.testModel.crateTable(), "La Tabla No fue creada en BD's");
         Assert.assertTrue(this.testModel.getTableExist(), "La tabla No existe en BD's ");
     }
 
-    @Test(description = "Insert Model",
+    @Test(testName = "Insert Model",
             dependsOnMethods = "createTable")
     public void insertModel() throws Exception {
         /**
@@ -104,10 +107,20 @@ public class JBSqlUtilsTestMySQL {
          */
         this.testModel.waitOperationComplete();
         Assert.assertTrue(rowsInsert == 1, "El registro no fue insertado en BD's");
-
     }
 
-    @Test(description = "Update Model", dependsOnMethods = "insertModel")
+
+    @Test(testName = "First Or Fail",
+            dependsOnMethods = "insertModel",
+    expectedExceptions = ModelNotFound.class)
+    public void firstOrFail() throws Exception {
+        this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+                "Cabrerassss").firstOrFail();
+    }
+
+
+
+    @Test(testName = "Update Model", dependsOnMethods = "firstOrFail")
     public void updateModel() throws Exception {
         /**
          * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
@@ -130,7 +143,7 @@ public class JBSqlUtilsTestMySQL {
         Assert.assertTrue(rowsUpdate==1, "El registro no fue actualizado en la BD's");
     }
 
-    @Test(description = "Delete Model", dependsOnMethods = "updateModel")
+    @Test(testName = "Delete Model", dependsOnMethods = "updateModel")
     public void deleteModel() throws Exception {
         /**
          * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
@@ -149,4 +162,28 @@ public class JBSqlUtilsTestMySQL {
     }
 
 
+    @Test(testName = "Insert Models",
+            dependsOnMethods = "deleteModel")
+    public void insertModels() throws Exception {
+        List<TestModel> models=new ArrayList<TestModel>();
+        //Llenamos la lista de mdelos a insertar en BD's
+        for (int i=0; i<10; i++) {
+            TestModel model=new TestModel();
+            model.getName().setValor("Modelo #"+i);
+            model.getApellido().setValor("Apellido #"+i);
+            if(i%2==0){
+                model.getIsMayor().setValor(false);
+            }
+            models.add(model);
+        }
+        Integer rowsInsert = this.testModel.saveALL(models);
+        LogsJB.info("Filas insertadas en BD's: " + rowsInsert + " " + models.toString());
+        /**
+         * Esperamos se ejecute la instrucción en BD's
+         */
+        this.testModel.waitOperationComplete();
+        //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
+        Assert.assertTrue(rowsInsert == 10, "Los registros no fueron insertados correctamente en BD's");
+
+    }
 }

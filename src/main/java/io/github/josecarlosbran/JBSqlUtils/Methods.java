@@ -31,8 +31,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * @author Jose Bran
@@ -262,11 +261,10 @@ class Methods extends Methods_Conexion {
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Retorna una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
-     * @throws InstantiationException Lanza esta excepción si ocurre un error al crear una nueva instancia
-     *                                del tipo de modelo proporcionado
-     * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     * captura la excepción y la lanza en el hilo principal
      */
-    public <T extends JBSqlUtils> List<T> getAll() throws InstantiationException, IllegalAccessException {
+    public <T extends JBSqlUtils> List<T> getAll() throws Exception {
         this.setTaskIsReady(false);
         List<T> lista = new ArrayList<T>();
         try {
@@ -274,8 +272,8 @@ class Methods extends Methods_Conexion {
                 this.refresh();
             }
             Connection connect = this.getConnection();
-            //T finalTemp = temp;
-            Runnable get = () -> {
+            Callable<ResultAsync<List<T>>> get = () -> {
+                List<T> listatemp = new ArrayList<T>();
                 try {
                     if (this.getTableExist()) {
                         String sql = "SELECT * FROM " + this.getTableName();
@@ -284,15 +282,17 @@ class Methods extends Methods_Conexion {
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         ResultSet registros = ejecutor.executeQuery();
                         while (registros.next()) {
-                            lista.add(procesarResultSet((T) this, registros));
+                            listatemp.add(procesarResultSet((T) this, registros));
                             //procesarResultSet(modelo, registros);
                         }
                         this.closeConnection(connect);
+                        return new ResultAsync<>(listatemp, null);
                     } else {
                         LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
                                 "recuperar el Registro: " + this.getTableName());
+                        this.setTaskIsReady(true);
+                        return new ResultAsync<>(listatemp, null);
                     }
-                    this.setTaskIsReady(true);
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
                             "SQL de la BD's: " + e.toString());
@@ -301,18 +301,26 @@ class Methods extends Methods_Conexion {
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
                     this.setTaskIsReady(true);
+                    return new ResultAsync<>(listatemp, e);
                 }
             };
             ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            ejecutor.submit(get);
+            Future<ResultAsync<List<T>>> future= ejecutor.submit(get);
+            while (!future.isDone()) {
+
+            }
             ejecutor.shutdown();
-        } catch (Exception e) {
+            ResultAsync<List<T>> resultado = future.get();
+            if (!Objects.isNull(resultado.getException())) {
+                throw resultado.getException();
+            }
+            lista = resultado.getResult();
+        } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-
         }
         return lista;
     }
@@ -329,7 +337,6 @@ class Methods extends Methods_Conexion {
      */
     public <T, G extends JBSqlUtils> void llenarModelo(T controlador, G modelo) {
         try {
-
             List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getMethods()));
             for (Method controladorMethod : controladorMethods) {
                 String controllerName = controladorMethod.getName();
@@ -339,40 +346,32 @@ class Methods extends Methods_Conexion {
                 if (claseMethod.equalsIgnoreCase("Object")) {
                     continue;
                 }
-
                 //Si el metodo no es un metodo get o set salta a la siguiente iteración
                 if (!(StringUtils.startsWithIgnoreCase(controllerName, "get"))
                         && !(StringUtils.startsWithIgnoreCase(controllerName, "set"))) {
                     continue;
                 }
-
                 //Si el metodo es un set, que continue, no tiene caso hacer lo siguiente
                 if (StringUtils.startsWithIgnoreCase(controllerName, "set")) {
                     continue;
                 }
-
                 int parametros = controladorMethod.getParameterCount();
                 LogsJB.trace("Cantidad de parametros: " + parametros);
                 if (parametros != 0) {
                     continue;
                 }
-
                 //Validara si es un void
                 if (controladorMethod.getReturnType().equals(Void.TYPE)) {
                     LogsJB.debug("El metodo " + controladorMethod.getName() + " No retorna ningun tipo" +
                             "de dato por lo que no tiene caso continuar con la Iteración");
                     continue;
                 }
-
-
                 LogsJB.trace("Validara si el contenido es Null: " + controllerName);
                 //Si el contenido es null, continua, no tiene caso hacer el resto
                 Object contenido = (Object) controladorMethod.invoke(controlador, null);
                 if (Objects.isNull(contenido)) {
                     continue;
                 }
-
-
                 //Obtiene los metodos get del modelo
                 List<Method> modelGetMethods = modelo.getMethodsGetOfModel(modelo.getMethodsModel());
                 LogsJB.debug("Obtuvo los metodos Get del modelo: " + controllerName);
@@ -423,7 +422,6 @@ class Methods extends Methods_Conexion {
                     if (isready) {
                         break;
                     }
-
                 }
             }
 
@@ -460,7 +458,6 @@ class Methods extends Methods_Conexion {
                     continue;
                 }
                 LogsJB.debug("Dato que se ingresara al controlador: " + dato);
-
                 List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getMethods()));
                 for (Method controladorMethod : controladorMethods) {
                     String controllerName = controladorMethod.getName();
@@ -470,25 +467,21 @@ class Methods extends Methods_Conexion {
                     if (claseMethod.equalsIgnoreCase("Object")) {
                         continue;
                     }
-
                     //Si el metodo no es un metodo get o set salta a la siguiente iteración
                     if (!(StringUtils.startsWithIgnoreCase(controllerName, "get"))
                             && !(StringUtils.startsWithIgnoreCase(controllerName, "set"))) {
                         continue;
                     }
-
                     //Si el metodo es un get, que continue, no tiene caso hacer lo siguiente
                     if (StringUtils.startsWithIgnoreCase(controllerName, "get")) {
                         continue;
                     }
-
                     //Valida que el metodo Set, si o sí, reciba un unico parametro
                     int parametros = controladorMethod.getParameterCount();
                     LogsJB.trace("Cantidad de parametros: " + parametros);
                     if ((parametros < 1) || (parametros > 1)) {
                         continue;
                     }
-
                     /*Si el nombre del metodo Get del modelo coincide con el nombre del metodo Set
                     Guardara la información en el controlador*/
                     modelGetName = StringUtils.removeStartIgnoreCase(modelGetName, "get");
@@ -499,7 +492,6 @@ class Methods extends Methods_Conexion {
                         LogsJB.info("Lleno la columna " + controllerName + " Con la información del modelo: " + dato);
                         break;
                     }
-
                 }
 
             }

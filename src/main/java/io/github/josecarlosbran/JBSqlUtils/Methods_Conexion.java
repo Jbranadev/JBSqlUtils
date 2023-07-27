@@ -781,6 +781,8 @@ public class Methods_Conexion extends Conexion {
      *
      * @param modelo Modelo que será insertado o actualizado en BD's
      * @param <T>    Expresión que hace que el metodo sea generico y pueda ser utilizado por cualquier objeto que herede la Clase JBSqlUtils
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     * captura la excepción y la lanza en el hilo principal
      */
     protected <T extends Methods_Conexion> Integer saveModel(T modelo) throws Exception {
         Integer result = 0;
@@ -1075,6 +1077,8 @@ public class Methods_Conexion extends Conexion {
      * @param modelo Modelo del cual se desea eliminar la información en BD's
      * @param <T>    Expresión que hace que el metodo sea generico y pueda ser utilizado por cualquier
      *               objeto que herede la Clase JBSqlUtils
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     * captura la excepción y la lanza en el hilo principal
      */
     protected <T extends Methods_Conexion> Integer deleteModel(T modelo) throws Exception {
         Integer result=0;
