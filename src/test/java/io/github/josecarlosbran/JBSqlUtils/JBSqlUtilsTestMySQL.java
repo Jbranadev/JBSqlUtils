@@ -17,8 +17,14 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static io.github.josecarlosbran.JBSqlUtils.Utilities.logParrafo;
+
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBSqlUtilsTestMySQL {
+
+    public JBSqlUtilsTestMySQL(){
+        System.setProperty("org.uncommons.reportng.escape-output", "false");
+    }
     TestModel testModel;
 
     @Test(testName = "Setear Properties Conexión Globales")
@@ -75,7 +81,6 @@ public class JBSqlUtilsTestMySQL {
     @Test(testName = "Drop Table If Exists",
             dependsOnMethods = {"setPropertiesConexiontoModel"})
     public void dropTableIfExists() throws Exception {
-        //
         this.testModel.crateTable();
         Assert.assertTrue(this.testModel.dropTableIfExist(), "No se pudo eliminar la tabla en BD's");
         Assert.assertFalse(this.testModel.getTableExist(), "La tabla No existe en BD's y aun así responde que si la elimino");
@@ -101,7 +106,7 @@ public class JBSqlUtilsTestMySQL {
         this.testModel.getIsMayor().setValor(false);
         Integer rowsInsert = this.testModel.save();
 
-        LogsJB.info("Filas insertadas en BD's: " + rowsInsert + " " + this.testModel.toString());
+        logParrafo("Filas insertadas en BD's: " + rowsInsert + " " + this.testModel.toString());
         /**
          * Esperamos se ejecute la instrucción en BD's
          */
@@ -177,13 +182,30 @@ public class JBSqlUtilsTestMySQL {
             models.add(model);
         }
         Integer rowsInsert = this.testModel.saveALL(models);
-        LogsJB.info("Filas insertadas en BD's: " + rowsInsert + " " + models.toString());
+        logParrafo("Filas insertadas en BD's: " + rowsInsert +" "+models );
         /**
          * Esperamos se ejecute la instrucción en BD's
          */
         this.testModel.waitOperationComplete();
         //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
         Assert.assertTrue(rowsInsert == 10, "Los registros no fueron insertados correctamente en BD's");
+    }
+
+    @Test(testName = "Delete Models",
+            dependsOnMethods = "insertModels")
+    public void deleteModels() throws Exception {
+        List<TestModel> models=new ArrayList<TestModel>();
+        models=this.testModel.where("Name", Operator.LIKE , "%Modelo #5%").or(
+                "Name", Operator.LIKE, "Modelo #8").or("Apellido", Operator.IGUAL_QUE, "Apellido #3").getAll();
+        this.testModel.waitOperationComplete();
+        logParrafo("Se recuperaron "+models.size()+" Para eliminar: "+models.toString());
+        Integer rowsDelete=this.testModel.deleteALL(models);
+        this.testModel.waitOperationComplete();
+        logParrafo("Filas eliminadas en BD's: " + rowsDelete +" "+models);
+        //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
+        Assert.assertTrue(rowsDelete == 3, "Los registros no fueron eliminados correctamente en BD's");
 
     }
+
+
 }

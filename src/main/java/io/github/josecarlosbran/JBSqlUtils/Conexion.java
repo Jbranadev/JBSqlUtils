@@ -758,6 +758,43 @@ class Conexion {
         return taskIsReady;
     }
 
+
+    /**
+     * Si queremos utilizar el mismo modelo para realizar otra operación en BD's
+     * es necesario que esperemos a que el modelo no este realizando ninguna tarea, relacionada con lectura o
+     * escritura.
+     * <p>
+     * Debido a que estas tareas JBSqlUtils las realiza en segundo plano, para no interrumpir
+     * el hilo de ejecución principal y entregar un mejor rendimiento, por si necesitamos realizar alguna otra
+     * instrucción mientras el modelo esta trabajando en segundo plano. para poder saber si el modelo actualmente esta
+     * ocupado, podemos hacerlo a traves del método getTaskIsReady(), el cual obtiene la bandera que indica si
+     * la tarea que estaba realizando el modelo ha sido terminada
+     *
+     * @return True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
+     * actualmente.
+     * <p>
+     * De utilizar otro modelo, no es necesario esperar a que el primer modelo este libre.
+     */
+    public void waitOperationComplete() {
+        /**
+         * Si queremos utilizar el mismo modelo para insertar otro registro con valores diferentes,
+         * es necesario que esperemos a que el modelo no este realizando ninguna tarea, relacionada con lectura o
+         * escritura en la BD's, debido a que estas tareas JBSqlUtils las realiza en segundo plano, para no interrumpir
+         * el hilo de ejecución principal y entregar un mejor rendimiento, por si necesitamos realizar alguna otra
+         * instrucción mientras el modelo esta trabajando en segundo plano. para poder saber si el modelo actualmente esta
+         * ocupado, podemos hacerlo a traves del método getTaskIsReady(), el cual obtiene la bandera que indica si
+         * la tarea que estaba realizando el modelo ha sido terminada
+         * @return True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
+         * actualmente.
+         *
+         * De utilizar otro modelo, no es necesario esperar a que el primer modelo este libre.
+         *
+         */
+        while (!this.getTaskIsReady()) {
+
+        }
+    }
+
     /**
      * Setea el valor de la bandera que indica si el modelo actual esta realizando una tarea
      *

@@ -33,13 +33,12 @@ public class Column<T> {
 
     private String name = null;
     private T valor = null;
-
     private String default_value = null;
-
+    @ToString.Exclude
     private DataType dataTypeSQL = null;
-
+    @ToString.Exclude
     private Constraint[] restriccion = null;
-
+    @ToString.Exclude
     private Boolean columnExist = false;
 
     private String size;

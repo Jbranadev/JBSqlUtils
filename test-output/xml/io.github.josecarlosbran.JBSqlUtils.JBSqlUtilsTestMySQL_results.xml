@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="JBSqlUtils"
-           tests="5"
+           tests="10"
            failures="0"
            errors="0"
            skipped="0"
-           time="0.985">
-    <properties/>
-
-
-    <testcase name="setPropertiesConexiontoModel" time="0.017"
-              classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL"/>
-    <testcase name="insertModel" time="0.021" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL"/>
-    <testcase name="dropTableIfExists" time="0.858"
-              classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL"/>
-    <testcase name="createTable" time="0.088" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL"/>
-    <testcase name="setPropertiesConexion" time="0.001"
-              classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL"/>
-
+           time="1.345">
+  <properties />
+  
+  
+            <testcase name="deleteModel" time="0.064" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="deleteModels" time="0.088" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="setPropertiesConexion" time="0.014" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="insertModel" time="0.028" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="firstOrFail" time="0.021" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="dropTableIfExists" time="0.765" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="insertModels" time="0.198" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="createTable" time="0.117" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="setPropertiesConexiontoModel" time="0.005" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="updateModel" time="0.045" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+      
 </testsuite>
