@@ -1,4 +1,4 @@
-package io.github.josecarlosbran.JBSqlUtils;
+package UtilidadesTest;
 
 import com.josebran.LogsJB.LogsJB;
 import org.testng.Reporter;

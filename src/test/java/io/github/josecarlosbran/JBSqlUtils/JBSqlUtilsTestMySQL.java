@@ -1,6 +1,7 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
 
+import UtilidadesTest.TestModel;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.ConeccionProperties;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
@@ -14,7 +15,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static io.github.josecarlosbran.JBSqlUtils.Utilities.logParrafo;
+import static UtilidadesTest.Utilities.logParrafo;
 
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBSqlUtilsTestMySQL {

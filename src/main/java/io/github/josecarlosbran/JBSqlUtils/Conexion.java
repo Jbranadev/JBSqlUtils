@@ -133,7 +133,7 @@ class Conexion {
     /**
      * Representa la metadata de la tabla correspondiente al modelo en BD's
      */
-    private TablesSQL tabla = null;
+    private TablesSQL tabla = new TablesSQL();
 
 
     private String propertisURL = null;
@@ -189,8 +189,9 @@ class Conexion {
     /**
      * Constructor de la clase Conexión que se encarga de inicializar las propiedades de conexión del modelo,
      * las cuales las obtiene de las propiedades del sistema Java.
+     * <p>
+     * c
      *
-     * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
      * @throws DataBaseUndefind      Lanza esta excepción si el tipo de BD's a la cual se conectara el modelo no ha sido definida entre
      *                               las propiedades del sistema Java.
      * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión no han sido definidas.
@@ -200,6 +201,7 @@ class Conexion {
         if (getPropertySystem) {
             this.getSystemProperties();
         }
+        this.setGetPropertySystem(getPropertySystem);
 
     }
 

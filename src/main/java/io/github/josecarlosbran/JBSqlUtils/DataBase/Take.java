@@ -67,6 +67,34 @@ public class Take<T> extends Get {
         this.sql = sql + "LIMIT " + limite;
     }
 
+    /**
+     * Constructor que recibe como parametro:
+     *
+     * @param sql               Sentencia SQL a la cual se agregara la logica del limite.
+     * @param limite            Entero que representa la cantidad maxima de valores recuperados.
+     * @param modelo            Modelo que solicita la creación de esta clase
+     * @param parametros        Lista de parametros a ser agregados a la sentencia SQL
+     * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
+     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     */
+    protected Take(String sql, int limite, T modelo, List<Column> parametros, Boolean getPropertySystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+        super(getPropertySystem);
+        if (Objects.isNull(limite)) {
+            throw new ValorUndefined("El Limite proporcionado es 0 o inferior, por lo cual no se puede" +
+                    "realizar la consulta a BD's");
+        }
+        if (Objects.isNull(modelo)) {
+            throw new ValorUndefined("El Modelo proporcionado es NULL");
+        }
+        this.parametros = parametros;
+        this.modelo = modelo;
+        this.sql = sql + "LIMIT " + limite;
+    }
+
 
     /**
      * Constructor que recibe como parametro:

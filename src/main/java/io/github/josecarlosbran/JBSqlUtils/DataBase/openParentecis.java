@@ -17,7 +17,7 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author Jose Bran
  * Clase que proporciona la logica para agregar una Apertura de Parentecis a una consulta SQL
  */
-public class openParentecis<T> {
+public class openParentecis<T> extends Get {
 
     private T modelo = null;
 
@@ -41,7 +41,7 @@ public class openParentecis<T> {
      * @param valor        Valor contra el que se evaluara la columna
      * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
-    protected openParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined {
+    protected openParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
@@ -64,9 +64,45 @@ public class openParentecis<T> {
         this.sql = sql + operatorPrev.getOperador()
                 + Operator.OPEN_PARENTESIS.getOperador()
                 + Operator.OPEN_PARENTESIS.getOperador() + columna + operador.getOperador() + "?" + Operator.CLOSE_PARENTESIS.getOperador();
-
     }
 
+    /**
+     * Constructor que recibe como parametro:
+     *
+     * @param sql               Sentencia SQL a la que se agregara la apertura de parentecis
+     * @param modelo            Modelo que invocara los metodos de esta clase
+     * @param parametros        Lista de parametros a ser agregados a la sentencia SQL
+     * @param operatorPrev      Operador a colocar antes de la apertura de parentecis
+     * @param columna           Columna a evaluar dentro de la sentencia AND
+     * @param operador          Operador con el cual se evaluara la columna
+     * @param valor             Valor contra el que se evaluara la columna
+     * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     */
+    protected openParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPrev, String columna, Operator operador, Object valor, Boolean getPropertySystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+        super(getPropertySystem);
+        if (stringIsNullOrEmpty(columna)) {
+            throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
+        }
+        if (Objects.isNull(valor)) {
+            throw new ValorUndefined("El valor proporcionado esta vacío o es NULL");
+        }
+        if (Objects.isNull(operador)) {
+            throw new ValorUndefined("El operador proporcionado es NULL");
+        }
+        if (Objects.isNull(operatorPrev)) {
+            throw new ValorUndefined("El operadorPrev proporcionado es NULL");
+        }
+        if (Objects.isNull(modelo)) {
+            throw new ValorUndefined("El Modelo proporcionado es NULL");
+        }
+        this.parametros = parametros;
+        this.modelo = modelo;
+        this.parametros.add(getColumn(valor));
+        this.sql = sql + operatorPrev.getOperador()
+                + Operator.OPEN_PARENTESIS.getOperador()
+                + Operator.OPEN_PARENTESIS.getOperador() + columna + operador.getOperador() + "?" + Operator.CLOSE_PARENTESIS.getOperador();
+    }
 
     /**
      * Constructor que recibe como parametro:
@@ -79,7 +115,7 @@ public class openParentecis<T> {
      * @param valor        Valor contra el que se evaluara la columna
      * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
-    protected openParentecis(String sql, List<Column> parametros, Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined {
+    protected openParentecis(String sql, List<Column> parametros, Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
@@ -113,7 +149,7 @@ public class openParentecis<T> {
      * @param valor      Valor contra el que se evaluara la columna
      * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
-    protected openParentecis(String sql, T modelo, List<Column> parametros, String columna, Operator operador, Object valor) throws ValorUndefined {
+    protected openParentecis(String sql, T modelo, List<Column> parametros, String columna, Operator operador, Object valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
@@ -134,7 +170,42 @@ public class openParentecis<T> {
         this.sql = sql
                 + Operator.OPEN_PARENTESIS.getOperador()
                 + Operator.OPEN_PARENTESIS.getOperador() + columna + operador.getOperador() + "?" + Operator.CLOSE_PARENTESIS.getOperador();
+    }
 
+
+    /**
+     * Constructor que recibe como parametro:
+     *
+     * @param sql               Sentencia SQL a la que se agregara la apertura de parentecis
+     * @param modelo            Modelo que invocara los metodos de esta clase
+     * @param parametros        Lista de parametros a ser agregados a la sentencia SQL
+     * @param columna           Columna a evaluar dentro de la sentencia AND
+     * @param operador          Operador con el cual se evaluara la columna
+     * @param valor             Valor contra el que se evaluara la columna
+     * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     */
+    protected openParentecis(String sql, T modelo, List<Column> parametros, String columna, Operator operador, Object valor, Boolean getPropertySystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+        super(getPropertySystem);
+        if (stringIsNullOrEmpty(columna)) {
+            throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
+        }
+        if (Objects.isNull(valor)) {
+            throw new ValorUndefined("El valor proporcionado esta vacío o es NULL");
+        }
+        if (Objects.isNull(operador)) {
+            throw new ValorUndefined("El operador proporcionado es NULL");
+        }
+
+        if (Objects.isNull(modelo)) {
+            throw new ValorUndefined("El Modelo proporcionado es NULL");
+        }
+        this.parametros = parametros;
+        this.modelo = modelo;
+        this.parametros.add(getColumn(valor));
+        this.sql = sql
+                + Operator.OPEN_PARENTESIS.getOperador()
+                + Operator.OPEN_PARENTESIS.getOperador() + columna + operador.getOperador() + "?" + Operator.CLOSE_PARENTESIS.getOperador();
     }
 
 
@@ -148,7 +219,7 @@ public class openParentecis<T> {
      * @param valor      Valor contra el que se evaluara la columna
      * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
-    protected openParentecis(String sql, List<Column> parametros, String columna, Operator operador, Object valor) throws ValorUndefined {
+    protected openParentecis(String sql, List<Column> parametros, String columna, Operator operador, Object valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
@@ -185,6 +256,11 @@ public class openParentecis<T> {
         if (Objects.isNull(this.modelo)) {
             return new And(this.sql, columna, operador, valor, this.parametros);
         } else {
+            if(!this.getGetPropertySystem()){
+                And and =new And(this.sql, columna, operador, valor, this.modelo, this.parametros, false);
+                and.llenarPropertiesFromModel(this);
+                return and;
+            }
             return new And(this.sql, columna, operador, valor, this.modelo, this.parametros);
         }
     }
@@ -205,6 +281,11 @@ public class openParentecis<T> {
         if (Objects.isNull(this.modelo)) {
             return new Or(this.sql, columna, operador, valor, this.parametros);
         } else {
+            if(!this.getGetPropertySystem()){
+                Or or=new Or(this.sql, columna, operador, valor, this.modelo, this.parametros, false);
+                or.llenarPropertiesFromModel(this);
+                return or;
+            }
             return new Or(this.sql, columna, operador, valor, this.modelo, this.parametros);
         }
     }
@@ -220,7 +301,7 @@ public class openParentecis<T> {
      * haya finalizado la logica dentro de sus parentecis
      * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
-    public openParentecis openParentecis(Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined {
+    public openParentecis openParentecis(Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         if (Objects.isNull(this.modelo)) {
             if (Objects.isNull(operatorPrev)) {
                 return new openParentecis(this.sql, this.parametros, columna, operador, valor);
@@ -229,8 +310,18 @@ public class openParentecis<T> {
             }
         } else {
             if (Objects.isNull(operatorPrev)) {
+                if (!this.getGetPropertySystem()) {
+                    openParentecis open = new openParentecis(this.sql, this.modelo, this.parametros, columna, operador, valor, false);
+                    open.llenarPropertiesFromModel(this);
+                    return open;
+                }
                 return new openParentecis(this.sql, this.modelo, this.parametros, columna, operador, valor);
             } else {
+                if (!this.getGetPropertySystem()) {
+                    openParentecis open = new openParentecis(this.sql, this.modelo, this.parametros, operatorPrev, columna, operador, valor, false);
+                    open.llenarPropertiesFromModel(this);
+                    return open;
+                }
                 return new openParentecis(this.sql, this.modelo, this.parametros, operatorPrev, columna, operador, valor);
             }
 
@@ -257,8 +348,18 @@ public class openParentecis<T> {
             }
         } else {
             if (Objects.isNull(operatorPost)) {
+                if (!this.getGetPropertySystem()) {
+                    closeParentecis close = new closeParentecis(this.sql, this.modelo, this.parametros, false);
+                    close.llenarPropertiesFromModel(this);
+                    return close;
+                }
                 return new closeParentecis(this.sql, this.modelo, this.parametros);
             } else {
+                if (!this.getGetPropertySystem()) {
+                    closeParentecis close = new closeParentecis(this.sql, this.modelo, this.parametros, operatorPost, false);
+                    close.llenarPropertiesFromModel(this);
+                    return close;
+                }
                 return new closeParentecis(this.sql, this.modelo, this.parametros, operatorPost);
             }
         }

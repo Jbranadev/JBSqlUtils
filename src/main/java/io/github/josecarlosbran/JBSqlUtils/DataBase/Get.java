@@ -54,6 +54,18 @@ public class Get extends Methods_Conexion {
         super();
     }
 
+    /**
+     * Constructor por default de la clase Get, que inicializa la clase
+     *
+     * @param getGetPropertiesSystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     */
+    protected Get(Boolean getGetPropertiesSystem) throws DataBaseUndefind, PropertiesDBUndefined {
+        super(getGetPropertiesSystem);
+    }
 
     /**
      * Llena el modelo que invoca este metodo con la información que obtiene de BD's
@@ -64,6 +76,10 @@ public class Get extends Methods_Conexion {
      * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      */
     protected <T extends JBSqlUtils> void get(T modelo, String Sql, List<Column> parametros) {
+        if(!this.getGetPropertySystem()){
+            modelo.setGetPropertySystem(false);
+            modelo.llenarPropertiesFromModel(this);
+        }
         try {
             modelo.setTaskIsReady(false);
             if (!modelo.getTableExist()) {
@@ -127,6 +143,10 @@ public class Get extends Methods_Conexion {
      * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
      */
     protected <T extends JBSqlUtils> T first(T modelo, String Sql, List<Column> parametros) {
+        if(!this.getGetPropertySystem()){
+            modelo.setGetPropertySystem(false);
+            modelo.llenarPropertiesFromModel(this);
+        }
         try {
             modelo.setTaskIsReady(false);
             if (!modelo.getTableExist()) {
@@ -191,6 +211,10 @@ public class Get extends Methods_Conexion {
      *                       SQL realizada.
      */
     protected <T extends JBSqlUtils> T firstOrFail(T modelo, String Sql, List<Column> parametros) throws ModelNotFound {
+        if(!this.getGetPropertySystem()){
+            modelo.setGetPropertySystem(false);
+            modelo.llenarPropertiesFromModel(this);
+        }
         modelo.setTaskIsReady(false);
         if (!modelo.getTableExist()) {
             modelo.refresh();
@@ -272,6 +296,10 @@ public class Get extends Methods_Conexion {
      * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
      */
     protected <T extends JBSqlUtils> List<T> getAll(T modelo, String Sql, List<Column> parametros) throws InstantiationException, IllegalAccessException {
+        if(!this.getGetPropertySystem()){
+            modelo.setGetPropertySystem(false);
+            modelo.llenarPropertiesFromModel(this);
+        }
         modelo.setTaskIsReady(false);
         List<T> lista = new ArrayList<>();
         try {

@@ -1,5 +1,6 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
+import UtilidadesTest.TestModel;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
@@ -9,10 +10,13 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import static io.github.josecarlosbran.JBSqlUtils.Utilities.logParrafo;
+import static UtilidadesTest.Utilities.logParrafo;
+import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.*;
+import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.setDataBaseTypeGlobal;
 
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBSqlUtilsTestSQLite {
@@ -24,28 +28,26 @@ public class JBSqlUtilsTestSQLite {
 
     @Test(testName = "Setear Properties Conexión for Model")
     public void setPropertiesConexiontoModel() throws DataBaseUndefind, PropertiesDBUndefined {
+        String separador = System.getProperty("file.separator");
+        String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
+                "BD" +
+                separador +
+                "JBSqlUtils.db");
+        /*
+        setPortGlobal("");
+        setHostGlobal("");
+        setUserGlobal("");
+        setPasswordGlobal("");
+        setDataBaseGlobal(BDSqlite);
+        setDataBaseTypeGlobal(DataBase.SQLite);*/
         this.testModel = new TestModel(false);
-        this.testModel.setPort("5076");
-        this.testModel.setHost("127.0.0.1");
-        this.testModel.setUser("Bran");
-        this.testModel.setPassword("Bran");
-        this.testModel.setBD("JBSQLUTILS");
-        this.testModel.setDataBaseType(DataBase.MySQL);
-        this.testModel.setPropertisURL("?autoReconnect=true&useSSL=false");
-        Assert.assertTrue("JBSQLUTILS".equalsIgnoreCase(this.testModel.getBD()),
+        this.testModel.setBD(BDSqlite);
+        this.testModel.setDataBaseType(DataBase.SQLite);
+
+        Assert.assertTrue(BDSqlite.equalsIgnoreCase(this.testModel.getBD()),
                 "Propiedad Nombre BD's no ha sido seteada correctamente");
-        Assert.assertTrue("5076".equalsIgnoreCase(this.testModel.getPort()),
-                "Propiedad Puerto BD's no ha sido seteada correctamente");
-        Assert.assertTrue("127.0.0.1".equalsIgnoreCase(this.testModel.getHost()),
-                "Propiedad Host BD's no ha sido seteada correctamente");
-        Assert.assertTrue("Bran".equalsIgnoreCase(this.testModel.getUser()),
-                "Propiedad Usuario BD's no ha sido seteada correctamente");
-        Assert.assertTrue("Bran".equalsIgnoreCase(this.testModel.getPassword()),
-                "Propiedad Password BD's no ha sido seteada correctamente");
-        Assert.assertTrue(DataBase.MySQL.name().equalsIgnoreCase(this.testModel.getDataBaseType().name()),
+        Assert.assertTrue(DataBase.SQLite.name().equalsIgnoreCase(this.testModel.getDataBaseType().name()),
                 "Propiedad Tipo de BD's no ha sido seteada correctamente");
-        Assert.assertTrue("?autoReconnect=true&useSSL=false".equalsIgnoreCase(this.testModel.getPropertisURL()),
-                "Propiedad Propiedades de conexión no ha sido seteada correctamente");
     }
 
     @Test(testName = "Drop Table If Exists",
@@ -142,7 +144,7 @@ public class JBSqlUtilsTestSQLite {
         List<TestModel> models = new ArrayList<TestModel>();
         //Llenamos la lista de mdelos a insertar en BD's
         for (int i = 0; i < 10; i++) {
-            TestModel model = new TestModel();
+            TestModel model = new TestModel(false);
             model.getName().setValor("Modelo #" + i);
             model.getApellido().setValor("Apellido #" + i);
             if (i % 2 == 0) {

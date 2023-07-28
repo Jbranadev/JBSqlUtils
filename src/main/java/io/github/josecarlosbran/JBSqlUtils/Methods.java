@@ -23,6 +23,7 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import org.apache.commons.lang3.StringUtils;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -100,15 +101,24 @@ class Methods extends Methods_Conexion {
                 modelo.setTableName(temp.getTableName());
                 //Con esto se maneja las tablas que existen en BD's
                 modelo.getTabla().setColumnsExist(temp.getTabla().getColumnsExist());
+                modelo.llenarPropertiesFromModel(temp);
                 LogsJB.info("Modelo Ya había sido inicializado: " + temp.getClass().getSimpleName());
             } else {
-                temp = (T) modelo.getClass().newInstance();
+                if(modelo.getGetPropertySystem()){
+                    temp = (T) modelo.getClass().newInstance();
+                }else{
+                    modelo.llenarPropertiesFromModel(this);
+                    Constructor constructor=modelo.getClass().getConstructor(Boolean.class);
+                    temp = (T) constructor.newInstance(false);
+                    temp.llenarPropertiesFromModel(modelo);
+                }
                 LogsJB.warning("Modelo era Null, crea una nueva instancia: " + temp.getClass().getSimpleName());
                 temp.refresh();
             }
             if (!modelo.getTableExist()) {
                 LogsJB.info("Obtendra la información de conexión de la BD's: " + modelo.getClass().getSimpleName());
                 modelo.refresh();
+                modelo.waitOperationComplete();
                 while (modelo.getTabla().getColumnas().size() == 0) {
 
                 }
@@ -157,13 +167,22 @@ class Methods extends Methods_Conexion {
                 modelo.setTableExist(temp.getTableExist());
                 modelo.setTableName(temp.getTableName());
                 LogsJB.info("Modelo Ya había sido inicializado: " + temp.getClass().getSimpleName());
+                modelo.llenarPropertiesFromModel(temp);
             } else {
-                temp = (T) modelo.getClass().newInstance();
+                if(modelo.getGetPropertySystem()){
+                    temp = (T) modelo.getClass().newInstance();
+                }else{
+                    modelo.llenarPropertiesFromModel(this);
+                    Constructor constructor=modelo.getClass().getConstructor(Boolean.class);
+                    temp = (T) constructor.newInstance(false);
+                    temp.llenarPropertiesFromModel(modelo);
+                }
                 LogsJB.warning("Modelo era Null, crea una nueva instancia: " + temp.getClass().getSimpleName());
             }
             if (!modelo.getTableExist()) {
                 LogsJB.info("Obtendra la información de conexión de la BD's: " + modelo.getClass().getSimpleName());
                 modelo.refresh();
+                modelo.waitOperationComplete();
                 while (modelo.getTabla().getColumnas().size() == 0) {
 
                 }
@@ -217,6 +236,11 @@ class Methods extends Methods_Conexion {
      *                               Vacío o es Null
      */
     public Where where(String columna, Operator operador, Object valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+        if(!this.getGetPropertySystem()){
+            Where where = new Where(columna, operador, valor, this, false);
+            where.llenarPropertiesFromModel(this);
+            return where;
+        }
         return new Where(columna, operador, valor, this);
     }
 

@@ -29,6 +29,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -1199,14 +1200,23 @@ public class Methods_Conexion extends Conexion {
      * @throws PropertiesDBUndefined     Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                                   propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected <T extends Methods_Conexion> T procesarResultSet(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException, DataBaseUndefind, PropertiesDBUndefined {
-        T temp = (T) modelo.getClass().newInstance();
+    protected <T extends Methods_Conexion> T procesarResultSet(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException, DataBaseUndefind, PropertiesDBUndefined, NoSuchMethodException {
+        T temp;
+        if(modelo.getGetPropertySystem()){
+            temp = (T) modelo.getClass().newInstance();
+        }else{
+            modelo.llenarPropertiesFromModel(this);
+            Constructor constructor=modelo.getClass().getConstructor(Boolean.class);
+            temp = (T) constructor.newInstance(false);
+            temp.llenarPropertiesFromModel(modelo);
+        }
         temp.setTabla(modelo.getTabla());
         temp.setTableExist(modelo.getTableExist());
         temp.setTableName(modelo.getTableName());
         temp.setModelExist(true);
 
         //Seteamos las propiedades del Modelo que obtuvo la conexión
+        temp.setGetPropertySystem(modelo.getGetPropertySystem());
         temp.setDataBaseType(modelo.getDataBaseType());
         temp.setBD(modelo.getBD());
         temp.setUser(modelo.getUser());
@@ -1845,7 +1855,7 @@ public class Methods_Conexion extends Conexion {
      * @param <T>       Modelo a llenar
      * @param <G>       Tipo de dato del invocador
      */
-    protected <T extends Methods_Conexion, G extends Methods_Conexion> void llenarPropertiesFromModel(G proveedor) {
+    public <T extends Methods_Conexion, G extends Methods_Conexion> void llenarPropertiesFromModel(G proveedor) {
         try {
             List<Method> metodosProveedor = Arrays.asList(proveedor.getClass().getMethods());
             //Filtro los metodos de las propiedades que deseo obtener

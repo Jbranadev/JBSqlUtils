@@ -83,6 +83,41 @@ public class And<T> extends Get {
         this.sql = sql + Operator.AND.getOperador() + Operator.OPEN_PARENTESIS.getOperador() + columna + operador.getOperador() + "?" + Operator.CLOSE_PARENTESIS.getOperador();
     }
 
+    /**
+     * Constructor que recibe como parametro:
+     *
+     * @param sql        Sentencia SQL a la que se agregara la logica AND
+     * @param columna    Columna a evaluar dentro de la sentencia AND
+     * @param operador   Operador con el cual se evaluara la columna
+     * @param valor      Valor contra el que se evaluara la columna
+     * @param modelo     Modelo que invocara los metodos de esta clase
+     * @param parametros Lista de parametros a ser agregados a la sentencia SQL
+     * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
+     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     */
+    protected And(String sql, String columna, Operator operador, Object valor, T modelo, List<Column> parametros, Boolean getPropertySystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+        super(getPropertySystem);
+        if (stringIsNullOrEmpty(columna)) {
+            throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
+        }
+        if (Objects.isNull(valor)) {
+            throw new ValorUndefined("El valor proporcionado esta vacío o es NULL");
+        }
+        if (Objects.isNull(operador)) {
+            throw new ValorUndefined("El operador proporcionado es NULL");
+        }
+        if (Objects.isNull(modelo)) {
+            throw new ValorUndefined("El Modelo proporcionado es NULL");
+        }
+        this.parametros = parametros;
+        this.modelo = modelo;
+        this.parametros.add(getColumn(valor));
+        this.sql = sql + Operator.AND.getOperador() + Operator.OPEN_PARENTESIS.getOperador() + columna + operador.getOperador() + "?" + Operator.CLOSE_PARENTESIS.getOperador();
+    }
 
     /**
      * Constructor que recibe como parametro:
@@ -131,6 +166,11 @@ public class And<T> extends Get {
         if (Objects.isNull(this.modelo)) {
             return new And(this.sql, columna, operador, valor, this.parametros);
         } else {
+            if(!this.getGetPropertySystem()){
+                And and =new And(this.sql, columna, operador, valor, this.modelo, this.parametros, false);
+                and.llenarPropertiesFromModel(this);
+                return and;
+            }
             return new And(this.sql, columna, operador, valor, this.modelo, this.parametros);
         }
     }
@@ -151,6 +191,11 @@ public class And<T> extends Get {
         if (Objects.isNull(this.modelo)) {
             return new Or(this.sql, columna, operador, valor, this.parametros);
         } else {
+            if(!this.getGetPropertySystem()){
+                Or or=new Or(this.sql, columna, operador, valor, this.modelo, this.parametros, false);
+                or.llenarPropertiesFromModel(this);
+                return or;
+            }
             return new Or(this.sql, columna, operador, valor, this.modelo, this.parametros);
         }
     }
@@ -171,6 +216,11 @@ public class And<T> extends Get {
         if (Objects.isNull(this.modelo)) {
             return new OrderBy(this.sql, columna, orderType, this.parametros);
         } else {
+            if (!this.getGetPropertySystem()) {
+                OrderBy orderby = new OrderBy(this.sql, columna, orderType, this.modelo, this.parametros, false);
+                orderby.llenarPropertiesFromModel(this);
+                return orderby;
+            }
             return new OrderBy(this.sql, columna, orderType, this.modelo, this.parametros);
         }
     }
@@ -191,6 +241,11 @@ public class And<T> extends Get {
         if (Objects.isNull(this.modelo)) {
             return new Take(this.sql, limite, this.parametros);
         } else {
+            if (!this.getGetPropertySystem()) {
+                Take take = new Take(this.sql, limite, this.modelo, this.parametros, false);
+                take.llenarPropertiesFromModel(this);
+                return take;
+            }
             return new Take(this.sql, limite, this.modelo, this.parametros);
         }
     }
@@ -206,7 +261,7 @@ public class And<T> extends Get {
      * haya finalizado la logica dentro de sus parentecis
      * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
-    public openParentecis openParentecis(Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined {
+    public openParentecis openParentecis(Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         if (Objects.isNull(this.modelo)) {
             if (Objects.isNull(operatorPrev)) {
                 return new openParentecis(this.sql, this.parametros, columna, operador, valor);
@@ -215,8 +270,18 @@ public class And<T> extends Get {
             }
         } else {
             if (Objects.isNull(operatorPrev)) {
+                if (!this.getGetPropertySystem()) {
+                    openParentecis open = new openParentecis(this.sql, this.modelo, this.parametros, columna, operador, valor, false);
+                    open.llenarPropertiesFromModel(this);
+                    return open;
+                }
                 return new openParentecis(this.sql, this.modelo, this.parametros, columna, operador, valor);
             } else {
+                if (!this.getGetPropertySystem()) {
+                    openParentecis open = new openParentecis(this.sql, this.modelo, this.parametros, operatorPrev, columna, operador, valor, false);
+                    open.llenarPropertiesFromModel(this);
+                    return open;
+                }
                 return new openParentecis(this.sql, this.modelo, this.parametros, operatorPrev, columna, operador, valor);
             }
 
@@ -243,8 +308,18 @@ public class And<T> extends Get {
             }
         } else {
             if (Objects.isNull(operatorPost)) {
+                if (!this.getGetPropertySystem()) {
+                    closeParentecis close = new closeParentecis(this.sql, this.modelo, this.parametros, false);
+                    close.llenarPropertiesFromModel(this);
+                    return close;
+                }
                 return new closeParentecis(this.sql, this.modelo, this.parametros);
             } else {
+                if (!this.getGetPropertySystem()) {
+                    closeParentecis close = new closeParentecis(this.sql, this.modelo, this.parametros, operatorPost, false);
+                    close.llenarPropertiesFromModel(this);
+                    return close;
+                }
                 return new closeParentecis(this.sql, this.modelo, this.parametros, operatorPost);
             }
         }
