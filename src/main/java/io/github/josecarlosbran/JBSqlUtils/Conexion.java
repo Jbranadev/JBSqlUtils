@@ -942,4 +942,6 @@ class Conexion {
     protected void setTabla(TablesSQL tabla) {
         this.tabla = tabla;
     }
+
+
 }

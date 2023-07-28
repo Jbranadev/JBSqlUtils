@@ -1,6 +1,5 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
-import io.github.josecarlosbran.JBSqlUtils.Enumerations.ConeccionProperties;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
@@ -17,9 +16,10 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.logParrafo;
 
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBSqlUtilsTestSQLite {
-    public JBSqlUtilsTestSQLite(){
+    public JBSqlUtilsTestSQLite() {
         System.setProperty("org.uncommons.reportng.escape-output", "false");
     }
+
     TestModel testModel;
 
     @Test(testName = "Setear Properties Conexión for Model")
@@ -94,7 +94,6 @@ public class JBSqlUtilsTestSQLite {
     }
 
 
-
     @Test(testName = "Update Model", dependsOnMethods = "firstOrFail")
     public void updateModel() throws Exception {
         /**
@@ -114,8 +113,8 @@ public class JBSqlUtilsTestSQLite {
         /**
          * Eliminamos el modelo en BD's
          */
-        Integer rowsUpdate=this.testModel.save();
-        Assert.assertTrue(rowsUpdate==1, "El registro no fue actualizado en la BD's");
+        Integer rowsUpdate = this.testModel.save();
+        Assert.assertTrue(rowsUpdate == 1, "El registro no fue actualizado en la BD's");
     }
 
     @Test(testName = "Delete Model", dependsOnMethods = "updateModel")
@@ -132,27 +131,27 @@ public class JBSqlUtilsTestSQLite {
         /**
          * Eliminamos el modelo en BD's
          */
-        Integer rowsDelete=this.testModel.delete();
-        Assert.assertTrue(rowsDelete==1, "El registro no fue eliminado en la BD's");
+        Integer rowsDelete = this.testModel.delete();
+        Assert.assertTrue(rowsDelete == 1, "El registro no fue eliminado en la BD's");
     }
 
 
     @Test(testName = "Insert Models",
             dependsOnMethods = "deleteModel")
     public void insertModels() throws Exception {
-        List<TestModel> models=new ArrayList<TestModel>();
+        List<TestModel> models = new ArrayList<TestModel>();
         //Llenamos la lista de mdelos a insertar en BD's
-        for (int i=0; i<10; i++) {
-            TestModel model=new TestModel();
-            model.getName().setValor("Modelo #"+i);
-            model.getApellido().setValor("Apellido #"+i);
-            if(i%2==0){
+        for (int i = 0; i < 10; i++) {
+            TestModel model = new TestModel();
+            model.getName().setValor("Modelo #" + i);
+            model.getApellido().setValor("Apellido #" + i);
+            if (i % 2 == 0) {
                 model.getIsMayor().setValor(false);
             }
             models.add(model);
         }
         Integer rowsInsert = this.testModel.saveALL(models);
-        logParrafo("Filas insertadas en BD's: " + rowsInsert +" "+models );
+        logParrafo("Filas insertadas en BD's: " + rowsInsert + " " + models);
         /**
          * Esperamos se ejecute la instrucción en BD's
          */
@@ -164,14 +163,14 @@ public class JBSqlUtilsTestSQLite {
     @Test(testName = "Delete Models",
             dependsOnMethods = "insertModels")
     public void deleteModels() throws Exception {
-        List<TestModel> models=new ArrayList<TestModel>();
-        models=this.testModel.where("Name", Operator.LIKE , "%Modelo #5%").or(
+        List<TestModel> models = new ArrayList<TestModel>();
+        models = this.testModel.where("Name", Operator.LIKE, "%Modelo #5%").or(
                 "Name", Operator.LIKE, "Modelo #8").or("Apellido", Operator.IGUAL_QUE, "Apellido #3").getAll();
         this.testModel.waitOperationComplete();
-        logParrafo("Se recuperaron "+models.size()+" Para eliminar: "+models.toString());
-        Integer rowsDelete=this.testModel.deleteALL(models);
+        logParrafo("Se recuperaron " + models.size() + " Para eliminar: " + models.toString());
+        Integer rowsDelete = this.testModel.deleteALL(models);
         this.testModel.waitOperationComplete();
-        logParrafo("Filas eliminadas en BD's: " + rowsDelete +" "+models);
+        logParrafo("Filas eliminadas en BD's: " + rowsDelete + " " + models);
         //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
         Assert.assertTrue(rowsDelete == 3, "Los registros no fueron eliminados correctamente en BD's");
 

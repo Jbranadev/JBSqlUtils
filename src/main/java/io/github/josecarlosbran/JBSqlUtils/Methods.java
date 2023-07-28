@@ -68,9 +68,10 @@ class Methods extends Methods_Conexion {
 
     /**
      * Almacena la información del modelo que hace el llamado en BD's.'
+     *
      * @return La cantidad de filas insertadas o actualizadas en BD's
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
-     * captura la excepción y la lanza en el hilo principal
+     *                   captura la excepción y la lanza en el hilo principal
      */
     public Integer save() throws Exception {
         return saveModel(this);
@@ -86,7 +87,7 @@ class Methods extends Methods_Conexion {
      *                llamado por diferentes tipos de objetos, siempre y cuando estos hereden la clase Methods Conexion.
      * @return La cantidad de filas insertadas o actualizadas en BD's
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
-     * captura la excepción y la lanza en el hilo principal
+     *                   captura la excepción y la lanza en el hilo principal
      */
     public <T extends JBSqlUtils> Integer saveALL(List<T> modelos) throws Exception {
         Integer result = 0;
@@ -126,12 +127,13 @@ class Methods extends Methods_Conexion {
 
     /**
      * Elimina la información del modelo que hace el llamado en BD´s
+     *
      * @return La cantidad de filas eliminadas en BD's
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
-     * captura la excepción y la lanza en el hilo principal
+     *                   captura la excepción y la lanza en el hilo principal
      */
     public Integer delete() throws Exception {
-            return deleteModel(this);
+        return deleteModel(this);
 
     }
 
@@ -143,35 +145,35 @@ class Methods extends Methods_Conexion {
      *                llamado por diferentes tipos de objetos, siempre y cuando estos hereden la clase Methods Conexion.
      * @return La cantidad de filas eliminadas en BD's
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
-     * captura la excepción y la lanza en el hilo principal
+     *                   captura la excepción y la lanza en el hilo principal
      */
     public <T extends JBSqlUtils> Integer deleteALL(List<T> modelos) throws Exception {
-        Integer result=0;
-            T temp = null;
-            for (T modelo : modelos) {
-                //Optimización de los tiempos de inserción de cada modelo.
-                if (!Objects.isNull(temp)) {
-                    modelo.setTabla(temp.getTabla());
-                    modelo.setTableExist(temp.getTableExist());
-                    modelo.setTableName(temp.getTableName());
-                    LogsJB.info("Modelo Ya había sido inicializado: " + temp.getClass().getSimpleName());
-                } else {
-                    temp = (T) modelo.getClass().newInstance();
-                    LogsJB.warning("Modelo era Null, crea una nueva instancia: " + temp.getClass().getSimpleName());
-                }
-                if (!modelo.getTableExist()) {
-                    LogsJB.info("Obtendra la información de conexión de la BD's: " + modelo.getClass().getSimpleName());
-                    modelo.refresh();
-                    while (modelo.getTabla().getColumnas().size() == 0) {
-
-                    }
-                    LogsJB.info("Ya obtuvo la información de BD's");
-                    temp.setTableExist(modelo.getTableExist());
-                    temp.setTableName(modelo.getTableName());
-                    temp.setTabla(modelo.getTabla());
-                }
-                result=result+modelo.deleteModel(modelo);
+        Integer result = 0;
+        T temp = null;
+        for (T modelo : modelos) {
+            //Optimización de los tiempos de inserción de cada modelo.
+            if (!Objects.isNull(temp)) {
+                modelo.setTabla(temp.getTabla());
+                modelo.setTableExist(temp.getTableExist());
+                modelo.setTableName(temp.getTableName());
+                LogsJB.info("Modelo Ya había sido inicializado: " + temp.getClass().getSimpleName());
+            } else {
+                temp = (T) modelo.getClass().newInstance();
+                LogsJB.warning("Modelo era Null, crea una nueva instancia: " + temp.getClass().getSimpleName());
             }
+            if (!modelo.getTableExist()) {
+                LogsJB.info("Obtendra la información de conexión de la BD's: " + modelo.getClass().getSimpleName());
+                modelo.refresh();
+                while (modelo.getTabla().getColumnas().size() == 0) {
+
+                }
+                LogsJB.info("Ya obtuvo la información de BD's");
+                temp.setTableExist(modelo.getTableExist());
+                temp.setTableName(modelo.getTableName());
+                temp.setTabla(modelo.getTabla());
+            }
+            result = result + modelo.deleteModel(modelo);
+        }
         return result;
     }
 
@@ -227,7 +229,7 @@ class Methods extends Methods_Conexion {
      * @return Retorna una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
-     * captura la excepción y la lanza en el hilo principal
+     *                   captura la excepción y la lanza en el hilo principal
      */
     public <T extends JBSqlUtils> List<T> getAll() throws Exception {
         this.setTaskIsReady(false);
@@ -270,7 +272,7 @@ class Methods extends Methods_Conexion {
                 }
             };
             ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            Future<ResultAsync<List<T>>> future= ejecutor.submit(get);
+            Future<ResultAsync<List<T>>> future = ejecutor.submit(get);
             while (!future.isDone()) {
 
             }
@@ -412,6 +414,7 @@ class Methods extends Methods_Conexion {
             //Obtiene los metodos get del modelo
             List<Method> modelGetMethods = modelo.getMethodsGetOfModel(modelo.getMethodsModel());
             LogsJB.debug("Obtuvo los metodos Get del modelo: ");
+            List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getMethods()));
             for (Method modelGetMethod : modelGetMethods) {
                 String modelGetName = modelGetMethod.getName();
                 LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);
@@ -423,7 +426,6 @@ class Methods extends Methods_Conexion {
                     continue;
                 }
                 LogsJB.debug("Dato que se ingresara al controlador: " + dato);
-                List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getMethods()));
                 for (Method controladorMethod : controladorMethods) {
                     String controllerName = controladorMethod.getName();
                     String claseMethod = controladorMethod.getDeclaringClass().getSimpleName();

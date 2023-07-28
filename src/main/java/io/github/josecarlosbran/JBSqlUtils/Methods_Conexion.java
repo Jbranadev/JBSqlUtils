@@ -32,12 +32,11 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.sql.Date;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.getBooleanfromInt;
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
@@ -782,7 +781,7 @@ public class Methods_Conexion extends Conexion {
      * @param modelo Modelo que será insertado o actualizado en BD's
      * @param <T>    Expresión que hace que el metodo sea generico y pueda ser utilizado por cualquier objeto que herede la Clase JBSqlUtils
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
-     * captura la excepción y la lanza en el hilo principal
+     *                   captura la excepción y la lanza en el hilo principal
      */
     protected <T extends Methods_Conexion> Integer saveModel(T modelo) throws Exception {
         Integer result = 0;
@@ -1078,10 +1077,10 @@ public class Methods_Conexion extends Conexion {
      * @param <T>    Expresión que hace que el metodo sea generico y pueda ser utilizado por cualquier
      *               objeto que herede la Clase JBSqlUtils
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
-     * captura la excepción y la lanza en el hilo principal
+     *                   captura la excepción y la lanza en el hilo principal
      */
     protected <T extends Methods_Conexion> Integer deleteModel(T modelo) throws Exception {
-        Integer result=0;
+        Integer result = 0;
         try {
             modelo.setTaskIsReady(false);
             if (!modelo.getTableExist()) {
@@ -1160,16 +1159,16 @@ public class Methods_Conexion extends Conexion {
                 }
             };
             ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            Future<ResultAsync<Integer>> future= ejecutor.submit(Delete);
-            while (!future.isDone()){
+            Future<ResultAsync<Integer>> future = ejecutor.submit(Delete);
+            while (!future.isDone()) {
 
             }
             ejecutor.shutdown();
-            ResultAsync<Integer> resultado= future.get();
-            if(!Objects.isNull(resultado.getException())){
+            ResultAsync<Integer> resultado = future.get();
+            if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
             }
-            result=resultado.getResult();
+            result = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -1836,6 +1835,63 @@ public class Methods_Conexion extends Conexion {
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
         return result;
+    }
+
+
+    /**
+     * Llena las propiedades de conexión de un modelo desde otro
+     *
+     * @param proveedor Modelo desde el que se obtendran las propiedades de conexión
+     * @param <T>       Modelo a llenar
+     * @param <G>       Tipo de dato del invocador
+     */
+    protected <T extends Methods_Conexion, G extends Methods_Conexion> void llenarPropertiesFromModel(G proveedor) {
+        try {
+            List<Method> metodosProveedor = Arrays.asList(proveedor.getClass().getMethods());
+            //Filtro los metodos de las propiedades que deseo obtener
+            metodosProveedor = metodosProveedor.stream().filter(metodo -> {
+                if (metodo.getName().equalsIgnoreCase("getDataBaseType") || metodo.getName().equalsIgnoreCase("getHost")
+                        || metodo.getName().equalsIgnoreCase("getPort") || metodo.getName().equalsIgnoreCase("getUser")
+                        || metodo.getName().equalsIgnoreCase("getPassword") || metodo.getName().equalsIgnoreCase("getBD")
+                        || metodo.getName().equalsIgnoreCase("getPropertisURL")) {
+                    return true;
+                }
+                return false;
+            }).collect(Collectors.toList());
+
+            List<Method> metodosReciber = Arrays.asList(this.getClass().getMethods());
+            //Filtro los metodos en los que se setearan las propiedades
+            metodosReciber = metodosReciber.stream().filter(metodo -> {
+                if (metodo.getName().equalsIgnoreCase("setDataBaseType") || metodo.getName().equalsIgnoreCase("setHost")
+                        || metodo.getName().equalsIgnoreCase("setPort") || metodo.getName().equalsIgnoreCase("setUser")
+                        || metodo.getName().equalsIgnoreCase("setPassword") || metodo.getName().equalsIgnoreCase("setBD")
+                        || metodo.getName().equalsIgnoreCase("setPropertisURL")) {
+                    return true;
+                }
+                return false;
+            }).collect(Collectors.toList());
+            for (Method metodoProveedor : metodosProveedor) {
+                for (Method metodoReciber : metodosReciber) {
+                    String nombreMetodoProveedor = metodoProveedor.getName();
+                    nombreMetodoProveedor = StringUtils.removeStartIgnoreCase(nombreMetodoProveedor, "get");
+                    String nombreMetodoReciber = metodoReciber.getName();
+                    nombreMetodoReciber = StringUtils.removeStartIgnoreCase(nombreMetodoReciber, "set");
+
+                    if (nombreMetodoProveedor.equalsIgnoreCase(nombreMetodoReciber) && metodoReciber.getParameterCount() == 1) {
+                        //Llena el recibidor con la información de las propiedades de conexión
+                        metodoReciber.invoke(this, metodoProveedor.invoke(proveedor, null));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
+
+
     }
 
 
