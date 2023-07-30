@@ -1330,7 +1330,7 @@ Maven
 Gradle
 
 ~~~
-implementation 'io.github.josecarlosbran:JBSqlUtils:1.1.4.5'
+implementation 'io.github.josecarlosbran:JBSqlUtils:1.1.5.1'
 ~~~
 
 Para mayor información sobre cómo descargar JBSqlUtils desde otros
