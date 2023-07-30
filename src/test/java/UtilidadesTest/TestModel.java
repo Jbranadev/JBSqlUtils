@@ -22,11 +22,13 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
 import lombok.ToString;
+import org.testng.annotations.Ignore;
 
 /**
  * @author Jose Bran
  * Clase de Pruebas
  */
+@Ignore
 @ToString
 public class TestModel extends JBSqlUtils {
 

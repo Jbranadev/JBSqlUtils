@@ -2,7 +2,9 @@ package UtilidadesTest;
 
 import com.josebran.LogsJB.LogsJB;
 import org.testng.Reporter;
+import org.testng.annotations.Ignore;
 
+@Ignore
 public class Utilities {
 
     public static void logParrafo(String log) {

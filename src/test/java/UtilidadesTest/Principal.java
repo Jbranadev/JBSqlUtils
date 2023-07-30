@@ -28,6 +28,7 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
 import org.json.JSONObject;
+import org.testng.annotations.Ignore;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ import java.util.function.Consumer;
 
 import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.*;
 
+@Ignore
 public class Principal {
 
 

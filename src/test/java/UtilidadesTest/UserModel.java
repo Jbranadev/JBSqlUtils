@@ -10,10 +10,12 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
 import lombok.Getter;
 import lombok.Setter;
+import org.testng.annotations.Ignore;
 
 /**
  * clase UserModel hereda de la clase JbSqlUtils los metodos
  */
+@Ignore
 public class UserModel extends JBSqlUtils {
 
     /**
