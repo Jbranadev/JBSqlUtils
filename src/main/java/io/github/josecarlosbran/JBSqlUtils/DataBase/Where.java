@@ -353,8 +353,10 @@ public class Where<T> extends Get {
      * Llena el modelo que invoca este metodo con la información que obtiene de BD's
      *
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
      */
-    public <T extends JBSqlUtils> void get() {
+    public <T extends JBSqlUtils> void get() throws Exception {
         super.get((T) this.modelo, this.sql, this.parametros);
     }
 
@@ -363,8 +365,10 @@ public class Where<T> extends Get {
      *
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
      */
-    public <T extends JBSqlUtils> T first() {
+    public <T extends JBSqlUtils> T first() throws Exception {
         return (T) super.first((T) this.modelo, this.sql, this.parametros);
     }
 
@@ -387,11 +391,10 @@ public class Where<T> extends Get {
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Retorna una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
-     * @throws InstantiationException Lanza esta excepción si ocurre un error al crear una nueva instancia
-     *                                del tipo de modelo proporcionado
-     * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
      */
-    public <T extends JBSqlUtils> List<T> getAll() throws InstantiationException, IllegalAccessException {
+    public <T extends JBSqlUtils> List<T> getAll() throws Exception {
         return (List<T>) super.getAll((T) this.modelo, this.sql, this.parametros);
     }
 

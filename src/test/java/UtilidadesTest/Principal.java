@@ -433,7 +433,7 @@ public class Principal {
     }
 
 
-    void SQLServer(TestModel testModel) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined, InstantiationException, IllegalAccessException, ModelNotFound {
+    void SQLServer(TestModel testModel) throws Exception {
         testModel.setGetPropertySystem(false);
         testModel.setPort("5077");
         testModel.setHost("localhost");

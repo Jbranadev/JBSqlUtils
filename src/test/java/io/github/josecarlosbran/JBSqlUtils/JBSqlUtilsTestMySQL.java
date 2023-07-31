@@ -207,4 +207,11 @@ public class JBSqlUtilsTestMySQL {
     }
 
 
+    @Test(testName = "Get Model",
+            dependsOnMethods = "deleteModels")
+    public void getModel() throws Exception {
+        this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+                "Cabrerassss").get();
+    }
+
 }

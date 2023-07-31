@@ -24,6 +24,7 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Methods_Conexion;
+import io.github.josecarlosbran.JBSqlUtils.ResultAsync;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 
@@ -34,6 +35,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.*;
 
 /**
@@ -74,8 +76,10 @@ public class Get extends Methods_Conexion {
      * @param Sql        Sentencia SQL para obtener el modelo
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
      * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
      */
-    protected <T extends JBSqlUtils> void get(T modelo, String Sql, List<Column> parametros) {
+    protected <T extends JBSqlUtils> void get(T modelo, String Sql, List<Column> parametros) throws Exception {
         if(!this.getGetPropertySystem()){
             modelo.setGetPropertySystem(false);
             modelo.llenarPropertiesFromModel(this);
@@ -86,7 +90,7 @@ public class Get extends Methods_Conexion {
                 modelo.refresh();
             }
             Connection connect = modelo.getConnection();
-            Runnable get = () -> {
+            Callable<ResultAsync<Boolean>> get = () -> {
                 try {
                     if (modelo.getTableExist()) {
                         String sql = "SELECT * FROM " + modelo.getTableName();
@@ -112,6 +116,7 @@ public class Get extends Methods_Conexion {
                                 "recuperar el Registro");
                     }
                     modelo.setTaskIsReady(true);
+                    return new ResultAsync<>(true, null);
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's: " + e.toString());
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -119,12 +124,20 @@ public class Get extends Methods_Conexion {
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
                     modelo.setTaskIsReady(true);
+                    return new ResultAsync<>(true, e);
                 }
             };
             ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            ejecutor.submit(get);
+            Future<ResultAsync<Boolean>> future= ejecutor.submit(get);
+            while (!future.isDone()) {
+
+            }
             ejecutor.shutdown();
-        } catch (Exception e) {
+            ResultAsync<Boolean> resultado = future.get();
+            if (!Objects.isNull(resultado.getException())) {
+                throw resultado.getException();
+            }
+        } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que obtiene el modelo en la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
@@ -141,8 +154,10 @@ public class Get extends Methods_Conexion {
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
      * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
      */
-    protected <T extends JBSqlUtils> T first(T modelo, String Sql, List<Column> parametros) {
+    protected <T extends JBSqlUtils> T first(T modelo, String Sql, List<Column> parametros) throws Exception {
         if(!this.getGetPropertySystem()){
             modelo.setGetPropertySystem(false);
             modelo.llenarPropertiesFromModel(this);
@@ -153,7 +168,7 @@ public class Get extends Methods_Conexion {
                 modelo.refresh();
             }
             Connection connect = modelo.getConnection();
-            Runnable get = () -> {
+            Callable<ResultAsync<Boolean>> get = () -> {
                 try {
                     if (modelo.getTableExist()) {
                         String sql = "SELECT * FROM " + modelo.getTableName();
@@ -177,6 +192,7 @@ public class Get extends Methods_Conexion {
                                 "recuperar el Registro");
                     }
                     modelo.setTaskIsReady(true);
+                    return new ResultAsync<>(true, null);
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's: " + e.toString());
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -184,12 +200,20 @@ public class Get extends Methods_Conexion {
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
                     modelo.setTaskIsReady(true);
+                    return new ResultAsync<>(true, e);
                 }
             };
             ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            ejecutor.submit(get);
+            Future<ResultAsync<Boolean>> future= ejecutor.submit(get);
+            while (!future.isDone()) {
+
+            }
             ejecutor.shutdown();
-        } catch (Exception e) {
+            ResultAsync<Boolean> resultado = future.get();
+            if (!Objects.isNull(resultado.getException())) {
+                throw resultado.getException();
+            }
+        } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que obtiene el modelo en la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
@@ -291,11 +315,10 @@ public class Get extends Methods_Conexion {
      * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Retorna una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
-     * @throws InstantiationException Lanza esta excepción si ocurre un error al crear una nueva instancia
-     *                                del tipo de modelo proporcionado
-     * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
      */
-    protected <T extends JBSqlUtils> List<T> getAll(T modelo, String Sql, List<Column> parametros) throws InstantiationException, IllegalAccessException {
+    protected <T extends JBSqlUtils> List<T> getAll(T modelo, String Sql, List<Column> parametros) throws Exception {
         if(!this.getGetPropertySystem()){
             modelo.setGetPropertySystem(false);
             modelo.llenarPropertiesFromModel(this);
@@ -308,7 +331,8 @@ public class Get extends Methods_Conexion {
             }
             Connection connect = modelo.getConnection();
             //T finalTemp = temp;
-            Runnable get = () -> {
+            Callable<ResultAsync<List<T>>> get = () -> {
+                List<T> listaTemp = new ArrayList<>();
                 try {
                     if (modelo.getTableExist()) {
                         String sql = "SELECT * FROM " + modelo.getTableName();
@@ -351,7 +375,7 @@ public class Get extends Methods_Conexion {
                         ResultSet registros = ejecutor.executeQuery();
 
                         while (registros.next()) {
-                            lista.add(procesarResultSet(modelo, registros));
+                            listaTemp.add(procesarResultSet(modelo, registros));
                             //procesarResultSet(modelo, registros);
                         }
                         modelo.closeConnection(connect);
@@ -360,6 +384,7 @@ public class Get extends Methods_Conexion {
                                 "recuperar el Registro");
                     }
                     modelo.setTaskIsReady(true);
+                    return new ResultAsync(listaTemp, null);
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
                             "SQL de la BD's: " + e.toString());
@@ -368,12 +393,21 @@ public class Get extends Methods_Conexion {
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
                     modelo.setTaskIsReady(true);
+                    return new ResultAsync(listaTemp, e);
                 }
             };
             ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            ejecutor.submit(get);
+            Future<ResultAsync<List<T>>> future=ejecutor.submit(get);
+            while (!future.isDone()) {
+
+            }
             ejecutor.shutdown();
-        } catch (Exception e) {
+            ResultAsync<List<T>> resultado = future.get();
+            if (!Objects.isNull(resultado.getException())) {
+                throw resultado.getException();
+            }
+            lista = resultado.getResult();
+        } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
