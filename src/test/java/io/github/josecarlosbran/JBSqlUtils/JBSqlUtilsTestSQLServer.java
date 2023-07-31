@@ -1,7 +1,6 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
 import UtilidadesTest.TestModel;
-import io.github.josecarlosbran.JBSqlUtils.Enumerations.ConeccionProperties;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
@@ -13,6 +12,7 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static UtilidadesTest.Utilities.logParrafo;
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
@@ -52,7 +52,6 @@ public class JBSqlUtilsTestSQLServer {
         Assert.assertTrue("?autoReconnect=true&useSSL=false".equalsIgnoreCase(this.testModel.getPropertisURL()),
                 "Propiedad Propiedades de conexión no ha sido seteada correctamente");
     }
-
     @Test(testName = "Drop Table If Exists",
             dependsOnMethods = {"setPropertiesConexiontoModel"})
     public void dropTableIfExists() throws Exception {
@@ -90,8 +89,25 @@ public class JBSqlUtilsTestSQLServer {
     }
 
 
+    @Test(testName = "Clean Model",
+            dependsOnMethods = "insertModel")
+    public void cleanModel() throws Exception {
+        Assert.assertTrue(this.testModel.getName().getValor().equalsIgnoreCase("Marcos"));
+        Assert.assertTrue(this.testModel.getApellido().getValor().equalsIgnoreCase("Cabrera"));
+        Assert.assertTrue(this.testModel.getIsMayor().getValor()==Boolean.FALSE);
+        Assert.assertTrue(this.testModel.getModelExist());
+        logParrafo("Limpiaremos el Modelo: "+this.testModel.toString());
+        this.testModel.cleanModel();
+        logParrafo("Modelo despues de realizar la limpieza: "+this.testModel.toString());
+        Assert.assertTrue(Objects.isNull(this.testModel.getName().getValor()), "No limpio la columna Name del Modelo");
+        Assert.assertTrue(Objects.isNull(this.testModel.getApellido().getValor()), "No limpio la columna Apellido del Modelo");
+        Assert.assertTrue(Objects.isNull(this.testModel.getIsMayor().getValor()), "No limpio la columna IsMayor del Modelo");
+        Assert.assertFalse(this.testModel.getModelExist(), "No limpio la bandera que indica que el modelo no existe en BD's");
+
+    }
+
     @Test(testName = "First Or Fail",
-            dependsOnMethods = "insertModel",
+            dependsOnMethods = "cleanModel",
             expectedExceptions = ModelNotFound.class)
     public void firstOrFail() throws Exception {
         this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
@@ -101,6 +117,7 @@ public class JBSqlUtilsTestSQLServer {
 
     @Test(testName = "Update Model", dependsOnMethods = "firstOrFail")
     public void updateModel() throws Exception {
+        this.testModel.cleanModel();
         /**
          * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
          */
@@ -124,6 +141,7 @@ public class JBSqlUtilsTestSQLServer {
 
     @Test(testName = "Delete Model", dependsOnMethods = "updateModel")
     public void deleteModel() throws Exception {
+        this.testModel.cleanModel();
         /**
          * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
          */
@@ -144,6 +162,7 @@ public class JBSqlUtilsTestSQLServer {
     @Test(testName = "Insert Models",
             dependsOnMethods = "deleteModel")
     public void insertModels() throws Exception {
+        this.testModel.cleanModel();
         List<TestModel> models = new ArrayList<TestModel>();
         //Llenamos la lista de mdelos a insertar en BD's
         for (int i = 0; i < 10; i++) {
@@ -165,9 +184,74 @@ public class JBSqlUtilsTestSQLServer {
         Assert.assertTrue(rowsInsert == 10, "Los registros no fueron insertados correctamente en BD's");
     }
 
-    @Test(testName = "Delete Models",
+
+    @Test(testName = "Get Model",
             dependsOnMethods = "insertModels")
+    public void getModel() throws Exception {
+        //Incluir metodo que permita limpiar el modelo
+        this.testModel.cleanModel();
+        this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+                "Cabrerassss").get();
+        this.testModel.waitOperationComplete();
+        logParrafo("Trato de obtener un modelo que no existe, el resultado es: "+this.testModel.getModelExist());
+        logParrafo(this.testModel.toString());
+        Assert.assertFalse(this.testModel.getModelExist(), "Obtuvo un registro que no existe en BD's");
+        this.testModel.where("Name", Operator.LIKE, "%Modelo #%").and("IsMayor", Operator.IGUAL_QUE,
+                true).get();
+        this.testModel.waitOperationComplete();
+        logParrafo("Trato de obtener un modelo que sí existe, el resultado es: "+this.testModel.getModelExist());
+        logParrafo(this.testModel.toString());
+        Assert.assertTrue(this.testModel.getModelExist(), "No obtuvo un registro que no existe en BD's");
+    }
+
+    @Test(testName = "Get First Model",
+            dependsOnMethods = "getModel")
+    public void firstModel() throws Exception {
+        //Incluir metodo que permita limpiar el modelo
+        this.testModel.cleanModel();
+        this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+                "Cabrerassss").first();
+        this.testModel.waitOperationComplete();
+        logParrafo("Trato de obtener un modelo que no existe, el resultado es: "+this.testModel.getModelExist());
+        logParrafo(this.testModel.toString());
+        Assert.assertFalse(this.testModel.getModelExist(), "Obtuvo un registro que no existe en BD's");
+        this.testModel.where("Name", Operator.LIKE, "%Modelo #%").and("IsMayor", Operator.IGUAL_QUE,
+                true).first();
+        this.testModel.waitOperationComplete();
+        logParrafo("Trato de obtener un modelo que sí existe, el resultado es: "+this.testModel.getModelExist());
+        logParrafo(this.testModel.toString());
+        Assert.assertTrue(this.testModel.getModelExist(), "No obtuvo un registro que no existe en BD's");
+    }
+
+    @Test(testName = "Take Models",
+            dependsOnMethods = "firstModel")
+    public void takeModels() throws Exception {
+        //Incluir metodo que permita limpiar el modelo
+        this.testModel.cleanModel();
+        List<TestModel> models = new ArrayList<TestModel>();
+        models = this.testModel.where("Name", Operator.LIKE, "%Modelo #%").take(6).get();
+        this.testModel.waitOperationComplete();
+        logParrafo("Se recuperaron " + models.size() + " los cuales son: " + models.toString());
+        Assert.assertTrue(models.size() == 6, "Los modelos no fueron recuperados de BD's como se definio en la sentencia Take");
+    }
+
+    @Test(testName = "Get All Models",
+            dependsOnMethods = "takeModels")
+    public void getAllModels() throws Exception {
+        //Incluir metodo que permita limpiar el modelo
+        this.testModel.cleanModel();
+        List<TestModel> models = new ArrayList<TestModel>();
+        models = this.testModel.where("Name", Operator.LIKE, "%Modelo #5%").or(
+                "Name", Operator.LIKE, "Modelo #8").or("Apellido", Operator.IGUAL_QUE, "Apellido #3").getAll();
+        this.testModel.waitOperationComplete();
+        logParrafo("Se recuperaron " + models.size() + " los cuales son: " + models.toString());
+        Assert.assertTrue(models.size() == 3, "Los modelos no fueron recuperados de BD's");
+    }
+
+    @Test(testName = "Delete Models",
+            dependsOnMethods = "getAllModels")
     public void deleteModels() throws Exception {
+        this.testModel.cleanModel();
         List<TestModel> models = new ArrayList<TestModel>();
         models = this.testModel.where("Name", Operator.LIKE, "%Modelo #5%").or(
                 "Name", Operator.LIKE, "Modelo #8").or("Apellido", Operator.IGUAL_QUE, "Apellido #3").getAll();

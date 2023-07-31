@@ -496,4 +496,57 @@ class Methods extends Methods_Conexion {
 
     }
 
+
+    /**
+     * Setea null en el campo valor de cada columna que posee el modelo.
+     * @param <T> Tipo de dato del modelo, acepta unicamente aquellos que heredan de la clase JBSqlUtils
+     */
+    public <T extends JBSqlUtils> void cleanModel(){
+        try{
+            this.setModelExist(false);
+            //Obtiene los metodos get del modelo
+            List<Method> modelGetMethods = this.getMethodsGetOfModel(this.getMethodsModel());
+            for (Method modelGetMethod : modelGetMethods) {
+                String modelGetName = modelGetMethod.getName();
+                String modelName=modelGetMethod.getDeclaringClass().getName();
+                LogsJB.debug("Obtuvo los metodos Get del modelo: " + modelName);
+                LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);
+                LogsJB.debug("Obtiene la columna: " + modelGetName);
+                //Obtengo la información de la columna
+                Column columnsSQL = (Column) modelGetMethod.invoke(this, null);
+                //Le meto la información a la columa
+                LogsJB.debug("Setea el contenido a la columna: " + modelGetName);
+                columnsSQL.setValor(null);
+                String columnName = modelGetMethod.getName();
+                columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
+                LogsJB.debug("Nombre de la columna a validar: " + columnName);
+                //Obtiene los metodos set del modelo
+                List<Method> modelSetMethods = this.getMethodsSetOfModel(this.getMethodsModel());
+                LogsJB.debug("Obtuvo los metodos Set del modelo: " + modelGetName);
+                for (Method modelSetMethod : modelSetMethods) {
+                    String modelSetName = modelSetMethod.getName();
+                    LogsJB.trace("Nombre del metodo: " + modelSetName);
+                    //Si el metodo es un get, que continue, no tiene caso hacer lo siguiente
+                    if (StringUtils.startsWithIgnoreCase(modelSetName, "get")) {
+                        continue;
+                    }
+                    LogsJB.trace("Si es un metodo Set: " + modelSetName);
+                    modelSetName = StringUtils.removeStartIgnoreCase(modelSetName, "set");
+                    LogsJB.trace("Nombre del metodo set a validar: " + modelSetName);
+                    if (StringUtils.equalsIgnoreCase(modelSetName, columnName)) {
+                        //Setea el valor del metodo
+                        modelSetMethod.invoke(this, columnsSQL);
+                        LogsJB.info("Ingreso la columna en el metodo set: " + modelSetName);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
+    }
+
 }

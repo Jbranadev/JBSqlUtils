@@ -106,7 +106,7 @@ public class Get extends Methods_Conexion {
                         LogsJB.info(ejecutor.toString());
 
                         ResultSet registros = ejecutor.executeQuery();
-                        if (registros.next()) {
+                        while (registros.next()) {
                             procesarResultSetOneResult(modelo, registros);
 
                         }
