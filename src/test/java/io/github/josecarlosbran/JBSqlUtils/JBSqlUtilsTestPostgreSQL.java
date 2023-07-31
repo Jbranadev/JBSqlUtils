@@ -50,7 +50,7 @@ public class JBSqlUtilsTestPostgreSQL {
         Assert.assertTrue("?autoReconnect=true&useSSL=false".equalsIgnoreCase(this.testModel.getPropertisURL()),
                 "Propiedad Propiedades de conexión no ha sido seteada correctamente");
     }
-    @Test(testName = "Drop Table If Exists",
+    @Test(testName = "Drop Table If Exists from Model",
             dependsOnMethods = {"setPropertiesConexiontoModel"})
     public void dropTableIfExists() throws Exception {
         this.testModel.crateTable();
@@ -58,7 +58,7 @@ public class JBSqlUtilsTestPostgreSQL {
         Assert.assertFalse(this.testModel.getTableExist(), "La tabla No existe en BD's y aun así responde que si la elimino");
     }
 
-    @Test(testName = "Create Table",
+    @Test(testName = "Create Table from Model",
             dependsOnMethods = "dropTableIfExists")
     public void createTable() throws Exception {
         Assert.assertTrue(this.testModel.crateTable(), "La Tabla No fue creada en BD's");

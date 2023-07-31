@@ -2,12 +2,11 @@ package io.github.josecarlosbran.JBSqlUtils;
 
 
 import UtilidadesTest.TestModel;
-import io.github.josecarlosbran.JBSqlUtils.Enumerations.ConeccionProperties;
-import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
-import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
+import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -17,6 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static UtilidadesTest.Utilities.logParrafo;
+import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.createTable;
 
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBSqlUtilsTestMySQL {
@@ -27,30 +27,6 @@ public class JBSqlUtilsTestMySQL {
 
     TestModel testModel;
 
-    @Test(testName = "Setear Properties Conexión Globales")
-    public void setPropertiesConexion() {
-        JBSqlUtils.setDataBaseGlobal("JBSQLUTILS");
-        JBSqlUtils.setPortGlobal("5076");
-        JBSqlUtils.setHostGlobal("127.0.0.1");
-        JBSqlUtils.setUserGlobal("Bran");
-        JBSqlUtils.setPasswordGlobal("Bran");
-        JBSqlUtils.setDataBaseTypeGlobal(DataBase.MySQL);
-        JBSqlUtils.setPropertisUrlConexionGlobal("?autoReconnect=true&useSSL=false");
-        Assert.assertTrue("JBSQLUTILS".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBNAME.getPropiertie())),
-                "Propiedad Nombre BD's no ha sido seteada correctamente");
-        Assert.assertTrue("5076".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBPORT.getPropiertie())),
-                "Propiedad Puerto BD's no ha sido seteada correctamente");
-        Assert.assertTrue("127.0.0.1".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBHOST.getPropiertie())),
-                "Propiedad Host BD's no ha sido seteada correctamente");
-        Assert.assertTrue("Bran".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBUSER.getPropiertie())),
-                "Propiedad Usuario BD's no ha sido seteada correctamente");
-        Assert.assertTrue("Bran".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBPASSWORD.getPropiertie())),
-                "Propiedad Password BD's no ha sido seteada correctamente");
-        Assert.assertTrue(DataBase.MySQL.name().equalsIgnoreCase(System.getProperty(ConeccionProperties.DBTYPE.getPropiertie())),
-                "Propiedad Tipo de BD's no ha sido seteada correctamente");
-        Assert.assertTrue("?autoReconnect=true&useSSL=false".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBPROPERTIESURL.getPropiertie())),
-                "Propiedad Propiedades de conexión no ha sido seteada correctamente");
-    }
 
     @Test(testName = "Setear Properties Conexión for Model")
     public void setPropertiesConexiontoModel() throws DataBaseUndefind, PropertiesDBUndefined {
@@ -79,7 +55,7 @@ public class JBSqlUtilsTestMySQL {
                 "Propiedad Propiedades de conexión no ha sido seteada correctamente");
     }
 
-    @Test(testName = "Drop Table If Exists",
+    @Test(testName = "Drop Table If Exists from Model",
             dependsOnMethods = {"setPropertiesConexiontoModel"})
     public void dropTableIfExists() throws Exception {
         this.testModel.crateTable();
@@ -87,7 +63,7 @@ public class JBSqlUtilsTestMySQL {
         Assert.assertFalse(this.testModel.getTableExist(), "La tabla No existe en BD's y aun así responde que si la elimino");
     }
 
-    @Test(testName = "Create Table",
+    @Test(testName = "Create Table from Model",
             dependsOnMethods = "dropTableIfExists")
     public void createTable() throws Exception {
         Assert.assertTrue(this.testModel.crateTable(), "La Tabla No fue creada en BD's");
@@ -290,6 +266,64 @@ public class JBSqlUtilsTestMySQL {
         //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
         Assert.assertTrue(rowsDelete == 3, "Los registros no fueron eliminados correctamente en BD's");
 
+    }
+
+    @Test(testName = "Setear Properties Conexión Globales",
+    dependsOnMethods = "deleteModels")
+    public void setPropertiesConexion() {
+        JBSqlUtils.setDataBaseGlobal("JBSQLUTILS");
+        JBSqlUtils.setPortGlobal("5076");
+        JBSqlUtils.setHostGlobal("127.0.0.1");
+        JBSqlUtils.setUserGlobal("Bran");
+        JBSqlUtils.setPasswordGlobal("Bran");
+        JBSqlUtils.setDataBaseTypeGlobal(DataBase.MySQL);
+        JBSqlUtils.setPropertisUrlConexionGlobal("?autoReconnect=true&useSSL=false");
+        Assert.assertTrue("JBSQLUTILS".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBNAME.getPropiertie())),
+                "Propiedad Nombre BD's no ha sido seteada correctamente");
+        Assert.assertTrue("5076".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBPORT.getPropiertie())),
+                "Propiedad Puerto BD's no ha sido seteada correctamente");
+        Assert.assertTrue("127.0.0.1".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBHOST.getPropiertie())),
+                "Propiedad Host BD's no ha sido seteada correctamente");
+        Assert.assertTrue("Bran".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBUSER.getPropiertie())),
+                "Propiedad Usuario BD's no ha sido seteada correctamente");
+        Assert.assertTrue("Bran".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBPASSWORD.getPropiertie())),
+                "Propiedad Password BD's no ha sido seteada correctamente");
+        Assert.assertTrue(DataBase.MySQL.name().equalsIgnoreCase(System.getProperty(ConeccionProperties.DBTYPE.getPropiertie())),
+                "Propiedad Tipo de BD's no ha sido seteada correctamente");
+        Assert.assertTrue("?autoReconnect=true&useSSL=false".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBPROPERTIESURL.getPropiertie())),
+                "Propiedad Propiedades de conexión no ha sido seteada correctamente");
+    }
+
+
+    @Test(testName = "Create Table JBSqlUtils",
+            dependsOnMethods = "setPropertiesConexion")
+    public void creteTableJBSqlUtils() throws Exception {
+        /**
+         * Definimos las columnas que deseamos posea nuestra tabla
+         */
+        Column<Integer> Id = new Column<>("Id", DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
+
+        Column<String> Name = new Column<>("Name", DataType.VARCHAR);
+
+        Column<String> Apellido = new Column<>("Apellido", DataType.VARCHAR);
+
+        Column<Boolean> Estado = new Column<>("Estado", DataType.BOOLEAN, "true", Constraint.DEFAULT);
+
+        /**
+         * Para crear una tabla utilizamos el metodo createTable despues de haber definido el nombre de la tabla que deseamos Crear
+         * y las columnas que deseamos tenga nuestra tabla
+         */
+        Boolean result= false;
+        result=JBSqlUtils.createTable("Proveedor").addColumn(Name).addColumn(Id).addColumn(Apellido).
+                addColumn(Estado).createTable();
+        logParrafo("Resultado de solicitar la creación de la tabla en BD's: "+result);
+        Assert.assertTrue(result, "La Tabla no pudo ser creada debido a que ya existe en BD's");
+
+        result =true;
+        result=JBSqlUtils.createTable("Proveedor").addColumn(Name).addColumn(Id).addColumn(Apellido).
+                addColumn(Estado).createTable();
+        logParrafo("Resultado de solicitar la creación de la tabla en BD's: "+result);
+        Assert.assertFalse(result, "Retorna que la tabla a sido creada cuando esta ya existe en BD's");
     }
 
 

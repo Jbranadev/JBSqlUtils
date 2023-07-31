@@ -1753,7 +1753,8 @@ public class Methods_Conexion extends Conexion {
                             }
                             Constraint[] columnRestriccion = columnsSQL.getRestriccion();
                             String restricciones = "";
-                            String tipo_de_columna = columnType.toString();
+                            //Se adecuo el obtener el tipo de columna, para que obtenga el tipo de dato con la información correcta
+                            String tipo_de_columna = columnsSQL.columnToString();
                             if ((((this.getDataBaseType() == DataBase.PostgreSQL)) || ((this.getDataBaseType() == DataBase.MySQL))
                                     || ((this.getDataBaseType() == DataBase.SQLite))) &&
                                     (columnType == DataType.BIT)) {

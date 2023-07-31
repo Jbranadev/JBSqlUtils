@@ -48,7 +48,7 @@ public class JBSqlUtilsTestSQLite {
         Assert.assertTrue(DataBase.SQLite.name().equalsIgnoreCase(this.testModel.getDataBaseType().name()),
                 "Propiedad Tipo de BD's no ha sido seteada correctamente");
     }
-    @Test(testName = "Drop Table If Exists",
+    @Test(testName = "Drop Table If Exists from Model",
             dependsOnMethods = {"setPropertiesConexiontoModel"})
     public void dropTableIfExists() throws Exception {
         this.testModel.crateTable();
@@ -56,7 +56,7 @@ public class JBSqlUtilsTestSQLite {
         Assert.assertFalse(this.testModel.getTableExist(), "La tabla No existe en BD's y aun así responde que si la elimino");
     }
 
-    @Test(testName = "Create Table",
+    @Test(testName = "Create Table from Model",
             dependsOnMethods = "dropTableIfExists")
     public void createTable() throws Exception {
         Assert.assertTrue(this.testModel.crateTable(), "La Tabla No fue creada en BD's");
