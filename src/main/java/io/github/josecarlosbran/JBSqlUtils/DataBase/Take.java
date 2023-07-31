@@ -129,11 +129,10 @@ public class Take<T> extends Get {
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Retorna una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
-     * @throws InstantiationException Lanza esta excepción si ocurre un error al crear una nueva instancia
-     *                                del tipo de modelo proporcionado
-     * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
      */
-    public <T extends JBSqlUtils> List<T> get() throws InstantiationException, IllegalAccessException {
+    public <T extends JBSqlUtils> List<T> get() throws Exception {
         return (List<T>) super.getAll((T) this.modelo, this.sql, this.parametros);
     }
 
