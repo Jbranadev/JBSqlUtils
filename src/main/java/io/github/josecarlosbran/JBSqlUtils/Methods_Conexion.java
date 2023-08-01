@@ -887,6 +887,7 @@ public class Methods_Conexion extends Conexion {
                         LogsJB.info("Filas Insertadas en BD's': " + filas + " " + this.getTableName());
                         modelo.closeConnection(connect);
                         modelo.setTaskIsReady(true);
+                        modelo.setModelExist(true);
                         return new ResultAsync<>(filas, null);
                     } else {
                         LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +

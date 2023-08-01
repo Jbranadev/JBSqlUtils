@@ -228,6 +228,8 @@ Column<String> Apellido = new Column<>("Apellido",DataType.VARCHAR);
 * desde nuestra aplicación en caso esta no exista a través del metodo modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
 */
 Column<Boolean> Estado = new Column<>("Estado", DataType.BOOLEAN, "true", Constraint.DEFAULT);
+        Name.setSize("1000");
+        Apellido.setSize("1000");
 
 /**
 * Para crear una tabla utilizamos el metodo createTable despues de haber definido el nombre de la tabla que deseamos Crear 

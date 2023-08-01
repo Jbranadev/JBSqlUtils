@@ -331,6 +331,8 @@ public class Principal {
         Column<String> Apellido = new Column<>("Apellido", DataType.VARCHAR);
 
         Column<Boolean> Estado = new Column<>("Estado", DataType.BOOLEAN, "true", Constraint.DEFAULT);
+        Name.setSize("1000");
+        Apellido.setSize("1000");
 
         /**
          * Para crear una tabla utilizamos el metodo createTable despues de haber definido el nombre de la tabla que deseamos Crear

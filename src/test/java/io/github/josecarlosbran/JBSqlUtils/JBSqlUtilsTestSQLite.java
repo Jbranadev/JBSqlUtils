@@ -188,7 +188,8 @@ public class JBSqlUtilsTestSQLite {
         List<TestModel> models = new ArrayList<TestModel>();
         //Llenamos la lista de mdelos a insertar en BD's
         for (int i = 0; i < 10; i++) {
-            TestModel model = new TestModel();
+            TestModel model = new TestModel(false);
+            model.llenarPropertiesFromModel(this.testModel);
             model.getName().setValor("Modelo #" + i);
             model.getApellido().setValor("Apellido #" + i);
             if (i % 2 == 0) {
@@ -360,6 +361,8 @@ public class JBSqlUtilsTestSQLite {
         Column<String> Apellido = new Column<>("Apellido", DataType.VARCHAR);
 
         Column<Boolean> Estado = new Column<>("Estado", DataType.BOOLEAN, "true", Constraint.DEFAULT);
+        Name.setSize("1000");
+        Apellido.setSize("1000");
         logParrafo("Se solicitara la creación de la tabla Proveedor, la cual tendra las siguientes columnas, Id, Name, Apellido y Estado");
         /**
          * Para crear una tabla utilizamos el metodo createTable despues de haber definido el nombre de la tabla que deseamos Crear

@@ -281,7 +281,6 @@ class Methods extends Methods_Conexion {
                     } else {
                         LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
                                 "recuperar el Registro: " + this.getTableName());
-                        this.setTaskIsReady(true);
                         return new ResultAsync<>(listatemp, null);
                     }
                 } catch (Exception e) {
@@ -291,7 +290,6 @@ class Methods extends Methods_Conexion {
                     LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-                    this.setTaskIsReady(true);
                     return new ResultAsync<>(listatemp, e);
                 }
             };
@@ -302,6 +300,7 @@ class Methods extends Methods_Conexion {
             }
             ejecutor.shutdown();
             ResultAsync<List<T>> resultado = future.get();
+            this.setTaskIsReady(true);
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
             }
@@ -405,7 +404,7 @@ class Methods extends Methods_Conexion {
                         if (StringUtils.equalsIgnoreCase(modelSetName, columnName)) {
                             //Setea el valor del metodo
                             modelSetMethod.invoke(modelo, columnsSQL);
-                            LogsJB.info("Ingreso la columna en el metodo set: " + modelSetName);
+                            LogsJB.debug("Ingreso la columna en el metodo set: " + modelSetName);
                             isready = true;
                             break;
                         }
@@ -480,7 +479,7 @@ class Methods extends Methods_Conexion {
                     LogsJB.debug("Nombre de la columna en el modelo: " + modelGetName + ", controlador: " + controllerName);
                     if (StringUtils.equalsIgnoreCase(modelGetName, controllerName)) {
                         controladorMethod.invoke(controlador, dato);
-                        LogsJB.info("Lleno la columna " + controllerName + " Con la información del modelo: " + dato);
+                        LogsJB.debug("Lleno la columna " + controllerName + " Con la información del modelo: " + dato);
                         break;
                     }
                 }
@@ -536,7 +535,7 @@ class Methods extends Methods_Conexion {
                     if (StringUtils.equalsIgnoreCase(modelSetName, columnName)) {
                         //Setea el valor del metodo
                         modelSetMethod.invoke(this, columnsSQL);
-                        LogsJB.info("Ingreso la columna en el metodo set: " + modelSetName);
+                        LogsJB.debug("Ingreso la columna en el metodo set: " + modelSetName);
                     }
                 }
             }
