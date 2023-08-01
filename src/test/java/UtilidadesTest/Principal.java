@@ -21,9 +21,6 @@ import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import org.json.JSONObject;
 import org.testng.annotations.Ignore;
 

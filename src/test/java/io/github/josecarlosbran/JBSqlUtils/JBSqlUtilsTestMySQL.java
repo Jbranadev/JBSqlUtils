@@ -2,12 +2,10 @@ package io.github.josecarlosbran.JBSqlUtils;
 
 
 import UtilidadesTest.TestModel;
-import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -18,7 +16,8 @@ import java.util.List;
 import java.util.Objects;
 
 import static UtilidadesTest.Utilities.logParrafo;
-import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.*;
+import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.dropTableIfExist;
+import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.select;
 
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBSqlUtilsTestMySQL {
