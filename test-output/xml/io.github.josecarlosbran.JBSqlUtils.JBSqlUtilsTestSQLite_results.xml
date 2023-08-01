@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JBSqlUtils"
+           tests="9"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="0.905">
+  <properties />
+  
+  
+            <testcase name="insertModel" time="0.079" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite" />
+                <testcase name="setPropertiesConexiontoModel" time="0.001" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite" />
+                <testcase name="insertModels" time="0.208" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite" />
+                <testcase name="updateModel" time="0.028" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite" />
+                <testcase name="createTable" time="0.047" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite" />
+                <testcase name="deleteModel" time="0.121" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite" />
+                <testcase name="deleteModels" time="0.133" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite" />
+                <testcase name="firstOrFail" time="0.021" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite" />
+                <testcase name="dropTableIfExists" time="0.267" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite" />
+      
+</testsuite>

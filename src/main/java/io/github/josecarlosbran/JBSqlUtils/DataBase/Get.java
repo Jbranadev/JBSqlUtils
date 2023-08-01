@@ -1,4 +1,4 @@
-/***
+/**
  * Copyright (C) 2022 El proyecto de código abierto JBSqlUtils de José Bran
  *
  * Con licencia de Apache License, Versión 2.0 (la "Licencia");
@@ -429,8 +429,10 @@ public class Get extends Methods_Conexion {
      *                   todas las columnas de la tabla especificada envíar NULL como parametro
      * @return Retorna una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
      * Envíada como parametro
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
      */
-    protected List<JSONObject> get(String Sql, List<Column> parametros, List<String> columnas) {
+    protected List<JSONObject> get(String Sql, List<Column> parametros, List<String> columnas) throws Exception {
         List<JSONObject> lista = new ArrayList<>();
         String tableName = Sql.replace("SELECT * FROM ", "").split(" ")[0];
         this.setTaskIsReady(false);
@@ -441,7 +443,7 @@ public class Get extends Methods_Conexion {
             }
             Connection connect = this.getConnection();
             //T finalTemp = temp;
-            Callable<List<JSONObject>> get = () -> {
+            Callable<ResultAsync<List<JSONObject>>> get = () -> {
                 List<JSONObject> temp = new ArrayList<>();
                 try {
                     if (this.getTableExist()) {
@@ -485,12 +487,14 @@ public class Get extends Methods_Conexion {
                             //procesarResultSet(modelo, registros);
                         }
                         this.closeConnection(connect);
-                        return temp;
+                        this.setTaskIsReady(true);
+                        return new ResultAsync<>(temp, null);
                     } else {
                         LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
                                 "recuperar los Registros");
+                        this.setTaskIsReady(true);
+                        return new ResultAsync<>(temp, null);
                     }
-                    this.setTaskIsReady(true);
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
                             "SQL de la BD's: " + e.toString());
@@ -499,18 +503,21 @@ public class Get extends Methods_Conexion {
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
                     this.setTaskIsReady(true);
+                    return new ResultAsync<>(temp, e);
                 }
-                return temp;
             };
             ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            Future<List<JSONObject>> future = ejecutor.submit(get);
+            Future<ResultAsync<List<JSONObject>>> future = ejecutor.submit(get);
             while (!future.isDone()) {
 
             }
-            //ejecutor.submit(get);
             ejecutor.shutdown();
-            lista = future.get();
-        } catch (Exception e) {
+            ResultAsync<List<JSONObject>> resultado = future.get();
+            if (!Objects.isNull(resultado.getException())) {
+                throw resultado.getException();
+            }
+            lista = resultado.getResult();
+        } catch (ExecutionException | InterruptedException  e) {
             LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());

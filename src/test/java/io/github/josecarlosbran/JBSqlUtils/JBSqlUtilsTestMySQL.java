@@ -2,11 +2,13 @@ package io.github.josecarlosbran.JBSqlUtils;
 
 
 import UtilidadesTest.TestModel;
+import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
+import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -17,6 +19,7 @@ import java.util.Objects;
 
 import static UtilidadesTest.Utilities.logParrafo;
 import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.createTable;
+import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.select;
 
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBSqlUtilsTestMySQL {
@@ -325,6 +328,80 @@ public class JBSqlUtilsTestMySQL {
         logParrafo("Resultado de solicitar la creación de la tabla en BD's: "+result);
         Assert.assertFalse(result, "Retorna que la tabla a sido creada cuando esta ya existe en BD's");
     }
+
+    @Test(testName = "Insert Into JBSqlUtils",
+            dependsOnMethods = "creteTableJBSqlUtils")
+    public void insertIntoJBSqlUtils() throws Exception {
+        int registros=0;
+
+        registros+=JBSqlUtils.insertInto("Proveedor").value("Name", "Erick").andValue("Apellido", "Ramos")
+                .execute();
+        logParrafo("Resultado de insertar el registro de Erick en la tabla Proveedor: "+registros);
+        Assert.assertTrue(registros==1, "No se pudo insertar el registro de Erick en la tabla Proveedor de BD's");
+
+        registros=0;
+        registros+=JBSqlUtils.insertInto("Proveedor").value("Name", "Daniel").andValue("Apellido", "Quiñonez").
+                andValue("Estado", false).execute();
+        logParrafo("Resultado de insertar el registro de Daniel en la tabla Proveedor: "+registros);
+        Assert.assertTrue(registros==1, "No se pudo insertar el registro de Daniel en la tabla Proveedor de BD's");
+
+        registros=0;
+        registros+=JBSqlUtils.insertInto("Proveedor").value("Name", "Ligia").andValue("Apellido", "Camey")
+                .andValue("Estado", true).andValue("Id", 3).execute();
+        logParrafo("Resultado de insertar el registro de Ligia en la tabla Proveedor: "+registros);
+        Assert.assertTrue(registros==1, "No se pudo insertar el registro de Ligia en la tabla Proveedor de BD's");
+
+        registros=0;
+        registros+= JBSqlUtils.insertInto("Proveedor").value("Name", "Elsa").andValue("Apellido", "Aguirre")
+                .andValue("Estado", false).execute();
+        logParrafo("Resultado de insertar el registro de Elsa en la tabla Proveedor: "+registros);
+        Assert.assertTrue(registros==1, "No se pudo insertar el registro de Elsa en la tabla Proveedor de BD's");
+
+        registros=0;
+        registros+=JBSqlUtils.insertInto("Proveedor").value("Name", "Alex").andValue("Apellido", "Garcia")
+                .execute();
+        logParrafo("Resultado de insertar el registro de Alex en la tabla Proveedor: "+registros);
+        Assert.assertTrue(registros==1, "No se pudo insertar el registro de Alex en la tabla Proveedor de BD's");
+    }
+
+
+    @Test(testName = "Get In JsonObjects JBSqlUtils",
+            dependsOnMethods = "insertIntoJBSqlUtils")
+    public void getInJsonObjectsJBSqlUtils() throws Exception {
+        /**
+         * Si deseamos obtener todas las columnas de la tabla envíamos el parametro columnas del metodo
+         * getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parametro
+         * del metodo select
+         */
+        List<String> columnas = null;
+
+        /**
+         * Si deseamos obtener unicamente determinadas columnas, es necesario envíar como parametro una lista de strings
+         * con los nombres de las columnas que deseamos obtener del metodo getInJsonObjects
+         */
+        columnas = new ArrayList<>();
+        columnas.add("Id");
+        columnas.add("Name");
+
+        /**
+         * Para obtener los registros de una tabla de BD's podemos hacerlo a traves del metodo select envíando como parametro
+         * el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a traves del metodo
+         * where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
+         */
+        List<JSONObject> lista = select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
+                .and("Apellido", Operator.LIKE, "%a%").take(2).getInJsonObjects(columnas);
+
+
+        logParrafo("Visualizamos los registros obtenidos de BD's");
+        /**
+         * Imprimimos los registros obtenidos
+         */
+        lista.forEach(fila -> {
+            logParrafo(fila.toString());
+        });
+        Assert.assertTrue(lista.size()==2, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
+    }
+
 
 
 

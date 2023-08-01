@@ -37,7 +37,7 @@ import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.*;
 public class Principal {
 
 
-    void MySQL(TestModel testModel) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined, InstantiationException, IllegalAccessException {
+    void MySQL(TestModel testModel) throws Exception {
         long inicio = System.currentTimeMillis();
 
         /**
@@ -392,7 +392,7 @@ public class Principal {
          * where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
          */
         List<JSONObject> lista = select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
-                .and("Apellido", Operator.LIKE, "%m%").take(3).getInJsonObjects(columnas);
+                .and("Apellido", Operator.LIKE, "%a%").take(3).getInJsonObjects(columnas);
 
         /**
          * Imprimimos los registros obtenidos

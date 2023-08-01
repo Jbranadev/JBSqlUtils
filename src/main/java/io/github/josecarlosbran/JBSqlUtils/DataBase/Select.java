@@ -70,8 +70,10 @@ public class Select extends Get {
      *                 odas las columnas de la tabla especificada envíar NULL como parametro
      * @return Retorna una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
      * Envíada como parametro
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
      */
-    public List<JSONObject> getInJsonObjects(List<String> columnas) {
+    public List<JSONObject> getInJsonObjects(List<String> columnas) throws Exception {
         return super.get(this.sql, this.parametros, columnas);
     }
 

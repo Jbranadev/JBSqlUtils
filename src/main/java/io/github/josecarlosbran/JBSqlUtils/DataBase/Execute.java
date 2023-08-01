@@ -22,11 +22,13 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Methods_Conexion;
+import io.github.josecarlosbran.JBSqlUtils.ResultAsync;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.*;
 
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
@@ -67,11 +69,12 @@ class Execute extends Methods_Conexion {
      * Ejecuta la sentencia SQL que recibe la clase al ser instanciada.
      *
      * @return Retorna la cantidad de filas que se han visto afectadas al ejecutar la sentencia SQL.
+     * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
-    public int execute() {
+    public int execute() throws Exception {
         int result = 0;
         try {
-            Callable<Integer> Ejecutar_Sentencia = () -> {
+            Callable<ResultAsync<Integer>> Ejecutar_Sentencia = () -> {
                 try {
                     Connection connect = this.getConnection();
                     this.sql = this.sql + ";";
@@ -84,10 +87,9 @@ class Execute extends Methods_Conexion {
                         Column columnsSQL = this.parametros.get(i);
                         convertJavaToSQL(columnsSQL, ejecutor, i + 1);
                     }
-
                     LogsJB.info(ejecutor.toString());
-
-                    int filas = ejecutor.executeUpdate();
+                    int filas=0;
+                    filas = ejecutor.executeUpdate();
                     //filas = ejecutor.getUpdateCount();
                     /*if(StringUtils.containsIgnoreCase(this.sql, "INSERT INTO")) {
                         filas=1;
@@ -95,7 +97,7 @@ class Execute extends Methods_Conexion {
                     LogsJB.info("Cantidad de filas afectadas: " + filas);
 
                     this.closeConnection(connect);
-                    return filas;
+                    return new ResultAsync<>(filas, null);
 
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que ejecuta la sentencia SQL transmitida: " + e.toString());
@@ -104,16 +106,20 @@ class Execute extends Methods_Conexion {
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
                     LogsJB.fatal("Sentencia SQL: " + this.sql);
+                    return new ResultAsync<>(0, e);
                 }
-                return 0;
             };
             ExecutorService executor = Executors.newFixedThreadPool(1);
-            Future<Integer> future = executor.submit(Ejecutar_Sentencia);
+            Future<ResultAsync<Integer>> future = executor.submit(Ejecutar_Sentencia);
             while (!future.isDone()) {
 
             }
             executor.shutdown();
-            result = future.get();
+            ResultAsync<Integer> resultado = future.get();
+            if (!Objects.isNull(resultado.getException())) {
+                throw resultado.getException();
+            }
+            result = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que ejecuta la sentencia SQL transmitida: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
