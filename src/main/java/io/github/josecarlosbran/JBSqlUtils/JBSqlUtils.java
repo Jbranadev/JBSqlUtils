@@ -242,29 +242,6 @@ public class JBSqlUtils extends Methods {
     }
 
 
-    /**
-     * Actualiza las filas de la tabla proporcionada, de acuerdo a la logica de la consulta generada.
-     *
-     * @param tableName Nombre de la tabla que deseamos actualizar
-     * @return Retorna un objeto de la clase Update que proporciona los metodos y lógica necesaria para realizar la
-     * actualización de registros en BD's sin haberlos recuperados.
-     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado esta Vacío o es NULL.
-     */
-    public static Update update(String tableName) throws ValorUndefined {
-        return new Update(tableName);
-    }
-
-    /**
-     * Elimina las filas de la tabla proporcionada, de acuerdo a la consulta generada.
-     *
-     * @param tableName Nombre de la tabla de la cual queremos eliminar los registros que posee
-     * @return Retorna un objeto de la clase Delete que proporciona los metodos y lógica necesaria para eliminar los
-     * registros en BD's sin haberlos recuperados.
-     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado esta Vacío o es NULL.
-     */
-    public static Delete delete(String tableName) throws ValorUndefined {
-        return new Delete(tableName);
-    }
 
 
     /**
@@ -293,6 +270,17 @@ public class JBSqlUtils extends Methods {
         return new DropTableIfExist(tableName);
     }
 
+    /**
+     * Proporciona un metodo de entrada por medio del cual podemos insertar registros a una tabla en BD's a traves del
+     * generador SQL de JBSqlUtils
+     *
+     * @param tableName Nombre de la tabla a la que deseamos insertar registros
+     * @return Objeto que brinda acceso a los metodos con la logica para el execute
+     * @throws ValorUndefined Si no se define tableName lanza esta excepción
+     */
+    public static InsertInto insertInto(String tableName) throws ValorUndefined {
+        return new InsertInto(tableName);
+    }
 
     /**
      * Proporciona un metodo de entrada para realizar una consulta a una tabla en BD's a traves del generador SQL de JBSqlUtils
@@ -311,14 +299,27 @@ public class JBSqlUtils extends Methods {
 
 
     /**
-     * Proporciona un metodo de entrada por medio del cual podemos insertar registros a una tabla en BD's a traves del
-     * generador SQL de JBSqlUtils
+     * Actualiza las filas de la tabla proporcionada, de acuerdo a la logica de la consulta generada.
      *
-     * @param tableName Nombre de la tabla a la que deseamos insertar registros
-     * @return Objeto que brinda acceso a los metodos con la logica para el execute
-     * @throws ValorUndefined Si no se define tableName lanza esta excepción
+     * @param tableName Nombre de la tabla que deseamos actualizar
+     * @return Retorna un objeto de la clase Update que proporciona los metodos y lógica necesaria para realizar la
+     * actualización de registros en BD's sin haberlos recuperados.
+     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado esta Vacío o es NULL.
      */
-    public static InsertInto insertInto(String tableName) throws ValorUndefined {
-        return new InsertInto(tableName);
+    public static Update update(String tableName) throws ValorUndefined {
+        return new Update(tableName);
     }
+
+    /**
+     * Elimina las filas de la tabla proporcionada, de acuerdo a la consulta generada.
+     *
+     * @param tableName Nombre de la tabla de la cual queremos eliminar los registros que posee
+     * @return Retorna un objeto de la clase Delete que proporciona los metodos y lógica necesaria para eliminar los
+     * registros en BD's sin haberlos recuperados.
+     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado esta Vacío o es NULL.
+     */
+    public static Delete delete(String tableName) throws ValorUndefined {
+        return new Delete(tableName);
+    }
+
 }
