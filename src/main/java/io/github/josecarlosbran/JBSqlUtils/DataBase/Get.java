@@ -342,7 +342,7 @@ public class Get extends Methods_Conexion {
                         if (modelo.getDataBaseType() == DataBase.SQLServer) {
                             if (StringUtils.containsIgnoreCase(sql, "LIMIT")) {
                                 String temporal;
-                                LogsJB.info("Sentencia SQL a modificar: " + sql);
+                                LogsJB.debug("Sentencia SQL a modificar: " + sql);
                                 int indice_limite = StringUtils.lastIndexOfIgnoreCase(sql, "LIMIT");
                                 LogsJB.debug("Indice limite: " + indice_limite);
                                 LogsJB.debug("Longitud de la sentencia: " + sql.length());
@@ -358,7 +358,7 @@ public class Get extends Methods_Conexion {
                                 LogsJB.trace("Temporal SQL: " + temporal);
                                 String select = "SELECT TOP " + temporal_limite + " * FROM ";
                                 sql = temporal.replace("SELECT * FROM ", select);
-                                LogsJB.info("Se modifico la sentencia SQL para que unicamente obtenga la cantidad de " +
+                                LogsJB.debug("Se modifico la sentencia SQL para que unicamente obtenga la cantidad de " +
                                         "registros especificados por el usuario: " + sql);
                             }
                         }
@@ -452,7 +452,7 @@ public class Get extends Methods_Conexion {
                         if (this.getDataBaseType() == DataBase.SQLServer) {
                             if (StringUtils.containsIgnoreCase(sql, "LIMIT")) {
                                 String temporal;
-                                LogsJB.info("Sentencia SQL a modificar: " + sql);
+                                LogsJB.debug("Sentencia SQL a modificar: " + sql);
                                 int indice_limite = StringUtils.lastIndexOfIgnoreCase(sql, "LIMIT");
                                 LogsJB.debug("Indice limite: " + indice_limite);
                                 LogsJB.debug("Longitud de la sentencia: " + sql.length());
@@ -468,7 +468,7 @@ public class Get extends Methods_Conexion {
                                 LogsJB.trace("Temporal SQL: " + temporal);
                                 String select = "SELECT TOP " + temporal_limite + " * FROM ";
                                 sql = temporal.replace("SELECT * FROM ", select);
-                                LogsJB.info("Se modifico la sentencia SQL para que unicamente obtenga la cantidad de " +
+                                LogsJB.debug("Se modifico la sentencia SQL para que unicamente obtenga la cantidad de " +
                                         "registros especificados por el usuario: " + sql);
                             }
                         }

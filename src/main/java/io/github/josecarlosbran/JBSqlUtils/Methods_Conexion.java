@@ -340,7 +340,7 @@ public class Methods_Conexion extends Conexion {
         try {
             Callable<ResultAsync<Boolean>> VerificarExistencia = () -> {
                 try {
-                    LogsJB.info("Comienza a verificar la existencia de la tabla");
+                    LogsJB.debug("Comienza a verificar la existencia de la tabla");
                     Connection connect = this.getConnection();
                     DatabaseMetaData metaData = connect.getMetaData();
                     String DatabaseName = this.getBD();
@@ -400,7 +400,7 @@ public class Methods_Conexion extends Conexion {
                                 clave.setPK_NAME(clavePrimaria.getString(6));
                                 this.getTabla().setClaveprimaria(clave);
                             }
-                            LogsJB.info("La tabla correspondiente a este modelo, existe en BD's " + this.getClass().getSimpleName());
+                            LogsJB.debug("La tabla correspondiente a este modelo, existe en BD's " + this.getClass().getSimpleName());
                             tables.close();
                             this.closeConnection(connect);
                             getColumnsTable();
@@ -410,7 +410,7 @@ public class Methods_Conexion extends Conexion {
                     LogsJB.trace("Termino de Revisarar el resultSet");
                     tables.close();
                     if (!this.getTableExist()) {
-                        LogsJB.info("La tabla correspondiente a este modelo, No existe en BD's " + this.getClass().getSimpleName());
+                        LogsJB.debug("La tabla correspondiente a este modelo, No existe en BD's " + this.getClass().getSimpleName());
 
                         this.closeConnection(connect);
 
@@ -499,7 +499,7 @@ public class Methods_Conexion extends Conexion {
                 temp.setIS_GENERATEDCOLUMN(columnas.getString(24));
                 this.getTabla().getColumnas().add(temp);
             }
-            LogsJB.info("Información de las columnas de la tabla correspondiente al modelo obtenida " + this.getClass().getSimpleName());
+            LogsJB.debug("Información de las columnas de la tabla correspondiente al modelo obtenida " + this.getClass().getSimpleName());
             columnas.close();
             this.closeConnection(connect);
             this.getTabla().getColumnas().stream().sorted(Comparator.comparing(ColumnsSQL::getORDINAL_POSITION));
@@ -1225,7 +1225,7 @@ public class Methods_Conexion extends Conexion {
         temp.setPort(modelo.getPort());
         temp.setHost(modelo.getHost());
 
-        LogsJB.info("Obtuvo un resultado de BD's, procedera a llenar el modelo " + temp.getClass().getSimpleName());
+        LogsJB.debug("Obtuvo un resultado de BD's, procedera a llenar el modelo " + temp.getClass().getSimpleName());
         List<Method> metodosSet = new ArrayList<>();
         LogsJB.trace("Inicializa el array list de los metodos set");
         metodosSet = temp.getMethodsSetOfModel(temp.getMethodsModel());
@@ -1289,7 +1289,7 @@ public class Methods_Conexion extends Conexion {
      */
     protected <T extends Methods_Conexion> void procesarResultSetOneResult(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException {
         modelo.setModelExist(true);
-        LogsJB.info("Obtuvo un resultado de BD's, procedera a llenar el modelo " + modelo.getTableName());
+        LogsJB.debug("Obtuvo un resultado de BD's, procedera a llenar el modelo " + modelo.getTableName());
         List<Method> metodosSet = new ArrayList<>();
         LogsJB.trace("Inicializa el array list de los metodos set");
         metodosSet = modelo.getMethodsSetOfModel(modelo.getMethodsModel());
@@ -1346,7 +1346,7 @@ public class Methods_Conexion extends Conexion {
      */
     protected JSONObject procesarResultSetJSON(List<String> columnas, ResultSet registros) throws SQLException {
         JSONObject temp = new JSONObject();
-        LogsJB.info("Obtuvo un resultado de BD's, procedera a llenar el JSON");
+        LogsJB.debug("Obtuvo un resultado de BD's, procedera a llenar el JSON");
         LogsJB.debug("Cantidad de columnas : " + this.getTabla().getColumnas().size());
         //Llena la información del modelo
         for (int i = 0; i < this.getTabla().getColumnas().size(); i++) {
@@ -1576,8 +1576,6 @@ public class Methods_Conexion extends Conexion {
                         if (!ejecutor.execute(sql)) {
                             LogsJB.info("Sentencia para crear tabla de la BD's ejecutada exitosamente");
                             LogsJB.info("Tabla " + this.getTableName() + " Creada exitosamente");
-                            LogsJB.info(sql);
-
                             this.closeConnection(connect);
                             this.refresh();
                             return new ResultAsync<Boolean>(true, null);
@@ -1646,13 +1644,10 @@ public class Methods_Conexion extends Conexion {
                             //+" RESTRICT;";
                         }
                         LogsJB.info(sql);
-
                         Statement ejecutor = connect.createStatement();
-
                         if (!ejecutor.execute(sql)) {
                             LogsJB.info("Sentencia para eliminar tabla de la BD's ejecutada exitosamente");
                             LogsJB.info("Tabla " + this.getTableName() + " Eliminada exitosamente");
-                            LogsJB.info(sql);
                             //this.setTableExist(false);
                             this.refresh();
                             return new ResultAsync<Boolean>(true, null);
@@ -1740,7 +1735,7 @@ public class Methods_Conexion extends Conexion {
                             return 0;
                         });
 
-                        LogsJB.info("Termino de ordenar la lista");
+                        LogsJB.debug("Termino de ordenar la lista");
                         int datos = 0;
                         for (int i = 0; i < columnas.size(); i++) {
                             //Obtengo el metodo
@@ -1808,7 +1803,6 @@ public class Methods_Conexion extends Conexion {
                         if (!ejecutor.execute(sql)) {
                             LogsJB.info("Sentencia para crear tabla de la BD's ejecutada exitosamente");
                             LogsJB.info("Tabla " + this.getTableName() + " Creada exitosamente");
-                            LogsJB.info(sql);
                             this.closeConnection(connect);
                             this.refresh();
                             return new ResultAsync<Boolean>(true, null);

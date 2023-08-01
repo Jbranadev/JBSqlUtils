@@ -102,7 +102,7 @@ class Methods extends Methods_Conexion {
                 //Con esto se maneja las tablas que existen en BD's
                 modelo.getTabla().setColumnsExist(temp.getTabla().getColumnsExist());
                 modelo.llenarPropertiesFromModel(temp);
-                LogsJB.info("Modelo Ya había sido inicializado: " + temp.getClass().getSimpleName());
+                LogsJB.debug("Modelo Ya había sido inicializado: " + temp.getClass().getSimpleName());
             } else {
                 if(modelo.getGetPropertySystem()){
                     temp = (T) modelo.getClass().newInstance();
@@ -116,13 +116,13 @@ class Methods extends Methods_Conexion {
                 temp.refresh();
             }
             if (!modelo.getTableExist()) {
-                LogsJB.info("Obtendra la información de conexión de la BD's: " + modelo.getClass().getSimpleName());
+                LogsJB.debug("Obtendra la información de conexión de la BD's: " + modelo.getClass().getSimpleName());
                 modelo.refresh();
                 modelo.waitOperationComplete();
                 while (modelo.getTabla().getColumnas().size() == 0) {
 
                 }
-                LogsJB.info("Ya obtuvo la información de BD's");
+                LogsJB.debug("Ya obtuvo la información de BD's");
                 temp.setTabla(modelo.getTabla());
                 temp.setTableExist(modelo.getTableExist());
                 temp.setTableName(modelo.getTableName());
@@ -166,7 +166,7 @@ class Methods extends Methods_Conexion {
                 modelo.setTabla(temp.getTabla());
                 modelo.setTableExist(temp.getTableExist());
                 modelo.setTableName(temp.getTableName());
-                LogsJB.info("Modelo Ya había sido inicializado: " + temp.getClass().getSimpleName());
+                LogsJB.debug("Modelo Ya había sido inicializado: " + temp.getClass().getSimpleName());
                 modelo.llenarPropertiesFromModel(temp);
             } else {
                 if(modelo.getGetPropertySystem()){
@@ -180,13 +180,13 @@ class Methods extends Methods_Conexion {
                 LogsJB.warning("Modelo era Null, crea una nueva instancia: " + temp.getClass().getSimpleName());
             }
             if (!modelo.getTableExist()) {
-                LogsJB.info("Obtendra la información de conexión de la BD's: " + modelo.getClass().getSimpleName());
+                LogsJB.debug("Obtendra la información de conexión de la BD's: " + modelo.getClass().getSimpleName());
                 modelo.refresh();
                 modelo.waitOperationComplete();
                 while (modelo.getTabla().getColumnas().size() == 0) {
 
                 }
-                LogsJB.info("Ya obtuvo la información de BD's");
+                LogsJB.debug("Ya obtuvo la información de BD's");
                 temp.setTableExist(modelo.getTableExist());
                 temp.setTableName(modelo.getTableName());
                 temp.setTabla(modelo.getTabla());
