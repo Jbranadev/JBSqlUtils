@@ -58,8 +58,17 @@ public class JBSqlUtilsTestMySQL {
         logParrafo("Se setearon las propiedades de conexión del modelo para MySQL");
     }
 
-    @Test(testName = "Drop Table If Exists from Model",
+    @Test(testName = "Refresh Model",
             dependsOnMethods = {"setPropertiesConexiontoModel"})
+    public void refreshModel() throws Exception {
+        logParrafo("Se refrescará el modelo con la información existente en BD's");
+        this.testModel.refresh();
+        this.testModel.waitOperationComplete();
+        logParrafo("Se refresco el modelo con la información existente en BD's");
+    }
+
+    @Test(testName = "Drop Table If Exists from Model",
+            dependsOnMethods = {"refreshModel"})
     public void dropTableIfExists() throws Exception {
         logParrafo("Se creara la tabla "+this.testModel.getTableName()+" en BD's");
         this.testModel.crateTable();
@@ -362,9 +371,17 @@ public class JBSqlUtilsTestMySQL {
     }
 
 
+
     @Test(testName = "Create Table JBSqlUtils",
             dependsOnMethods = "setPropertiesConexion")
     public void creteTableJBSqlUtils() throws Exception {
+        /**
+         * Para eliminar una tabla de BD's utilizamos el metodo execute de la clase dropTableIfExist a la cual mandamos como parametro
+         * el nombre de la tabla que queremos eliminar
+         */
+        logParrafo("Eliminara la tabla Proveedor de BD's en caso de que exista");
+        logParrafo("Resultado de solicitar eliminar la tabla en BD's: "+dropTableIfExist("Proveedor").execute());
+
         /**
          * Definimos las columnas que deseamos posea nuestra tabla
          */
@@ -377,8 +394,6 @@ public class JBSqlUtilsTestMySQL {
         Column<Boolean> Estado = new Column<>("Estado", DataType.BOOLEAN, "true", Constraint.DEFAULT);
         Name.setSize("1000");
         Apellido.setSize("1000");
-
-
 
         logParrafo("Se solicitara la creación de la tabla Proveedor, la cual tendra las siguientes columnas, Id, Name, Apellido y Estado");
         /**
@@ -397,7 +412,6 @@ public class JBSqlUtilsTestMySQL {
         logParrafo("Resultado de solicitar la creación de la tabla en BD's: "+result);
         Assert.assertFalse(result, "Retorna que la tabla a sido creada cuando esta ya existe en BD's");
     }
-
     @Test(testName = "Insert Into JBSqlUtils",
             dependsOnMethods = "creteTableJBSqlUtils")
     public void insertIntoJBSqlUtils() throws Exception {
@@ -416,7 +430,7 @@ public class JBSqlUtilsTestMySQL {
 
         registros=0;
         registros+=JBSqlUtils.insertInto("Proveedor").value("Name", "Ligia").andValue("Apellido", "Camey")
-                .andValue("Estado", true).andValue("Id", 3).execute();
+                .andValue("Estado", true).execute();
         logParrafo("Resultado de insertar el registro de Ligia en la tabla Proveedor: "+registros);
         Assert.assertTrue(registros==1, "No se pudo insertar el registro de Ligia en la tabla Proveedor de BD's");
 

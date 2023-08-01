@@ -193,7 +193,7 @@ public class OrderBy<T> extends Get {
      * @throws ModelNotFound Lanza esta excepción si no logra encontrar el registro correspondiente a la consulta
      *                       SQL realizada.
      */
-    public <T extends JBSqlUtils> T firstOrFail() throws ModelNotFound {
+    public <T extends JBSqlUtils> T firstOrFail() throws Exception {
         return (T) super.firstOrFail((T) this.modelo, this.sql, this.parametros);
     }
 

@@ -223,7 +223,7 @@ public class Methods_Conexion extends Conexion {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
-                        this.getHost() + ":" + this.getPort() + ";databaseName=" + this.getBD() + ";TrustServerCertificate=True";
+                        this.getHost() + ":" + this.getPort() + ";databaseName=" + this.getBD() ;
                 String usuario = this.getUser();
                 String password = this.getPassword();
                 if (!stringIsNullOrEmpty(this.getPropertisURL())) {
@@ -372,15 +372,26 @@ public class Methods_Conexion extends Conexion {
                         String DatabaseTemp = tables.getString(1);
                         String DatabaseTemp2 = tables.getString(2);
                         Boolean tablaisofDB = true;
+                        if (NameModel.equalsIgnoreCase(NameTable) ){
+                            LogsJB.debug("Base de datos del modelo: " + DatabaseName
+                                    + " Base de datos del servidor3: " + DatabaseTemp);
+                        }
                         if (!stringIsNullOrEmpty(DatabaseTemp)) {
                             if (!DatabaseName.equalsIgnoreCase(DatabaseTemp)) {
                                 tablaisofDB = false;
                             }
                         }
-                        if (!stringIsNullOrEmpty(DatabaseTemp2)) {
-                            if (!DatabaseName.equalsIgnoreCase(DatabaseTemp2)) {
-                                tablaisofDB = false;
+                        if(!tablaisofDB){
+                            if (!stringIsNullOrEmpty(DatabaseTemp2)) {
+                                if (!DatabaseName.equalsIgnoreCase(DatabaseTemp2)) {
+                                    tablaisofDB = false;
+                                }else{
+                                    tablaisofDB=true;
+                                }
                             }
+                        }
+                        if(this.getDataBaseType()==DataBase.PostgreSQL && NameModel.equalsIgnoreCase(NameTable)){
+                            tablaisofDB=true;
                         }
 
                         if (NameModel.equalsIgnoreCase(NameTable) && tablaisofDB) {
@@ -609,16 +620,8 @@ public class Methods_Conexion extends Conexion {
     /**
      * Metodo que actualiza la información que el modelo tiene sobre lo que existe en BD's'
      */
-    public void refresh() {
-        try {
+    public void refresh() throws Exception {
             this.setTableExist(this.tableExist());
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el metodo que actualiza la información de conexión del modelo: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-        }
     }
 
 
@@ -1514,15 +1517,20 @@ public class Methods_Conexion extends Conexion {
                             //Manejo de tipo de dato TimeStamp en SQLServer
                             if ((columnType == DataType.TIMESTAMP) && (this.getDataBaseType() == DataBase.SQLServer)) {
                                 columnType = DataType.DATETIME;
+                                columnsSQL.setDataTypeSQL(DataType.DATETIME);
                             }
                             Constraint[] columnRestriccion = columnsSQL.getRestriccion();
                             String restricciones = "";
-                            String tipo_de_columna = columnsSQL.columnToString();
+                            //Se adecuo el obtener el tipo de columna, para que obtenga el tipo de dato con la información correcta
                             if ((((this.getDataBaseType() == DataBase.PostgreSQL)) || ((this.getDataBaseType() == DataBase.MySQL))
                                     || ((this.getDataBaseType() == DataBase.SQLite))) &&
                                     (columnType == DataType.BIT)) {
-                                tipo_de_columna = DataType.BOOLEAN.toString();
+                                columnsSQL.setDataTypeSQL(DataType.BOOLEAN);
                             }
+                            if((this.getDataBaseType()==DataBase.SQLServer) && columnType==DataType.BOOLEAN){
+                                columnsSQL.setDataTypeSQL(DataType.BIT);
+                            }
+                            String tipo_de_columna = columnsSQL.columnToString();
                             if (!Objects.isNull(columnRestriccion)) {
                                 for (Constraint restriccion : columnRestriccion) {
                                     if ((DataBase.PostgreSQL == this.getDataBaseType()) &&
@@ -1746,16 +1754,20 @@ public class Methods_Conexion extends Conexion {
                             //Manejo de tipo de dato TimeStamp en SQLServer
                             if ((columnType == DataType.TIMESTAMP) && (this.getDataBaseType() == DataBase.SQLServer)) {
                                 columnType = DataType.DATETIME;
+                                columnsSQL.setDataTypeSQL(DataType.DATETIME);
                             }
                             Constraint[] columnRestriccion = columnsSQL.getRestriccion();
                             String restricciones = "";
                             //Se adecuo el obtener el tipo de columna, para que obtenga el tipo de dato con la información correcta
-                            String tipo_de_columna = columnsSQL.columnToString();
                             if ((((this.getDataBaseType() == DataBase.PostgreSQL)) || ((this.getDataBaseType() == DataBase.MySQL))
                                     || ((this.getDataBaseType() == DataBase.SQLite))) &&
                                     (columnType == DataType.BIT)) {
-                                tipo_de_columna = DataType.BOOLEAN.toString();
+                                columnsSQL.setDataTypeSQL(DataType.BOOLEAN);
                             }
+                            if((this.getDataBaseType()==DataBase.SQLServer) && columnType==DataType.BOOLEAN){
+                                columnsSQL.setDataTypeSQL(DataType.BIT);
+                            }
+                            String tipo_de_columna = columnsSQL.columnToString();
                             if (!Objects.isNull(columnRestriccion)) {
                                 for (Constraint restriccion : columnRestriccion) {
                                     if ((DataBase.PostgreSQL == this.getDataBaseType()) &&

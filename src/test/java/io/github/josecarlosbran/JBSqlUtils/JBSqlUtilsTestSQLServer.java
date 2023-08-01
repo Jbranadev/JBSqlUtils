@@ -32,6 +32,7 @@ public class JBSqlUtilsTestSQLServer {
     @Test(testName = "Setear Properties Conexión for Model")
     public void setPropertiesConexiontoModel() throws DataBaseUndefind, PropertiesDBUndefined {
         this.testModel = new TestModel(false);
+        this.testModel.getIsMayor().setDefault_value("1");
         logParrafo("Se setearan las propiedades de conexión del modelo para SQLServer");
         this.testModel.setGetPropertySystem(false);
         this.testModel.setPort("5077");
@@ -40,7 +41,7 @@ public class JBSqlUtilsTestSQLServer {
         this.testModel.setPassword("Bran");
         this.testModel.setBD("JBSQLUTILS");
         this.testModel.setDataBaseType(DataBase.SQLServer);
-        this.testModel.setPropertisURL("?autoReconnect=true&useSSL=false");
+        this.testModel.setPropertisURL(";TrustServerCertificate=true");
         Assert.assertTrue("JBSQLUTILS".equalsIgnoreCase(this.testModel.getBD()),
                 "Propiedad Nombre BD's no ha sido seteada correctamente");
         Assert.assertTrue("5077".equalsIgnoreCase(this.testModel.getPort()),
@@ -53,13 +54,22 @@ public class JBSqlUtilsTestSQLServer {
                 "Propiedad Password BD's no ha sido seteada correctamente");
         Assert.assertTrue(DataBase.SQLServer.name().equalsIgnoreCase(this.testModel.getDataBaseType().name()),
                 "Propiedad Tipo de BD's no ha sido seteada correctamente");
-        Assert.assertTrue("?autoReconnect=true&useSSL=false".equalsIgnoreCase(this.testModel.getPropertisURL()),
+        Assert.assertTrue(";TrustServerCertificate=true".equalsIgnoreCase(this.testModel.getPropertisURL()),
                 "Propiedad Propiedades de conexión no ha sido seteada correctamente");
         logParrafo("Se setearan las propiedades de conexión del modelo para SQLServer");
     }
 
-    @Test(testName = "Drop Table If Exists from Model",
+    @Test(testName = "Refresh Model",
             dependsOnMethods = {"setPropertiesConexiontoModel"})
+    public void refreshModel() throws Exception {
+        logParrafo("Se refrescará el modelo con la información existente en BD's");
+        this.testModel.refresh();
+        this.testModel.waitOperationComplete();
+        logParrafo("Se refresco el modelo con la información existente en BD's");
+    }
+
+    @Test(testName = "Drop Table If Exists from Model",
+            dependsOnMethods = {"refreshModel"})
     public void dropTableIfExists() throws Exception {
         logParrafo("Se creara la tabla "+this.testModel.getTableName()+" en BD's");
         this.testModel.crateTable();
@@ -343,7 +353,7 @@ public class JBSqlUtilsTestSQLServer {
         JBSqlUtils.setUserGlobal("Bran");
         JBSqlUtils.setPasswordGlobal("Bran");
         JBSqlUtils.setDataBaseTypeGlobal(DataBase.SQLServer);
-        JBSqlUtils.setPropertisUrlConexionGlobal("?autoReconnect=true&useSSL=false");
+        JBSqlUtils.setPropertisUrlConexionGlobal(";TrustServerCertificate=true");
         logParrafo("Ha seteado las propiedades de conexión globales para SQLServer");
         Assert.assertTrue("JBSQLUTILS".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBNAME.getPropiertie())),
                 "Propiedad Nombre BD's no ha sido seteada correctamente");
@@ -357,14 +367,23 @@ public class JBSqlUtilsTestSQLServer {
                 "Propiedad Password BD's no ha sido seteada correctamente");
         Assert.assertTrue(DataBase.SQLServer.name().equalsIgnoreCase(System.getProperty(ConeccionProperties.DBTYPE.getPropiertie())),
                 "Propiedad Tipo de BD's no ha sido seteada correctamente");
-        Assert.assertTrue("?autoReconnect=true&useSSL=false".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBPROPERTIESURL.getPropiertie())),
+        Assert.assertTrue(";TrustServerCertificate=true".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBPROPERTIESURL.getPropiertie())),
                 "Propiedad Propiedades de conexión no ha sido seteada correctamente");
     }
+
+
 
 
     @Test(testName = "Create Table JBSqlUtils",
             dependsOnMethods = "setPropertiesConexion")
     public void creteTableJBSqlUtils() throws Exception {
+        /**
+         * Para eliminar una tabla de BD's utilizamos el metodo execute de la clase dropTableIfExist a la cual mandamos como parametro
+         * el nombre de la tabla que queremos eliminar
+         */
+        logParrafo("Eliminara la tabla Proveedor de BD's en caso de que exista");
+        logParrafo("Resultado de solicitar eliminar la tabla en BD's: "+dropTableIfExist("Proveedor").execute());
+
         /**
          * Definimos las columnas que deseamos posea nuestra tabla
          */
@@ -377,6 +396,8 @@ public class JBSqlUtilsTestSQLServer {
         Column<Boolean> Estado = new Column<>("Estado", DataType.BOOLEAN, "true", Constraint.DEFAULT);
         Name.setSize("1000");
         Apellido.setSize("1000");
+        Estado.setDefault_value("1");
+
         logParrafo("Se solicitara la creación de la tabla Proveedor, la cual tendra las siguientes columnas, Id, Name, Apellido y Estado");
         /**
          * Para crear una tabla utilizamos el metodo createTable despues de haber definido el nombre de la tabla que deseamos Crear
@@ -413,7 +434,7 @@ public class JBSqlUtilsTestSQLServer {
 
         registros=0;
         registros+=JBSqlUtils.insertInto("Proveedor").value("Name", "Ligia").andValue("Apellido", "Camey")
-                .andValue("Estado", true).andValue("Id", 3).execute();
+                .andValue("Estado", true).execute();
         logParrafo("Resultado de insertar el registro de Ligia en la tabla Proveedor: "+registros);
         Assert.assertTrue(registros==1, "No se pudo insertar el registro de Ligia en la tabla Proveedor de BD's");
 

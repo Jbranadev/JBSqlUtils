@@ -234,7 +234,7 @@ public class Get extends Methods_Conexion {
      * @throws ModelNotFound Lanza esta excepción si no logra encontrar el registro correspondiente a la consulta
      *                       SQL realizada.
      */
-    protected <T extends JBSqlUtils> T firstOrFail(T modelo, String Sql, List<Column> parametros) throws ModelNotFound {
+    protected <T extends JBSqlUtils> T firstOrFail(T modelo, String Sql, List<Column> parametros) throws Exception {
         if(!this.getGetPropertySystem()){
             modelo.setGetPropertySystem(false);
             modelo.llenarPropertiesFromModel(this);

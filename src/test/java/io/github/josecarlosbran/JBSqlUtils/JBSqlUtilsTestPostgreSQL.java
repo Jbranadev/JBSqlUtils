@@ -56,8 +56,17 @@ public class JBSqlUtilsTestPostgreSQL {
         logParrafo("Se setearon las propiedades de conexión del modelo para PostgreSQL");
     }
 
-    @Test(testName = "Drop Table If Exists from Model",
+    @Test(testName = "Refresh Model",
             dependsOnMethods = {"setPropertiesConexiontoModel"})
+    public void refreshModel() throws Exception {
+        logParrafo("Se refrescará el modelo con la información existente en BD's");
+        this.testModel.refresh();
+        this.testModel.waitOperationComplete();
+        logParrafo("Se refresco el modelo con la información existente en BD's");
+    }
+
+    @Test(testName = "Drop Table If Exists from Model",
+            dependsOnMethods = {"refreshModel"})
     public void dropTableIfExists() throws Exception {
         logParrafo("Se creara la tabla "+this.testModel.getTableName()+" en BD's");
         this.testModel.crateTable();
@@ -364,6 +373,13 @@ public class JBSqlUtilsTestPostgreSQL {
             dependsOnMethods = "setPropertiesConexion")
     public void creteTableJBSqlUtils() throws Exception {
         /**
+         * Para eliminar una tabla de BD's utilizamos el metodo execute de la clase dropTableIfExist a la cual mandamos como parametro
+         * el nombre de la tabla que queremos eliminar
+         */
+        logParrafo("Eliminara la tabla Proveedor de BD's en caso de que exista");
+        logParrafo("Resultado de solicitar eliminar la tabla en BD's: "+dropTableIfExist("Proveedor").execute());
+
+        /**
          * Definimos las columnas que deseamos posea nuestra tabla
          */
         Column<Integer> Id = new Column<>("Id", DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
@@ -412,7 +428,7 @@ public class JBSqlUtilsTestPostgreSQL {
 
         registros=0;
         registros+=JBSqlUtils.insertInto("Proveedor").value("Name", "Ligia").andValue("Apellido", "Camey")
-                .andValue("Estado", true).andValue("Id", 3).execute();
+                .andValue("Estado", true).execute();
         logParrafo("Resultado de insertar el registro de Ligia en la tabla Proveedor: "+registros);
         Assert.assertTrue(registros==1, "No se pudo insertar el registro de Ligia en la tabla Proveedor de BD's");
 
@@ -483,11 +499,11 @@ public class JBSqlUtilsTestPostgreSQL {
          */
         int rowsUpdate=0;
         for (JSONObject fila: lista){
-            if(fila.getString("Name").equalsIgnoreCase("Ligia") && fila.getString("Apellido").equalsIgnoreCase("Camey")){
+            if(fila.getString("name").equalsIgnoreCase("Ligia") && fila.getString("apellido").equalsIgnoreCase("Camey")){
                 logParrafo("Actualizara la fila que corresponde a Ligia Camey: ");
                 logParrafo(fila.toString());
                 rowsUpdate+=JBSqlUtils.update("Proveedor").set("Name", "Futura").andSet("Apellido", "Prometida")
-                        .where("Id", Operator.IGUAL_QUE, fila.getInt("Id")).execute();
+                        .where("Id", Operator.IGUAL_QUE, fila.getInt("id")).execute();
                 logParrafo("Filas actualizadas en BD's: "+rowsUpdate);
             }
         }
@@ -513,10 +529,10 @@ public class JBSqlUtilsTestPostgreSQL {
          */
         int rowsDelete=0;
         for (JSONObject fila: lista){
-            if(fila.getInt("Id")==5){
+            if(fila.getInt("id")==5){
                 logParrafo("VIsualizamos la Fila a eliminar, cuyo Id es igual a 5: ");
                 logParrafo(fila.toString());
-                rowsDelete+=JBSqlUtils.delete("Proveedor").where("Id", Operator.IGUAL_QUE, fila.getInt("Id")).execute();
+                rowsDelete+=JBSqlUtils.delete("Proveedor").where("Id", Operator.IGUAL_QUE, fila.getInt("id")).execute();
                 logParrafo("Filas eliminadas en BD's: "+rowsDelete);
             }
         }
