@@ -630,7 +630,7 @@ testModel.save();
  * Si queremos utilizar el mismo modelo para insertar otro registro con valores diferentes,
  * es necesario que esperemos a que el modelo no este realizando ninguna tarea, relacionada con lectura o
  * escritura en la BD's, debido a que estas tareas JBSqlUtils las realiza en segundo plano, para no interrumpir
- * el hilo de ejecución principal y entregar un mejor rendimiento, por si necesitamos realizar algúna otra
+ * el hilo de ejecución principal y entregar un mejor rendimiento, por si necesitamos realizar alguna otra
  * instrucción mientras el modelo esta trabajando en segundo plano. para poder saber si el modelo actualmente esta
  * ocupado, podemos hacerlo a través del método getTaskIsReady(), el cual obtiene la bandera que indica si
  * la tarea que estaba realizando el modelo ha sido terminada
@@ -1133,7 +1133,7 @@ Información en BD's SQLite antes de actualizar los registros
 
 Actividad registrada por JBSqlUtils, Cómo JBSqlUtils ejecuta las operaciones de escritura cómo de lectura en segundo
 plano
-para que el hilo de ejecución principal no se vea afectado y pueda realizar algúna otra actividad en paralelo, por cada
+para que el hilo de ejecución principal no se vea afectado y pueda realizar alguna otra actividad en paralelo, por cada
 modelo
 que se actualiza, JBSqlUtils crea un subproceso para cada modelo, de esta manera las operaciones de escritura en BD's
 se realizan en paralelo, mejorando el rendimiento de nuestra aplicación.
@@ -1222,7 +1222,7 @@ Información en BD's SQLite antes de eliminar los registros
 
 Actividad registrada por JBSqlUtils, Cómo JBSqlUtils ejecuta las operaciones de escritura cómo de lectura en segundo
 plano
-para que el hilo de ejecución principal no se vea afectado y pueda realizar algúna otra actividad en paralelo, por cada
+para que el hilo de ejecución principal no se vea afectado y pueda realizar alguna otra actividad en paralelo, por cada
 modelo
 que se elimina, JBSqlUtils crea un subproceso para cada modelo, de esta manera las operaciones de escritura en BD's
 se realizan en paralelo, mejorando el rendimiento de nuestra aplicación.
