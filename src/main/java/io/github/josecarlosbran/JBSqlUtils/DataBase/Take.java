@@ -67,6 +67,34 @@ public class Take<T> extends Get {
         this.sql = sql + "LIMIT " + limite;
     }
 
+    /**
+     * Constructor que recibe como parametro:
+     *
+     * @param sql               Sentencia SQL a la cual se agregara la logica del limite.
+     * @param limite            Entero que representa la cantidad maxima de valores recuperados.
+     * @param modelo            Modelo que solicita la creación de esta clase
+     * @param parametros        Lista de parametros a ser agregados a la sentencia SQL
+     * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
+     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     */
+    protected Take(String sql, int limite, T modelo, List<Column> parametros, Boolean getPropertySystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+        super(getPropertySystem);
+        if (Objects.isNull(limite)) {
+            throw new ValorUndefined("El Limite proporcionado es 0 o inferior, por lo cual no se puede" +
+                    "realizar la consulta a BD's");
+        }
+        if (Objects.isNull(modelo)) {
+            throw new ValorUndefined("El Modelo proporcionado es NULL");
+        }
+        this.parametros = parametros;
+        this.modelo = modelo;
+        this.sql = sql + "LIMIT " + limite;
+    }
+
 
     /**
      * Constructor que recibe como parametro:
@@ -101,11 +129,10 @@ public class Take<T> extends Get {
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Retorna una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
-     * @throws InstantiationException Lanza esta excepción si ocurre un error al crear una nueva instancia
-     *                                del tipo de modelo proporcionado
-     * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
      */
-    public <T extends JBSqlUtils> List<T> get() throws InstantiationException, IllegalAccessException {
+    public <T extends JBSqlUtils> List<T> get() throws Exception {
         return (List<T>) super.getAll((T) this.modelo, this.sql, this.parametros);
     }
 
@@ -119,13 +146,9 @@ public class Take<T> extends Get {
      *
      * @return Retorna un Entero que representa la cantidad de filas afectadas al ejecutar la sentencia SQL
      * proporcionada.
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
-    public int execute() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    public int execute() throws Exception {
         return new Execute(this.sql, this.parametros).execute();
     }
 
@@ -133,12 +156,15 @@ public class Take<T> extends Get {
     /**
      * Obtiene una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
      * Envíada como parametro
+     *
      * @param columnas Lista con los nombres de las columnas que se desea recuperar, si se desea obtener
-     *      odas las columnas de la tabla especificada envíar NULL como parametro
+     *                 odas las columnas de la tabla especificada envíar NULL como parametro
      * @return Retorna una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
-     *      Envíada como parametro
+     * Envíada como parametro
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
      */
-    public List<JSONObject> getInJsonObjects(List<String> columnas) {
+    public List<JSONObject> getInJsonObjects(List<String> columnas) throws Exception {
         return super.get(this.sql, this.parametros, columnas);
     }
 

@@ -52,15 +52,16 @@ public enum OrderType {
 
     /**
      * Retorna la numeración correspondiente al nombre proporcionado
+     *
      * @param name Nombre de la Numeración que se desea obtener
      * @return Numeración correspondiente al nombre proporcionado
      */
     public OrderType getNumeracionforName(String name) {
-        Class<OrderType> esta=OrderType.class;
-        OrderType[] temp= esta.getEnumConstants();
-        List<OrderType> numeraciones= Arrays.asList(temp);
-        for(OrderType numeracion:numeraciones){
-            if(numeracion.name().equalsIgnoreCase(name)){
+        Class<OrderType> esta = OrderType.class;
+        OrderType[] temp = esta.getEnumConstants();
+        List<OrderType> numeraciones = Arrays.asList(temp);
+        for (OrderType numeracion : numeraciones) {
+            if (numeracion.name().equalsIgnoreCase(name)) {
                 /*LogsJB.info("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
                         +" operador: "+numeracion.getOperador());*/
                 return numeracion;

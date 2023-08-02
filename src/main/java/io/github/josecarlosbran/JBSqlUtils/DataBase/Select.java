@@ -16,7 +16,7 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author José Bran
  * Clase que proporciona un punto de entrada para poder obtener valores de BD's
  */
-public class Select extends Get{
+public class Select extends Get {
 
     private String sql;
 
@@ -65,12 +65,15 @@ public class Select extends Get{
     /**
      * Obtiene una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
      * Envíada como parametro
+     *
      * @param columnas Lista con los nombres de las columnas que se desea recuperar, si se desea obtener
-     *      odas las columnas de la tabla especificada envíar NULL como parametro
+     *                 odas las columnas de la tabla especificada envíar NULL como parametro
      * @return Retorna una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
-     *      Envíada como parametro
+     * Envíada como parametro
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
      */
-    public List<JSONObject> getInJsonObjects(List<String> columnas) {
+    public List<JSONObject> getInJsonObjects(List<String> columnas) throws Exception {
         return super.get(this.sql, this.parametros, columnas);
     }
 

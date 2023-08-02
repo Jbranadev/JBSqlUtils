@@ -107,13 +107,9 @@ public class AndSet {
      *
      * @return Retorna un Entero que representa la cantidad de filas afectadas al ejecutar la sentencia SQL
      * proporcionada.
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
-    public int execute() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    public int execute() throws Exception {
         return new Execute(this.sql, this.parametros).execute();
     }
 

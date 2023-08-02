@@ -18,6 +18,7 @@ package io.github.josecarlosbran.JBSqlUtils;
 
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
+import lombok.ToString;
 
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
@@ -27,21 +28,20 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * Clase que permite crear los atributos del modelo, especificando el tipo de dato en java, el tipo de dato en SQL
  * y las restricciones que debería tener cada columna.
  */
+@ToString
 public class Column<T> {
 
-    private String name=null;
+    private String name = null;
     private T valor = null;
-
     private String default_value = null;
-
+    @ToString.Exclude
     private DataType dataTypeSQL = null;
-
+    @ToString.Exclude
     private Constraint[] restriccion = null;
-
+    @ToString.Exclude
     private Boolean columnExist = false;
 
     private String size;
-
 
 
     /**
@@ -130,7 +130,8 @@ public class Column<T> {
 
     /**
      * Inicializa la columna indicando el tipo de dato SQL que tendra la columna
-     * @param name Nombre de la columna
+     *
+     * @param name         Nombre de la columna
      * @param tipo_de_dato DataType que indica el tipo de dato SQL que almacenara la columna.
      */
     public Column(String name, DataType tipo_de_dato) {
@@ -141,7 +142,8 @@ public class Column<T> {
 
     /**
      * Inicializa la columna indicando el valor y el tipo de dato SQL que tendra la columna
-     * @param name Nombre de la columna
+     *
+     * @param name         Nombre de la columna
      * @param Valor        Valor que tendra la columna.
      * @param tipo_de_dato DataType que indica el tipo de dato SQL que almacenara la columna.
      */
@@ -156,7 +158,8 @@ public class Column<T> {
     /**
      * Inicializa la columna indicando el valor, el tipo de dato SQL que tendra la columna y las restricciones
      * SQL que tendra.
-     * @param name Nombre de la columna
+     *
+     * @param name         Nombre de la columna
      * @param Valor        Valor que tendra la columna.
      * @param tipo_de_dato DataType que indica el tipo de dato SQL que almacenara la columna.
      * @param restriccion  Indica las restricciones SQL que tendra este campo.
@@ -172,7 +175,8 @@ public class Column<T> {
 
     /**
      * Inicializa la columna indicando el tipo de dato SQL  que tendra la columna y las restricciones SQL que tendra
-     * @param name Nombre de la columna
+     *
+     * @param name         Nombre de la columna
      * @param tipo_de_dato DataType que indica el tipo de dato SQL que almacenara la columna.
      * @param restriccion  Indica las restricciones SQL que tendra este campo.
      */
@@ -187,7 +191,8 @@ public class Column<T> {
     /**
      * Inicializa la columna indicando el valor, el tipo de dato SQL que tendra la columna y las restricciones
      * SQL que tendra.
-     * @param name Nombre de la columna
+     *
+     * @param name          Nombre de la columna
      * @param Valor         Valor que tendra la columna.
      * @param tipo_de_dato  DataType que indica el tipo de dato SQL que almacenara la columna.
      * @param restriccion   Indica las restricciones SQL que tendra este campo.
@@ -204,7 +209,8 @@ public class Column<T> {
 
     /**
      * Inicializa la columna indicando el tipo de dato SQL  que tendra la columna y las restricciones SQL que tendra
-     * @param name Nombre de la columna
+     *
+     * @param name          Nombre de la columna
      * @param tipo_de_dato  DataType que indica el tipo de dato SQL que almacenara la columna.
      * @param restriccion   Indica las restricciones SQL que tendra este campo.
      * @param default_value Indica el valor por default que tendra la columna en BD's
@@ -216,8 +222,6 @@ public class Column<T> {
         this.setDefault_value(default_value);
         this.setSize(this.getDataTypeSQL().getSize());
     }
-
-
 
 
     /**
@@ -352,6 +356,7 @@ public class Column<T> {
 
     /**
      * Obtiene el nombre de la columna SQL
+     *
      * @return Nombre de la columna SQL
      */
     public String getName() {
@@ -360,6 +365,7 @@ public class Column<T> {
 
     /**
      * Setea el nombre de la Columna SQL
+     *
      * @param name Nombre de la columna
      */
     public void setName(String name) {

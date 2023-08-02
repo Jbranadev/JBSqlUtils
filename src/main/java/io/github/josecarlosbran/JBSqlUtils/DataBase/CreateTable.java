@@ -26,16 +26,17 @@ public class CreateTable {
         if (stringIsNullOrEmpty(TableName)) {
             throw new ValorUndefined("El nombre de la Tabla proporcionado esta vacío o es NULL");
         }
-        this.tableName=TableName;
+        this.tableName = TableName;
     }
 
 
     /**
      * Agrega una columna a la sentencia SQL a ejecutar al momento de llamar al metodo creteTable()
+     *
      * @param columna Columna a agregar
-     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado está vacío o es NULL
+     * @throws ValorUndefined        Lanza esta excepción si el parametro proporcionado está vacío o es NULL
      * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
-     * @throws DataBaseUndefind Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
+     * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
      */
     public AddColumn addColumn(Column columna) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         return new AddColumn(this.tableName, columna);

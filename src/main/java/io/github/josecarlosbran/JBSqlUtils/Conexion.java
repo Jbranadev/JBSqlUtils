@@ -16,6 +16,7 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
 import com.josebran.LogsJB.LogsJB;
+import io.github.josecarlosbran.JBSqlUtils.Enumerations.ConeccionProperties;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
@@ -132,22 +133,25 @@ class Conexion {
     /**
      * Representa la metadata de la tabla correspondiente al modelo en BD's
      */
-    private TablesSQL tabla = null;
+    private TablesSQL tabla = new TablesSQL();
+
 
     private String propertisURL = null;
 
     /**
      * Setea las propiedades extra para la url de conexión a BD's
+     *
      * @param propertisURL Propiedades extra para la url de conexión a BD's por ejemplo
      *                     ?autoReconnect=true&useSSL=false
      */
-    public void setPropertisURL(String propertisURL){
+    public void setPropertisURL(String propertisURL) {
         try {
-            this.propertisURL = propertisURL;
-            if (this.getGetPropertySystem() && !stringIsNullOrEmpty(propertisURL)) {
+            if (!stringIsNullOrEmpty(propertisURL))
+                this.propertisURL = propertisURL;
+            /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(propertisURL)) {
                 System.setProperty("DBpropertisUrl", propertisURL);
                 //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseUser"));
-            }
+            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear las propiedades extra de conexión con la cual el modelo se conectara a la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -160,13 +164,12 @@ class Conexion {
 
     /**
      * Obtiene la propiedades extra de la url de conexión a la BD's
+     *
      * @return Propiedades extra de la url de conexión a la BD's
      */
-    public String getPropertisURL(){
+    public String getPropertisURL() {
         return this.propertisURL;
     }
-
-
 
 
     /**
@@ -182,11 +185,31 @@ class Conexion {
         this.getSystemProperties();
     }
 
+
+    /**
+     * Constructor de la clase Conexión que se encarga de inicializar las propiedades de conexión del modelo,
+     * las cuales las obtiene de las propiedades del sistema Java.
+     * <p>
+     * c
+     *
+     * @throws DataBaseUndefind      Lanza esta excepción si el tipo de BD's a la cual se conectara el modelo no ha sido definida entre
+     *                               las propiedades del sistema Java.
+     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión no han sido definidas.
+     */
+    public Conexion(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
+        this.setTableName();
+        if (getPropertySystem) {
+            this.getSystemProperties();
+        }
+        this.setGetPropertySystem(getPropertySystem);
+
+    }
+
     /**
      * Si el nombre de la tabla no esta definido, setea el nombre del modelo, como nombre de la tabla
      */
-    private void setTableName(){
-        if(stringIsNullOrEmpty(this.getTableName())){
+    private void setTableName() {
+        if (stringIsNullOrEmpty(this.getTableName())) {
             this.setTableName(this.getClass().getSimpleName());
         }
     }
@@ -222,7 +245,7 @@ class Conexion {
      */
     private DataBase setearDBType() throws DataBaseUndefind {
         if (this.getGetPropertySystem()) {
-            String dataBase = System.getProperty("DataBase");
+            String dataBase = System.getProperty(ConeccionProperties.DBTYPE.getPropiertie());
             if (stringIsNullOrEmpty(dataBase)) {
                 //Si la propiedad del sistema no esta definida, Lanza una Exepción
                 throw new DataBaseUndefind("No se a seteado la DataBase que índica a que BD's deseamos se pegue JBSqlUtils");
@@ -261,7 +284,7 @@ class Conexion {
      */
     private String setearHost() throws PropertiesDBUndefined, DataBaseUndefind {
         if (this.getGetPropertySystem()) {
-            String host = System.getProperty("DataBaseHost");
+            String host = System.getProperty(ConeccionProperties.DBHOST.getPropiertie());
             if (this.getDataBaseType() != DataBase.SQLite) {
                 if (stringIsNullOrEmpty(host)) {
                     //Si la propiedad del sistema no esta definida, Lanza una Exepción
@@ -287,7 +310,7 @@ class Conexion {
      */
     private String setearPort() throws PropertiesDBUndefined, DataBaseUndefind {
         if (this.getGetPropertySystem()) {
-            String port = System.getProperty("DataBasePort");
+            String port = System.getProperty(ConeccionProperties.DBPORT.getPropiertie());
             if (this.getDataBaseType() != DataBase.SQLite) {
                 if (stringIsNullOrEmpty(port)) {
                     //Si la propiedad del sistema no esta definida, Lanza una Exepción
@@ -313,7 +336,7 @@ class Conexion {
      */
     private String setearUser() throws PropertiesDBUndefined, DataBaseUndefind {
         if (this.getGetPropertySystem()) {
-            String user = System.getProperty("DataBaseUser");
+            String user = System.getProperty(ConeccionProperties.DBUSER.getPropiertie());
             if (this.getDataBaseType() != DataBase.SQLite) {
                 if (stringIsNullOrEmpty(user)) {
                     //Si la propiedad del sistema no esta definida, Lanza una Exepción
@@ -337,7 +360,7 @@ class Conexion {
      */
     private String setearBD() throws PropertiesDBUndefined {
         if (this.getGetPropertySystem()) {
-            String DB = System.getProperty("DataBaseBD");
+            String DB = System.getProperty(ConeccionProperties.DBNAME.getPropiertie());
             //System.out.println("BD seteada en system property: " + DB);
             if (stringIsNullOrEmpty(DB)) {
                 //Si la propiedad del sistema no esta definida, Lanza una Exepción
@@ -358,7 +381,7 @@ class Conexion {
      */
     private String setearPassword() throws PropertiesDBUndefined, DataBaseUndefind {
         if (this.getGetPropertySystem()) {
-            String password = System.getProperty("DataBasePassword");
+            String password = System.getProperty(ConeccionProperties.DBPASSWORD.getPropiertie());
             if (this.getDataBaseType() != DataBase.SQLite) {
                 if (stringIsNullOrEmpty(password)) {
                     //Si la propiedad del sistema no esta definida, Lanza una Exepción
@@ -373,11 +396,12 @@ class Conexion {
 
     /**
      * Obtiene las propiedades de la url de conexión a la BD's
+     *
      * @return Las propiedades de la url para la conexión a la BD's obtenida de las variables del sistema
      */
-    private String setearPropertisUrl()  {
+    private String setearPropertisUrl() {
         if (this.getGetPropertySystem()) {
-            String property = System.getProperty("DBpropertisUrl");
+            String property = System.getProperty(ConeccionProperties.DBPROPERTIESURL.getPropiertie());
             return property;
         }
         return null;
@@ -411,11 +435,12 @@ class Conexion {
      */
     public void setDataBaseType(DataBase dataBase) {
         try {
-            this.dataBaseType = dataBase;
-            if (this.getGetPropertySystem()) {
+            if (!Objects.isNull(dataBase))
+                this.dataBaseType = dataBase;
+            /*if (this.getGetPropertySystem()) {
                 System.setProperty("DataBase", dataBase.name());
                 //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBase"));
-            }
+            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el tipo de BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -452,11 +477,12 @@ class Conexion {
      */
     public void setHost(String host) {
         try {
-            this.host = host;
-            if (this.getGetPropertySystem() && !stringIsNullOrEmpty(host)) {
+            if (!stringIsNullOrEmpty(host))
+                this.host = host;
+            /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(host)) {
                 System.setProperty("DataBaseHost", host);
                 //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseHost"));
-            }
+            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el host en el que se encuentra la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -493,11 +519,12 @@ class Conexion {
      */
     public void setPort(String port) {
         try {
-            this.port = port;
-            if (this.getGetPropertySystem() && !stringIsNullOrEmpty(port)) {
+            if (!stringIsNullOrEmpty(port))
+                this.port = port;
+            /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(port)) {
                 System.setProperty("DataBasePort", port);
                 //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBasePort"));
-            }
+            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el puerto en el cual se encuentra escuchando la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -533,11 +560,12 @@ class Conexion {
      */
     public void setUser(String user) {
         try {
-            this.user = user;
-            if (this.getGetPropertySystem() && !stringIsNullOrEmpty(user)) {
+            if (!stringIsNullOrEmpty(user))
+                this.user = user;
+            /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(user)) {
                 System.setProperty("DataBaseUser", user);
                 //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseUser"));
-            }
+            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el usuario con el cual el modelo se conectara a la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -572,11 +600,12 @@ class Conexion {
      */
     public void setPassword(String password) {
         try {
-            this.password = password;
-            if (this.getGetPropertySystem() && !stringIsNullOrEmpty(password)) {
+            if (!stringIsNullOrEmpty(password))
+                this.password = password;
+            /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(password)) {
                 System.setProperty("DataBasePassword", password);
                 //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBasePassword"));
-            }
+            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear la contraseña del usuario con el cual el modelo se conectara a la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -608,12 +637,13 @@ class Conexion {
      */
     public void setBD(String BD) {
         try {
-            this.BD = BD;
-            if (this.getGetPropertySystem() && !stringIsNullOrEmpty(BD)) {
+            if (!stringIsNullOrEmpty(BD))
+                this.BD = BD;
+            /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(BD)) {
                 //System.out.println("Base de datos a setear: " + BD);
                 System.setProperty("DataBaseBD", BD);
                 //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseBD"));
-            }
+            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el nombre de la Base de Datos a la que se conectara el modelo: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -728,6 +758,43 @@ class Conexion {
      */
     public synchronized Boolean getTaskIsReady() {
         return taskIsReady;
+    }
+
+
+    /**
+     * Si queremos utilizar el mismo modelo para realizar otra operación en BD's
+     * es necesario que esperemos a que el modelo no este realizando ninguna tarea, relacionada con lectura o
+     * escritura.
+     * <p>
+     * Debido a que estas tareas JBSqlUtils las realiza en segundo plano, para no interrumpir
+     * el hilo de ejecución principal y entregar un mejor rendimiento, por si necesitamos realizar alguna otra
+     * instrucción mientras el modelo esta trabajando en segundo plano. para poder saber si el modelo actualmente esta
+     * ocupado, podemos hacerlo a traves del método getTaskIsReady(), el cual obtiene la bandera que indica si
+     * la tarea que estaba realizando el modelo ha sido terminada
+     *
+     * @return True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
+     * actualmente.
+     * <p>
+     * De utilizar otro modelo, no es necesario esperar a que el primer modelo este libre.
+     */
+    public void waitOperationComplete() {
+        /**
+         * Si queremos utilizar el mismo modelo para insertar otro registro con valores diferentes,
+         * es necesario que esperemos a que el modelo no este realizando ninguna tarea, relacionada con lectura o
+         * escritura en la BD's, debido a que estas tareas JBSqlUtils las realiza en segundo plano, para no interrumpir
+         * el hilo de ejecución principal y entregar un mejor rendimiento, por si necesitamos realizar alguna otra
+         * instrucción mientras el modelo esta trabajando en segundo plano. para poder saber si el modelo actualmente esta
+         * ocupado, podemos hacerlo a traves del método getTaskIsReady(), el cual obtiene la bandera que indica si
+         * la tarea que estaba realizando el modelo ha sido terminada
+         * @return True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
+         * actualmente.
+         *
+         * De utilizar otro modelo, no es necesario esperar a que el primer modelo este libre.
+         *
+         */
+        while (!this.getTaskIsReady()) {
+
+        }
     }
 
     /**
@@ -877,4 +944,6 @@ class Conexion {
     protected void setTabla(TablesSQL tabla) {
         this.tabla = tabla;
     }
+
+
 }

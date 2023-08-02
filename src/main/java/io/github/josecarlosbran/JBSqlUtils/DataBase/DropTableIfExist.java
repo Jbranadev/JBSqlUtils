@@ -31,10 +31,12 @@ public class DropTableIfExist extends Methods_Conexion {
 
     /**
      * Ejecuta la sentencia SQL encargada de eliminar la tabla en BD's
+     *
      * @return True si la tabla fue eliminada en BD's, Flase si la tabla no existe en BD's o si
      * sucede algun problema al ejecutar la sentencia SQL.
+     * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
-    public Boolean execute(){
+    public Boolean execute() throws Exception {
         return this.dropTableIfExist();
     }
 }

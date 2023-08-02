@@ -86,7 +86,7 @@ public enum Operator {
     private String operador;
 
     private Operator(String s) {
-        this.operador=s;
+        this.operador = s;
     }
 
     public String getOperador() {
@@ -95,15 +95,16 @@ public enum Operator {
 
     /**
      * Retorna la numeración correspondiente al nombre proporcionado
+     *
      * @param name Nombre de la Numeración que se desea obtener
      * @return Numeración correspondiente al nombre proporcionado
      */
     public Operator getNumeracionforName(String name) {
-        Class<Operator> esta=Operator.class;
-        Operator[] temp= esta.getEnumConstants();
-        List<Operator> numeraciones= Arrays.asList(temp);
-        for(Operator numeracion:numeraciones){
-            if(numeracion.name().equalsIgnoreCase(name)){
+        Class<Operator> esta = Operator.class;
+        Operator[] temp = esta.getEnumConstants();
+        List<Operator> numeraciones = Arrays.asList(temp);
+        for (Operator numeracion : numeraciones) {
+            if (numeracion.name().equalsIgnoreCase(name)) {
                 /*LogsJB.info("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
                         +" operador: "+numeracion.getOperador());*/
                 return numeracion;

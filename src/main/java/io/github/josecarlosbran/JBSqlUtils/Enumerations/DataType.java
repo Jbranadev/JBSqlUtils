@@ -47,56 +47,53 @@ public enum DataType {
     /**
      * Tipo de dato auto incrementable en PostgreSQL
      */
-    SERIAL("SERIAL",1),
+    SERIAL("SERIAL", 1),
     //java.lang.Integer
-
 
 
     /**
      * Cadena de caracteres de longitud fija
      */
-    CHAR("1",2),
+    CHAR("1", 2),
 
     /**
      * Cadena de caracteres de longitud variable
      */
-    VARCHAR("21844",2),
+    VARCHAR("21844", 2),
 
     /**
      * Cadenas de cualquier longitud (varios megabytes), debe definir el tamaño que desea tenga la columna
      * por medio del metodo setSize, para esta numeración en especifico.
      */
-    LONGVARCHAR("",2),
+    LONGVARCHAR("", 2),
 
     /**
      * Enum se tienen que definir las opciones disponibles a través del metodo setSize, envíando como parametro
      * para esta numeración, las opciones que deseamos tenga disponible
      */
-    ENUM("",2),
-
+    ENUM("", 2),
 
 
     /**
      * entero de 16 bits
      */
-    SMALLINT("",3),
+    SMALLINT("", 3),
 
     /**
      * entero de 16 bits
      */
-    TINYINT("",3),
-
+    TINYINT("", 3),
 
 
     /**
      * Valor de coma flotante
      */
-    REAL("",4),
+    REAL("", 4),
 
     /**
      * Valor de coma flotante
      */
-    FLOAT("",4),
+    FLOAT("", 4),
 
     //double
 
@@ -105,126 +102,113 @@ public enum DataType {
     /**
      * Gran valor de punto flotante
      */
-    DOUBLE("38,3",4),
+    DOUBLE("38,3", 4),
 
 
     /**
      * Valores decimales de precisión absoluta
      */
-    NUMERIC("38,2",4),
+    NUMERIC("38,2", 4),
 
     /**
      * Valor decimal de precisión absoluta
      */
-    DECIMAL("38,3",4),
+    DECIMAL("38,3", 4),
 
     /**
      * Valor decimal de precisión absoluta
      */
-    MONEY("38,2",4),
+    MONEY("38,2", 4),
 
     /**
      * Valor decimal de precisión absoluta
      */
-    SMALLMONEY("18,2",4),
-
-
+    SMALLMONEY("18,2", 4),
 
 
     /**
      * Bit único/valor binario (activado o desactivado)
      */
-    BIT("",5),
+    BIT("", 5),
 
     /**
      * Valor Booleano
      */
-    BOOLEAN("",5),
+    BOOLEAN("", 5),
 
     /**
      * Valor Booleano
      */
-    BOOL("",5),
-
-
+    BOOL("", 5),
 
 
     /**
      * Matriz de valores binarios
      */
-    BINARY("1",6),
+    BINARY("1", 6),
 
     /**
      * Matriz de longitud variable de valores binarios, en mysql el valor maximo es de 21844
      * pero en sql server es de 8000
      */
-    VARBINARY("8000",6),
+    VARBINARY("8000", 6),
 
     /**
      * Matriz de valores binarios de cualquier longitud (varios megabytes)
      * SQL Server
      */
-    LONGVARBINARY("MAX",6),
+    LONGVARBINARY("MAX", 6),
 
 
     /**
      * Cadena binaria de ancho variable
      */
-    IMAGE("",6),
-
-
+    IMAGE("", 6),
 
 
     /**
      * Setea que el tipo de dato será un Object
      */
-    OBJECT("",7),
+    OBJECT("", 7),
 
     /**
      * Setea que el tipo de dato será un JSON
      */
-    JSON("",7),
-
-
+    JSON("", 7),
 
 
     /**
      * Valor de fecha
      */
-    DATE("",8),
-
+    DATE("", 8),
 
 
     /**
      * Valor del tiempo
      */
-    TIME("",9),
-
-
-
-
-    /**
-     * Valor de tiempo con campo adicional de nanosegundos
-     */
-    TIMESTAMP("",10),
-
-    /**
-     * Valor de tiempo con campo adicional de nanosegundos
-     */
-    SMALLDATETIME("",10),
-
-    /**
-     * Valor de tiempo con campo adicional de nanosegundos
-     */
-    DATETIME("",10),
+    TIME("", 9),
 
 
     /**
      * Valor de tiempo con campo adicional de nanosegundos
      */
-    DATETIME2("",10);
+    TIMESTAMP("", 10),
+
+    /**
+     * Valor de tiempo con campo adicional de nanosegundos
+     */
+    SMALLDATETIME("", 10),
+
+    /**
+     * Valor de tiempo con campo adicional de nanosegundos
+     */
+    DATETIME("", 10),
 
 
+    /**
+     * Valor de tiempo con campo adicional de nanosegundos
+     */
+    DATETIME2("", 10);
 
 
     private String size;
@@ -270,12 +254,13 @@ public enum DataType {
      *
      * @param Size Cadena que representa el contenido del tipo de dato entre Parentesis.
      */
-    public void setSize(String Size) {
+    private void setSize(String Size) {
         this.size = Size;
     }
 
     /**
      * Obtiene el orden del tipo de dato
+     *
      * @return Retorna el nivel de orden definido para el tipo de dato
      */
     public int getOrden() {
@@ -285,15 +270,16 @@ public enum DataType {
 
     /**
      * Retorna la numeración correspondiente al nombre proporcionado
+     *
      * @param name Nombre de la Numeración que se desea obtener
      * @return Numeración correspondiente al nombre proporcionado
      */
     public DataType getNumeracionforName(String name) {
-        Class<DataType> esta=DataType.class;
-        DataType[] temp= esta.getEnumConstants();
-        List<DataType> numeraciones= Arrays.asList(temp);
-        for(DataType numeracion:numeraciones){
-            if(numeracion.name().equalsIgnoreCase(name)){
+        Class<DataType> esta = DataType.class;
+        DataType[] temp = esta.getEnumConstants();
+        List<DataType> numeraciones = Arrays.asList(temp);
+        for (DataType numeracion : numeraciones) {
+            if (numeracion.name().equalsIgnoreCase(name)) {
                 /*LogsJB.info("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
                         +" operador: "+numeracion.getOperador());*/
                 return numeracion;
