@@ -1,0 +1,31 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="JBSqlUtils">
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+    </listeners>
+    <test name="Test MySQL">
+        <classes>
+            <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL">
+            </class>
+        </classes>
+    </test>
+    <test name="Test PostgreSQL">
+        <classes>
+            <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL">
+            </class>
+        </classes>
+    </test>
+    <test name="Test SQLite">
+        <classes>
+            <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite">
+            </class>
+        </classes>
+    </test>
+    <test name="Test SQLServer">
+        <classes>
+            <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer">
+            </class>
+        </classes>
+    </test>
+</suite>
