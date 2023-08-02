@@ -21,17 +21,17 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
 
 /**
  * @author Jose Bran
- * Clase que proporciona los metodos necesarios para la lógica de un Update en BD's sin necesidad
+ * Clase que proporciona los métodos necesarios para la lógica de un Update en BD's sin necesidad
  * de tener un modelo de la tabla que se desea actualizar.
  */
 public class Update {
     private String sql;
 
     /**
-     * Constructor que recibe como parametro:
+     * Constructor que recibe como parámetro:
      *
      * @param TableName El nombre de la tabla sobre la cual se desea realizar el Update.
-     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado está vacío o es NULL
+     * @throws ValorUndefined Lanza esta excepción si el parámetro proporcionado está vacío o es NULL
      */
     public Update(String TableName) throws ValorUndefined {
         String respuesta = "";
@@ -49,7 +49,7 @@ public class Update {
      * @return Retorna un objeto Set que entrega la capacidad de setear otro valor
      * antes de ejecutar la sentencia Upddate
      * @throws ValorUndefined ValorUndefined ValorUndefined Lanza esta Excepción si
-     *                        alguno de los parametros proporcionados esta vacío o es Null
+     *                        alguno de los parámetros proporcionados esta vacío o es Null
      */
     public Set set(String columName, Object value) throws ValorUndefined {
         return new Set(columName, value, this.sql);

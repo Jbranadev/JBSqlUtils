@@ -23,18 +23,18 @@ public class Value {
     private String sql;
 
     /**
-     * Lista de los parametros a envíar
+     * Lista de los parámetros a envíar
      */
     protected List<Column> parametros = new ArrayList<>();
 
     /**
-     * Constructor que recibe como parametro:
+     * Constructor que recibe como parámetro:
      *
      * @param columName El nombre de la columna a la cual se asignara el valor porporcionado.
      * @param value     Valor que se asignara a la columna.
      * @param sql       Sentencia SQL a la cual se agregara la columna y valor a setear.
      * @throws ValorUndefined ValorUndefined Lanza esta Excepción si
-     *                        alguno de los parametros proporcionados esta vacío o es Null
+     *                        alguno de los parámetros proporcionados esta vacío o es Null
      */
     protected Value(String columName, Object value, String sql) throws ValorUndefined {
         if (stringIsNullOrEmpty(columName)) {

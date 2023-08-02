@@ -14,10 +14,10 @@ public class InsertInto {
     private String sql;
 
     /**
-     * Constructor que recibe como parametro:
+     * Constructor que recibe como parámetro:
      *
      * @param TableName El nombre de la tabla sobre la cual se desea realizar el Insert.
-     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado está vacío o es NULL
+     * @throws ValorUndefined Lanza esta excepción si el parámetro proporcionado está vacío o es NULL
      */
     public InsertInto(String TableName) throws ValorUndefined {
         String respuesta = "";
@@ -35,7 +35,7 @@ public class InsertInto {
      * @return Retorna un objeto Set que entrega la capacidad de setear otro valor
      * antes de ejecutar la sentencia Upddate
      * @throws ValorUndefined ValorUndefined ValorUndefined Lanza esta Excepción si
-     *                        alguno de los parametros proporcionados esta vacío o es Null
+     *                        alguno de los parámetros proporcionados esta vacío o es Null
      */
     public Value value(String columName, Object value) throws ValorUndefined {
         return new Value(columName, value, this.sql);

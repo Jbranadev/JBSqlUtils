@@ -631,7 +631,7 @@ public class Methods_Conexion extends Conexion {
      * @param columnsSQL Columna java que será analizada
      * @param ejecutor   PreparedStatement sobre el cual se estara envíando la información de la columna
      * @param auxiliar   Indice que indica la posición del parametro en el ejecutor.
-     * @throws SQLException Lanza esta excepción si sucede algun problema al setear el valor Java en el ejecutor.
+     * @throws SQLException Lanza esta excepción si sucede algún problema al setear el valor Java en el ejecutor.
      */
     protected void convertJavaToSQL(Column columnsSQL, PreparedStatement ejecutor, int auxiliar) throws SQLException {
         LogsJB.debug("DataType de la columna: " + columnsSQL.getDataTypeSQL());
@@ -691,13 +691,13 @@ public class Methods_Conexion extends Conexion {
      * Metodo que convierte la información obtenida de BD's a Java
      *
      * @param columna    Columna del modelo
-     * @param resultado  ResulSet que esta siendo evaludo
+     * @param resultado  ResulSet que está siendo evaludo
      * @param metodo     Metodo Set en el que se seteara la columna del modelo
      * @param columnaSql Columna SQL que corresponde a la columna del modelo
      * @param invocador  Invocador del metodo
-     * @throws SQLException              Lanza esta excepción de suceder algun problema con el ResultSet
-     * @throws InvocationTargetException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
-     * @throws IllegalAccessException    Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     * @throws SQLException              Lanza esta excepción de suceder algún problema con el ResultSet
+     * @throws InvocationTargetException Lanza esta excepción si hubiera algún problema al invocar el metodo Set
+     * @throws IllegalAccessException    Lanza esta excepción si hubiera algún problema al invocar el metodo Set
      */
     protected void convertSQLtoJava(ColumnsSQL columna, ResultSet resultado, Method metodo, Column columnaSql, Object invocador) throws SQLException, InvocationTargetException, IllegalAccessException {
         String columnName = columna.getCOLUMN_NAME();
@@ -1196,9 +1196,9 @@ public class Methods_Conexion extends Conexion {
      * con la información de BD's
      * @throws InstantiationException    Lanza esta excepción si ocurre un error al crear una nueva instancia
      *                                   del tipo de modelo proporcionado
-     * @throws SQLException              Lanza esta excepción de suceder algun problema con el ResultSet
-     * @throws InvocationTargetException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
-     * @throws IllegalAccessException    Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     * @throws SQLException              Lanza esta excepción de suceder algún problema con el ResultSet
+     * @throws InvocationTargetException Lanza esta excepción si hubiera algún problema al invocar el metodo Set
+     * @throws IllegalAccessException    Lanza esta excepción si hubiera algún problema al invocar el metodo Set
      * @throws DataBaseUndefind          Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
      *                                   BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined     Lanza esta excepción si en las propiedades del sistema no estan definidas las
@@ -1286,9 +1286,9 @@ public class Methods_Conexion extends Conexion {
      *                  objeto que herede la Clase JBSqlUtils
      * @throws InstantiationException    Lanza esta excepción si ocurre un error al crear una nueva instancia
      *                                   del tipo de modelo proporcionado
-     * @throws SQLException              Lanza esta excepción de suceder algun problema con el ResultSet
-     * @throws InvocationTargetException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
-     * @throws IllegalAccessException    Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     * @throws SQLException              Lanza esta excepción de suceder algún problema con el ResultSet
+     * @throws InvocationTargetException Lanza esta excepción si hubiera algún problema al invocar el metodo Set
+     * @throws IllegalAccessException    Lanza esta excepción si hubiera algún problema al invocar el metodo Set
      */
     protected <T extends Methods_Conexion> void procesarResultSetOneResult(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException {
         modelo.setModelExist(true);
@@ -1345,7 +1345,7 @@ public class Methods_Conexion extends Conexion {
      * @param columnas  Lista de los nombres de las columnas que se desea recuperar, si se desea recuperar todas las columnas envíar NULL
      * @param registros ResultSet del cual se obtendran los valores de las columnas
      * @return Retorna un Json Object con las columnas solicitadas como propiedades del json con sus respectivos valores
-     * @throws SQLException Lanza esta excepción si sucede algun error al obtener el valor de cada una de las columnas solicitadas
+     * @throws SQLException Lanza esta excepción si sucede algún error al obtener el valor de cada una de las columnas solicitadas
      */
     protected JSONObject procesarResultSetJSON(List<String> columnas, ResultSet registros) throws SQLException {
         JSONObject temp = new JSONObject();

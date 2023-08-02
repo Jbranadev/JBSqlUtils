@@ -36,7 +36,7 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
 /**
  * @author Jose Bran
  * Clase que proporciona la logica para agregar una sentencia AND a una consulta personalizada del modelo
- * tomando como parametro la sentencia sql a la que se agregara la logica de la sentencia AND
+ * tomando como parámetro la sentencia sql a la que se agregara la logica de la sentencia AND
  */
 public class And<T> extends Get {
     private T modelo = null;
@@ -44,7 +44,7 @@ public class And<T> extends Get {
     private String sql;
 
     /**
-     * Lista de los parametros a envíar
+     * Lista de los parámetros a envíar
      */
     protected List<Column> parametros = new ArrayList<>();
 
@@ -55,7 +55,7 @@ public class And<T> extends Get {
      * @param columna    Columna a evaluar dentro de la sentencia AND
      * @param operador   Operador con el cual se evaluara la columna
      * @param valor      Valor contra el que se evaluara la columna
-     * @param modelo     Modelo que invocara los metodos de esta clase
+     * @param modelo     Modelo que invocara los métodos de esta clase
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
@@ -90,7 +90,7 @@ public class And<T> extends Get {
      * @param columna    Columna a evaluar dentro de la sentencia AND
      * @param operador   Operador con el cual se evaluara la columna
      * @param valor      Valor contra el que se evaluara la columna
-     * @param modelo     Modelo que invocara los metodos de esta clase
+     * @param modelo     Modelo que invocara los métodos de esta clase
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
      * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
@@ -256,8 +256,8 @@ public class And<T> extends Get {
      * @param columna      Columna a evaluar dentro de la sentencia AND
      * @param operador     Operador con el cual se evaluara la columna
      * @param valor        Valor contra el que se evaluara la columna
-     * @return Retorna un objeto OpenParentecis el cual proporciona acceso a los metodos necesarios
-     * para filtrar de una mejor manera nuestra consulta, No olvide llamar al metodo close parentecis cuando
+     * @return Retorna un objeto OpenParentecis el cual proporciona acceso a los métodos necesarios
+     * para filtrar de una mejor manera nuestra consulta, No olvide llamar al método close parentecis cuando
      * haya finalizado la logica dentro de sus parentecis
      * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
@@ -292,7 +292,7 @@ public class And<T> extends Get {
      * Agrega la posibilidad de realizar un cierre de parentecis dentro de la logica de nuestra sentencia SQL
      *
      * @param operatorPost Operador a colocar despues del cierre de parentecis
-     * @return Retorna un objeto closeParentecis, el cual da acceso al resto de metodos que podemos llamar.
+     * @return Retorna un objeto closeParentecis, el cual da acceso al resto de métodos que podemos llamar.
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
      *                               BD's a la cual se conectara el modelo.
@@ -331,28 +331,28 @@ public class And<T> extends Get {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Llena el modelo que invoca este metodo con la información que obtiene de BD's
+     * Llena el modelo que invoca este método con la información que obtiene de BD's
      *
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
      */
     public <T extends JBSqlUtils> void get() throws Exception {
         super.get((T) this.modelo, this.sql, this.parametros);
     }
 
     /**
-     * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's
+     * Obtiene un modelo del tipo que invoca este método con la información que obtiene de BD's
      *
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
-     * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
+     * @return Retorna un un modelo del tipo que invoca este método con la información que obtiene de BD's.
      */
     public <T extends JBSqlUtils> T first() throws Exception {
         return (T) super.first((T) this.modelo, this.sql, this.parametros);
     }
 
     /**
-     * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's
+     * Obtiene un modelo del tipo que invoca este método con la información que obtiene de BD's
      *
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
      * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
      * @throws ModelNotFound Lanza esta excepción si no logra encontrar el registro correspondiente a la consulta
      *                       SQL realizada.
@@ -370,7 +370,7 @@ public class And<T> extends Get {
      * proporcionada
      * @throws InstantiationException Lanza esta excepción si ocurre un error al crear una nueva instancia
      *                                del tipo de modelo proporcionado
-     * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     * @throws IllegalAccessException Lanza esta excepción si hubiera algún problema al invocar el metodo Set
      */
     public <T extends JBSqlUtils> List<T> getAll() throws Exception {
         return (List<T>) super.getAll((T) this.modelo, this.sql, this.parametros);

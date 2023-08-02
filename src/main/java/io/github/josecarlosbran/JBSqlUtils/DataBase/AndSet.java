@@ -38,18 +38,18 @@ public class AndSet {
     private String sql;
 
     /**
-     * Lista de los parametros a envíar
+     * Lista de los parámetros a envíar
      */
     protected List<Column> parametros = new ArrayList<>();
 
     /**
-     * Constructor que recibe como parametro:
+     * Constructor que recibe como parámetro:
      *
      * @param columName El nombre de la columna a la cual se asignara el valor porporcionado.
      * @param value     Valor que se asignara a la columna.
      * @param sql       Sentencia SQL a la cual se agregara la columna y valor a setear.
      * @throws ValorUndefined ValorUndefined Lanza esta Excepción si
-     *                        alguno de los parametros proporcionados esta vacío o es Null
+     *                        alguno de los parámetros proporcionados esta vacío o es Null
      */
     protected AndSet(String columName, Object value, String sql, List<Column> parametros) throws ValorUndefined {
         if (stringIsNullOrEmpty(columName)) {
@@ -88,7 +88,7 @@ public class AndSet {
      * @param columna  Columna que sera evaluada
      * @param operador Operador por medio del cual se evaluara la columna
      * @param value    Valor contra el que se evaluara la columna
-     * @return Punto de entrada a metodos que permiten seguir modificando la expresión de filtro u obtener el o los
+     * @return Punto de entrada a métodos que permiten seguir modificando la expresión de filtro u obtener el o los
      * modelos que hacen match con la consulta generada
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
      *                               BD's a la cual se conectara el modelo.

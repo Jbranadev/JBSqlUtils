@@ -40,7 +40,7 @@ import java.util.concurrent.*;
 
 /**
  * @author Jose Bran
- * Clase que proporciona los metodos que obtienen los registros de BD's
+ * Clase que proporciona los métodos que obtienen los registros de BD's
  */
 public class Get extends Methods_Conexion {
 
@@ -70,12 +70,12 @@ public class Get extends Methods_Conexion {
     }
 
     /**
-     * Llena el modelo que invoca este metodo con la información que obtiene de BD's
+     * Llena el modelo que invoca este método con la información que obtiene de BD's
      *
      * @param modelo     Modelo que será llenado
      * @param Sql        Sentencia SQL para obtener el modelo
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
-     * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el método.
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
      *                   captura la excepción y la lanza en el hilo principal
      */
@@ -147,13 +147,13 @@ public class Get extends Methods_Conexion {
     }
 
     /**
-     * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's
+     * Obtiene un modelo del tipo que invoca este método con la información que obtiene de BD's
      *
-     * @param modelo     Modelo que esta invocando el metodo
+     * @param modelo     Modelo que está invocando el método
      * @param Sql        Sentencia SQL para obtener el modelo
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
-     * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
-     * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
+     * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el método.
+     * @return Retorna un un modelo del tipo que invoca este método con la información que obtiene de BD's.
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
      *                   captura la excepción y la lanza en el hilo principal
      */
@@ -226,7 +226,7 @@ public class Get extends Methods_Conexion {
     /**
      * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's
      *
-     * @param modelo     Modelo que esta invocando el metodo
+     * @param modelo     Modelo que está invocando el metodo
      * @param Sql        Sentencia SQL para obtener el modelo
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
      * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
@@ -309,7 +309,7 @@ public class Get extends Methods_Conexion {
      * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
      *
-     * @param modelo     Modelo que esta invocando el metodo
+     * @param modelo     Modelo que está invocando el metodo
      * @param Sql        Sentencia SQL para obtener el modelo
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
      * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.

@@ -107,7 +107,7 @@ public class JBSqlUtilsTestSQLServer {
          * Esperamos se ejecute la instrucción en BD's
          */
         this.testModel.waitOperationComplete();
-        logParrafo("Insertamos el Modelo a traves del metodo save");
+        logParrafo("Insertamos el Modelo a través del metodo save");
         logParrafo("Filas insertadas en BD's: " + rowsInsert + " " + this.testModel.toString());
         Assert.assertTrue(rowsInsert == 1, "El registro no fue insertado en BD's");
     }
@@ -187,7 +187,7 @@ public class JBSqlUtilsTestSQLServer {
         /**
          * Eliminamos el modelo en BD's
          */
-        logParrafo("Eliminamos el modelo a traves del metodo delete");
+        logParrafo("Eliminamos el modelo a través del metodo delete");
         Integer rowsDelete = this.testModel.delete();
         Assert.assertTrue(rowsDelete == 1, "El registro no fue eliminado en la BD's");
     }
@@ -314,7 +314,7 @@ public class JBSqlUtilsTestSQLServer {
             modelo.getIsMayor().setValor(!modelo.getIsMayor().getValor());
             logParrafo("Modelo a actualizar: "+modelo.toString());
         });
-        logParrafo("Enviamos a guardar los modelos a traves del metodo saveALL");
+        logParrafo("Enviamos a guardar los modelos a través del metodo saveALL");
         Integer rowsUpdate = this.testModel.saveALL(models);
         logParrafo("Filas actualizadas en BD's: " + rowsUpdate);
         /**
@@ -470,8 +470,8 @@ public class JBSqlUtilsTestSQLServer {
         columnas.add("Name");
         logParrafo("Obtendra los primeros 2 registros cuyo estado sea true y en su apellido posea la letra a");
         /**
-         * Para obtener los registros de una tabla de BD's podemos hacerlo a traves del metodo select envíando como parametro
-         * el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a traves del metodo
+         * Para obtener los registros de una tabla de BD's podemos hacerlo a través del metodo select envíando como parametro
+         * el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a través del metodo
          * where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
          */
         List<JSONObject> lista = select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)

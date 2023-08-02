@@ -36,7 +36,7 @@ import java.util.concurrent.*;
 
 /**
  * @author Jose Bran
- * Clase que proporciona metodos que permiten al modelo ejecutar sentencias DML, así como crear o eliminar la tabla
+ * Clase que proporciona métodos que permiten al modelo ejecutar sentencias DML, así como crear o eliminar la tabla
  * correspondiente al modelo
  */
 class Methods extends Methods_Conexion {
@@ -84,7 +84,7 @@ class Methods extends Methods_Conexion {
      * Almacena la información de los modelos proporcionados en BD's
      *
      * @param modelos Lista de modelos que serán Insertados o Actualizados
-     * @param <T>     Tipo de parametro que hace que el metodo sea generico para poder ser
+     * @param <T>     Tipo de parámetro que hace que el método sea generico para poder ser
      *                llamado por diferentes tipos de objetos, siempre y cuando estos hereden la clase Methods Conexion.
      * @return La cantidad de filas insertadas o actualizadas en BD's
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
@@ -151,7 +151,7 @@ class Methods extends Methods_Conexion {
      * Elimina la información de los modelos proporcionados en BD's
      *
      * @param modelos Lista de modelos que serán Eliminados
-     * @param <T>     Tipo de parametro que hace que el metodo sea generico para poder ser
+     * @param <T>     Tipo de parámetro que hace que el método sea generico para poder ser
      *                llamado por diferentes tipos de objetos, siempre y cuando estos hereden la clase Methods Conexion.
      * @return La cantidad de filas eliminadas en BD's
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
@@ -226,7 +226,7 @@ class Methods extends Methods_Conexion {
      * @param columna  Columna que sera evaluada
      * @param operador Operador por medio del cual se evaluara la columna
      * @param valor    Valor contra el cual se evaluara la columna
-     * @return Punto de entrada a metodos que permiten seguir modificando la expresión de filtro u obtener el o los
+     * @return Punto de entrada a métodos que permiten seguir modificando la expresión de filtro u obtener el o los
      * modelos que hacen match con la consulta generada
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
      *                               BD's a la cual se conectara el modelo.
@@ -249,7 +249,7 @@ class Methods extends Methods_Conexion {
      * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
      *
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
      * @return Retorna una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
@@ -320,7 +320,7 @@ class Methods extends Methods_Conexion {
      * Llena el modelo con la información del controlador
      *
      * @param controlador Controlador que debe poseer los atributos en java, que corresponden al modelo, con
-     *                    sus respectivos metodos setter y getter
+     *                    sus respectivos métodos setter y getter
      * @param modelo      Modelo que será llenado con la información del controlador
      * @param <T>         Tipo de dato del controlador, acepta cualquier Object
      * @param <G>         Tipo de dato del modelo, acepta unicamente aquellos que heredan de la clase JBSqlUtils

@@ -33,25 +33,25 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
 
 /**
  * @author Jose Bran
- * Clase que proporciona la capacidad de agregar una sentencia OrderBy a la consulta trasladada como parametro
+ * Clase que proporciona la capacidad de agregar una sentencia OrderBy a la consulta trasladada como parámetro
  */
 public class OrderBy<T> extends Get {
     private String sql;
     private T modelo;
 
     /**
-     * Lista de los parametros a envíar
+     * Lista de los parámetros a envíar
      */
     protected List<Column> parametros = new ArrayList<>();
 
     /**
-     * Constructor que recibe como parametro:
+     * Constructor que recibe como parámetro:
      *
      * @param sql        Sentencia SQL a la que se agregara la logica ORDER BY
      * @param columna    Columna a evaluar dentro de la sentencia ORDER BY
      * @param orderType  Tipo de ordenamiento que se realizara
-     * @param modelo     Modelo que invoca la ejecución de los metodos.
-     * @param parametros Lista de parametros a ser agregados a la sentencia SQL
+     * @param modelo     Modelo que invoca la ejecución de los métodos.
+     * @param parámetros Lista de parámetros a ser agregados a la sentencia SQL
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
      *                               BD's a la cual se conectara el modelo.
@@ -76,13 +76,13 @@ public class OrderBy<T> extends Get {
 
 
     /**
-     * Constructor que recibe como parametro:
+     * Constructor que recibe como parámetro:
      *
      * @param sql               Sentencia SQL a la que se agregara la logica ORDER BY
      * @param columna           Columna a evaluar dentro de la sentencia ORDER BY
      * @param orderType         Tipo de ordenamiento que se realizara
-     * @param modelo            Modelo que invoca la ejecución de los metodos.
-     * @param parametros        Lista de parametros a ser agregados a la sentencia SQL
+     * @param modelo            Modelo que invoca la ejecución de los métodos.
+     * @param parámetros        Lista de parametros a ser agregados a la sentencia SQL
      * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
@@ -163,9 +163,9 @@ public class OrderBy<T> extends Get {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Llena el modelo que invoca este metodo con la información que obtiene de BD's
+     * Llena el modelo que invoca este método con la información que obtiene de BD's
      *
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
      *                   captura la excepción y la lanza en el hilo principal
      */
@@ -174,10 +174,10 @@ public class OrderBy<T> extends Get {
     }
 
     /**
-     * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's
+     * Obtiene un modelo del tipo que invoca este método con la información que obtiene de BD's
      *
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
-     * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
+     * @return Retorna un un modelo del tipo que invoca este método con la información que obtiene de BD's.
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
      *                   captura la excepción y la lanza en el hilo principal
      */
@@ -186,10 +186,10 @@ public class OrderBy<T> extends Get {
     }
 
     /**
-     * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's
+     * Obtiene un modelo del tipo que invoca este método con la información que obtiene de BD's
      *
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
-     * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
+     * @return Retorna un un modelo del tipo que invoca este método con la información que obtiene de BD's.
      * @throws ModelNotFound Lanza esta excepción si no logra encontrar el registro correspondiente a la consulta
      *                       SQL realizada.
      */
@@ -201,7 +201,7 @@ public class OrderBy<T> extends Get {
      * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
      *
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
      * @return Retorna una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's

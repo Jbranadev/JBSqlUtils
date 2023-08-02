@@ -33,7 +33,7 @@ import java.util.Objects;
 public class UtilitiesJB {
 
     /**
-     * Filtra los caracteres especiales de los valores pasados como parametros
+     * Filtra los caracteres especiales de los valores pasados como parámetros
      *
      * @param valor Valor a evaluar
      * @return Retorna el String del valor proporcionado, habiendo removido comentarios,

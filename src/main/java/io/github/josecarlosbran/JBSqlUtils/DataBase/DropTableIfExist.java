@@ -10,15 +10,15 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
 
 /**
  * @author José Bran
- * Clase que permite el poder eliminar una tabla en BD's a travez del metodo Execute()
+ * Clase que permite el poder eliminar una tabla en BD's a travez del método Execute()
  */
 public class DropTableIfExist extends Methods_Conexion {
 
     /**
-     * Constructor que recibe como parametro:
+     * Constructor que recibe como parámetro:
      *
      * @param TableName El nombre de la tabla que se desea eliminar.
-     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado está vacío o es NULL
+     * @throws ValorUndefined Lanza esta excepción si el parámetro proporcionado está vacío o es NULL
      */
     public DropTableIfExist(String TableName) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
@@ -33,7 +33,7 @@ public class DropTableIfExist extends Methods_Conexion {
      * Ejecuta la sentencia SQL encargada de eliminar la tabla en BD's
      *
      * @return True si la tabla fue eliminada en BD's, Flase si la tabla no existe en BD's o si
-     * sucede algun problema al ejecutar la sentencia SQL.
+     * sucede algún problema al ejecutar la sentencia SQL.
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
     public Boolean execute() throws Exception {

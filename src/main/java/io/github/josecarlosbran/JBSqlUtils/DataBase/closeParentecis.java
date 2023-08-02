@@ -380,7 +380,7 @@ public class closeParentecis<T> extends Get {
      * proporcionada
      * @throws InstantiationException Lanza esta excepción si ocurre un error al crear una nueva instancia
      *                                del tipo de modelo proporcionado
-     * @throws IllegalAccessException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     * @throws IllegalAccessException Lanza esta excepción si hubiera algún problema al invocar el metodo Set
      */
     public <T extends JBSqlUtils> List<T> getAll() throws Exception {
         return (List<T>) super.getAll((T) this.modelo, this.sql, this.parametros);

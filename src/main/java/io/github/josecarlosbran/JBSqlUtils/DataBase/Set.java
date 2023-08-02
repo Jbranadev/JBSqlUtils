@@ -39,18 +39,18 @@ public class Set {
     private String sql;
 
     /**
-     * Lista de los parametros a envíar
+     * Lista de los parámetros a envíar
      */
     protected List<Column> parametros = new ArrayList<>();
 
     /**
-     * Constructor que recibe como parametro:
+     * Constructor que recibe como parámetro:
      *
      * @param columName El nombre de la columna a la cual se asignara el valor porporcionado.
      * @param value     Valor que se asignara a la columna.
      * @param sql       Sentencia SQL a la cual se agregara la columna y valor a setear.
      * @throws ValorUndefined ValorUndefined Lanza esta Excepción si
-     *                        alguno de los parametros proporcionados esta vacío o es Null
+     *                        alguno de los parámetros proporcionados esta vacío o es Null
      */
     protected Set(String columName, Object value, String sql) throws ValorUndefined {
         if (stringIsNullOrEmpty(columName)) {
@@ -75,7 +75,7 @@ public class Set {
      * @return Retorna un objeto AndSet que entrega la capacidad de setear otro valor
      * antes de ejecutar la sentencia Upddate
      * @throws ValorUndefined ValorUndefined ValorUndefined Lanza esta Excepción si
-     *                        alguno de los parametros proporcionados esta vacío o es Null
+     *                        alguno de los parámetros proporcionados esta vacío o es Null
      */
     public AndSet andSet(String columName, Object value) throws ValorUndefined {
         return new AndSet(columName, value, this.sql, this.parametros);
@@ -88,7 +88,7 @@ public class Set {
      * @param columna  Columna que sera evaluada
      * @param operador Operador por medio del cual se evaluara la columna
      * @param value    Valor contra el que se evaluara la columna
-     * @return Punto de entrada a metodos que permiten seguir modificando la expresión de filtro u obtener el o los
+     * @return Punto de entrada a métodos que permiten seguir modificando la expresión de filtro u obtener el o los
      * modelos que hacen match con la consulta generada
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */

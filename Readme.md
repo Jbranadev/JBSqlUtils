@@ -1,21 +1,21 @@
 # JBSqlUtils :computer:
 
-JBSqlUtils es un ORM desarrollado en java por José Carlos Alfredo Bran Aguirre, que permite gestionar BD's SQLite,
-MySQL,
-PostgreSQL y SQLServer, de una manera fácil y rápida sin interrumpir la ejecución del hilo principal del programa,
-lo cual la hace un potente ORM, por medio del cual tendrá acceso a un CRUD, configurando únicamente la conexión del
-modelo,
-los atributos que posee la tabla en BD's cómo variables que pertenecerán al modelo en su aplicación.
+JBSqlUtils es un ORM desarrollado en java por José Carlos Alfredo Bran Aguirre, 
+que permite gestionar BD's SQLite, MySQL, PostgreSQL y SQLServer, de una manera fácil 
+y rápida sin interrumpir la ejecución del hilo principal del programa, lo cual la hace un potente ORM, 
+por medio del cual tendrá acceso a un CRUD, configurando únicamente la conexión del
+modelo, los atributos que posee la tabla en BD's cómo variables que pertenecerán al modelo en su aplicación.
 
-JBSqlUtils también proporciona un potente generador de consultas que le permitirá actualizar o eliminar registros
-de una tabla en su BD's sin necesidad de instanciar un objeto cómo tal, únicamente tendrá que configurar previamente
+JBSqlUtils también proporciona un potente generador de consultas que le permitirá crear 
+o eliminar una tabla, insertar, seleccionar, actualizar o eliminar registros de una tabla 
+en su BD's sin necesidad de instanciar un modelo cómo tal, únicamente tendrá que configurar previamente
 la conexión a su BD's.
 * * *
 
 ## Estado del Proyecto :atom:
 
-JBSqlUtils actualmente está en una etapa de desarrollo continuo, por lo cual sus observaciones y recomendaciones,
-son bienvenidas para mejorar el proyecto.
+JBSqlUtils actualmente está en una etapa de desarrollo continuo, por lo cual sus 
+observaciones y recomendaciones, son bienvenidas para mejorar el proyecto.
 ***
 
 ## Configuración :gear:
@@ -27,8 +27,8 @@ Utilizar JBSqlUtils es muy fácil.
 - Lo primero es setear las variables globales de conexión
 
 Al setear las variables globales de conexión estas se almacenan cómo variables del sistema
-del entorno de ejecución de la aplicación, las cuales no pueden ser accedidas más que por la misma aplicación
-que las configuro y se eliminan, cuando la aplicación termina su ejecución.
+del entorno de ejecución de la aplicación, las cuales no pueden ser accedidas más que por
+la misma aplicación que las configuro y se eliminan, cuando la aplicación termina su ejecución.
 
 Configuración necesaria para SQLite:
 
@@ -37,7 +37,6 @@ Configuración necesaria para SQLite:
 del cual existe una carpeta llamada BD y dentro de esta carpeta se crearía la BD's JBSqlUtils al establecer
 la conexión si esta no existiera, de existir, únicamente se establecería la conexión.
 */ 
-
       
 String separador=System.getProperty("file.separator");
 String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
@@ -50,7 +49,7 @@ String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separ
  * personalizada.
  * @param BD Nombre de la Base de Datos.
  */
-setDataBaseGlobal(BDSqlite);
+JBSqlUtils.setDataBaseGlobal(BDSqlite);
 
 /**
  * Setea el tipo de BD's global a la cual se estarán conectando los modelos que no tengan una configuración personalizada.
@@ -60,7 +59,7 @@ setDataBaseGlobal(BDSqlite);
  *         PostgreSQL,
  *         SQLite.
  */
-setDataBaseTypeGlobal(DataBase.SQLite);
+JBSqlUtils.setDataBaseTypeGlobal(DataBase.SQLite);
 ~~~
 
 Configuración necesaria para MySQL, PostgreSQL y SQLServer:
@@ -70,47 +69,44 @@ Configuración necesaria para MySQL, PostgreSQL y SQLServer:
 caracteristicas especificadas.
 */ 
    
-   
 /**
  * Setea el nombre de la Base de Datos global a la que se conectaran los modelos que no tengan una configuración
  * personalizada.
  * @param BD Nombre de la Base de Datos.
  */
-public static void setDataBaseGlobal(String BD);
-
+JBSqlUtils.setDataBaseGlobal(String BD);
 
 /**
  * Setea la Contraseña del usuario global con la que se conectaran los modelos que no tengan una configuración personalizada.
  * @param password Contraseña del usuario con el cual se conectara a la BD's.
  */
-public static void setPasswordGlobal(String password);
-
+JBSqlUtils.setPasswordGlobal(String password);
 
 /**
  * Setea el Usuario global con la que se conectaran los modelos que no tengan una configuración personalizada.
  * @param user Usuario con el cual se conectara a la BD's.
  */
-public static void setUserGlobal(String user);
-
+JBSqlUtils.setUserGlobal(String user);
 
 /**
  * Setea el puerto global con el que se conectaran los modelos que no tengan una configuración personalizada.
  * @param port Puerto en el cual se encuentra escuchando la BD's a la cual se pegaran los modelos.
  */
-public static void setPortGlobal(String port);
-
+JBSqlUtils.setPortGlobal(String port);
 
 /**
  * Setea el host en el cual se encuentra la BD's global a la cual se conectaran los modelos que no tengan una configuración personalizada.
  * @param host Host en el cual se encuentra la BD's a la que nos queremos conectar.
  */
-public static void setHostGlobal(String host);
+JBSqlUtils.setHostGlobal(String host);
 
 /**
-* Setea las propiedades que puede tener la url de conexión a BD's
+* Setea las propiedades extra de conexión url DB que pueden utilizar los modelos para conectarse a BD's
+*
+* @param propertisUrl Propiedades extra para la url de conexión a BD's por ejemplo
+*                     ?autoReconnect=true&useSSL=false
 */
-setPropertisUrlConexionGlobal("?autoReconnect=true&useSSL=false");
-
+JBSqlUtils.setPropertisUrlConexionGlobal("?autoReconnect=true&useSSL=false");     
 
 /**
  * Setea el tipo de BD's global a la cual se estarán conectando los modelos que no tengan una configuración personalizada.
@@ -120,7 +116,7 @@ setPropertisUrlConexionGlobal("?autoReconnect=true&useSSL=false");
  *         PostgreSQL,
  *         SQLite.
  */
-public static void setDataBaseTypeGlobal(DataBase dataBase);
+JBSqlUtils.setDataBaseTypeGlobal(DataBase dataBase);
 ~~~
 
 Al haber configurado las variables de conexión globales, su aplicación estará lista
@@ -142,11 +138,10 @@ una determinada tabla de forma masiva, de acuerdo a la lógica que se le dé a l
 
 - Crear una tabla.
 
-Para crear una tabla utilizamos el metodo createTable despues de haber definido el nombre de la tabla que deseamos crear
+Para crear una tabla utilizamos el método createTable despues de haber definido el nombre de la tabla que deseamos crear
 y las columnas que deseamos tenga nuestra tabla.
 
 ~~~
-
 /**
 * Definimos las columnas que deseamos posea nuestra tabla 
 */
@@ -154,10 +149,10 @@ y las columnas que deseamos tenga nuestra tabla.
 /**
 * Para poder utilizar JBSqlUtils es necesario que los miembros de la clase modelo, que correspondan
 * a una columna de la tabla correspondiente al modelo, sean del tipo Column, especificando el tipo de dato
-* en java y por medio del constructor del objeto Column se pase cómo parametro el tipo de dato SQL
+* en java y por medio del constructor del objeto Column se pase cómo parámetro el tipo de dato SQL
 * de la columna, adicional a esto se pueden definir restricciones, cómo valor por defecto para la columna 
 * para crear la tabla en BD's, pero estos últimos son opcionales
-* el único parametro obligatorio es el DataType de la columna en BD's.
+* el único parámetro obligatorio es el DataType de la columna en BD's.
 *
 * Por convención el nombre de cada miembro correspondiente a una columna en BD's debe tener el mismo
 * nombre que la columna en BD's. y estos deben tener sus respectivos métodos set an get, teniendo estos
@@ -170,13 +165,12 @@ y las columnas que deseamos tenga nuestra tabla.
 */
 
 
-
 /**
 * Declara un miembro de la tabla que deseamos crear, el cual en java almacenara un dato de tipo Integer, se define Integer,
 * ya que la clase Column es una clase generica y no puede trabajar con datos primivitos cómo int, pero si con
 * clases contenedoras cómo Integer.
 *
-* En el constructor mandamos como primer parametro el nombre que deseamos tenga la columna.
+* En el constructor mandamos como primer parámetro el nombre que deseamos tenga la columna.
 *
 * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
 * Integer.
@@ -186,36 +180,33 @@ y las columnas que deseamos tenga nuestra tabla.
 */
 Column<Integer> Id = new Column<>("Id", DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
 
-
 /**
 * Declara un miembro de la tabla, el cual en java almacenara un dato de tipo String.
 * <p>
 *
-* En el constructor mandamos como primer parametro el nombre que deseamos tenga la columna.
+* En el constructor mandamos como primer parámetro el nombre que deseamos tenga la columna.
 *
 * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
 * Varchar.
 */
 Column<String> Name = new Column<>("Name", DataType.VARCHAR);
 
-
 /**
 * Declara un miembro de la tabla, el cual en java almacenara un dato de tipo String.
 * <p>
 *
-* En el constructor mandamos como primer parametro el nombre que deseamos tenga la columna.
+* En el constructor mandamos como primer parámetro el nombre que deseamos tenga la columna.
 *
 * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
 * Varchar.
 */
 Column<String> Apellido = new Column<>("Apellido",DataType.VARCHAR);
 
-
 /**
 * Declara un miembro del modelo, el cual en java almacenara un dato de tipo Boolean.
 * <p>
 *
-* En el constructor mandamos como primer parametro el nombre que deseamos tenga la columna.
+* En el constructor mandamos como primer parámetro el nombre que deseamos tenga la columna.
 *
 * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
 * BOOLEAN.
@@ -225,57 +216,93 @@ Column<String> Apellido = new Column<>("Apellido",DataType.VARCHAR);
 * se estará conectando el modelo.
 * <p>
 * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
-* desde nuestra aplicación en caso esta no exista a través del metodo modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
+* desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
 */
 Column<Boolean> Estado = new Column<>("Estado", DataType.BOOLEAN, "true", Constraint.DEFAULT);
-        Name.setSize("1000");
-        Apellido.setSize("1000");
+Name.setSize("1000");
+Apellido.setSize("1000");
 
 /**
-* Para crear una tabla utilizamos el metodo createTable despues de haber definido el nombre de la tabla que deseamos Crear 
+* Para crear una tabla utilizamos el método createTable despues de haber definido el nombre de la tabla que deseamos Crear 
 * y las columnas que deseamos tenga nuestra tabla
 */
-createTable("Proveedor").addColumn(Name).addColumn(Id).addColumn(Apellido).addColumn(Estado).createTable();
-
+JBSqlUtils.createTable("Proveedor").addColumn(Name).addColumn(Id).addColumn(Apellido).addColumn(Estado).createTable();
 ~~~
 
 - Eliminar una tabla.
 
-Para eliminar una tabla de BD's utilizamos el metodo execute de la clase dropTableIfExist a la cual mandamos como
-parametro
+Para eliminar una tabla de BD's utilizamos el método execute de la clase dropTableIfExist a la cual mandamos como
+parámetro
 el nombre de la tabla que queremos eliminar.
 
 ~~~
-
 /**
-* Para eliminar una tabla de BD's utilizamos el metodo execute de la clase dropTableIfExist a la cual mandamos como parametro
+* Para eliminar una tabla de BD's utilizamos el método execute de la clase dropTableIfExist a la cual mandamos como parámetro
 * el nombre de la tabla que queremos eliminar.
 */
-dropTableIfExist("Proveedor").execute();
-
+JBSqlUtils.dropTableIfExist("Proveedor").execute();
 ~~~
 
 - Insertar Registros en una tabla.
 
-Para insertar registros hacemos uso del metodo execute que esta disponible en la clase value y andValue a las cuales
+Para insertar registros hacemos uso del método execute que está disponible en la clase value y andValue a las cuales
 podemos acceder
-a traves de la clase insertInto a la cual enviamos como parametro el nombre de la tabla a la que queremos insertar, a
-traves de los metodos value
-y andValue definimos los valores que queremos insertar en determinada columna, el metodo execute retorna la cantidad de
+a través de la clase insertInto a la cual enviamos como parámetro el nombre de la tabla a la que queremos insertar, a
+través de los métodos value
+y andValue definimos los valores que queremos insertar en determinada columna, el método execute retorna la cantidad de
 registros insertados.
 
-De suceder algun error durante la ejecución de la sentencia insertInto retorna 0, de lo contrario retorna 1, ya que solo
+De suceder algún error durante la ejecución de la sentencia insertInto retorna 0, de lo contrario retorna 1, ya que solo
 se puede insertar un registro a la vez.
 
 ~~~
-
 /**
-* Para insertar registros hacemos uso del metodo execute que esta disponible en la clase value y andValue a las cuales podemos acceder 
-* a traves de la clase insertInto a la cual enviamos como parametro el nombre de la tabla a la que queremos insertar, a traves de los metodos value
+* Para insertar registros hacemos uso del método execute que está disponible en la clase value y andValue a las cuales podemos acceder 
+* a través de la clase insertInto a la cual enviamos como parámetro el nombre de la tabla a la que queremos insertar, a través de los métodos value
 * y andValue definimos los valores que queremos insertar en determinada columna.
 */
-int registros=insertInto("Proveedor").value("Name", "Daniel").andValue("Apellido", "Quiñonez").andValue("Estado", false).execute();
+int registros=JBSqlUtils.insertInto("Proveedor").value("Name", "Daniel").andValue("Apellido", "Quiñonez").andValue("Estado", false).execute();
+~~~
 
+- Seleccionar registros.
+
+Para obtener los registros de una tabla de BD's podemos hacerlo a través del método select envíando como parametro
+el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a través del
+método where el cual proporciona acceso a métodos por medio de los cuales podemos filtrar los resultados.
+
+Los resultados serán devueltos en una List<JSONObject> del tipo JSONObject de
+la implementación json de org.json
+
+~~~
+/**
+* Si deseamos obtener todas las columnas de la tabla envíamos el parametro columnas del método 
+* getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parametro 
+* del método select
+*/
+List<String> columnas=null;
+
+/**
+* Si deseamos obtener unicamente determinadas columnas, es necesario envíar como parametro una lista de strings
+* con los nombres de las columnas que deseamos obtener del método getInJsonObjects
+*/
+columnas= new ArrayList<>();
+columnas.add("Id");
+columnas.add("Name");
+
+/**
+* Para obtener los registros de una tabla de BD's podemos hacerlo a través del método select envíando como parametro
+* el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a través del método 
+* where el cual proporciona acceso a métodos por medio de los cuales podemos filtrar los resultados.
+*/
+List<JSONObject> lista=JBSqlUtils.select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
+    .and("Apellido", Operator.LIKE, "%m%").take(3).getInJsonObjects(columnas);
+
+/**
+* Imprimimos los registros obtenidos
+*/
+lista.forEach( fila -> {
+LogsJB.info(fila.toString());
+});
 ~~~
 
 - Actualizar registros.
@@ -286,15 +313,14 @@ llegar al método execute, el cual ejecuta la sentencia SQL generada y retorna e
 filas afectadas por la ejecución de la sentencia SQL.
 
 ~~~
-
 /**
  * Actualizar todas las filas de una tabla X (Test), senteando un valor Y(Jose Carlos) a una columna Z(name).
- * El método update recibe cómo parametro el nombre de la tabla que se desea actualizar y proporciona acceso
- * al método set el cual recibe cómo primer parametro el nombre de la columna que se desea modificar y el valor
+ * El método update recibe cómo parámetro el nombre de la tabla que se desea actualizar y proporciona acceso
+ * al método set el cual recibe cómo primer parámetro el nombre de la columna que se desea modificar y el valor
  * que se desea setear a la columna, el método set proporciona acceso al método execute el cual se encarga de
  * ejecutar la sentencia SQL generada y retorna el numero de filas afectadas.
  */
-int rows_afected=update("Test").set("name", "Jose Carlos").execute();
+int rows_afected=JBSqlUtils.update("Test").set("name", "Jose Carlos").execute();
 
 /**
  * Podemos agregar una sentencia Where, por medio del cual podemos acceder a los métodos necesarios para
@@ -302,8 +328,7 @@ int rows_afected=update("Test").set("name", "Jose Carlos").execute();
  * llamado al método execute el cual se encarga de ejecutar la sentencia SQL generada y retorna el numero de filas
  * afectadas.
  */
-rows_afected=update("Test").set("name", "Jose Carlos").where("Id", Operator.MAYOR_QUE, 2).and("apellido", Operator.LIKE, "Bran%").execute();
-
+rows_afected=JBSqlUtils.update("Test").set("name", "Jose Carlos").where("Id", Operator.MAYOR_QUE, 2).and("apellido", Operator.LIKE, "Bran%").execute();
 
 /**
  * Podemos actualizar mas de una columna a través del método andSet, el cual nos proporciona la capacidad de
@@ -311,8 +336,7 @@ rows_afected=update("Test").set("name", "Jose Carlos").where("Id", Operator.MAYO
  * where por medio del cual podemos filtrar las filas que se veran afectadas al llamar al método execute, el cual
  * se encargara de ejecutar la sentencia SQL generada y retorna el numero de filas afectadas.
  */
-rows_afected=update("Test").set("name", "Jose Carlos").andSet("IsMayor", true).execute();
-
+rows_afected=JBSqlUtils.update("Test").set("name", "Jose Carlos").andSet("IsMayor", true).execute();
 ~~~
 
 - Eliminar registros.
@@ -326,54 +350,13 @@ filas afectadas por la ejecución de la sentencia SQL.
 
 /**
  * Eliminar todas las filas de una tabla X (Test), donde la columna Y(Id) tiene un valor MAYOR O IGUAL a Z(2).
- * El método delete recibe cómo parametro el nombre de la tabla que se desea eliminar registros y proporciona acceso
+ * El método delete recibe cómo parámetro el nombre de la tabla que se desea eliminar registros y proporciona acceso
  * al método Where, por medio del cual podemos acceder a los métodos necesarios para
  * filtrar la cantidad de filas que queremos eliminar, una vez hemos terminado de brindar la lógica hacemos el
  * llamado al método execute el cual se encarga de ejecutar la sentencia SQL generada y retorna el numero de filas
  * afectadas.
  */
-int rows_afected=delete("Test").where("Id", Operator.MAYOR_IGUAL_QUE, 2).execute();
-
-~~~
-
-- Seleccionar registros.
-
-Para obtener los registros de una tabla de BD's podemos hacerlo a traves del metodo select envíando como parametro
-el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a traves del
-metodo
-where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
-
-~~~
-
-/**
-* Si deseamos obtener todas las columnas de la tabla envíamos el parametro columnas del metodo 
-* getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parametro 
-* del metodo select
-*/
-List<String> columnas=null;
-
-/**
-* Si deseamos obtener unicamente determinadas columnas, es necesario envíar como parametro una lista de strings
-* con los nombres de las columnas que deseamos obtener del metodo getInJsonObjects
-*/
-columnas= new ArrayList<>();
-columnas.add("Id");
-columnas.add("Name");
-
-/**
-* Para obtener los registros de una tabla de BD's podemos hacerlo a traves del metodo select envíando como parametro
-* el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a traves del metodo 
-* where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
-*/
-List<JSONObject> lista=select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
-    .and("Apellido", Operator.LIKE, "%m%").take(3).getInJsonObjects(columnas);
-
-/**
-* Imprimimos los registros obtenidos
-*/
-lista.forEach( fila -> {
-LogsJB.info(fila.toString());
-});
+int rows_afected=JBSqlUtils.delete("Test").where("Id", Operator.MAYOR_IGUAL_QUE, 2).execute();
 
 ~~~
 
@@ -647,9 +630,9 @@ testModel.save();
  * Si queremos utilizar el mismo modelo para insertar otro registro con valores diferentes,
  * es necesario que esperemos a que el modelo no este realizando ninguna tarea, relacionada con lectura o
  * escritura en la BD's, debido a que estas tareas JBSqlUtils las realiza en segundo plano, para no interrumpir
- * el hilo de ejecución principal y entregar un mejor rendimiento, por si necesitamos realizar alguna otra
+ * el hilo de ejecución principal y entregar un mejor rendimiento, por si necesitamos realizar algúna otra
  * instrucción mientras el modelo esta trabajando en segundo plano. para poder saber si el modelo actualmente esta
- * ocupado, podemos hacerlo a traves del método getTaskIsReady(), el cual obtiene la bandera que indica si
+ * ocupado, podemos hacerlo a través del método getTaskIsReady(), el cual obtiene la bandera que indica si
  * la tarea que estaba realizando el modelo ha sido terminada
  * @return True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
  * actualmente.
@@ -676,7 +659,7 @@ testModel.getIsMayor().setValor(false);
 testModel.setTimestamps(false);
 
 /**
-* En este segundo ejemplo si seteamos un valor a la columna IsMayor, ya que no queremos que esta
+* En este segundo ejemplo si seteamos un valor a la columna IsMayor, ya que no queremos que está
 * tenga el valor configurado por default para esta columna al momento de crear la tabla.
 */
 testModel.save();
@@ -1150,7 +1133,7 @@ Información en BD's SQLite antes de actualizar los registros
 
 Actividad registrada por JBSqlUtils, Cómo JBSqlUtils ejecuta las operaciones de escritura cómo de lectura en segundo
 plano
-para que el hilo de ejecución principal no se vea afectado y pueda realizar alguna otra actividad en paralelo, por cada
+para que el hilo de ejecución principal no se vea afectado y pueda realizar algúna otra actividad en paralelo, por cada
 modelo
 que se actualiza, JBSqlUtils crea un subproceso para cada modelo, de esta manera las operaciones de escritura en BD's
 se realizan en paralelo, mejorando el rendimiento de nuestra aplicación.
@@ -1197,7 +1180,7 @@ LogsJB.info(testModel.getId().getValor()+"  "+testModel.getName().getValor()+"  
   +"  "+testModel.getIsMayor().getValor()+"  "+testModel.getCreated_at().getValor()+"  "+testModel.getUpdated_at().getValor());
 
 /**
-* LLamamos al metodo delete, el cual se encargará de eliminar el registro en BD's.
+* LLamamos al método delete, el cual se encargará de eliminar el registro en BD's.
 */
 testModel.delete();
 
@@ -1239,7 +1222,7 @@ Información en BD's SQLite antes de eliminar los registros
 
 Actividad registrada por JBSqlUtils, Cómo JBSqlUtils ejecuta las operaciones de escritura cómo de lectura en segundo
 plano
-para que el hilo de ejecución principal no se vea afectado y pueda realizar alguna otra actividad en paralelo, por cada
+para que el hilo de ejecución principal no se vea afectado y pueda realizar algúna otra actividad en paralelo, por cada
 modelo
 que se elimina, JBSqlUtils crea un subproceso para cada modelo, de esta manera las operaciones de escritura en BD's
 se realizan en paralelo, mejorando el rendimiento de nuestra aplicación.

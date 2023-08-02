@@ -321,7 +321,7 @@ public class Column<T> {
      * @return Retorna el nombre del tipo de dato en SQL si este no necesita la especificación de un tamaño.
      * Ejemplo: Datatime retornara Datatime
      * Varchar retornara Varchar(Size).
-     * El Size puede ser manipulado a travez del metodo SetSize(Size);
+     * El Size puede ser manipulado a travez del método SetSize(Size);
      */
     public String columnToString() {
         if (stringIsNullOrEmpty(this.getSize())) {
@@ -334,7 +334,7 @@ public class Column<T> {
     /**
      * Setea el Valor que tendra entre parentecis el tipo de dato, por lo general sería
      * Varchar(size), pero de ser otro tipo de dato por ejemplo Identity(1,1), si usted desea modificar
-     * el contenido de identity entre parentecis puede hacerlo a travez del metodo SetSize(Size);
+     * el contenido de identity entre parentecis puede hacerlo a travez del método SetSize(Size);
      *
      * @param Size Cadena que representa el contenido del tipo de dato entre Parentesis.
      */
@@ -345,7 +345,7 @@ public class Column<T> {
     /**
      * Obtiene el Valor que tendra entre parentecis el tipo de dato, por lo general sería
      * Varchar(size), pero de ser otro tipo de dato por ejemplo Identity(1,1), si usted desea modificar
-     * el contenido de identity entre parentecis puede hacerlo a travez del metodo SetSize(Size);
+     * el contenido de identity entre parentecis puede hacerlo a travez del método SetSize(Size);
      *
      * @return el Valor que tendra entre parentecis el tipo de dato.
      */

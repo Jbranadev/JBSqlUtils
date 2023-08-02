@@ -73,13 +73,13 @@ public class TestModel extends JBSqlUtils {
     /**
      * Para poder utilizar JBSqlUtils es necesario que los miembros de la clase modelo, que correspondan
      * a una columna de la tabla correspondiente al modelo, sean del tipo Column, especificando el tipo de dato
-     * en java y por medio del constructor del objeto Column se pase como parametro el tipo de dato SQL
+     * en java y por medio del constructor del objeto Column se pase como parámetro el tipo de dato SQL
      * de la columna, adicional a esto se pueden definir restricciones, como valor por defecto para la columna
      * si se desea utilizar el modelo para crear la tabla en BD's, pero estos últimos son opcionales
-     * el único parametro obligatorio es el DataType de la columna en BD's.
+     * el único parámetro obligatorio es el DataType de la columna en BD's.
      *
      * Por convención el nombre de cada miembro correspondiente a una columna en BD's debe tener el mismo
-     * nombre que la columna en BD's. y estos deben tener sus respectivos metodos set an get, teniendo estos
+     * nombre que la columna en BD's. y estos deben tener sus respectivos métodos set an get, teniendo estos
      * por convención el nombre setColumnName, getColumName.
      *
      * Por ejemplo, para la columna Id = El miembro del modelo será Id, JBSqlUtils no es case sensitive,
@@ -108,15 +108,15 @@ public class TestModel extends JBSqlUtils {
      * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
      * Varchar.
      * <p>
-     * Agregamos un parametro extra el cual es el default_value antes de indicar las restricciones,
-     * este parametro es de tipo String, por medio de este parametro podemos definir el valor que deseamos tenga la
+     * Agregamos un parámetro extra el cual es el default_value antes de indicar las restricciones,
+     * este parámetro es de tipo String, por medio de este parámetro podemos definir el valor que deseamos tenga la
      * columna por default (Puede ser un valor del tipo de dato SQL, o una funcion SQL que retorne un valor del
      * tipo de dato SQL de la columna) cuando se inserte un registro y no se especifique un dato para esa columna,
      * este unicamente funcionara cuando tenga la restriccion DEFAULT definida y se definira unicamente si se
-     * crea la tabla en BD's desde nuestra aplicación a través del metodo modelo.crateTable().
+     * crea la tabla en BD's desde nuestra aplicación a través del método modelo.crateTable().
      * <p>
      * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
-     * desde nuestra aplicación en caso esta no exista a través del metodo modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
+     * desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
      */
     private Column<String> name = new Column<>(DataType.VARCHAR, "'Daniel'", Constraint.DEFAULT);
 
@@ -139,7 +139,7 @@ public class TestModel extends JBSqlUtils {
      * se estará conectando el modelo.
      * <p>
      * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
-     * desde nuestra aplicación en caso esta no exista a través del metodo modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
+     * desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
      */
     private Column<Boolean> isMayor = new Column<>(DataType.BIT, "true", Constraint.DEFAULT);
 

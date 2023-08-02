@@ -35,7 +35,7 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
 
 /**
  * @author Jose Bran
- * Clase que proporciona el metodo para ejecutar sentencias SQL sin necesidad de instanciar
+ * Clase que proporciona el método para ejecutar sentencias SQL sin necesidad de instanciar
  * un modelo u obtenerlo de BD's
  */
 class Execute extends Methods_Conexion {

@@ -15,7 +15,7 @@
         SQLite,
         MySQL, PostgreSQL y SQLServer, de una manera fácil y rápida sin interrumpir la ejecución del hilo principal
         del programa, lo cual la hace un potente ORM para aplicaciones android y sistemas empresariales que tengan
-        la necesidad de poder conectarse a alguna de estas 4 tipos de BD's, cabe mencionar que para ello utiliza
+        la necesidad de poder conectarse a algúna de estas 4 tipos de BD's, cabe mencionar que para ello utiliza
         el SQLite JDBC de org.xerial, org.postgresql, mysql y com.microsoft.sqlserver. Para mayor información,
         consultar el siguiente enlace https://github.com/JoseCarlosBran/JBSqlUtils/blob/master/Readme.md
     </description>
