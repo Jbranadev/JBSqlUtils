@@ -31,9 +31,16 @@ public class JBSqlUtilsTestMySQL {
 
     @Test(testName = "Setear Properties Conexión for Model")
     public void setPropertiesConexiontoModel() throws DataBaseUndefind, PropertiesDBUndefined {
+        /**
+         * Instanciamos el modelo indicando que no obtendra las variables globales de conexión
+         * de la JVM
+         */
         this.testModel = new TestModel(false);
         logParrafo("Se setearan las propiedades de conexión del modelo para MySQL");
         this.testModel.setGetPropertySystem(false);
+        /**
+         * Seteamos las propiedades de conexión del modelo
+         */
         this.testModel.setPort("5076");
         this.testModel.setHost("127.0.0.1");
         this.testModel.setUser("Bran");
@@ -201,7 +208,15 @@ public class JBSqlUtilsTestMySQL {
         List<TestModel> models = new ArrayList<TestModel>();
         //Llenamos la lista de mdelos a insertar en BD's
         for (int i = 0; i < 10; i++) {
+            /**
+             * Instanciamos el modelo indicando que no obtendra las variables de conexión globales
+             */
             TestModel model = new TestModel(false);
+            /**
+             * Trasladamos las propiedades de conexión al modelo a traves del método llenarPropertiesFromModel
+             * enviamos como parámetro el modelo desde el cual se obtendran las variables de conexión.
+             * @param proveedor Modelo desde el que se obtendran las propiedades de conexión
+             */
             model.llenarPropertiesFromModel(this.testModel);
             model.getName().setValor("Modelo #" + i);
             model.getApellido().setValor("Apellido #" + i);

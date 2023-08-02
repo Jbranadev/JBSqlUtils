@@ -1865,6 +1865,7 @@ public class Methods_Conexion extends Conexion {
      */
     public <T extends Methods_Conexion, G extends Methods_Conexion> void llenarPropertiesFromModel(G proveedor) {
         try {
+            this.setGetPropertySystem(proveedor.getGetPropertySystem());
             List<Method> metodosProveedor = Arrays.asList(proveedor.getClass().getMethods());
             //Filtro los metodos de las propiedades que deseo obtener
             metodosProveedor = metodosProveedor.stream().filter(metodo -> {

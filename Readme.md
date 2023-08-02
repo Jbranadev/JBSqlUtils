@@ -370,7 +370,6 @@ que corresponden a cada una de las columnas de la tabla con las que queremos pod
 acá vemos un ejemplo:
 
 ~~~
-
 package io.github.josecarlosbran.JBSqlUtils.Pruebas;
 
 import io.github.josecarlosbran.JBSqlUtils.Column;
@@ -417,6 +416,24 @@ public class Test extends JBSqlUtils {
     this.getName().setSize("1000");
     
   }
+
+   /**
+    * Si deseamos que nuestro modelo no utilice las propiedades de conexión globales, podemos crear un constructor que 
+    * reciba un único parametro de tipo Booleano el cual enviamos como parametro al constructor de la clase padre JBSqlUtils
+    * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema,
+    *                          true si deseamos que obtenga las variables globales y false si deseamos que no obtenga las 
+    *                          variables globales
+    * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+    *                               BD's a la cual se conectara el modelo.
+    * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+    *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+    */
+   public TestModel(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
+       super(getPropertySystem);
+       this.setTableName("testModel");
+       this.getName().setSize("200");
+       this.getApellido().setSize("200");
+   }
 
   /**
    * Para poder utilizar JBSqlUtils es necesario que los miembros de la clase modelo, que correspondan
@@ -525,7 +542,50 @@ public class Test extends JBSqlUtils {
     this.isMayor = isMayor;
   }
 }
+~~~
 
+## ¿Cómo instanciar un modelo que utilice sus propias propiedades de conexión?
+
+Para poder crear un modelo que se conecte a una BD's diferente a la configurada
+a través de las variables globales, se realizara de la siguiente manera
+
+~~~
+/**
+ * Instanciamos el modelo indicando que no obtendra las variables globales de conexión
+ * de la JVM
+ */
+this.testModel = new TestModel(false);
+logParrafo("Se setearan las propiedades de conexión del modelo para MySQL");
+this.testModel.setGetPropertySystem(false);
+/**
+ * Seteamos las propiedades de conexión del modelo 
+ */
+this.testModel.setPort(String port);
+this.testModel.setHost(String host);
+this.testModel.setUser(String user);
+this.testModel.setPassword(String password);
+this.testModel.setBD(String NameBD);
+this.testModel.setDataBaseType(DataBase dataBaseType);
+this.testModel.setPropertisURL(String propertiesUrlConection);
+~~~
+
+## ¿Cómo trasladar las propiedades de conexión de un modelo a otro?
+
+Para poder crear un modelo que se conecte a una BD's diferente a la configurada
+a través de las variables globales, se realizara de la siguiente manera
+
+~~~
+/**
+ * Instanciamos el modelo indicando que no obtendra las variables globales de conexión
+ * de la JVM
+ */
+TestModel model = new TestModel(false);
+/**
+ * Trasladamos las propiedades de conexión al modelo a traves del método llenarPropertiesFromModel
+ * enviamos como parámetro el modelo desde el cual se obtendran las variables de conexión.
+ * @param proveedor Modelo desde el que se obtendran las propiedades de conexión
+ */
+model.llenarPropertiesFromModel(this.testModel);
 ~~~
 
 * * *
@@ -536,7 +596,6 @@ Para poder eliminar la tabla correspondiente a un modelo únicamente necesitamos
 instancia del mismo y llamar al método dropTableIfExist().
 
 ~~~
-
 /**
 * Instanciamos el modelo
 */
@@ -548,7 +607,6 @@ Test testModel = new Test();
 * en BD's retorna False.
 */
 testModel.dropTableIfExist();
-
 ~~~
 
 * * *
@@ -559,7 +617,6 @@ Para poder crear la tabla correspondiente a un modelo únicamente necesitamos cr
 instancia del mismo y llamar al método crateTable().
 
 ~~~
-
 /**
 * Instanciamos el modelo
 */
@@ -571,7 +628,6 @@ Test testModel = new Test();
 * False si la tabla correspondiente al modelo ya existe en BD's
 */
 testModel.crateTable();
-
 ~~~
 
 ![](Imagenes/Table1.jpg)
@@ -584,7 +640,6 @@ si queremos que JBSqlUtils gestione las columnas o false si queremos que JBSqlUt
 por default JBSqlUtils esta configurada para manejar la columnas created_at y update_at.
 
 ~~~
-
 /**
 * Setea la bandera que define si el modelo desea que JBSqlUtils maneje las timestamps Created_at, Update_at.
 * @param timestamps True si las timestamps serán manejadas por JBSqlUtils, False, si el modelo no tiene estas
@@ -592,14 +647,12 @@ por default JBSqlUtils esta configurada para manejar la columnas created_at y up
 */
 testModel.setTimestamps(false);
 
-
 /**
 * Crea la tabla correspondiente al modelo en BD's si esta no existe.
 * @return True si la tabla correspondiente al modelo en BD's no existe y fue creada exitosamente,
 * False si la tabla correspondiente al modelo ya existe en BD's
 */
 testModel.crateTable();
-
 ~~~
 
 ![](Imagenes/Table2.jpg)
@@ -612,7 +665,6 @@ Para poder insertar un modelo en la tabla correspondiente al mismo en BD's únic
 al método save(), una vez estemos seguros de que el modelo posee la información necesaria para insertar el registro.
 
 ~~~
-
 /**
 * Asignamos valores a las columnas del modelo, luego llamamos al método save(),
 * el cual se encarga de insertar un registro en la tabla correspondiente al modelo con la información del mismo
@@ -640,9 +692,7 @@ testModel.save();
  * De utilizar otro modelo, no es necesario esperar a que el primer modelo este libre.
  * 
  */
-while (!testModel.getTaskIsReady()){
-
-}
+testModel.waitOperationComplete();
 
 /**
 * Una vez hemos comprobado que el modelo no esta escribiendo u obteniendo información en segundo plano
@@ -663,7 +713,6 @@ testModel.setTimestamps(false);
 * tenga el valor configurado por default para esta columna al momento de crear la tabla.
 */
 testModel.save();
-
 ~~~
 
 ![](Imagenes/Insertar.jpg)
@@ -677,7 +726,6 @@ Para obtener un registro de BD's JBSqlUtils proporciona diferentes métodos los 
 ### Obtener el registro en el modelo que realiza la búsqueda.
 
 ~~~
-
 /**
 * Podemos obtener un registro de la tabla correspondiente al modelo en BD's a través del método get()
 * el cual llena el modelo que realiza la invocación del método con la información obtenida.
@@ -691,9 +739,7 @@ testModel.where("name", Operator.LIKE, "Jos%").and("apellido", Operator.IGUAL_QU
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!testModel.getTaskIsReady()){
-
-}
+testModel.waitOperationComplete();
 
 /**
 * Mostramos la información obtenida
@@ -704,13 +750,11 @@ LogsJB.info(testModel.getId().getValor()+"  "+testModel.getName().getValor()+"  
 ~~~
 
 ![](Imagenes/getmodel.jpg)
-
 * * *
 
 ### Obtener el registro en un modelo diferente al modelo que realiza la búsqueda.
 
 ~~~
-
 /**
 * Podemos obtener un registro de la tabla correspondiente al modelo en BD's a través del método first()
 * el cual obtiene un nuevo modelo del tipo que realiza la invocación del método con la información obtenida,
@@ -725,15 +769,13 @@ Test testModel2= (Test) testModel.where("isMayor", Operator.IGUAL_QUE, false).fi
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!testModel.getTaskIsReady()){
+testModel.waitOperationComplete();
 
-}
 /**
 * Mostramos la información obtenida
 */
 LogsJB.info(testModel2.getId().getValor()+"  "+testModel2.getName().getValor()+"  "+testModel2.getApellido().getValor()
   +"  "+testModel2.getIsMayor().getValor()+"  "+testModel2.getCreated_at().getValor()+"  "+testModel2.getUpdated_at().getValor());
-
 ~~~
 
 ![](Imagenes/first.jpg)
@@ -753,7 +795,6 @@ de no encontrar el registro para el modelo.
 - En el siguiente Ejemplo obtendrá la información para el modelo
 
 ~~~
-
 /**
 * Podemos obtener un registro de la tabla correspondiente al modelo en BD's a través del método firstOrFail()
 * el cual obtiene un nuevo modelo del tipo que realiza la invocación del método con la información obtenida,
@@ -771,16 +812,13 @@ Test testModel2= (Test) testModel.where("Name", Operator.IGUAL_QUE, "Jose").firs
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!testModel.getTaskIsReady()){
+testModel.waitOperationComplete();
 
-}
 /**
 * Mostramos la información obtenida
 */
 LogsJB.info(testModel2.getId().getValor()+"  "+testModel2.getName().getValor()+"  "+testModel2.getApellido().getValor()
   +"  "+testModel2.getIsMayor().getValor()+"  "+testModel2.getCreated_at().getValor()+"  "+testModel2.getUpdated_at().getValor());
-
-
 ~~~
 
 Información en BD's SQLite
@@ -794,7 +832,6 @@ Información obtenida por el modelo
 - En el siguiente Ejemplo Lanzara la excepción ModelNotFound
 
 ~~~
-
 /**
 * Podemos obtener un registro de la tabla correspondiente al modelo en BD's a través del método firstOrFail()
 * el cual obtiene un nuevo modelo del tipo que realiza la invocación del método con la información obtenida,
@@ -809,20 +846,16 @@ Información obtenida por el modelo
 */
 Test testModel2= (Test) testModel.where("Name", Operator.IGUAL_QUE, "Jose").and("IsMayor", Operator.IGUAL_QUE, false).firstOrFail();
 
-
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!testModel.getTaskIsReady()){
+testModel.waitOperationComplete();
 
-}
 /**
 * Mostramos la información obtenida
 */
 LogsJB.info(testModel2.getId().getValor()+"  "+testModel2.getName().getValor()+"  "+testModel2.getApellido().getValor()
   +"  "+testModel2.getIsMayor().getValor()+"  "+testModel2.getCreated_at().getValor()+"  "+testModel2.getUpdated_at().getValor());
-
-
 ~~~
 
 Información en BD's SQLite
@@ -845,7 +878,6 @@ Podemos obtener multiples registros de BD's a través de los siguientes métodos
 Obtiene una lista de modelos que coinciden con la búsqueda realizada por medio de la consulta SQL
 
 ~~~
-
 /**
 * Declaramos una lista de modelos del tipo Test, en la cual almacenaremos la información obtenida de BD's'
 */
@@ -860,9 +892,7 @@ lista=testModel.where("id", Operator.MAYOR_QUE, 2).getAll();
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!testModel.getTaskIsReady()){
-
-}
+testModel.waitOperationComplete();
 
 /**
 * Declaramos una función anonima que recibira cómo parametro un obtjeto del tipo Test
@@ -878,9 +908,6 @@ LogsJB.info(fila.getId().getValor()+"  "+fila.getName().getValor()+"  "+fila.get
 * su contenido por medio de la función anonima que declaramos ateriormente.
 */
 lista.forEach(showFilas);
-
-
-
 ~~~
 
 Información en BD's SQLite
@@ -901,7 +928,6 @@ Obtiene una lista de modelos que coinciden con la búsqueda realizada por medio 
 por la cantidad de registros especificados en el método take()
 
 ~~~
-
 /**
 * Declaramos una lista de modelos del tipo Test, en la cual almacenaremos la información obtenida de BD's'
 */
@@ -917,9 +943,7 @@ lista=testModel.where("id", Operator.MAYOR_QUE, 2).take(2).get();
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!testModel.getTaskIsReady()){
-
-}
+testModel.waitOperationComplete();
 
 /**
 * Declaramos una función anonima que recibira cómo parametro un obtjeto del tipo Test
@@ -935,9 +959,6 @@ LogsJB.info(fila.getId().getValor()+"  "+fila.getName().getValor()+"  "+fila.get
 * su contenido por medio de la función anonima que declaramos ateriormente.
 */
 lista.forEach(showFilas);
-
-
-
 ~~~
 
 Información en BD's SQLite
@@ -960,7 +981,6 @@ Ordena los registros obtenidos de BD's de acuerdo a la columna que enviamos cóm
 tipo de ordenamiento que le especificamos.
 
 ~~~
-
 /**
 * Declaramos una lista de modelos del tipo Test, en la cual almacenaremos la información obtenida de BD's'
 */
@@ -977,9 +997,7 @@ lista=testModel.where("id", Operator.MAYOR_QUE, 2).orderBy("id", OrderType.DESC)
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!testModel.getTaskIsReady()){
-
-}
+testModel.waitOperationComplete();
 
 /**
 * Declaramos una función anonima que recibira cómo parametro un obtjeto del tipo Test
@@ -995,9 +1013,6 @@ LogsJB.info(fila.getId().getValor()+"  "+fila.getName().getValor()+"  "+fila.get
 * su contenido por medio de la función anonima que declaramos ateriormente.
 */
 lista.forEach(showFilas);
-
-
-
 ~~~
 
 Información en BD's SQLite
@@ -1022,7 +1037,6 @@ lo cual podemos hacerlo a través del método setModelExist(), adicional a esto,
 modelo en su columna correspondiente a la primaryKey, tenga el valor del registro que queremos actualizar.
 
 ~~~
-
 /**
 *Obtenemos el registro que coincide con la sentencia SQL generada por el modelo
 */
@@ -1031,15 +1045,13 @@ testModel.where("Apellido", Operator.IGUAL_QUE, "Cabrera").and("IsMayor", Operat
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!testModel.getTaskIsReady()){
+testModel.waitOperationComplete();
 
-}
 /**
 * Mostramos la información obtenida
 */
 LogsJB.info(testModel.getId().getValor()+"  "+testModel.getName().getValor()+"  "+testModel.getApellido().getValor()
   +"  "+testModel.getIsMayor().getValor()+"  "+testModel.getCreated_at().getValor()+"  "+testModel.getUpdated_at().getValor());
-
 
 /**
 * Modificamos el valor de la columna IsMayor a true
@@ -1050,7 +1062,6 @@ testModel.getIsMayor().setValor(true);
 * LLamamos al método save, el cual se encargará de actualizar el registro en BD's.
 */
 testModel.save();
-
 ~~~
 
 Información en BD's SQLite antes de actualizar el registro
@@ -1080,7 +1091,6 @@ adicional a esto, debemos asegurarnos, de que cada uno de los modelos en su colu
 tenga el valor del registro que queremos actualizar.
 
 ~~~
-
 /**
 * Declaramos una lista de modelos del tipo Test, en la cual almacenaremos la información obtenida de BD's'
 */
@@ -1094,9 +1104,7 @@ lista=testModel.where("id", Operator.MAYOR_IGUAL_QUE, 1).and("id", Operator.MENO
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!testModel.getTaskIsReady()){
-
-}
+testModel.waitOperationComplete();
 
 /**
 * Declaramos una función anonima que recibira cómo parametro un obtjeto del tipo Test
@@ -1117,14 +1125,11 @@ fila.getIsMayor().setValor(!fila.getIsMayor().getValor());
 */
 lista.forEach(showFilas);
 
-
 /**
 * Almacena la información de los modelos proporcionados en BD's
 * @param modelos Lista de modelos que serán Insertados o Actualizados
 */
 testModel.saveALL(lista);
-    
-
 ~~~
 
 Información en BD's SQLite antes de actualizar los registros
@@ -1161,7 +1166,6 @@ En caso no hayamos obtenido el modelo de BD's es importante asegurarnos de que e
 modelo en su columna correspondiente a la primaryKey, tenga el valor del registro que queremos eliminar.
 
 ~~~
-
 /**
 *Obtenemos el registro que coincide con la sentencia SQL generada por el modelo
 */
@@ -1170,9 +1174,8 @@ testModel.where("Apellido", Operator.IGUAL_QUE, "Cabrera").and("Name", Operator.
 /**
 * Esperamos a que el modelo termine de obtener la información de BD's
 */
-while (!testModel.getTaskIsReady()){
+testModel.waitOperationComplete();
 
-}
 /**
 * Mostramos la información obtenida
 */
@@ -1183,7 +1186,6 @@ LogsJB.info(testModel.getId().getValor()+"  "+testModel.getName().getValor()+"  
 * LLamamos al método delete, el cual se encargará de eliminar el registro en BD's.
 */
 testModel.delete();
-
 ~~~
 
 Información en BD's SQLite antes de eliminar el registro
@@ -1212,8 +1214,7 @@ eliminar.
 
 ~~~
 
-    
-
+   
 ~~~
 
 Información en BD's SQLite antes de eliminar los registros
@@ -1258,7 +1259,7 @@ Maven
     <dependency>
         <groupId>io.github.josecarlosbran</groupId>
         <artifactId>LogsJBSupport</artifactId>
-        <version>0.2</version>
+        <version>0.5.1</version>
         <scope>compile</scope>
     </dependency>
 ~~~
@@ -1266,13 +1267,12 @@ Maven
 Gradle
 
 ~~~
-implementation 'io.github.josecarlosbran:LogsJBSupport:0.2'
+implementation 'io.github.josecarlosbran:LogsJBSupport:0.5.1'
 ~~~
 
 Modificar el Nivel de Log que queremos tener sobre JBSqlUtils
 
 ~~~
-
 /***
 * Setea el NivelLog desde el cual deseamos se escriba en el Log de la aplicación actual.
 * @param GradeLog Nivel Log desde el cual hacía arriba en la jerarquia de logs, deseamos se reporten
@@ -1285,7 +1285,6 @@ Modificar el Nivel de Log que queremos tener sobre JBSqlUtils
 * El valor por defaul es Info. Lo cual hace que se reporten los Logs de grado Info, Warning, Error y Fatal.
 */
 LogsJB.setGradeLog(NivelLog.INFO);
-
 ~~~
 
 Encontraremos los Logs de JBSqlUtils en el directorio de nuestra aplicación en ejecución, se creará la carpeta
@@ -1308,14 +1307,14 @@ Maven
 <dependency>
   <groupId>io.github.josecarlosbran</groupId>
   <artifactId>JBSqlUtils</artifactId>
-  <version>1.1.5.1</version>
+  <version>1.1.6</version>
 </dependency>
 ~~~
 
 Gradle
 
 ~~~
-implementation 'io.github.josecarlosbran:JBSqlUtils:1.1.5.1'
+implementation 'io.github.josecarlosbran:JBSqlUtils:1.1.6'
 ~~~
 
 Para mayor información sobre cómo descargar JBSqlUtils desde otros

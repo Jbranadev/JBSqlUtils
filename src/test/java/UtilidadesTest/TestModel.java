@@ -63,6 +63,18 @@ public class TestModel extends JBSqlUtils {
         this.getApellido().setSize("200");
     }
 
+
+    /**
+     * Si deseamos que nuestro modelo no utilice las propiedades de conexión globales, podemos crear un constructor que
+     * reciba un único parametro de tipo Booleano el cual enviamos como parametro al constructor de la clase padre JBSqlUtils
+     * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema,
+     *                          true si deseamos que obtenga las variables globales y false si deseamos que no obtenga las
+     *                          variables globales
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     */
     public TestModel(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
         super(getPropertySystem);
         this.setTableName("testModel");
