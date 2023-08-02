@@ -340,7 +340,7 @@ public class Methods_Conexion extends Conexion {
         try {
             Callable<ResultAsync<Boolean>> VerificarExistencia = () -> {
                 try {
-                    LogsJB.debug("Comienza a verificar la existencia de la tabla");
+                    LogsJB.info("Comienza a verificar la existencia de la tabla");
                     Connection connect = this.getConnection();
                     DatabaseMetaData metaData = connect.getMetaData();
                     String DatabaseName = this.getBD();
@@ -411,7 +411,7 @@ public class Methods_Conexion extends Conexion {
                                 clave.setPK_NAME(clavePrimaria.getString(6));
                                 this.getTabla().setClaveprimaria(clave);
                             }
-                            LogsJB.debug("La tabla correspondiente a este modelo, existe en BD's " + this.getClass().getSimpleName());
+                            LogsJB.info("La tabla correspondiente a este modelo, existe en BD's " + this.getClass().getSimpleName());
                             tables.close();
                             this.closeConnection(connect);
                             getColumnsTable();
@@ -421,7 +421,7 @@ public class Methods_Conexion extends Conexion {
                     LogsJB.trace("Termino de Revisarar el resultSet");
                     tables.close();
                     if (!this.getTableExist()) {
-                        LogsJB.debug("La tabla correspondiente a este modelo, No existe en BD's " + this.getClass().getSimpleName());
+                        LogsJB.info("La tabla correspondiente a este modelo, No existe en BD's " + this.getClass().getSimpleName());
 
                         this.closeConnection(connect);
 
