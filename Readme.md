@@ -406,7 +406,12 @@ public class Test extends JBSqlUtils {
      * Hacemos el llamado al constructor de la Clase JBSqlUtils
      */
     super();
-    
+    /**
+    * Si deseamos setear un nombre personalizado de la tabla a la cual representa el modelo
+    * podemos hacerlo a través del metodo setTableName
+    */
+    this.setTableName("testModel");
+
     /**
      * Setear un tamaño especifico para una columna en BD's
      * Esto nos permitira que cuando creemos la tabla desde nuestra aplicación podamos personalizar el tamaña de las columnas
@@ -430,7 +435,15 @@ public class Test extends JBSqlUtils {
     */
    public TestModel(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
        super(getPropertySystem);
+       /**
+       * Si deseamos setear un nombre personalizado de la tabla a la cual representa el modelo
+       * podemos hacerlo a través del metodo setTableName
+       */
        this.setTableName("testModel");
+       /**
+       * Tambien podemos modificar el tamaño que tendrá cada columna al momento de solicitar
+       * crear la tabla, a través del metodo setSize
+       */
        this.getName().setSize("200");
        this.getApellido().setSize("200");
    }
@@ -555,8 +568,6 @@ a través de las variables globales, se realizara de la siguiente manera
  * de la JVM
  */
 this.testModel = new TestModel(false);
-logParrafo("Se setearan las propiedades de conexión del modelo para MySQL");
-this.testModel.setGetPropertySystem(false);
 /**
  * Seteamos las propiedades de conexión del modelo 
  */
@@ -586,6 +597,19 @@ TestModel model = new TestModel(false);
  * @param proveedor Modelo desde el que se obtendran las propiedades de conexión
  */
 model.llenarPropertiesFromModel(this.testModel);
+~~~
+
+## ¿Cómo refrescar un modelo con la información de la tabla que representa en BD's?
+
+Para poder refrescar un modelo obteniendo la información de la tabla que representa
+en BD's, si esta existe y que columnas posee, podemos hacerlo a través del método
+refresh
+
+~~~
+/**
+* Metodo que actualiza la información que el modelo tiene sobre lo que existe en BD's'
+*/
+this.testModel.refresh();
 ~~~
 
 * * *
@@ -717,6 +741,18 @@ testModel.save();
 
 ![](Imagenes/Insertar.jpg)
 
+* * *
+
+## ¿Cómo limpiar un modelo que contiene información que se envío u obtuvo de BD's?
+
+Para poder limpiar un modelo, utilizamos el método cleanModel
+
+~~~
+/**
+* Setea null en el campo valor de cada columna que posee el modelo.
+*/
+testModel.cleanModel();
+~~~
 * * *
 
 ## ¿Cómo obtener un registro de BD's?
@@ -1036,6 +1072,8 @@ En caso no hayamos obtenido el modelo de BD's es importante que configuremos la 
 lo cual podemos hacerlo a través del método setModelExist(), adicional a esto, debemos asegurarnos, de que el
 modelo en su columna correspondiente a la primaryKey, tenga el valor del registro que queremos actualizar.
 
+De no cumplir con la configuración anterior, JBSqlUtils procedera a
+insertar el modelo.
 ~~~
 /**
 *Obtenemos el registro que coincide con la sentencia SQL generada por el modelo
@@ -1089,6 +1127,9 @@ En caso no hayamos obtenido los modelos de BD's es importante que configuremos l
 cada uno de los modelos que vayamos a actualizar, lo cual podemos hacerlo a través del método setModelExist(),
 adicional a esto, debemos asegurarnos, de que cada uno de los modelos en su columna correspondiente a la primaryKey,
 tenga el valor del registro que queremos actualizar.
+
+De no cumplir con la configuración anterior, JBSqlUtils procedera a
+insertar el modelo.
 
 ~~~
 /**
@@ -1213,8 +1254,26 @@ modelos que queremos eliminar tengan en su columna correspondiente a la primaryK
 eliminar.
 
 ~~~
+/**
+* Declaramos una lista de modelos del tipo Test, en la cual almacenaremos la información obtenida de BD's'
+*/
+List<TestModel> lista = new ArrayList<>();
 
-   
+/**
+* Obtenemos todos los modelos que su Id se encuentra entre 1 y 5
+*/
+lista = testModel.where("id", Operator.MAYOR_IGUAL_QUE, 1).and("id", Operator.MENOR_IGUAL_QUE, 5).getAll();
+
+/**
+* Esperamos a que el modelo termine de obtener la información de BD's
+*/
+testModel.waitOperationComplete();
+
+/**
+* Elimina la información de los modelos proporcionados en BD's
+* @param modelos Lista de modelos que serán Eliminados
+*/
+testModel.deleteALL(lista);
 ~~~
 
 Información en BD's SQLite antes de eliminar los registros
@@ -1240,17 +1299,21 @@ Información en BD's SQLite después de eliminar los registros
 ![](Imagenes/deleteall2.jpg)
 
 * * *
+## ¿A que Test se ha sometido JBSqlUtils?
+
+
+* * *
 
 ## ¿Cómo poder hacer un seguimiento a lo que sucede dentro de JBSqlUtils?
 
-JBSqlUtils utiliza la librería LogsJB, para el registro de todo lo que sucede al momento
+JBSqlUtils utiliza la librería LogsJBSupport, para el registro de todo lo que sucede al momento
 de realizar una inserción, actualización, consulta o eliminar un registro en BD's, por default se
 registra toda aquella actividad de nivel INFO y superior, si desea debuggear o modificar el nivel
-de log que reporta JBSqlUtils será necesario que importe en su proyecto la librería LogsJB y
+de log que reporta JBSqlUtils será necesario que importe en su proyecto la librería LogsJBSupport y
 llame al método LogsJB.setGradeLog(), enviando cómo parametro el grado de Log, desde el cual
 desea que JBSqlUtils registre su actividad.
 
-Puedes obtener la librería LogsJB de la siguiente manera
+Puedes obtener la librería LogsJBSupport de la siguiente manera
 
 Maven
 
@@ -1291,7 +1354,7 @@ Encontraremos los Logs de JBSqlUtils en el directorio de nuestra aplicación en 
 Logs, dentro de la cual se creara una carpeta por cada día y dentro de la misma se almacenaran los Logs de la
 aplicación, para mayor información visitar el siguiente Link
 
-<https://github.com/JoseCarlosBran/LogsJB/blob/master/Readme.md>
+<https://github.com/Jbranadev/LogsJB/blob/support_version/Readme.md>
 
 ![](Imagenes/Logs.jpg)
 
