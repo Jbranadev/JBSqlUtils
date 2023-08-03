@@ -36,7 +36,7 @@ import java.util.concurrent.*;
 
 /**
  * @author Jose Bran
- * Clase que proporciona métodos que permiten al modelo ejecutar sentencias DML, así como crear o eliminar la tabla
+ * Clase que proporciona metodos que permiten al modelo ejecutar sentencias DML, así como crear o eliminar la tabla
  * correspondiente al modelo
  */
 class Methods extends Methods_Conexion {
@@ -226,7 +226,7 @@ class Methods extends Methods_Conexion {
      * @param columna  Columna que sera evaluada
      * @param operador Operador por medio del cual se evaluara la columna
      * @param valor    Valor contra el cual se evaluara la columna
-     * @return Punto de entrada a métodos que permiten seguir modificando la expresión de filtro u obtener el o los
+     * @return Punto de entrada a metodos que permiten seguir modificando la expresión de filtro u obtener el o los
      * modelos que hacen match con la consulta generada
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
      *                               BD's a la cual se conectara el modelo.
@@ -320,7 +320,7 @@ class Methods extends Methods_Conexion {
      * Llena el modelo con la información del controlador
      *
      * @param controlador Controlador que debe poseer los atributos en java, que corresponden al modelo, con
-     *                    sus respectivos métodos setter y getter
+     *                    sus respectivos metodos setter y getter
      * @param modelo      Modelo que será llenado con la información del controlador
      * @param <T>         Tipo de dato del controlador, acepta cualquier Object
      * @param <G>         Tipo de dato del modelo, acepta unicamente aquellos que heredan de la clase JBSqlUtils

@@ -35,7 +35,7 @@ public class closeParentecis<T> extends Get {
      * Constructor que recibe como parametro:
      *
      * @param sql        Sentencia SQL a la que se agregara el cierre de parentecis
-     * @param modelo     Modelo que invocara los metodos de esta clase
+     * @param modelo     Modelo que invocara los métodos de esta clase
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
@@ -57,7 +57,7 @@ public class closeParentecis<T> extends Get {
      * Constructor que recibe como parametro:
      *
      * @param sql                    Sentencia SQL a la que se agregara el cierre de parentecis
-     * @param modelo                 Modelo que invocara los metodos de esta clase
+     * @param modelo                 Modelo que invocara los métodos de esta clase
      * @param parametros             Lista de parametros a ser agregados a la sentencia SQL
      * @param getGetPropertiesSystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
@@ -99,7 +99,7 @@ public class closeParentecis<T> extends Get {
      * Constructor que recibe como parametro:
      *
      * @param sql          Sentencia SQL a la que se agregara el cierre de parentecis
-     * @param modelo       Modelo que invocara los metodos de esta clase
+     * @param modelo       Modelo que invocara los métodos de esta clase
      * @param parametros   Lista de parametros a ser agregados a la sentencia SQL
      * @param operatorPost Operador posterior a colocar despues del cierre de parentecis
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
@@ -122,7 +122,7 @@ public class closeParentecis<T> extends Get {
      * Constructor que recibe como parametro:
      *
      * @param sql                    Sentencia SQL a la que se agregara el cierre de parentecis
-     * @param modelo                 Modelo que invocara los metodos de esta clase
+     * @param modelo                 Modelo que invocara los métodos de esta clase
      * @param parametros             Lista de parametros a ser agregados a la sentencia SQL
      * @param operatorPost           Operador posterior a colocar despues del cierre de parentecis
      * @param getGetPropertiesSystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema

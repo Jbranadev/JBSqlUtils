@@ -91,7 +91,7 @@ public class TestModel extends JBSqlUtils {
      * el único parámetro obligatorio es el DataType de la columna en BD's.
      *
      * Por convención el nombre de cada miembro correspondiente a una columna en BD's debe tener el mismo
-     * nombre que la columna en BD's. y estos deben tener sus respectivos métodos set an get, teniendo estos
+     * nombre que la columna en BD's. y estos deben tener sus respectivos metodos set an get, teniendo estos
      * por convención el nombre setColumnName, getColumName.
      *
      * Por ejemplo, para la columna Id = El miembro del modelo será Id, JBSqlUtils no es case sensitive,

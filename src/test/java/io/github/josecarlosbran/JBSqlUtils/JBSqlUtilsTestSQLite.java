@@ -455,7 +455,7 @@ public class JBSqlUtilsTestSQLite {
         /**
          * Para obtener los registros de una tabla de BD's podemos hacerlo a través del método select envíando como parámetro
          * el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a través del método
-         * where el cual proporciona acceso a métodos por medio de los cuales podemos filtrar los resultados.
+         * where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
          */
         List<JSONObject> lista = select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
                 .and("Apellido", Operator.LIKE, "%a%").take(2).getInJsonObjects(columnas);

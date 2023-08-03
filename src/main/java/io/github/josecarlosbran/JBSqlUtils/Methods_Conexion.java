@@ -45,8 +45,8 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
 
 /**
  * @author Jose Bran
- * Clase que proporciona los metodos de conexión necesarios para que el modelo pueda realizar
- * la conversion de datos entre java y sql, así mismo proporciona metodos de logica del manejor del resultado
+ * Clase que proporciona los métodos de conexión necesarios para que el modelo pueda realizar
+ * la conversion de datos entre java y sql, así mismo proporciona métodos de logica del manejor del resultado
  * como de envíar valores a BD's
  */
 public class Methods_Conexion extends Conexion {
@@ -82,10 +82,10 @@ public class Methods_Conexion extends Conexion {
 
 
     /**
-     * Obtiene la lista de metodos pertenecientes al modelo que lo invoca.
+     * Obtiene la lista de métodos pertenecientes al modelo que lo invoca.
      *
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
-     * @return Retorna una lista de los metodos pertenecientes al modelo.
+     * @return Retorna una lista de los métodos pertenecientes al modelo.
      */
     public synchronized <T> List<Method> getMethodsModel() {
         Method[] metodos = this.getClass().getMethods();
@@ -124,11 +124,11 @@ public class Methods_Conexion extends Conexion {
 
 
     /**
-     * Obtiene la lista de los metodos get del modelo que lo invoca.
+     * Obtiene la lista de los métodos get del modelo que lo invoca.
      *
-     * @param metodos Lista de metodos que tiene el modelo, sobre los cuales se filtraran los metodos get.
+     * @param metodos Lista de métodos que tiene el modelo, sobre los cuales se filtraran los métodos get.
      * @param <T>     Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
-     * @return Lista de los metodos get del modelo que lo invoca.
+     * @return Lista de los métodos get del modelo que lo invoca.
      */
     public synchronized <T> List<Method> getMethodsGetOfModel(List<Method> metodos) {
         // Los muestro en consola
@@ -151,11 +151,11 @@ public class Methods_Conexion extends Conexion {
     }
 
     /**
-     * Obtiene la lista de los metodos set del modelo que lo invoca.
+     * Obtiene la lista de los métodos set del modelo que lo invoca.
      *
-     * @param metodos Lista de metodos que tiene el modelo, sobre los cuales se filtraran los metodos set.
+     * @param metodos Lista de métodos que tiene el modelo, sobre los cuales se filtraran los métodos set.
      * @param <T>     Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
-     * @return Lista de los metodos set del modelo que lo invoca.
+     * @return Lista de los métodos set del modelo que lo invoca.
      */
     public synchronized <T> List<Method> getMethodsSetOfModel(List<Method> metodos) {
         List<Method> result = new ArrayList<>();
@@ -542,13 +542,13 @@ public class Methods_Conexion extends Conexion {
                 try {
                     LogsJB.debug("Buscara si la columna tiene un atributo en el modelo actual: " + nameColumn);
                     List<Method> metodosSet = new ArrayList<>();
-                    LogsJB.trace("Inicializa el array list de los metodos set");
+                    LogsJB.trace("Inicializa el array list de los métodos set");
                     metodosSet = this.getMethodsSetOfModel(this.getMethodsModel());
-                    LogsJB.trace("obtuvo los metodos set");
+                    LogsJB.trace("obtuvo los métodos set");
                     //Llena la información del modelo
                     LogsJB.trace("Columna : " + nameColumn);
-                    LogsJB.debug("Cantidad de metodos set: " + metodosSet.size());
-                    //Recorrera los metodos set del modelo para ver cual es el que corresponde a la columna
+                    LogsJB.debug("Cantidad de métodos set: " + metodosSet.size());
+                    //Recorrera los métodos set del modelo para ver cual es el que corresponde a la columna
                     for (int j = 0; j < metodosSet.size(); j++) {
                         Method metodo = metodosSet.get(j);
                         String metodoName = metodo.getName();
@@ -558,7 +558,7 @@ public class Methods_Conexion extends Conexion {
                             LogsJB.trace("Nombre de la columna, nombre del metodo set: " + nameColumn + "   " + metodoName);
                             List<Method> metodosget = new ArrayList<>();
                             metodosget = this.getMethodsGetOfModel(this.getMethodsModel());
-                            LogsJB.trace("Cantidad de metodos get: " + metodosget.size());
+                            LogsJB.trace("Cantidad de métodos get: " + metodosget.size());
                             //Llena la información de las columnas que se insertaran
                             for (int a = 0; a < metodosget.size(); a++) {
                                 //Obtengo el metodo
@@ -773,7 +773,7 @@ public class Methods_Conexion extends Conexion {
             columnaSql.setValor(resultado.getObject(columnName));
             metodo.invoke(invocador, columnaSql);
             LogsJB.warning("No se pudo setear el valor de la columna: " + columnName + " " + this.getTableName());
-            LogsJB.warning("Debido a que ninguno de los metodos corresponde al tipo de dato SQL: " + columnType);
+            LogsJB.warning("Debido a que ninguno de los métodos corresponde al tipo de dato SQL: " + columnType);
         }
 
     }
@@ -1230,9 +1230,9 @@ public class Methods_Conexion extends Conexion {
 
         LogsJB.debug("Obtuvo un resultado de BD's, procedera a llenar el modelo " + temp.getClass().getSimpleName());
         List<Method> metodosSet = new ArrayList<>();
-        LogsJB.trace("Inicializa el array list de los metodos set");
+        LogsJB.trace("Inicializa el array list de los métodos set");
         metodosSet = temp.getMethodsSetOfModel(temp.getMethodsModel());
-        LogsJB.trace("obtuvo los metodos set");
+        LogsJB.trace("obtuvo los métodos set");
         LogsJB.debug("Cantidad de columnas : " + temp.getTabla().getColumnas().size());
 
         //Llena la información del modelo
@@ -1241,7 +1241,7 @@ public class Methods_Conexion extends Conexion {
             ColumnsSQL columna = temp.getTabla().getColumnas().get(i);
             String columnName = columna.getCOLUMN_NAME();
             LogsJB.trace("Columna : " + columnName);
-            LogsJB.debug("Cantidad de metodos set: " + metodosSet.size());
+            LogsJB.debug("Cantidad de métodos set: " + metodosSet.size());
             //Recorrera los metodos set del modelo para ver cual es el que corresponde a la columna
             for (int j = 0; j < metodosSet.size(); j++) {
                 Method metodo = metodosSet.get(j);

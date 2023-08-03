@@ -155,7 +155,7 @@ y las columnas que deseamos tenga nuestra tabla.
 * el único parámetro obligatorio es el DataType de la columna en BD's.
 *
 * Por convención el nombre de cada miembro correspondiente a una columna en BD's debe tener el mismo
-* nombre que la columna en BD's. y estos deben tener sus respectivos métodos set an get, teniendo estos
+* nombre que la columna en BD's. y estos deben tener sus respectivos metodos set an get, teniendo estos
 * por convención el nombre setColumnName, getColumName.
 *
 * Por ejemplo, para la columna Id = El miembro del modelo será Id, JBSqlUtils no es case sensitive,
@@ -248,7 +248,7 @@ JBSqlUtils.dropTableIfExist("Proveedor").execute();
 Para insertar registros hacemos uso del método execute que está disponible en la clase value y andValue a las cuales
 podemos acceder
 a través de la clase insertInto a la cual enviamos como parámetro el nombre de la tabla a la que queremos insertar, a
-través de los métodos value
+través de los metodos value
 y andValue definimos los valores que queremos insertar en determinada columna, el método execute retorna la cantidad de
 registros insertados.
 
@@ -258,7 +258,7 @@ se puede insertar un registro a la vez.
 ~~~
 /**
 * Para insertar registros hacemos uso del método execute que está disponible en la clase value y andValue a las cuales podemos acceder 
-* a través de la clase insertInto a la cual enviamos como parámetro el nombre de la tabla a la que queremos insertar, a través de los métodos value
+* a través de la clase insertInto a la cual enviamos como parámetro el nombre de la tabla a la que queremos insertar, a través de los metodos value
 * y andValue definimos los valores que queremos insertar en determinada columna.
 */
 int registros=JBSqlUtils.insertInto("Proveedor").value("Name", "Daniel").andValue("Apellido", "Quiñonez").andValue("Estado", false).execute();
@@ -268,7 +268,7 @@ int registros=JBSqlUtils.insertInto("Proveedor").value("Name", "Daniel").andValu
 
 Para obtener los registros de una tabla de BD's podemos hacerlo a través del método select envíando como parametro
 el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a través del
-método where el cual proporciona acceso a métodos por medio de los cuales podemos filtrar los resultados.
+método where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
 
 Los resultados serán devueltos en una List<JSONObject> del tipo JSONObject de
 la implementación json de org.json
@@ -292,7 +292,7 @@ columnas.add("Name");
 /**
 * Para obtener los registros de una tabla de BD's podemos hacerlo a través del método select envíando como parametro
 * el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a través del método 
-* where el cual proporciona acceso a métodos por medio de los cuales podemos filtrar los resultados.
+* where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
 */
 List<JSONObject> lista=JBSqlUtils.select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
     .and("Apellido", Operator.LIKE, "%m%").take(3).getInJsonObjects(columnas);
@@ -308,7 +308,7 @@ LogsJB.info(fila.toString());
 - Actualizar registros.
 
 Para actualizar registros sin necesidad de instanciar un modelo, puede hacerlo a través del
-update método estático de la clase JBSqlUtils, el cual brinda los métodos necesarios, para poder
+update método estático de la clase JBSqlUtils, el cual brinda los metodos necesarios, para poder
 llegar al método execute, el cual ejecuta la sentencia SQL generada y retorna el número de
 filas afectadas por la ejecución de la sentencia SQL.
 
@@ -323,7 +323,7 @@ filas afectadas por la ejecución de la sentencia SQL.
 int rows_afected=JBSqlUtils.update("Test").set("name", "Jose Carlos").execute();
 
 /**
- * Podemos agregar una sentencia Where, por medio del cual podemos acceder a los métodos necesarios para
+ * Podemos agregar una sentencia Where, por medio del cual podemos acceder a los metodos necesarios para
  * filtrar la cantidad de filas que queremos modificar, una vez hemos terminado de brindar la lógica hacemos el
  * llamado al método execute el cual se encarga de ejecutar la sentencia SQL generada y retorna el numero de filas
  * afectadas.
@@ -332,7 +332,7 @@ rows_afected=JBSqlUtils.update("Test").set("name", "Jose Carlos").where("Id", Op
 
 /**
  * Podemos actualizar mas de una columna a través del método andSet, el cual nos proporciona la capacidad de
- * modificar el valor de otra columna y acceso a los métodos andSet para setear otro valor a otra columna y el método
+ * modificar el valor de otra columna y acceso a los metodos andSet para setear otro valor a otra columna y el método
  * where por medio del cual podemos filtrar las filas que se veran afectadas al llamar al método execute, el cual
  * se encargara de ejecutar la sentencia SQL generada y retorna el numero de filas afectadas.
  */
@@ -342,7 +342,7 @@ rows_afected=JBSqlUtils.update("Test").set("name", "Jose Carlos").andSet("IsMayo
 - Eliminar registros.
 
 Para eliminar registros sin necesidad de instanciar un modelo, puede hacerlo a través del
-delete método estático de la clase JBSqlUtils, el cual brinda los métodos necesarios, para poder
+delete método estático de la clase JBSqlUtils, el cual brinda los metodos necesarios, para poder
 llegar al método execute, el cual ejecuta la sentencia SQL generada y retorna el número de
 filas afectadas por la ejecución de la sentencia SQL.
 
@@ -351,7 +351,7 @@ filas afectadas por la ejecución de la sentencia SQL.
 /**
  * Eliminar todas las filas de una tabla X (Test), donde la columna Y(Id) tiene un valor MAYOR O IGUAL a Z(2).
  * El método delete recibe cómo parámetro el nombre de la tabla que se desea eliminar registros y proporciona acceso
- * al método Where, por medio del cual podemos acceder a los métodos necesarios para
+ * al método Where, por medio del cual podemos acceder a los metodos necesarios para
  * filtrar la cantidad de filas que queremos eliminar, una vez hemos terminado de brindar la lógica hacemos el
  * llamado al método execute el cual se encarga de ejecutar la sentencia SQL generada y retorna el numero de filas
  * afectadas.
@@ -457,7 +457,7 @@ public class Test extends JBSqlUtils {
    * el único parametro obligatorio es el DataType de la columna en BD's.
    *
    * Por convención el nombre de cada miembro correspondiente a una columna en BD's debe tener el mismo
-   * nombre que la columna en BD's. y estos deben tener sus respectivos métodos set an get, teniendo estos
+   * nombre que la columna en BD's. y estos deben tener sus respectivos metodos set an get, teniendo estos
    * por convención el nombre setColumnName, getColumName.
    *
    * Por ejemplo, para la columna Id = El miembro del modelo será Id, JBSqlUtils no es case sensitive,
@@ -757,7 +757,7 @@ testModel.cleanModel();
 
 ## ¿Cómo obtener un registro de BD's?
 
-Para obtener un registro de BD's JBSqlUtils proporciona diferentes métodos los cuales veremos a continuación.
+Para obtener un registro de BD's JBSqlUtils proporciona diferentes metodos los cuales veremos a continuación.
 
 ### Obtener el registro en el modelo que realiza la búsqueda.
 
@@ -767,7 +767,7 @@ Para obtener un registro de BD's JBSqlUtils proporciona diferentes métodos los 
 * el cual llena el modelo que realiza la invocación del método con la información obtenida.
 *
 * Para poder filtrar la búsqueda y tener acceso al método get(), es necesario que llamemos al método
-* where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
+* where() el cual nos proporciona un punto de entrada para otros metodos, por medio de los cuales podemos
 * brindar una lógica un poco más compleja a la búsqueda del registro que deseamos obtener.
 */
 testModel.where("name", Operator.LIKE, "Jos%").and("apellido", Operator.IGUAL_QUE, "Bran").get();
@@ -797,7 +797,7 @@ LogsJB.info(testModel.getId().getValor()+"  "+testModel.getName().getValor()+"  
 * únicamente casteamos el resultado al tipo de modelo que recibira la información.
 *
 * Para poder filtrar la búsqueda y tener acceso al método first(), es necesario que llamemos al método
-* where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
+* where() el cual nos proporciona un punto de entrada para otros metodos, por medio de los cuales podemos
 * brindar una lógica un poco más compleja a la búsqueda del registro que deseamos obtener.
 */
 Test testModel2= (Test) testModel.where("isMayor", Operator.IGUAL_QUE, false).first();
@@ -840,7 +840,7 @@ de no encontrar el registro para el modelo.
 * nos indicará que no fue posible encontrar la información para el modelo.
 *
 * Para poder filtrar la busqueda y tener acceso al método firstOrFail(), es necesario que llamemos al método
-* where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
+* where() el cual nos proporciona un punto de entrada para otros metodos, por medio de los cuales podemos
 * brindar una lógica un poco más compleja a la busqueda del registro que deseamos obtener.
 */
 Test testModel2= (Test) testModel.where("Name", Operator.IGUAL_QUE, "Jose").firstOrFail();
@@ -877,7 +877,7 @@ Información obtenida por el modelo
 * nos indicará que no fue posible encontrar la información para el modelo.
 *
 * Para poder filtrar la busqueda y tener acceso al método firstOrFail(), es necesario que llamemos al método
-* where() el cual nos proporciona un punto de entrada para otros métodos, por medio de los cuales podemos
+* where() el cual nos proporciona un punto de entrada para otros metodos, por medio de los cuales podemos
 * brindar una lógica un poco más compleja a la busqueda del registro que deseamos obtener.
 */
 Test testModel2= (Test) testModel.where("Name", Operator.IGUAL_QUE, "Jose").and("IsMayor", Operator.IGUAL_QUE, false).firstOrFail();
@@ -907,7 +907,7 @@ misma.
 
 ## ¿Cómo obtener multiples registros de BD's?
 
-Podemos obtener multiples registros de BD's a través de los siguientes métodos
+Podemos obtener multiples registros de BD's a través de los siguientes metodos
 
 - Método getALL()
 
@@ -1025,7 +1025,7 @@ List<Test> lista=new ArrayList<>();
 /**
 * Obtenemos todos los registros cuyos Id son mayores a 2, el método orderBy() los ordena de acuerdo a la columna
 * que enviamos cómo parametro y el tipo de ordenamiento que le especificamos.
-* El método orderBy() proporciona acceso a todos los métodos que hemos visto anteriormente, los cuales nos
+* El método orderBy() proporciona acceso a todos los metodos que hemos visto anteriormente, los cuales nos
 * permiten obtener uno o multiples registros, de acuerdo a la lógica que brindemos a nuestra sentencia SQL.
 */
 lista=testModel.where("id", Operator.MAYOR_QUE, 2).orderBy("id", OrderType.DESC).take(2).get();
@@ -1300,7 +1300,9 @@ Información en BD's SQLite después de eliminar los registros
 
 * * *
 ## ¿A que Test se ha sometido JBSqlUtils?
+Puede revisar los resultados de los Test a los que se ha sometido JBSqlUtils en el siguiente enlace
 
+<https://github.com/Jbranadev/JBSqlUtils/blob/master/src/test/TestResult.md>
 
 * * *
 
