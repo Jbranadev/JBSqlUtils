@@ -1205,15 +1205,8 @@ public class Methods_Conexion extends Conexion {
      *                                   propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     protected <T extends Methods_Conexion> T procesarResultSet(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException, DataBaseUndefind, PropertiesDBUndefined, NoSuchMethodException {
-        T temp;
-        if(modelo.getGetPropertySystem()){
-            temp = (T) modelo.getClass().newInstance();
-        }else{
-            modelo.llenarPropertiesFromModel(this);
-            Constructor constructor=modelo.getClass().getConstructor(Boolean.class);
-            temp = (T) constructor.newInstance(false);
-            temp.llenarPropertiesFromModel(modelo);
-        }
+        T temp=null;
+        modelo.obtenerInstanciaOfModel(modelo, temp);
         temp.setTabla(modelo.getTabla());
         temp.setTableExist(modelo.getTableExist());
         temp.setTableName(modelo.getTableName());
@@ -1275,6 +1268,30 @@ public class Methods_Conexion extends Conexion {
             }
         }
         return temp;
+    }
+
+    /**
+     * Obtiene una instancia nueva del tipo de modelo que se envía como parametro
+     * @param modelo Tipo de objeto que se desea instanciar
+     * @param temp es necesario que este objeto sea del mismo tipo que el modelo del cual se obtendra la instancia
+     */
+    public <T extends Methods_Conexion> void obtenerInstanciaOfModel(T modelo, T temp){
+        try{
+            if(modelo.getGetPropertySystem()){
+                temp = (T) modelo.getClass().newInstance();
+            }else{
+                modelo.llenarPropertiesFromModel(this);
+                Constructor constructor=modelo.getClass().getConstructor(Boolean.class);
+                temp = (T) constructor.newInstance(false);
+                temp.llenarPropertiesFromModel(modelo);
+            }
+        } catch (InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
+            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
     }
 
     /**

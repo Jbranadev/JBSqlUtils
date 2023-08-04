@@ -23,7 +23,6 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import org.apache.commons.lang3.StringUtils;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -104,14 +103,7 @@ class Methods extends Methods_Conexion {
                 modelo.llenarPropertiesFromModel(temp);
                 LogsJB.debug("Modelo Ya había sido inicializado: " + temp.getClass().getSimpleName());
             } else {
-                if(modelo.getGetPropertySystem()){
-                    temp = (T) modelo.getClass().newInstance();
-                }else{
-                    modelo.llenarPropertiesFromModel(this);
-                    Constructor constructor=modelo.getClass().getConstructor(Boolean.class);
-                    temp = (T) constructor.newInstance(false);
-                    temp.llenarPropertiesFromModel(modelo);
-                }
+                modelo.obtenerInstanciaOfModel(modelo, temp);
                 LogsJB.warning("Modelo era Null, crea una nueva instancia: " + temp.getClass().getSimpleName());
                 temp.refresh();
             }
@@ -169,14 +161,7 @@ class Methods extends Methods_Conexion {
                 LogsJB.debug("Modelo Ya había sido inicializado: " + temp.getClass().getSimpleName());
                 modelo.llenarPropertiesFromModel(temp);
             } else {
-                if(modelo.getGetPropertySystem()){
-                    temp = (T) modelo.getClass().newInstance();
-                }else{
-                    modelo.llenarPropertiesFromModel(this);
-                    Constructor constructor=modelo.getClass().getConstructor(Boolean.class);
-                    temp = (T) constructor.newInstance(false);
-                    temp.llenarPropertiesFromModel(modelo);
-                }
+                modelo.obtenerInstanciaOfModel(modelo, temp);
                 LogsJB.warning("Modelo era Null, crea una nueva instancia: " + temp.getClass().getSimpleName());
             }
             if (!modelo.getTableExist()) {
