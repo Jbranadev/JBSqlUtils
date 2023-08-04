@@ -17,7 +17,7 @@
         por medio del cual tendrá acceso a un CRUD, configurando únicamente la conexión del
         modelo, los atributos que posee la tabla en BD's cómo variables que pertenecerán al modelo en su aplicación.
 
-        JBSqlUtils también proporciona un potente generador de consultas que le permitirá crear
+        JBSqlUtils también proporciona un potente generador de instrucciones SQL que le permitirá crear
         o eliminar una tabla, insertar, seleccionar, actualizar o eliminar registros de una tabla
         en su BD's sin necesidad de instanciar un modelo cómo tal, únicamente tendrá que configurar previamente
         la conexión a su BD's.
