@@ -126,7 +126,7 @@ class Conexion {
     private String updateAT = "updated_at";
 
     /**
-     * Bandera que sirve para identificar si el modelo existe en BD's, de existir cuando se llame al metodo save se procedera a actualizar el modelo
+     * Bandera que sirve para identificar si el modelo existe en BD's, de existir cuando se llame al método save se procedera a actualizar el modelo
      */
     private Boolean modelExist = false;
 
@@ -215,7 +215,7 @@ class Conexion {
     }
 
     /**
-     * Metodo que se encarga de inicializar las propiedades de conexión del modelo,
+     * método que se encarga de inicializar las propiedades de conexión del modelo,
      * las cuales las obtiene de las propiedades del sistema Java.
      *
      * @throws DataBaseUndefind      Lanza esta excepción si el tipo de BD's a la cual se conectara el modelo no ha sido definida entre
@@ -769,7 +769,7 @@ class Conexion {
      * Debido a que estas tareas JBSqlUtils las realiza en segundo plano, para no interrumpir
      * el hilo de ejecución principal y entregar un mejor rendimiento, por si necesitamos realizar alguna otra
      * instrucción mientras el modelo esta trabajando en segundo plano. para poder saber si el modelo actualmente esta
-     * ocupado, podemos hacerlo a traves del método getTaskIsReady(), el cual obtiene la bandera que indica si
+     * ocupado, podemos hacerlo a través del método getTaskIsReady(), el cual obtiene la bandera que indica si
      * la tarea que estaba realizando el modelo ha sido terminada
      *
      * @return True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
@@ -784,7 +784,7 @@ class Conexion {
          * escritura en la BD's, debido a que estas tareas JBSqlUtils las realiza en segundo plano, para no interrumpir
          * el hilo de ejecución principal y entregar un mejor rendimiento, por si necesitamos realizar alguna otra
          * instrucción mientras el modelo esta trabajando en segundo plano. para poder saber si el modelo actualmente esta
-         * ocupado, podemos hacerlo a traves del método getTaskIsReady(), el cual obtiene la bandera que indica si
+         * ocupado, podemos hacerlo a través del método getTaskIsReady(), el cual obtiene la bandera que indica si
          * la tarea que estaba realizando el modelo ha sido terminada
          * @return True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
          * actualmente.

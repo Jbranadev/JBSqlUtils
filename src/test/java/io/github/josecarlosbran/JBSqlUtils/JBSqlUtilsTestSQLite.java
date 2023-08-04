@@ -102,7 +102,7 @@ public class JBSqlUtilsTestSQLite {
          * Esperamos se ejecute la instrucción en BD's
          */
         this.testModel.waitOperationComplete();
-        logParrafo("Insertamos el Modelo a traves del metodo save");
+        logParrafo("Insertamos el Modelo a través del método save");
         logParrafo("Filas insertadas en BD's: " + rowsInsert + " " + this.testModel.toString());
         Assert.assertTrue(rowsInsert == 1, "El registro no fue insertado en BD's");
     }
@@ -129,7 +129,7 @@ public class JBSqlUtilsTestSQLite {
             dependsOnMethods = "cleanModel",
             expectedExceptions = ModelNotFound.class)
     public void firstOrFail() throws Exception {
-        this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+        TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
                 "Cabrerassss").firstOrFail();
     }
 
@@ -142,24 +142,24 @@ public class JBSqlUtilsTestSQLite {
          * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
          */
         logParrafo("Obtenemos el modelo que tiene por nombre Marcos, Apellido Cabrera");
-        this.testModel.where("Name", Operator.IGUAL_QUE, "Marcos").and("Apellido", Operator.IGUAL_QUE,
+        TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcos").and("Apellido", Operator.IGUAL_QUE,
                 "Cabrera").firstOrFail();
         /**
          * Esperamos ejecute la operación en BD's
          */
         this.testModel.waitOperationComplete();
-        logParrafo(this.testModel.toString());
+        logParrafo(temp.toString());
         /**
          * Actualizamos la información
          */
         logParrafo("Actualizamos el nombre del modelo a MarcosEfrain y asígnamos que será mayor de edad");
-        this.testModel.getName().setValor("MarcosEfrain");
-        this.testModel.getIsMayor().setValor(true);
-        logParrafo(this.testModel.toString());
+        temp.getName().setValor("MarcosEfrain");
+        temp.getIsMayor().setValor(true);
+        logParrafo(temp.toString());
         /**
          * Eliminamos el modelo en BD's
          */
-        Integer rowsUpdate = this.testModel.save();
+        Integer rowsUpdate = temp.save();
         logParrafo("Guardamos el modelo en BD's");
         Assert.assertTrue(rowsUpdate == 1, "El registro no fue actualizado en la BD's");
     }
@@ -172,20 +172,21 @@ public class JBSqlUtilsTestSQLite {
          * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
          */
         logParrafo("Obtenemos el modelo que tiene por nombre MarcosEfrain, Apellido Cabrera y es Mayor de Edad");
-        this.testModel.where("Name", Operator.IGUAL_QUE, "MarcosEfrain").and("Apellido", Operator.IGUAL_QUE,
+        TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "MarcosEfrain").and("Apellido", Operator.IGUAL_QUE,
                 "Cabrera").and("isMayor", Operator.IGUAL_QUE, true).firstOrFail();
         /**
          * Esperamos ejecute la operación en BD's
          */
         this.testModel.waitOperationComplete();
-        logParrafo(this.testModel.toString());
+        logParrafo(temp.toString());
         /**
          * Eliminamos el modelo en BD's
          */
-        logParrafo("Eliminamos el modelo a traves del metodo delete");
-        Integer rowsDelete = this.testModel.delete();
+        logParrafo("Eliminamos el modelo a través del metodo delete");
+        Integer rowsDelete = temp.delete();
         Assert.assertTrue(rowsDelete == 1, "El registro no fue eliminado en la BD's");
     }
+
 
 
     @Test(testName = "Insert Models",
@@ -222,7 +223,7 @@ public class JBSqlUtilsTestSQLite {
     @Test(testName = "Get Model",
             dependsOnMethods = "insertModels")
     public void getModel() throws Exception {
-        //Incluir metodo que permita limpiar el modelo
+        //Incluir método que permita limpiar el modelo
         logParrafo("Limpiamos el modelo");
         this.testModel.cleanModel();
         logParrafo("Obtenemos el primero modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
@@ -248,26 +249,26 @@ public class JBSqlUtilsTestSQLite {
         logParrafo("Limpiamos el modelo");
         this.testModel.cleanModel();
         logParrafo("Obtenemos el primero modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
-        this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+        TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
                 "Cabrerassss").first();
         this.testModel.waitOperationComplete();
-        logParrafo("Trato de obtener un modelo que no existe, el resultado es: "+this.testModel.getModelExist());
-        logParrafo(this.testModel.toString());
-        Assert.assertFalse(this.testModel.getModelExist(), "Obtuvo un registro que no existe en BD's");
+        logParrafo("Trato de obtener un modelo que no existe, el resultado es: "+temp.getModelExist());
+        logParrafo(temp.toString());
+        Assert.assertFalse(temp.getModelExist(), "Obtuvo un registro que no existe en BD's");
         logParrafo("Obtenemos el primero modelo cuyo nombre sea Modelo # y sea mayor de edad");
-        this.testModel.where("Name", Operator.LIKE, "%Modelo #%").and("IsMayor", Operator.IGUAL_QUE,
+        temp = (TestModel) this.testModel.where("Name", Operator.LIKE, "%Modelo #%").and("IsMayor", Operator.IGUAL_QUE,
                 true).first();
         this.testModel.waitOperationComplete();
-        logParrafo("Trato de obtener un modelo que sí existe, el resultado es: "+this.testModel.getModelExist());
-        logParrafo(this.testModel.toString());
-        Assert.assertTrue(this.testModel.getModelExist(), "No obtuvo un registro que no existe en BD's");
+        logParrafo("Trato de obtener un modelo que sí existe, el resultado es: "+temp.getModelExist());
+        logParrafo(temp.toString());
+        Assert.assertTrue(temp.getModelExist(), "No obtuvo un registro que no existe en BD's");
     }
 
     @Test(testName = "Take Models",
             dependsOnMethods = "firstModel")
     public void takeModels() throws Exception {
         logParrafo("Limpiamos el modelo");
-        //Incluir metodo que permita limpiar el modelo
+        //Incluir método que permita limpiar el modelo
         this.testModel.cleanModel();
         List<TestModel> models = new ArrayList<TestModel>();
         logParrafo("Recuperamos los primeros seis modelos que en su nombre poseen el texto Modelo #");
@@ -280,7 +281,7 @@ public class JBSqlUtilsTestSQLite {
     @Test(testName = "Get All Models",
             dependsOnMethods = "takeModels")
     public void getAllModels() throws Exception {
-        //Incluir metodo que permita limpiar el modelo
+        //Incluir método que permita limpiar el modelo
         logParrafo("Limpiamos el modelo");
         this.testModel.cleanModel();
         List<TestModel> models = new ArrayList<TestModel>();
@@ -309,7 +310,7 @@ public class JBSqlUtilsTestSQLite {
             modelo.getIsMayor().setValor(!modelo.getIsMayor().getValor());
             logParrafo("Modelo a actualizar: "+modelo.toString());
         });
-        logParrafo("Enviamos a guardar los modelos a traves del metodo saveALL");
+        logParrafo("Enviamos a guardar los modelos a través del método saveALL");
         Integer rowsUpdate = this.testModel.saveALL(models);
         logParrafo("Filas actualizadas en BD's: " + rowsUpdate);
         /**
@@ -362,7 +363,7 @@ public class JBSqlUtilsTestSQLite {
             dependsOnMethods = "setPropertiesConexion")
     public void creteTableJBSqlUtils() throws Exception {
         /**
-         * Para eliminar una tabla de BD's utilizamos el metodo execute de la clase dropTableIfExist a la cual mandamos como parametro
+         * Para eliminar una tabla de BD's utilizamos el método execute de la clase dropTableIfExist a la cual mandamos como parámetro
          * el nombre de la tabla que queremos eliminar
          */
         logParrafo("Eliminara la tabla Proveedor de BD's en caso de que exista");
@@ -383,7 +384,7 @@ public class JBSqlUtilsTestSQLite {
 
         logParrafo("Se solicitara la creación de la tabla Proveedor, la cual tendra las siguientes columnas, Id, Name, Apellido y Estado");
         /**
-         * Para crear una tabla utilizamos el metodo createTable despues de haber definido el nombre de la tabla que deseamos Crear
+         * Para crear una tabla utilizamos el método createTable despues de haber definido el nombre de la tabla que deseamos Crear
          * y las columnas que deseamos tenga nuestra tabla
          */
         Boolean result= false;
@@ -439,22 +440,22 @@ public class JBSqlUtilsTestSQLite {
             dependsOnMethods = "insertIntoJBSqlUtils")
     public void getInJsonObjectsJBSqlUtils() throws Exception {
         /**
-         * Si deseamos obtener todas las columnas de la tabla envíamos el parametro columnas del metodo
-         * getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parametro
-         * del metodo select
+         * Si deseamos obtener todas las columnas de la tabla envíamos el parámetro columnas del método
+         * getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parámetro
+         * del método select
          */
         List<String> columnas = null;
         /**
-         * Si deseamos obtener unicamente determinadas columnas, es necesario envíar como parametro una lista de strings
-         * con los nombres de las columnas que deseamos obtener del metodo getInJsonObjects
+         * Si deseamos obtener unicamente determinadas columnas, es necesario envíar como parámetro una lista de strings
+         * con los nombres de las columnas que deseamos obtener del método getInJsonObjects
          */
         columnas = new ArrayList<>();
         columnas.add("Id");
         columnas.add("Name");
         logParrafo("Obtendra los primeros 2 registros cuyo estado sea true y en su apellido posea la letra a");
         /**
-         * Para obtener los registros de una tabla de BD's podemos hacerlo a traves del metodo select envíando como parametro
-         * el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a traves del metodo
+         * Para obtener los registros de una tabla de BD's podemos hacerlo a través del método select envíando como parámetro
+         * el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a través del método
          * where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
          */
         List<JSONObject> lista = select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
@@ -475,8 +476,8 @@ public class JBSqlUtilsTestSQLite {
             dependsOnMethods = "getInJsonObjectsJBSqlUtils")
     public void updateJBSqlUtils() throws Exception {
         /**
-         * Si deseamos obtener todas las columnas de la tabla envíamos el parametro columnas del metodo
-         * getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parametro
+         * Si deseamos obtener todas las columnas de la tabla envíamos el parámetro columnas del método
+         * getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parámetro
          * del metodo select
          */
         List<String> columnas = null;
@@ -505,8 +506,8 @@ public class JBSqlUtilsTestSQLite {
             dependsOnMethods = "updateJBSqlUtils")
     public void deleteJBSqlUtils() throws Exception {
         /**
-         * Si deseamos obtener todas las columnas de la tabla envíamos el parametro columnas del metodo
-         * getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parametro
+         * Si deseamos obtener todas las columnas de la tabla envíamos el parámetro columnas del metodo
+         * getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parámetro
          * del metodo select
          */
         List<String> columnas = null;
@@ -534,7 +535,7 @@ public class JBSqlUtilsTestSQLite {
     public void dropTableJBSqlUtils() throws Exception {
         Boolean result= false;
         /**
-         * Para eliminar una tabla de BD's utilizamos el metodo execute de la clase dropTableIfExist a la cual mandamos como parametro
+         * Para eliminar una tabla de BD's utilizamos el metodo execute de la clase dropTableIfExist a la cual mandamos como parámetro
          * el nombre de la tabla que queremos eliminar
          */
         logParrafo("Eliminara la tabla Proveedor de BD's");

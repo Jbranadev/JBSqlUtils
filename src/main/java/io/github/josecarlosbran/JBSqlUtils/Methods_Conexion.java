@@ -45,8 +45,8 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
 
 /**
  * @author Jose Bran
- * Clase que proporciona los metodos de conexión necesarios para que el modelo pueda realizar
- * la conversion de datos entre java y sql, así mismo proporciona metodos de logica del manejor del resultado
+ * Clase que proporciona los métodos de conexión necesarios para que el modelo pueda realizar
+ * la conversion de datos entre java y sql, así mismo proporciona métodos de logica del manejor del resultado
  * como de envíar valores a BD's
  */
 public class Methods_Conexion extends Conexion {
@@ -82,10 +82,10 @@ public class Methods_Conexion extends Conexion {
 
 
     /**
-     * Obtiene la lista de metodos pertenecientes al modelo que lo invoca.
+     * Obtiene la lista de métodos pertenecientes al modelo que lo invoca.
      *
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
-     * @return Retorna una lista de los metodos pertenecientes al modelo.
+     * @return Retorna una lista de los métodos pertenecientes al modelo.
      */
     public synchronized <T> List<Method> getMethodsModel() {
         Method[] metodos = this.getClass().getMethods();
@@ -124,11 +124,11 @@ public class Methods_Conexion extends Conexion {
 
 
     /**
-     * Obtiene la lista de los metodos get del modelo que lo invoca.
+     * Obtiene la lista de los métodos get del modelo que lo invoca.
      *
-     * @param metodos Lista de metodos que tiene el modelo, sobre los cuales se filtraran los metodos get.
+     * @param metodos Lista de métodos que tiene el modelo, sobre los cuales se filtraran los métodos get.
      * @param <T>     Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
-     * @return Lista de los metodos get del modelo que lo invoca.
+     * @return Lista de los métodos get del modelo que lo invoca.
      */
     public synchronized <T> List<Method> getMethodsGetOfModel(List<Method> metodos) {
         // Los muestro en consola
@@ -151,11 +151,11 @@ public class Methods_Conexion extends Conexion {
     }
 
     /**
-     * Obtiene la lista de los metodos set del modelo que lo invoca.
+     * Obtiene la lista de los métodos set del modelo que lo invoca.
      *
-     * @param metodos Lista de metodos que tiene el modelo, sobre los cuales se filtraran los metodos set.
+     * @param metodos Lista de métodos que tiene el modelo, sobre los cuales se filtraran los métodos set.
      * @param <T>     Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
-     * @return Lista de los metodos set del modelo que lo invoca.
+     * @return Lista de los métodos set del modelo que lo invoca.
      */
     public synchronized <T> List<Method> getMethodsSetOfModel(List<Method> metodos) {
         List<Method> result = new ArrayList<>();
@@ -542,13 +542,13 @@ public class Methods_Conexion extends Conexion {
                 try {
                     LogsJB.debug("Buscara si la columna tiene un atributo en el modelo actual: " + nameColumn);
                     List<Method> metodosSet = new ArrayList<>();
-                    LogsJB.trace("Inicializa el array list de los metodos set");
+                    LogsJB.trace("Inicializa el array list de los métodos set");
                     metodosSet = this.getMethodsSetOfModel(this.getMethodsModel());
-                    LogsJB.trace("obtuvo los metodos set");
+                    LogsJB.trace("obtuvo los métodos set");
                     //Llena la información del modelo
                     LogsJB.trace("Columna : " + nameColumn);
-                    LogsJB.debug("Cantidad de metodos set: " + metodosSet.size());
-                    //Recorrera los metodos set del modelo para ver cual es el que corresponde a la columna
+                    LogsJB.debug("Cantidad de métodos set: " + metodosSet.size());
+                    //Recorrera los métodos set del modelo para ver cual es el que corresponde a la columna
                     for (int j = 0; j < metodosSet.size(); j++) {
                         Method metodo = metodosSet.get(j);
                         String metodoName = metodo.getName();
@@ -558,7 +558,7 @@ public class Methods_Conexion extends Conexion {
                             LogsJB.trace("Nombre de la columna, nombre del metodo set: " + nameColumn + "   " + metodoName);
                             List<Method> metodosget = new ArrayList<>();
                             metodosget = this.getMethodsGetOfModel(this.getMethodsModel());
-                            LogsJB.trace("Cantidad de metodos get: " + metodosget.size());
+                            LogsJB.trace("Cantidad de métodos get: " + metodosget.size());
                             //Llena la información de las columnas que se insertaran
                             for (int a = 0; a < metodosget.size(); a++) {
                                 //Obtengo el metodo
@@ -631,7 +631,7 @@ public class Methods_Conexion extends Conexion {
      * @param columnsSQL Columna java que será analizada
      * @param ejecutor   PreparedStatement sobre el cual se estara envíando la información de la columna
      * @param auxiliar   Indice que indica la posición del parametro en el ejecutor.
-     * @throws SQLException Lanza esta excepción si sucede algun problema al setear el valor Java en el ejecutor.
+     * @throws SQLException Lanza esta excepción si sucede algún problema al setear el valor Java en el ejecutor.
      */
     protected void convertJavaToSQL(Column columnsSQL, PreparedStatement ejecutor, int auxiliar) throws SQLException {
         LogsJB.debug("DataType de la columna: " + columnsSQL.getDataTypeSQL());
@@ -691,13 +691,13 @@ public class Methods_Conexion extends Conexion {
      * Metodo que convierte la información obtenida de BD's a Java
      *
      * @param columna    Columna del modelo
-     * @param resultado  ResulSet que esta siendo evaludo
+     * @param resultado  ResulSet que está siendo evaludo
      * @param metodo     Metodo Set en el que se seteara la columna del modelo
      * @param columnaSql Columna SQL que corresponde a la columna del modelo
      * @param invocador  Invocador del metodo
-     * @throws SQLException              Lanza esta excepción de suceder algun problema con el ResultSet
-     * @throws InvocationTargetException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
-     * @throws IllegalAccessException    Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     * @throws SQLException              Lanza esta excepción de suceder algún problema con el ResultSet
+     * @throws InvocationTargetException Lanza esta excepción si hubiera algún problema al invocar el metodo Set
+     * @throws IllegalAccessException    Lanza esta excepción si hubiera algún problema al invocar el metodo Set
      */
     protected void convertSQLtoJava(ColumnsSQL columna, ResultSet resultado, Method metodo, Column columnaSql, Object invocador) throws SQLException, InvocationTargetException, IllegalAccessException {
         String columnName = columna.getCOLUMN_NAME();
@@ -773,7 +773,7 @@ public class Methods_Conexion extends Conexion {
             columnaSql.setValor(resultado.getObject(columnName));
             metodo.invoke(invocador, columnaSql);
             LogsJB.warning("No se pudo setear el valor de la columna: " + columnName + " " + this.getTableName());
-            LogsJB.warning("Debido a que ninguno de los metodos corresponde al tipo de dato SQL: " + columnType);
+            LogsJB.warning("Debido a que ninguno de los métodos corresponde al tipo de dato SQL: " + columnType);
         }
 
     }
@@ -1196,24 +1196,17 @@ public class Methods_Conexion extends Conexion {
      * con la información de BD's
      * @throws InstantiationException    Lanza esta excepción si ocurre un error al crear una nueva instancia
      *                                   del tipo de modelo proporcionado
-     * @throws SQLException              Lanza esta excepción de suceder algun problema con el ResultSet
-     * @throws InvocationTargetException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
-     * @throws IllegalAccessException    Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     * @throws SQLException              Lanza esta excepción de suceder algún problema con el ResultSet
+     * @throws InvocationTargetException Lanza esta excepción si hubiera algún problema al invocar el metodo Set
+     * @throws IllegalAccessException    Lanza esta excepción si hubiera algún problema al invocar el metodo Set
      * @throws DataBaseUndefind          Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
      *                                   BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined     Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                                   propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     protected <T extends Methods_Conexion> T procesarResultSet(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException, DataBaseUndefind, PropertiesDBUndefined, NoSuchMethodException {
-        T temp;
-        if(modelo.getGetPropertySystem()){
-            temp = (T) modelo.getClass().newInstance();
-        }else{
-            modelo.llenarPropertiesFromModel(this);
-            Constructor constructor=modelo.getClass().getConstructor(Boolean.class);
-            temp = (T) constructor.newInstance(false);
-            temp.llenarPropertiesFromModel(modelo);
-        }
+        T temp=null;
+        modelo.obtenerInstanciaOfModel(modelo, temp);
         temp.setTabla(modelo.getTabla());
         temp.setTableExist(modelo.getTableExist());
         temp.setTableName(modelo.getTableName());
@@ -1230,9 +1223,9 @@ public class Methods_Conexion extends Conexion {
 
         LogsJB.debug("Obtuvo un resultado de BD's, procedera a llenar el modelo " + temp.getClass().getSimpleName());
         List<Method> metodosSet = new ArrayList<>();
-        LogsJB.trace("Inicializa el array list de los metodos set");
+        LogsJB.trace("Inicializa el array list de los métodos set");
         metodosSet = temp.getMethodsSetOfModel(temp.getMethodsModel());
-        LogsJB.trace("obtuvo los metodos set");
+        LogsJB.trace("obtuvo los métodos set");
         LogsJB.debug("Cantidad de columnas : " + temp.getTabla().getColumnas().size());
 
         //Llena la información del modelo
@@ -1241,7 +1234,7 @@ public class Methods_Conexion extends Conexion {
             ColumnsSQL columna = temp.getTabla().getColumnas().get(i);
             String columnName = columna.getCOLUMN_NAME();
             LogsJB.trace("Columna : " + columnName);
-            LogsJB.debug("Cantidad de metodos set: " + metodosSet.size());
+            LogsJB.debug("Cantidad de métodos set: " + metodosSet.size());
             //Recorrera los metodos set del modelo para ver cual es el que corresponde a la columna
             for (int j = 0; j < metodosSet.size(); j++) {
                 Method metodo = metodosSet.get(j);
@@ -1278,6 +1271,30 @@ public class Methods_Conexion extends Conexion {
     }
 
     /**
+     * Obtiene una instancia nueva del tipo de modelo que se envía como parametro
+     * @param modelo Tipo de objeto que se desea instanciar
+     * @param temp es necesario que este objeto sea del mismo tipo que el modelo del cual se obtendra la instancia
+     */
+    public <T extends Methods_Conexion> void obtenerInstanciaOfModel(T modelo, T temp){
+        try{
+            if(modelo.getGetPropertySystem()){
+                temp = (T) modelo.getClass().newInstance();
+            }else{
+                modelo.llenarPropertiesFromModel(this);
+                Constructor constructor=modelo.getClass().getConstructor(Boolean.class);
+                temp = (T) constructor.newInstance(false);
+                temp.llenarPropertiesFromModel(modelo);
+            }
+        } catch (InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
+            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
+    }
+
+    /**
      * Llena el modelo proporcionado con la Información Obtenida de BD's
      *
      * @param modelo    Modelo que invoca el metodo.
@@ -1286,9 +1303,9 @@ public class Methods_Conexion extends Conexion {
      *                  objeto que herede la Clase JBSqlUtils
      * @throws InstantiationException    Lanza esta excepción si ocurre un error al crear una nueva instancia
      *                                   del tipo de modelo proporcionado
-     * @throws SQLException              Lanza esta excepción de suceder algun problema con el ResultSet
-     * @throws InvocationTargetException Lanza esta excepción si hubiera algun problema al invocar el metodo Set
-     * @throws IllegalAccessException    Lanza esta excepción si hubiera algun problema al invocar el metodo Set
+     * @throws SQLException              Lanza esta excepción de suceder algún problema con el ResultSet
+     * @throws InvocationTargetException Lanza esta excepción si hubiera algún problema al invocar el metodo Set
+     * @throws IllegalAccessException    Lanza esta excepción si hubiera algún problema al invocar el metodo Set
      */
     protected <T extends Methods_Conexion> void procesarResultSetOneResult(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException {
         modelo.setModelExist(true);
@@ -1345,7 +1362,7 @@ public class Methods_Conexion extends Conexion {
      * @param columnas  Lista de los nombres de las columnas que se desea recuperar, si se desea recuperar todas las columnas envíar NULL
      * @param registros ResultSet del cual se obtendran los valores de las columnas
      * @return Retorna un Json Object con las columnas solicitadas como propiedades del json con sus respectivos valores
-     * @throws SQLException Lanza esta excepción si sucede algun error al obtener el valor de cada una de las columnas solicitadas
+     * @throws SQLException Lanza esta excepción si sucede algún error al obtener el valor de cada una de las columnas solicitadas
      */
     protected JSONObject procesarResultSetJSON(List<String> columnas, ResultSet registros) throws SQLException {
         JSONObject temp = new JSONObject();
@@ -1865,6 +1882,7 @@ public class Methods_Conexion extends Conexion {
      */
     public <T extends Methods_Conexion, G extends Methods_Conexion> void llenarPropertiesFromModel(G proveedor) {
         try {
+            this.setGetPropertySystem(proveedor.getGetPropertySystem());
             List<Method> metodosProveedor = Arrays.asList(proveedor.getClass().getMethods());
             //Filtro los metodos de las propiedades que deseo obtener
             metodosProveedor = metodosProveedor.stream().filter(metodo -> {

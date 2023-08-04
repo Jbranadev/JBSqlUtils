@@ -140,7 +140,7 @@ public class PrimaryKey {
     }
 
     /**
-     * Setea el orden en el que esta la clave si el modelo tiene una clave primara compuesta por 2 o más registros.
+     * Setea el orden en el que está la clave si el modelo tiene una clave primara compuesta por 2 o más registros.
      *
      * @param KEY_SEQ KEY_SEQ short => número de secuencia dentro de la clave principal
      *                * (un valor de 1 representa la primera columna de la clave principal, un valor de 2 representaría la segunda

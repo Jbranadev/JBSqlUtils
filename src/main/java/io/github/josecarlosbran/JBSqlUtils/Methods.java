@@ -23,7 +23,6 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import org.apache.commons.lang3.StringUtils;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -84,7 +83,7 @@ class Methods extends Methods_Conexion {
      * Almacena la información de los modelos proporcionados en BD's
      *
      * @param modelos Lista de modelos que serán Insertados o Actualizados
-     * @param <T>     Tipo de parametro que hace que el metodo sea generico para poder ser
+     * @param <T>     Tipo de parámetro que hace que el método sea generico para poder ser
      *                llamado por diferentes tipos de objetos, siempre y cuando estos hereden la clase Methods Conexion.
      * @return La cantidad de filas insertadas o actualizadas en BD's
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
@@ -104,14 +103,7 @@ class Methods extends Methods_Conexion {
                 modelo.llenarPropertiesFromModel(temp);
                 LogsJB.debug("Modelo Ya había sido inicializado: " + temp.getClass().getSimpleName());
             } else {
-                if(modelo.getGetPropertySystem()){
-                    temp = (T) modelo.getClass().newInstance();
-                }else{
-                    modelo.llenarPropertiesFromModel(this);
-                    Constructor constructor=modelo.getClass().getConstructor(Boolean.class);
-                    temp = (T) constructor.newInstance(false);
-                    temp.llenarPropertiesFromModel(modelo);
-                }
+                modelo.obtenerInstanciaOfModel(modelo, temp);
                 LogsJB.warning("Modelo era Null, crea una nueva instancia: " + temp.getClass().getSimpleName());
                 temp.refresh();
             }
@@ -151,7 +143,7 @@ class Methods extends Methods_Conexion {
      * Elimina la información de los modelos proporcionados en BD's
      *
      * @param modelos Lista de modelos que serán Eliminados
-     * @param <T>     Tipo de parametro que hace que el metodo sea generico para poder ser
+     * @param <T>     Tipo de parámetro que hace que el método sea generico para poder ser
      *                llamado por diferentes tipos de objetos, siempre y cuando estos hereden la clase Methods Conexion.
      * @return La cantidad de filas eliminadas en BD's
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
@@ -169,14 +161,7 @@ class Methods extends Methods_Conexion {
                 LogsJB.debug("Modelo Ya había sido inicializado: " + temp.getClass().getSimpleName());
                 modelo.llenarPropertiesFromModel(temp);
             } else {
-                if(modelo.getGetPropertySystem()){
-                    temp = (T) modelo.getClass().newInstance();
-                }else{
-                    modelo.llenarPropertiesFromModel(this);
-                    Constructor constructor=modelo.getClass().getConstructor(Boolean.class);
-                    temp = (T) constructor.newInstance(false);
-                    temp.llenarPropertiesFromModel(modelo);
-                }
+                modelo.obtenerInstanciaOfModel(modelo, temp);
                 LogsJB.warning("Modelo era Null, crea una nueva instancia: " + temp.getClass().getSimpleName());
             }
             if (!modelo.getTableExist()) {
@@ -249,7 +234,7 @@ class Methods extends Methods_Conexion {
      * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
      *
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
      * @return Retorna una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's

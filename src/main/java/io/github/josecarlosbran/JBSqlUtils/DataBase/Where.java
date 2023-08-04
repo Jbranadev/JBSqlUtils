@@ -42,17 +42,17 @@ public class Where<T> extends Get {
     private T modelo = null;
 
     /**
-     * Lista de los parametros a envíar
+     * Lista de los parámetros a envíar
      */
     protected List<Column> parametros = new ArrayList<>();
 
     /**
-     * Constructor que recibe como parametro:
+     * Constructor que recibe como parámetro:
      *
      * @param columna  Columna a evaluar dentro de la sentencia WHERE
      * @param operador Operador con el cual se evaluara la columna
      * @param valor    Valor contra el que se evaluara la columna
-     * @param modelo   Modelo que invocara los metodos de esta clase
+     * @param modelo   Modelo que invocara los métodos de esta clase
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
      *                               BD's a la cual se conectara el modelo.
@@ -79,12 +79,12 @@ public class Where<T> extends Get {
     }
 
     /**
-     * Constructor que recibe como parametro:
+     * Constructor que recibe como parámetro:
      *
      * @param columna  Columna a evaluar dentro de la sentencia WHERE
      * @param operador Operador con el cual se evaluara la columna
      * @param valor    Valor contra el que se evaluara la columna
-     * @param modelo   Modelo que invocara los metodos de esta clase
+     * @param modelo   Modelo que invocara los métodos de esta clase
      * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
@@ -113,7 +113,7 @@ public class Where<T> extends Get {
 
 
     /**
-     * Constructor que recibe como parametro:
+     * Constructor que recibe como parámetro:
      *
      * @param columna  Columna a evaluar dentro de la sentencia WHERE
      * @param operador Operador con el cual se evaluara la columna
@@ -142,7 +142,7 @@ public class Where<T> extends Get {
     }
 
     /**
-     * Constructor que recibe como parametro:
+     * Constructor que recibe como parámetro:
      *
      * @param columna  Columna a evaluar dentro de la sentencia WHERE
      * @param operador Operador con el cual se evaluara la columna
@@ -275,8 +275,8 @@ public class Where<T> extends Get {
      * @param columna      Columna a evaluar dentro de la sentencia AND
      * @param operador     Operador con el cual se evaluara la columna
      * @param valor        Valor contra el que se evaluara la columna
-     * @return Retorna un objeto OpenParentecis el cual proporciona acceso a los metodos necesarios
-     * para filtrar de una mejor manera nuestra consulta, No olvide llamar al metodo close parentecis cuando
+     * @return Retorna un objeto OpenParentecis el cual proporciona acceso a los métodos necesarios
+     * para filtrar de una mejor manera nuestra consulta, No olvide llamar al método close parentecis cuando
      * haya finalizado la logica dentro de sus parentecis
      * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
@@ -311,7 +311,7 @@ public class Where<T> extends Get {
      * Agrega la posibilidad de realizar un cierre de parentecis dentro de la logica de nuestra sentencia SQL
      *
      * @param operatorPost Operador a colocar despues del cierre de parentecis
-     * @return Retorna un objeto closeParentecis, el cual da acceso al resto de metodos que podemos llamar.
+     * @return Retorna un objeto closeParentecis, el cual da acceso al resto de métodos que podemos llamar.
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
      *                               BD's a la cual se conectara el modelo.
@@ -350,9 +350,9 @@ public class Where<T> extends Get {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Llena el modelo que invoca este metodo con la información que obtiene de BD's
+     * Llena el modelo que invoca este método con la información que obtiene de BD's
      *
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
      *                   captura la excepción y la lanza en el hilo principal
      */
@@ -361,10 +361,10 @@ public class Where<T> extends Get {
     }
 
     /**
-     * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's
+     * Obtiene un modelo del tipo que invoca este método con la información que obtiene de BD's
      *
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
-     * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
+     * @return Retorna un un modelo del tipo que invoca este método con la información que obtiene de BD's.
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
      *                   captura la excepción y la lanza en el hilo principal
      */
@@ -373,9 +373,9 @@ public class Where<T> extends Get {
     }
 
     /**
-     * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's
+     * Obtiene un modelo del tipo que invoca este método con la información que obtiene de BD's
      *
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
      * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
      * @throws ModelNotFound Lanza esta excepción si no logra encontrar el registro correspondiente a la consulta
      *                       SQL realizada.

@@ -70,12 +70,12 @@ public class Get extends Methods_Conexion {
     }
 
     /**
-     * Llena el modelo que invoca este metodo con la información que obtiene de BD's
+     * Llena el modelo que invoca este método con la información que obtiene de BD's
      *
      * @param modelo     Modelo que será llenado
      * @param Sql        Sentencia SQL para obtener el modelo
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
-     * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el método.
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
      *                   captura la excepción y la lanza en el hilo principal
      */
@@ -147,28 +147,32 @@ public class Get extends Methods_Conexion {
     }
 
     /**
-     * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's
+     * Obtiene un modelo del tipo que invoca este método con la información que obtiene de BD's
      *
-     * @param modelo     Modelo que esta invocando el metodo
+     * @param modelo     Modelo que está invocando el método
      * @param Sql        Sentencia SQL para obtener el modelo
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
-     * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
-     * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
+     * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el método.
+     * @return Retorna un un modelo del tipo que invoca este método con la información que obtiene de BD's.
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
      *                   captura la excepción y la lanza en el hilo principal
      */
     protected <T extends JBSqlUtils> T first(T modelo, String Sql, List<Column> parametros) throws Exception {
+        T modeloResult=null;
         if(!this.getGetPropertySystem()){
             modelo.setGetPropertySystem(false);
             modelo.llenarPropertiesFromModel(this);
         }
         try {
+            modelo.obtenerInstanciaOfModel(modelo, modeloResult);
             modelo.setTaskIsReady(false);
             if (!modelo.getTableExist()) {
                 modelo.refresh();
             }
             Connection connect = modelo.getConnection();
-            Callable<ResultAsync<Boolean>> get = () -> {
+            Callable<ResultAsync<T>> get = () -> {
+                T modeloTemp=null;
+                modelo.obtenerInstanciaOfModel(modelo, modeloTemp);
                 try {
                     if (modelo.getTableExist()) {
                         String sql = "SELECT * FROM " + modelo.getTableName();
@@ -183,7 +187,7 @@ public class Get extends Methods_Conexion {
                         LogsJB.info(ejecutor.toString());
                         ResultSet registros = ejecutor.executeQuery();
                         if (registros.next()) {
-                            procesarResultSetOneResult(modelo, registros);
+                            modeloTemp=procesarResultSet(modelo, registros);
 
                         }
                         modelo.closeConnection(connect);
@@ -192,7 +196,7 @@ public class Get extends Methods_Conexion {
                                 "recuperar el Registro");
                     }
                     modelo.setTaskIsReady(true);
-                    return new ResultAsync<>(true, null);
+                    return new ResultAsync<>(modeloTemp, null);
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's: " + e.toString());
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -200,19 +204,20 @@ public class Get extends Methods_Conexion {
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
                     modelo.setTaskIsReady(true);
-                    return new ResultAsync<>(true, e);
+                    return new ResultAsync<>(modeloTemp, e);
                 }
             };
             ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            Future<ResultAsync<Boolean>> future= ejecutor.submit(get);
+            Future<ResultAsync<T>> future= ejecutor.submit(get);
             while (!future.isDone()) {
 
             }
             ejecutor.shutdown();
-            ResultAsync<Boolean> resultado = future.get();
+            ResultAsync<T> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
             }
+            modeloResult=resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que obtiene el modelo en la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -220,13 +225,13 @@ public class Get extends Methods_Conexion {
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
-        return modelo;
+        return modeloResult;
     }
 
     /**
      * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's
      *
-     * @param modelo     Modelo que esta invocando el metodo
+     * @param modelo     Modelo que está invocando el metodo
      * @param Sql        Sentencia SQL para obtener el modelo
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
      * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
@@ -235,6 +240,7 @@ public class Get extends Methods_Conexion {
      *                       SQL realizada.
      */
     protected <T extends JBSqlUtils> T firstOrFail(T modelo, String Sql, List<Column> parametros) throws Exception {
+        T modeloResult=null;
         if(!this.getGetPropertySystem()){
             modelo.setGetPropertySystem(false);
             modelo.llenarPropertiesFromModel(this);
@@ -243,10 +249,11 @@ public class Get extends Methods_Conexion {
         if (!modelo.getTableExist()) {
             modelo.refresh();
         }
-
+        modelo.obtenerInstanciaOfModel(modelo, modeloResult);
         Connection connect = modelo.getConnection();
-        Callable<Boolean> get = () -> {
-            Boolean respuesta = false;
+        Callable<ResultAsync<T>> get = () -> {
+            T modeloTemp=null;
+            modelo.obtenerInstanciaOfModel(modelo, modeloTemp);
             try {
                 if (modelo.getTableExist()) {
                     String sql = "SELECT * FROM " + modelo.getTableName();
@@ -262,15 +269,17 @@ public class Get extends Methods_Conexion {
                     LogsJB.info(ejecutor.toString());
                     ResultSet registros = ejecutor.executeQuery();
                     if (registros.next()) {
-                        procesarResultSetOneResult(modelo, registros);
-                        respuesta = true;
+                        modeloTemp=procesarResultSet(modelo, registros);
                     }
                     modelo.closeConnection(connect);
+                    modelo.setTaskIsReady(true);
+                    return new ResultAsync<>(modeloTemp, null);
                 } else {
                     LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
                             "recuperar el Registro");
+                    modelo.setTaskIsReady(true);
+                    return new ResultAsync<>(modeloTemp, null);
                 }
-                modelo.setTaskIsReady(true);
             } catch (SQLException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
                 LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's: " + e.toString());
                 LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -278,38 +287,35 @@ public class Get extends Methods_Conexion {
                 LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                 LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
                 modelo.setTaskIsReady(true);
+                return new ResultAsync<>(modeloTemp, e);
             }
-            return respuesta;
         };
 
         ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-        Future<Boolean> future = ejecutor.submit(get);
+        Future<ResultAsync<T>> future= ejecutor.submit(get);
         while (!future.isDone()) {
 
         }
         ejecutor.shutdown();
-        Boolean result = false;
-        try {
-            result = future.get();
-        } catch (ExecutionException | InterruptedException e) {
-            LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        ResultAsync<T> resultado = future.get();
+        if (!Objects.isNull(resultado.getException())) {
+            throw resultado.getException();
         }
+        modeloResult=resultado.getResult();
+        Boolean result = false;
+        result = modeloResult.getModelExist();
         if (!result) {
             String sql = "SELECT * FROM " + modelo.getTableName();
             throw new ModelNotFound("No existe un modelo en BD's que corresponda a los criterios de la consulta sql: " + sql + Sql);
         }
-        return modelo;
+        return modeloResult;
     }
 
     /**
      * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
      *
-     * @param modelo     Modelo que esta invocando el metodo
+     * @param modelo     Modelo que está invocando el metodo
      * @param Sql        Sentencia SQL para obtener el modelo
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
      * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.

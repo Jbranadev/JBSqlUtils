@@ -6,18 +6,27 @@
 
     <groupId>io.github.josecarlosbran</groupId>
     <artifactId>JBSqlUtils</artifactId>
-    <version>1.1.5.1</version>
+    <version>1.1.6</version>
 
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>
-        JBSqlUtils es un ORM desarrollado en java por José Carlos Alfredo Bran Aguirre que permite gestionar BD's
-        SQLite,
-        MySQL, PostgreSQL y SQLServer, de una manera fácil y rápida sin interrumpir la ejecución del hilo principal
-        del programa, lo cual la hace un potente ORM para aplicaciones android y sistemas empresariales que tengan
+        JBSqlUtils es un ORM desarrollado en java por José Carlos Alfredo Bran Aguirre,
+        que permite gestionar BD's SQLite, MySQL, PostgreSQL y SQLServer, de una manera fácil
+        y rápida sin interrumpir la ejecución del hilo principal del programa, lo cual la hace un potente ORM,
+        por medio del cual tendrá acceso a un CRUD, configurando únicamente la conexión del
+        modelo, los atributos que posee la tabla en BD's cómo variables que pertenecerán al modelo en su aplicación.
+
+        JBSqlUtils también proporciona un potente generador de instrucciones SQL que le permitirá crear
+        o eliminar una tabla, insertar, seleccionar, actualizar o eliminar registros de una tabla
+        en su BD's sin necesidad de instanciar un modelo cómo tal, únicamente tendrá que configurar previamente
+        la conexión a su BD's.
+
+        Lo cual la hace un potente ORM para aplicaciones android y sistemas empresariales que tengan
         la necesidad de poder conectarse a alguna de estas 4 tipos de BD's, cabe mencionar que para ello utiliza
-        el SQLite JDBC de org.xerial, org.postgresql, mysql y com.microsoft.sqlserver. Para mayor información,
-        consultar el siguiente enlace https://github.com/JoseCarlosBran/JBSqlUtils/blob/master/Readme.md
+        el SQLite JDBC de org.xerial, org.postgresql, mysql y com.microsoft.sqlserver.
+
+        Para mayor información, consultar el siguiente enlace https://github.com/JoseCarlosBran/JBSqlUtils/blob/master/Readme.md
     </description>
     <!-- FIXME change it to the project's website -->
     <url>https://github.com/JoseCarlosBran/JBSqlUtils/blob/master/Readme.md</url>
@@ -184,6 +193,11 @@
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.22.1</version>
+                    <configuration>
+                        <suiteXmlFiles>
+                            <suiteXmlFile>JBSqlUtilsTest.xml</suiteXmlFile>
+                        </suiteXmlFiles>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>

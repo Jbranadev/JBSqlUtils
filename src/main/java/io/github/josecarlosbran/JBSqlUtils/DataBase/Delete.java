@@ -31,10 +31,10 @@ public class Delete {
     private String sql;
 
     /**
-     * Constructor que recibe como parametro:
+     * Constructor que recibe como parámetro:
      *
      * @param TableName El nombre de la tabla sobre la cual se desea realizar el Update.
-     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado está vacío o es NULL
+     * @throws ValorUndefined Lanza esta excepción si el parámetro proporcionado está vacío o es NULL
      */
     public Delete(String TableName) throws ValorUndefined {
         String respuesta = "";
@@ -57,7 +57,7 @@ public class Delete {
      *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
-     * @throws ValorUndefined        Lanza esta excepción si alguno de los parametros proporcionados esta
+     * @throws ValorUndefined        Lanza esta excepción si alguno de los parámetros proporcionados esta
      *                               Vacío o es Null
      */
     public Where where(String columna, Operator operador, Object value) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {

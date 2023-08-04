@@ -107,11 +107,10 @@ public class JBSqlUtilsTestSQLServer {
          * Esperamos se ejecute la instrucción en BD's
          */
         this.testModel.waitOperationComplete();
-        logParrafo("Insertamos el Modelo a traves del metodo save");
+        logParrafo("Insertamos el Modelo a través del metodo save");
         logParrafo("Filas insertadas en BD's: " + rowsInsert + " " + this.testModel.toString());
         Assert.assertTrue(rowsInsert == 1, "El registro no fue insertado en BD's");
     }
-
 
     @Test(testName = "Clean Model",
             dependsOnMethods = "insertModel")
@@ -134,10 +133,9 @@ public class JBSqlUtilsTestSQLServer {
             dependsOnMethods = "cleanModel",
             expectedExceptions = ModelNotFound.class)
     public void firstOrFail() throws Exception {
-        this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+        TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
                 "Cabrerassss").firstOrFail();
     }
-
 
     @Test(testName = "Update Model", dependsOnMethods = "firstOrFail")
     public void updateModel() throws Exception {
@@ -147,24 +145,24 @@ public class JBSqlUtilsTestSQLServer {
          * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
          */
         logParrafo("Obtenemos el modelo que tiene por nombre Marcos, Apellido Cabrera");
-        this.testModel.where("Name", Operator.IGUAL_QUE, "Marcos").and("Apellido", Operator.IGUAL_QUE,
+        TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcos").and("Apellido", Operator.IGUAL_QUE,
                 "Cabrera").firstOrFail();
         /**
          * Esperamos ejecute la operación en BD's
          */
         this.testModel.waitOperationComplete();
-        logParrafo(this.testModel.toString());
+        logParrafo(temp.toString());
         /**
          * Actualizamos la información
          */
         logParrafo("Actualizamos el nombre del modelo a MarcosEfrain y asígnamos que será mayor de edad");
-        this.testModel.getName().setValor("MarcosEfrain");
-        this.testModel.getIsMayor().setValor(true);
-        logParrafo(this.testModel.toString());
+        temp.getName().setValor("MarcosEfrain");
+        temp.getIsMayor().setValor(true);
+        logParrafo(temp.toString());
         /**
          * Eliminamos el modelo en BD's
          */
-        Integer rowsUpdate = this.testModel.save();
+        Integer rowsUpdate = temp.save();
         logParrafo("Guardamos el modelo en BD's");
         Assert.assertTrue(rowsUpdate == 1, "El registro no fue actualizado en la BD's");
     }
@@ -177,18 +175,18 @@ public class JBSqlUtilsTestSQLServer {
          * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
          */
         logParrafo("Obtenemos el modelo que tiene por nombre MarcosEfrain, Apellido Cabrera y es Mayor de Edad");
-        this.testModel.where("Name", Operator.IGUAL_QUE, "MarcosEfrain").and("Apellido", Operator.IGUAL_QUE,
+        TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "MarcosEfrain").and("Apellido", Operator.IGUAL_QUE,
                 "Cabrera").and("isMayor", Operator.IGUAL_QUE, true).firstOrFail();
         /**
          * Esperamos ejecute la operación en BD's
          */
         this.testModel.waitOperationComplete();
-        logParrafo(this.testModel.toString());
+        logParrafo(temp.toString());
         /**
          * Eliminamos el modelo en BD's
          */
-        logParrafo("Eliminamos el modelo a traves del metodo delete");
-        Integer rowsDelete = this.testModel.delete();
+        logParrafo("Eliminamos el modelo a través del metodo delete");
+        Integer rowsDelete = temp.delete();
         Assert.assertTrue(rowsDelete == 1, "El registro no fue eliminado en la BD's");
     }
 
@@ -253,19 +251,19 @@ public class JBSqlUtilsTestSQLServer {
         logParrafo("Limpiamos el modelo");
         this.testModel.cleanModel();
         logParrafo("Obtenemos el primero modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
-        this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+        TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
                 "Cabrerassss").first();
         this.testModel.waitOperationComplete();
-        logParrafo("Trato de obtener un modelo que no existe, el resultado es: "+this.testModel.getModelExist());
-        logParrafo(this.testModel.toString());
-        Assert.assertFalse(this.testModel.getModelExist(), "Obtuvo un registro que no existe en BD's");
+        logParrafo("Trato de obtener un modelo que no existe, el resultado es: "+temp.getModelExist());
+        logParrafo(temp.toString());
+        Assert.assertFalse(temp.getModelExist(), "Obtuvo un registro que no existe en BD's");
         logParrafo("Obtenemos el primero modelo cuyo nombre sea Modelo # y sea mayor de edad");
-        this.testModel.where("Name", Operator.LIKE, "%Modelo #%").and("IsMayor", Operator.IGUAL_QUE,
+        temp = (TestModel) this.testModel.where("Name", Operator.LIKE, "%Modelo #%").and("IsMayor", Operator.IGUAL_QUE,
                 true).first();
         this.testModel.waitOperationComplete();
-        logParrafo("Trato de obtener un modelo que sí existe, el resultado es: "+this.testModel.getModelExist());
-        logParrafo(this.testModel.toString());
-        Assert.assertTrue(this.testModel.getModelExist(), "No obtuvo un registro que no existe en BD's");
+        logParrafo("Trato de obtener un modelo que sí existe, el resultado es: "+temp.getModelExist());
+        logParrafo(temp.toString());
+        Assert.assertTrue(temp.getModelExist(), "No obtuvo un registro que no existe en BD's");
     }
 
     @Test(testName = "Take Models",
@@ -314,7 +312,7 @@ public class JBSqlUtilsTestSQLServer {
             modelo.getIsMayor().setValor(!modelo.getIsMayor().getValor());
             logParrafo("Modelo a actualizar: "+modelo.toString());
         });
-        logParrafo("Enviamos a guardar los modelos a traves del metodo saveALL");
+        logParrafo("Enviamos a guardar los modelos a través del metodo saveALL");
         Integer rowsUpdate = this.testModel.saveALL(models);
         logParrafo("Filas actualizadas en BD's: " + rowsUpdate);
         /**
@@ -470,8 +468,8 @@ public class JBSqlUtilsTestSQLServer {
         columnas.add("Name");
         logParrafo("Obtendra los primeros 2 registros cuyo estado sea true y en su apellido posea la letra a");
         /**
-         * Para obtener los registros de una tabla de BD's podemos hacerlo a traves del metodo select envíando como parametro
-         * el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a traves del metodo
+         * Para obtener los registros de una tabla de BD's podemos hacerlo a través del metodo select envíando como parametro
+         * el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a través del metodo
          * where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
          */
         List<JSONObject> lista = select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
