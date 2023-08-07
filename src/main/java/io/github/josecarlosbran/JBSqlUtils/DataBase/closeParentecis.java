@@ -180,7 +180,7 @@ public class closeParentecis<T> extends Get {
         } else {
             if(!this.getGetPropertySystem()){
                 And and =new And(this.sql, columna, operador, valor, this.modelo, this.parametros, false);
-                and.llenarPropertiesFromModel(this);
+                //and.llenarPropertiesFromModel(this);
                 return and;
             }
             return new And(this.sql, columna, operador, valor, this.modelo, this.parametros);
@@ -205,7 +205,7 @@ public class closeParentecis<T> extends Get {
         } else {
             if(!this.getGetPropertySystem()){
                 Or or=new Or(this.sql, columna, operador, valor, this.modelo, this.parametros, false);
-                or.llenarPropertiesFromModel(this);
+                //or.llenarPropertiesFromModel(this);
                 return or;
             }
             return new Or(this.sql, columna, operador, valor, this.modelo, this.parametros);
@@ -229,7 +229,7 @@ public class closeParentecis<T> extends Get {
         } else {
             if (!this.getGetPropertySystem()) {
                 OrderBy orderby = new OrderBy(this.sql, columna, orderType, this.modelo, this.parametros, false);
-                orderby.llenarPropertiesFromModel(this);
+                //orderby.llenarPropertiesFromModel(this);
                 return orderby;
             }
             return new OrderBy(this.sql, columna, orderType, this.modelo, this.parametros);
@@ -254,7 +254,7 @@ public class closeParentecis<T> extends Get {
         } else {
             if (!this.getGetPropertySystem()) {
                 Take take = new Take(this.sql, limite, this.modelo, this.parametros, false);
-                take.llenarPropertiesFromModel(this);
+                //take.llenarPropertiesFromModel(this);
                 return take;
             }
             return new Take(this.sql, limite, this.modelo, this.parametros);
@@ -283,14 +283,14 @@ public class closeParentecis<T> extends Get {
             if (Objects.isNull(operatorPrev)) {
                 if (!this.getGetPropertySystem()) {
                     openParentecis open = new openParentecis(this.sql, this.modelo, this.parametros, columna, operador, valor, false);
-                    open.llenarPropertiesFromModel(this);
+                    //open.llenarPropertiesFromModel(this);
                     return open;
                 }
                 return new openParentecis(this.sql, this.modelo, this.parametros, columna, operador, valor);
             } else {
                 if (!this.getGetPropertySystem()) {
                     openParentecis open = new openParentecis(this.sql, this.modelo, this.parametros, operatorPrev, columna, operador, valor, false);
-                    open.llenarPropertiesFromModel(this);
+                    //open.llenarPropertiesFromModel(this);
                     return open;
                 }
                 return new openParentecis(this.sql, this.modelo, this.parametros, operatorPrev, columna, operador, valor);
@@ -320,14 +320,14 @@ public class closeParentecis<T> extends Get {
             if (Objects.isNull(operatorPost)) {
                 if (!this.getGetPropertySystem()) {
                     closeParentecis close = new closeParentecis(this.sql, this.modelo, this.parametros, false);
-                    close.llenarPropertiesFromModel(this);
+                    //close.llenarPropertiesFromModel(this);
                     return close;
                 }
                 return new closeParentecis(this.sql, this.modelo, this.parametros);
             } else {
                 if (!this.getGetPropertySystem()) {
                     closeParentecis close = new closeParentecis(this.sql, this.modelo, this.parametros, operatorPost, false);
-                    close.llenarPropertiesFromModel(this);
+                    //close.llenarPropertiesFromModel(this);
                     return close;
                 }
                 return new closeParentecis(this.sql, this.modelo, this.parametros, operatorPost);

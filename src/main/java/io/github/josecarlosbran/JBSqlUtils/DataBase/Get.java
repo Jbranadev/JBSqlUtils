@@ -82,20 +82,21 @@ public class Get extends Methods_Conexion {
     protected <T extends JBSqlUtils> void get(T modelo, String Sql, List<Column> parametros) throws Exception {
         if(!this.getGetPropertySystem()){
             modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(this);
+            modelo.llenarPropertiesFromModel(modelo);
         }
         try {
             modelo.setTaskIsReady(false);
             if (!modelo.getTableExist()) {
                 modelo.refresh();
             }
-            Connection connect = modelo.getConnection();
+
             Callable<ResultAsync<Boolean>> get = () -> {
                 try {
                     if (modelo.getTableExist()) {
                         String sql = "SELECT * FROM " + modelo.getTableName();
                         sql = sql + Sql + ";";
                         //LogsJB.info(sql);
+                        Connection connect = modelo.getConnection();
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         for (int i = 0; i < parametros.size(); i++) {
                             //Obtengo la información de la columna
@@ -161,23 +162,22 @@ public class Get extends Methods_Conexion {
         T modeloResult=null;
         if(!this.getGetPropertySystem()){
             modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(this);
+            modelo.llenarPropertiesFromModel(modelo);
         }
         try {
-            modelo.obtenerInstanciaOfModel(modelo, modeloResult);
+            modeloResult=modelo.obtenerInstanciaOfModel(modelo);
             modelo.setTaskIsReady(false);
             if (!modelo.getTableExist()) {
                 modelo.refresh();
             }
-            Connection connect = modelo.getConnection();
             Callable<ResultAsync<T>> get = () -> {
-                T modeloTemp=null;
-                modelo.obtenerInstanciaOfModel(modelo, modeloTemp);
+                T modeloTemp=modelo.obtenerInstanciaOfModel(modelo);
                 try {
                     if (modelo.getTableExist()) {
                         String sql = "SELECT * FROM " + modelo.getTableName();
                         sql = sql + Sql + ";";
                         //LogsJB.info(sql);
+                        Connection connect = modelo.getConnection();
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         for (int i = 0; i < parametros.size(); i++) {
                             //Obtengo la información de la columna
@@ -243,22 +243,21 @@ public class Get extends Methods_Conexion {
         T modeloResult=null;
         if(!this.getGetPropertySystem()){
             modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(this);
+            modelo.llenarPropertiesFromModel(modelo);
         }
         modelo.setTaskIsReady(false);
         if (!modelo.getTableExist()) {
             modelo.refresh();
         }
-        modelo.obtenerInstanciaOfModel(modelo, modeloResult);
-        Connection connect = modelo.getConnection();
+        modeloResult=modelo.obtenerInstanciaOfModel(modelo);
         Callable<ResultAsync<T>> get = () -> {
-            T modeloTemp=null;
-            modelo.obtenerInstanciaOfModel(modelo, modeloTemp);
+            T modeloTemp=modelo.obtenerInstanciaOfModel(modelo);
             try {
                 if (modelo.getTableExist()) {
                     String sql = "SELECT * FROM " + modelo.getTableName();
                     sql = sql + Sql + ";";
                     //LogsJB.info(sql);
+                    Connection connect = modelo.getConnection();
                     PreparedStatement ejecutor = connect.prepareStatement(sql);
 
                     for (int i = 0; i < parametros.size(); i++) {
@@ -327,7 +326,7 @@ public class Get extends Methods_Conexion {
     protected <T extends JBSqlUtils> List<T> getAll(T modelo, String Sql, List<Column> parametros) throws Exception {
         if(!this.getGetPropertySystem()){
             modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(this);
+            modelo.llenarPropertiesFromModel(modelo);
         }
         modelo.setTaskIsReady(false);
         List<T> lista = new ArrayList<>();
@@ -335,7 +334,6 @@ public class Get extends Methods_Conexion {
             if (!modelo.getTableExist()) {
                 modelo.refresh();
             }
-            Connection connect = modelo.getConnection();
             //T finalTemp = temp;
             Callable<ResultAsync<List<T>>> get = () -> {
                 List<T> listaTemp = new ArrayList<>();
@@ -369,6 +367,7 @@ public class Get extends Methods_Conexion {
                             }
                         }
                         //LogsJB.info(sql);
+                        Connection connect = modelo.getConnection();
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
 
                         for (int i = 0; i < parametros.size(); i++) {
@@ -377,9 +376,7 @@ public class Get extends Methods_Conexion {
                             convertJavaToSQL(columnsSQL, ejecutor, i + 1);
                         }
                         LogsJB.info(ejecutor.toString());
-
                         ResultSet registros = ejecutor.executeQuery();
-
                         while (registros.next()) {
                             listaTemp.add(procesarResultSet(modelo, registros));
                             //procesarResultSet(modelo, registros);
@@ -447,7 +444,6 @@ public class Get extends Methods_Conexion {
             if (!this.getTableExist()) {
                 this.refresh();
             }
-            Connection connect = this.getConnection();
             //T finalTemp = temp;
             Callable<ResultAsync<List<JSONObject>>> get = () -> {
                 List<JSONObject> temp = new ArrayList<>();
@@ -479,8 +475,8 @@ public class Get extends Methods_Conexion {
                             }
                         }
                         //LogsJB.info(sql);
+                        Connection connect = this.getConnection();
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
-
                         for (int i = 0; i < parametros.size(); i++) {
                             //Obtengo la información de la columna
                             Column columnsSQL = parametros.get(i);
