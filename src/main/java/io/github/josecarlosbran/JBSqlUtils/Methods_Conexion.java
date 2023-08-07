@@ -90,30 +90,16 @@ public class Methods_Conexion extends Conexion {
     public synchronized <T> List<Method> getMethodsModel() {
         Method[] metodos = this.getClass().getMethods();
         List<Method> result = new ArrayList<>();
+        String classColumn=Column.class.getSimpleName();
         // Los muestro en consola
         for (Method metodo : metodos) {
-            String clase = metodo.getDeclaringClass().getSimpleName();
             String returntype = metodo.getReturnType().getSimpleName();
             Parameter[] parametros = metodo.getParameters();
             String ParametroType = "";
-            if (parametros.length >= 1) {
+            if (parametros.length == 1) {
                 ParametroType = parametros[0].getType().getSimpleName();
             }
-
-            if ((clase.equalsIgnoreCase("Object")
-                    || clase.equalsIgnoreCase("And")
-                    || clase.equalsIgnoreCase("GET")
-                    || clase.equalsIgnoreCase("Or")
-                    || clase.equalsIgnoreCase("OrderBy")
-                    || clase.equalsIgnoreCase("Where")
-                    || clase.equalsIgnoreCase("Conexion")
-                    || clase.equalsIgnoreCase("Take")
-                    || clase.equalsIgnoreCase("Methods")
-                    || clase.equalsIgnoreCase("Methods_Conexion"))
-                //&& !(returntype.equalsIgnoreCase("Column") ||ParametroType.equalsIgnoreCase("Column"))
-            ) {
-
-            } else if ((returntype.equalsIgnoreCase("Column") || ParametroType.equalsIgnoreCase("Column"))) {
+            if ((returntype.equalsIgnoreCase(classColumn) || ParametroType.equalsIgnoreCase(classColumn))) {
                 //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + returntype+"  " + ParametroType);
                 result.add(metodo);
             }
@@ -135,12 +121,13 @@ public class Methods_Conexion extends Conexion {
         int i = 0;
         //System.out.println("Inicia a obtener los metodos get");
         List<Method> result = new ArrayList<>();
+        String classColumn=Column.class.getSimpleName();
         //System.out.println("asigno los metodos get");
         for (Method metodo : metodos) {
             //Method metodo = result.get(i);
             String returntype = metodo.getReturnType().getSimpleName();
             String nombre = metodo.getName();
-            if (returntype.equalsIgnoreCase("Column") && StringUtils.startsWithIgnoreCase(nombre, "Get")) {
+            if (returntype.equalsIgnoreCase(classColumn) && StringUtils.startsWithIgnoreCase(nombre, "Get")) {
                 //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + returntype);
                 result.add(metodo);
             } else {
@@ -159,15 +146,16 @@ public class Methods_Conexion extends Conexion {
      */
     public synchronized <T> List<Method> getMethodsSetOfModel(List<Method> metodos) {
         List<Method> result = new ArrayList<>();
+        String classColumn=Column.class.getSimpleName();
         for (Method metodo : metodos) {
             Parameter[] parametros = metodo.getParameters();
             String ParametroType = "";
             String nombre = metodo.getName();
-            if (parametros.length >= 1) {
+            if (parametros.length == 1) {
                 ParametroType = parametros[0].getType().getSimpleName();
             }
             //System.out.println(nombre + "   " + metodo.getDeclaringClass() + "  " + ParametroType);
-            if ((StringUtils.startsWithIgnoreCase(nombre, "Set")) && (ParametroType.equalsIgnoreCase("Column"))) {
+            if ((StringUtils.startsWithIgnoreCase(nombre, "Set")) && (ParametroType.equalsIgnoreCase(classColumn))) {
                 result.add(metodo);
                 //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+ParametroType);
             } else {
