@@ -90,30 +90,16 @@ public class Methods_Conexion extends Conexion {
     public synchronized <T> List<Method> getMethodsModel() {
         Method[] metodos = this.getClass().getMethods();
         List<Method> result = new ArrayList<>();
+        String classColumn=Column.class.getSimpleName();
         // Los muestro en consola
         for (Method metodo : metodos) {
-            String clase = metodo.getDeclaringClass().getSimpleName();
             String returntype = metodo.getReturnType().getSimpleName();
             Parameter[] parametros = metodo.getParameters();
             String ParametroType = "";
-            if (parametros.length >= 1) {
+            if (parametros.length == 1) {
                 ParametroType = parametros[0].getType().getSimpleName();
             }
-
-            if ((clase.equalsIgnoreCase("Object")
-                    || clase.equalsIgnoreCase("And")
-                    || clase.equalsIgnoreCase("GET")
-                    || clase.equalsIgnoreCase("Or")
-                    || clase.equalsIgnoreCase("OrderBy")
-                    || clase.equalsIgnoreCase("Where")
-                    || clase.equalsIgnoreCase("Conexion")
-                    || clase.equalsIgnoreCase("Take")
-                    || clase.equalsIgnoreCase("Methods")
-                    || clase.equalsIgnoreCase("Methods_Conexion"))
-                //&& !(returntype.equalsIgnoreCase("Column") ||ParametroType.equalsIgnoreCase("Column"))
-            ) {
-
-            } else if ((returntype.equalsIgnoreCase("Column") || ParametroType.equalsIgnoreCase("Column"))) {
+            if ((returntype.equalsIgnoreCase(classColumn) || ParametroType.equalsIgnoreCase(classColumn))) {
                 //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + returntype+"  " + ParametroType);
                 result.add(metodo);
             }
@@ -135,12 +121,13 @@ public class Methods_Conexion extends Conexion {
         int i = 0;
         //System.out.println("Inicia a obtener los metodos get");
         List<Method> result = new ArrayList<>();
+        String classColumn=Column.class.getSimpleName();
         //System.out.println("asigno los metodos get");
         for (Method metodo : metodos) {
             //Method metodo = result.get(i);
             String returntype = metodo.getReturnType().getSimpleName();
             String nombre = metodo.getName();
-            if (returntype.equalsIgnoreCase("Column") && StringUtils.startsWithIgnoreCase(nombre, "Get")) {
+            if (returntype.equalsIgnoreCase(classColumn) && StringUtils.startsWithIgnoreCase(nombre, "Get")) {
                 //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + returntype);
                 result.add(metodo);
             } else {
@@ -159,15 +146,16 @@ public class Methods_Conexion extends Conexion {
      */
     public synchronized <T> List<Method> getMethodsSetOfModel(List<Method> metodos) {
         List<Method> result = new ArrayList<>();
+        String classColumn=Column.class.getSimpleName();
         for (Method metodo : metodos) {
             Parameter[] parametros = metodo.getParameters();
             String ParametroType = "";
             String nombre = metodo.getName();
-            if (parametros.length >= 1) {
+            if (parametros.length == 1) {
                 ParametroType = parametros[0].getType().getSimpleName();
             }
             //System.out.println(nombre + "   " + metodo.getDeclaringClass() + "  " + ParametroType);
-            if ((StringUtils.startsWithIgnoreCase(nombre, "Set")) && (ParametroType.equalsIgnoreCase("Column"))) {
+            if ((StringUtils.startsWithIgnoreCase(nombre, "Set")) && (ParametroType.equalsIgnoreCase(classColumn))) {
                 result.add(metodo);
                 //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+ParametroType);
             } else {
@@ -257,7 +245,6 @@ public class Methods_Conexion extends Conexion {
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
                 }
-
                 url = "jdbc:" + this.getDataBaseType().getDBType() + ":" + this.getBD();
                 LogsJB.debug("Url de conexion a DB: " + url);
                 connect = DriverManager.getConnection(url);
@@ -413,8 +400,8 @@ public class Methods_Conexion extends Conexion {
                             }
                             LogsJB.info("La tabla correspondiente a este modelo, existe en BD's " + this.getClass().getSimpleName());
                             tables.close();
-                            this.closeConnection(connect);
-                            getColumnsTable();
+                            //this.closeConnection(connect);
+                            getColumnsTable(connect);
                             return new ResultAsync<Boolean>(true, null);
                         }
                     }
@@ -465,11 +452,10 @@ public class Methods_Conexion extends Conexion {
     /**
      * Obtiene las columnas que tiene la tabla correspondiente al modelo en BD's.
      */
-    protected void getColumnsTable() {
-        //Runnable ObtenerColumnas = () -> {
+    protected void getColumnsTable(Connection connect) {
         try {
             LogsJB.debug("Comienza a obtener las columnas que le pertenecen a la tabla " + this.getTableName());
-            Connection connect = this.getConnection();
+            //Connection connect = this.getConnection();
             LogsJB.trace("Obtuvo el objeto conexión");
             DatabaseMetaData metaData = connect.getMetaData();
             LogsJB.trace("Ya tiene el MetaData de la BD's");
@@ -521,12 +507,6 @@ public class Methods_Conexion extends Conexion {
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
-        /*};
-        ExecutorService executorColumnas = Executors.newFixedThreadPool(1);
-        executorColumnas.submit(ObtenerColumnas);
-        executorColumnas.shutdown();*/
-
-
     }
 
 
@@ -643,6 +623,12 @@ public class Methods_Conexion extends Conexion {
             //Caracteres y cadenas de Texto
             ejecutor.setString(auxiliar, (String) columnsSQL.getValor());
 
+        } else if ((columnsSQL.getDataTypeSQL() == DataType.SMALLINT) || (columnsSQL.getDataTypeSQL() == DataType.TINYINT)
+                || (columnsSQL.getDataTypeSQL() == DataType.INTEGER) || (columnsSQL.getDataTypeSQL() == DataType.IDENTITY)
+                || (columnsSQL.getDataTypeSQL() == DataType.SERIAL)) {
+            //Valores Enteros
+            ejecutor.setInt(auxiliar, (Integer) columnsSQL.getValor());
+
         } else if ((columnsSQL.getDataTypeSQL() == DataType.NUMERIC) || (columnsSQL.getDataTypeSQL() == DataType.DECIMAL)
                 || (columnsSQL.getDataTypeSQL() == DataType.MONEY) || (columnsSQL.getDataTypeSQL() == DataType.SMALLMONEY)
                 || (columnsSQL.getDataTypeSQL() == DataType.DOUBLE)) {
@@ -655,13 +641,7 @@ public class Methods_Conexion extends Conexion {
             //Valores Booleanos
             ejecutor.setBoolean(auxiliar, (Boolean) columnsSQL.getValor());
             //ejecutor.setObject(auxiliar, columnsSQL.getValor(), Types.BOOLEAN);
-        } else if ((columnsSQL.getDataTypeSQL() == DataType.SMALLINT) || (columnsSQL.getDataTypeSQL() == DataType.TINYINT)
-                || (columnsSQL.getDataTypeSQL() == DataType.INTEGER) || (columnsSQL.getDataTypeSQL() == DataType.IDENTITY)
-                || (columnsSQL.getDataTypeSQL() == DataType.SERIAL)) {
-            //Valores Enteros
-            ejecutor.setInt(auxiliar, (Integer) columnsSQL.getValor());
-
-        } else if ((columnsSQL.getDataTypeSQL() == DataType.REAL) || (columnsSQL.getDataTypeSQL() == DataType.FLOAT)) {
+        }  else if ((columnsSQL.getDataTypeSQL() == DataType.REAL) || (columnsSQL.getDataTypeSQL() == DataType.FLOAT)) {
             //Valores Flotantes
             ejecutor.setFloat(auxiliar, (Float) columnsSQL.getValor());
 
@@ -711,6 +691,15 @@ public class Methods_Conexion extends Conexion {
             //Caracteres y cadenas de Texto
             columnaSql.setValor(resultado.getString(columnName));
             metodo.invoke(invocador, columnaSql);
+        } else if ((StringUtils.containsIgnoreCase(columnType, DataType.SMALLINT.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.TINYINT.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.INTEGER.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.IDENTITY.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.INT.name()))
+                || (StringUtils.containsIgnoreCase(columnType, DataType.SERIAL.name()))) {
+            //Valores Enteros
+            columnaSql.setValor(resultado.getInt(columnName));
+            metodo.invoke(invocador, columnaSql);
         } else if ((StringUtils.containsIgnoreCase(columnType, DataType.NUMERIC.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.DECIMAL.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.MONEY.name()))
@@ -733,15 +722,6 @@ public class Methods_Conexion extends Conexion {
             } else {
                 columnaSql.setValor(resultado.getBoolean(columnName));
             }
-            metodo.invoke(invocador, columnaSql);
-        } else if ((StringUtils.containsIgnoreCase(columnType, DataType.SMALLINT.name()))
-                || (StringUtils.containsIgnoreCase(columnType, DataType.TINYINT.name()))
-                || (StringUtils.containsIgnoreCase(columnType, DataType.INTEGER.name()))
-                || (StringUtils.containsIgnoreCase(columnType, DataType.IDENTITY.name()))
-                || (StringUtils.containsIgnoreCase(columnType, DataType.INT.name()))
-                || (StringUtils.containsIgnoreCase(columnType, DataType.SERIAL.name()))) {
-            //Valores Enteros
-            columnaSql.setValor(resultado.getInt(columnName));
             metodo.invoke(invocador, columnaSql);
         } else if ((StringUtils.containsIgnoreCase(columnType, DataType.REAL.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.FLOAT.name()))) {
@@ -1091,11 +1071,10 @@ public class Methods_Conexion extends Conexion {
             if (!modelo.getTableExist()) {
                 modelo.refresh();
             }
-            Connection connect = modelo.getConnection();
+
             Callable<ResultAsync<Integer>> Delete = () -> {
                 try {
                     if (modelo.getTableExist()) {
-
                         //Obtener cual es la clave primaria de la tabla
                         String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
                         String sql = "DELETE FROM " + modelo.getTableName();
@@ -1120,6 +1099,7 @@ public class Methods_Conexion extends Conexion {
                         //Colocamos el where
                         sql = sql + " WHERE " + namePrimaryKey + "=?;";
                         //LogsJB.info(sql);
+                        Connection connect = modelo.getConnection();
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         //LogsJB.info("Creo la instancia del PreparedStatement");
                         //Llena el prepareStatement
@@ -1205,8 +1185,7 @@ public class Methods_Conexion extends Conexion {
      *                                   propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     protected <T extends Methods_Conexion> T procesarResultSet(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException, DataBaseUndefind, PropertiesDBUndefined, NoSuchMethodException {
-        T temp=null;
-        modelo.obtenerInstanciaOfModel(modelo, temp);
+        T temp=modelo.obtenerInstanciaOfModel(modelo);
         temp.setTabla(modelo.getTabla());
         temp.setTableExist(modelo.getTableExist());
         temp.setTableName(modelo.getTableName());
@@ -1227,9 +1206,9 @@ public class Methods_Conexion extends Conexion {
         metodosSet = temp.getMethodsSetOfModel(temp.getMethodsModel());
         LogsJB.trace("obtuvo los métodos set");
         LogsJB.debug("Cantidad de columnas : " + temp.getTabla().getColumnas().size());
-
+        List<Method> metodosget = new ArrayList<>();
+        metodosget = temp.getMethodsGetOfModel(temp.getMethodsModel());
         //Llena la información del modelo
-
         for (int i = 0; i < temp.getTabla().getColumnas().size(); i++) {
             ColumnsSQL columna = temp.getTabla().getColumnas().get(i);
             String columnName = columna.getCOLUMN_NAME();
@@ -1240,15 +1219,11 @@ public class Methods_Conexion extends Conexion {
                 Method metodo = metodosSet.get(j);
                 String metodoName = metodo.getName();
                 metodoName = StringUtils.removeStartIgnoreCase(metodoName, "set");
-
                 if (StringUtils.equalsIgnoreCase(metodoName, columnName)) {
-
+                    Boolean breakSegundoFor=false;
                     LogsJB.trace("Nombre de la columna, nombre del metodo set: " + columnName + "   " + metodoName);
-                    List<Method> metodosget = new ArrayList<>();
-                    metodosget = temp.getMethodsGetOfModel(temp.getMethodsModel());
                     LogsJB.trace("Cantidad de metodos get: " + metodosget.size());
                     //Llena la información de las columnas que se insertaran
-
                     for (int a = 0; a < metodosget.size(); a++) {
                         //Obtengo el metodo
                         Method metodoget = metodosget.get(a);
@@ -1261,8 +1236,12 @@ public class Methods_Conexion extends Conexion {
                             //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
                             columnsSQL.setColumnExist(true);
                             convertSQLtoJava(columna, registros, metodo, columnsSQL, temp);
+                            breakSegundoFor=true;
                             break;
                         }
+                    }
+                    if(breakSegundoFor){
+                        break;
                     }
                 }
             }
@@ -1273,14 +1252,15 @@ public class Methods_Conexion extends Conexion {
     /**
      * Obtiene una instancia nueva del tipo de modelo que se envía como parametro
      * @param modelo Tipo de objeto que se desea instanciar
-     * @param temp es necesario que este objeto sea del mismo tipo que el modelo del cual se obtendra la instancia
+     * @return Retorna la nueva instancia del modelo creada
      */
-    public <T extends Methods_Conexion> void obtenerInstanciaOfModel(T modelo, T temp){
+    public <T extends Methods_Conexion> T obtenerInstanciaOfModel(T modelo){
+        T temp=null;
         try{
             if(modelo.getGetPropertySystem()){
                 temp = (T) modelo.getClass().newInstance();
             }else{
-                modelo.llenarPropertiesFromModel(this);
+                //modelo.llenarPropertiesFromModel(modelo);
                 Constructor constructor=modelo.getClass().getConstructor(Boolean.class);
                 temp = (T) constructor.newInstance(false);
                 temp.llenarPropertiesFromModel(modelo);
@@ -1291,6 +1271,8 @@ public class Methods_Conexion extends Conexion {
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }finally {
+            return temp;
         }
     }
 
@@ -1315,9 +1297,9 @@ public class Methods_Conexion extends Conexion {
         metodosSet = modelo.getMethodsSetOfModel(modelo.getMethodsModel());
         LogsJB.trace("obtuvo los metodos set");
         LogsJB.debug("Cantidad de columnas : " + modelo.getTabla().getColumnas().size());
-
+        List<Method> metodosget = new ArrayList<>();
+        metodosget = modelo.getMethodsGetOfModel(modelo.getMethodsModel());
         //Llena la información del modelo
-
         for (int i = 0; i < modelo.getTabla().getColumnas().size(); i++) {
             ColumnsSQL columna = modelo.getTabla().getColumnas().get(i);
             String columnName = columna.getCOLUMN_NAME();
@@ -1330,10 +1312,9 @@ public class Methods_Conexion extends Conexion {
                 metodoName = StringUtils.removeStartIgnoreCase(metodoName, "set");
                 if (StringUtils.equalsIgnoreCase(metodoName, columnName)) {
                     LogsJB.trace("Nombre de la columna, nombre del metodo set: " + columnName + "   " + metodoName);
-                    List<Method> metodosget = new ArrayList<>();
-                    metodosget = modelo.getMethodsGetOfModel(modelo.getMethodsModel());
                     LogsJB.trace("Cantidad de metodos get: " + metodosget.size());
                     //Llena la información de las columnas que se insertaran
+                    Boolean breakSegundoFor=false;
                     for (int a = 0; a < metodosget.size(); a++) {
                         //Obtengo el metodo
                         Method metodoget = metodosget.get(a);
@@ -1346,8 +1327,12 @@ public class Methods_Conexion extends Conexion {
                             //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
                             columnsSQL.setColumnExist(true);
                             convertSQLtoJava(columna, registros, metodo, columnsSQL, modelo);
+                            breakSegundoFor=true;
                             break;
                         }
+                    }
+                    if(breakSegundoFor){
+                        break;
                     }
                 }
             }
@@ -1384,7 +1369,6 @@ public class Methods_Conexion extends Conexion {
                         this.convertSQLtoJson(columna, registros, temp);
                     }
                 }
-
             }
 
         }
@@ -1652,7 +1636,6 @@ public class Methods_Conexion extends Conexion {
     public Boolean dropTableIfExist() throws Exception {
         Boolean result = false;
         try {
-            Connection connect = this.getConnection();
             Callable<ResultAsync<Boolean>> dropTable = () -> {
                 try {
                     if (this.tableExist()) {
@@ -1669,6 +1652,7 @@ public class Methods_Conexion extends Conexion {
                             //+" RESTRICT;";
                         }
                         LogsJB.info(sql);
+                        Connection connect = this.getConnection();
                         Statement ejecutor = connect.createStatement();
                         if (!ejecutor.execute(sql)) {
                             LogsJB.info("Sentencia para eliminar tabla de la BD's ejecutada exitosamente");
@@ -1894,7 +1878,6 @@ public class Methods_Conexion extends Conexion {
                 }
                 return false;
             }).collect(Collectors.toList());
-
             List<Method> metodosReciber = Arrays.asList(this.getClass().getMethods());
             //Filtro los metodos en los que se setearan las propiedades
             metodosReciber = metodosReciber.stream().filter(metodo -> {
@@ -1906,16 +1889,19 @@ public class Methods_Conexion extends Conexion {
                 }
                 return false;
             }).collect(Collectors.toList());
+
             for (Method metodoProveedor : metodosProveedor) {
-                for (Method metodoReciber : metodosReciber) {
+                Iterator<Method> iteradorMetodosReciber = metodosReciber.iterator();
+                while (iteradorMetodosReciber.hasNext()) {
+                    Method metodoReciber=iteradorMetodosReciber.next();
                     String nombreMetodoProveedor = metodoProveedor.getName();
                     nombreMetodoProveedor = StringUtils.removeStartIgnoreCase(nombreMetodoProveedor, "get");
                     String nombreMetodoReciber = metodoReciber.getName();
                     nombreMetodoReciber = StringUtils.removeStartIgnoreCase(nombreMetodoReciber, "set");
-
                     if (nombreMetodoProveedor.equalsIgnoreCase(nombreMetodoReciber) && metodoReciber.getParameterCount() == 1) {
                         //Llena el recibidor con la información de las propiedades de conexión
                         metodoReciber.invoke(this, metodoProveedor.invoke(proveedor, null));
+                        iteradorMetodosReciber.remove();
                     }
                 }
             }
@@ -1926,8 +1912,6 @@ public class Methods_Conexion extends Conexion {
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
-
-
     }
 
 

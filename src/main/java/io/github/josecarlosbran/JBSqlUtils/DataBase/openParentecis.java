@@ -258,7 +258,7 @@ public class openParentecis<T> extends Get {
         } else {
             if(!this.getGetPropertySystem()){
                 And and =new And(this.sql, columna, operador, valor, this.modelo, this.parametros, false);
-                and.llenarPropertiesFromModel(this);
+                //and.llenarPropertiesFromModel(this);
                 return and;
             }
             return new And(this.sql, columna, operador, valor, this.modelo, this.parametros);
@@ -283,7 +283,7 @@ public class openParentecis<T> extends Get {
         } else {
             if(!this.getGetPropertySystem()){
                 Or or=new Or(this.sql, columna, operador, valor, this.modelo, this.parametros, false);
-                or.llenarPropertiesFromModel(this);
+                //or.llenarPropertiesFromModel(this);
                 return or;
             }
             return new Or(this.sql, columna, operador, valor, this.modelo, this.parametros);
@@ -312,14 +312,14 @@ public class openParentecis<T> extends Get {
             if (Objects.isNull(operatorPrev)) {
                 if (!this.getGetPropertySystem()) {
                     openParentecis open = new openParentecis(this.sql, this.modelo, this.parametros, columna, operador, valor, false);
-                    open.llenarPropertiesFromModel(this);
+                    //open.llenarPropertiesFromModel(this);
                     return open;
                 }
                 return new openParentecis(this.sql, this.modelo, this.parametros, columna, operador, valor);
             } else {
                 if (!this.getGetPropertySystem()) {
                     openParentecis open = new openParentecis(this.sql, this.modelo, this.parametros, operatorPrev, columna, operador, valor, false);
-                    open.llenarPropertiesFromModel(this);
+                    //open.llenarPropertiesFromModel(this);
                     return open;
                 }
                 return new openParentecis(this.sql, this.modelo, this.parametros, operatorPrev, columna, operador, valor);
@@ -350,14 +350,14 @@ public class openParentecis<T> extends Get {
             if (Objects.isNull(operatorPost)) {
                 if (!this.getGetPropertySystem()) {
                     closeParentecis close = new closeParentecis(this.sql, this.modelo, this.parametros, false);
-                    close.llenarPropertiesFromModel(this);
+                    //close.llenarPropertiesFromModel(this);
                     return close;
                 }
                 return new closeParentecis(this.sql, this.modelo, this.parametros);
             } else {
                 if (!this.getGetPropertySystem()) {
                     closeParentecis close = new closeParentecis(this.sql, this.modelo, this.parametros, operatorPost, false);
-                    close.llenarPropertiesFromModel(this);
+                    //close.llenarPropertiesFromModel(this);
                     return close;
                 }
                 return new closeParentecis(this.sql, this.modelo, this.parametros, operatorPost);
