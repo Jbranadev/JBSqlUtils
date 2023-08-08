@@ -314,10 +314,10 @@ class Methods extends Methods_Conexion {
         try {
             List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getMethods()));
             //Obtiene los metodos get del modelo
-            List<Method> modelGetMethods = modelo.getMethodsGetOfModel(modelo.getMethodsModel());
+            List<Method> modelGetMethods = modelo.getMethodsGetOfModel();
 
             //Obtiene los metodos set del modelo
-            List<Method> modelSetMethods = modelo.getMethodsSetOfModel(modelo.getMethodsModel());
+            List<Method> modelSetMethods = modelo.getMethodsSetOfModel();
 
             for (Method controladorMethod : controladorMethods) {
                 String controllerName = controladorMethod.getName();
@@ -437,7 +437,7 @@ class Methods extends Methods_Conexion {
     public <T, G extends JBSqlUtils> void llenarControlador(T controlador, G modelo) {
         try {
             //Obtiene los metodos get del modelo
-            List<Method> modelGetMethods = modelo.getMethodsGetOfModel(modelo.getMethodsModel());
+            List<Method> modelGetMethods = modelo.getMethodsGetOfModel();
             LogsJB.debug("Obtuvo los metodos Get del modelo: ");
             List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getMethods()));
 
@@ -517,8 +517,8 @@ class Methods extends Methods_Conexion {
         try{
             this.setModelExist(false);
             //Obtiene los metodos get del modelo
-            List<Method> modelGetMethods = this.getMethodsGetOfModel(this.getMethodsModel());
-            List<Method> modelSetMethods = this.getMethodsSetOfModel(this.getMethodsModel());
+            List<Method> modelGetMethods = this.getMethodsGetOfModel();
+            List<Method> modelSetMethods = this.getMethodsSetOfModel();
             for (Method modelGetMethod : modelGetMethods) {
                 String modelGetName = modelGetMethod.getName();
                 String modelName=modelGetMethod.getDeclaringClass().getName();

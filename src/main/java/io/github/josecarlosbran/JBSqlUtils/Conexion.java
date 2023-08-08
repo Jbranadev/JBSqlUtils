@@ -23,7 +23,10 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.TablesSQL;
 
+import java.lang.reflect.Method;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
@@ -135,8 +138,21 @@ class Conexion {
      */
     private TablesSQL tabla = new TablesSQL();
 
-
+    /**
+     * Propiedades extra para la url de conexión a BD's por ejemplo
+     * ?autoReconnect=true&useSSL=false
+     */
     private String propertisURL = null;
+
+    /**
+     * Lista de metodos get que posee el modelo
+     */
+    private List<Method> MethodsGetOfModel = null;
+
+    /**
+     * Lista de metodos set que posee el modelo
+     */
+    private List<Method> MethodsSetOfModel = null;
 
     /**
      * Setea las propiedades extra para la url de conexión a BD's
@@ -946,4 +962,24 @@ class Conexion {
     }
 
 
+    /**
+     * @return Lista de metodos get que posee el modelo
+     */
+    protected synchronized List<Method> getMethodsGetOfModel() {
+        if(Objects.isNull(MethodsGetOfModel)){
+            MethodsGetOfModel=new ArrayList<Method>();
+        }
+        return MethodsGetOfModel;
+    }
+
+
+    /**
+     * @return Lista de metodos set que posee el modelo
+     */
+    protected synchronized List<Method> getMethodsSetOfModel() {
+        if(Objects.isNull(MethodsSetOfModel)){
+            MethodsSetOfModel=new ArrayList<Method>();
+        }
+        return MethodsSetOfModel;
+    }
 }

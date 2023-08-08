@@ -63,6 +63,7 @@ public class Methods_Conexion extends Conexion {
      */
     public Methods_Conexion() throws DataBaseUndefind, PropertiesDBUndefined {
         super();
+        this.getMethodsModel();
     }
 
 
@@ -78,6 +79,7 @@ public class Methods_Conexion extends Conexion {
      */
     public Methods_Conexion(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
         super(getPropertySystem);
+        this.getMethodsModel();
     }
 
 
@@ -87,7 +89,7 @@ public class Methods_Conexion extends Conexion {
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Retorna una lista de los métodos pertenecientes al modelo.
      */
-    public synchronized <T> List<Method> getMethodsModel() {
+    public synchronized <T> void getMethodsModel() {
         Method[] metodos = this.getClass().getMethods();
         List<Method> result = new ArrayList<>();
         String classColumn=Column.class.getSimpleName();
@@ -96,16 +98,18 @@ public class Methods_Conexion extends Conexion {
             String returntype = metodo.getReturnType().getSimpleName();
             Parameter[] parametros = metodo.getParameters();
             String ParametroType = "";
+            String nameMetodo = metodo.getName();
             if (parametros.length == 1) {
                 ParametroType = parametros[0].getType().getSimpleName();
             }
-            if ((returntype.equalsIgnoreCase(classColumn) || ParametroType.equalsIgnoreCase(classColumn))) {
-                //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + returntype+"  " + ParametroType);
+            //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + returntype+"  " + ParametroType);
+            if(returntype.equalsIgnoreCase(classColumn) && (StringUtils.startsWithIgnoreCase(nameMetodo, "get"))){
+                this.getMethodsGetOfModel().add(metodo);
+            }else if(ParametroType.equalsIgnoreCase(classColumn) && (StringUtils.startsWithIgnoreCase(nameMetodo, "set"))) {
+                this.getMethodsSetOfModel().add(metodo);
                 result.add(metodo);
             }
-            //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+returntype);
         }
-        return result;
     }
 
 
@@ -523,7 +527,7 @@ public class Methods_Conexion extends Conexion {
                     LogsJB.debug("Buscara si la columna tiene un atributo en el modelo actual: " + nameColumn);
                     List<Method> metodosSet = new ArrayList<>();
                     LogsJB.trace("Inicializa el array list de los métodos set");
-                    metodosSet = this.getMethodsSetOfModel(this.getMethodsModel());
+                    metodosSet = this.getMethodsSetOfModel();
                     LogsJB.trace("obtuvo los métodos set");
                     //Llena la información del modelo
                     LogsJB.trace("Columna : " + nameColumn);
@@ -537,7 +541,7 @@ public class Methods_Conexion extends Conexion {
                         if (StringUtils.equalsIgnoreCase(metodoName, nameColumn)) {
                             LogsJB.trace("Nombre de la columna, nombre del metodo set: " + nameColumn + "   " + metodoName);
                             List<Method> metodosget = new ArrayList<>();
-                            metodosget = this.getMethodsGetOfModel(this.getMethodsModel());
+                            metodosget = this.getMethodsGetOfModel();
                             LogsJB.trace("Cantidad de métodos get: " + metodosget.size());
                             //Llena la información de las columnas que se insertaran
                             for (int a = 0; a < metodosget.size(); a++) {
@@ -780,7 +784,7 @@ public class Methods_Conexion extends Conexion {
                     if (modelo.getTableExist()) {
                         String sql = "INSERT INTO " + modelo.getTableName() + "(";
                         List<Method> metodos = new ArrayList<>();
-                        metodos = modelo.getMethodsGetOfModel(modelo.getMethodsModel());
+                        metodos = modelo.getMethodsGetOfModel();
                         int datos = 0;
                         List<Integer> indicemetodos = new ArrayList<>();
                         //Llena la información de las columnas que se insertaran
@@ -898,7 +902,7 @@ public class Methods_Conexion extends Conexion {
 
                         String sql = "UPDATE " + modelo.getTableName() + " SET";
                         List<Method> metodos = new ArrayList<>();
-                        metodos = modelo.getMethodsGetOfModel(modelo.getMethodsModel());
+                        metodos = modelo.getMethodsGetOfModel();
                         int datos = 0;
                         List<Integer> indicemetodos = new ArrayList<>();
                         int indicePrimarykey = 0;
@@ -1079,7 +1083,7 @@ public class Methods_Conexion extends Conexion {
                         String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
                         String sql = "DELETE FROM " + modelo.getTableName();
                         List<Method> metodos = new ArrayList<>();
-                        metodos = modelo.getMethodsGetOfModel(modelo.getMethodsModel());
+                        metodos = modelo.getMethodsGetOfModel();
                         int datos = 0;
                         List<Integer> indicemetodos = new ArrayList<>();
                         int indicePrimarykey = -1;
@@ -1203,11 +1207,11 @@ public class Methods_Conexion extends Conexion {
         LogsJB.debug("Obtuvo un resultado de BD's, procedera a llenar el modelo " + temp.getClass().getSimpleName());
         List<Method> metodosSet = new ArrayList<>();
         LogsJB.trace("Inicializa el array list de los métodos set");
-        metodosSet = temp.getMethodsSetOfModel(temp.getMethodsModel());
+        metodosSet = temp.getMethodsSetOfModel();
         LogsJB.trace("obtuvo los métodos set");
         LogsJB.debug("Cantidad de columnas : " + temp.getTabla().getColumnas().size());
         List<Method> metodosget = new ArrayList<>();
-        metodosget = temp.getMethodsGetOfModel(temp.getMethodsModel());
+        metodosget = temp.getMethodsGetOfModel();
         //Llena la información del modelo
         for (int i = 0; i < temp.getTabla().getColumnas().size(); i++) {
             ColumnsSQL columna = temp.getTabla().getColumnas().get(i);
@@ -1294,11 +1298,11 @@ public class Methods_Conexion extends Conexion {
         LogsJB.debug("Obtuvo un resultado de BD's, procedera a llenar el modelo " + modelo.getTableName());
         List<Method> metodosSet = new ArrayList<>();
         LogsJB.trace("Inicializa el array list de los metodos set");
-        metodosSet = modelo.getMethodsSetOfModel(modelo.getMethodsModel());
+        metodosSet = modelo.getMethodsSetOfModel();
         LogsJB.trace("obtuvo los metodos set");
         LogsJB.debug("Cantidad de columnas : " + modelo.getTabla().getColumnas().size());
         List<Method> metodosget = new ArrayList<>();
-        metodosget = modelo.getMethodsGetOfModel(modelo.getMethodsModel());
+        metodosget = modelo.getMethodsGetOfModel();
         //Llena la información del modelo
         for (int i = 0; i < modelo.getTabla().getColumnas().size(); i++) {
             ColumnsSQL columna = modelo.getTabla().getColumnas().get(i);
@@ -1473,7 +1477,7 @@ public class Methods_Conexion extends Conexion {
                     } else {
                         String sql = "CREATE TABLE " + this.getTableName() + "(";
                         List<Method> metodos = new ArrayList<>();
-                        metodos = this.getMethodsGetOfModel(this.getMethodsModel());
+                        metodos = this.getMethodsGetOfModel();
                         //Aquí vamos a ordenar la lista
                         LogsJB.debug("Comienza a ordenar la lista");
                         metodos.sort((metodo1, metodo2) -> {
