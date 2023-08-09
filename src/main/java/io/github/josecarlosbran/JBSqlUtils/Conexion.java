@@ -23,7 +23,10 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.TablesSQL;
 
+import java.lang.reflect.Method;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
@@ -135,8 +138,26 @@ class Conexion {
      */
     private TablesSQL tabla = new TablesSQL();
 
-
+    /**
+     * Propiedades extra para la url de conexión a BD's por ejemplo
+     * ?autoReconnect=true&useSSL=false
+     */
     private String propertisURL = null;
+
+    /**
+     * Lista de metodos get que posee el modelo
+     */
+    private List<Method> MethodsGetOfModel = null;
+
+    /**
+     * Lista de metodos set que posee el modelo
+     */
+    private List<Method> MethodsSetOfModel = null;
+
+    /**
+     * Cantidad de conexiones que ha realizado el modelo a BD's
+     */
+    private Integer contadorConexiones=0;
 
     /**
      * Setea las propiedades extra para la url de conexión a BD's
@@ -946,4 +967,43 @@ class Conexion {
     }
 
 
+    /**
+     * Obtiene la lista de los métodos get del modelo que lo invoca.
+     * @return Lista de los métodos get del modelo que lo invoca.
+     */
+    protected synchronized List<Method> getMethodsGetOfModel() {
+        if(Objects.isNull(MethodsGetOfModel)){
+            MethodsGetOfModel=new ArrayList<Method>();
+        }
+        return MethodsGetOfModel;
+    }
+
+
+    /**
+     * Obtiene la lista de los métodos set del modelo que lo invoca.
+     * @return Lista de los métodos set del modelo que lo invoca.
+     */
+    protected synchronized List<Method> getMethodsSetOfModel() {
+        if(Objects.isNull(MethodsSetOfModel)){
+            MethodsSetOfModel=new ArrayList<Method>();
+        }
+        return MethodsSetOfModel;
+    }
+
+    /**
+     * Cantidad de conexiones que ha realizado el modelo a BD's
+     */ /**
+     * @return Cantidad de conexiones que ha realizado el modelo a BD's
+     */
+    public synchronized Integer getContadorConexiones() {
+        return contadorConexiones;
+    }
+
+    /**
+     * Setea la cantidad de conexiones que a realizado el modelo
+     * @param contadorConexiones Cantidad de conexiones que a realizado el modelo
+     */
+    public synchronized void setContadorConexiones(Integer contadorConexiones) {
+        this.contadorConexiones = contadorConexiones;
+    }
 }

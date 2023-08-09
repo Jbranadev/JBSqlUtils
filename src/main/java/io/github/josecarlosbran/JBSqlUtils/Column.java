@@ -38,10 +38,10 @@ public class Column<T> {
     private DataType dataTypeSQL = null;
     @ToString.Exclude
     private Constraint[] restriccion = null;
-    @ToString.Exclude
+
     private Boolean columnExist = false;
 
-    private String size;
+    private String size="";
 
 
     /**

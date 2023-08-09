@@ -47,7 +47,7 @@ public class JBSqlUtilsTestMySQL {
         this.testModel.setPassword("Bran");
         this.testModel.setBD("JBSQLUTILS");
         this.testModel.setDataBaseType(DataBase.MySQL);
-        this.testModel.setPropertisURL("?autoReconnect=true&useSSL=false");
+        //this.testModel.setPropertisURL("?autoReconnect=true&useSSL=false");
         Assert.assertTrue("JBSQLUTILS".equalsIgnoreCase(this.testModel.getBD()),
                 "Propiedad Nombre BD's no ha sido seteada correctamente");
         Assert.assertTrue("5076".equalsIgnoreCase(this.testModel.getPort()),
