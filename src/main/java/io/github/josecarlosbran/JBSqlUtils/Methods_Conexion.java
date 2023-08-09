@@ -25,6 +25,7 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.ColumnsSQL;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.PrimaryKey;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.TablesSQL;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 
@@ -114,62 +115,6 @@ public class Methods_Conexion extends Conexion {
 
 
     /**
-     * Obtiene la lista de los métodos get del modelo que lo invoca.
-     *
-     * @param metodos Lista de métodos que tiene el modelo, sobre los cuales se filtraran los métodos get.
-     * @param <T>     Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
-     * @return Lista de los métodos get del modelo que lo invoca.
-     */
-    public synchronized <T> List<Method> getMethodsGetOfModel(List<Method> metodos) {
-        // Los muestro en consola
-        int i = 0;
-        //System.out.println("Inicia a obtener los metodos get");
-        List<Method> result = new ArrayList<>();
-        String classColumn=Column.class.getSimpleName();
-        //System.out.println("asigno los metodos get");
-        for (Method metodo : metodos) {
-            //Method metodo = result.get(i);
-            String returntype = metodo.getReturnType().getSimpleName();
-            String nombre = metodo.getName();
-            if (returntype.equalsIgnoreCase(classColumn) && StringUtils.startsWithIgnoreCase(nombre, "Get")) {
-                //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + returntype);
-                result.add(metodo);
-            } else {
-                //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + returntype);
-            }
-        }
-        return result;
-    }
-
-    /**
-     * Obtiene la lista de los métodos set del modelo que lo invoca.
-     *
-     * @param metodos Lista de métodos que tiene el modelo, sobre los cuales se filtraran los métodos set.
-     * @param <T>     Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
-     * @return Lista de los métodos set del modelo que lo invoca.
-     */
-    public synchronized <T> List<Method> getMethodsSetOfModel(List<Method> metodos) {
-        List<Method> result = new ArrayList<>();
-        String classColumn=Column.class.getSimpleName();
-        for (Method metodo : metodos) {
-            Parameter[] parametros = metodo.getParameters();
-            String ParametroType = "";
-            String nombre = metodo.getName();
-            if (parametros.length == 1) {
-                ParametroType = parametros[0].getType().getSimpleName();
-            }
-            //System.out.println(nombre + "   " + metodo.getDeclaringClass() + "  " + ParametroType);
-            if ((StringUtils.startsWithIgnoreCase(nombre, "Set")) && (ParametroType.equalsIgnoreCase(classColumn))) {
-                result.add(metodo);
-                //System.out.println(metodo.getName()+"   "+metodo.getDeclaringClass()+"  "+ParametroType);
-            } else {
-                //result.remove(metodo);
-            }
-        }
-        return result;
-    }
-
-    /**
      * Obtiene la conexión del modelo a la BD's con las propiedades definidas.
      *
      * @return Retorna la conexión del modelo a la BD's con las propiedades definidas.
@@ -177,6 +122,9 @@ public class Methods_Conexion extends Conexion {
     public synchronized Connection getConnection() {
         Connection connect = null;
         try {
+            if(this.getContadorConexiones()==0){
+                this.getNameForColumns();
+            }
             String url = null;
             if (this.getDataBaseType() == DataBase.PostgreSQL) {
                 //Carga el controlador de PostgreSQL
@@ -253,7 +201,6 @@ public class Methods_Conexion extends Conexion {
                 LogsJB.debug("Url de conexion a DB: " + url);
                 connect = DriverManager.getConnection(url);
             }
-
             if (!Objects.isNull(connect)) {
                 LogsJB.info("Conexión a BD's " + this.getBD() + " Realizada exitosamente " + this.getClass().getSimpleName());
                 //this.setConnect(connect);
@@ -266,6 +213,7 @@ public class Methods_Conexion extends Conexion {
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
+        this.setContadorConexiones(this.getContadorConexiones()+1);
         return connect;
     }
 
@@ -1263,6 +1211,7 @@ public class Methods_Conexion extends Conexion {
         try{
             if(modelo.getGetPropertySystem()){
                 temp = (T) modelo.getClass().newInstance();
+                temp.llenarPropertiesFromModel(temp);
             }else{
                 //modelo.llenarPropertiesFromModel(modelo);
                 Constructor constructor=modelo.getClass().getConstructor(Boolean.class);
@@ -1870,6 +1819,7 @@ public class Methods_Conexion extends Conexion {
      */
     public <T extends Methods_Conexion, G extends Methods_Conexion> void llenarPropertiesFromModel(G proveedor) {
         try {
+            this.getNameForColumns();
             this.setGetPropertySystem(proveedor.getGetPropertySystem());
             List<Method> metodosProveedor = Arrays.asList(proveedor.getClass().getMethods());
             //Filtro los metodos de las propiedades que deseo obtener
@@ -1918,5 +1868,73 @@ public class Methods_Conexion extends Conexion {
         }
     }
 
+
+    /**
+     * Obtiene los nombres de las columnas que posee el modelo en caso estas no posean un nombre
+     */
+    private void getNameForColumns(){
+        try{
+            String JBSQLUTILSNAME=JBSqlUtils.class.getSimpleName();
+            String SuperClaseModelo=this.getClass().getSuperclass().getSimpleName();
+            if(StringUtils.equalsIgnoreCase(JBSQLUTILSNAME, SuperClaseModelo)){
+                //Obtiene los metodos get del modelo
+                List<Method> modelGetMethods = this.getMethodsGetOfModel();
+                Iterator<Method> iteradorModelGetMethods=modelGetMethods.iterator();
+                while (iteradorModelGetMethods.hasNext()) {
+                    try{
+                        Method modelGetMethod=iteradorModelGetMethods.next();
+                        String modelGetName = modelGetMethod.getName();
+                        LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);
+                        //Obtengo la información de la columna
+                        Column columnsSQL = (Column) modelGetMethod.invoke(this, null);
+                        String columnName = modelGetMethod.getName();
+                        columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
+                        //Le meto la información a la columa
+                        LogsJB.debug("Setea el nombre a la columna: " + columnName);
+                        if(UtilitiesJB.stringIsNullOrEmpty(columnsSQL.getName())){
+                            columnsSQL.setName(columnName);
+                        }
+                        Boolean isready = false;
+                        //Obtiene los metodos set del modelo
+                        List<Method> modelSetMethods = this.getMethodsSetOfModel();
+                        Iterator<Method> iteradorModelSetMethods=modelSetMethods.iterator();
+                        while (iteradorModelSetMethods.hasNext()) {
+                            try{
+                                Method modelSetMethod=iteradorModelSetMethods.next();
+                                String modelSetName = modelSetMethod.getName();
+                                LogsJB.trace("Nombre del metodo set: " + modelSetName);
+                                modelSetName = StringUtils.removeStartIgnoreCase(modelSetName, "set");
+                                LogsJB.trace("Nombre del metodo set a validar: " + modelSetName);
+                                if (StringUtils.equalsIgnoreCase(modelSetName, columnName)) {
+                                    //Setea el valor del metodo
+                                    modelSetMethod.invoke(this, columnsSQL);
+                                    LogsJB.debug("Ingreso la columna en el metodo set: " + modelSetName);
+                                    break;
+                                }
+                            }catch (Exception e) {
+                                LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador: " + e.toString());
+                                LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                                LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                                LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                                LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                            }
+                        }
+                    }catch (Exception e) {
+                        LogsJB.fatal("Excepción disparada al obtener los nombres de las columnas del modelo: " + e.toString());
+                        LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                        LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                        LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                        LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    }
+                }
+            }
+        }catch (Exception e) {
+            LogsJB.fatal("Excepción disparada al obtener los nombres de las columnas del modelo: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
+    }
 
 }
