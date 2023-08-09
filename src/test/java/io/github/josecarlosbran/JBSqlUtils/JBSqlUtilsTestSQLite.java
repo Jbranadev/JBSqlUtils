@@ -54,8 +54,17 @@ public class JBSqlUtilsTestSQLite {
         logParrafo("Se setearon las propiedades de conexión del modelo para SQLite");
     }
 
-    @Test(testName = "Refresh Model",
+    @Test(testName = "Get Conexión",
             dependsOnMethods = {"setPropertiesConexiontoModel"})
+    public void getConection(){
+        logParrafo("Obtendra la conexión del modelo a BD's");
+        Assert.assertFalse(Objects.isNull(this.testModel.getConnection()),
+                "No se logro establecer la conexión del modelo a BD's");
+        logParrafo("Obtuvo la conexión del modelo a BD's");
+    }
+
+    @Test(testName = "Refresh Model",
+            dependsOnMethods = {"getConection"})
     public void refreshModel() throws Exception {
         logParrafo("Se refrescará el modelo con la información existente en BD's");
         this.testModel.refresh();
