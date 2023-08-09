@@ -509,93 +509,6 @@ public class Methods_Conexion extends Conexion {
 
 
     /**
-     * Si el modelo tiene una columna correspondiente al nombre de la columna especificada en el
-     * parametro, setea entre los valores de la columna que esta si existe en BD's.
-     *
-     * @param nameColumn Nombre de la columna en BD's
-     */
-    protected void columnaExist(String nameColumn) {
-        try {
-            Runnable columnexist = () -> {
-                try {
-                    LogsJB.debug("Buscara si la columna tiene un atributo en el modelo actual: " + nameColumn);
-                    List<Method> metodosSet = new ArrayList<>();
-                    LogsJB.trace("Inicializa el array list de los métodos set");
-                    metodosSet = this.getMethodsSetOfModel();
-                    LogsJB.trace("obtuvo los métodos set");
-                    //Llena la información del modelo
-                    LogsJB.trace("Columna : " + nameColumn);
-                    LogsJB.debug("Cantidad de métodos set: " + metodosSet.size());
-                    //Recorrera los métodos set del modelo para ver cual es el que corresponde a la columna
-                    for (int j = 0; j < metodosSet.size(); j++) {
-                        Method metodo = metodosSet.get(j);
-                        String metodoName = metodo.getName();
-                        metodoName = StringUtils.removeStartIgnoreCase(metodoName, "set");
-                        //Si el nombre del metodo coincide con el nombre de la columna
-                        if (StringUtils.equalsIgnoreCase(metodoName, nameColumn)) {
-                            LogsJB.trace("Nombre de la columna, nombre del metodo set: " + nameColumn + "   " + metodoName);
-                            List<Method> metodosget = new ArrayList<>();
-                            metodosget = this.getMethodsGetOfModel();
-                            LogsJB.trace("Cantidad de métodos get: " + metodosget.size());
-                            //Llena la información de las columnas que se insertaran
-                            for (int a = 0; a < metodosget.size(); a++) {
-                                //Obtengo el metodo
-                                Method metodoget = metodosget.get(a);
-                                //Obtengo la información de la columna
-                                Column columnsSQL = (Column) metodoget.invoke(this, null);
-                                String NameMetodoGet = metodoget.getName();
-                                NameMetodoGet = StringUtils.removeStartIgnoreCase(NameMetodoGet, "get");
-                                if (StringUtils.equalsIgnoreCase(NameMetodoGet, nameColumn)) {
-                                    columnsSQL.setColumnExist(true);
-                                    LogsJB.debug("Seteara que la columna existe en BD's: " + nameColumn + "   " + NameMetodoGet);
-                                    //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
-                                    metodo.invoke(this, columnsSQL);
-                                } else if (StringUtils.equalsIgnoreCase(NameMetodoGet, "created_at")) {
-                                    if (StringUtils.equalsIgnoreCase(nameColumn, this.getCreatedAt())) {
-                                        columnsSQL.setColumnExist(true);
-                                        LogsJB.debug("Seteara que la columna existe en BD's: " + nameColumn + "   " + this.getCreatedAt());
-                                        //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
-                                        metodo.invoke(this, columnsSQL);
-                                    }
-                                } else if (StringUtils.equalsIgnoreCase(NameMetodoGet, "updated_at")) {
-                                    if (StringUtils.equalsIgnoreCase(nameColumn, this.getUpdateAT())) {
-                                        columnsSQL.setColumnExist(true);
-                                        LogsJB.debug("Seteara que la columna existe en BD's: " + nameColumn + "   " + this.getUpdateAT());
-                                        //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
-                                        metodo.invoke(this, columnsSQL);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que setea si la columna existe en BD's'" +
-                            "SQL de la BD's: " + e.toString());
-                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-
-                }
-            };
-            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            ejecutor.submit(columnexist);
-            ejecutor.shutdown();
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el método que setea si la columna existe en BD's'" +
-                    "SQL de la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-
-        }
-
-
-    }
-
-
-    /**
      * Metodo que actualiza la información que el modelo tiene sobre lo que existe en BD's'
      */
     public void refresh() throws Exception {
@@ -787,8 +700,8 @@ public class Methods_Conexion extends Conexion {
                             Method metodo = metodos.get(i);
                             //Obtengo la información de la columna
                             Column columnsSQL = (Column) metodo.invoke(modelo, null);
-                            String columnName = metodo.getName();
-                            columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
+                            String columnName = columnsSQL.getName();
+                            //columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
                             if (Objects.isNull(columnsSQL.getValor())) {
                                 continue;
                             }
@@ -906,8 +819,8 @@ public class Methods_Conexion extends Conexion {
                             Method metodo = metodos.get(i);
                             //Obtengo la información de la columna
                             Column columnsSQL = (Column) metodo.invoke(modelo, null);
-                            String columnName = metodo.getName();
-                            columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
+                            String columnName = columnsSQL.getName();
+                            //columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
                             if (StringUtils.equalsIgnoreCase(namePrimaryKey, columnName)) {
                                 indicePrimarykey = i;
                                 continue;
@@ -970,8 +883,8 @@ public class Methods_Conexion extends Conexion {
                             Method metodo = metodos.get(indicemetodos.get(i));
                             //Obtengo la información de la columna
                             Column columnsSQL = (Column) metodo.invoke(modelo, null);
-                            String columnName = metodo.getName();
-                            columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
+                            String columnName = columnsSQL.getName();
+                            //columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
                             if ((StringUtils.equalsIgnoreCase(columnName, "updated_at"))) {
                                 Long datetime = System.currentTimeMillis();
                                 columnsSQL.setValor(new Timestamp(datetime));
@@ -1087,8 +1000,8 @@ public class Methods_Conexion extends Conexion {
                             Method metodo = metodos.get(i);
                             //Obtengo la información de la columna
                             Column columnsSQL = (Column) metodo.invoke(modelo, null);
-                            String columnName = metodo.getName();
-                            columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
+                            String columnName = columnsSQL.getName();
+                            //columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
                             if (StringUtils.equalsIgnoreCase(namePrimaryKey, columnName)) {
                                 indicePrimarykey = i;
                                 break;
@@ -1162,6 +1075,35 @@ public class Methods_Conexion extends Conexion {
         return result;
     }
 
+
+    /**
+     * Obtiene una instancia nueva del tipo de modelo que se envía como parametro
+     * @param modelo Tipo de objeto que se desea instanciar
+     * @return Retorna la nueva instancia del modelo creada
+     */
+    public <T extends Methods_Conexion> T obtenerInstanciaOfModel(T modelo){
+        T temp=null;
+        try{
+            if(modelo.getGetPropertySystem()){
+                temp = (T) modelo.getClass().newInstance();
+                temp.llenarPropertiesFromModel(temp);
+            }else{
+                //modelo.llenarPropertiesFromModel(modelo);
+                Constructor constructor=modelo.getClass().getConstructor(Boolean.class);
+                temp = (T) constructor.newInstance(false);
+                temp.llenarPropertiesFromModel(modelo);
+            }
+        } catch (InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
+            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }finally {
+            return temp;
+        }
+    }
+
     /**
      * Obtiene un nuevo modelo del tipo de modelo proporcionado para procesar el ResultSet
      * con la información de BD's
@@ -1216,64 +1158,41 @@ public class Methods_Conexion extends Conexion {
             for (int j = 0; j < metodosSet.size(); j++) {
                 Method metodo = metodosSet.get(j);
                 String metodoName = metodo.getName();
-                metodoName = StringUtils.removeStartIgnoreCase(metodoName, "set");
-                if (StringUtils.equalsIgnoreCase(metodoName, columnName)) {
-                    Boolean breakSegundoFor=false;
-                    LogsJB.trace("Nombre de la columna, nombre del metodo set: " + columnName + "   " + metodoName);
-                    LogsJB.trace("Cantidad de metodos get: " + metodosget.size());
-                    //Llena la información de las columnas que se insertaran
-                    for (int a = 0; a < metodosget.size(); a++) {
-                        //Obtengo el metodo
-                        Method metodoget = metodosget.get(a);
-                        //Obtengo la información de la columna
-                        Column columnsSQL = (Column) metodoget.invoke(temp, null);
-                        String NameMetodoGet = metodoget.getName();
-                        NameMetodoGet = StringUtils.removeStartIgnoreCase(NameMetodoGet, "get");
-                        if (StringUtils.equalsIgnoreCase(NameMetodoGet, columnName)) {
-                            LogsJB.trace("Nombre de la columna, nombre del metodo get: " + columnName + "   " + NameMetodoGet);
-                            //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
-                            columnsSQL.setColumnExist(true);
+                //metodoName = StringUtils.removeStartIgnoreCase(metodoName, "set");
+                Boolean breakSegundoFor=false;
+                LogsJB.trace("Nombre de la columna, nombre del metodo set: " + columnName + "   " + metodoName);
+                LogsJB.trace("Cantidad de metodos get: " + metodosget.size());
+                //Llena la información de las columnas que se insertaran
+                for (int a = 0; a < metodosget.size(); a++) {
+                    //Obtengo el metodo
+                    Method metodoget = metodosget.get(a);
+                    //Obtengo la información de la columna
+                    Column columnsSQL = (Column) metodoget.invoke(temp, null);
+                    String NameMetodoGet = metodoget.getName();
+                    //NameMetodoGet = StringUtils.removeStartIgnoreCase(NameMetodoGet, "get");
+                    if (StringUtils.equalsIgnoreCase(
+                            StringUtils.removeStartIgnoreCase(NameMetodoGet, "get"), StringUtils.removeStartIgnoreCase(metodoName, "set"))
+                    ) {
+                        LogsJB.trace("Nombre de la columna, nombre del metodo get: " + columnName + "   " + NameMetodoGet);
+                        //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
+                        //columnsSQL.setColumnExist(true);
+                        String nameColumn=columnsSQL.getName();
+                        if(StringUtils.equalsIgnoreCase(nameColumn, columnName)){
                             convertSQLtoJava(columna, registros, metodo, columnsSQL, temp);
                             breakSegundoFor=true;
                             break;
                         }
                     }
-                    if(breakSegundoFor){
-                        break;
-                    }
                 }
+                if(breakSegundoFor){
+                    break;
+                }
+
             }
         }
         return temp;
     }
 
-    /**
-     * Obtiene una instancia nueva del tipo de modelo que se envía como parametro
-     * @param modelo Tipo de objeto que se desea instanciar
-     * @return Retorna la nueva instancia del modelo creada
-     */
-    public <T extends Methods_Conexion> T obtenerInstanciaOfModel(T modelo){
-        T temp=null;
-        try{
-            if(modelo.getGetPropertySystem()){
-                temp = (T) modelo.getClass().newInstance();
-                temp.llenarPropertiesFromModel(temp);
-            }else{
-                //modelo.llenarPropertiesFromModel(modelo);
-                Constructor constructor=modelo.getClass().getConstructor(Boolean.class);
-                temp = (T) constructor.newInstance(false);
-                temp.llenarPropertiesFromModel(modelo);
-            }
-        } catch (InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
-            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-        }finally {
-            return temp;
-        }
-    }
 
     /**
      * Llena el modelo proporcionado con la Información Obtenida de BD's
@@ -1308,32 +1227,36 @@ public class Methods_Conexion extends Conexion {
             for (int j = 0; j < metodosSet.size(); j++) {
                 Method metodo = metodosSet.get(j);
                 String metodoName = metodo.getName();
-                metodoName = StringUtils.removeStartIgnoreCase(metodoName, "set");
-                if (StringUtils.equalsIgnoreCase(metodoName, columnName)) {
-                    LogsJB.trace("Nombre de la columna, nombre del metodo set: " + columnName + "   " + metodoName);
-                    LogsJB.trace("Cantidad de metodos get: " + metodosget.size());
-                    //Llena la información de las columnas que se insertaran
-                    Boolean breakSegundoFor=false;
-                    for (int a = 0; a < metodosget.size(); a++) {
-                        //Obtengo el metodo
-                        Method metodoget = metodosget.get(a);
-                        //Obtengo la información de la columna
-                        Column columnsSQL = (Column) metodoget.invoke(modelo, null);
-                        String NameMetodoGet = metodoget.getName();
-                        NameMetodoGet = StringUtils.removeStartIgnoreCase(NameMetodoGet, "get");
-                        if (StringUtils.equalsIgnoreCase(NameMetodoGet, columnName)) {
-                            LogsJB.trace("Nombre de la columna, nombre del metodo get: " + columnName + "   " + NameMetodoGet);
-                            //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
-                            columnsSQL.setColumnExist(true);
+                //metodoName = StringUtils.removeStartIgnoreCase(metodoName, "set");
+                LogsJB.trace("Nombre de la columna, nombre del metodo set: " + columnName + "   " + metodoName);
+                LogsJB.trace("Cantidad de metodos get: " + metodosget.size());
+                //Llena la información de las columnas que se insertaran
+                Boolean breakSegundoFor=false;
+                for (int a = 0; a < metodosget.size(); a++) {
+                    //Obtengo el metodo
+                    Method metodoget = metodosget.get(a);
+                    //Obtengo la información de la columna
+                    Column columnsSQL = (Column) metodoget.invoke(modelo, null);
+                    String NameMetodoGet = metodoget.getName();
+                    //NameMetodoGet = StringUtils.removeStartIgnoreCase(NameMetodoGet, "get");
+                    if (StringUtils.equalsIgnoreCase(
+                            StringUtils.removeStartIgnoreCase(NameMetodoGet, "get"), StringUtils.removeStartIgnoreCase(metodoName, "set"))
+                    ) {
+                        LogsJB.trace("Nombre de la columna, nombre del metodo get: " + columnName + "   " + NameMetodoGet);
+                        //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
+                        //columnsSQL.setColumnExist(true);
+                        String nameColumn=columnsSQL.getName();
+                        if(StringUtils.equalsIgnoreCase(nameColumn, columnName)){
                             convertSQLtoJava(columna, registros, metodo, columnsSQL, modelo);
                             breakSegundoFor=true;
                             break;
                         }
                     }
-                    if(breakSegundoFor){
-                        break;
-                    }
                 }
+                if(breakSegundoFor){
+                    break;
+                }
+
             }
         }
 
@@ -1414,7 +1337,6 @@ public class Methods_Conexion extends Conexion {
             } else {
                 temp.put(columnName, resultado.getBoolean(columnName));
             }
-
         } else if ((StringUtils.containsIgnoreCase(columnType, DataType.SMALLINT.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.TINYINT.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.INTEGER.name()))
@@ -1511,8 +1433,8 @@ public class Methods_Conexion extends Conexion {
                             Method metodo = metodos.get(i);
                             //Obtengo la información de la columna
                             Column columnsSQL = (Column) metodo.invoke(this, null);
-                            String columnName = metodo.getName();
-                            columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
+                            String columnName = columnsSQL.getName();
+                            //columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
                             DataType columnType = columnsSQL.getDataTypeSQL();
                             //Manejo de tipo de dato TimeStamp en SQLServer
                             if ((columnType == DataType.TIMESTAMP) && (this.getDataBaseType() == DataBase.SQLServer)) {
