@@ -63,11 +63,12 @@ public class JBSqlUtilsTestSQLServer {
             dependsOnMethods = {"setPropertiesConexiontoModel"})
     public void getConection(){
         logParrafo("Obtendra la conexión del modelo a BD's");
-        this.testModel.getConnection();
         Assert.assertFalse(Objects.isNull(this.testModel.getConnection()),
-                "No se logro establecer la conexión del modelo a BD's");
+                "No se logro establecer la conexión del modelo a BD's, asegurese de haber configurado correctamente" +
+                        "las propiedades de conexión a su servidor de BD's en el metodo setPropertiesConexiontoModel()");
         logParrafo("Obtuvo la conexión del modelo a BD's");
     }
+
 
     @Test(testName = "Refresh Model",
             dependsOnMethods = {"getConection"})
