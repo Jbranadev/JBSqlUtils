@@ -41,7 +41,7 @@ public class Column<T> {
 
     private Boolean columnExist = false;
 
-    private String size=null;
+    private String size="";
 
 
     /**

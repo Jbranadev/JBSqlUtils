@@ -292,18 +292,13 @@ public class Methods_Conexion extends Conexion {
                         temp.setTABLE_NAME(tables.getString(3));
                         temp.setTABLE_TYPE(tables.getString(4));
                         temp.setREMARKS(tables.getString(5));
-
-
                         if (this.getDataBaseType() != DataBase.SQLServer) {
                             temp.setTYPE_CAT(tables.getString(6));
                             temp.setTYPE_SCHEM(tables.getString(7));
                             temp.setTYPE_NAME(tables.getString(8));
                             temp.setSELF_REFERENCING_COL_NAME(tables.getString(9));
                             temp.setREF_GENERATION(tables.getString(10));
-
                         }
-
-
                         String NameModel = this.getTableName();
                         String NameTable = temp.getTABLE_NAME();
                         //Valida que la tabla pertenezca a la BD's que pertenece el modelo
@@ -332,7 +327,6 @@ public class Methods_Conexion extends Conexion {
                         if(this.getDataBaseType()==DataBase.PostgreSQL && NameModel.equalsIgnoreCase(NameTable)){
                             tablaisofDB=true;
                         }
-
                         if (NameModel.equalsIgnoreCase(NameTable) && tablaisofDB) {
                             LogsJB.debug("Base de datos del modelo: " + DatabaseName
                                     + " Base de datos del servidor3: " + DatabaseTemp);
@@ -361,13 +355,9 @@ public class Methods_Conexion extends Conexion {
                     tables.close();
                     if (!this.getTableExist()) {
                         LogsJB.info("La tabla correspondiente a este modelo, No existe en BD's " + this.getClass().getSimpleName());
-
                         this.closeConnection(connect);
-
                         return new ResultAsync<Boolean>(false, null);
                     }
-
-
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: " + e.toString());
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -389,7 +379,6 @@ public class Methods_Conexion extends Conexion {
                 throw resultado.getException();
             }
             result = resultado.getResult();
-
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -426,17 +415,14 @@ public class Methods_Conexion extends Conexion {
                 //Seteara que la columna si existe en BD's
                 //columnaExist(columnas.getString(4));
                 this.getTabla().getColumnsExist().add(columnas.getString(4).toUpperCase());
-
                 temp.setDATA_TYPE(columnas.getInt(5));
                 temp.setTYPE_NAME(columnas.getString(6));
                 temp.setCOLUMN_SIZE(columnas.getInt(7));
-
                 temp.setDECIMAL_DIGITS(columnas.getInt(9));
                 temp.setNUM_PREC_RADIX(columnas.getInt(10));
                 temp.setNULLABLE(columnas.getInt(11));
                 temp.setREMARKS(columnas.getString(12));
                 temp.setCOLUMN_DEF(columnas.getString(13));
-
                 temp.setCHAR_OCTET_LENGTH(columnas.getInt(16));
                 temp.setORDINAL_POSITION(columnas.getInt(17));
                 temp.setIS_NULLABLE(columnas.getString(18));
@@ -452,6 +438,66 @@ public class Methods_Conexion extends Conexion {
             columnas.close();
             this.closeConnection(connect);
             this.getTabla().getColumnas().stream().sorted(Comparator.comparing(ColumnsSQL::getORDINAL_POSITION));
+            //Seteamos a cada columna si existe
+            String JBSQLUTILSNAME=JBSqlUtils.class.getSimpleName();
+            String SuperClaseModelo=this.getClass().getSuperclass().getSimpleName();
+
+            if(StringUtils.equalsIgnoreCase(JBSQLUTILSNAME, SuperClaseModelo)){
+                //Obtiene los metodos get del modelo
+                List<Method> modelGetMethods = this.getMethodsGetOfModel();
+                Iterator<Method> iteradorModelGetMethods=modelGetMethods.iterator();
+                while (iteradorModelGetMethods.hasNext()) {
+                    try{
+                        Method modelGetMethod=iteradorModelGetMethods.next();
+                        String modelGetName = modelGetMethod.getName();
+                        LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);
+                        //Obtengo la información de la columna
+                        Column columnsSQL = (Column) modelGetMethod.invoke(this, null);
+                        String columnName = columnsSQL.getName();
+                        //Le meto la información a la columa
+                        Iterator<ColumnsSQL> iteradorColumnas=this.getTabla().getColumnas().iterator();
+                        while(iteradorColumnas.hasNext()){
+                            ColumnsSQL columTemp =iteradorColumnas.next();
+                            String nombreColumnaTemp=columTemp.getCOLUMN_NAME();
+                            if(StringUtils.equalsIgnoreCase(nombreColumnaTemp, columnName)){
+                                LogsJB.debug("Setea si la columna existe en BD's: " + columnName);
+                                columnsSQL.setColumnExist(true);
+                            }
+                        }
+                        //Obtiene los metodos set del modelo
+                        List<Method> modelSetMethods = this.getMethodsSetOfModel();
+                        Iterator<Method> iteradorModelSetMethods=modelSetMethods.iterator();
+                        while (iteradorModelSetMethods.hasNext()) {
+                            try{
+                                Method modelSetMethod=iteradorModelSetMethods.next();
+                                String modelSetName = modelSetMethod.getName();
+                                LogsJB.trace("Nombre del metodo set: " + modelSetName);
+                                modelSetName = StringUtils.removeStartIgnoreCase(modelSetName, "set");
+                                LogsJB.trace("Nombre del metodo set a validar: " + modelSetName);
+                                if (StringUtils.equalsIgnoreCase(modelSetName, columnName)) {
+                                    //Setea el valor del metodo
+                                    modelSetMethod.invoke(this, columnsSQL);
+                                    LogsJB.debug("Ingreso la columna en el metodo set: " + modelSetName);
+                                    break;
+                                }
+                            }catch (Exception e) {
+                                LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador: " + e.toString());
+                                LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                                LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                                LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                                LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                            }
+                        }
+                    }catch (Exception e) {
+                        LogsJB.fatal("Excepción disparada al obtener los nombres de las columnas del modelo: " + e.toString());
+                        LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                        LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                        LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                        LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    }
+                }
+            }
+
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());

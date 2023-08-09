@@ -4,32 +4,32 @@
            failures="0"
            errors="0"
            skipped="0"
-           time="2.111">
+           time="3.072">
   <properties />
   
   
-            <testcase name="refreshModel" time="0.491" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="firstOrFail" time="0.041" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="deleteModels" time="0.077" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="deleteJBSqlUtils" time="0.087" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="deleteModel" time="0.036" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="creteTableJBSqlUtils" time="0.134" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="getAllModels" time="0.026" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="firstModel" time="0.037" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="takeModels" time="0.047" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="insertModels" time="0.284" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+            <testcase name="insertIntoJBSqlUtils" time="0.043" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="createTable" time="0.211" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="dropTableIfExists" time="0.249" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="firstOrFail" time="0.061" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="deleteModels" time="0.148" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="cleanModel" time="0.007" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="refreshModel" time="0.682" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="updateJBSqlUtils" time="0.041" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="takeModels" time="0.064" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="creteTableJBSqlUtils" time="0.108" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="insertModel" time="0.072" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="deleteModel" time="0.063" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="deleteJBSqlUtils" time="0.106" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="getInJsonObjectsJBSqlUtils" time="0.040" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="getModel" time="0.080" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="dropTableJBSqlUtils" time="0.086" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="updateModels" time="0.339" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="setPropertiesConexiontoModel" time="0.063" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="firstModel" time="0.051" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="updateModel" time="0.076" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="insertModels" time="0.446" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
+                <testcase name="getAllModels" time="0.034" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
                 <testcase name="setPropertiesConexion" time="0.002" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="createTable" time="0.081" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="insertIntoJBSqlUtils" time="0.043" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="getModel" time="0.027" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="cleanModel" time="0.008" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="dropTableJBSqlUtils" time="0.067" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="updateModel" time="0.036" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="setPropertiesConexiontoModel" time="0.080" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="getInJsonObjectsJBSqlUtils" time="0.069" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="updateJBSqlUtils" time="0.049" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="dropTableIfExists" time="0.143" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="insertModel" time="0.034" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
-                <testcase name="updateModels" time="0.212" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL" />
       
 </testsuite>
