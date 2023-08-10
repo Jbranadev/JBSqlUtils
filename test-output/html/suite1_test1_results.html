@@ -29,7 +29,7 @@
 	    		<span class="tooltiptextCustom">Copy Test name</span>
 			</div>
 	    </th>
-	    <th id="testNameId">Test MySQL</th> 
+	    <th id="testNameId">JBSqlUtils</th> 
 	  </tr>
 	  <tr>
 	    <th>Test Class : </th>
@@ -43,8 +43,8 @@
 	    		<span class="tooltiptextCustom">Copy Class name</span>
 			</div>
 	    </th> 
-	    <th id="testClassId">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</th>
-	    <th id="testClassNameId" hidden="true">JBSqlUtilsTestMySQL</th>
+	    <th id="testClassId">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</th>
+	    <th id="testClassNameId" hidden="true">JBSqlUtilsTestSQLite</th>
 	  </tr>
 	  <tr>
 	    <th>Suite Name : </th>
@@ -54,7 +54,7 @@
 	    		<span class="tooltiptextCustom">Copy Suite name</span>
 			</div>
 		</th>
-	    <th id="suiteNameId">JBSqlUtils</th>
+	    <th id="suiteNameId">Default Suite</th>
 	  </tr>
 	  <tr>
 	    <th>Suite XML : </th>
@@ -68,13 +68,13 @@
 	    		<span class="tooltiptextCustom">Copy Suite file name</span>
 			</div>
 	    </th> 
-	  	<th id="suiteXMLId">C:\Users\jobran\IdeaProjects\JBSqlUtils\JBSqlUtilsTest.xml</th>
-	  	<th id="suiteXMLNameId" hidden="true">JBSqlUtilsTest.xml</th>
+	  	<th id="suiteXMLId">C:\Users\jobran\AppData\Local\JetBrains\IdeaIC2022.2\temp-testng-customsuite.xml</th>
+	  	<th id="suiteXMLNameId" hidden="true">temp-testng-customsuite.xml</th>
 	  </tr>
 	  	  <tr>
 	    <th>Total Time : </th>
 	    <th></th>
-	    <th>00:00:00</th> 
+	    <th>00:00:01</th> 
 	  </tr>
 	  <tr>
 	    <th>Total Steps : </th>
@@ -84,7 +84,7 @@
 	  <tr>
 	    <th>Status : </th>
 	    <th></th>
-	    <th><font color="red">FAIL</font></th> 
+	    <th><font color="green">PASS</font></th> 
 	  </tr>
 	</table>
 </div>
@@ -109,29 +109,139 @@
 				
 				
 				
-											<tr>
-	<td class="time">1691622234897</td>
-	<td class="header failed" colspan="4" onClick="toggleElement('3fa65438-d461-48c5-b5c0-800c1a7e07cb','block');changeSingleIcon('span-3fa65438-d461-48c5-b5c0-800c1a7e07cb');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-3fa65438-d461-48c5-b5c0-800c1a7e07cb' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622234897</td>
+				
+				
+												<tr>
+			<td class="time">1691678930850</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('51861758-1dd3-4949-90fa-dcb26dc867b2','block');changeSingleIcon('span-51861758-1dd3-4949-90fa-dcb26dc867b2');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-51861758-1dd3-4949-90fa-dcb26dc867b2' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678930850</td>
 	<td class="methodTest">
-		<span class="description"><b>Method: </b>getConection</span><br>
+		<span class="description"><b>Method: </b>takeModels</span><br>
 			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.209s</span><br>
+							<span class="duration"><b>Duration: </b>0.042s</span><br>
 	</td>
 	<td class="result">
-						<div class="noCollapse" id="3fa65438-d461-48c5-b5c0-800c1a7e07cb" style="display: block;">
-												<p><font size="2">Obtendra la conexión del modelo a BD's</font></p><br>
-									<a href="javascript:toggleElement('exception-3fa65438-d461-48c5-b5c0-800c1a7e07cb','block')" title="Click to expand/collapse"><b>java.lang.AssertionError: No se logro establecer la conexión del modelo a BD&apos;s expected [false] but found [true]</b></a><br/>
-		<div class="stackTrace" id="exception-3fa65438-d461-48c5-b5c0-800c1a7e07cb">
-					org.testng.Assert.fail(Assert.java:111)<br/>
-					org.testng.Assert.failNotEquals(Assert.java:1578)<br/>
-					org.testng.Assert.assertFalse(Assert.java:79)<br/>
-					io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.getConection(JBSqlUtilsTestMySQL.java:73)<br/>
+						<div class="stackTrace" id="51861758-1dd3-4949-90fa-dcb26dc867b2" style="display: block;">
+												<p><font size="2">Limpiamos el modelo</font></p><br>
+												<p><font size="2">Recuperamos los primeros seis modelos que en su nombre poseen el texto Modelo #</font></p><br>
+												<p><font size="2">Se recuperaron 6 los cuales son: [TestModel(id=Column(name=Id, valor=1, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #0, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #0, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=)), TestModel(id=Column(name=Id, valor=2, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #1, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #1, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=)), TestModel(id=Column(name=Id, valor=3, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #2, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #2, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=)), TestModel(id=Column(name=Id, valor=4, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #3, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #3, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=)), TestModel(id=Column(name=Id, valor=5, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #4, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #4, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=)), TestModel(id=Column(name=Id, valor=6, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #5, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #5, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=))]</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678931447</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('ff6e84db-8a74-41a2-9cec-20b3dee1f0e3','block');changeSingleIcon('span-ff6e84db-8a74-41a2-9cec-20b3dee1f0e3');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-ff6e84db-8a74-41a2-9cec-20b3dee1f0e3' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678931447</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>deleteJBSqlUtils</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.023s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="ff6e84db-8a74-41a2-9cec-20b3dee1f0e3" style="display: block;">
+												<p><font size="2">Obtenedra todos los registros que tienen estado True y en su apellido tienen una letra a</font></p><br>
+												<p><font size="2">VIsualizamos la Fila a eliminar, cuyo Id es igual a 5: </font></p><br>
+												<p><font size="2">{"Apellido":"Garcia","Id":5,"Name":"Alex","Estado":true}</font></p><br>
+												<p><font size="2">Filas eliminadas en BD's: 1</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678930927</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('3040e3d6-de2a-43eb-9619-2e6fb7f93f6b','block');changeSingleIcon('span-3040e3d6-de2a-43eb-9619-2e6fb7f93f6b');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-3040e3d6-de2a-43eb-9619-2e6fb7f93f6b' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678930927</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>updateModels</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.264s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="3040e3d6-de2a-43eb-9619-2e6fb7f93f6b" style="display: block;">
+												<p><font size="2">Limpiamos el modelo</font></p><br>
+												<p><font size="2">Obtenemos los modelos a actualizar: </font></p><br>
+												<p><font size="2">Operamos los cambios a realizar en los modelos obtenidos de BD's</font></p><br>
+												<p><font size="2">Modelo obtenido: TestModel(id=Column(name=Id, valor=1, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #0, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #0, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Modelo a actualizar: TestModel(id=Column(name=Id, valor=1, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #0, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #0, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Modelo obtenido: TestModel(id=Column(name=Id, valor=2, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #1, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #1, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Modelo a actualizar: TestModel(id=Column(name=Id, valor=2, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #1, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #1, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Modelo obtenido: TestModel(id=Column(name=Id, valor=3, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #2, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #2, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Modelo a actualizar: TestModel(id=Column(name=Id, valor=3, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #2, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #2, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Modelo obtenido: TestModel(id=Column(name=Id, valor=4, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #3, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #3, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Modelo a actualizar: TestModel(id=Column(name=Id, valor=4, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #3, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #3, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Modelo obtenido: TestModel(id=Column(name=Id, valor=5, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #4, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #4, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Modelo a actualizar: TestModel(id=Column(name=Id, valor=5, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #4, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #4, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Modelo obtenido: TestModel(id=Column(name=Id, valor=6, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #5, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #5, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Modelo a actualizar: TestModel(id=Column(name=Id, valor=6, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #5, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #5, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Modelo obtenido: TestModel(id=Column(name=Id, valor=7, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #6, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #6, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Modelo a actualizar: TestModel(id=Column(name=Id, valor=7, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #6, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #6, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Modelo obtenido: TestModel(id=Column(name=Id, valor=8, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #7, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #7, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Modelo a actualizar: TestModel(id=Column(name=Id, valor=8, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #7, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #7, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Modelo obtenido: TestModel(id=Column(name=Id, valor=9, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #8, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #8, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Modelo a actualizar: TestModel(id=Column(name=Id, valor=9, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #8, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #8, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Modelo obtenido: TestModel(id=Column(name=Id, valor=10, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #9, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #9, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Modelo a actualizar: TestModel(id=Column(name=Id, valor=10, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #9, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #9, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Enviamos a guardar los modelos a través del método saveALL</font></p><br>
+												<p><font size="2">Filas actualizadas en BD's: 10</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678930215</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('bb41ead5-e028-4c69-8e92-564b9762e4f2','block');changeSingleIcon('span-bb41ead5-e028-4c69-8e92-564b9762e4f2');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-bb41ead5-e028-4c69-8e92-564b9762e4f2' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678930215</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>refreshModel</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.035s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="bb41ead5-e028-4c69-8e92-564b9762e4f2" style="display: block;">
+												<p><font size="2">Se refrescará el modelo con la información existente en BD's</font></p><br>
+												<p><font size="2">Se refresco el modelo con la información existente en BD's</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678930405</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('83a9f9e3-253c-4f56-bf87-144a4ab1d38e','block');changeSingleIcon('span-83a9f9e3-253c-4f56-bf87-144a4ab1d38e');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-83a9f9e3-253c-4f56-bf87-144a4ab1d38e' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678930405</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>firstOrFail</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.047s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="83a9f9e3-253c-4f56-bf87-144a4ab1d38e" style="display: block;">
+						<a href="javascript:toggleElement('exception-83a9f9e3-253c-4f56-bf87-144a4ab1d38e','block')" title="Click to expand/collapse"><b>io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound: No existe un modelo en BD&apos;s que corresponda a los criterios de la consulta sql: SELECT * FROM testModel WHERE&nbsp; (Name = ? ) AND&nbsp; (Apellido = ? )</b></a><br/>
+		<div class="stackTrace" id="exception-83a9f9e3-253c-4f56-bf87-144a4ab1d38e">
+					io.github.josecarlosbran.JBSqlUtils.DataBase.Get.firstOrFail(Get.java:308)<br/>
+					io.github.josecarlosbran.JBSqlUtils.DataBase.And.firstOrFail(And.java:361)<br/>
+					io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite.firstOrFail(JBSqlUtilsTestSQLite.java:143)<br/>
 					java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)<br/>
 					java.base/java.lang.reflect.Method.invoke(Method.java:577)<br/>
 					org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)<br/>
@@ -161,978 +271,451 @@
 		</td>
 	</div>
 </tr>
-						
-											<tr>
-	<td class="time">1691622235119</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('252c8d77-572c-4576-8fae-f9af5ecdfedb','block');changeSingleIcon('span-252c8d77-572c-4576-8fae-f9af5ecdfedb');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-252c8d77-572c-4576-8fae-f9af5ecdfedb' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235119</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>takeModels</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.firstModel</span>
-							<div class="stackTrace" id="252c8d77-572c-4576-8fae-f9af5ecdfedb" style="display: block;">
-						<a href="javascript:toggleElement('exception-252c8d77-572c-4576-8fae-f9af5ecdfedb','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.takeModels() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.firstModel() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-252c8d77-572c-4576-8fae-f9af5ecdfedb">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235113</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('28095710-f89b-4e47-a890-35df831c755e','block');changeSingleIcon('span-28095710-f89b-4e47-a890-35df831c755e');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-28095710-f89b-4e47-a890-35df831c755e' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235113</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>insertModel</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.001s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.createTable</span>
-							<div class="stackTrace" id="28095710-f89b-4e47-a890-35df831c755e" style="display: block;">
-						<a href="javascript:toggleElement('exception-28095710-f89b-4e47-a890-35df831c755e','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.insertModel() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.createTable() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-28095710-f89b-4e47-a890-35df831c755e">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235122</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('70ac5d2c-bb14-4149-8c6e-4a327eef6ee4','block');changeSingleIcon('span-70ac5d2c-bb14-4149-8c6e-4a327eef6ee4');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-70ac5d2c-bb14-4149-8c6e-4a327eef6ee4' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235122</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>insertIntoJBSqlUtils</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.creteTableJBSqlUtils</span>
-							<div class="stackTrace" id="70ac5d2c-bb14-4149-8c6e-4a327eef6ee4" style="display: block;">
-						<a href="javascript:toggleElement('exception-70ac5d2c-bb14-4149-8c6e-4a327eef6ee4','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.insertIntoJBSqlUtils() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.creteTableJBSqlUtils() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-70ac5d2c-bb14-4149-8c6e-4a327eef6ee4">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235116</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('18330e6e-1562-43f8-97b9-1c81bd300b81','block');changeSingleIcon('span-18330e6e-1562-43f8-97b9-1c81bd300b81');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-18330e6e-1562-43f8-97b9-1c81bd300b81' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235116</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>updateModel</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.firstOrFail</span>
-							<div class="stackTrace" id="18330e6e-1562-43f8-97b9-1c81bd300b81" style="display: block;">
-						<a href="javascript:toggleElement('exception-18330e6e-1562-43f8-97b9-1c81bd300b81','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.updateModel() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.firstOrFail() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-18330e6e-1562-43f8-97b9-1c81bd300b81">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235124</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('43ee0e02-18e2-46a7-8543-28f591afec47','block');changeSingleIcon('span-43ee0e02-18e2-46a7-8543-28f591afec47');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-43ee0e02-18e2-46a7-8543-28f591afec47' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235124</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>dropTableJBSqlUtils</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.deleteJBSqlUtils</span>
-							<div class="stackTrace" id="43ee0e02-18e2-46a7-8543-28f591afec47" style="display: block;">
-												==============================================================================================
-												Total Passed: 1(+1), Failures: 1(+1), Skips: 22(+22)
-												==============================================================================================
-												==============================================================================================
-												Total Passed: 2(+1), Failures: 2(+1), Skips: 44(+22)
-												==============================================================================================
-									<a href="javascript:toggleElement('exception-43ee0e02-18e2-46a7-8543-28f591afec47','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.dropTableJBSqlUtils() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.deleteJBSqlUtils() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-43ee0e02-18e2-46a7-8543-28f591afec47">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235123</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('729c42a3-051f-4ed3-9d92-0d77088b3031','block');changeSingleIcon('span-729c42a3-051f-4ed3-9d92-0d77088b3031');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-729c42a3-051f-4ed3-9d92-0d77088b3031' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235123</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>updateJBSqlUtils</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.getInJsonObjectsJBSqlUtils</span>
-							<div class="stackTrace" id="729c42a3-051f-4ed3-9d92-0d77088b3031" style="display: block;">
-						<a href="javascript:toggleElement('exception-729c42a3-051f-4ed3-9d92-0d77088b3031','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.updateJBSqlUtils() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.getInJsonObjectsJBSqlUtils() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-729c42a3-051f-4ed3-9d92-0d77088b3031">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235121</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('b6abbc13-6945-4da5-a193-a106cee0b1ac','block');changeSingleIcon('span-b6abbc13-6945-4da5-a193-a106cee0b1ac');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-b6abbc13-6945-4da5-a193-a106cee0b1ac' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235121</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>setPropertiesConexion</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.deleteModels</span>
-							<div class="stackTrace" id="b6abbc13-6945-4da5-a193-a106cee0b1ac" style="display: block;">
-						<a href="javascript:toggleElement('exception-b6abbc13-6945-4da5-a193-a106cee0b1ac','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.setPropertiesConexion() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.deleteModels() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-b6abbc13-6945-4da5-a193-a106cee0b1ac">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235118</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('4090eefb-7f3b-4a17-a7e1-a367649360fe','block');changeSingleIcon('span-4090eefb-7f3b-4a17-a7e1-a367649360fe');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-4090eefb-7f3b-4a17-a7e1-a367649360fe' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235118</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>firstModel</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.getModel</span>
-							<div class="stackTrace" id="4090eefb-7f3b-4a17-a7e1-a367649360fe" style="display: block;">
-						<a href="javascript:toggleElement('exception-4090eefb-7f3b-4a17-a7e1-a367649360fe','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.firstModel() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.getModel() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-4090eefb-7f3b-4a17-a7e1-a367649360fe">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235123</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('3c0a2da6-2b6e-458d-a08d-3278c235d0a5','block');changeSingleIcon('span-3c0a2da6-2b6e-458d-a08d-3278c235d0a5');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-3c0a2da6-2b6e-458d-a08d-3278c235d0a5' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235123</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>deleteJBSqlUtils</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.updateJBSqlUtils</span>
-							<div class="stackTrace" id="3c0a2da6-2b6e-458d-a08d-3278c235d0a5" style="display: block;">
-						<a href="javascript:toggleElement('exception-3c0a2da6-2b6e-458d-a08d-3278c235d0a5','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.deleteJBSqlUtils() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.updateJBSqlUtils() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-3c0a2da6-2b6e-458d-a08d-3278c235d0a5">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235121</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('5e37e9bf-6ea1-4359-a427-ee4761b31624','block');changeSingleIcon('span-5e37e9bf-6ea1-4359-a427-ee4761b31624');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-5e37e9bf-6ea1-4359-a427-ee4761b31624' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235121</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>creteTableJBSqlUtils</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.001s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.setPropertiesConexion</span>
-							<div class="stackTrace" id="5e37e9bf-6ea1-4359-a427-ee4761b31624" style="display: block;">
-						<a href="javascript:toggleElement('exception-5e37e9bf-6ea1-4359-a427-ee4761b31624','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.creteTableJBSqlUtils() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.setPropertiesConexion() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-5e37e9bf-6ea1-4359-a427-ee4761b31624">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235115</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('e95aae76-81c5-47c5-be0c-8c91a2f0a5f1','block');changeSingleIcon('span-e95aae76-81c5-47c5-be0c-8c91a2f0a5f1');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-e95aae76-81c5-47c5-be0c-8c91a2f0a5f1' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235115</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>firstOrFail</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.cleanModel</span>
-							<div class="stackTrace" id="e95aae76-81c5-47c5-be0c-8c91a2f0a5f1" style="display: block;">
-						<a href="javascript:toggleElement('exception-e95aae76-81c5-47c5-be0c-8c91a2f0a5f1','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.firstOrFail() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.cleanModel() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-e95aae76-81c5-47c5-be0c-8c91a2f0a5f1">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235120</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('4d1cfbdd-9e38-4502-a6e8-9b24b81ca397','block');changeSingleIcon('span-4d1cfbdd-9e38-4502-a6e8-9b24b81ca397');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-4d1cfbdd-9e38-4502-a6e8-9b24b81ca397' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235120</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>updateModels</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.getAllModels</span>
-							<div class="stackTrace" id="4d1cfbdd-9e38-4502-a6e8-9b24b81ca397" style="display: block;">
-						<a href="javascript:toggleElement('exception-4d1cfbdd-9e38-4502-a6e8-9b24b81ca397','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.updateModels() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.getAllModels() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-4d1cfbdd-9e38-4502-a6e8-9b24b81ca397">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235112</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('2d6824eb-ad3d-4e31-8869-78e1844ab2c8','block');changeSingleIcon('span-2d6824eb-ad3d-4e31-8869-78e1844ab2c8');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-2d6824eb-ad3d-4e31-8869-78e1844ab2c8' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235112</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>createTable</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.dropTableIfExists</span>
-							<div class="stackTrace" id="2d6824eb-ad3d-4e31-8869-78e1844ab2c8" style="display: block;">
-						<a href="javascript:toggleElement('exception-2d6824eb-ad3d-4e31-8869-78e1844ab2c8','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.createTable() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.dropTableIfExists() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-2d6824eb-ad3d-4e31-8869-78e1844ab2c8">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235110</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('9e4ca7b4-e15c-467d-8137-ce07006fd69f','block');changeSingleIcon('span-9e4ca7b4-e15c-467d-8137-ce07006fd69f');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-9e4ca7b4-e15c-467d-8137-ce07006fd69f' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235110</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>refreshModel</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.getConection</span>
-							<div class="stackTrace" id="9e4ca7b4-e15c-467d-8137-ce07006fd69f" style="display: block;">
-						<a href="javascript:toggleElement('exception-9e4ca7b4-e15c-467d-8137-ce07006fd69f','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.refreshModel() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.getConection() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-9e4ca7b4-e15c-467d-8137-ce07006fd69f">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235120</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('aa33abbc-eebd-4f1c-a43e-d2bf6b1b9d84','block');changeSingleIcon('span-aa33abbc-eebd-4f1c-a43e-d2bf6b1b9d84');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-aa33abbc-eebd-4f1c-a43e-d2bf6b1b9d84' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235120</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>deleteModels</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.updateModels</span>
-							<div class="stackTrace" id="aa33abbc-eebd-4f1c-a43e-d2bf6b1b9d84" style="display: block;">
-						<a href="javascript:toggleElement('exception-aa33abbc-eebd-4f1c-a43e-d2bf6b1b9d84','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.deleteModels() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.updateModels() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-aa33abbc-eebd-4f1c-a43e-d2bf6b1b9d84">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235118</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('eafb8f0f-ada7-4bf7-8ce4-62b234424359','block');changeSingleIcon('span-eafb8f0f-ada7-4bf7-8ce4-62b234424359');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-eafb8f0f-ada7-4bf7-8ce4-62b234424359' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235118</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>getModel</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.insertModels</span>
-							<div class="stackTrace" id="eafb8f0f-ada7-4bf7-8ce4-62b234424359" style="display: block;">
-						<a href="javascript:toggleElement('exception-eafb8f0f-ada7-4bf7-8ce4-62b234424359','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.getModel() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.insertModels() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-eafb8f0f-ada7-4bf7-8ce4-62b234424359">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235119</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('247f0beb-a4db-4288-aeec-71170c2a0a44','block');changeSingleIcon('span-247f0beb-a4db-4288-aeec-71170c2a0a44');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-247f0beb-a4db-4288-aeec-71170c2a0a44' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235119</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>getAllModels</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.takeModels</span>
-							<div class="stackTrace" id="247f0beb-a4db-4288-aeec-71170c2a0a44" style="display: block;">
-						<a href="javascript:toggleElement('exception-247f0beb-a4db-4288-aeec-71170c2a0a44','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.getAllModels() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.takeModels() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-247f0beb-a4db-4288-aeec-71170c2a0a44">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235117</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('b1af0fef-ac48-4866-a567-bb1978ed807c','block');changeSingleIcon('span-b1af0fef-ac48-4866-a567-bb1978ed807c');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-b1af0fef-ac48-4866-a567-bb1978ed807c' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235117</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>insertModels</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.deleteModel</span>
-							<div class="stackTrace" id="b1af0fef-ac48-4866-a567-bb1978ed807c" style="display: block;">
-						<a href="javascript:toggleElement('exception-b1af0fef-ac48-4866-a567-bb1978ed807c','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.insertModels() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.deleteModel() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-b1af0fef-ac48-4866-a567-bb1978ed807c">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235117</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('84a6665c-58df-4afc-8738-9f9b5b3d5d8f','block');changeSingleIcon('span-84a6665c-58df-4afc-8738-9f9b5b3d5d8f');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-84a6665c-58df-4afc-8738-9f9b5b3d5d8f' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235117</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>deleteModel</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.updateModel</span>
-							<div class="stackTrace" id="84a6665c-58df-4afc-8738-9f9b5b3d5d8f" style="display: block;">
-						<a href="javascript:toggleElement('exception-84a6665c-58df-4afc-8738-9f9b5b3d5d8f','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.deleteModel() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.updateModel() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-84a6665c-58df-4afc-8738-9f9b5b3d5d8f">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235114</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('521c3381-fa86-4ab2-a7f0-9aff9dd7dd99','block');changeSingleIcon('span-521c3381-fa86-4ab2-a7f0-9aff9dd7dd99');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-521c3381-fa86-4ab2-a7f0-9aff9dd7dd99' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235114</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>cleanModel</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.insertModel</span>
-							<div class="stackTrace" id="521c3381-fa86-4ab2-a7f0-9aff9dd7dd99" style="display: block;">
-						<a href="javascript:toggleElement('exception-521c3381-fa86-4ab2-a7f0-9aff9dd7dd99','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.cleanModel() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.insertModel() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-521c3381-fa86-4ab2-a7f0-9aff9dd7dd99">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235111</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('4e719e8f-43b5-493b-872d-78559add3d5e','block');changeSingleIcon('span-4e719e8f-43b5-493b-872d-78559add3d5e');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-4e719e8f-43b5-493b-872d-78559add3d5e' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235111</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>dropTableIfExists</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.refreshModel</span>
-							<div class="stackTrace" id="4e719e8f-43b5-493b-872d-78559add3d5e" style="display: block;">
-						<a href="javascript:toggleElement('exception-4e719e8f-43b5-493b-872d-78559add3d5e','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.dropTableIfExists() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.refreshModel() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-4e719e8f-43b5-493b-872d-78559add3d5e">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-					<tr>
-	<td class="time">1691622235122</td>
-	<td class="header skipped" colspan="4" onClick="toggleElement('070420ca-3a38-4570-b8f4-404d4eee1b65','block');changeSingleIcon('span-070420ca-3a38-4570-b8f4-404d4eee1b65');" title="Click to expand/collapse" style="cursor: pointer;">
-	<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-	<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-070420ca-3a38-4570-b8f4-404d4eee1b65' class="glyphicon glyphicon-menu-down"></span></div>
-	</td>
-	</tr>
-<tr>
-	<td class="time">1691622235122</td>
-	<td class="methodTest">
-		<span class="description"><b>Method: </b>getInJsonObjectsJBSqlUtils</span><br>
-			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.000s</span><br>
-	</td>
-	<td class="result">
-		 							<i>Depends on method(s): </i>
-			<span class="dependency">io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.insertIntoJBSqlUtils</span>
-							<div class="stackTrace" id="070420ca-3a38-4570-b8f4-404d4eee1b65" style="display: block;">
-						<a href="javascript:toggleElement('exception-070420ca-3a38-4570-b8f4-404d4eee1b65','block')" title="Click to expand/collapse"><b>java.lang.Throwable: Method io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.getInJsonObjectsJBSqlUtils() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46 depends on not successfully finished methods <br/>
-[io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL.insertIntoJBSqlUtils() on instance io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL@3835c46]</b></a><br/>
-		<div class="stackTrace" id="exception-070420ca-3a38-4570-b8f4-404d4eee1b65">
-					org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)<br/>
-					org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)<br/>
-					org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)<br/>
-					java.base/java.util.ArrayList.forEach(ArrayList.java:1511)<br/>
-					org.testng.TestRunner.privateRun(TestRunner.java:848)<br/>
-					org.testng.TestRunner.run(TestRunner.java:621)<br/>
-					org.testng.SuiteRunner.runTest(SuiteRunner.java:443)<br/>
-					org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)<br/>
-					org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)<br/>
-					org.testng.SuiteRunner.run(SuiteRunner.java:336)<br/>
-					org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br/>
-					org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)<br/>
-					org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)<br/>
-					org.testng.TestNG.runSuitesLocally(TestNG.java:1200)<br/>
-					org.testng.TestNG.runSuites(TestNG.java:1114)<br/>
-					org.testng.TestNG.run(TestNG.java:1082)<br/>
-					com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)<br/>
-					com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)<br/>
-						</div>
-		</td>
-	</div>
-</tr>
-						
-												<tr>
-			<td class="time">1691622234843</td>
-			<td class="header passed" colspan="4" onClick="toggleElement('070f66b7-574c-4066-a4ee-4d80d220d53a','block');changeSingleIcon('span-070f66b7-574c-4066-a4ee-4d80d220d53a');" title="Click to expand/collapse" style="cursor: pointer;">
-			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL</div>
-			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-070f66b7-574c-4066-a4ee-4d80d220d53a' class="glyphicon glyphicon-menu-down"></span></div>
+						<tr>
+			<td class="time">1691678930395</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('b3da2cd2-c03e-423f-851c-699d2fb7e743','block');changeSingleIcon('span-b3da2cd2-c03e-423f-851c-699d2fb7e743');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-b3da2cd2-c03e-423f-851c-699d2fb7e743' class="glyphicon glyphicon-menu-down"></span></div>
 			</td>
 			</tr>
 			<tr>
-	<td class="time">1691622234843</td>
+	<td class="time">1691678930395</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>cleanModel</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.008s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="b3da2cd2-c03e-423f-851c-699d2fb7e743" style="display: block;">
+												<p><font size="2">Limpiaremos el Modelo: TestModel(id=Column(name=Id, valor=null, default_value=null, columnExist=true, size=), name=Column(name=Name, valor=Marcos, default_value='Daniel', columnExist=true, size=200), apellido=Column(name=Apellido, valor=Cabrera, default_value=null, columnExist=true, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=true, size=))</font></p><br>
+												<p><font size="2">Modelo despues de realizar la limpieza: TestModel(id=Column(name=Id, valor=null, default_value=null, columnExist=true, size=), name=Column(name=Name, valor=null, default_value='Daniel', columnExist=true, size=200), apellido=Column(name=Apellido, valor=null, default_value=null, columnExist=true, size=200), isMayor=Column(name=IsMayor, valor=null, default_value=true, columnExist=true, size=))</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678930502</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('0ea8a34f-300d-4db2-b103-8d14abdf6cc7','block');changeSingleIcon('span-0ea8a34f-300d-4db2-b103-8d14abdf6cc7');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-0ea8a34f-300d-4db2-b103-8d14abdf6cc7' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678930502</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>deleteModel</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.039s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="0ea8a34f-300d-4db2-b103-8d14abdf6cc7" style="display: block;">
+												<p><font size="2">Limpiamos el modelo</font></p><br>
+												<p><font size="2">Obtenemos el modelo que tiene por nombre MarcosEfrain, Apellido Cabrera y es Mayor de Edad</font></p><br>
+												<p><font size="2">TestModel(id=Column(name=Id, valor=1, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=MarcosEfrain, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Cabrera, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Eliminamos el modelo a través del metodo delete</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678930786</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('04dea6d3-f499-4c8c-9604-95620ef5504a','block');changeSingleIcon('span-04dea6d3-f499-4c8c-9604-95620ef5504a');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-04dea6d3-f499-4c8c-9604-95620ef5504a' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678930786</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>getModel</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.029s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="04dea6d3-f499-4c8c-9604-95620ef5504a" style="display: block;">
+												<p><font size="2">Limpiamos el modelo</font></p><br>
+												<p><font size="2">Obtenemos el primero modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe</font></p><br>
+												<p><font size="2">Trato de obtener un modelo que no existe, el resultado es: false</font></p><br>
+												<p><font size="2">TestModel(id=Column(name=Id, valor=null, default_value=null, columnExist=true, size=), name=Column(name=Name, valor=null, default_value='Daniel', columnExist=true, size=200), apellido=Column(name=Apellido, valor=null, default_value=null, columnExist=true, size=200), isMayor=Column(name=IsMayor, valor=null, default_value=true, columnExist=true, size=))</font></p><br>
+												<p><font size="2">Obtenemos un modelo cuyo nombre sea Modelo # y sea mayor de edad</font></p><br>
+												<p><font size="2">Trato de obtener un modelo que sí existe, el resultado es: true</font></p><br>
+												<p><font size="2">TestModel(id=Column(name=Id, valor=null, default_value=null, columnExist=true, size=), name=Column(name=Name, valor=null, default_value='Daniel', columnExist=true, size=200), apellido=Column(name=Apellido, valor=null, default_value=null, columnExist=true, size=200), isMayor=Column(name=IsMayor, valor=null, default_value=true, columnExist=true, size=))</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678931323</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('95d2d5ef-a0db-46e5-85a9-151758317d2f','block');changeSingleIcon('span-95d2d5ef-a0db-46e5-85a9-151758317d2f');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-95d2d5ef-a0db-46e5-85a9-151758317d2f' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678931323</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>insertIntoJBSqlUtils</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.064s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="95d2d5ef-a0db-46e5-85a9-151758317d2f" style="display: block;">
+												<p><font size="2">Se insertaran 5 registros en la tabla Proveedor</font></p><br>
+												<p><font size="2">Resultado de insertar el registro de Erick en la tabla Proveedor: 1</font></p><br>
+												<p><font size="2">Resultado de insertar el registro de Daniel en la tabla Proveedor: 1</font></p><br>
+												<p><font size="2">Resultado de insertar el registro de Ligia en la tabla Proveedor: 1</font></p><br>
+												<p><font size="2">Resultado de insertar el registro de Elsa en la tabla Proveedor: 1</font></p><br>
+												<p><font size="2">Resultado de insertar el registro de Alex en la tabla Proveedor: 1</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678930542</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('abff835f-f954-4746-8aae-d102418091c0','block');changeSingleIcon('span-abff835f-f954-4746-8aae-d102418091c0');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-abff835f-f954-4746-8aae-d102418091c0' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678930542</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>insertModels</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.243s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="abff835f-f954-4746-8aae-d102418091c0" style="display: block;">
+												<p><font size="2">Limpiamos el modelo</font></p><br>
+												<p><font size="2">Preparamos los modelos a insertar: </font></p><br>
+												<p><font size="2">TestModel(id=Column(name=Id, valor=null, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #0, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #0, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">TestModel(id=Column(name=Id, valor=null, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #1, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #1, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=null, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">TestModel(id=Column(name=Id, valor=null, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #2, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #2, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">TestModel(id=Column(name=Id, valor=null, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #3, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #3, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=null, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">TestModel(id=Column(name=Id, valor=null, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #4, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #4, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">TestModel(id=Column(name=Id, valor=null, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #5, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #5, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=null, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">TestModel(id=Column(name=Id, valor=null, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #6, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #6, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">TestModel(id=Column(name=Id, valor=null, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #7, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #7, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=null, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">TestModel(id=Column(name=Id, valor=null, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #8, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #8, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">TestModel(id=Column(name=Id, valor=null, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #9, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #9, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=null, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Enviamos a guardar los modelos</font></p><br>
+												<p><font size="2">Filas insertadas en BD's: 10</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678931193</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('6ab4c606-44aa-42a3-a179-bc731297edb4','block');changeSingleIcon('span-6ab4c606-44aa-42a3-a179-bc731297edb4');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-6ab4c606-44aa-42a3-a179-bc731297edb4' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678931193</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>deleteModels</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.082s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="6ab4c606-44aa-42a3-a179-bc731297edb4" style="display: block;">
+												<p><font size="2">Limpiamos el modelo</font></p><br>
+												<p><font size="2">Obtenemos los modelos que poseen nombre es Modelo #5 U #8 o su apellido es #3</font></p><br>
+												<p><font size="2">Se recuperaron 3 Para eliminar: [TestModel(id=Column(name=Id, valor=4, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #3, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #3, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=)), TestModel(id=Column(name=Id, valor=6, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #5, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #5, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=)), TestModel(id=Column(name=Id, valor=9, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #8, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #8, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=))]</font></p><br>
+												<p><font size="2">Filas eliminadas en BD's: 3 [TestModel(id=Column(name=Id, valor=4, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #3, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #3, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=)), TestModel(id=Column(name=Id, valor=6, default_value=null, columnExist=true, size=), name=Column(name=Name, valor=Modelo #5, default_value='Daniel', columnExist=true, size=200), apellido=Column(name=Apellido, valor=Apellido #5, default_value=null, columnExist=true, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=true, size=)), TestModel(id=Column(name=Id, valor=9, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #8, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #8, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=))]</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678931276</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('59b6ef67-8fab-4c96-8fa4-a3f8ebd708f1','block');changeSingleIcon('span-59b6ef67-8fab-4c96-8fa4-a3f8ebd708f1');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-59b6ef67-8fab-4c96-8fa4-a3f8ebd708f1' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678931276</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>setPropertiesConexion</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.003s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="59b6ef67-8fab-4c96-8fa4-a3f8ebd708f1" style="display: block;">
+												<p><font size="2">Seteara las propiedades de conexión Globales para SQLite</font></p><br>
+												<p><font size="2">Ha seteado las propiedades de conexión globales para SQLite</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678930893</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('cc1f3aea-0723-468e-ac7a-fc9eddd06756','block');changeSingleIcon('span-cc1f3aea-0723-468e-ac7a-fc9eddd06756');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-cc1f3aea-0723-468e-ac7a-fc9eddd06756' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678930893</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>getAllModels</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.032s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="cc1f3aea-0723-468e-ac7a-fc9eddd06756" style="display: block;">
+												<p><font size="2">Limpiamos el modelo</font></p><br>
+												<p><font size="2">Obtenemos los modelos que poseen nombre es Modelo #5 U #8 o su apellido es #3</font></p><br>
+												<p><font size="2">Se recuperaron 3 los cuales son: [TestModel(id=Column(name=Id, valor=4, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #3, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #3, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=)), TestModel(id=Column(name=Id, valor=6, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #5, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #5, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=)), TestModel(id=Column(name=Id, valor=9, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #8, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #8, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=))]</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678930454</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('ae6ff919-0bc1-4130-b95d-e07e649680b1','block');changeSingleIcon('span-ae6ff919-0bc1-4130-b95d-e07e649680b1');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-ae6ff919-0bc1-4130-b95d-e07e649680b1' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678930454</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>updateModel</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.046s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="ae6ff919-0bc1-4130-b95d-e07e649680b1" style="display: block;">
+												<p><font size="2">Limpiamos el modelo</font></p><br>
+												<p><font size="2">Obtenemos el modelo que tiene por nombre Marcos, Apellido Cabrera</font></p><br>
+												<p><font size="2">TestModel(id=Column(name=Id, valor=1, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Marcos, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Cabrera, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Actualizamos el nombre del modelo a MarcosEfrain y asígnamos que será mayor de edad</font></p><br>
+												<p><font size="2">TestModel(id=Column(name=Id, valor=1, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=MarcosEfrain, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Cabrera, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Guardamos el modelo en BD's</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678931418</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('49acf048-a57c-4e91-8127-bd192dfdb0fb','block');changeSingleIcon('span-49acf048-a57c-4e91-8127-bd192dfdb0fb');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-49acf048-a57c-4e91-8127-bd192dfdb0fb' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678931418</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>updateJBSqlUtils</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.028s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="49acf048-a57c-4e91-8127-bd192dfdb0fb" style="display: block;">
+												<p><font size="2">Obtendra los primeros 2 registros cuyo estado sea true y en su apellido posea la letra a</font></p><br>
+												<p><font size="2">Actualizara la fila que corresponde a Ligia Camey: </font></p><br>
+												<p><font size="2">{"Apellido":"Camey","Id":3,"Name":"Ligia","Estado":true}</font></p><br>
+												<p><font size="2">Filas actualizadas en BD's: 1</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678930322</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('66ce872f-b325-4ba4-a3fb-dff377ceabb2','block');changeSingleIcon('span-66ce872f-b325-4ba4-a3fb-dff377ceabb2');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-66ce872f-b325-4ba4-a3fb-dff377ceabb2' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678930322</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>createTable</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.035s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="66ce872f-b325-4ba4-a3fb-dff377ceabb2" style="display: block;">
+												<p><font size="2">Se creara la tabla testModel en BD's</font></p><br>
+												<p><font size="2">La tabla a sido creada en BD's</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678929766</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('dcba4ec1-2e2d-423b-b1ae-d197ec1d1da6','block');changeSingleIcon('span-dcba4ec1-2e2d-423b-b1ae-d197ec1d1da6');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-dcba4ec1-2e2d-423b-b1ae-d197ec1d1da6' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678929766</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>getConection</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.447s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="dcba4ec1-2e2d-423b-b1ae-d197ec1d1da6" style="display: block;">
+												<p><font size="2">Obtendra la conexión del modelo a BD's</font></p><br>
+												<p><font size="2">Obtuvo la conexión del modelo a BD's</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678931388</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('33a5f391-45ee-4023-a2b5-40b90cf39c36','block');changeSingleIcon('span-33a5f391-45ee-4023-a2b5-40b90cf39c36');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-33a5f391-45ee-4023-a2b5-40b90cf39c36' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678931388</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>getInJsonObjectsJBSqlUtils</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.029s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="33a5f391-45ee-4023-a2b5-40b90cf39c36" style="display: block;">
+												<p><font size="2">Obtendra los primeros 2 registros cuyo estado sea true y en su apellido posea la letra a</font></p><br>
+												<p><font size="2">Visualizamos los registros obtenidos de BD's: </font></p><br>
+												<p><font size="2">{"Id":1,"Name":"Erick"}</font></p><br>
+												<p><font size="2">{"Id":3,"Name":"Ligia"}</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678929679</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('fdb3832e-b155-4686-97ab-76b5f80112c4','block');changeSingleIcon('span-fdb3832e-b155-4686-97ab-76b5f80112c4');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-fdb3832e-b155-4686-97ab-76b5f80112c4' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678929679</td>
 	<td class="methodTest">
 		<span class="description"><b>Method: </b>setPropertiesConexiontoModel</span><br>
 			<span class="description"><b>Description: </b></span><br>
-							<span class="duration"><b>Duration: </b>0.047s</span><br>
+							<span class="duration"><b>Duration: </b>0.077s</span><br>
 	</td>
 	<td class="result">
-						<div class="stackTrace" id="070f66b7-574c-4066-a4ee-4d80d220d53a" style="display: block;">
-												<p><font size="2">Se setearan las propiedades de conexión del modelo para MySQL</font></p><br>
-												<p><font size="2">Se setearon las propiedades de conexión del modelo para MySQL</font></p><br>
+						<div class="stackTrace" id="fdb3832e-b155-4686-97ab-76b5f80112c4" style="display: block;">
+												<p><font size="2">Se setearan las propiedades de conexión del modelo para SQLite</font></p><br>
+												<p><font size="2">Se setearon las propiedades de conexión del modelo para SQLite</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678931472</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('b2d5f286-4234-4ad7-8d1a-a49506d7610e','block');changeSingleIcon('span-b2d5f286-4234-4ad7-8d1a-a49506d7610e');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-b2d5f286-4234-4ad7-8d1a-a49506d7610e' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678931472</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>dropTableJBSqlUtils</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.027s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="b2d5f286-4234-4ad7-8d1a-a49506d7610e" style="display: block;">
+												<p><font size="2">Eliminara la tabla Proveedor de BD's</font></p><br>
+												<p><font size="2">Resultado de solicitar eliminar la tabla en BD's: true</font></p><br>
+												<p><font size="2">Solicitara eliminar la tabla de BD's cuando esta ya no existe</font></p><br>
+												<p><font size="2">Resultado de solicitar la eliminar la tabla cuando no existe en BD's: false</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678931280</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('7d7a79f0-0768-4ff0-b38a-be68277103b1','block');changeSingleIcon('span-7d7a79f0-0768-4ff0-b38a-be68277103b1');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-7d7a79f0-0768-4ff0-b38a-be68277103b1' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678931280</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>creteTableJBSqlUtils</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.042s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="7d7a79f0-0768-4ff0-b38a-be68277103b1" style="display: block;">
+												<p><font size="2">Eliminara la tabla Proveedor de BD's en caso de que exista</font></p><br>
+												<p><font size="2">Resultado de solicitar eliminar la tabla en BD's: false</font></p><br>
+												<p><font size="2">Se solicitara la creación de la tabla Proveedor, la cual tendra las siguientes columnas, Id, Name, Apellido y Estado</font></p><br>
+												<p><font size="2">Resultado de solicitar la creación de la tabla en BD's: true</font></p><br>
+												<p><font size="2">Solicitara la creación de la tabla Proveedor cuando esta ya existe en BD's</font></p><br>
+												<p><font size="2">Resultado de solicitar la creación de la tabla en BD's: false</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678930359</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('044e4510-9af2-4b73-a176-bdeecd8cba57','block');changeSingleIcon('span-044e4510-9af2-4b73-a176-bdeecd8cba57');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-044e4510-9af2-4b73-a176-bdeecd8cba57' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678930359</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>insertModel</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.035s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="044e4510-9af2-4b73-a176-bdeecd8cba57" style="display: block;">
+												<p><font size="2">Insertaremos un modelo cuyo nombre será Marcos, Apellido Cabrera y sera menor de edad</font></p><br>
+												<p><font size="2">TestModel(id=Column(name=Id, valor=null, default_value=null, columnExist=true, size=), name=Column(name=Name, valor=Marcos, default_value='Daniel', columnExist=true, size=200), apellido=Column(name=Apellido, valor=Cabrera, default_value=null, columnExist=true, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=true, size=))</font></p><br>
+												<p><font size="2">Insertamos el Modelo a través del método save</font></p><br>
+												<p><font size="2">Filas insertadas en BD's: 1 TestModel(id=Column(name=Id, valor=null, default_value=null, columnExist=true, size=), name=Column(name=Name, valor=Marcos, default_value='Daniel', columnExist=true, size=200), apellido=Column(name=Apellido, valor=Cabrera, default_value=null, columnExist=true, size=200), isMayor=Column(name=IsMayor, valor=false, default_value=true, columnExist=true, size=))</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678930817</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('479b186d-1375-46b6-a00d-3cd8a70caf89','block');changeSingleIcon('span-479b186d-1375-46b6-a00d-3cd8a70caf89');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-479b186d-1375-46b6-a00d-3cd8a70caf89' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678930817</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>firstModel</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.032s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="479b186d-1375-46b6-a00d-3cd8a70caf89" style="display: block;">
+												<p><font size="2">Limpiamos el modelo</font></p><br>
+												<p><font size="2">Obtenemos el primero modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe</font></p><br>
+												<p><font size="2">Trato de obtener un modelo que no existe, el resultado es: false</font></p><br>
+												<p><font size="2">TestModel(id=Column(name=Id, valor=null, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=null, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=null, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=null, default_value=true, columnExist=false, size=))</font></p><br>
+												<p><font size="2">Obtenemos el primero modelo cuyo nombre sea Modelo # y sea mayor de edad</font></p><br>
+												<p><font size="2">Trato de obtener un modelo que sí existe, el resultado es: true</font></p><br>
+												<p><font size="2">TestModel(id=Column(name=Id, valor=2, default_value=null, columnExist=false, size=), name=Column(name=Name, valor=Modelo #1, default_value='Daniel', columnExist=false, size=200), apellido=Column(name=Apellido, valor=Apellido #1, default_value=null, columnExist=false, size=200), isMayor=Column(name=IsMayor, valor=true, default_value=true, columnExist=false, size=))</font></p><br>
+								</td>
+	</div>
+</tr>
+						<tr>
+			<td class="time">1691678930253</td>
+			<td class="header passed" colspan="4" onClick="toggleElement('db6c28a6-b4bc-4889-b1c5-6260f33e7af8','block');changeSingleIcon('span-db6c28a6-b4bc-4889-b1c5-6260f33e7af8');" title="Click to expand/collapse" style="cursor: pointer;">
+			<div style="float:left;"><i>Class&nbsp;:&nbsp;</i>io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite</div>
+			<div style="float:right;">@Test @ with DataProvider : [""] &nbsp;&nbsp;<span id='span-db6c28a6-b4bc-4889-b1c5-6260f33e7af8' class="glyphicon glyphicon-menu-down"></span></div>
+			</td>
+			</tr>
+			<tr>
+	<td class="time">1691678930253</td>
+	<td class="methodTest">
+		<span class="description"><b>Method: </b>dropTableIfExists</span><br>
+			<span class="description"><b>Description: </b></span><br>
+							<span class="duration"><b>Duration: </b>0.067s</span><br>
+	</td>
+	<td class="result">
+						<div class="stackTrace" id="db6c28a6-b4bc-4889-b1c5-6260f33e7af8" style="display: block;">
+												<p><font size="2">Se creara la tabla testModel en BD's</font></p><br>
+												<p><font size="2">La tabla a sido creada en BD's</font></p><br>
+												<p><font size="2">Se procedera a eliminar la tabla en BD's</font></p><br>
+												<p><font size="2">La tabla a sido eliminada en BD's</font></p><br>
 								</td>
 	</div>
 </tr>
