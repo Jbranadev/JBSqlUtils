@@ -17,12 +17,10 @@ package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 
 import com.josebran.LogsJB.LogsJB;
-import io.github.josecarlosbran.JBSqlUtils.Column;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.JBSqlUtils.Methods_Conexion;
-import io.github.josecarlosbran.JBSqlUtils.ResultAsync;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

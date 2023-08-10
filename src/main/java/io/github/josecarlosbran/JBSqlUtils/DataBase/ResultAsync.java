@@ -1,4 +1,4 @@
-package io.github.josecarlosbran.JBSqlUtils;
+package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 /***
  * @author Jose Bran

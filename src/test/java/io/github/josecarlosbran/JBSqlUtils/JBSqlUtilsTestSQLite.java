@@ -1,10 +1,12 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
 import UtilidadesTest.TestModel;
+import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -16,8 +18,8 @@ import java.util.List;
 import java.util.Objects;
 
 import static UtilidadesTest.Utilities.logParrafo;
-import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.dropTableIfExist;
-import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.select;
+import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.dropTableIfExist;
+import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.select;
 
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBSqlUtilsTestSQLite {
@@ -532,7 +534,7 @@ public class JBSqlUtilsTestSQLite {
             if(fila.getInt("Id")==5){
                 logParrafo("VIsualizamos la Fila a eliminar, cuyo Id es igual a 5: ");
                 logParrafo(fila.toString());
-                rowsDelete+=JBSqlUtils.delete("Proveedor").where("Id", Operator.IGUAL_QUE, fila.getInt("Id")).execute();
+                rowsDelete+= JBSqlUtils.delete("Proveedor").where("Id", Operator.IGUAL_QUE, fila.getInt("Id")).execute();
                 logParrafo("Filas eliminadas en BD's: "+rowsDelete);
             }
         }

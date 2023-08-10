@@ -13,7 +13,7 @@
  * Consulte la Licencia para conocer el idioma específico que rige los permisos y
  * limitaciones bajo la Licencia.
  */
-package io.github.josecarlosbran.JBSqlUtils;
+package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
@@ -22,10 +22,7 @@ import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
-import io.github.josecarlosbran.JBSqlUtils.Utilities.ColumnsSQL;
-import io.github.josecarlosbran.JBSqlUtils.Utilities.PrimaryKey;
-import io.github.josecarlosbran.JBSqlUtils.Utilities.TablesSQL;
-import io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 
