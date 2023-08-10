@@ -27,7 +27,7 @@ public class closeParentecis<T> extends Get {
     /**
      * Lista de los parametros a envíar
      */
-    protected List<Column> parametros = new ArrayList<>();
+    private List<Column> parametros = new ArrayList<>();
 
 
     /**

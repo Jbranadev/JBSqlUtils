@@ -23,7 +23,7 @@ public class Select extends Get {
     /**
      * Lista de los parametros a envíar
      */
-    protected List<Column> parametros = new ArrayList<>();
+    private List<Column> parametros = new ArrayList<>();
 
     /**
      * Constructor que recibe como parametro:
@@ -31,7 +31,7 @@ public class Select extends Get {
      * @param TableName El nombre de la tabla sobre la cual se desea realizar el Select.
      * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado está vacío o es NULL
      */
-    public Select(String TableName) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected Select(String TableName) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         String respuesta = "";
         if (stringIsNullOrEmpty(TableName)) {

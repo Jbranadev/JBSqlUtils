@@ -19,7 +19,7 @@ public class DropTableIfExist extends Methods_Conexion {
      * @param TableName El nombre de la tabla que se desea eliminar.
      * @throws ValorUndefined Lanza esta excepción si el parámetro proporcionado está vacío o es NULL
      */
-    public DropTableIfExist(String TableName) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected DropTableIfExist(String TableName) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(TableName)) {
             throw new ValorUndefined("El nombre de la Tabla proporcionado esta vacío o es NULL");

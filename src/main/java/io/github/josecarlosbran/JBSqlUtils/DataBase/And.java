@@ -45,7 +45,7 @@ public class And<T> extends Get {
     /**
      * Lista de los parámetros a envíar
      */
-    protected List<Column> parametros = new ArrayList<>();
+    private List<Column> parametros = new ArrayList<>();
 
     /**
      * Constructor que recibe como parametro:

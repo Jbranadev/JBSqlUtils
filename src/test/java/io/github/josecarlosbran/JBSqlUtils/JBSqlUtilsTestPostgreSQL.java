@@ -41,20 +41,11 @@ public class JBSqlUtilsTestPostgreSQL {
         this.testModel.setBD("JBSQLUTILS");
         this.testModel.setDataBaseType(DataBase.PostgreSQL);
         this.testModel.setPropertisURL("?autoReconnect=true&useSSL=false");
-        Assert.assertTrue("JBSQLUTILS".equalsIgnoreCase(this.testModel.getBD()),
-                "Propiedad Nombre BD's no ha sido seteada correctamente");
-        Assert.assertTrue("5075".equalsIgnoreCase(this.testModel.getPort()),
-                "Propiedad Puerto BD's no ha sido seteada correctamente");
-        Assert.assertTrue("localhost".equalsIgnoreCase(this.testModel.getHost()),
-                "Propiedad Host BD's no ha sido seteada correctamente");
-        Assert.assertTrue("postgres".equalsIgnoreCase(this.testModel.getUser()),
-                "Propiedad Usuario BD's no ha sido seteada correctamente");
-        Assert.assertTrue("Bran".equalsIgnoreCase(this.testModel.getPassword()),
-                "Propiedad Password BD's no ha sido seteada correctamente");
-        Assert.assertTrue(DataBase.PostgreSQL.name().equalsIgnoreCase(this.testModel.getDataBaseType().name()),
-                "Propiedad Tipo de BD's no ha sido seteada correctamente");
-        Assert.assertTrue("?autoReconnect=true&useSSL=false".equalsIgnoreCase(this.testModel.getPropertisURL()),
-                "Propiedad Propiedades de conexión no ha sido seteada correctamente");
+        logParrafo("Obtendra la conexión del modelo a BD's");
+        Assert.assertFalse(Objects.isNull(this.testModel.getConnection()),
+                "No se logro establecer la conexión del modelo a BD's, asegurese de haber configurado correctamente" +
+                        "las propiedades de conexión a su servidor de BD's en el metodo setPropertiesConexiontoModel()");
+        logParrafo("Obtuvo la conexión del modelo a BD's");
         logParrafo("Se setearon las propiedades de conexión del modelo para PostgreSQL");
     }
 

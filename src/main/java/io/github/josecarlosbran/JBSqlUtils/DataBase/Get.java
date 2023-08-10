@@ -39,7 +39,7 @@ import java.util.concurrent.*;
  * @author Jose Bran
  * Clase que proporciona los metodos que obtienen los registros de BD's
  */
-public class Get extends Methods_Conexion {
+class Get extends Methods_Conexion {
 
     /**
      * Constructor por default de la clase Get, que inicializa la clase

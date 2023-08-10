@@ -40,7 +40,7 @@ public class AndSet {
     /**
      * Lista de los parámetros a envíar
      */
-    protected List<Column> parametros = new ArrayList<>();
+    private List<Column> parametros = new ArrayList<>();
 
     /**
      * Constructor que recibe como parámetro:

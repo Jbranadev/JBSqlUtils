@@ -4,7 +4,7 @@ package io.github.josecarlosbran.JBSqlUtils.DataBase;
  * @author Jose Bran
  * @param <T> Define el tipo de resultado que se espera de la ejecución asincrona de una operación en BD's
  */
-public class ResultAsync<T> {
+class ResultAsync<T> {
     private T result = null;
 
     private Exception exception = null;
@@ -16,7 +16,7 @@ public class ResultAsync<T> {
      * @param result    Resultado esperado de la operación
      * @param exception Exception de la operación en caso sucediera, de lo contrario NULL
      */
-    public ResultAsync(T result, Exception exception) {
+    protected ResultAsync(T result, Exception exception) {
         this.result = result;
         this.exception = exception;
     }

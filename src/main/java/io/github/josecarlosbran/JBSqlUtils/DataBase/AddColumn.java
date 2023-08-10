@@ -30,7 +30,7 @@ public class AddColumn extends Methods_Conexion {
      * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
      * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
      */
-    public AddColumn(String TableName, Column columna) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected AddColumn(String TableName, Column columna) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(TableName)) {
             throw new ValorUndefined("El nombre de la Tabla proporcionado esta vacío o es NULL");
@@ -53,7 +53,7 @@ public class AddColumn extends Methods_Conexion {
      * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
      * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
      */
-    public AddColumn(String TableName, Column columna, List<Column> columnas) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected AddColumn(String TableName, Column columna, List<Column> columnas) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(TableName)) {
             throw new ValorUndefined("El nombre de la Tabla proporcionado esta vacío o es NULL");

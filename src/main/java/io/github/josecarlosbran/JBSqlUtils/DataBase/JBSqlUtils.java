@@ -73,7 +73,6 @@ public class JBSqlUtils extends Methods {
     public static void setDataBaseGlobal(String BD) {
         try {
             System.setProperty(ConeccionProperties.DBNAME.getPropiertie(), BD);
-            //System.out.println("SystemProperty Seteada: "+System.getProperty("DataBaseBD"));
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el nombre de la Base de Datos global: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -91,7 +90,6 @@ public class JBSqlUtils extends Methods {
     public static void setPasswordGlobal(String password) {
         try {
             System.setProperty(ConeccionProperties.DBPASSWORD.getPropiertie(), password);
-            //System.out.println("SystemProperty Seteada: "+System.getProperty("DataBasePassword"));
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea la contraseña del usuario de BD's global: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -109,8 +107,6 @@ public class JBSqlUtils extends Methods {
     public static void setUserGlobal(String user) {
         try {
             System.setProperty(ConeccionProperties.DBUSER.getPropiertie(), user);
-            //System.out.println("SystemProperty Seteada: "+System.getProperty("DataBaseUser"));
-
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el usuario de BD's global: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -128,8 +124,6 @@ public class JBSqlUtils extends Methods {
     public static void setPortGlobal(String port) {
         try {
             System.setProperty(ConeccionProperties.DBPORT.getPropiertie(), port);
-            //System.out.println("SystemProperty Seteada: "+System.getProperty("DataBasePort"));
-
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el Puerto de BD's global: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -147,7 +141,6 @@ public class JBSqlUtils extends Methods {
     public static void setHostGlobal(String host) {
         try {
             System.setProperty(ConeccionProperties.DBHOST.getPropiertie(), host);
-            //System.out.println("SystemProperty Seteada: "+System.getProperty("DataBaseHost"));
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el Host de la BD's global: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -170,7 +163,6 @@ public class JBSqlUtils extends Methods {
     public static void setDataBaseTypeGlobal(DataBase dataBase) {
         try {
             System.setProperty(ConeccionProperties.DBTYPE.getPropiertie(), dataBase.name());
-            //System.out.println("SystemProperty Seteada: "+System.getProperty("DataBase"));
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el Tipo de BD's global: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());

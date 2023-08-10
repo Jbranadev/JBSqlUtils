@@ -48,11 +48,11 @@ public class JBSqlUtilsTestSQLite {
         this.testModel.setGetPropertySystem(false);
         this.testModel.setBD(BDSqlite);
         this.testModel.setDataBaseType(DataBase.SQLite);
-
-        Assert.assertTrue(BDSqlite.equalsIgnoreCase(this.testModel.getBD()),
-                "Propiedad Nombre BD's no ha sido seteada correctamente");
-        Assert.assertTrue(DataBase.SQLite.name().equalsIgnoreCase(this.testModel.getDataBaseType().name()),
-                "Propiedad Tipo de BD's no ha sido seteada correctamente");
+        logParrafo("Obtendra la conexión del modelo a BD's");
+        Assert.assertFalse(Objects.isNull(this.testModel.getConnection()),
+                "No se logro establecer la conexión del modelo a BD's, asegurese de haber configurado correctamente" +
+                        "las propiedades de conexión a su servidor de BD's en el metodo setPropertiesConexiontoModel()");
+        logParrafo("Obtuvo la conexión del modelo a BD's");
         logParrafo("Se setearon las propiedades de conexión del modelo para SQLite");
     }
 

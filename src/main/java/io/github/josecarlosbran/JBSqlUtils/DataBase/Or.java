@@ -44,7 +44,7 @@ public class Or<T> extends Get {
     /**
      * Lista de los parámetros a envíar
      */
-    protected List<Column> parametros = new ArrayList<>();
+    private List<Column> parametros = new ArrayList<>();
 
     /**
      * Constructor que recibe como parámetro:
@@ -54,7 +54,7 @@ public class Or<T> extends Get {
      * @param operador   Operador con el cual se evaluara la columna
      * @param valor      Valor contra el que se evaluara la columna
      * @param modelo     Modelo que invocara los métodos de esta clase
-     * @param parámetros Lista de parámetros a ser agregados a la sentencia SQL
+     * @param parametros Lista de parámetros a ser agregados a la sentencia SQL
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
      *                               BD's a la cual se conectara el modelo.
@@ -89,7 +89,7 @@ public class Or<T> extends Get {
      * @param operador   Operador con el cual se evaluara la columna
      * @param valor      Valor contra el que se evaluara la columna
      * @param modelo     Modelo que invocara los métodos de esta clase
-     * @param parámetros Lista de parametros a ser agregados a la sentencia SQL
+     * @param parametros Lista de parametros a ser agregados a la sentencia SQL
      * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
