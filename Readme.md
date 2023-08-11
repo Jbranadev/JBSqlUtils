@@ -107,14 +107,14 @@ Maven
 <dependency>
   <groupId>io.github.josecarlosbran</groupId>
   <artifactId>JBSqlUtils</artifactId>
-  <version>1.1.5.5</version>
+  <version>1.1.5.6</version>
 </dependency>
 ~~~
 
 Gradle
 
 ~~~
-implementation 'io.github.josecarlosbran:JBSqlUtils:1.1.5.5'
+implementation 'io.github.josecarlosbran:JBSqlUtils:1.1.5.6'
 ~~~
 
 Para mayor información sobre cómo descargar JBSqlUtils desde otros
