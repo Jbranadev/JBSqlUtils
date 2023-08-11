@@ -16,14 +16,13 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 
-import io.github.josecarlosbran.JBSqlUtils.Column;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.OrderType;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -44,7 +43,7 @@ public class Where<T> extends Get {
     /**
      * Lista de los parámetros a envíar
      */
-    protected List<Column> parametros = new ArrayList<>();
+    private List<Column> parametros = new ArrayList<>();
 
     /**
      * Constructor que recibe como parámetro:
@@ -59,7 +58,7 @@ public class Where<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public Where(String columna, Operator operador, Object valor, T modelo) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected Where(String columna, Operator operador, Object valor, T modelo) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
@@ -92,7 +91,7 @@ public class Where<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public Where(String columna, Operator operador, Object valor, T modelo, Boolean getPropertySystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected Where(String columna, Operator operador, Object valor, T modelo, Boolean getPropertySystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super(getPropertySystem);
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
@@ -125,7 +124,7 @@ public class Where<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public Where(String columna, Operator operador, Object valor, String sql, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected Where(String columna, Operator operador, Object valor, String sql, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
@@ -154,7 +153,7 @@ public class Where<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public Where(String columna, Operator operador, Object valor, String sql) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected Where(String columna, Operator operador, Object valor, String sql) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");

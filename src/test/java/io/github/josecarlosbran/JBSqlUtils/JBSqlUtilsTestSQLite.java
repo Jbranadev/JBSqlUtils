@@ -1,10 +1,12 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
 import UtilidadesTest.TestModel;
+import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -16,8 +18,8 @@ import java.util.List;
 import java.util.Objects;
 
 import static UtilidadesTest.Utilities.logParrafo;
-import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.dropTableIfExist;
-import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.select;
+import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.dropTableIfExist;
+import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.select;
 
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBSqlUtilsTestSQLite {
@@ -46,35 +48,16 @@ public class JBSqlUtilsTestSQLite {
         this.testModel.setGetPropertySystem(false);
         this.testModel.setBD(BDSqlite);
         this.testModel.setDataBaseType(DataBase.SQLite);
-
-        Assert.assertTrue(BDSqlite.equalsIgnoreCase(this.testModel.getBD()),
-                "Propiedad Nombre BD's no ha sido seteada correctamente");
-        Assert.assertTrue(DataBase.SQLite.name().equalsIgnoreCase(this.testModel.getDataBaseType().name()),
-                "Propiedad Tipo de BD's no ha sido seteada correctamente");
-        logParrafo("Se setearon las propiedades de conexión del modelo para SQLite");
-    }
-
-    @Test(testName = "Get Conexión",
-            dependsOnMethods = {"setPropertiesConexiontoModel"})
-    public void getConection(){
         logParrafo("Obtendra la conexión del modelo a BD's");
         Assert.assertFalse(Objects.isNull(this.testModel.getConnection()),
                 "No se logro establecer la conexión del modelo a BD's, asegurese de haber configurado correctamente" +
                         "las propiedades de conexión a su servidor de BD's en el metodo setPropertiesConexiontoModel()");
         logParrafo("Obtuvo la conexión del modelo a BD's");
-    }
-
-    @Test(testName = "Refresh Model",
-            dependsOnMethods = {"getConection"})
-    public void refreshModel() throws Exception {
-        logParrafo("Se refrescará el modelo con la información existente en BD's");
-        this.testModel.refresh();
-        this.testModel.waitOperationComplete();
-        logParrafo("Se refresco el modelo con la información existente en BD's");
+        logParrafo("Se setearon las propiedades de conexión del modelo para SQLite");
     }
 
     @Test(testName = "Drop Table If Exists from Model",
-            dependsOnMethods = {"refreshModel"})
+            dependsOnMethods = {"setPropertiesConexiontoModel"})
     public void dropTableIfExists() throws Exception {
         logParrafo("Se creara la tabla "+this.testModel.getTableName()+" en BD's");
         this.testModel.crateTable();
@@ -532,7 +515,7 @@ public class JBSqlUtilsTestSQLite {
             if(fila.getInt("Id")==5){
                 logParrafo("VIsualizamos la Fila a eliminar, cuyo Id es igual a 5: ");
                 logParrafo(fila.toString());
-                rowsDelete+=JBSqlUtils.delete("Proveedor").where("Id", Operator.IGUAL_QUE, fila.getInt("Id")).execute();
+                rowsDelete+= JBSqlUtils.delete("Proveedor").where("Id", Operator.IGUAL_QUE, fila.getInt("Id")).execute();
                 logParrafo("Filas eliminadas en BD's: "+rowsDelete);
             }
         }

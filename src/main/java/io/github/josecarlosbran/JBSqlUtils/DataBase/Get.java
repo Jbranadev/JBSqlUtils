@@ -17,14 +17,11 @@ package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 
 import com.josebran.LogsJB.LogsJB;
-import io.github.josecarlosbran.JBSqlUtils.Column;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
-import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
-import io.github.josecarlosbran.JBSqlUtils.Methods_Conexion;
-import io.github.josecarlosbran.JBSqlUtils.ResultAsync;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 
@@ -42,7 +39,7 @@ import java.util.concurrent.*;
  * @author Jose Bran
  * Clase que proporciona los metodos que obtienen los registros de BD's
  */
-public class Get extends Methods_Conexion {
+class Get extends Methods_Conexion {
 
     /**
      * Constructor por default de la clase Get, que inicializa la clase

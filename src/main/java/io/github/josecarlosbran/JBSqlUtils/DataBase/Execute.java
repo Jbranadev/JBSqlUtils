@@ -17,12 +17,10 @@ package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 
 import com.josebran.LogsJB.LogsJB;
-import io.github.josecarlosbran.JBSqlUtils.Column;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.JBSqlUtils.Methods_Conexion;
-import io.github.josecarlosbran.JBSqlUtils.ResultAsync;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -44,7 +42,7 @@ class Execute extends Methods_Conexion {
     /**
      * Lista de los parametros a envíar
      */
-    protected List<Column> parametros = new ArrayList<>();
+    private List<Column> parametros = new ArrayList<>();
 
     /**
      * Constructor que recibe como parametro:
@@ -56,7 +54,7 @@ class Execute extends Methods_Conexion {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public Execute(String sql, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected Execute(String sql, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(sql)) {
             throw new ValorUndefined("La cadena que contiene la sentencia SQL esta vacío o es NULL");
@@ -71,7 +69,7 @@ class Execute extends Methods_Conexion {
      * @return Retorna la cantidad de filas que se han visto afectadas al ejecutar la sentencia SQL.
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
-    public int execute() throws Exception {
+    protected int execute() throws Exception {
         int result = 0;
         try {
             Callable<ResultAsync<Integer>> Ejecutar_Sentencia = () -> {

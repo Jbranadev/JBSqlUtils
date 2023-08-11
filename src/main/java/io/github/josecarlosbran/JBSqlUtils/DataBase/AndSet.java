@@ -17,7 +17,7 @@ package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 
 import com.josebran.LogsJB.LogsJB;
-import io.github.josecarlosbran.JBSqlUtils.Column;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
@@ -40,7 +40,7 @@ public class AndSet {
     /**
      * Lista de los parámetros a envíar
      */
-    protected List<Column> parametros = new ArrayList<>();
+    private List<Column> parametros = new ArrayList<>();
 
     /**
      * Constructor que recibe como parámetro:

@@ -13,7 +13,7 @@
  * Consulte la Licencia para conocer el idioma específico que rige los permisos y
  * limitaciones bajo la Licencia.
  */
-package io.github.josecarlosbran.JBSqlUtils;
+package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
@@ -22,10 +22,7 @@ import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
-import io.github.josecarlosbran.JBSqlUtils.Utilities.ColumnsSQL;
-import io.github.josecarlosbran.JBSqlUtils.Utilities.PrimaryKey;
-import io.github.josecarlosbran.JBSqlUtils.Utilities.TablesSQL;
-import io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 
@@ -50,7 +47,7 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * la conversion de datos entre java y sql, así mismo proporciona métodos de logica del manejor del resultado
  * como de envíar valores a BD's
  */
-public class Methods_Conexion extends Conexion {
+class Methods_Conexion extends Conexion {
 
 
     /**
@@ -62,7 +59,7 @@ public class Methods_Conexion extends Conexion {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public Methods_Conexion() throws DataBaseUndefind, PropertiesDBUndefined {
+    protected Methods_Conexion() throws DataBaseUndefind, PropertiesDBUndefined {
         super();
         this.getMethodsModel();
     }
@@ -78,7 +75,7 @@ public class Methods_Conexion extends Conexion {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public Methods_Conexion(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
+    protected Methods_Conexion(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
         super(getPropertySystem);
         this.getMethodsModel();
     }
@@ -90,11 +87,10 @@ public class Methods_Conexion extends Conexion {
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
      * @return Retorna una lista de los métodos pertenecientes al modelo.
      */
-    public synchronized <T> void getMethodsModel() {
+    protected synchronized <T> void getMethodsModel() {
         Method[] metodos = this.getClass().getMethods();
         List<Method> result = new ArrayList<>();
         String classColumn=Column.class.getSimpleName();
-        // Los muestro en consola
         for (Method metodo : metodos) {
             String returntype = metodo.getReturnType().getSimpleName();
             Parameter[] parametros = metodo.getParameters();
@@ -103,7 +99,6 @@ public class Methods_Conexion extends Conexion {
             if (parametros.length == 1) {
                 ParametroType = parametros[0].getType().getSimpleName();
             }
-            //System.out.println(metodo.getName() + "   " + metodo.getDeclaringClass() + "  " + returntype+"  " + ParametroType);
             if(returntype.equalsIgnoreCase(classColumn) && (StringUtils.startsWithIgnoreCase(nameMetodo, "get"))){
                 this.getMethodsGetOfModel().add(metodo);
             }else if(ParametroType.equalsIgnoreCase(classColumn) && (StringUtils.startsWithIgnoreCase(nameMetodo, "set"))) {
@@ -189,7 +184,6 @@ public class Methods_Conexion extends Conexion {
                             }
                         }
                     }
-
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada al intentar crear el directorio donde estará la BD's SQLite: " + e.toString());
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -203,8 +197,6 @@ public class Methods_Conexion extends Conexion {
             }
             if (!Objects.isNull(connect)) {
                 LogsJB.info("Conexión a BD's " + this.getBD() + " Realizada exitosamente " + this.getClass().getSimpleName());
-                //this.setConnect(connect);
-                //tableExist(connect);
             }
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: " + e.toString());
@@ -249,7 +241,7 @@ public class Methods_Conexion extends Conexion {
     /**
      * Cierra la conexión a BD's del modelo.
      */
-    public synchronized void closeConnection() {
+    protected synchronized void closeConnection() {
         try {
             if (!this.getConnect().isClosed()) {
                 this.getConnect().close();
@@ -512,7 +504,7 @@ public class Methods_Conexion extends Conexion {
      * Metodo que actualiza la información que el modelo tiene sobre lo que existe en BD's'
      */
     public void refresh() throws Exception {
-            this.setTableExist(this.tableExist());
+        this.setTableExist(this.tableExist());
     }
 
 
@@ -706,10 +698,7 @@ public class Methods_Conexion extends Conexion {
                                 continue;
                             }
 
-                            //Si la columna no tiene seteado que existe en BD's no la va a envíar
-                            /*if(!columnsSQL.getColumnExist()){
-                                continue;
-                            }*/
+                            //Si la columna existe entre la metadata de la BD's
                             if (!this.getTabla().getColumnsExist().contains(columnName.toUpperCase())) {
                                 continue;
                             }
@@ -771,7 +760,6 @@ public class Methods_Conexion extends Conexion {
                                 continue;
                             }
 
-
                             convertJavaToSQL(columnsSQL, ejecutor, auxiliar);
                             auxiliar++;
                         }
@@ -829,10 +817,8 @@ public class Methods_Conexion extends Conexion {
                                 continue;
                             }
 
-                            //Si la columna no tiene seteado que existe en BD's no la va a envíar
-                            /*if(!columnsSQL.getColumnExist()){
-                                continue;
-                            }*/
+                            //Si la columna existe entre la metadata de la BD's
+
                             if (!this.getTabla().getColumnsExist().contains(columnName.toUpperCase())) {
                                 continue;
                             }
@@ -1429,9 +1415,7 @@ public class Methods_Conexion extends Conexion {
                             return 0;
                         });
 
-
                         LogsJB.debug("Termino de ordenar la lista");
-
 
                         int datos = 0;
                         for (int i = 0; i < metodos.size(); i++) {

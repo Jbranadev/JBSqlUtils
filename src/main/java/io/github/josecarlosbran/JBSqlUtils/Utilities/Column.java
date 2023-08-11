@@ -13,7 +13,7 @@
  * Consulte la Licencia para conocer el idioma específico que rige los permisos y
  * limitaciones bajo la Licencia.
  */
-package io.github.josecarlosbran.JBSqlUtils;
+package io.github.josecarlosbran.JBSqlUtils.Utilities;
 
 
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
@@ -301,7 +301,7 @@ public class Column<T> {
      *
      * @return True si la columna existe en la tabla correspondiente al modelo.
      */
-    protected Boolean getColumnExist() {
+    public Boolean getColumnExist() {
         return columnExist;
     }
 
@@ -310,7 +310,7 @@ public class Column<T> {
      *
      * @param columnExist True si la columna existe, False si la columna no existe
      */
-    protected void setColumnExist(Boolean columnExist) {
+    public void setColumnExist(Boolean columnExist) {
         this.columnExist = columnExist;
     }
 

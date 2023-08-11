@@ -2,7 +2,7 @@ package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 
 import com.josebran.LogsJB.LogsJB;
-import io.github.josecarlosbran.JBSqlUtils.Column;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class AndValue {
     /**
      * Lista de los parametros a envíar
      */
-    protected List<Column> parametros = new ArrayList<>();
+    private List<Column> parametros = new ArrayList<>();
 
 
     /**

@@ -15,10 +15,8 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.Utilities;
 
-import io.github.josecarlosbran.JBSqlUtils.Column;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Date;
@@ -44,9 +42,7 @@ public class UtilitiesJB {
         valor = StringUtils.substringBefore(valor, ";");
         valor = StringUtils.substringBefore(valor, "--");
         valor = StringUtils.substringBefore(valor, "/*");
-
         valor = StringUtils.substringBefore(valor, Operator.OR.getOperador());
-
         return valor;
     }
 

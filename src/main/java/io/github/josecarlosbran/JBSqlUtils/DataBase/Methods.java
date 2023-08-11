@@ -13,14 +13,14 @@
  * Consulte la Licencia para conocer el idioma específico que rige los permisos y
  * limitaciones bajo la Licencia.
  */
-package io.github.josecarlosbran.JBSqlUtils;
+package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 import com.josebran.LogsJB.LogsJB;
-import io.github.josecarlosbran.JBSqlUtils.DataBase.Where;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Method;
@@ -45,7 +45,7 @@ class Methods extends Methods_Conexion {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public Methods() throws DataBaseUndefind, PropertiesDBUndefined {
+    protected Methods() throws DataBaseUndefind, PropertiesDBUndefined {
         super();
     }
 
@@ -58,7 +58,7 @@ class Methods extends Methods_Conexion {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public Methods(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
+    protected Methods(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
         super(getPropertySystem);
     }
 
@@ -189,10 +189,9 @@ class Methods extends Methods_Conexion {
     public Boolean saveBoolean() {
         Boolean result = false;
         try {
-            saveModel(this);
-            while (!this.getTaskIsReady()) {
-            }
-            result = this.getTaskIsReady();
+            Integer resultado=saveModel(this);
+            this.waitOperationComplete();
+            return resultado>=1;
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -222,7 +221,6 @@ class Methods extends Methods_Conexion {
     public Where where(String columna, Operator operador, Object valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         if(!this.getGetPropertySystem()){
             Where where = new Where(columna, operador, valor, this, false);
-            //where.llenarPropertiesFromModel(this);
             return where;
         }
         return new Where(columna, operador, valor, this);
@@ -249,7 +247,6 @@ class Methods extends Methods_Conexion {
             Callable<ResultAsync<List<T>>> get = () -> {
                 List<T> listatemp = new ArrayList<T>();
                 try{
-
                     if (this.getTableExist()) {
                         String sql = "SELECT * FROM " + this.getTableName();
                         sql = sql + ";";
@@ -315,10 +312,8 @@ class Methods extends Methods_Conexion {
             List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getMethods()));
             //Obtiene los metodos get del modelo
             List<Method> modelGetMethods = modelo.getMethodsGetOfModel();
-
             //Obtiene los metodos set del modelo
             List<Method> modelSetMethods = modelo.getMethodsSetOfModel();
-
             for (Method controladorMethod : controladorMethods) {
                 String controllerName = controladorMethod.getName();
                 String claseMethod = controladorMethod.getDeclaringClass().getSimpleName();
@@ -440,7 +435,6 @@ class Methods extends Methods_Conexion {
             List<Method> modelGetMethods = modelo.getMethodsGetOfModel();
             LogsJB.debug("Obtuvo los metodos Get del modelo: ");
             List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getMethods()));
-
             for (Method modelGetMethod : modelGetMethods) {
                 String modelGetName = modelGetMethod.getName();
                 LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);

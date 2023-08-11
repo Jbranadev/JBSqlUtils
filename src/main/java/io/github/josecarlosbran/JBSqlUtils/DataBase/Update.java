@@ -33,7 +33,7 @@ public class Update {
      * @param TableName El nombre de la tabla sobre la cual se desea realizar el Update.
      * @throws ValorUndefined Lanza esta excepción si el parámetro proporcionado está vacío o es NULL
      */
-    public Update(String TableName) throws ValorUndefined {
+    protected Update(String TableName) throws ValorUndefined {
         String respuesta = "";
         if (stringIsNullOrEmpty(TableName)) {
             throw new ValorUndefined("El nombre de la Tabla proporcionado esta vacío o es NULL");

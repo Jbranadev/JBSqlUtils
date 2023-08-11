@@ -13,7 +13,7 @@
  * Consulte la Licencia para conocer el idioma específico que rige los permisos y
  * limitaciones bajo la Licencia.
  */
-package io.github.josecarlosbran.JBSqlUtils;
+package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.ConeccionProperties;
@@ -169,10 +169,6 @@ class Conexion {
         try {
             if (!stringIsNullOrEmpty(propertisURL))
                 this.propertisURL = propertisURL;
-            /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(propertisURL)) {
-                System.setProperty("DBpropertisUrl", propertisURL);
-                //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseUser"));
-            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear las propiedades extra de conexión con la cual el modelo se conectara a la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -189,8 +185,28 @@ class Conexion {
      * @return Propiedades extra de la url de conexión a la BD's
      */
     public String getPropertisURL() {
+        //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
+        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+        String clase = null;
+        String clase2=Methods_Conexion.class.getName();
+        String clase3=Conexion.class.getName();
+        String clase4=Get.class.getName();
+        for(int i=3;i>=0; i--){
+            try{
+                clase = elements[i].getClassName();
+            }catch (Exception ex){
+                clase="Invalid";
+            }
+            if(clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)){
+                break;
+            }
+        }
+        if(!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)){
+            return null;
+        }
         return this.propertisURL;
     }
+
 
 
     /**
@@ -201,7 +217,7 @@ class Conexion {
      *                               las propiedades del sistema Java.
      * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión no han sido definidas.
      */
-    public Conexion() throws DataBaseUndefind, PropertiesDBUndefined {
+    protected Conexion() throws DataBaseUndefind, PropertiesDBUndefined {
         this.setTableName();
         this.getSystemProperties();
     }
@@ -217,7 +233,7 @@ class Conexion {
      *                               las propiedades del sistema Java.
      * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión no han sido definidas.
      */
-    public Conexion(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
+    protected Conexion(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
         this.setTableName();
         if (getPropertySystem) {
             this.getSystemProperties();
@@ -442,6 +458,25 @@ class Conexion {
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new DataBaseUndefind("No se a seteado la DataBase que índica a que BD's deseamos se pegue JBSqlUtils");
         }
+        //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
+        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+        String clase = null;
+        String clase2=Methods_Conexion.class.getName();
+        String clase3=Conexion.class.getName();
+        String clase4=Get.class.getName();
+        for(int i=3;i>=0; i--){
+            try{
+                clase = elements[i].getClassName();
+            }catch (Exception ex){
+                clase="Invalid";
+            }
+            if(clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)){
+                break;
+            }
+        }
+        if(!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)){
+            return null;
+        }
         return this.dataBaseType;
     }
 
@@ -458,10 +493,6 @@ class Conexion {
         try {
             if (!Objects.isNull(dataBase))
                 this.dataBaseType = dataBase;
-            /*if (this.getGetPropertySystem()) {
-                System.setProperty("DataBase", dataBase.name());
-                //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBase"));
-            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el tipo de BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -488,6 +519,25 @@ class Conexion {
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new PropertiesDBUndefined("No se a seteado el host en el que se encuentra la BD's a la cual deseamos se pegue JBSqlUtils");
         }
+        //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
+        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+        String clase = null;
+        String clase2=Methods_Conexion.class.getName();
+        String clase3=Conexion.class.getName();
+        String clase4=Get.class.getName();
+        for(int i=3;i>=0; i--){
+            try{
+                clase = elements[i].getClassName();
+            }catch (Exception ex){
+                clase="Invalid";
+            }
+            if(clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)){
+                break;
+            }
+        }
+        if(!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)){
+            return null;
+        }
         return this.host;
     }
 
@@ -500,10 +550,6 @@ class Conexion {
         try {
             if (!stringIsNullOrEmpty(host))
                 this.host = host;
-            /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(host)) {
-                System.setProperty("DataBaseHost", host);
-                //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseHost"));
-            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el host en el que se encuentra la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -530,6 +576,25 @@ class Conexion {
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new PropertiesDBUndefined("No se a seteado el puerto en el que se encuentra escuchando la BD's a la cual deseamos se pegue JBSqlUtils");
         }
+        //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
+        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+        String clase = null;
+        String clase2=Methods_Conexion.class.getName();
+        String clase3=Conexion.class.getName();
+        String clase4=Get.class.getName();
+        for(int i=3;i>=0; i--){
+            try{
+                clase = elements[i].getClassName();
+            }catch (Exception ex){
+                clase="Invalid";
+            }
+            if(clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)){
+                break;
+            }
+        }
+        if(!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)){
+            return null;
+        }
         return this.port;
     }
 
@@ -542,10 +607,6 @@ class Conexion {
         try {
             if (!stringIsNullOrEmpty(port))
                 this.port = port;
-            /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(port)) {
-                System.setProperty("DataBasePort", port);
-                //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBasePort"));
-            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el puerto en el cual se encuentra escuchando la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -571,6 +632,25 @@ class Conexion {
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new PropertiesDBUndefined("No se a seteado el usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
         }
+        //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
+        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+        String clase = null;
+        String clase2=Methods_Conexion.class.getName();
+        String clase3=Conexion.class.getName();
+        String clase4=Get.class.getName();
+        for(int i=3;i>=0; i--){
+            try{
+                clase = elements[i].getClassName();
+            }catch (Exception ex){
+                clase="Invalid";
+            }
+            if(clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)){
+                break;
+            }
+        }
+        if(!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)){
+            return null;
+        }
         return this.user;
     }
 
@@ -583,10 +663,6 @@ class Conexion {
         try {
             if (!stringIsNullOrEmpty(user))
                 this.user = user;
-            /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(user)) {
-                System.setProperty("DataBaseUser", user);
-                //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseUser"));
-            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el usuario con el cual el modelo se conectara a la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -611,6 +687,25 @@ class Conexion {
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new PropertiesDBUndefined("No se a seteado la contraseña del usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
         }
+        //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
+        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+        String clase = null;
+        String clase2=Methods_Conexion.class.getName();
+        String clase3=Conexion.class.getName();
+        String clase4=Get.class.getName();
+        for(int i=3;i>=0; i--){
+            try{
+                clase = elements[i].getClassName();
+            }catch (Exception ex){
+                clase="Invalid";
+            }
+            if(clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)){
+                break;
+            }
+        }
+        if(!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)){
+            return null;
+        }
         return this.password;
     }
 
@@ -623,10 +718,6 @@ class Conexion {
         try {
             if (!stringIsNullOrEmpty(password))
                 this.password = password;
-            /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(password)) {
-                System.setProperty("DataBasePassword", password);
-                //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBasePassword"));
-            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear la contraseña del usuario con el cual el modelo se conectara a la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -634,7 +725,6 @@ class Conexion {
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
-
     }
 
     /**
@@ -648,6 +738,25 @@ class Conexion {
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new PropertiesDBUndefined("No se a seteado la BD's a la cual deseamos se pegue JBSqlUtils");
         }
+        //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
+        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+        String clase = null;
+        String clase2=Methods_Conexion.class.getName();
+        String clase3=Conexion.class.getName();
+        String clase4=Get.class.getName();
+        for(int i=3;i>=0; i--){
+            try{
+                clase = elements[i].getClassName();
+            }catch (Exception ex){
+                clase="Invalid";
+            }
+            if(clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)){
+                break;
+            }
+        }
+        if(!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)){
+            return null;
+        }
         return this.BD;
     }
 
@@ -660,11 +769,6 @@ class Conexion {
         try {
             if (!stringIsNullOrEmpty(BD))
                 this.BD = BD;
-            /*if (this.getGetPropertySystem() && !stringIsNullOrEmpty(BD)) {
-                //System.out.println("Base de datos a setear: " + BD);
-                System.setProperty("DataBaseBD", BD);
-                //System.out.println("SystemProperty Seteada: " + System.getProperty("DataBaseBD"));
-            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el nombre de la Base de Datos a la que se conectara el modelo: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -710,7 +814,7 @@ class Conexion {
      *
      * @return Retorna la conexión del Modelo a la Base de Datos.
      */
-    public Connection getConnect() throws ConexionUndefind {
+    protected Connection getConnect() throws ConexionUndefind {
         if (Objects.isNull(this.connect)) {
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new ConexionUndefind("No se a conectado el modelo a la BD's");
@@ -722,7 +826,7 @@ class Conexion {
      * Setea la conexión del Modelo a la Base de Datos.
      * @param connect Conexión del Modelo a la Base de Datos.
      */
-    public void setConnect(Connection connect) {
+    protected void setConnect(Connection connect) {
         try {
             this.connect = connect;
         } catch (Exception e) {
@@ -824,7 +928,7 @@ class Conexion {
      * @param taskIsReady True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
      *                    actualmente.
      */
-    public synchronized void setTaskIsReady(Boolean taskIsReady) {
+    protected synchronized void setTaskIsReady(Boolean taskIsReady) {
         this.taskIsReady = taskIsReady;
     }
 
@@ -1003,7 +1107,7 @@ class Conexion {
      * Setea la cantidad de conexiones que a realizado el modelo
      * @param contadorConexiones Cantidad de conexiones que a realizado el modelo
      */
-    public synchronized void setContadorConexiones(Integer contadorConexiones) {
+    protected synchronized void setContadorConexiones(Integer contadorConexiones) {
         this.contadorConexiones = contadorConexiones;
     }
 }

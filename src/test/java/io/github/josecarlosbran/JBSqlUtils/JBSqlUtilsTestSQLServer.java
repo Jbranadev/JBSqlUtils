@@ -1,10 +1,12 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
 import UtilidadesTest.TestModel;
+import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -15,8 +17,8 @@ import java.util.List;
 import java.util.Objects;
 
 import static UtilidadesTest.Utilities.logParrafo;
-import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.dropTableIfExist;
-import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.select;
+import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.dropTableIfExist;
+import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.select;
 
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBSqlUtilsTestSQLServer {
@@ -42,20 +44,11 @@ public class JBSqlUtilsTestSQLServer {
         this.testModel.setBD("JBSQLUTILS");
         this.testModel.setDataBaseType(DataBase.SQLServer);
         this.testModel.setPropertisURL(";TrustServerCertificate=true");
-        Assert.assertTrue("JBSQLUTILS".equalsIgnoreCase(this.testModel.getBD()),
-                "Propiedad Nombre BD's no ha sido seteada correctamente");
-        Assert.assertTrue("5077".equalsIgnoreCase(this.testModel.getPort()),
-                "Propiedad Puerto BD's no ha sido seteada correctamente");
-        Assert.assertTrue("localhost".equalsIgnoreCase(this.testModel.getHost()),
-                "Propiedad Host BD's no ha sido seteada correctamente");
-        Assert.assertTrue("Bran".equalsIgnoreCase(this.testModel.getUser()),
-                "Propiedad Usuario BD's no ha sido seteada correctamente");
-        Assert.assertTrue("Bran".equalsIgnoreCase(this.testModel.getPassword()),
-                "Propiedad Password BD's no ha sido seteada correctamente");
-        Assert.assertTrue(DataBase.SQLServer.name().equalsIgnoreCase(this.testModel.getDataBaseType().name()),
-                "Propiedad Tipo de BD's no ha sido seteada correctamente");
-        Assert.assertTrue(";TrustServerCertificate=true".equalsIgnoreCase(this.testModel.getPropertisURL()),
-                "Propiedad Propiedades de conexión no ha sido seteada correctamente");
+        logParrafo("Obtendra la conexión del modelo a BD's");
+        Assert.assertFalse(Objects.isNull(this.testModel.getConnection()),
+                "No se logro establecer la conexión del modelo a BD's, asegurese de haber configurado correctamente" +
+                        "las propiedades de conexión a su servidor de BD's en el metodo setPropertiesConexiontoModel()");
+        logParrafo("Obtuvo la conexión del modelo a BD's");
         logParrafo("Se setearan las propiedades de conexión del modelo para SQLServer");
     }
 

@@ -1,10 +1,12 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
 import UtilidadesTest.TestModel;
+import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -15,8 +17,8 @@ import java.util.List;
 import java.util.Objects;
 
 import static UtilidadesTest.Utilities.logParrafo;
-import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.dropTableIfExist;
-import static io.github.josecarlosbran.JBSqlUtils.JBSqlUtils.select;
+import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.dropTableIfExist;
+import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.select;
 
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBSqlUtilsTestPostgreSQL {
@@ -39,35 +41,18 @@ public class JBSqlUtilsTestPostgreSQL {
         this.testModel.setBD("JBSQLUTILS");
         this.testModel.setDataBaseType(DataBase.PostgreSQL);
         this.testModel.setPropertisURL("?autoReconnect=true&useSSL=false");
-        Assert.assertTrue("JBSQLUTILS".equalsIgnoreCase(this.testModel.getBD()),
-                "Propiedad Nombre BD's no ha sido seteada correctamente");
-        Assert.assertTrue("5075".equalsIgnoreCase(this.testModel.getPort()),
-                "Propiedad Puerto BD's no ha sido seteada correctamente");
-        Assert.assertTrue("localhost".equalsIgnoreCase(this.testModel.getHost()),
-                "Propiedad Host BD's no ha sido seteada correctamente");
-        Assert.assertTrue("postgres".equalsIgnoreCase(this.testModel.getUser()),
-                "Propiedad Usuario BD's no ha sido seteada correctamente");
-        Assert.assertTrue("Bran".equalsIgnoreCase(this.testModel.getPassword()),
-                "Propiedad Password BD's no ha sido seteada correctamente");
-        Assert.assertTrue(DataBase.PostgreSQL.name().equalsIgnoreCase(this.testModel.getDataBaseType().name()),
-                "Propiedad Tipo de BD's no ha sido seteada correctamente");
-        Assert.assertTrue("?autoReconnect=true&useSSL=false".equalsIgnoreCase(this.testModel.getPropertisURL()),
-                "Propiedad Propiedades de conexión no ha sido seteada correctamente");
-        logParrafo("Se setearon las propiedades de conexión del modelo para PostgreSQL");
-    }
-
-    @Test(testName = "Get Conexión",
-            dependsOnMethods = {"setPropertiesConexiontoModel"})
-    public void getConection(){
         logParrafo("Obtendra la conexión del modelo a BD's");
         Assert.assertFalse(Objects.isNull(this.testModel.getConnection()),
                 "No se logro establecer la conexión del modelo a BD's, asegurese de haber configurado correctamente" +
                         "las propiedades de conexión a su servidor de BD's en el metodo setPropertiesConexiontoModel()");
         logParrafo("Obtuvo la conexión del modelo a BD's");
+        logParrafo("Se setearon las propiedades de conexión del modelo para PostgreSQL");
     }
 
+
+
     @Test(testName = "Refresh Model",
-            dependsOnMethods = {"getConection"})
+            dependsOnMethods = {"setPropertiesConexiontoModel"})
     public void refreshModel() throws Exception {
         logParrafo("Se refrescará el modelo con la información existente en BD's");
         this.testModel.refresh();

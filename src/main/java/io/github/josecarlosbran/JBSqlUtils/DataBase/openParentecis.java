@@ -1,6 +1,6 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
-import io.github.josecarlosbran.JBSqlUtils.Column;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
@@ -26,7 +26,7 @@ public class openParentecis<T> extends Get {
     /**
      * Lista de los parametros a envíar
      */
-    protected List<Column> parametros = new ArrayList<>();
+    private List<Column> parametros = new ArrayList<>();
 
 
     /**

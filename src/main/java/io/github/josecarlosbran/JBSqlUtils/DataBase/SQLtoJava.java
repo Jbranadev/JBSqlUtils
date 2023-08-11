@@ -13,7 +13,7 @@
  * Consulte la Licencia para conocer el idioma específico que rige los permisos y
  * limitaciones bajo la Licencia.
  */
-package io.github.josecarlosbran.JBSqlUtils.Enumerations;
+package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.List;
  * @author Jose Bran
  * Enumeración que permite realizar la converción de datos de SQL a Java
  */
-public enum SQLtoJava {
+enum SQLtoJava {
     /**
      * Cadena de caracteres de longitud fija
      */

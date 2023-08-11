@@ -16,13 +16,12 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 
-import io.github.josecarlosbran.JBSqlUtils.Column;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.OrderType;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -51,7 +50,7 @@ public class OrderBy<T> extends Get {
      * @param columna    Columna a evaluar dentro de la sentencia ORDER BY
      * @param orderType  Tipo de ordenamiento que se realizara
      * @param modelo     Modelo que invoca la ejecución de los metodos.
-     * @param parámetros Lista de parámetros a ser agregados a la sentencia SQL
+     * @param parametros Lista de parámetros a ser agregados a la sentencia SQL
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
      *                               BD's a la cual se conectara el modelo.
@@ -82,7 +81,7 @@ public class OrderBy<T> extends Get {
      * @param columna           Columna a evaluar dentro de la sentencia ORDER BY
      * @param orderType         Tipo de ordenamiento que se realizara
      * @param modelo            Modelo que invoca la ejecución de los metodos.
-     * @param parámetros        Lista de parametros a ser agregados a la sentencia SQL
+     * @param parametros        Lista de parametros a ser agregados a la sentencia SQL
      * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de

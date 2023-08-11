@@ -19,7 +19,7 @@ public class InsertInto {
      * @param TableName El nombre de la tabla sobre la cual se desea realizar el Insert.
      * @throws ValorUndefined Lanza esta excepción si el parámetro proporcionado está vacío o es NULL
      */
-    public InsertInto(String TableName) throws ValorUndefined {
+    protected InsertInto(String TableName) throws ValorUndefined {
         String respuesta = "";
         if (stringIsNullOrEmpty(TableName)) {
             throw new ValorUndefined("El nombre de la Tabla proporcionado esta vacío o es NULL");
