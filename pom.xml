@@ -87,7 +87,7 @@
         <dependency>
             <groupId>io.github.josecarlosbran</groupId>
             <artifactId>LogsJBSupport</artifactId>
-            <version>0.5.2</version>
+            <version>0.5.3</version>
             <scope>compile</scope>
         </dependency>
 
