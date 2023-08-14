@@ -58,7 +58,7 @@ Maven
     <dependency>
         <groupId>io.github.josecarlosbran</groupId>
         <artifactId>LogsJBSupport</artifactId>
-        <version>0.5.1</version>
+        <version>0.5.4</version>
         <scope>compile</scope>
     </dependency>
 ~~~
