@@ -1,13 +1,13 @@
 package UtilidadesTest;
 
 
-import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
+import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import lombok.Getter;
 import lombok.Setter;
 import org.testng.annotations.Ignore;

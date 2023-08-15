@@ -39,6 +39,19 @@ public enum DataType {
      */
     INT("", 1),
 
+
+    /**
+     * entero de 16 bits
+     */
+    SMALLINT("", 3),
+
+    /**
+     * entero de 16 bits
+     */
+    TINYINT("", 3),
+
+
+
     /**
      * Tipo de dato auto incrementable en SQL Server
      */
@@ -48,18 +61,33 @@ public enum DataType {
      * Tipo de dato auto incrementable en PostgreSQL
      */
     SERIAL("SERIAL", 1),
-    //java.lang.Integer
 
+    /**
+     * Tipo de dato tipo TEXT
+     */
+    TEXT("", 2),
 
     /**
      * Cadena de caracteres de longitud fija
      */
     CHAR("1", 2),
 
+
     /**
      * Cadena de caracteres de longitud variable
      */
     VARCHAR("21844", 2),
+
+    /**
+     * Cadena de caracteres de longitud fija
+     */
+    NCHAR("1", 2),
+
+
+    /**
+     * Cadena de caracteres de longitud variable
+     */
+    NVARCHAR("4000", 2),
 
     /**
      * Cadenas de cualquier longitud (varios megabytes), debe definir el tamaño que desea tenga la columna
@@ -72,17 +100,6 @@ public enum DataType {
      * para esta numeración, las opciones que deseamos tenga disponible
      */
     ENUM("", 2),
-
-
-    /**
-     * entero de 16 bits
-     */
-    SMALLINT("", 3),
-
-    /**
-     * entero de 16 bits
-     */
-    TINYINT("", 3),
 
 
     /**
@@ -208,7 +225,9 @@ public enum DataType {
     /**
      * Valor de tiempo con campo adicional de nanosegundos
      */
-    DATETIME2("", 10);
+    DATETIME2("", 10),
+
+    ;
 
 
     private String size="";
