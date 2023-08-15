@@ -310,10 +310,6 @@ class Methods extends Methods_Conexion {
     public <T, G extends JBSqlUtils> void llenarModelo(T controlador, G modelo) {
         try {
             List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getMethods()));
-            //Obtiene los metodos get del modelo
-            List<Method> modelGetMethods = modelo.getMethodsGetOfModel();
-            //Obtiene los metodos set del modelo
-            List<Method> modelSetMethods = modelo.getMethodsSetOfModel();
             for (Method controladorMethod : controladorMethods) {
                 String controllerName = controladorMethod.getName();
                 String claseMethod = controladorMethod.getDeclaringClass().getSimpleName();
@@ -345,6 +341,8 @@ class Methods extends Methods_Conexion {
                 LogsJB.trace("Validara si el contenido es Null: " + controllerName);
                 Object contenido = (Object) controladorMethod.invoke(controlador, null);
                 LogsJB.debug("Dato que se ingresara al modelo: " + contenido);
+                //Obtiene los metodos get del modelo
+                List<Method> modelGetMethods = new ArrayList<>(modelo.getMethodsGetOfModel());
                 Iterator<Method> iteradorModelGetMethods=modelGetMethods.iterator();
                 while (iteradorModelGetMethods.hasNext()) {
                     try{
@@ -368,6 +366,8 @@ class Methods extends Methods_Conexion {
                         columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
                         LogsJB.debug("Nombre de la columna a validar: " + columnName);
                         Boolean isready = false;
+                        //Obtiene los metodos set del modelo
+                        List<Method> modelSetMethods = new ArrayList<>(modelo.getMethodsSetOfModel());
                         Iterator<Method> iteradorModelSetMethods=modelSetMethods.iterator();
                         while (iteradorModelSetMethods.hasNext()) {
                             try{
