@@ -10,15 +10,6 @@ que corresponden a cada una de las columnas de la tabla con las que queremos pod
 acá vemos un ejemplo:
 
 ~~~
-package io.github.josecarlosbran.JBSqlUtils.Pruebas;
-
-import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
-import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
-import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 
 /**
  * @author Jose Bran

@@ -6,7 +6,7 @@
 
     <groupId>io.github.josecarlosbran</groupId>
     <artifactId>JBSqlUtils</artifactId>
-    <version>1.1.5.6</version>
+    <version>1.1.5.7</version>
 
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -26,7 +26,7 @@
         la necesidad de poder conectarse a alguna de estas 4 tipos de BD's, cabe mencionar que para ello utiliza
         el SQLite JDBC de org.xerial, org.postgresql, mysql y com.microsoft.sqlserver.
 
-        Para mayor información, consultar el siguiente enlace https://github.com/JoseCarlosBran/JBSqlUtils/blob/master/Readme.md
+        Para mayor información, consultar el enlace del proyecto
     </description>
     <!-- FIXME change it to the project's website -->
     <url>https://github.com/JoseCarlosBran/JBSqlUtils/blob/master/Readme.md</url>
@@ -42,7 +42,7 @@
     <developers>
         <developer>
             <name>Jose Carlos Bran</name>
-            <email>josecarlosbran16@gmail.com</email>
+            <email>jbranadev@gmail.com</email>
             <organization>JoseBran</organization>
         </developer>
     </developers>
@@ -53,12 +53,8 @@
         <url>https://github.com/JoseCarlosBran/JBSqlUtils/tree/master</url>
     </scm>
 
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!--<maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-         <gpg.skip>true</gpg.skip> -->
     </properties>
 
     <dependencies>
@@ -87,7 +83,7 @@
         <dependency>
             <groupId>io.github.josecarlosbran</groupId>
             <artifactId>LogsJBSupport</artifactId>
-            <version>0.5.4</version>
+            <version>0.5.5</version>
             <scope>compile</scope>
         </dependency>
 

@@ -10,6 +10,11 @@ JBSqlUtils también proporciona un potente generador de instrucciones SQL que le
 o eliminar una tabla, insertar, seleccionar, actualizar o eliminar registros de una tabla 
 en su BD's sin necesidad de instanciar un modelo cómo tal, únicamente tendrá que configurar previamente
 la conexión a su BD's.
+
+
+![Maven Central](https://img.shields.io/maven-central/v/io.github.josecarlosbran/JBSqlUtils?logo=apachemaven&logoColor=%23C71A36&color=blue&link=https%3A%2F%2Fcentral.sonatype.com%2Fsearch%3Fq%3D%26namespace%3Dio.github.josecarlosbran%26name%JBSqlUtils)
+[![License](https://img.shields.io/badge/Licence-Apache%202.0-blue.svg)](https://github.com/Jbranadev/JBSqlUtils/tree/master/LICENSE.txt)
+
 * * *
 
 ## Estado del Proyecto :atom:
