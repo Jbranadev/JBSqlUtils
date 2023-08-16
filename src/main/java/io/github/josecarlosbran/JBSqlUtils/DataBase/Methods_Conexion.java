@@ -125,8 +125,8 @@ class Methods_Conexion extends Conexion {
                 //Carga el controlador de PostgreSQL
                 url = null;
                 connect = null;
-                Class.forName("org.postgresql.Driver");
-                DriverManager.registerDriver(new org.postgresql.Driver());
+                //Class.forName("org.postgresql.Driver");
+                //DriverManager.registerDriver(new org.postgresql.Driver());
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
                         this.getHost() + ":" + this.getPort() + "/" + this.getBD();
                 String usuario = this.getUser();
@@ -140,8 +140,23 @@ class Methods_Conexion extends Conexion {
                 url = null;
                 connect = null;
                 //Carga el controlador de MySQL
-                Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+                //Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+                //DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+                url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
+                        this.getHost() + ":" + this.getPort() + "/" + this.getBD();
+                String usuario = this.getUser();
+                String password = this.getPassword();
+                if (!stringIsNullOrEmpty(this.getPropertisURL())) {
+                    url = url + this.getPropertisURL();
+                }
+                LogsJB.debug("Url de conexion a DB: " + url);
+                connect = DriverManager.getConnection(url, usuario, password);
+            } else if (this.getDataBaseType() == DataBase.MariaDB) {
+                url = null;
+                connect = null;
+                //Carga el controlador de MariaDB
+                //Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+                //DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
                         this.getHost() + ":" + this.getPort() + "/" + this.getBD();
                 String usuario = this.getUser();
@@ -155,8 +170,8 @@ class Methods_Conexion extends Conexion {
                 url = null;
                 connect = null;
                 //Carga el controlador de SQLServer
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+                //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                //DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
                         this.getHost() + ":" + this.getPort() + ";databaseName=" + this.getBD() ;
                 String usuario = this.getUser();
@@ -167,8 +182,8 @@ class Methods_Conexion extends Conexion {
                 LogsJB.debug("Url de conexion a DB: " + url);
                 connect = DriverManager.getConnection(url, usuario, password);
             } else if (this.getDataBaseType() == DataBase.SQLite) {
-                Class.forName("org.sqlite.JDBC").newInstance();
-                DriverManager.registerDriver(new org.sqlite.JDBC());
+                //Class.forName("org.sqlite.JDBC").newInstance();
+                //DriverManager.registerDriver(new org.sqlite.JDBC());
                 url = null;
                 connect = null;
                 try {
@@ -300,7 +315,7 @@ class Methods_Conexion extends Conexion {
                         Boolean tablaisofDB = true;
                         if (NameModel.equalsIgnoreCase(NameTable) ){
                             LogsJB.debug("Base de datos del modelo: " + DatabaseName
-                                    + " Base de datos del servidor3: " + DatabaseTemp);
+                                    + " Base de datos del servidor: " + DatabaseTemp);
                         }
                         if (!stringIsNullOrEmpty(DatabaseTemp)) {
                             if (!DatabaseName.equalsIgnoreCase(DatabaseTemp)) {
@@ -1457,8 +1472,12 @@ class Methods_Conexion extends Conexion {
                             Constraint[] columnRestriccion = columnsSQL.getRestriccion();
                             String restricciones = "";
                             //Se adecuo el obtener el tipo de columna, para que obtenga el tipo de dato con la información correcta
-                            if ((((this.getDataBaseType() == DataBase.PostgreSQL)) || ((this.getDataBaseType() == DataBase.MySQL))
-                                    || ((this.getDataBaseType() == DataBase.SQLite))) &&
+                            if ((
+                                    ((this.getDataBaseType() == DataBase.PostgreSQL))
+                                    || ((this.getDataBaseType() == DataBase.MySQL))
+                                    || ((this.getDataBaseType() == DataBase.SQLite))
+                                            || ((this.getDataBaseType() == DataBase.MariaDB))
+                            ) &&
                                     (columnType == DataType.BIT)) {
                                 columnsSQL.setDataTypeSQL(DataType.BOOLEAN);
                             }
@@ -1484,7 +1503,6 @@ class Methods_Conexion extends Conexion {
                                     } else {
                                         restricciones = restricciones + restriccion.getRestriccion() + " ";
                                     }
-
 
                                 }
                             }
@@ -1574,16 +1592,14 @@ class Methods_Conexion extends Conexion {
                 try {
                     if (this.tableExist()) {
                         String sql = "";
-                        if (this.getDataBaseType() == DataBase.MySQL || this.getDataBaseType() == DataBase.PostgreSQL || this.getDataBaseType() == DataBase.SQLite) {
-                            sql = "DROP TABLE IF EXISTS " + this.getTableName();
-                            //+ " RESTRICT";
-                        } else if (this.getDataBaseType() == DataBase.SQLServer) {
+                        if (this.getDataBaseType() == DataBase.SQLServer) {
                             sql = "if exists (select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = '" +
                                     this.getTableName() +
                                     "' AND TABLE_SCHEMA = 'dbo')\n" +
                                     "    drop table dbo." +
                                     this.getTableName();
-                            //+" RESTRICT;";
+                        }else{
+                            sql = "DROP TABLE IF EXISTS " + this.getTableName();
                         }
                         LogsJB.info(sql);
                         Connection connect = this.getConnection();
@@ -1694,8 +1710,12 @@ class Methods_Conexion extends Conexion {
                             Constraint[] columnRestriccion = columnsSQL.getRestriccion();
                             String restricciones = "";
                             //Se adecuo el obtener el tipo de columna, para que obtenga el tipo de dato con la información correcta
-                            if ((((this.getDataBaseType() == DataBase.PostgreSQL)) || ((this.getDataBaseType() == DataBase.MySQL))
-                                    || ((this.getDataBaseType() == DataBase.SQLite))) &&
+                            if ((
+                                    ((this.getDataBaseType() == DataBase.PostgreSQL))
+                                            || ((this.getDataBaseType() == DataBase.MySQL))
+                                            || ((this.getDataBaseType() == DataBase.SQLite))
+                                            || ((this.getDataBaseType() == DataBase.MariaDB))
+                            ) &&
                                     (columnType == DataType.BIT)) {
                                 columnsSQL.setDataTypeSQL(DataType.BOOLEAN);
                             }

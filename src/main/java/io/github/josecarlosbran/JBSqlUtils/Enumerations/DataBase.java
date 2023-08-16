@@ -35,6 +35,11 @@ public enum DataBase {
     MySQL("mysql"),
 
     /**
+     * MariaDB
+     */
+    MariaDB("mariadb"),
+
+    /**
      * SQL Server
      */
     SQLServer("sqlserver"),

@@ -291,6 +291,10 @@ class Conexion {
                     setDataBaseType(DataBase.MySQL);
                     return DataBase.MySQL;
                 }
+                if (dataBase.equals(DataBase.MariaDB.name())) {
+                    setDataBaseType(DataBase.MariaDB);
+                    return DataBase.MariaDB;
+                }
                 if (dataBase.equals(DataBase.SQLite.name())) {
                     setDataBaseType(DataBase.SQLite);
                     return DataBase.SQLite;
