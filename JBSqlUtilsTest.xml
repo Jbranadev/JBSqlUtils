@@ -10,6 +10,12 @@
             </class>
         </classes>
     </test>
+    <test name="Test MariaDB">
+        <classes>
+            <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB">
+            </class>
+        </classes>
+    </test>
     <test name="Test PostgreSQL">
         <classes>
             <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL">
