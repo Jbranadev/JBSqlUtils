@@ -5,7 +5,7 @@ que pone a disposición de sus usuarios, para ello utiliza TestNG y ReportNG par
 de los resultados.
 
 Esta es la pagina principal del reporte de Test, en la cual se pueden visualizar
-que JBSqlUtils se ha sometido a 92 Test's
+que JBSqlUtils se ha sometido a 115 Test's
 [Results](https://jbranadev.github.io/JBSqlUtilsTest.github.io/html/index.html)
 
 Resultados de los Test ejecutados
