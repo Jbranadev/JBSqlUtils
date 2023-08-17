@@ -275,12 +275,12 @@ class Methods extends Methods_Conexion {
                     return new ResultAsync<>(listatemp, e);
                 }
             };
-            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            Future<ResultAsync<List<T>>> future = ejecutor.submit(get);
+            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            Future<ResultAsync<List<T>>> future = this.ejecutor.submit(get);
             while (!future.isDone()) {
 
             }
-            ejecutor.shutdown();
+            //this.ejecutor.shutdown();
             ResultAsync<List<T>> resultado = future.get();
             this.setTaskIsReady(true);
             if (!Objects.isNull(resultado.getException())) {

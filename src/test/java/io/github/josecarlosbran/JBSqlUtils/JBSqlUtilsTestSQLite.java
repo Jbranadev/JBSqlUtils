@@ -56,8 +56,16 @@ public class JBSqlUtilsTestSQLite {
         logParrafo("Se setearon las propiedades de conexión del modelo para SQLite");
     }
 
-    @Test(testName = "Drop Table If Exists from Model",
+    @Test(testName = "Refresh Model",
             dependsOnMethods = {"setPropertiesConexiontoModel"})
+    public void refreshModel() throws Exception {
+        logParrafo("Se refrescará el modelo con la información existente en BD's");
+        this.testModel.refresh();
+        this.testModel.waitOperationComplete();
+        logParrafo("Se refresco el modelo con la información existente en BD's");
+    }
+    @Test(testName = "Drop Table If Exists from Model",
+            dependsOnMethods = {"refreshModel"})
     public void dropTableIfExists() throws Exception {
         logParrafo("Se creara la tabla "+this.testModel.getTableName()+" en BD's");
         this.testModel.crateTable();
@@ -67,7 +75,6 @@ public class JBSqlUtilsTestSQLite {
         Assert.assertFalse(this.testModel.getTableExist(), "La tabla No existe en BD's y aun así responde que si la elimino");
         logParrafo("La tabla a sido eliminada en BD's");
     }
-
     @Test(testName = "Create Table from Model",
             dependsOnMethods = "dropTableIfExists")
     public void createTable() throws Exception {

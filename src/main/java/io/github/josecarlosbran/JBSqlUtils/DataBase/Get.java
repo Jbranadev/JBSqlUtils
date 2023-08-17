@@ -125,12 +125,12 @@ class Get extends Methods_Conexion {
                     return new ResultAsync<>(true, e);
                 }
             };
-            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            Future<ResultAsync<Boolean>> future= ejecutor.submit(get);
+            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            Future<ResultAsync<Boolean>> future= this.ejecutor.submit(get);
             while (!future.isDone()) {
 
             }
-            ejecutor.shutdown();
+            //this.ejecutor.shutdown();
             ResultAsync<Boolean> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
@@ -204,12 +204,12 @@ class Get extends Methods_Conexion {
                     return new ResultAsync<>(modeloTemp, e);
                 }
             };
-            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            Future<ResultAsync<T>> future= ejecutor.submit(get);
+            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            Future<ResultAsync<T>> future= this.ejecutor.submit(get);
             while (!future.isDone()) {
 
             }
-            ejecutor.shutdown();
+            //this.ejecutor.shutdown();
             ResultAsync<T> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
@@ -287,12 +287,12 @@ class Get extends Methods_Conexion {
             }
         };
 
-        ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-        Future<ResultAsync<T>> future= ejecutor.submit(get);
+        //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+        Future<ResultAsync<T>> future= this.ejecutor.submit(get);
         while (!future.isDone()) {
 
         }
-        ejecutor.shutdown();
+        //this.ejecutor.shutdown();
         ResultAsync<T> resultado = future.get();
         if (!Objects.isNull(resultado.getException())) {
             throw resultado.getException();
@@ -396,12 +396,12 @@ class Get extends Methods_Conexion {
                     return new ResultAsync(listaTemp, e);
                 }
             };
-            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            Future<ResultAsync<List<T>>> future=ejecutor.submit(get);
+            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            Future<ResultAsync<List<T>>> future=this.ejecutor.submit(get);
             while (!future.isDone()) {
 
             }
-            ejecutor.shutdown();
+            //this.ejecutor.shutdown();
             ResultAsync<List<T>> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
@@ -505,12 +505,12 @@ class Get extends Methods_Conexion {
                     return new ResultAsync<>(temp, e);
                 }
             };
-            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            Future<ResultAsync<List<JSONObject>>> future = ejecutor.submit(get);
+            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            Future<ResultAsync<List<JSONObject>>> future = this.ejecutor.submit(get);
             while (!future.isDone()) {
 
             }
-            ejecutor.shutdown();
+            //this.ejecutor.shutdown();
             ResultAsync<List<JSONObject>> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();

@@ -375,12 +375,12 @@ class Methods_Conexion extends Conexion {
                 }
                 return new ResultAsync<Boolean>(false, null);
             };
-            ExecutorService executor = Executors.newFixedThreadPool(1);
-            Future<ResultAsync<Boolean>> future = executor.submit(VerificarExistencia);
+            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            Future<ResultAsync<Boolean>> future = this.ejecutor.submit(VerificarExistencia);
             while (!future.isDone()) {
 
             }
-            executor.shutdown();
+            //this.ejecutor.shutdown();
             ResultAsync<Boolean> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
@@ -1040,19 +1040,18 @@ class Methods_Conexion extends Conexion {
 
                 }
             };
-            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
             LogsJB.debug("El modelo existe: " + modelo.getModelExist());
             Future<ResultAsync<Integer>> future = null;
             if (modelo.getModelExist()) {
-                future = ejecutor.submit(Update);
-            }
-            if (!modelo.getModelExist()) {
-                future = ejecutor.submit(Save);
+                future = this.ejecutor.submit(Update);
+            }else if (!modelo.getModelExist()) {
+                future = this.ejecutor.submit(Save);
             }
             while (!future.isDone()) {
 
             }
-            ejecutor.shutdown();
+            //this.ejecutor.shutdown();
             ResultAsync<Integer> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
@@ -1156,12 +1155,12 @@ class Methods_Conexion extends Conexion {
                     return new ResultAsync<>(0, e);
                 }
             };
-            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            Future<ResultAsync<Integer>> future = ejecutor.submit(Delete);
+            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            Future<ResultAsync<Integer>> future = this.ejecutor.submit(Delete);
             while (!future.isDone()) {
 
             }
-            ejecutor.shutdown();
+            //this.ejecutor.shutdown();
             ResultAsync<Integer> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
@@ -1557,12 +1556,12 @@ class Methods_Conexion extends Conexion {
                 return new ResultAsync<Boolean>(false, null);
             };
 
-            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            Future<ResultAsync<Boolean>> future = ejecutor.submit(createtabla);
+            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            Future<ResultAsync<Boolean>> future = this.ejecutor.submit(createtabla);
             while (!future.isDone()) {
 
             }
-            ejecutor.shutdown();
+            //this.ejecutor.shutdown();
             ResultAsync<Boolean> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
@@ -1629,12 +1628,12 @@ class Methods_Conexion extends Conexion {
                 }
             };
 
-            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            Future<ResultAsync<Boolean>> future = ejecutor.submit(dropTable);
+            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            Future<ResultAsync<Boolean>> future = this.ejecutor.submit(dropTable);
             while (!future.isDone()) {
 
             }
-            ejecutor.shutdown();
+            //this.ejecutor.shutdown();
             ResultAsync<Boolean> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
@@ -1789,12 +1788,12 @@ class Methods_Conexion extends Conexion {
 
             };
 
-            ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            Future<ResultAsync<Boolean>> future = ejecutor.submit(createtabla);
+            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            Future<ResultAsync<Boolean>> future = this.ejecutor.submit(createtabla);
             while (!future.isDone()) {
 
             }
-            ejecutor.shutdown();
+            //this.ejecutor.shutdown();
             ResultAsync<Boolean> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();

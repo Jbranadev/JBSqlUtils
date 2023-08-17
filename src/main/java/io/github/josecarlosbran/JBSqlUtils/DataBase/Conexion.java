@@ -28,6 +28,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
@@ -158,6 +160,11 @@ class Conexion {
      * Cantidad de conexiones que ha realizado el modelo a BD's
      */
     private Integer contadorConexiones=0;
+
+    /**
+     * Ejecutor de tareas asincronas
+     */
+    protected ExecutorService ejecutor = Executors.newFixedThreadPool(2);
 
     /**
      * Setea las propiedades extra para la url de conexión a BD's

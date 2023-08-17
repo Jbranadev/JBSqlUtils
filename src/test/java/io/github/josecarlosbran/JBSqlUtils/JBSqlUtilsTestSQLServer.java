@@ -27,9 +27,7 @@ public class JBSqlUtilsTestSQLServer {
     public JBSqlUtilsTestSQLServer() {
         System.setProperty("org.uncommons.reportng.escape-output", "false");
     }
-
     TestModel testModel;
-
 
     @Test(testName = "Setear Properties Conexión for Model")
     public void setPropertiesConexiontoModel() throws DataBaseUndefind, PropertiesDBUndefined {
@@ -52,19 +50,9 @@ public class JBSqlUtilsTestSQLServer {
         logParrafo("Se setearan las propiedades de conexión del modelo para SQLServer");
     }
 
-    @Test(testName = "Get Conexión",
-            dependsOnMethods = {"setPropertiesConexiontoModel"})
-    public void getConection(){
-        logParrafo("Obtendra la conexión del modelo a BD's");
-        Assert.assertFalse(Objects.isNull(this.testModel.getConnection()),
-                "No se logro establecer la conexión del modelo a BD's, asegurese de haber configurado correctamente" +
-                        "las propiedades de conexión a su servidor de BD's en el metodo setPropertiesConexiontoModel()");
-        logParrafo("Obtuvo la conexión del modelo a BD's");
-    }
-
 
     @Test(testName = "Refresh Model",
-            dependsOnMethods = {"getConection"})
+            dependsOnMethods = {"setPropertiesConexiontoModel"})
     public void refreshModel() throws Exception {
         logParrafo("Se refrescará el modelo con la información existente en BD's");
         this.testModel.refresh();

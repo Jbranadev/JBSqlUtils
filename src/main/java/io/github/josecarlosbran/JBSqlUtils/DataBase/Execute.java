@@ -107,12 +107,12 @@ class Execute extends Methods_Conexion {
                     return new ResultAsync<>(0, e);
                 }
             };
-            ExecutorService executor = Executors.newFixedThreadPool(1);
-            Future<ResultAsync<Integer>> future = executor.submit(Ejecutar_Sentencia);
+            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+            Future<ResultAsync<Integer>> future = this.ejecutor.submit(Ejecutar_Sentencia);
             while (!future.isDone()) {
 
             }
-            executor.shutdown();
+            //this.ejecutor.shutdown();
             ResultAsync<Integer> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
