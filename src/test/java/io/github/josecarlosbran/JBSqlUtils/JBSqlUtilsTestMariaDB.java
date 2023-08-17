@@ -2,8 +2,6 @@ package io.github.josecarlosbran.JBSqlUtils;
 
 
 import UtilidadesTest.TestModel;
-import com.josebran.LogsJB.LogsJB;
-import com.josebran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;

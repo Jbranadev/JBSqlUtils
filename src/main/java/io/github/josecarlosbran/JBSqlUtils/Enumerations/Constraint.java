@@ -38,8 +38,8 @@ public enum Constraint {
      * Restriccion que permite indicarle que tipo de valores si serán aceptados por la columna
      * Lo puede realizar a travez del metodo setRestriccion(String restriccion); de esta numeración.
      * considerar que la misma restricción se aplicara para el resto de columnas que tengan un valor Check.
-     */
-    CHECK("CHECK"),
+
+    CHECK("CHECK"),*/
 
     /**
      * Indica que la columna funciona como clave primaria del modelo.
@@ -49,8 +49,8 @@ public enum Constraint {
 
     /**
      * Indica que la columna funciona como clave foranea del modelo.
-     */
-    FOREIGN_KEY("FOREIGN KEY"),
+
+    FOREIGN_KEY("FOREIGN KEY"),*/
 
     /**
      * Indica que el campo tendra como valor por default el TimeStamp del momento en que se almacene el modelo.

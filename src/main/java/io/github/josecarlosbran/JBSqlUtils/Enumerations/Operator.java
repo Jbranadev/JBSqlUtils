@@ -78,6 +78,32 @@ public enum Operator {
     OR(" OR "),
 
     /**
+     * Operador IS
+     */
+    IS(" IS "),
+
+    /**
+     * Operador NULL
+     */
+    NULL(" NULL "),
+
+    /**
+     * Operador NOT NULL
+     */
+    NOT_NULL(" NOT NULL "),
+
+    /**
+     * Operador IN
+     */
+    IN(" IN "),
+
+    /**
+     * Operador BETWEEN
+     */
+    BETWEEN(" BETWEEN "),
+
+
+    /**
      * Operador NOT
      */
     NOT(" NOT ");
