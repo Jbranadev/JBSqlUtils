@@ -21,6 +21,7 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -104,7 +105,7 @@ class Execute extends Methods_Conexion {
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                     LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     LogsJB.fatal("Sentencia SQL: " + this.sql);
                     return new ResultAsync<>(0, e);
                 }
@@ -125,7 +126,7 @@ class Execute extends Methods_Conexion {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
             LogsJB.fatal("Sentencia SQL: " + this.sql);
         }
         return result;

@@ -24,6 +24,7 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.*;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -206,7 +207,7 @@ class Methods_Conexion extends Conexion {
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                     LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                 }
                 url = "jdbc:" + this.getDataBaseType().getDBType() + ":" + this.getBD();
                 LogsJB.debug("Url de conexion a DB: " + url);
@@ -220,7 +221,7 @@ class Methods_Conexion extends Conexion {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         this.setContadorConexiones(this.getContadorConexiones()+1);
         return connect;
@@ -251,7 +252,7 @@ class Methods_Conexion extends Conexion {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -273,7 +274,7 @@ class Methods_Conexion extends Conexion {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -372,7 +373,7 @@ class Methods_Conexion extends Conexion {
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                     LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     new ResultAsync<Boolean>(false, e);
                 }
                 return new ResultAsync<Boolean>(false, null);
@@ -393,7 +394,7 @@ class Methods_Conexion extends Conexion {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
     }
@@ -494,7 +495,7 @@ class Methods_Conexion extends Conexion {
                                 LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                                 LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                                 LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                                LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                                LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                             }
                         }
                     }catch (Exception e) {
@@ -502,7 +503,7 @@ class Methods_Conexion extends Conexion {
                         LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                         LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                         LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                        LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                        LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     }
                 }
             }
@@ -512,7 +513,7 @@ class Methods_Conexion extends Conexion {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -900,7 +901,7 @@ class Methods_Conexion extends Conexion {
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                     LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     modelo.setTaskIsReady(true);
                     return new ResultAsync<>(0, e);
                 }
@@ -1036,7 +1037,7 @@ class Methods_Conexion extends Conexion {
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                     LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     modelo.setTaskIsReady(true);
                     return new ResultAsync<>(0, e);
 
@@ -1064,7 +1065,7 @@ class Methods_Conexion extends Conexion {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
     }
@@ -1152,7 +1153,7 @@ class Methods_Conexion extends Conexion {
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                     LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     modelo.setTaskIsReady(true);
                     return new ResultAsync<>(0, e);
                 }
@@ -1173,7 +1174,7 @@ class Methods_Conexion extends Conexion {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
     }
@@ -1201,7 +1202,7 @@ class Methods_Conexion extends Conexion {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }finally {
             return temp;
         }
@@ -1449,7 +1450,7 @@ class Methods_Conexion extends Conexion {
                                 LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                                 LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                                 LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                                LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                                LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                             }
                             return 0;
                         });
@@ -1552,7 +1553,7 @@ class Methods_Conexion extends Conexion {
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                     LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     new ResultAsync<Boolean>(false, e);
                 }
                 return new ResultAsync<Boolean>(false, null);
@@ -1574,7 +1575,7 @@ class Methods_Conexion extends Conexion {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
     }
@@ -1625,7 +1626,7 @@ class Methods_Conexion extends Conexion {
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                     LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     return new ResultAsync<Boolean>(false, e);
                 }
             };
@@ -1646,7 +1647,7 @@ class Methods_Conexion extends Conexion {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
     }
@@ -1690,7 +1691,7 @@ class Methods_Conexion extends Conexion {
                                 LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                                 LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                                 LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                                LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                                LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                             }
                             return 0;
                         });
@@ -1784,7 +1785,7 @@ class Methods_Conexion extends Conexion {
                     LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                     LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                     LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                    LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     return new ResultAsync<Boolean>(false, e);
                 }
 
@@ -1806,7 +1807,7 @@ class Methods_Conexion extends Conexion {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
     }
@@ -1866,7 +1867,7 @@ class Methods_Conexion extends Conexion {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -1918,7 +1919,7 @@ class Methods_Conexion extends Conexion {
                                 LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                                 LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                                 LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                                LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                                LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                             }
                         }
                     }catch (Exception e) {
@@ -1926,7 +1927,7 @@ class Methods_Conexion extends Conexion {
                         LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                         LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                         LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                        LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                        LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     }
                 }
             }
@@ -1935,7 +1936,7 @@ class Methods_Conexion extends Conexion {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
 
