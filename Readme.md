@@ -15,6 +15,7 @@ la conexión a su BD's.
 [![javadoc](https://javadoc.io/badge2/io.github.josecarlosbran/JBSqlUtils/javadoc.svg)](https://javadoc.io/doc/io.github.josecarlosbran/JBSqlUtils)
 [![License](https://img.shields.io/badge/Licence-Apache%202.0-blue.svg)](https://github.com/Jbranadev/JBSqlUtils/tree/master/LICENSE.txt)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Jbranadev/JBSqlUtils/badge)](https://securityscorecards.dev/viewer/?uri=github.com/Jbranadev/JBSqlUtils)
+[![CodeQL](https://github.com/Jbranadev/JBSqlUtils/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/Jbranadev/JBSqlUtils/actions/workflows/codeql.yml)
 * * *
 
 ## Estado del Proyecto :atom:
