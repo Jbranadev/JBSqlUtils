@@ -14,8 +14,10 @@ la conexión a su BD's.
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.josecarlosbran/JBSqlUtils?logo=apachemaven&logoColor=%23C71A36)](https://central.sonatype.com/artifact/io.github.josecarlosbran/JBSqlUtils/)
 [![javadoc](https://javadoc.io/badge2/io.github.josecarlosbran/JBSqlUtils/javadoc.svg)](https://javadoc.io/doc/io.github.josecarlosbran/JBSqlUtils)
 [![License](https://img.shields.io/badge/Licence-Apache%202.0-blue.svg)](https://github.com/Jbranadev/JBSqlUtils/tree/master/LICENSE.txt)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Jbranadev/JBSqlUtils/badge)](https://securityscorecards.dev/viewer/?uri=github.com/Jbranadev/JBSqlUtils)
 [![CodeQL](https://github.com/Jbranadev/JBSqlUtils/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/Jbranadev/JBSqlUtils/actions/workflows/codeql.yml)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Jbranadev/JBSqlUtils/badge)](https://securityscorecards.dev/viewer/?uri=github.com/Jbranadev/JBSqlUtils)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/7791/badge)](https://www.bestpractices.dev/projects/7791)
+
 * * *
 
 ## Estado del Proyecto :atom:
