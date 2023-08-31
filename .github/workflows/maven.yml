@@ -9,10 +9,11 @@
 name: Java CI with Maven
 
 on:
+  workflow_dispatch:
   push:
-    branches: [ $default-branch ]
+    branches: [ "master" , "JBran"  ]
   pull_request:
-    branches: [ $default-branch ]
+    branches: [ "master" ]
 
 jobs:
   build:
