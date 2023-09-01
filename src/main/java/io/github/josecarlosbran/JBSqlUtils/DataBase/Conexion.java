@@ -171,7 +171,7 @@ class Conexion {
      * Setea las propiedades extra para la url de conexión a BD's
      *
      * @param propertisURL Propiedades extra para la url de conexión a BD's por ejemplo
-     *                     ?autoReconnect=true&useSSL=false
+     *                     {@literal ?autoReconnect=true&useSSL=false}
      */
     public void setPropertisURL(String propertisURL) {
         try {
@@ -823,8 +823,8 @@ class Conexion {
 
     /**
      * Obtiene la conexión del Modelo a la Base de Datos.
-     *
      * @return Retorna la conexión del Modelo a la Base de Datos.
+     * @exception ConexionUndefind lanza esta excepción si el modelo no posee una conexión abierta a BD's
      */
     protected Connection getConnect() throws ConexionUndefind {
         if (Objects.isNull(this.connect)) {
@@ -908,10 +908,6 @@ class Conexion {
      * instrucción mientras el modelo esta trabajando en segundo plano. para poder saber si el modelo actualmente esta
      * ocupado, podemos hacerlo a través del método getTaskIsReady(), el cual obtiene la bandera que indica si
      * la tarea que estaba realizando el modelo ha sido terminada
-     *
-     * @return True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
-     * actualmente.
-     * <p>
      * De utilizar otro modelo, no es necesario esperar a que el primer modelo este libre.
      */
     public void waitOperationComplete() {
@@ -923,11 +919,6 @@ class Conexion {
          * instrucción mientras el modelo esta trabajando en segundo plano. para poder saber si el modelo actualmente esta
          * ocupado, podemos hacerlo a través del método getTaskIsReady(), el cual obtiene la bandera que indica si
          * la tarea que estaba realizando el modelo ha sido terminada
-         * @return True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
-         * actualmente.
-         *
-         * De utilizar otro modelo, no es necesario esperar a que el primer modelo este libre.
-         *
          */
         while (!this.getTaskIsReady()) {
 
@@ -946,6 +937,7 @@ class Conexion {
 
     /**
      * Obtiene la clave primaria del modelo.
+     * @return Nombre de la clave primaria del modelo
      */
     public String getPrimaryKey() {
         return primaryKey;
@@ -980,6 +972,8 @@ class Conexion {
 
     /**
      * Obtiene la bandera que define si el modelo desea que JBSqlUtils maneje las timestamps Created_at, Update_at.
+     * @return True si JBSqlUtils manejara de forma predeterminada las timestamps del modelo, False si no se
+     * desea que JBSqlUtils registre esta información
      */
     protected Boolean getTimestamps() {
         return timestamps;
@@ -997,6 +991,7 @@ class Conexion {
 
     /**
      * Obtiene el formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
+     * @return  Una representación String del Formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
      */
     public String getDateFormat() {
         return dateFormat;
@@ -1013,6 +1008,7 @@ class Conexion {
 
     /**
      * Obtiene el nombre de la columna correspondiente a la TimeStamp CreateAT
+     * @return Nombre de la columna correspondiente a la TimeStamp CreateAT
      */
     public String getCreatedAt() {
         return createdAt;
@@ -1029,6 +1025,7 @@ class Conexion {
 
     /**
      * Obtiene el nombre de la columna correspondiente a la TimeStamp UpdateAT
+     * @return Nombre de la columna correspondiente a la TimeStamp UpdateAT
      */
     public String getUpdateAT() {
         return updateAT;
@@ -1068,6 +1065,7 @@ class Conexion {
 
     /**
      * Representa la metadata de la tabla correspondiente al modelo en BD's
+     * Retorna la TablaSQL correspondiente al modelo
      */
     protected synchronized TablesSQL getTabla() {
         return tabla;
@@ -1108,7 +1106,6 @@ class Conexion {
 
     /**
      * Cantidad de conexiones que ha realizado el modelo a BD's
-     */ /**
      * @return Cantidad de conexiones que ha realizado el modelo a BD's
      */
     public synchronized Integer getContadorConexiones() {

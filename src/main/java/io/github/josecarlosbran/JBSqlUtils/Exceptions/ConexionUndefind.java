@@ -16,10 +16,15 @@
 package io.github.josecarlosbran.JBSqlUtils.Exceptions;
 
 /**
- * @author Jose Bran
  * Exepción que indica que no se a realizado una conexión del modelo, por lo cual no se puede obtener la misma
+ * @author Jose Bran
  */
 public class ConexionUndefind extends Exception {
+
+    /**
+     * Constructor por default de la excepción de Tipo ConexionUndefined
+     * @param mensaje Mensaje que brinda el desarrollador para mostrar la excepción al dispararse
+     */
     public ConexionUndefind(String mensaje) {
         super(mensaje);
     }

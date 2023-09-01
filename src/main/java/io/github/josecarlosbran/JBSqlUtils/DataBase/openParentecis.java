@@ -14,8 +14,8 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.getColum
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
 /**
- * @author Jose Bran
  * Clase que proporciona la logica para agregar una Apertura de Parentecis a una consulta SQL
+ * @author Jose Bran
  */
 public class openParentecis<T> extends Get {
 
@@ -39,7 +39,9 @@ public class openParentecis<T> extends Get {
      * @param columna      Columna a evaluar dentro de la sentencia AND
      * @param operador     Operador con el cual se evaluara la columna
      * @param valor        Valor contra el que se evaluara la columna
-     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws ValorUndefined        Lanza esta excepción si el parametro proporcionado está vacío o es NULL
+     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
+     * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
      */
     protected openParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
@@ -77,7 +79,9 @@ public class openParentecis<T> extends Get {
      * @param operador          Operador con el cual se evaluara la columna
      * @param valor             Valor contra el que se evaluara la columna
      * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
-     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws ValorUndefined        Lanza esta excepción si el parametro proporcionado está vacío o es NULL
+     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
+     * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
      */
     protected openParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPrev, String columna, Operator operador, Object valor, Boolean getPropertySystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super(getPropertySystem);
@@ -113,7 +117,9 @@ public class openParentecis<T> extends Get {
      * @param columna      Columna a evaluar dentro de la sentencia AND
      * @param operador     Operador con el cual se evaluara la columna
      * @param valor        Valor contra el que se evaluara la columna
-     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws ValorUndefined        Lanza esta excepción si el parametro proporcionado está vacío o es NULL
+     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
+     * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
      */
     protected openParentecis(String sql, List<Column> parametros, Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
@@ -147,7 +153,9 @@ public class openParentecis<T> extends Get {
      * @param columna    Columna a evaluar dentro de la sentencia AND
      * @param operador   Operador con el cual se evaluara la columna
      * @param valor      Valor contra el que se evaluara la columna
-     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws ValorUndefined        Lanza esta excepción si el parametro proporcionado está vacío o es NULL
+     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
+     * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
      */
     protected openParentecis(String sql, T modelo, List<Column> parametros, String columna, Operator operador, Object valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
@@ -183,7 +191,9 @@ public class openParentecis<T> extends Get {
      * @param operador          Operador con el cual se evaluara la columna
      * @param valor             Valor contra el que se evaluara la columna
      * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
-     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws ValorUndefined        Lanza esta excepción si el parametro proporcionado está vacío o es NULL
+     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
+     * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
      */
     protected openParentecis(String sql, T modelo, List<Column> parametros, String columna, Operator operador, Object valor, Boolean getPropertySystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super(getPropertySystem);
@@ -217,7 +227,9 @@ public class openParentecis<T> extends Get {
      * @param columna    Columna a evaluar dentro de la sentencia AND
      * @param operador   Operador con el cual se evaluara la columna
      * @param valor      Valor contra el que se evaluara la columna
-     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws ValorUndefined        Lanza esta excepción si el parametro proporcionado está vacío o es NULL
+     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
+     * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
      */
     protected openParentecis(String sql, List<Column> parametros, String columna, Operator operador, Object valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
@@ -242,7 +254,6 @@ public class openParentecis<T> extends Get {
 
     /**
      * Retorna un objeto del tipo AND que permite agregar esta expresión a la sentencia SQL
-     *
      * @param columna  Columna a evaluar dentro de la sentencia AND
      * @param operador Operador con el cual se evaluara la columna
      * @param valor    Valor contra el que se evaluara la columna
@@ -251,6 +262,7 @@ public class openParentecis<T> extends Get {
      *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @return objeto del tipo AND que permite agregar esta expresión a la sentencia SQL
      */
     public And and(String columna, Operator operador, Object valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         if (Objects.isNull(this.modelo)) {
@@ -267,7 +279,6 @@ public class openParentecis<T> extends Get {
 
     /**
      * Retorna un objeto del tipo OR que permite agregar esta expresión a la sentencia SQL
-     *
      * @param columna  Columna a evaluar dentro de la sentencia OR
      * @param operador Operador con el cual se evaluara la columna
      * @param valor    Valor contra el que se evaluara la columna
@@ -276,6 +287,7 @@ public class openParentecis<T> extends Get {
      *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @return objeto del tipo OR que permite agregar esta expresión a la sentencia SQL
      */
     public Or or(String columna, Operator operador, Object valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         if (Objects.isNull(this.modelo)) {
@@ -299,7 +311,11 @@ public class openParentecis<T> extends Get {
      * @return Retorna un objeto OpenParentecis el cual proporciona acceso a los métodos necesarios
      * para filtrar de una mejor manera nuestra consulta, No olvide llamar al metodo close parentecis cuando
      * haya finalizado la logica dentro de sus parentecis
-     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     public openParentecis openParentecis(Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         if (Objects.isNull(this.modelo)) {

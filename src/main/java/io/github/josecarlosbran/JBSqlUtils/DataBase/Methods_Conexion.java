@@ -88,7 +88,6 @@ class Methods_Conexion extends Conexion {
      * Obtiene la lista de métodos pertenecientes al modelo que lo invoca.
      *
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
-     * @return Retorna una lista de los métodos pertenecientes al modelo.
      */
     protected synchronized <T> void getMethodsModel() {
         Method[] metodos = this.getClass().getMethods();
@@ -402,6 +401,7 @@ class Methods_Conexion extends Conexion {
 
     /**
      * Obtiene las columnas que tiene la tabla correspondiente al modelo en BD's.
+     * @param connect a BD's para obtener la metadata
      */
     protected void getColumnsTable(Connection connect) {
         try {
@@ -520,6 +520,7 @@ class Methods_Conexion extends Conexion {
 
     /**
      * Metodo que actualiza la información que el modelo tiene sobre lo que existe en BD's'
+     * @throws Exception Lanza una Excepción si ocurre algun error al ejecutar el metodo refresh
      */
     public void refresh() throws Exception {
         this.setTableExist(this.tableExist());
@@ -699,7 +700,7 @@ class Methods_Conexion extends Conexion {
      * @param columna   Columna que se obtendra.
      * @param resultado ResultSet del cual se obtendra el valor para la columna.
      * @param temp      Json Object al cual se agregara el valor de la columna como una propiedad del JSON.
-     * @throws SQLException
+     * @throws SQLException An exception that provides information on a database access error or other errors.
      */
     protected void convertSQLtoJson(ColumnsSQL columna, ResultSet resultado, JSONObject temp) throws SQLException {
         String columnName = columna.getCOLUMN_NAME();
@@ -788,6 +789,7 @@ class Methods_Conexion extends Conexion {
      * @param <T>    Expresión que hace que el metodo sea generico y pueda ser utilizado por cualquier objeto que herede la Clase JBSqlUtils
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
      *                   captura la excepción y la lanza en el hilo principal
+     * @return La cantidad de filas almacenadas en BD's
      */
     protected <T extends Methods_Conexion> Integer saveModel(T modelo) throws Exception {
         Integer result = 0;
@@ -1076,6 +1078,7 @@ class Methods_Conexion extends Conexion {
      * @param modelo Modelo del cual se desea eliminar la información en BD's
      * @param <T>    Expresión que hace que el metodo sea generico y pueda ser utilizado por cualquier
      *               objeto que herede la Clase JBSqlUtils
+     * @return La cantidad de filas eliminadas en BD's
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
      *                   captura la excepción y la lanza en el hilo principal
      */
@@ -1183,6 +1186,8 @@ class Methods_Conexion extends Conexion {
     /**
      * Obtiene una instancia nueva del tipo de modelo que se envía como parametro
      * @param modelo Tipo de objeto que se desea instanciar
+     * @param <T>    Expresión que hace que el metodo sea generico y pueda ser utilizado por cualquier
+     *               objeto que herede la Clase JBSqlUtils
      * @return Retorna la nueva instancia del modelo creada
      */
     public <T extends Methods_Conexion> T obtenerInstanciaOfModel(T modelo){
@@ -1227,6 +1232,7 @@ class Methods_Conexion extends Conexion {
      *                                   BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined     Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                                   propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws NoSuchMethodException     Lanza esta excepción si el modelo no posee el metodo que se invocara
      */
     protected <T extends Methods_Conexion> T procesarResultSet(T modelo, ResultSet registros) throws InstantiationException, IllegalAccessException, InvocationTargetException, SQLException, DataBaseUndefind, PropertiesDBUndefined, NoSuchMethodException {
         T temp=modelo.obtenerInstanciaOfModel(modelo);
@@ -1298,11 +1304,8 @@ class Methods_Conexion extends Conexion {
 
     /**
      * Llena el modelo proporcionado con la Información Obtenida de BD's
-     *
      * @param modelo    Modelo que invoca el metodo.
      * @param registros Resulset que contiene la información obtenida de BD's
-     * @param <T>       * @param <T>    Expresión que hace que el metodo sea generico y pueda ser utilizado por cualquier
-     *                  objeto que herede la Clase JBSqlUtils
      * @throws InstantiationException    Lanza esta excepción si ocurre un error al crear una nueva instancia
      *                                   del tipo de modelo proporcionado
      * @throws SQLException              Lanza esta excepción de suceder algún problema con el ResultSet

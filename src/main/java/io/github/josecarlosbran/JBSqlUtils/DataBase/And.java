@@ -33,9 +33,9 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.getColum
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
 /**
- * @author Jose Bran
  * Clase que proporciona la logica para agregar una sentencia AND a una consulta personalizada del modelo
  * tomando como parámetro la sentencia sql a la que se agregara la logica de la sentencia AND
+ * @author Jose Bran
  */
 public class And<T> extends Get {
     private T modelo = null;

@@ -22,8 +22,8 @@ import java.util.List;
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
 /**
- * @author Jose Bran
  * Enumeración que sirve para identificar el tipo de dato SQL que tiene la columna en el servidor.
+ * @author Jose Bran
  */
 public enum DataType {
 

@@ -15,8 +15,8 @@ import java.util.Objects;
 
 
 /**
- * @author Jose Bran
  * Clase que proporciona la logica para agregar un Cierre de Parentecis a una consulta SQL
+ * @author Jose Bran
  */
 public class closeParentecis<T> extends Get {
 
@@ -81,7 +81,6 @@ public class closeParentecis<T> extends Get {
      *
      * @param sql        Sentencia SQL a la que se agregara el cierre de parentecis
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
      *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
@@ -148,7 +147,6 @@ public class closeParentecis<T> extends Get {
      * @param sql          Sentencia SQL a la que se agregara el cierre de parentecis
      * @param parametros   Lista de parametros a ser agregados a la sentencia SQL
      * @param operatorPost Operador posterior a colocar despues del cierre de parentecis
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
      *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las

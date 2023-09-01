@@ -29,9 +29,9 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 /**
- * @author Jose Bran
  * Clase a ser heredada por los modelos, la cual brinda acceso a los métodos necesarios para que el modelo
  * se pegue a la BD's especifícada y pueda realizar las operaciónes necesarias sobre la misma.
+ * @author Jose Bran
  */
 public class JBSqlUtils extends Methods {
 
@@ -178,7 +178,7 @@ public class JBSqlUtils extends Methods {
      * Setea las propiedades extra de conexión url DB que pueden utilizar los modelos para conectarse a BD's
      *
      * @param propertisUrl Propiedades extra para la url de conexión a BD's por ejemplo
-     *                     ?autoReconnect=true&useSSL=false
+     *                     {@literal ?autoReconnect=true&useSSL=false}
      */
     public static void setPropertisUrlConexionGlobal(String propertisUrl) {
         try {
@@ -193,6 +193,7 @@ public class JBSqlUtils extends Methods {
     }
 
     /**
+     * Obtiene la fecha de creación del modelo
      * @return TimeStamp correspondiente a la fecha de creación del registro en BD's
      */
     public Column<Timestamp> getCreated_at() {
@@ -214,6 +215,7 @@ public class JBSqlUtils extends Methods {
     }
 
     /**
+     * Obtiene la fecha de actualización del modelo
      * @return TimeStamp correspondiente a la fecha de actualización del registro en BD's
      */
     public Column<Timestamp> getUpdated_at() {
