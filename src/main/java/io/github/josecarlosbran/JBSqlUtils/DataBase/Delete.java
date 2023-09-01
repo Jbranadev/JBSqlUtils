@@ -23,9 +23,9 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
 /**
- * @author Jose Bran
  * Clase que proporciona los metodos necesarios para la lógica de un Delete en BD's sin necesidad
  * de tener un modelo de la tabla que se desea Eliminar registros.
+ * @author Jose Bran
  */
 public class Delete {
     private String sql;

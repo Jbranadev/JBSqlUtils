@@ -16,9 +16,9 @@
 package io.github.josecarlosbran.JBSqlUtils.Exceptions;
 
 /**
- * @author Jose Bran
  * Excepción que indica que un valor proporcionado a alguna de las expresiones SQL es null o vacío
  * por lo cual el metodo no puede retornar un resultado y en su lugar lanza la excepción
+ * @author Jose Bran
  */
 public class ValorUndefined extends Exception {
     public ValorUndefined(String mensaje) {

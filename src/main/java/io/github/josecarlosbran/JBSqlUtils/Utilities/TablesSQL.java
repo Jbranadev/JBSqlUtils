@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Jose Bran
  * Clase que sirve para identificar las caracteristicas de la tabla correspondiente al modelo
+ * @author Jose Bran
  */
 public class TablesSQL {
     /**

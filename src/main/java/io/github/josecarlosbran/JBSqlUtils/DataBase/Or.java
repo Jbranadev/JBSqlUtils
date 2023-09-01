@@ -33,9 +33,9 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.getColum
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
 /**
- * @author Jose Bran
  * Clase que proporciona la logica para agregar una sentencia OR a una consulta personalizada del modelo
  * tomando como parámetro la sentencia sql a la que se agregara la logica de la sentencia OR
+ * @author Jose Bran
  */
 public class Or<T> extends Get {
     private String sql;
@@ -160,6 +160,7 @@ public class Or<T> extends Get {
      *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @return objeto del tipo AND que permite agregar esta expresión a la sentencia SQL
      */
     public And and(String columna, Operator operador, Object valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         if (Objects.isNull(this.modelo)) {
@@ -185,6 +186,7 @@ public class Or<T> extends Get {
      *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @return objeto del tipo OR que permite agregar esta expresión a la sentencia SQL
      */
     public Or or(String columna, Operator operador, Object valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         if (Objects.isNull(this.modelo)) {
@@ -210,6 +212,7 @@ public class Or<T> extends Get {
      *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @return objeto del tipo ORDER BY que permite agregar esta expresión a la sentencia SQL
      */
     public OrderBy orderBy(String columna, OrderType orderType) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         if (Objects.isNull(this.modelo)) {
@@ -234,6 +237,8 @@ public class Or<T> extends Get {
      *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @return objeto del tipo Take que permite agregar esta sentencia a la Logica de la sentencia
+     * SQL a ejecutar.
      */
     public Take take(int limite) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         if (Objects.isNull(this.modelo)) {

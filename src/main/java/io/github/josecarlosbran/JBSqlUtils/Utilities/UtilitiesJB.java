@@ -25,8 +25,8 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 /**
- * @author Jose Bran
  * Clase que brinda acceso a funcionalidades comunes, sin necesidad de crear una instancia de la misma
+ * @author Jose Bran
  */
 public class UtilitiesJB {
 

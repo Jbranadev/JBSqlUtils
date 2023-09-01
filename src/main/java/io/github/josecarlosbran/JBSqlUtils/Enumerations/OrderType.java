@@ -19,8 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Jose Bran
  * Numeración que proporciona los tipos de ordenamiento SQL disponibles.
+ * @author Jose Bran
  */
 public enum OrderType {
 

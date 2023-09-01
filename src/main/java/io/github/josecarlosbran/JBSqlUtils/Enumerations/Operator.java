@@ -19,34 +19,34 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Jose Bran
  * Enumeración que proporciona acceso a los diferentes tipos de operadores disponibles para realizar
  * consultas SQL Personalizadas.
+ * @author Jose Bran
  */
 public enum Operator {
 
     /**
-     * Operador >=
+     * Operador {@literal >=}
      */
     MAYOR_IGUAL_QUE(" >= "),
     /**
-     * Operador >
+     * Operador {@literal >}
      */
     MAYOR_QUE(" > "),
     /**
-     * Operador =
+     * Operador {@literal =}
      */
     IGUAL_QUE(" = "),
     /**
-     * Operador <>
+     * Operador {@literal <>}
      */
     DISTINTO(" <> "),
     /**
-     * Operador <
+     * Operador {@literal <}
      */
     MENOR_QUE(" < "),
     /**
-     * Operador <=
+     * Operador {@literal <=}
      */
     MENOR_IGUAL_QUE(" <= "),
 
@@ -115,6 +115,10 @@ public enum Operator {
         this.operador = s;
     }
 
+    /**
+     * Obtiene el operador
+     * @return Representación String del Operador en cuestión
+     */
     public String getOperador() {
         return operador;
     }

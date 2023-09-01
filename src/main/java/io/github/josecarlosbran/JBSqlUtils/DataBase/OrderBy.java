@@ -31,8 +31,8 @@ import java.util.Objects;
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
 /**
- * @author Jose Bran
  * Clase que proporciona la capacidad de agregar una sentencia OrderBy a la consulta trasladada como parámetro
+ * @author Jose Bran
  */
 public class OrderBy<T> extends Get {
     private String sql;

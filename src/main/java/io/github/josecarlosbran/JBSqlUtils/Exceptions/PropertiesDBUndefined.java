@@ -16,9 +16,9 @@
 package io.github.josecarlosbran.JBSqlUtils.Exceptions;
 
 /**
- * @author Jose Bran
  * Exepción que indica que no han sido especificadas las propiedades de conexion necesarias
  * para el tipo de BD's a la que se conectara el modelo
+ * @author Jose Bran
  */
 public class PropertiesDBUndefined extends Exception {
     public PropertiesDBUndefined(String mensaje) {

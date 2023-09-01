@@ -26,9 +26,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @author Jose Bran
  * Clase que proporciona la logica para tomar una cantidad de resultados, siendo esa cantidad el limite trasladado como
  * parametro para el constructor.
+ * @author Jose Bran
  */
 public class Take<T> extends Get {
     private String sql;

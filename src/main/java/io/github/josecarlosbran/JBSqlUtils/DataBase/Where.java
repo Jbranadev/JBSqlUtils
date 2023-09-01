@@ -33,8 +33,8 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.getColum
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
 /**
- * @author Jose Bran
  * Clase que proporciona la logica para agregar una sentencia WHERE a la consulta a realizar.
+ * @author Jose Bran
  */
 public class Where<T> extends Get {
     private String sql;

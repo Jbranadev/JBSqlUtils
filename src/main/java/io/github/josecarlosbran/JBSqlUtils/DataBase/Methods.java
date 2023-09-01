@@ -426,6 +426,7 @@ class Methods extends Methods_Conexion {
     }
 
     /**
+     * Llena el controlador proporcionado con la información del modelo
      * @param controlador Controlador que debe poseer los atributos en java, que corresponden al modelo, con
      *                    sus respectivos metodos setter y getter
      * @param modelo      Modelo del cual se extraera la información para llenar el controlador

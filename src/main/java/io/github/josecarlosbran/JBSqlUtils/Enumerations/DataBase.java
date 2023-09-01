@@ -19,8 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Jose Bran
  * Enumeración que permite indicar a que Base de Datos se estara conectando el modelo.
+ * @author Jose Bran
  */
 public enum DataBase {
 

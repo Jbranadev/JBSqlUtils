@@ -31,8 +31,8 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.getColum
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
 /**
- * @author Jose Bran
  * Clase que proporciona la lógica para setear otro valor antes de ejecutar la sentencia Update.
+ * @author Jose Bran
  */
 public class AndSet {
     private String sql;

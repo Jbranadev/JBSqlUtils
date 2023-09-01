@@ -19,8 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Jose Bran
  * Enumeración que permite indicar las restricciones que puede tener una columna al momento de su creación.
+ * @author Jose Bran
  */
 public enum Constraint {
 
