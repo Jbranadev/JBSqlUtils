@@ -30,6 +30,6 @@ jobs:
           distribution: 'temurin'
       - name: Publish to GitHub Packages
         #run: mvn --batch-mode deploy
-        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        run: mvn --batch-mode deploy -s $GITHUB_WORKSPACE/settings.xml
         env:
           GITHUB_TOKEN: ${{ secrets.DEPLOY_ACTIONS_GITHUB }}
