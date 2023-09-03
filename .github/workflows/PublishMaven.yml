@@ -49,6 +49,3 @@ jobs:
         run: mvn --batch-mode deploy -s $GITHUB_WORKSPACE/.github/workflows/Publish/settingsGitHub.xml
         env:
           GITHUB_TOKEN: ${{ secrets.DEPLOY_ACTIONS_GITHUB }}
-
-
-
