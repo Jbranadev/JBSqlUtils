@@ -20,12 +20,13 @@ jobs:
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }} # Substituted with the value stored in the referenced secret
-          gpg-passphrase: SIGN_KEY_PASS # Env var that holds the key's passphrase
+          #gpg-passphrase: SIGN_KEY_PASS # Env var that holds the key's passphrase
+          gpg-passphrase: ${{ secrets.SIGN_KEY_PASS }} # Env var that holds the key's passphrase
           cache: maven
       - name: Publish to the Maven Central Repository
         run: mvn --batch-mode deploy
         env:
-          SIGN_KEY_PASS: ${env.GPG_PASSPHRASE}
+          #SIGN_KEY_PASS: ${env.GPG_PASSPHRASE}
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
       - name: Set up Java for publishing to GitHub Packages
