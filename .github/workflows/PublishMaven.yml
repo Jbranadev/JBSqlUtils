@@ -1,10 +1,4 @@
 name: Publish package to the Maven Central Repository and GitHub Packages
-env:
-  #SIGN_KEY_PASS: ${env.GPG_PASSPHRASE}
-  MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-  MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-  MAVEN_GPG_PASSPHRASE: ${{ secrets.SIGN_KEY_PASS }}
-  GITHUB_TOKEN: ${{ secrets.DEPLOY_ACTIONS_GITHUB }}
 on:
   workflow_dispatch:
   release:
@@ -36,10 +30,19 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }} # Substituted with the value stored in the referenced secret
           gpg-passphrase: MAVEN_GPG_PASSPHRASE # Env var that holds the key's passphrase
           cache: 'maven'
-
+          env:
+            MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+            MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+            MAVEN_GPG_PASSPHRASE: ${{ secrets.SIGN_KEY_PASS }}
+            GITHUB_TOKEN: ${{ secrets.DEPLOY_ACTIONS_GITHUB }}
       #Publicamos en maven
       - name: Publish to the Maven Central Repository
         run: mvn --batch-mode deploy
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.SIGN_KEY_PASS }}
+          GITHUB_TOKEN: ${{ secrets.DEPLOY_ACTIONS_GITHUB }}
 
 
       #Publicamos en GithubPackages
@@ -51,5 +54,10 @@ jobs:
       - name: Publish to GitHub Packages
         #run: mvn --batch-mode deploy
         run: mvn --batch-mode deploy -s $GITHUB_WORKSPACE/.github/workflows/Publish/settingsGitHub.xml
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.SIGN_KEY_PASS }}
+          GITHUB_TOKEN: ${{ secrets.DEPLOY_ACTIONS_GITHUB }}
 
 
