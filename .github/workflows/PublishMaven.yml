@@ -32,7 +32,7 @@ jobs:
           cache: 'maven'
       #Publicamos en maven
       - name: Publish to the Maven Central Repository
-        run: mvn --batch-mode deploy -Darguments=-Dgpg.passphrase=${{ secrets.SIGN_KEY_PASS }}
+        run: mvn --batch-mode deploy -Darguments=-Dgpg.passphrase=${{ secrets.SIGN_KEY_PASS }} -X
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
@@ -46,6 +46,6 @@ jobs:
           distribution: 'temurin'
       - name: Publish to GitHub Packages
         #run: mvn --batch-mode deploy
-        run: mvn --batch-mode deploy -s $GITHUB_WORKSPACE/.github/workflows/Publish/settingsGitHub.xml
+        run: mvn --batch-mode deploy -s $GITHUB_WORKSPACE/.github/workflows/Publish/settingsGitHub.xml -X
         env:
           GITHUB_TOKEN: ${{ secrets.DEPLOY_ACTIONS_GITHUB }}
