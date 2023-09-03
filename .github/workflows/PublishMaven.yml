@@ -32,7 +32,7 @@ jobs:
           cache: 'maven'
       #Publicamos en maven
       - name: Publish to the Maven Central Repository
-        run: mvn --batch-mode deploy
+        run: mvn --batch-mode deploy -Darguments=-Dgpg.passphrase=${{ secrets.SIGN_KEY_PASS }}
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
