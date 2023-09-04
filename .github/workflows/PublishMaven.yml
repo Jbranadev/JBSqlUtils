@@ -37,15 +37,3 @@ jobs:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.SIGN_KEY_PASS }}
-
-      #Publicamos en GithubPackages
-      - name: Set up Java for publishing to GitHub Packages
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-      - name: Publish to GitHub Packages
-        #run: mvn --batch-mode deploy
-        run: mvn --batch-mode deploy -s $GITHUB_WORKSPACE/.github/workflows/Publish/settingsGitHub.xml -X
-        env:
-          GITHUB_TOKEN: ${{ secrets.DEPLOY_ACTIONS_GITHUB }}
