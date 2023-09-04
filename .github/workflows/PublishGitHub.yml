@@ -21,7 +21,7 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }} # Substituted with the value stored in the referenced secret
           gpg-passphrase: MAVEN_GPG_PASSPHRASE # Env var that holds the key's passphrase
       - name: Publish to GitHub Packages
-        run: mvn --batch-mode deploy
+        run: mmvn --batch-mode deploy -P Github -s $GITHUB_WORKSPACE/.github/workflows/Publish/settingsGitHub.xml -X
         env:
           MAVEN_GPG_PASSPHRASE: ${{ secrets.SIGN_KEY_PASS }}
           GITHUB_TOKEN: ${{ secrets.DEPLOY_ACTIONS_GITHUB }}
