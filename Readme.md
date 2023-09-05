@@ -11,12 +11,13 @@ o eliminar una tabla, insertar, seleccionar, actualizar o eliminar registros de 
 en su BD's sin necesidad de instanciar un modelo cómo tal, únicamente tendrá que configurar previamente
 la conexión a su BD's.
 
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.josecarlosbran/JBSqlUtils?logo=apachemaven&logoColor=%23C71A36)](https://central.sonatype.com/artifact/io.github.josecarlosbran/JBSqlUtils/)
-[![javadoc](https://javadoc.io/badge2/io.github.josecarlosbran/JBSqlUtils/javadoc.svg)](https://javadoc.io/doc/io.github.josecarlosbran/JBSqlUtils)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.josecarlosbran/jbsqlutils?logo=apachemaven&logoColor=%23C71A36)](https://central.sonatype.com/artifact/io.github.josecarlosbran/jbsqlutils/)
+[![javadoc](https://javadoc.io/badge2/io.github.josecarlosbran/jbsqlutils/javadoc.svg)](https://javadoc.io/doc/io.github.josecarlosbran/jbsqlutils)
 [![License](https://img.shields.io/badge/Licence-Apache%202.0-blue.svg)](https://github.com/Jbranadev/JBSqlUtils/tree/master/LICENSE.txt)
 [![CodeQL](https://github.com/Jbranadev/JBSqlUtils/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/Jbranadev/JBSqlUtils/actions/workflows/codeql.yml)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Jbranadev/JBSqlUtils/badge)](https://securityscorecards.dev/viewer/?uri=github.com/Jbranadev/JBSqlUtils)
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/7791/badge)](https://www.bestpractices.dev/projects/7791)
+[![codecov](https://codecov.io/gh/Jbranadev/JBSqlUtils/graph/badge.svg?token=SHZHWJU6SA)](https://codecov.io/gh/Jbranadev/JBSqlUtils)
 
 * * *
 
@@ -65,7 +66,7 @@ Maven
 <!-- Dependencia para el manejo de los Logs -->
     <dependency>
         <groupId>io.github.josecarlosbran</groupId>
-        <artifactId>LogsJBSupport</artifactId>
+        <artifactId>logsjbsupport</artifactId>
         <version>0.5.6</version>
         <scope>compile</scope>
     </dependency>
@@ -74,7 +75,7 @@ Maven
 Gradle
 
 ~~~
-implementation 'io.github.josecarlosbran:LogsJBSupport:0.5.6'
+implementation 'io.github.josecarlosbran:logsjbsupport:0.5.6'
 ~~~
 
 Modificar el Nivel de Log que queremos tener sobre JBSqlUtils
@@ -114,7 +115,7 @@ Maven
 ~~~
 <dependency>
   <groupId>io.github.josecarlosbran</groupId>
-  <artifactId>JBSqlUtils</artifactId>
+  <artifactId>jbsqlutils</artifactId>
   <version>1.1.8</version>
 </dependency>
 ~~~
@@ -122,7 +123,7 @@ Maven
 Gradle
 
 ~~~
-implementation 'io.github.josecarlosbran:JBSqlUtils:1.1.8'
+implementation 'io.github.josecarlosbran:jbsqlutils:1.1.8'
 ~~~
 
 Para mayor información sobre cómo descargar JBSqlUtils desde otros
