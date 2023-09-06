@@ -16,7 +16,6 @@ la conexión a su BD's.
 [![License](https://img.shields.io/badge/Licence-Apache%202.0-blue.svg)](https://github.com/Jbranadev/JBSqlUtils/tree/master/LICENSE.txt)
 [![CodeQL](https://github.com/Jbranadev/JBSqlUtils/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/Jbranadev/JBSqlUtils/actions/workflows/codeql.yml)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Jbranadev/JBSqlUtils/badge)](https://securityscorecards.dev/viewer/?uri=github.com/Jbranadev/JBSqlUtils)
-[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/7791/badge)](https://www.bestpractices.dev/projects/7791)
 [![codecov](https://codecov.io/gh/Jbranadev/JBSqlUtils/graph/badge.svg?token=SHZHWJU6SA)](https://codecov.io/gh/Jbranadev/JBSqlUtils)
 
 * * *
