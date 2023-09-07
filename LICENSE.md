@@ -1,4 +1,4 @@
-                                    Licencia Apache
+                                    Licencia apache-2.0
                               Versión 2.0, enero de 2004
                             http://www.apache.org/licenses/
 
