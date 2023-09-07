@@ -165,7 +165,16 @@ class Conexion {
     /**
      * Ejecutor de tareas asincronas
      */
-    protected ExecutorService ejecutor = Executors.newFixedThreadPool(2);
+    //31
+    //protected ExecutorService ejecutor = Executors.newFixedThreadPool(2);
+    // 1.924 seg
+    protected ExecutorService ejecutor = Executors.newCachedThreadPool();
+    //Se bloquea si una tarea bloquea el procesamiento
+    //protected ExecutorService ejecutor = Executors.newSingleThreadExecutor();
+    //17 seg
+    //protected ExecutorService ejecutor = Executors.newWorkStealingPool();
+    // 1.570 seg
+    //protected ExecutorService ejecutor = Executors.newVirtualThreadPerTaskExecutor();
 
     /**
      * Setea las propiedades extra para la url de conexión a BD's

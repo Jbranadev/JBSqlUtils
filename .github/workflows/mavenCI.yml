@@ -15,9 +15,14 @@ on:
   pull_request:
     branches: [ "master" ]
 
+permissions:
+  contents: read|write
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read|write
     steps:
     - name: Harden Runner
       uses: step-security/harden-runner@8ca2b8b2ece13480cda6dacd3511b49857a23c09 # v2.5.1

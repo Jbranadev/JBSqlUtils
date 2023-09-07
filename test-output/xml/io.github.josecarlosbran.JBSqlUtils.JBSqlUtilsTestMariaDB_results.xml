@@ -4,32 +4,32 @@
            failures="0"
            errors="0"
            skipped="0"
-           time="2.840">
+           time="2.630">
   <properties />
   
   
-            <testcase name="firstModel" time="0.050" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="setPropertiesConexiontoModel" time="0.139" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="cleanModel" time="0.006" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="dropTableJBSqlUtils" time="0.152" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="updateJBSqlUtils" time="0.068" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="createTable" time="0.119" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="deleteJBSqlUtils" time="0.099" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="updateModel" time="0.060" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="creteTableJBSqlUtils" time="0.379" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="takeModels" time="0.043" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="updateModels" time="0.502" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="insertModel" time="0.024" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="insertIntoJBSqlUtils" time="0.073" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="getInJsonObjectsJBSqlUtils" time="0.045" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="dropTableIfExists" time="0.132" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="refreshModel" time="0.157" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="setPropertiesConexion" time="0.002" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="insertModels" time="0.430" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="firstOrFail" time="0.026" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+            <testcase name="insertIntoJBSqlUtils" time="0.074" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="getAllModels" time="0.035" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="getModel" time="0.041" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="updateJBSqlUtils" time="0.144" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="updateModel" time="0.055" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="refreshModel" time="0.059" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="dropTableIfExists" time="0.187" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
                 <testcase name="deleteModels" time="0.150" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="getModel" time="0.086" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="deleteModel" time="0.069" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
-                <testcase name="getAllModels" time="0.029" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="insertModel" time="0.041" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="getInJsonObjectsJBSqlUtils" time="0.054" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="creteTableJBSqlUtils" time="0.220" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="firstModel" time="0.057" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="dropTableJBSqlUtils" time="0.377" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="updateModels" time="0.316" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="cleanModel" time="0.005" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="insertModels" time="0.374" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="deleteModel" time="0.041" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="setPropertiesConexion" time="0.001" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="firstOrFail" time="0.032" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="deleteJBSqlUtils" time="0.081" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="takeModels" time="0.053" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="createTable" time="0.118" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
+                <testcase name="setPropertiesConexiontoModel" time="0.115" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMariaDB" />
       
 </testsuite>
