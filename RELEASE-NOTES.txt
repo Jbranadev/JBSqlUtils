@@ -1,6 +1,63 @@
-                        jbsqlutils
-                        Version 1.1.8
-                        Release Notes
+                                         jbsqlutils
+                                        Version 1.1.8
+                                        Release Notes
+
+## What's Changed
+* Implementación deploy automated GitHub Actions by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/29
+* Actualización publicación Maven GithubActions by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/32
+* Actualización flujo MavenPublish 2 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/33
+* Actualización flujo MavenPublish 3 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/34
+* Actualización flujo MavenPublish 3.1 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/35
+* Actualización flujo MavenPublish 3.2 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/36
+* Actualización flujo MavenPublish 3.3 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/37
+* Actualización flujo MavenPublish 3.4 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/38
+* Actualización flujo MavenPublish 3.5 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/39
+* Actualización flujo MavenPublish 3.6 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/40
+* Actualización flujo MavenPublish 3.7 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/41
+* Debuguear Publicación Maven by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/42
+* Actualización flujo MavenPublish 3.8 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/43
+* Actualización flujo MavenPublish 3.9 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/44
+* MavenPublish 4.0 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/45
+* Publicación de flujo GitHub Packages by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/46
+* Publicación de flujo GitHub Packages 1.1 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/47
+* Publicación de flujo GitHub Packages 1.2 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/48
+* Publicación de flujo GitHub Packages 1.3 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/49
+* Actualización flujo GitHub Publish by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/50
+* Actualización flujo GitHub Publish 1 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/51
+* Actualización flujo GitHub Publish 2 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/52
+* Actualización flujo GitHub Publish 3 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/53
+* Actualización flujo GitHub Publish 4 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/54
+* Actualización flujo GitHub Publish 5 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/55
+* Actualización flujo GitHub Publish 6 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/56
+* Actualización flujo GitHub Publish 7 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/57
+* Actualización flujo GitHub Publish y Maven final by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/58
+* [StepSecurity] Apply security best practices by @step-security-bot in https://github.com/Jbranadev/JBSqlUtils/pull/59
+* Actualización Permisos maven.yml by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/60
+* Actualización RELEASE-NOTES.txt by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/61
+* Actualización mavenCI.yml by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/62
+* Actualización mavenCI.yml  2 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/63
+* Actualización mavenCI.yml 3 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/64
+* Actualización Readme.md by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/65
+* Update Badeg Openssf Best Pratices by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/66
+* Update Badge.md by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/67
+* [StepSecurity] ci: Harden GitHub Actions by @step-security-bot in https://github.com/Jbranadev/JBSqlUtils/pull/68
+* Update badge bestpractices by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/69
+* Actualización Flujo changelog y mavenCI by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/70
+* contents: read by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/71
+* Actualización Licencia 1.1.8 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/72
+* Actualización Ramas by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/73
+* Release 1.1.9 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/75
+
+## New Contributors
+* @step-security-bot made their first contribution in https://github.com/Jbranadev/JBSqlUtils/pull/59
+
+**Full Changelog**: https://github.com/Jbranadev/JBSqlUtils/compare/1.1.8...1.1.9
+
+
+
+                                         jbsqlutils
+                                        Version 1.1.8
+                                        Release Notes
 
 Actualización de Pluggins y Dependencias JDBC
 
