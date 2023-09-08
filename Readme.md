@@ -12,7 +12,7 @@ en su BD's sin necesidad de instanciar un modelo cómo tal, únicamente tendrá 
 la conexión a su BD's.
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.josecarlosbran/jbsqlutils?logo=apachemaven&logoColor=%23C71A36)](https://central.sonatype.com/artifact/io.github.josecarlosbran/jbsqlutils/)
-[![javadoc](https://javadoc.io/badge2/io.github.josecarlosbran/jbsqlutils/javadoc.svg)](https://javadoc.io/doc/io.github.josecarlosbran/jbsqlutils)
+[![Javadoc](https://javadoc.io/badge2/io.github.josecarlosbran/jbsqlutils/javadoc.svg)](https://javadoc.io/doc/io.github.josecarlosbran/jbsqlutils)
 [![License](https://img.shields.io/badge/Licence-Apache%202.0-blue.svg)](LICENSE.md)
 [![CodeQL](https://github.com/Jbranadev/JBSqlUtils/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/Jbranadev/JBSqlUtils/actions/workflows/codeql.yml)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Jbranadev/JBSqlUtils/badge)](https://securityscorecards.dev/viewer/?uri=github.com/Jbranadev/JBSqlUtils)
