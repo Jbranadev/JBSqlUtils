@@ -13,7 +13,7 @@ la conexión a su BD's.
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.josecarlosbran/jbsqlutils?logo=apachemaven&logoColor=%23C71A36)](https://central.sonatype.com/artifact/io.github.josecarlosbran/jbsqlutils/)
 [![javadoc](https://javadoc.io/badge2/io.github.josecarlosbran/jbsqlutils/javadoc.svg)](https://javadoc.io/doc/io.github.josecarlosbran/jbsqlutils)
-[![License](https://img.shields.io/badge/Licence-Apache%202.0-blue.svg)](https://github.com/Jbranadev/JBSqlUtils/tree/master/LICENSE.txt)
+[![License](https://img.shields.io/badge/Licence-Apache%202.0-blue.svg)](LICENSE.md)
 [![CodeQL](https://github.com/Jbranadev/JBSqlUtils/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/Jbranadev/JBSqlUtils/actions/workflows/codeql.yml)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Jbranadev/JBSqlUtils/badge)](https://securityscorecards.dev/viewer/?uri=github.com/Jbranadev/JBSqlUtils)
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/7791/badge)](https://www.bestpractices.dev/projects/7791)
@@ -67,7 +67,7 @@ Maven
     <dependency>
         <groupId>io.github.josecarlosbran</groupId>
         <artifactId>logsjbsupport</artifactId>
-        <version>0.5.6</version>
+        <version>1.0.0</version>
         <scope>compile</scope>
     </dependency>
 ~~~
@@ -116,14 +116,14 @@ Maven
 <dependency>
   <groupId>io.github.josecarlosbran</groupId>
   <artifactId>jbsqlutils</artifactId>
-  <version>1.1.8</version>
+  <version>1.1.9</version>
 </dependency>
 ~~~
 
 Gradle
 
 ~~~
-implementation 'io.github.josecarlosbran:jbsqlutils:1.1.8'
+implementation 'io.github.josecarlosbran:jbsqlutils:1.1.9'
 ~~~
 
 Para mayor información sobre cómo descargar JBSqlUtils desde otros
