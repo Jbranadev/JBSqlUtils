@@ -23,6 +23,7 @@ import java.util.List;
 /**
  * Enumeración que proporciona acceso a los diferentes tipos de operadores disponibles para realizar
  * consultas SQL Personalizadas.
+ *
  * @author Jose Bran
  */
 public enum Operator {
@@ -119,6 +120,7 @@ public enum Operator {
 
     /**
      * Obtiene el operador
+     *
      * @return Representación String del Operador en cuestión
      */
     public String getOperador() {
@@ -137,8 +139,8 @@ public enum Operator {
         List<Operator> numeraciones = Arrays.asList(temp);
         for (Operator numeracion : numeraciones) {
             if (numeracion.name().equalsIgnoreCase(name)) {
-                LogsJB.trace("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
-                        +" Operador: "+numeracion.getOperador());
+                LogsJB.trace("Nombre: " + numeracion.name() + " Posicion Ordinal: " + numeracion.ordinal()
+                        + " Operador: " + numeracion.getOperador());
                 return numeracion;
             }
         }

@@ -18,11 +18,13 @@ package io.github.josecarlosbran.JBSqlUtils.Exceptions;
 /**
  * Excepción que indica que no a sido posible encontrar el Modelo en BD's con las caracteristicas
  * proporcionadas a travez de la consulta realizada.
+ *
  * @author Jose Bran
  */
 public class ModelNotFound extends Exception {
     /**
      * Constructor por default para excepción del tipo Model Not Found
+     *
      * @param mensaje Mensaje que deseamos tenga la excepción al momento de dispararse
      */
     public ModelNotFound(String mensaje) {

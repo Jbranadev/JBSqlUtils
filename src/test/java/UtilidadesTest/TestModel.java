@@ -67,6 +67,7 @@ public class TestModel extends JBSqlUtils {
     /**
      * Si deseamos que nuestro modelo no utilice las propiedades de conexión globales, podemos crear un constructor que
      * reciba un único parametro de tipo Booleano el cual enviamos como parametro al constructor de la clase padre JBSqlUtils
+     *
      * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema,
      *                          true si deseamos que obtenga las variables globales y false si deseamos que no obtenga las
      *                          variables globales

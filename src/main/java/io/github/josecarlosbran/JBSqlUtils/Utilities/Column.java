@@ -25,6 +25,7 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
 /**
  * Clase que permite crear los atributos del modelo, especificando el tipo de dato en java, el tipo de dato en SQL
  * y las restricciones que debería tener cada columna.
+ *
  * @param <T> Tipo de dato correspondiente en Java.
  * @author José Bran
  */
@@ -41,7 +42,7 @@ public class Column<T> {
 
     private Boolean columnExist = false;
 
-    private String size="";
+    private String size = "";
 
 
     /**

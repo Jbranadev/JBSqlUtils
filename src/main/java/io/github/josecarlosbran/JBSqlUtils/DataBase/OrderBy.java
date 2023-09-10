@@ -18,13 +18,12 @@ package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.OrderType;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
+import io.github.josecarlosbran.JBSqlUtils.MethodsOrderBy;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,16 +31,11 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
 
 /**
  * Clase que proporciona la capacidad de agregar una sentencia OrderBy a la consulta trasladada como parámetro
+ *
  * @author Jose Bran
  */
-public class OrderBy<T> extends Get {
-    private String sql;
-    private T modelo;
+public class OrderBy<T> extends MethodsOrderBy {
 
-    /**
-     * Lista de los parámetros a envíar
-     */
-    protected List<Column> parametros = new ArrayList<>();
 
     /**
      * Constructor que recibe como parámetro:
@@ -160,55 +154,6 @@ public class OrderBy<T> extends Get {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * Llena el modelo que invoca este método con la información que obtiene de BD's
-     *
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
-     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
-     *                   captura la excepción y la lanza en el hilo principal
-     */
-    public <T extends JBSqlUtils> void get() throws Exception {
-        super.get((T) this.modelo, this.sql, this.parametros);
-    }
-
-    /**
-     * Obtiene un modelo del tipo que invoca este método con la información que obtiene de BD's
-     *
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
-     * @return Retorna un un modelo del tipo que invoca este método con la información que obtiene de BD's.
-     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
-     *                   captura la excepción y la lanza en el hilo principal
-     */
-    public <T extends JBSqlUtils> T first() throws Exception {
-        return (T) super.first((T) this.modelo, this.sql, this.parametros);
-    }
-
-    /**
-     * Obtiene un modelo del tipo que invoca este método con la información que obtiene de BD's
-     *
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
-     * @return Retorna un un modelo del tipo que invoca este método con la información que obtiene de BD's.
-     * @throws ModelNotFound Lanza esta excepción si no logra encontrar el registro correspondiente a la consulta
-     *                       SQL realizada.
-     */
-    public <T extends JBSqlUtils> T firstOrFail() throws Exception {
-        return (T) super.firstOrFail((T) this.modelo, this.sql, this.parametros);
-    }
-
-    /**
-     * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
-     * proporcionada
-     *
-     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
-     * @return Retorna una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
-     * proporcionada
-     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
-     *                   captura la excepción y la lanza en el hilo principal
-     */
-    public <T extends JBSqlUtils> List<T> getAll() throws Exception {
-        return (List<T>) super.getAll((T) this.modelo, this.sql, this.parametros);
-    }
 
 
     /**

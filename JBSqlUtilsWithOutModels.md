@@ -1,10 +1,10 @@
-
 # ¿Cómo utilizar JBSqlUtils sin necesidad de crear un Modelo?
 
 JBSqlUtils puede ser utilizada cómo un generador de sentencias SQL, para Crear, Eliminar tablas,
 Insertar, Actualizar, Eliminar o Seleccionar registros en
 una determinada tabla de forma masiva, de acuerdo a la lógica que se le dé a la consulta.
 ***
+
 ## Crear una tabla.
 
 Para crear una tabla utilizamos el método createTable despues de haber definido el nombre de la tabla que deseamos crear
@@ -97,7 +97,9 @@ Apellido.setSize("1000");
 */
 JBSqlUtils.createTable("Proveedor").addColumn(Name).addColumn(Id).addColumn(Apellido).addColumn(Estado).createTable();
 ~~~
+
 ***
+
 ## Eliminar una tabla.
 
 Para eliminar una tabla de BD's utilizamos el método execute de la clase dropTableIfExist a la cual mandamos como
@@ -111,7 +113,9 @@ el nombre de la tabla que queremos eliminar.
 */
 JBSqlUtils.dropTableIfExist("Proveedor").execute();
 ~~~
+
 ***
+
 ## Insertar Registros en una tabla.
 
 Para insertar registros hacemos uso del método execute que está disponible en la clase value y andValue a las cuales
@@ -132,7 +136,9 @@ se puede insertar un registro a la vez.
 */
 int registros=JBSqlUtils.insertInto("Proveedor").value("Name", "Daniel").andValue("Apellido", "Quiñonez").andValue("Estado", false).execute();
 ~~~
+
 ***
+
 ## Seleccionar registros.
 
 Para obtener los registros de una tabla de BD's podemos hacerlo a través del método select envíando como parametro
@@ -173,7 +179,9 @@ lista.forEach( fila -> {
 LogsJB.info(fila.toString());
 });
 ~~~
+
 ***
+
 ## Actualizar registros.
 
 Para actualizar registros sin necesidad de instanciar un modelo, puede hacerlo a través del
@@ -207,7 +215,9 @@ rows_afected=JBSqlUtils.update("Test").set("name", "Jose Carlos").where("Id", Op
  */
 rows_afected=JBSqlUtils.update("Test").set("name", "Jose Carlos").andSet("IsMayor", true).execute();
 ~~~
+
 ***
+
 ## Eliminar registros.
 
 Para eliminar registros sin necesidad de instanciar un modelo, puede hacerlo a través del
@@ -228,4 +238,5 @@ filas afectadas por la ejecución de la sentencia SQL.
 int rows_afected=JBSqlUtils.delete("Test").where("Id", Operator.MAYOR_IGUAL_QUE, 2).execute();
 
 ~~~
+
 ***

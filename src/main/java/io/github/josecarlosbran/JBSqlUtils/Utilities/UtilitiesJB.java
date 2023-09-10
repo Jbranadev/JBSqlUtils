@@ -16,8 +16,6 @@
 package io.github.josecarlosbran.JBSqlUtils.Utilities;
 
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
-import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
-import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -26,25 +24,10 @@ import java.util.Objects;
 
 /**
  * Clase que brinda acceso a funcionalidades comunes, sin necesidad de crear una instancia de la misma
+ *
  * @author Jose Bran
  */
 public class UtilitiesJB {
-
-    /**
-     * Filtra los caracteres especiales de los valores pasados como parámetros
-     *
-     * @param valor Valor a evaluar
-     * @return Retorna el String del valor proporcionado, habiendo removido comentarios,
-     *         todo lo que este despues de un punto y coma, todo lo que lleve un operador OR
-     */
-    public static String sqlFilter(String valor) {
-        //int index=StringUtils.indexOfIgnoreCase(valor, ";");
-        valor = StringUtils.substringBefore(valor, ";");
-        valor = StringUtils.substringBefore(valor, "--");
-        valor = StringUtils.substringBefore(valor, "/*");
-        valor = StringUtils.substringBefore(valor, Operator.OR.getOperador());
-        return valor;
-    }
 
 
     /****
@@ -85,7 +68,6 @@ public class UtilitiesJB {
         }
         return 1;
     }
-
 
 
     /**

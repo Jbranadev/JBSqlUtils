@@ -160,7 +160,7 @@ class Conexion {
     /**
      * Cantidad de conexiones que ha realizado el modelo a BD's
      */
-    private Integer contadorConexiones=0;
+    private Integer contadorConexiones = 0;
 
     /**
      * Ejecutor de tareas asincronas
@@ -205,25 +205,24 @@ class Conexion {
         //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
         StackTraceElement[] elements = Thread.currentThread().getStackTrace();
         String clase = null;
-        String clase2=Methods_Conexion.class.getName();
-        String clase3=Conexion.class.getName();
-        String clase4=Get.class.getName();
-        for(int i=3;i>=0; i--){
-            try{
+        String clase2 = Methods_Conexion.class.getName();
+        String clase3 = Conexion.class.getName();
+        String clase4 = Get.class.getName();
+        for (int i = 3; i >= 0; i--) {
+            try {
                 clase = elements[i].getClassName();
-            }catch (Exception ex){
-                clase="Invalid";
+            } catch (Exception ex) {
+                clase = "Invalid";
             }
-            if(clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)){
+            if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
                 break;
             }
         }
-        if(!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)){
+        if (!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)) {
             return null;
         }
         return this.propertisURL;
     }
-
 
 
     /**
@@ -482,20 +481,20 @@ class Conexion {
         //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
         StackTraceElement[] elements = Thread.currentThread().getStackTrace();
         String clase = null;
-        String clase2=Methods_Conexion.class.getName();
-        String clase3=Conexion.class.getName();
-        String clase4=Get.class.getName();
-        for(int i=3;i>=0; i--){
-            try{
+        String clase2 = Methods_Conexion.class.getName();
+        String clase3 = Conexion.class.getName();
+        String clase4 = Get.class.getName();
+        for (int i = 3; i >= 0; i--) {
+            try {
                 clase = elements[i].getClassName();
-            }catch (Exception ex){
-                clase="Invalid";
+            } catch (Exception ex) {
+                clase = "Invalid";
             }
-            if(clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)){
+            if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
                 break;
             }
         }
-        if(!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)){
+        if (!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)) {
             return null;
         }
         return this.dataBaseType;
@@ -543,20 +542,20 @@ class Conexion {
         //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
         StackTraceElement[] elements = Thread.currentThread().getStackTrace();
         String clase = null;
-        String clase2=Methods_Conexion.class.getName();
-        String clase3=Conexion.class.getName();
-        String clase4=Get.class.getName();
-        for(int i=3;i>=0; i--){
-            try{
+        String clase2 = Methods_Conexion.class.getName();
+        String clase3 = Conexion.class.getName();
+        String clase4 = Get.class.getName();
+        for (int i = 3; i >= 0; i--) {
+            try {
                 clase = elements[i].getClassName();
-            }catch (Exception ex){
-                clase="Invalid";
+            } catch (Exception ex) {
+                clase = "Invalid";
             }
-            if(clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)){
+            if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
                 break;
             }
         }
-        if(!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)){
+        if (!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)) {
             return null;
         }
         return this.host;
@@ -600,20 +599,20 @@ class Conexion {
         //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
         StackTraceElement[] elements = Thread.currentThread().getStackTrace();
         String clase = null;
-        String clase2=Methods_Conexion.class.getName();
-        String clase3=Conexion.class.getName();
-        String clase4=Get.class.getName();
-        for(int i=3;i>=0; i--){
-            try{
+        String clase2 = Methods_Conexion.class.getName();
+        String clase3 = Conexion.class.getName();
+        String clase4 = Get.class.getName();
+        for (int i = 3; i >= 0; i--) {
+            try {
                 clase = elements[i].getClassName();
-            }catch (Exception ex){
-                clase="Invalid";
+            } catch (Exception ex) {
+                clase = "Invalid";
             }
-            if(clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)){
+            if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
                 break;
             }
         }
-        if(!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)){
+        if (!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)) {
             return null;
         }
         return this.port;
@@ -656,20 +655,20 @@ class Conexion {
         //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
         StackTraceElement[] elements = Thread.currentThread().getStackTrace();
         String clase = null;
-        String clase2=Methods_Conexion.class.getName();
-        String clase3=Conexion.class.getName();
-        String clase4=Get.class.getName();
-        for(int i=3;i>=0; i--){
-            try{
+        String clase2 = Methods_Conexion.class.getName();
+        String clase3 = Conexion.class.getName();
+        String clase4 = Get.class.getName();
+        for (int i = 3; i >= 0; i--) {
+            try {
                 clase = elements[i].getClassName();
-            }catch (Exception ex){
-                clase="Invalid";
+            } catch (Exception ex) {
+                clase = "Invalid";
             }
-            if(clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)){
+            if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
                 break;
             }
         }
-        if(!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)){
+        if (!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)) {
             return null;
         }
         return this.user;
@@ -711,20 +710,20 @@ class Conexion {
         //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
         StackTraceElement[] elements = Thread.currentThread().getStackTrace();
         String clase = null;
-        String clase2=Methods_Conexion.class.getName();
-        String clase3=Conexion.class.getName();
-        String clase4=Get.class.getName();
-        for(int i=3;i>=0; i--){
-            try{
+        String clase2 = Methods_Conexion.class.getName();
+        String clase3 = Conexion.class.getName();
+        String clase4 = Get.class.getName();
+        for (int i = 3; i >= 0; i--) {
+            try {
                 clase = elements[i].getClassName();
-            }catch (Exception ex){
-                clase="Invalid";
+            } catch (Exception ex) {
+                clase = "Invalid";
             }
-            if(clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)){
+            if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
                 break;
             }
         }
-        if(!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)){
+        if (!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)) {
             return null;
         }
         return this.password;
@@ -762,20 +761,20 @@ class Conexion {
         //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
         StackTraceElement[] elements = Thread.currentThread().getStackTrace();
         String clase = null;
-        String clase2=Methods_Conexion.class.getName();
-        String clase3=Conexion.class.getName();
-        String clase4=Get.class.getName();
-        for(int i=3;i>=0; i--){
-            try{
+        String clase2 = Methods_Conexion.class.getName();
+        String clase3 = Conexion.class.getName();
+        String clase4 = Get.class.getName();
+        for (int i = 3; i >= 0; i--) {
+            try {
                 clase = elements[i].getClassName();
-            }catch (Exception ex){
-                clase="Invalid";
+            } catch (Exception ex) {
+                clase = "Invalid";
             }
-            if(clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)){
+            if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
                 break;
             }
         }
-        if(!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)){
+        if (!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)) {
             return null;
         }
         return this.BD;
@@ -832,8 +831,9 @@ class Conexion {
 
     /**
      * Obtiene la conexión del Modelo a la Base de Datos.
+     *
      * @return Retorna la conexión del Modelo a la Base de Datos.
-     * @exception ConexionUndefind lanza esta excepción si el modelo no posee una conexión abierta a BD's
+     * @throws ConexionUndefind lanza esta excepción si el modelo no posee una conexión abierta a BD's
      */
     protected Connection getConnect() throws ConexionUndefind {
         if (Objects.isNull(this.connect)) {
@@ -946,6 +946,7 @@ class Conexion {
 
     /**
      * Obtiene la clave primaria del modelo.
+     *
      * @return Nombre de la clave primaria del modelo
      */
     public String getPrimaryKey() {
@@ -981,6 +982,7 @@ class Conexion {
 
     /**
      * Obtiene la bandera que define si el modelo desea que JBSqlUtils maneje las timestamps Created_at, Update_at.
+     *
      * @return True si JBSqlUtils manejara de forma predeterminada las timestamps del modelo, False si no se
      * desea que JBSqlUtils registre esta información
      */
@@ -1000,7 +1002,8 @@ class Conexion {
 
     /**
      * Obtiene el formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
-     * @return  Una representación String del Formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
+     *
+     * @return Una representación String del Formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
      */
     public String getDateFormat() {
         return dateFormat;
@@ -1017,6 +1020,7 @@ class Conexion {
 
     /**
      * Obtiene el nombre de la columna correspondiente a la TimeStamp CreateAT
+     *
      * @return Nombre de la columna correspondiente a la TimeStamp CreateAT
      */
     public String getCreatedAt() {
@@ -1034,6 +1038,7 @@ class Conexion {
 
     /**
      * Obtiene el nombre de la columna correspondiente a la TimeStamp UpdateAT
+     *
      * @return Nombre de la columna correspondiente a la TimeStamp UpdateAT
      */
     public String getUpdateAT() {
@@ -1092,11 +1097,12 @@ class Conexion {
 
     /**
      * Obtiene la lista de los métodos get del modelo que lo invoca.
+     *
      * @return Lista de los métodos get del modelo que lo invoca.
      */
     protected synchronized List<Method> getMethodsGetOfModel() {
-        if(Objects.isNull(MethodsGetOfModel)){
-            MethodsGetOfModel=new ArrayList<Method>();
+        if (Objects.isNull(MethodsGetOfModel)) {
+            MethodsGetOfModel = new ArrayList<Method>();
         }
         return MethodsGetOfModel;
     }
@@ -1104,17 +1110,19 @@ class Conexion {
 
     /**
      * Obtiene la lista de los métodos set del modelo que lo invoca.
+     *
      * @return Lista de los métodos set del modelo que lo invoca.
      */
     protected synchronized List<Method> getMethodsSetOfModel() {
-        if(Objects.isNull(MethodsSetOfModel)){
-            MethodsSetOfModel=new ArrayList<Method>();
+        if (Objects.isNull(MethodsSetOfModel)) {
+            MethodsSetOfModel = new ArrayList<Method>();
         }
         return MethodsSetOfModel;
     }
 
     /**
      * Cantidad de conexiones que ha realizado el modelo a BD's
+     *
      * @return Cantidad de conexiones que ha realizado el modelo a BD's
      */
     public synchronized Integer getContadorConexiones() {
@@ -1123,6 +1131,7 @@ class Conexion {
 
     /**
      * Setea la cantidad de conexiones que a realizado el modelo
+     *
      * @param contadorConexiones Cantidad de conexiones que a realizado el modelo
      */
     protected synchronized void setContadorConexiones(Integer contadorConexiones) {

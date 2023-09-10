@@ -31,6 +31,7 @@ import java.util.Objects;
 /**
  * Clase a ser heredada por los modelos, la cual brinda acceso a los métodos necesarios para que el modelo
  * se pegue a la BD's especifícada y pueda realizar las operaciónes necesarias sobre la misma.
+ *
  * @author Jose Bran
  */
 public class JBSqlUtils extends Methods {
@@ -194,6 +195,7 @@ public class JBSqlUtils extends Methods {
 
     /**
      * Obtiene la fecha de creación del modelo
+     *
      * @return TimeStamp correspondiente a la fecha de creación del registro en BD's
      */
     public Column<Timestamp> getCreated_at() {
@@ -216,6 +218,7 @@ public class JBSqlUtils extends Methods {
 
     /**
      * Obtiene la fecha de actualización del modelo
+     *
      * @return TimeStamp correspondiente a la fecha de actualización del registro en BD's
      */
     public Column<Timestamp> getUpdated_at() {
@@ -235,8 +238,6 @@ public class JBSqlUtils extends Methods {
     public void setUpdated_at(Column<Timestamp> updated_at) {
         this.updated_at = updated_at;
     }
-
-
 
 
     /**

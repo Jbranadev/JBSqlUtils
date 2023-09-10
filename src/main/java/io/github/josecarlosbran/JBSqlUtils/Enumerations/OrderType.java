@@ -22,6 +22,7 @@ import java.util.List;
 
 /**
  * Numeración que proporciona los tipos de ordenamiento SQL disponibles.
+ *
  * @author Jose Bran
  */
 public enum OrderType {
@@ -64,8 +65,8 @@ public enum OrderType {
         List<OrderType> numeraciones = Arrays.asList(temp);
         for (OrderType numeracion : numeraciones) {
             if (numeracion.name().equalsIgnoreCase(name)) {
-                LogsJB.info("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
-                        +" OrderType: "+numeracion.getValor());
+                LogsJB.info("Nombre: " + numeracion.name() + " Posicion Ordinal: " + numeracion.ordinal()
+                        + " OrderType: " + numeracion.getValor());
                 return numeracion;
             }
         }

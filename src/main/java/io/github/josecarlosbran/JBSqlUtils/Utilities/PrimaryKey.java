@@ -17,6 +17,7 @@ package io.github.josecarlosbran.JBSqlUtils.Utilities;
 
 /**
  * Clase que permite tener la información de la clave primaria de la tabla correspondiente al modelo en BD's
+ *
  * @author Jose Bran
  */
 public class PrimaryKey {

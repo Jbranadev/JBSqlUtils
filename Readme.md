@@ -1,13 +1,13 @@
 # JBSqlUtils :computer:
 
-JBSqlUtils es un ORM desarrollado en java por José Carlos Alfredo Bran Aguirre, 
-que permite gestionar BD's SQLite, MySQL, MariaDB, PostgreSQL y SQLServer, de una manera fácil 
-y rápida sin interrumpir la ejecución del hilo principal del programa, lo cual la hace un potente ORM, 
+JBSqlUtils es un ORM desarrollado en java por José Carlos Alfredo Bran Aguirre,
+que permite gestionar BD's SQLite, MySQL, MariaDB, PostgreSQL y SQLServer, de una manera fácil
+y rápida sin interrumpir la ejecución del hilo principal del programa, lo cual la hace un potente ORM,
 por medio del cual tendrá acceso a un CRUD, configurando únicamente la conexión del
 modelo, los atributos que posee la tabla en BD's cómo variables que pertenecerán al modelo en su aplicación.
 
-JBSqlUtils también proporciona un potente generador de instrucciones SQL que le permitirá crear 
-o eliminar una tabla, insertar, seleccionar, actualizar o eliminar registros de una tabla 
+JBSqlUtils también proporciona un potente generador de instrucciones SQL que le permitirá crear
+o eliminar una tabla, insertar, seleccionar, actualizar o eliminar registros de una tabla
 en su BD's sin necesidad de instanciar un modelo cómo tal, únicamente tendrá que configurar previamente
 la conexión a su BD's.
 
@@ -23,10 +23,11 @@ la conexión a su BD's.
 
 ## Estado del Proyecto :atom:
 
-JBSqlUtils actualmente está en una etapa de desarrollo continuo, por lo cual sus 
+JBSqlUtils actualmente está en una etapa de desarrollo continuo, por lo cual sus
 observaciones y recomendaciones, son bienvenidas para mejorar el proyecto.
 
 ***
+
 ## Configuración :gear:
 
 [Configuración Global](ConfigJBSqlUtils.md)
@@ -43,6 +44,7 @@ observaciones y recomendaciones, son bienvenidas para mejorar el proyecto.
 ***
 
 ## ¿A que Test se ha sometido JBSqlUtils?
+
 Puede revisar los resultados de los Test a los que se ha sometido JBSqlUtils en el siguiente enlace
 
 [Test Result](src/test/TestResult.md)
@@ -100,7 +102,6 @@ Logs, dentro de la cual se creara una carpeta por cada día y dentro de la misma
 aplicación, para mayor información visitar el siguiente Link
 
 [LogsJB](https://github.com/Jbranadev/LogsJB/blob/support_version/Readme.md)
-
 
 ![](Imagenes/Logs.jpg)
 

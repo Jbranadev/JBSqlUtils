@@ -2,6 +2,7 @@ package io.github.josecarlosbran.JBSqlUtils.Enumerations;
 
 /**
  * Enumeración que permite indicar la propiedad de conección que se esta seteando entre las variables de entorno de la JVM.
+ *
  * @author Jose Bran
  */
 public enum ConeccionProperties {

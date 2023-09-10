@@ -32,7 +32,7 @@
 * [#60](https://github.com/Jbranadev/JBSqlUtils/pull/60): Actualización Permisos maven.yml
 * [#61](https://github.com/Jbranadev/JBSqlUtils/pull/61): Actualización RELEASE-NOTES.txt
 * [#62](https://github.com/Jbranadev/JBSqlUtils/pull/62): Actualización mavenCI.yml
-* [#63](https://github.com/Jbranadev/JBSqlUtils/pull/63): Actualización mavenCI.yml  2
+* [#63](https://github.com/Jbranadev/JBSqlUtils/pull/63): Actualización mavenCI.yml 2
 * [#64](https://github.com/Jbranadev/JBSqlUtils/pull/64): Actualización mavenCI.yml 3
 * [#65](https://github.com/Jbranadev/JBSqlUtils/pull/65): Actualización Readme.md
 * [#66](https://github.com/Jbranadev/JBSqlUtils/pull/66): Update Badeg Openssf Best Pratices
