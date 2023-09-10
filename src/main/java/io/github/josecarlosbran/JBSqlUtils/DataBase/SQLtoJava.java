@@ -15,6 +15,8 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
+import com.josebran.LogsJB.LogsJB;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -173,8 +175,8 @@ enum SQLtoJava {
         List<SQLtoJava> numeraciones = Arrays.asList(temp);
         for (SQLtoJava numeracion : numeraciones) {
             if (numeracion.name().equalsIgnoreCase(name)) {
-                /*LogsJB.info("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
-                        +" operador: "+numeracion.getOperador());*/
+                LogsJB.trace("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
+                        +" Tipo: "+numeracion.getTypeJava());
                 return numeracion;
             }
         }

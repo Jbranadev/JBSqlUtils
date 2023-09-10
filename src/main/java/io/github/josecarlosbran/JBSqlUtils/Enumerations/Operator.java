@@ -15,6 +15,8 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.Enumerations;
 
+import com.josebran.LogsJB.LogsJB;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -135,8 +137,8 @@ public enum Operator {
         List<Operator> numeraciones = Arrays.asList(temp);
         for (Operator numeracion : numeraciones) {
             if (numeracion.name().equalsIgnoreCase(name)) {
-                /*LogsJB.info("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
-                        +" operador: "+numeracion.getOperador());*/
+                LogsJB.trace("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
+                        +" Operador: "+numeracion.getOperador());
                 return numeracion;
             }
         }
