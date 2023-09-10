@@ -38,6 +38,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
+      #Limpiamos la cache de Maven
+      - name: Run tests and collect coverage
+        run: mvn -B clean
           #Esperamos la inicialización de los servicios de docker
       - name: Espera Mientras Inician los Servicios de Docker
         run: sleep 10s
