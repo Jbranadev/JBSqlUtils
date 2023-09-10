@@ -35,19 +35,17 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  *
  * @author Jose Bran
  */
-public class AndSet {
-    protected String sql;
-
-    /**
-     * Lista de los parámetros a envíar
-     */
-    protected List<Column> parametros = new ArrayList<>();
+public class AndSet extends MethodsAndSet{
 
     /**
      * Constructor Utilizado para que la clase Set pueda acceder a los metodos heredados de esta clase
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected AndSet() {
-
+    protected AndSet() throws DataBaseUndefind, PropertiesDBUndefined {
+        super();
     }
 
     /**
@@ -58,8 +56,13 @@ public class AndSet {
      * @param sql       Sentencia SQL a la cual se agregara la columna y valor a setear.
      * @throws ValorUndefined ValorUndefined Lanza esta Excepción si
      *                        alguno de los parámetros proporcionados esta vacío o es Null
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected AndSet(String columName, Object value, String sql, List<Column> parametros) throws ValorUndefined {
+    protected AndSet(String columName, Object value, String sql, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+        super();
         if (stringIsNullOrEmpty(columName)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
         }
@@ -84,8 +87,12 @@ public class AndSet {
      * antes de ejecutar la sentencia Upddate
      * @throws ValorUndefined ValorUndefined ValorUndefined Lanza esta Excepción si
      *                        alguno de los parametros proporcionados esta vacío o es Null
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public AndSet andSet(String columName, Object value) throws ValorUndefined {
+    public AndSet andSet(String columName, Object value) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         return new AndSet(columName, value, this.sql, this.parametros);
     }
 
@@ -110,16 +117,6 @@ public class AndSet {
     }
 
 
-    /**
-     * Ejecuta la sentencia SQL proporcionada y retorna la cantidad de filas afectadas
-     *
-     * @return Retorna un Entero que representa la cantidad de filas afectadas al ejecutar la sentencia SQL
-     * proporcionada.
-     * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
-     */
-    public int execute() throws Exception {
-        return new Execute(this.sql, this.parametros).execute();
-    }
 
 
 }

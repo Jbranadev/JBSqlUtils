@@ -31,14 +31,8 @@ import java.util.Objects;
  *
  * @author Jose Bran
  */
-public class Take<T> extends Get {
-    private String sql;
-    private T modelo = null;
+public class Take<T> extends MethodsTake {
 
-    /**
-     * Lista de los parametros a envíar
-     */
-    private List<Column> parametros = new ArrayList<>();
 
     /**
      * Constructor que recibe como parametro:
@@ -137,36 +131,6 @@ public class Take<T> extends Get {
     }
 
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * Ejecuta la sentencia SQL proporcionada y retorna la cantidad de filas afectadas
-     *
-     * @return Retorna un Entero que representa la cantidad de filas afectadas al ejecutar la sentencia SQL
-     * proporcionada.
-     * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
-     */
-    public int execute() throws Exception {
-        return new Execute(this.sql, this.parametros).execute();
-    }
-
-
-    /**
-     * Obtiene una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
-     * Envíada como parametro
-     *
-     * @param columnas Lista con los nombres de las columnas que se desea recuperar, si se desea obtener
-     *                 odas las columnas de la tabla especificada envíar NULL como parametro
-     * @return Retorna una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
-     * Envíada como parametro
-     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
-     *                   captura la excepción y la lanza en el hilo principal
-     */
-    public List<JSONObject> getInJsonObjects(List<String> columnas) throws Exception {
-        return super.get(this.sql, this.parametros, columnas);
-    }
 
 
 }

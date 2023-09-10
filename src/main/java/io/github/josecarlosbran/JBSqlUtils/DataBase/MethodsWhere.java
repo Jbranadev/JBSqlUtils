@@ -4,7 +4,6 @@ import io.github.josecarlosbran.JBSqlUtils.Enumerations.OrderType;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.JBSqlUtils.MethodsOrderBy;
 
 import java.util.Objects;
 
@@ -93,6 +92,22 @@ public class MethodsWhere<T> extends MethodsOrderBy {
             }
             return new Take(this.sql, limite, this.modelo, this.parametros);
         }
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Ejecuta la sentencia SQL proporcionada y retorna la cantidad de filas afectadas
+     *
+     * @return Retorna un Entero que representa la cantidad de filas afectadas al ejecutar la sentencia SQL
+     * proporcionada.
+     * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
+     */
+    public int execute() throws Exception {
+        return new Execute(this.sql, this.parametros).execute();
     }
 
 
