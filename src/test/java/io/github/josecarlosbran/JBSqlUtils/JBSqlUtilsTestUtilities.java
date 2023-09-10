@@ -83,7 +83,7 @@ public class JBSqlUtilsTestUtilities {
         Assert.assertTrue(UtilitiesJB.getColumn(tempTimeStamp).getValor() instanceof Timestamp,
                 "El tipo de Columna obtenido no corresponde al esperado");
 
-        Object tempObject = 1052.255;
+        Object tempObject = new Object();
         Assert.assertTrue(UtilitiesJB.getColumn(tempObject).getValor() instanceof Object,
                 "El tipo de Columna obtenido no corresponde al esperado");
     }
