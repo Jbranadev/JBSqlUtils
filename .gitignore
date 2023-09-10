@@ -41,5 +41,6 @@ build/
 
 /Logs/
 
-/test-output/
 /target/
+/test-output/html/
+/test-output/xml/
