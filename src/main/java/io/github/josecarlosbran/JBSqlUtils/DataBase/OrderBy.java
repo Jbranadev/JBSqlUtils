@@ -20,9 +20,7 @@ import io.github.josecarlosbran.JBSqlUtils.Enumerations.OrderType;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.JBSqlUtils.MethodsOrderBy;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
-import org.json.JSONObject;
 
 import java.util.List;
 import java.util.Objects;
@@ -156,19 +154,6 @@ public class OrderBy<T> extends MethodsOrderBy {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    /**
-     * Obtiene una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
-     * Envíada como parametro
-     *
-     * @param columnas Lista con los nombres de las columnas que se desea recuperar, si se desea obtener
-     *                 odas las columnas de la tabla especificada envíar NULL como parametro
-     * @return Retorna una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
-     * Envíada como parametro
-     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
-     *                   captura la excepción y la lanza en el hilo principal
-     */
-    public List<JSONObject> getInJsonObjects(List<String> columnas) throws Exception {
-        return super.get(this.sql, this.parametros, columnas);
-    }
+
 
 }

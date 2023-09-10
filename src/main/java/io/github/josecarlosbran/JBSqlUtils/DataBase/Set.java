@@ -17,6 +17,8 @@ package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 
 import com.josebran.LogsJB.LogsJB;
+import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
+import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 
 import java.util.Objects;
@@ -40,8 +42,12 @@ public class Set extends AndSet {
      * @param sql       Sentencia SQL a la cual se agregara la columna y valor a setear.
      * @throws ValorUndefined ValorUndefined Lanza esta Excepción si
      *                        alguno de los parámetros proporcionados esta vacío o es Null
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected Set(String columName, Object value, String sql) throws ValorUndefined {
+    protected Set(String columName, Object value, String sql) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
         if (stringIsNullOrEmpty(columName)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");

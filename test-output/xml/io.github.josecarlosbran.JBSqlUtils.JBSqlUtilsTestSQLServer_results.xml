@@ -4,41 +4,32 @@
            failures="0"
            errors="0"
            skipped="0"
-           time="4.580">
-    <properties/>
-
-
-    <testcase name="creteTableJBSqlUtils" time="0.464"
-              classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="deleteJBSqlUtils" time="0.156"
-              classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="setPropertiesConexiontoModel" time="0.127"
-              classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="deleteModel" time="0.085" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="getModel" time="0.073" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="createTable" time="0.580" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="dropTableJBSqlUtils" time="0.413"
-              classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="takeModels" time="0.064" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="insertModel" time="0.038" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="refreshModel" time="0.172" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="updateModel" time="0.132" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="updateJBSqlUtils" time="0.133"
-              classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="deleteModels" time="0.225" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="setPropertiesConexion" time="0.000"
-              classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="cleanModel" time="0.005" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="insertIntoJBSqlUtils" time="0.162"
-              classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="getInJsonObjectsJBSqlUtils" time="0.091"
-              classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="getAllModels" time="0.048" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="updateModels" time="0.584" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="firstOrFail" time="0.043" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="dropTableIfExists" time="0.312"
-              classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="insertModels" time="0.604" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-    <testcase name="firstModel" time="0.069" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer"/>
-
+           time="5.092">
+  <properties />
+  
+  
+            <testcase name="setPropertiesConexiontoModel" time="0.135" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="takeModels" time="0.062" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="insertModel" time="0.092" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="getAllModels" time="0.058" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="insertModels" time="0.735" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="creteTableJBSqlUtils" time="0.665" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="deleteModels" time="0.269" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="dropTableJBSqlUtils" time="0.367" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="createTable" time="0.309" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="updateModels" time="0.712" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="firstOrFail" time="0.059" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="dropTableIfExists" time="0.371" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="updateJBSqlUtils" time="0.183" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="setPropertiesConexion" time="0.001" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="deleteModel" time="0.135" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="insertIntoJBSqlUtils" time="0.179" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="deleteJBSqlUtils" time="0.132" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="cleanModel" time="0.007" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="getModel" time="0.102" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="getInJsonObjectsJBSqlUtils" time="0.130" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="firstModel" time="0.113" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="updateModel" time="0.097" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+                <testcase name="refreshModel" time="0.179" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer" />
+      
 </testsuite>

@@ -1,10 +1,11 @@
-package io.github.josecarlosbran.JBSqlUtils;
+package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.MethodsOpenParentecis;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * @author Jose Bran
  * Clase que brinda acceso a la logica de los metodos comunes que comparte un OrderBy Object
  */
-public class MethodsOrderBy<T> extends MethodsOpenParentecis {
+public class MethodsOrderBy<T> extends MethodsTake {
 
 
     /**
@@ -93,6 +94,8 @@ public class MethodsOrderBy<T> extends MethodsOpenParentecis {
     public <T extends JBSqlUtils> List<T> getAll() throws Exception {
         return (List<T>) super.getAll((T) this.modelo, this.sql, this.parametros);
     }
+
+
 
 }
 
