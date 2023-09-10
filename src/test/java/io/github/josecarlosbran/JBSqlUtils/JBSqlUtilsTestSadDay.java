@@ -3,10 +3,7 @@ package io.github.josecarlosbran.JBSqlUtils;
 
 import UtilidadesTest.TestModel;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
-import io.github.josecarlosbran.JBSqlUtils.Enumerations.ConeccionProperties;
-import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
-import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
-import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
+import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
@@ -241,7 +238,138 @@ public class JBSqlUtilsTestSadDay {
             dependsOnMethods = "andSetValueColumnNameJBSqlUtils",
             expectedExceptions = ValorUndefined.class)
     public void andSetValueColumnValueJBSqlUtils() throws Exception {
-        JBSqlUtils.update("Proveedor").set("ColumnName", null).andSet("ColumnName2", null);
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).andSet("ColumnName2", null);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+
+    @Test(testName = "Where Colum Name JBSqlUtils",
+            dependsOnMethods = "andSetValueColumnValueJBSqlUtils",
+            expectedExceptions = ValorUndefined.class)
+    public void whereColumnNameJBSqlUtils() throws Exception {
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).where(null, Operator.LIKE, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Where Operator JBSqlUtils",
+            dependsOnMethods = "whereColumnNameJBSqlUtils",
+            expectedExceptions = ValorUndefined.class)
+    public void whereOperatorJBSqlUtils() throws Exception {
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", null, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Where Value JBSqlUtils",
+            dependsOnMethods = "whereOperatorJBSqlUtils",
+            expectedExceptions = ValorUndefined.class)
+    public void whereValueJBSqlUtils() throws Exception {
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", Operator.LIKE, null);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+
+    @Test(testName = "And Colum Name JBSqlUtils",
+            dependsOnMethods = "whereValueJBSqlUtils",
+            expectedExceptions = ValorUndefined.class)
+    public void andColumnNameJBSqlUtils() throws Exception {
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", Operator.LIKE, true).and(null, Operator.LIKE, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "And Operator JBSqlUtils",
+            dependsOnMethods = "andColumnNameJBSqlUtils",
+            expectedExceptions = ValorUndefined.class)
+    public void andOperatorJBSqlUtils() throws Exception {
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", Operator.LIKE, true).and("null", null, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "And Value JBSqlUtils",
+            dependsOnMethods = "andOperatorJBSqlUtils",
+            expectedExceptions = ValorUndefined.class)
+    public void andValueJBSqlUtils() throws Exception {
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", Operator.LIKE, true).and("null", Operator.LIKE, null);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+
+    @Test(testName = "Or Colum Name JBSqlUtils",
+            dependsOnMethods = "andValueJBSqlUtils",
+            expectedExceptions = ValorUndefined.class)
+    public void orColumnNameJBSqlUtils() throws Exception {
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", Operator.LIKE, true).or(null, Operator.LIKE, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Or Operator JBSqlUtils",
+            dependsOnMethods = "andColumnNameJBSqlUtils",
+            expectedExceptions = ValorUndefined.class)
+    public void orOperatorJBSqlUtils() throws Exception {
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", Operator.LIKE, true).or("null", null, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Or Value JBSqlUtils",
+            dependsOnMethods = "andOperatorJBSqlUtils",
+            expectedExceptions = ValorUndefined.class)
+    public void orValueJBSqlUtils() throws Exception {
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", Operator.LIKE, true).or("null", Operator.LIKE, null);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+
+    @Test(testName = "Open Parentecis Colum Name JBSqlUtils",
+            dependsOnMethods = "orValueJBSqlUtils",
+            expectedExceptions = ValorUndefined.class)
+    public void openParentecisColumnNameJBSqlUtils() throws Exception {
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", Operator.LIKE, true).openParentecis(Operator.OR, null, Operator.LIKE, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Open Parentecis Operator JBSqlUtils",
+            dependsOnMethods = "openParentecisColumnNameJBSqlUtils",
+            expectedExceptions = ValorUndefined.class)
+    public void openParentecisOperatorJBSqlUtils() throws Exception {
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", Operator.LIKE, true).openParentecis(Operator.OR, "null", null, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Open Parentecis Value JBSqlUtils",
+            dependsOnMethods = "openParentecisOperatorJBSqlUtils",
+            expectedExceptions = ValorUndefined.class)
+    public void openParentecisValueJBSqlUtils() throws Exception {
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", Operator.LIKE, true).openParentecis(Operator.OR, "null", Operator.LIKE, null);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+
+    @Test(testName = "Order By Colum Name JBSqlUtils",
+            dependsOnMethods = "openParentecisValueJBSqlUtils",
+            expectedExceptions = ValorUndefined.class)
+    public void orderByColumnNameJBSqlUtils() throws Exception {
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", Operator.LIKE, true).orderBy(null, OrderType.ASC);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Order By OrderType JBSqlUtils",
+            dependsOnMethods = "orderByColumnNameJBSqlUtils",
+            expectedExceptions = ValorUndefined.class)
+    public void orderByOperatorJBSqlUtils() throws Exception {
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", Operator.LIKE, true).orderBy("null", null);
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
