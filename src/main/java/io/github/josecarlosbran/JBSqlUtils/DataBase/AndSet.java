@@ -23,7 +23,6 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,10 +34,11 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  *
  * @author Jose Bran
  */
-public class AndSet extends MethodsAndSet{
+public class AndSet extends MethodsAndSet {
 
     /**
      * Constructor Utilizado para que la clase Set pueda acceder a los metodos heredados de esta clase
+     *
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
      *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
@@ -54,8 +54,8 @@ public class AndSet extends MethodsAndSet{
      * @param columName El nombre de la columna a la cual se asignara el valor porporcionado.
      * @param value     Valor que se asignara a la columna.
      * @param sql       Sentencia SQL a la cual se agregara la columna y valor a setear.
-     * @throws ValorUndefined ValorUndefined Lanza esta Excepción si
-     *                        alguno de los parámetros proporcionados esta vacío o es Null
+     * @throws ValorUndefined        ValorUndefined Lanza esta Excepción si
+     *                               alguno de los parámetros proporcionados esta vacío o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
      *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
@@ -85,8 +85,8 @@ public class AndSet extends MethodsAndSet{
      * @param value     Valor que se asignara a la columna.
      * @return Retorna un objeto AndSet que entrega la capacidad de setear otro valor
      * antes de ejecutar la sentencia Upddate
-     * @throws ValorUndefined ValorUndefined ValorUndefined Lanza esta Excepción si
-     *                        alguno de los parametros proporcionados esta vacío o es Null
+     * @throws ValorUndefined        ValorUndefined ValorUndefined Lanza esta Excepción si
+     *                               alguno de los parametros proporcionados esta vacío o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
      *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
@@ -115,8 +115,6 @@ public class AndSet extends MethodsAndSet{
     public Where where(String columna, Operator operador, Object value) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         return new Where(columna, operador, value, this.sql, this.parametros);
     }
-
-
 
 
 }

@@ -19,9 +19,7 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
-import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -129,8 +127,6 @@ public class Take<T> extends MethodsTake {
     public <T extends JBSqlUtils> List<T> get() throws Exception {
         return (List<T>) super.getAll((T) this.modelo, this.sql, this.parametros);
     }
-
-
 
 
 }

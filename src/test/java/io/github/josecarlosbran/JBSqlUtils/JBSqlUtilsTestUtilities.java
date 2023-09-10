@@ -1,6 +1,8 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
 
+import UtilidadesTest.TestController;
+import UtilidadesTest.TestModel;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB;
@@ -69,7 +71,7 @@ public class JBSqlUtilsTestUtilities {
         Assert.assertTrue(UtilitiesJB.getColumn(tempBytes).getValor() instanceof byte[],
                 "El tipo de Columna obtenido no corresponde al esperado");
 
-        Date tempDate = new Date();
+        java.sql.Date tempDate = new java.sql.Date(System.currentTimeMillis());
         Assert.assertTrue(UtilitiesJB.getColumn(tempDate).getValor() instanceof Date,
                 "El tipo de Columna obtenido no corresponde al esperado");
 
@@ -84,6 +86,54 @@ public class JBSqlUtilsTestUtilities {
         Object tempObject = 1052.255;
         Assert.assertTrue(UtilitiesJB.getColumn(tempObject).getValor() instanceof Object,
                 "El tipo de Columna obtenido no corresponde al esperado");
+    }
+
+    @Test(testName = "Llenar Modelo",
+            dependsOnMethods = "geColumn")
+    public void llenarModelo() throws DataBaseUndefind, PropertiesDBUndefined {
+        TestModel model = new TestModel(false);
+        TestController controller = new TestController();
+        controller.setName("Controller");
+        controller.setApellido("Apellido");
+        controller.setIsMayor(false);
+        controller.setId(5075);
+        model.llenarModelo(controller, model);
+
+        Assert.assertTrue(controller.getId() == model.getId().getValor(),
+                "El valor que contiene modelo no corresponde al que posee el controlador");
+
+        Assert.assertTrue(controller.getIsMayor() == model.getIsMayor().getValor(),
+                "El valor que contiene modelo no corresponde al que posee el controlador");
+
+        Assert.assertTrue(controller.getName().equalsIgnoreCase(model.getName().getValor()),
+                "El valor que contiene modelo no corresponde al que posee el controlador");
+
+        Assert.assertTrue(controller.getApellido().equalsIgnoreCase(model.getApellido().getValor()),
+                "El valor que contiene modelo no corresponde al que posee el controlador");
+    }
+
+    @Test(testName = "Llenar Controlador",
+            dependsOnMethods = "llenarModelo")
+    public void llenarControlador() throws DataBaseUndefind, PropertiesDBUndefined {
+        TestModel model = new TestModel(false);
+        TestController controller = new TestController();
+        model.getName().setValor("Controller");
+        model.getApellido().setValor("Apellido");
+        model.getIsMayor().setValor(false);
+        model.getId().setValor(5075);
+        model.llenarControlador(controller, model);
+
+        Assert.assertTrue(controller.getId() == model.getId().getValor(),
+                "El valor que contiene controlador no corresponde al que posee el modelo");
+
+        Assert.assertTrue(controller.getIsMayor() == model.getIsMayor().getValor(),
+                "El valor que contiene controlador no corresponde al que posee el modelo");
+
+        Assert.assertTrue(controller.getName().equalsIgnoreCase(model.getName().getValor()),
+                "El valor que contiene controlador no corresponde al que posee el modelo");
+
+        Assert.assertTrue(controller.getApellido().equalsIgnoreCase(model.getApellido().getValor()),
+                "El valor que contiene controlador no corresponde al que posee el modelo");
     }
 
 
