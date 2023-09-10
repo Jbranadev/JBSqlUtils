@@ -21,7 +21,6 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
-import org.json.JSONObject;
 
 import java.util.List;
 import java.util.Objects;
@@ -138,8 +137,6 @@ public class And<T> extends MethodsWhere {
         this.parametros.add(getColumn(valor));
         this.sql = sql + Operator.AND.getOperador() + Operator.OPEN_PARENTESIS.getOperador() + columna + operador.getOperador() + "?" + Operator.CLOSE_PARENTESIS.getOperador();
     }
-
-
 
 
 }

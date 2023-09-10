@@ -1,11 +1,8 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
-import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
-import io.github.josecarlosbran.JBSqlUtils.DataBase.MethodsOpenParentecis;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -94,7 +91,6 @@ public class MethodsOrderBy<T> extends MethodsTake {
     public <T extends JBSqlUtils> List<T> getAll() throws Exception {
         return (List<T>) super.getAll((T) this.modelo, this.sql, this.parametros);
     }
-
 
 
 }

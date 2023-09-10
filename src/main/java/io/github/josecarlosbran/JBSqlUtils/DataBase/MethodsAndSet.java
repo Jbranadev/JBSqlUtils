@@ -1,14 +1,11 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
-import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author Jose Bran
@@ -64,7 +61,6 @@ public class MethodsAndSet<T> extends Get {
     public int execute() throws Exception {
         return new Execute(this.sql, this.parametros).execute();
     }
-
 
 
 }

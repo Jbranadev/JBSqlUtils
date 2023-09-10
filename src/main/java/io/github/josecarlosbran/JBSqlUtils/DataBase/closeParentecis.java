@@ -5,7 +5,6 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
-import org.json.JSONObject;
 
 import java.util.List;
 import java.util.Objects;
@@ -146,9 +145,6 @@ public class closeParentecis<T> extends MethodsWhere {
         this.parametros = parametros;
         this.sql = sql + Operator.CLOSE_PARENTESIS.getOperador() + operatorPost.getOperador();
     }
-
-
-
 
 
 }

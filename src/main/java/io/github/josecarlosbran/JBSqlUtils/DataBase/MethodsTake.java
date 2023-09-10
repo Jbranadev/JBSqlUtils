@@ -4,10 +4,8 @@ import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,7 +16,6 @@ import java.util.Objects;
 public class MethodsTake<T> extends MethodsAndSet {
 
     protected T modelo = null;
-
 
 
     /**
@@ -183,11 +180,6 @@ public class MethodsTake<T> extends MethodsAndSet {
     }
 
 
-
-
-
-
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -218,7 +210,6 @@ public class MethodsTake<T> extends MethodsAndSet {
     public List<JSONObject> getInJsonObjects(List<String> columnas) throws Exception {
         return super.get(this.sql, this.parametros, columnas);
     }
-
 
 
 }

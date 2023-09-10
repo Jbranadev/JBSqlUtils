@@ -40,8 +40,8 @@ public class Set extends AndSet {
      * @param columName El nombre de la columna a la cual se asignara el valor porporcionado.
      * @param value     Valor que se asignara a la columna.
      * @param sql       Sentencia SQL a la cual se agregara la columna y valor a setear.
-     * @throws ValorUndefined ValorUndefined Lanza esta Excepción si
-     *                        alguno de los parámetros proporcionados esta vacío o es Null
+     * @throws ValorUndefined        ValorUndefined Lanza esta Excepción si
+     *                               alguno de los parámetros proporcionados esta vacío o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
      *                               BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
