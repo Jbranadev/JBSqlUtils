@@ -35,10 +35,10 @@ public class JBSqlUtilsTestSQLServer {
         this.testModel.getIsMayor().setDefault_value("1");
         logParrafo("Se setearan las propiedades de conexión del modelo para SQLServer");
         this.testModel.setGetPropertySystem(false);
-        this.testModel.setPort("5077");
-        this.testModel.setHost("localhost");
-        this.testModel.setUser("Bran");
-        this.testModel.setPassword("Bran");
+        this.testModel.setPort("6077");
+        this.testModel.setHost("127.0.0.1");
+        this.testModel.setUser("SA");
+        this.testModel.setPassword("BranSQLSERVEr1");
         this.testModel.setBD("JBSQLUTILS");
         this.testModel.setDataBaseType(DataBase.SQLServer);
         this.testModel.setPropertisURL(";TrustServerCertificate=true");
@@ -338,22 +338,22 @@ public class JBSqlUtilsTestSQLServer {
     public void setPropertiesConexion() {
         logParrafo("Seteara las propiedades de conexión Globales para SQLServer");
         JBSqlUtils.setDataBaseGlobal("JBSQLUTILS");
-        JBSqlUtils.setPortGlobal("5077");
-        JBSqlUtils.setHostGlobal("localhost");
-        JBSqlUtils.setUserGlobal("Bran");
-        JBSqlUtils.setPasswordGlobal("Bran");
+        JBSqlUtils.setPortGlobal("6077");
+        JBSqlUtils.setHostGlobal("127.0.0.1");
+        JBSqlUtils.setUserGlobal("SA");
+        JBSqlUtils.setPasswordGlobal("BranSQLSERVEr1");
         JBSqlUtils.setDataBaseTypeGlobal(DataBase.SQLServer);
         JBSqlUtils.setPropertisUrlConexionGlobal(";TrustServerCertificate=true");
         logParrafo("Ha seteado las propiedades de conexión globales para SQLServer");
         Assert.assertTrue("JBSQLUTILS".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBNAME.getPropiertie())),
                 "Propiedad Nombre BD's no ha sido seteada correctamente");
-        Assert.assertTrue("5077".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBPORT.getPropiertie())),
+        Assert.assertTrue("6077".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBPORT.getPropiertie())),
                 "Propiedad Puerto BD's no ha sido seteada correctamente");
-        Assert.assertTrue("localhost".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBHOST.getPropiertie())),
+        Assert.assertTrue("127.0.0.1".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBHOST.getPropiertie())),
                 "Propiedad Host BD's no ha sido seteada correctamente");
-        Assert.assertTrue("Bran".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBUSER.getPropiertie())),
+        Assert.assertTrue("SA".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBUSER.getPropiertie())),
                 "Propiedad Usuario BD's no ha sido seteada correctamente");
-        Assert.assertTrue("Bran".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBPASSWORD.getPropiertie())),
+        Assert.assertTrue("BranSQLSERVEr1".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBPASSWORD.getPropiertie())),
                 "Propiedad Password BD's no ha sido seteada correctamente");
         Assert.assertTrue(DataBase.SQLServer.name().equalsIgnoreCase(System.getProperty(ConeccionProperties.DBTYPE.getPropiertie())),
                 "Propiedad Tipo de BD's no ha sido seteada correctamente");
