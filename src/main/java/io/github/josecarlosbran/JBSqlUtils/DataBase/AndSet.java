@@ -32,15 +32,23 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
 
 /**
  * Clase que proporciona la lógica para setear otro valor antes de ejecutar la sentencia Update.
+ *
  * @author Jose Bran
  */
 public class AndSet {
-    private String sql;
+    protected String sql;
 
     /**
      * Lista de los parámetros a envíar
      */
-    private List<Column> parametros = new ArrayList<>();
+    protected List<Column> parametros = new ArrayList<>();
+
+    /**
+     * Constructor Utilizado para que la clase Set pueda acceder a los metodos heredados de esta clase
+     */
+    protected AndSet() {
+
+    }
 
     /**
      * Constructor que recibe como parámetro:

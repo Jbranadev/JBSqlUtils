@@ -22,6 +22,7 @@ import java.util.List;
 
 /**
  * Enumeración que permite indicar las restricciones que puede tener una columna al momento de su creación.
+ *
  * @author Jose Bran
  */
 public enum Constraint {
@@ -41,7 +42,7 @@ public enum Constraint {
      * Lo puede realizar a travez del metodo setRestriccion(String restriccion); de esta numeración.
      * considerar que la misma restricción se aplicara para el resto de columnas que tengan un valor Check.
 
-    CHECK("CHECK"),*/
+     CHECK("CHECK"),*/
 
     /**
      * Indica que la columna funciona como clave primaria del modelo.
@@ -52,7 +53,7 @@ public enum Constraint {
     /**
      * Indica que la columna funciona como clave foranea del modelo.
 
-    FOREIGN_KEY("FOREIGN KEY"),*/
+     FOREIGN_KEY("FOREIGN KEY"),*/
 
     /**
      * Indica que el campo tendra como valor por default el TimeStamp del momento en que se almacene el modelo.
@@ -103,8 +104,8 @@ public enum Constraint {
         List<Constraint> numeraciones = Arrays.asList(temp);
         for (Constraint numeracion : numeraciones) {
             if (numeracion.name().equalsIgnoreCase(name)) {
-                LogsJB.trace("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
-                        +" Constraint: "+numeracion.getRestriccion());
+                LogsJB.trace("Nombre: " + numeracion.name() + " Posicion Ordinal: " + numeracion.ordinal()
+                        + " Constraint: " + numeracion.getRestriccion());
                 return numeracion;
             }
         }

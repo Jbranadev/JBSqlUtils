@@ -1,4 +1,3 @@
-
 # Configuración Global :gear:
 
 Utilizar JBSqlUtils es muy fácil.
@@ -11,6 +10,7 @@ Al setear las variables globales de conexión estas se almacenan cómo variables
 del entorno de ejecución de la aplicación, las cuales no pueden ser accedidas más que por
 la misma aplicación que las configuro y se eliminan, cuando la aplicación termina su ejecución.
 ***
+
 ### Configuración necesaria para SQLite:
 
 ~~~ 
@@ -42,7 +42,9 @@ JBSqlUtils.setDataBaseGlobal(BDSqlite);
  */
 JBSqlUtils.setDataBaseTypeGlobal(DataBase.SQLite);
 ~~~
+
 ***
+
 ### Configuración necesaria para MySQL, PostgreSQL y SQLServer:
 
 ~~~ 
@@ -105,7 +107,7 @@ para instanciar objetos que hereden la clase JBSqlUtils, los cuales fungirán c�
 realizar operaciones sobre la tabla correspondiente a cada modelo.
 
 De no desear usar Modelos en su aplicación hasta este punto, podrá utilizar JBSqlUtils cómo un generador de
-sentencias SQL que le permitirán crear o eliminar una tabla en BD's, 
+sentencias SQL que le permitirán crear o eliminar una tabla en BD's,
 insertar, seleccionar, actualizar o eliminar registros de una tabla de acuerdo a la lógica que brinde a la
 sentencia SQL a ejecutar, todo esto sin necesidad de instanciar un modelo, únicamente habiendo configurado sus
 variables de conexión.

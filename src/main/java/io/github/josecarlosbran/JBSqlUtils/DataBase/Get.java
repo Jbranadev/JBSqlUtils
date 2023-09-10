@@ -1,12 +1,12 @@
 /**
  * Copyright (C) 2022 El proyecto de código abierto JBSqlUtils de José Bran
- *
+ * <p>
  * Con licencia de Apache License, Versión 2.0 (la "Licencia");
  * no puede usar este archivo excepto de conformidad con la Licencia.
  * Puede obtener una copia de la Licencia en
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * A menos que lo exija la ley aplicable o se acuerde por escrito, el software
  * distribuido bajo la Licencia se distribuye "TAL CUAL",
  * SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas.
@@ -80,7 +80,7 @@ class Get extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     protected <T extends JBSqlUtils> void get(T modelo, String Sql, List<Column> parametros) throws Exception {
-        if(!this.getGetPropertySystem()){
+        if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
             modelo.llenarPropertiesFromModel(modelo);
         }
@@ -129,7 +129,7 @@ class Get extends Methods_Conexion {
                 }
             };
             //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            Future<ResultAsync<Boolean>> future= this.ejecutor.submit(get);
+            Future<ResultAsync<Boolean>> future = this.ejecutor.submit(get);
             while (!future.isDone()) {
 
             }
@@ -159,19 +159,19 @@ class Get extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     protected <T extends JBSqlUtils> T first(T modelo, String Sql, List<Column> parametros) throws Exception {
-        T modeloResult=null;
-        if(!this.getGetPropertySystem()){
+        T modeloResult = null;
+        if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
             modelo.llenarPropertiesFromModel(modelo);
         }
         try {
-            modeloResult=modelo.obtenerInstanciaOfModel(modelo);
+            modeloResult = modelo.obtenerInstanciaOfModel(modelo);
             modelo.setTaskIsReady(false);
             if (!modelo.getTableExist()) {
                 modelo.refresh();
             }
             Callable<ResultAsync<T>> get = () -> {
-                T modeloTemp=modelo.obtenerInstanciaOfModel(modelo);
+                T modeloTemp = modelo.obtenerInstanciaOfModel(modelo);
                 try {
                     if (modelo.getTableExist()) {
                         String sql = "SELECT * FROM " + modelo.getTableName();
@@ -187,7 +187,7 @@ class Get extends Methods_Conexion {
                         LogsJB.info(ejecutor.toString());
                         ResultSet registros = ejecutor.executeQuery();
                         if (registros.next()) {
-                            modeloTemp=procesarResultSet(modelo, registros);
+                            modeloTemp = procesarResultSet(modelo, registros);
 
                         }
                         modelo.closeConnection(connect);
@@ -208,7 +208,7 @@ class Get extends Methods_Conexion {
                 }
             };
             //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            Future<ResultAsync<T>> future= this.ejecutor.submit(get);
+            Future<ResultAsync<T>> future = this.ejecutor.submit(get);
             while (!future.isDone()) {
 
             }
@@ -217,7 +217,7 @@ class Get extends Methods_Conexion {
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
             }
-            modeloResult=resultado.getResult();
+            modeloResult = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que obtiene el modelo en la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -240,8 +240,8 @@ class Get extends Methods_Conexion {
      *                       SQL realizada.
      */
     protected <T extends JBSqlUtils> T firstOrFail(T modelo, String Sql, List<Column> parametros) throws Exception {
-        T modeloResult=null;
-        if(!this.getGetPropertySystem()){
+        T modeloResult = null;
+        if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
             modelo.llenarPropertiesFromModel(modelo);
         }
@@ -249,9 +249,9 @@ class Get extends Methods_Conexion {
         if (!modelo.getTableExist()) {
             modelo.refresh();
         }
-        modeloResult=modelo.obtenerInstanciaOfModel(modelo);
+        modeloResult = modelo.obtenerInstanciaOfModel(modelo);
         Callable<ResultAsync<T>> get = () -> {
-            T modeloTemp=modelo.obtenerInstanciaOfModel(modelo);
+            T modeloTemp = modelo.obtenerInstanciaOfModel(modelo);
             try {
                 if (modelo.getTableExist()) {
                     String sql = "SELECT * FROM " + modelo.getTableName();
@@ -268,7 +268,7 @@ class Get extends Methods_Conexion {
                     LogsJB.info(ejecutor.toString());
                     ResultSet registros = ejecutor.executeQuery();
                     if (registros.next()) {
-                        modeloTemp=procesarResultSet(modelo, registros);
+                        modeloTemp = procesarResultSet(modelo, registros);
                     }
                     modelo.closeConnection(connect);
                     modelo.setTaskIsReady(true);
@@ -291,7 +291,7 @@ class Get extends Methods_Conexion {
         };
 
         //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-        Future<ResultAsync<T>> future= this.ejecutor.submit(get);
+        Future<ResultAsync<T>> future = this.ejecutor.submit(get);
         while (!future.isDone()) {
 
         }
@@ -300,7 +300,7 @@ class Get extends Methods_Conexion {
         if (!Objects.isNull(resultado.getException())) {
             throw resultado.getException();
         }
-        modeloResult=resultado.getResult();
+        modeloResult = resultado.getResult();
         Boolean result = false;
         result = modeloResult.getModelExist();
         if (!result) {
@@ -324,7 +324,7 @@ class Get extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     protected <T extends JBSqlUtils> List<T> getAll(T modelo, String Sql, List<Column> parametros) throws Exception {
-        if(!this.getGetPropertySystem()){
+        if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
             modelo.llenarPropertiesFromModel(modelo);
         }
@@ -400,7 +400,7 @@ class Get extends Methods_Conexion {
                 }
             };
             //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
-            Future<ResultAsync<List<T>>> future=this.ejecutor.submit(get);
+            Future<ResultAsync<List<T>>> future = this.ejecutor.submit(get);
             while (!future.isDone()) {
 
             }
@@ -519,7 +519,7 @@ class Get extends Methods_Conexion {
                 throw resultado.getException();
             }
             lista = resultado.getResult();
-        } catch (ExecutionException | InterruptedException  e) {
+        } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());

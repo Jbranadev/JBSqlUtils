@@ -187,6 +187,7 @@ public class Test extends JBSqlUtils {
   }
 }
 ~~~
+
 ***
 
 ## ¿Cómo instanciar un modelo que utilice sus propias propiedades de conexión?
@@ -211,6 +212,7 @@ this.testModel.setBD(String NameBD);
 this.testModel.setDataBaseType(DataBase dataBaseType);
 this.testModel.setPropertisURL(String propertiesUrlConection);
 ~~~
+
 ***
 
 ## ¿Cómo trasladar las propiedades de conexión de un modelo a otro?
@@ -231,4 +233,5 @@ TestModel model = new TestModel(false);
  */
 model.llenarPropertiesFromModel(this.testModel);
 ~~~
+
 ***

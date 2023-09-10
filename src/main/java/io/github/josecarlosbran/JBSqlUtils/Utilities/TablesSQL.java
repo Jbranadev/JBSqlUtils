@@ -21,6 +21,7 @@ import java.util.List;
 
 /**
  * Clase que sirve para identificar las caracteristicas de la tabla correspondiente al modelo
+ *
  * @author Jose Bran
  */
 public class TablesSQL {

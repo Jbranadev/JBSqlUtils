@@ -22,6 +22,7 @@ import java.util.List;
 
 /**
  * Enumeración que permite indicar a que Base de Datos se estara conectando el modelo.
+ *
  * @author Jose Bran
  */
 public enum DataBase {
@@ -82,8 +83,8 @@ public enum DataBase {
         List<DataBase> numeraciones = Arrays.asList(temp);
         for (DataBase numeracion : numeraciones) {
             if (numeracion.name().equalsIgnoreCase(name)) {
-                LogsJB.trace("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
-                        +" DataBaseType: "+numeracion.getDBType());
+                LogsJB.trace("Nombre: " + numeracion.name() + " Posicion Ordinal: " + numeracion.ordinal()
+                        + " DataBaseType: " + numeracion.getDBType());
                 return numeracion;
             }
         }

@@ -22,6 +22,7 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
 /**
  * Clase que proporciona los métodos necesarios para la lógica de un Update en BD's sin necesidad
  * de tener un modelo de la tabla que se desea actualizar.
+ *
  * @author Jose Bran
  */
 public class Update {

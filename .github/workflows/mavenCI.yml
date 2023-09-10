@@ -11,7 +11,7 @@ name: Java CI with Maven
 on:
   workflow_dispatch:
   push:
-    branches: [ "master" , "JBran"  ]
+    branches: [ "master" , "JBran" ]
   pull_request:
     branches: [ "master" ]
 permissions:
@@ -23,40 +23,40 @@ jobs:
     permissions:
       contents: write
     steps:
-    - name: Harden Runner
-      uses: step-security/harden-runner@8ca2b8b2ece13480cda6dacd3511b49857a23c09 # v2.5.1
-      with:
-        egress-policy: audit
-    - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v3.6.0
-      #Corremos los servicios de Docker
-    - name: Deploy Services DataBases
-      run: docker compose -f ./compose.yaml up -d
-      #Seteamos la version de Java
-    - name: Set up JDK 17
-      uses: actions/setup-java@cd89f46ac9d01407894225f350157564c9c7cee2 # v3.12.0
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
-        #Esperamos la inicialización de los servicios de docker
-    - name: Espera Mientras Inician los Servicios de Docker
-      run: sleep 10s
-      #Corremos los Test de Maven
-    - name: Run tests and collect coverage
-      run: mvn -B clean test
-      #Enviamos los resultados a Codecov
-    - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@eaaf4bedf32dbdc6b720b63067d99c4d77d6047d # v3.1.4
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - name: Harden Runner
+        uses: step-security/harden-runner@8ca2b8b2ece13480cda6dacd3511b49857a23c09 # v2.5.1
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v3.6.0
+        #Corremos los servicios de Docker
+      - name: Deploy Services DataBases
+        run: docker compose -f ./compose.yaml up -d
+        #Seteamos la version de Java
+      - name: Set up JDK 17
+        uses: actions/setup-java@cd89f46ac9d01407894225f350157564c9c7cee2 # v3.12.0
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+          #Esperamos la inicialización de los servicios de docker
+      - name: Espera Mientras Inician los Servicios de Docker
+        run: sleep 10s
+        #Corremos los Test de Maven
+      - name: Run tests and collect coverage
+        run: mvn -B clean test
+        #Enviamos los resultados a Codecov
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@eaaf4bedf32dbdc6b720b63067d99c4d77d6047d # v3.1.4
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-    #Matamos los servicios de Docker
-    - name: Kill Services DataBases
-      run: docker compose down
+      #Matamos los servicios de Docker
+      - name: Kill Services DataBases
+        run: docker compose down
 
 
-    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-    - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@c5ad0fd6b977364190852883b46728f25a9617c3
+      # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
+      - name: Update dependency graph
+        uses: advanced-security/maven-dependency-submission-action@c5ad0fd6b977364190852883b46728f25a9617c3
 
 

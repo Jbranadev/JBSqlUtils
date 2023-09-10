@@ -13,6 +13,7 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
 
 /**
  * Agrega una columna a la sentencia SQL a ejecutar al momento de llamar al metodo creteTable()
+ *
  * @author Jose Bran
  */
 public class AddColumn extends Methods_Conexion {
@@ -73,10 +74,10 @@ public class AddColumn extends Methods_Conexion {
      * Agrega una columna a la sentencia SQL a ejecutar al momento de llamar al metodo creteTable()
      *
      * @param columna Columna a agregar
+     * @return retorna un objeto del tipo AddColumn que brinda la capacidad de dar una mayor logica a la operación de createTable
      * @throws ValorUndefined        Lanza esta excepción si el parametro proporcionado está vacío o es NULL
      * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
      * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
-     * @return retorna un objeto del tipo AddColumn que brinda la capacidad de dar una mayor logica a la operación de createTable
      */
     public AddColumn addColumn(Column columna) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         return new AddColumn(this.tableName, columna, this.columnas);

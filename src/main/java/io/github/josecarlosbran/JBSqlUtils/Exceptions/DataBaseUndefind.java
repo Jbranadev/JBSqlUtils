@@ -17,11 +17,13 @@ package io.github.josecarlosbran.JBSqlUtils.Exceptions;
 
 /**
  * Excepción que indica que no a sido especificado el tipo de Base de Datos al cual se conectara el modelo
+ *
  * @author Jose Bran
  */
 public class DataBaseUndefind extends Exception {
     /**
      * Crea una excepción del tipo DataBaseUndefined
+     *
      * @param mensaje Mensaje de la excepción que se mostrara al dispararse una excepción de este tipo
      */
     public DataBaseUndefind(String mensaje) {

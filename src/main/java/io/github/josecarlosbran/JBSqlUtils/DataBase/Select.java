@@ -14,6 +14,7 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
 
 /**
  * Clase que proporciona un punto de entrada para poder obtener valores de BD's
+ *
  * @author José Bran
  */
 public class Select extends Get {

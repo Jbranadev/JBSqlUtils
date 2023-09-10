@@ -25,6 +25,7 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
 
 /**
  * Enumeración que sirve para identificar el tipo de dato SQL que tiene la columna en el servidor.
+ *
  * @author Jose Bran
  */
 public enum DataType {
@@ -51,7 +52,6 @@ public enum DataType {
      * entero de 16 bits
      */
     TINYINT("", 3),
-
 
 
     /**
@@ -232,7 +232,7 @@ public enum DataType {
     ;
 
 
-    private String size="";
+    private String size = "";
 
     private int orden;
 
@@ -301,8 +301,8 @@ public enum DataType {
         List<DataType> numeraciones = Arrays.asList(temp);
         for (DataType numeracion : numeraciones) {
             if (numeracion.name().equalsIgnoreCase(name)) {
-                LogsJB.trace("Nombre: "+numeracion.name()+" Posicion Ordinal: "+numeracion.ordinal()
-                        +" DataType: "+numeracion.name());
+                LogsJB.trace("Nombre: " + numeracion.name() + " Posicion Ordinal: " + numeracion.ordinal()
+                        + " DataType: " + numeracion.name());
                 return numeracion;
             }
         }

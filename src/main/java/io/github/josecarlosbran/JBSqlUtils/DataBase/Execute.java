@@ -89,7 +89,7 @@ class Execute extends Methods_Conexion {
                         convertJavaToSQL(columnsSQL, ejecutor, i + 1);
                     }
                     LogsJB.info(ejecutor.toString());
-                    int filas=0;
+                    int filas = 0;
                     filas = ejecutor.executeUpdate();
                     //filas = ejecutor.getUpdateCount();
                     /*if(StringUtils.containsIgnoreCase(this.sql, "INSERT INTO")) {

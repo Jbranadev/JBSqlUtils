@@ -34,6 +34,7 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
 
 /**
  * Clase que proporciona la logica para agregar una sentencia WHERE a la consulta a realizar.
+ *
  * @author Jose Bran
  */
 public class Where<T> extends Get {
@@ -80,10 +81,10 @@ public class Where<T> extends Get {
     /**
      * Constructor que recibe como parámetro:
      *
-     * @param columna  Columna a evaluar dentro de la sentencia WHERE
-     * @param operador Operador con el cual se evaluara la columna
-     * @param valor    Valor contra el que se evaluara la columna
-     * @param modelo   Modelo que invocara los métodos de esta clase
+     * @param columna           Columna a evaluar dentro de la sentencia WHERE
+     * @param operador          Operador con el cual se evaluara la columna
+     * @param valor             Valor contra el que se evaluara la columna
+     * @param modelo            Modelo que invocara los métodos de esta clase
      * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
      * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
@@ -185,8 +186,8 @@ public class Where<T> extends Get {
         if (Objects.isNull(this.modelo)) {
             return new And(this.sql, columna, operador, valor, this.parametros);
         } else {
-            if(!this.getGetPropertySystem()){
-                And and =new And(this.sql, columna, operador, valor, this.modelo, this.parametros, false);
+            if (!this.getGetPropertySystem()) {
+                And and = new And(this.sql, columna, operador, valor, this.modelo, this.parametros, false);
                 //and.llenarPropertiesFromModel(this);
                 return and;
             }
@@ -210,8 +211,8 @@ public class Where<T> extends Get {
         if (Objects.isNull(this.modelo)) {
             return new Or(this.sql, columna, operador, valor, this.parametros);
         } else {
-            if(!this.getGetPropertySystem()){
-                Or or=new Or(this.sql, columna, operador, valor, this.modelo, this.parametros, false);
+            if (!this.getGetPropertySystem()) {
+                Or or = new Or(this.sql, columna, operador, valor, this.modelo, this.parametros, false);
                 //or.llenarPropertiesFromModel(this);
                 return or;
             }

@@ -104,7 +104,7 @@ class Methods extends Methods_Conexion {
                 LogsJB.debug("Modelo Ya había sido inicializado: " + temp.getClass().getSimpleName());
             } else {
                 modelo.llenarPropertiesFromModel(this);
-                temp=this.obtenerInstanciaOfModel(modelo);
+                temp = this.obtenerInstanciaOfModel(modelo);
                 LogsJB.warning("Modelo era Null, crea una nueva instancia: " + temp.getClass().getSimpleName());
                 temp.refresh();
             }
@@ -163,7 +163,7 @@ class Methods extends Methods_Conexion {
                 modelo.llenarPropertiesFromModel(temp);
             } else {
                 modelo.llenarPropertiesFromModel(this);
-                temp=modelo.obtenerInstanciaOfModel(modelo);
+                temp = modelo.obtenerInstanciaOfModel(modelo);
                 LogsJB.warning("Modelo era Null, crea una nueva instancia: " + temp.getClass().getSimpleName());
             }
             if (!modelo.getTableExist()) {
@@ -192,9 +192,9 @@ class Methods extends Methods_Conexion {
     public Boolean saveBoolean() {
         Boolean result = false;
         try {
-            Integer resultado=saveModel(this);
+            Integer resultado = saveModel(this);
             this.waitOperationComplete();
-            return resultado>=1;
+            return resultado >= 1;
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -222,7 +222,7 @@ class Methods extends Methods_Conexion {
      *                               Vacío o es Null
      */
     public Where where(String columna, Operator operador, Object valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        if(!this.getGetPropertySystem()){
+        if (!this.getGetPropertySystem()) {
             Where where = new Where(columna, operador, valor, this, false);
             return where;
         }
@@ -249,7 +249,7 @@ class Methods extends Methods_Conexion {
             }
             Callable<ResultAsync<List<T>>> get = () -> {
                 List<T> listatemp = new ArrayList<T>();
-                try{
+                try {
                     if (this.getTableExist()) {
                         String sql = "SELECT * FROM " + this.getTableName();
                         sql = sql + ";";
@@ -346,10 +346,10 @@ class Methods extends Methods_Conexion {
                 LogsJB.debug("Dato que se ingresara al modelo: " + contenido);
                 //Obtiene los metodos get del modelo
                 List<Method> modelGetMethods = new ArrayList<>(modelo.getMethodsGetOfModel());
-                Iterator<Method> iteradorModelGetMethods=modelGetMethods.iterator();
+                Iterator<Method> iteradorModelGetMethods = modelGetMethods.iterator();
                 while (iteradorModelGetMethods.hasNext()) {
-                    try{
-                        Method modelGetMethod=iteradorModelGetMethods.next();
+                    try {
+                        Method modelGetMethod = iteradorModelGetMethods.next();
                         String modelGetName = modelGetMethod.getName();
                     /*Si el nombre del metodo get, no coincide con el nombre del metodo del
                     controlador, continua
@@ -371,10 +371,10 @@ class Methods extends Methods_Conexion {
                         Boolean isready = false;
                         //Obtiene los metodos set del modelo
                         List<Method> modelSetMethods = new ArrayList<>(modelo.getMethodsSetOfModel());
-                        Iterator<Method> iteradorModelSetMethods=modelSetMethods.iterator();
+                        Iterator<Method> iteradorModelSetMethods = modelSetMethods.iterator();
                         while (iteradorModelSetMethods.hasNext()) {
-                            try{
-                                Method modelSetMethod=iteradorModelSetMethods.next();
+                            try {
+                                Method modelSetMethod = iteradorModelSetMethods.next();
                                 String modelSetName = modelSetMethod.getName();
                                 LogsJB.trace("Nombre del metodo: " + modelSetName);
                                 //Si el metodo es un get, que continue, no tiene caso hacer lo siguiente
@@ -393,7 +393,7 @@ class Methods extends Methods_Conexion {
                                     iteradorModelSetMethods.remove();
                                     break;
                                 }
-                            }catch (Exception e) {
+                            } catch (Exception e) {
                                 LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador: " + e.toString());
                                 LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                                 LogsJB.fatal("Causa de la Excepción : " + e.getCause());
@@ -405,7 +405,7 @@ class Methods extends Methods_Conexion {
                             iteradorModelGetMethods.remove();
                             break;
                         }
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador: " + e.toString());
                         LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                         LogsJB.fatal("Causa de la Excepción : " + e.getCause());
@@ -427,6 +427,7 @@ class Methods extends Methods_Conexion {
 
     /**
      * Llena el controlador proporcionado con la información del modelo
+     *
      * @param controlador Controlador que debe poseer los atributos en java, que corresponden al modelo, con
      *                    sus respectivos metodos setter y getter
      * @param modelo      Modelo del cual se extraera la información para llenar el controlador
@@ -446,9 +447,9 @@ class Methods extends Methods_Conexion {
                 Column columnsSQL = (Column) modelGetMethod.invoke(modelo, null);
                 Object dato = columnsSQL.getValor();
                 LogsJB.debug("Dato que se ingresara al controlador: " + dato);
-                Iterator<Method> iteradorController=controladorMethods.iterator();
+                Iterator<Method> iteradorController = controladorMethods.iterator();
                 while (iteradorController.hasNext()) {
-                    try{
+                    try {
                         Method controladorMethod = iteradorController.next();
                         String controllerName = controladorMethod.getName();
                         String claseMethod = controladorMethod.getDeclaringClass().getSimpleName();
@@ -487,7 +488,7 @@ class Methods extends Methods_Conexion {
                             iteradorController.remove();
                             break;
                         }
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         LogsJB.fatal("Excepción disparada al llenar el controlador, con la info del modelo: " + e.toString());
                         LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                         LogsJB.fatal("Causa de la Excepción : " + e.getCause());
@@ -509,17 +510,18 @@ class Methods extends Methods_Conexion {
 
     /**
      * Setea null en el campo valor de cada columna que posee el modelo.
+     *
      * @param <T> Tipo de dato del modelo, acepta unicamente aquellos que heredan de la clase JBSqlUtils
      */
-    public <T extends JBSqlUtils> void cleanModel(){
-        try{
+    public <T extends JBSqlUtils> void cleanModel() {
+        try {
             this.setModelExist(false);
             //Obtiene los metodos get del modelo
             List<Method> modelGetMethods = this.getMethodsGetOfModel();
             List<Method> modelSetMethods = this.getMethodsSetOfModel();
             for (Method modelGetMethod : modelGetMethods) {
                 String modelGetName = modelGetMethod.getName();
-                String modelName=modelGetMethod.getDeclaringClass().getName();
+                String modelName = modelGetMethod.getDeclaringClass().getName();
                 LogsJB.debug("Obtuvo los metodos Get del modelo: " + modelName);
                 LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);
                 //Obtengo la información de la columna
@@ -531,10 +533,10 @@ class Methods extends Methods_Conexion {
                 columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
                 LogsJB.debug("Nombre de la columna a validar: " + columnName);
                 //Obtiene los metodos set del modelo
-                Iterator<Method> iteradorModelSetMethods=modelSetMethods.iterator();
+                Iterator<Method> iteradorModelSetMethods = modelSetMethods.iterator();
                 while (iteradorModelSetMethods.hasNext()) {
-                    try{
-                        Method modelSetMethod =iteradorModelSetMethods.next();
+                    try {
+                        Method modelSetMethod = iteradorModelSetMethods.next();
                         String modelSetName = modelSetMethod.getName();
                         LogsJB.trace("Nombre del metodo: " + modelSetName);
                         //Si el metodo es un get, que continue, no tiene caso hacer lo siguiente
@@ -551,7 +553,7 @@ class Methods extends Methods_Conexion {
                             LogsJB.debug("Ingreso la columna en el metodo set: " + modelSetName);
                             iteradorModelSetMethods.remove();
                         }
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         LogsJB.fatal("Excepción disparada al limpiar el mmodelo: " + e.toString());
                         LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                         LogsJB.fatal("Causa de la Excepción : " + e.getCause());

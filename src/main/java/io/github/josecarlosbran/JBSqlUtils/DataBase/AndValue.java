@@ -15,17 +15,25 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
 /**
  * Clase que proporciona la lógica para insertar otro valor a una columna a travez de la sentencia
  * InsertInto
+ *
  * @author Jose Bran
  */
 public class AndValue {
 
 
-    private String sql;
+    protected String sql;
 
     /**
      * Lista de los parametros a envíar
      */
-    private List<Column> parametros = new ArrayList<>();
+    protected List<Column> parametros = new ArrayList<>();
+
+    /**
+     * Constructor Por defaul Utilizado para que Value Pueda acceder a los metodos de esta clase, reduciendo el codigo a mantener
+     */
+    protected AndValue() {
+
+    }
 
 
     /**

@@ -3,18 +3,19 @@ package io.github.josecarlosbran.JBSqlUtils;
 
 import UtilidadesTest.TestModel;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
-import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.*;
+import io.github.josecarlosbran.JBSqlUtils.Enumerations.ConeccionProperties;
+import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
+import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
+import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
+import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
+import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
-import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 import static UtilidadesTest.Utilities.logParrafo;
 import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.*;
@@ -31,7 +32,7 @@ public class JBSqlUtilsTestSadDay {
     @Test(testName = "Properties DB Undefined",
             expectedExceptions = PropertiesDBUndefined.class)
     public void propertiesDBUndefined() throws DataBaseUndefind, PropertiesDBUndefined {
-        this.testModel= new TestModel(false);
+        this.testModel = new TestModel(false);
         this.testModel.setDataBaseType(DataBase.SQLite);
         this.testModel.getBD();
         Assert.assertTrue(false,
@@ -42,7 +43,7 @@ public class JBSqlUtilsTestSadDay {
             dependsOnMethods = "propertiesDBUndefined",
             expectedExceptions = DataBaseUndefind.class)
     public void DataBaseTypeUndefined() throws DataBaseUndefind, PropertiesDBUndefined {
-        this.testModel= new TestModel(false);
+        this.testModel = new TestModel(false);
         /**
          * Seteamos las propiedades de conexión del modelo
          */
@@ -59,7 +60,7 @@ public class JBSqlUtilsTestSadDay {
     @Test(testName = "Conexion Undefind",
             dependsOnMethods = "DataBaseTypeUndefined")
     public void conexionUndefined() throws DataBaseUndefind, PropertiesDBUndefined {
-        this.testModel= new TestModel(false);
+        this.testModel = new TestModel(false);
         this.testModel.closeConnection(null);
         Assert.assertTrue(true,
                 "No se Lanzo la exepción ConexionUndefind como se esperaba");
@@ -87,7 +88,7 @@ public class JBSqlUtilsTestSadDay {
             dependsOnMethods = "setPropertiesConexion",
             expectedExceptions = ValorUndefined.class)
     public void dropTableJBSqlUtils() throws Exception {
-        Boolean result= false;
+        Boolean result = false;
         dropTableIfExist(null);
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
@@ -97,7 +98,7 @@ public class JBSqlUtilsTestSadDay {
             dependsOnMethods = "dropTableJBSqlUtils",
             expectedExceptions = ValorUndefined.class)
     public void deleteTableJBSqlUtils() throws Exception {
-        Boolean result= false;
+        Boolean result = false;
         delete(null);
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
@@ -107,7 +108,7 @@ public class JBSqlUtilsTestSadDay {
             dependsOnMethods = "deleteTableJBSqlUtils",
             expectedExceptions = ValorUndefined.class)
     public void insertIntoTableJBSqlUtils() throws Exception {
-        Boolean result= false;
+        Boolean result = false;
         insertInto(null);
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
@@ -117,7 +118,7 @@ public class JBSqlUtilsTestSadDay {
             dependsOnMethods = "insertIntoTableJBSqlUtils",
             expectedExceptions = ValorUndefined.class)
     public void creteTableJBSqlUtils() throws Exception {
-        Boolean result= false;
+        Boolean result = false;
         createTable(null);
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
@@ -127,7 +128,7 @@ public class JBSqlUtilsTestSadDay {
             dependsOnMethods = "creteTableJBSqlUtils",
             expectedExceptions = ValorUndefined.class)
     public void updateTableJBSqlUtils() throws Exception {
-        Boolean result= false;
+        Boolean result = false;
         update(null);
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
@@ -137,7 +138,7 @@ public class JBSqlUtilsTestSadDay {
             dependsOnMethods = "updateTableJBSqlUtils",
             expectedExceptions = ValorUndefined.class)
     public void selectTableJBSqlUtils() throws Exception {
-        Boolean result= false;
+        Boolean result = false;
         select(null);
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
@@ -157,6 +158,7 @@ public class JBSqlUtilsTestSadDay {
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
+
     @Test(testName = "Add Column a Column of Table JBSqlUtils",
             dependsOnMethods = "addColumnTableJBSqlUtils",
             expectedExceptions = ValorUndefined.class)
@@ -203,7 +205,7 @@ public class JBSqlUtilsTestSadDay {
             dependsOnMethods = "andValueColumnNameJBSqlUtils",
             expectedExceptions = ValorUndefined.class)
     public void andValueColumnValueJBSqlUtils() throws Exception {
-        JBSqlUtils.insertInto("Proveedor").value("ColumnName", null).andValue("ColumnName2", null);
+        JBSqlUtils.insertInto("Proveedor").value("ColumnName", true).andValue("ColumnName2", null);
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
@@ -243,8 +245,6 @@ public class JBSqlUtilsTestSadDay {
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
-
-
 
 
 }

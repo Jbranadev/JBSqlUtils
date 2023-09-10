@@ -1,4 +1,3 @@
-
 ## ¿Cómo refrescar un modelo con la información de la tabla que representa en BD's?
 
 Para poder refrescar un modelo obteniendo la información de la tabla que representa
@@ -11,6 +10,7 @@ refresh
 */
 this.testModel.refresh();
 ~~~
+
 * * *
 
 ## ¿Cómo eliminar la tabla correspondiente a un modelo?
@@ -31,6 +31,7 @@ Test testModel = new Test();
 */
 testModel.dropTableIfExist();
 ~~~
+
 * * *
 
 ## ¿Cómo crear la tabla correspondiente a un modelo?
@@ -151,6 +152,7 @@ Para poder limpiar un modelo, utilizamos el método cleanModel
 */
 testModel.cleanModel();
 ~~~
+
 * * *
 
 ## ¿Cómo obtener un registro de BD's?
@@ -472,6 +474,7 @@ modelo en su columna correspondiente a la primaryKey, tenga el valor del registr
 
 De no cumplir con la configuración anterior, JBSqlUtils procedera a
 insertar el modelo.
+
 ~~~
 /**
 *Obtenemos el registro que coincide con la sentencia SQL generada por el modelo
