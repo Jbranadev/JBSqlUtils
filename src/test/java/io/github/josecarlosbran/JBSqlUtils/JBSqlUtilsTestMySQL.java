@@ -43,9 +43,9 @@ public class JBSqlUtilsTestMySQL {
         /**
          * Seteamos las propiedades de conexión del modelo
          */
-        this.testModel.setPort("5076");
+        this.testModel.setPort("6076");
         this.testModel.setHost("127.0.0.1");
-        this.testModel.setUser("Bran");
+        this.testModel.setUser("root");
         this.testModel.setPassword("Bran");
         this.testModel.setBD("JBSQLUTILS");
         this.testModel.setDataBaseType(DataBase.MySQL);
@@ -356,20 +356,20 @@ public class JBSqlUtilsTestMySQL {
     public void setPropertiesConexion() {
         logParrafo("Seteara las propiedades de conexión Globales para MySQL");
         JBSqlUtils.setDataBaseGlobal("JBSQLUTILS");
-        JBSqlUtils.setPortGlobal("5076");
+        JBSqlUtils.setPortGlobal("6076");
         JBSqlUtils.setHostGlobal("127.0.0.1");
-        JBSqlUtils.setUserGlobal("Bran");
+        JBSqlUtils.setUserGlobal("root");
         JBSqlUtils.setPasswordGlobal("Bran");
         JBSqlUtils.setDataBaseTypeGlobal(DataBase.MySQL);
         JBSqlUtils.setPropertisUrlConexionGlobal("?autoReconnect=true&useSSL=false");
         logParrafo("Ha seteado las propiedades de conexión globales para MySQL");
         Assert.assertTrue("JBSQLUTILS".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBNAME.getPropiertie())),
                 "Propiedad Nombre BD's no ha sido seteada correctamente");
-        Assert.assertTrue("5076".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBPORT.getPropiertie())),
+        Assert.assertTrue("6076".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBPORT.getPropiertie())),
                 "Propiedad Puerto BD's no ha sido seteada correctamente");
         Assert.assertTrue("127.0.0.1".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBHOST.getPropiertie())),
                 "Propiedad Host BD's no ha sido seteada correctamente");
-        Assert.assertTrue("Bran".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBUSER.getPropiertie())),
+        Assert.assertTrue("root".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBUSER.getPropiertie())),
                 "Propiedad Usuario BD's no ha sido seteada correctamente");
         Assert.assertTrue("Bran".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBPASSWORD.getPropiertie())),
                 "Propiedad Password BD's no ha sido seteada correctamente");

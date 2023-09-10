@@ -4,32 +4,32 @@
            failures="0"
            errors="0"
            skipped="0"
-           time="5.841">
+           time="4.380">
   <properties />
   
   
-            <testcase name="deleteModels" time="0.350" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="firstModel" time="0.137" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="setPropertiesConexiontoModel" time="0.199" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="updateJBSqlUtils" time="0.202" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="dropTableJBSqlUtils" time="0.405" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="takeModels" time="0.081" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="createTable" time="0.260" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="cleanModel" time="0.004" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="updateModel" time="0.123" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="deleteJBSqlUtils" time="0.223" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="creteTableJBSqlUtils" time="0.447" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="setPropertiesConexion" time="0.000" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="getModel" time="0.114" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="insertModel" time="0.071" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="insertIntoJBSqlUtils" time="0.410" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="insertModels" time="0.849" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="firstOrFail" time="0.059" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="getAllModels" time="0.069" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="getInJsonObjectsJBSqlUtils" time="0.142" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="updateModels" time="0.964" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="dropTableIfExists" time="0.475" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="refreshModel" time="0.136" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
-                <testcase name="deleteModel" time="0.121" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+            <testcase name="deleteModels" time="0.241" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="creteTableJBSqlUtils" time="0.332" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="deleteJBSqlUtils" time="0.151" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="insertIntoJBSqlUtils" time="0.163" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="insertModel" time="0.038" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="getModel" time="0.068" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="getAllModels" time="0.059" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="cleanModel" time="0.005" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="firstOrFail" time="0.035" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="firstModel" time="0.083" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="insertModels" time="0.652" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="refreshModel" time="0.154" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="updateModel" time="0.088" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="updateModels" time="0.573" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="updateJBSqlUtils" time="0.128" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="createTable" time="0.367" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="setPropertiesConexiontoModel" time="0.188" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="takeModels" time="0.064" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="getInJsonObjectsJBSqlUtils" time="0.086" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="deleteModel" time="0.140" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="dropTableIfExists" time="0.331" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="dropTableJBSqlUtils" time="0.433" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
+                <testcase name="setPropertiesConexion" time="0.001" classname="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestPostgreSQL" />
       
 </testsuite>

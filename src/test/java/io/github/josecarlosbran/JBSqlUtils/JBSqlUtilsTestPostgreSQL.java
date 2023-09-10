@@ -34,8 +34,8 @@ public class JBSqlUtilsTestPostgreSQL {
         this.testModel = new TestModel(false);
         logParrafo("Se setearan las propiedades de conexión del modelo para PostgreSQL");
         this.testModel.setGetPropertySystem(false);
-        this.testModel.setPort("5075");
-        this.testModel.setHost("localhost");
+        this.testModel.setPort("6075");
+        this.testModel.setHost("127.0.0.1");
         this.testModel.setUser("postgres");
         this.testModel.setPassword("Bran");
         this.testModel.setBD("JBSQLUTILS");
@@ -341,8 +341,8 @@ public class JBSqlUtilsTestPostgreSQL {
     public void setPropertiesConexion() {
         logParrafo("Seteara las propiedades de conexión Globales para PostgreSQL");
         JBSqlUtils.setDataBaseGlobal("JBSQLUTILS");
-        JBSqlUtils.setPortGlobal("5075");
-        JBSqlUtils.setHostGlobal("localhost");
+        JBSqlUtils.setPortGlobal("6075");
+        JBSqlUtils.setHostGlobal("127.0.0.1");
         JBSqlUtils.setUserGlobal("postgres");
         JBSqlUtils.setPasswordGlobal("Bran");
         JBSqlUtils.setDataBaseTypeGlobal(DataBase.PostgreSQL);
@@ -350,9 +350,9 @@ public class JBSqlUtilsTestPostgreSQL {
         logParrafo("Ha seteado las propiedades de conexión globales para PostgreSQL");
         Assert.assertTrue("JBSQLUTILS".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBNAME.getPropiertie())),
                 "Propiedad Nombre BD's no ha sido seteada correctamente");
-        Assert.assertTrue("5075".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBPORT.getPropiertie())),
+        Assert.assertTrue("6075".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBPORT.getPropiertie())),
                 "Propiedad Puerto BD's no ha sido seteada correctamente");
-        Assert.assertTrue("localhost".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBHOST.getPropiertie())),
+        Assert.assertTrue("127.0.0.1".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBHOST.getPropiertie())),
                 "Propiedad Host BD's no ha sido seteada correctamente");
         Assert.assertTrue("postgres".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBUSER.getPropiertie())),
                 "Propiedad Usuario BD's no ha sido seteada correctamente");

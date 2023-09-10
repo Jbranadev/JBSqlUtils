@@ -42,7 +42,7 @@ public class JBSqlUtilsTestMariaDB {
         /**
          * Seteamos las propiedades de conexión del modelo
          */
-        this.testModel.setPort("5078");
+        this.testModel.setPort("6078");
         this.testModel.setHost("127.0.0.1");
         this.testModel.setUser("root");
         this.testModel.setPassword("Bran");
@@ -339,7 +339,7 @@ public class JBSqlUtilsTestMariaDB {
     public void setPropertiesConexion() {
         logParrafo("Seteara las propiedades de conexión Globales para MariaDB");
         JBSqlUtils.setDataBaseGlobal("JBSQLUTILS");
-        JBSqlUtils.setPortGlobal("5078");
+        JBSqlUtils.setPortGlobal("6078");
         JBSqlUtils.setHostGlobal("127.0.0.1");
         JBSqlUtils.setUserGlobal("root");
         JBSqlUtils.setPasswordGlobal("Bran");
@@ -348,7 +348,7 @@ public class JBSqlUtilsTestMariaDB {
         logParrafo("Ha seteado las propiedades de conexión globales para MariaDB");
         Assert.assertTrue("JBSQLUTILS".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBNAME.getPropiertie())),
                 "Propiedad Nombre BD's no ha sido seteada correctamente");
-        Assert.assertTrue("5078".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBPORT.getPropiertie())),
+        Assert.assertTrue("6078".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBPORT.getPropiertie())),
                 "Propiedad Puerto BD's no ha sido seteada correctamente");
         Assert.assertTrue("127.0.0.1".equalsIgnoreCase(System.getProperty(ConeccionProperties.DBHOST.getPropiertie())),
                 "Propiedad Host BD's no ha sido seteada correctamente");

@@ -1,0 +1,73 @@
+
+services:
+
+  sqlserver:
+    container_name: sqlserver
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    healthcheck:
+      test: [ "CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'BranSQLSERVEr1' -Q 'CREATE DATABASE JBSQLUTILS' || exit 1" ]
+      interval: 1s
+      retries: 5
+      start_period: 100ms
+      timeout: 3s
+    #command: [ "/opt/mssql-tools/bin/sqlcmd", "-S", "127.0.0.1", "-U", "SA", "-P" , "'BranSQLSERVEr1'", "-Q", "'CREATE DATABASE JBSQLUTILS'"]
+    networks:
+      - test_red
+    ports:
+      - 6077:1433
+    environment:
+      MSSQL_SA_PASSWORD: BranSQLSERVEr1
+      ACCEPT_EULA: Y
+
+
+  mariadb:
+    container_name: mariadb
+    image: mariadb:latest
+    depends_on:
+      - sqlserver
+    volumes:
+      - test-volume:/var/lib/mariadb
+    networks:
+      - test_red
+    ports:
+      - 6078:3306
+    environment:
+      MARIADB_ROOT_PASSWORD: Bran
+      MARIADB_DATABASE: JBSQLUTILS
+
+
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    depends_on:
+      - sqlserver
+    networks:
+      - test_red
+    ports:
+      - 6076:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: Bran
+      MYSQL_DATABASE: JBSQLUTILS
+
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    depends_on:
+      - sqlserver
+    volumes:
+      - test-volume:/var/lib/postgres
+    networks:
+      - test_red
+    ports:
+      - 6075:5432
+    environment:
+      POSTGRES_PASSWORD: Bran
+      POSTGRES_DB: JBSQLUTILS
+
+
+
+volumes:
+  test-volume:
+
+networks:
+  test_red:
