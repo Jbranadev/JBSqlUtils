@@ -5,6 +5,27 @@
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
     </listeners>
     <!-- Se excluyen Test de MySQL, MariaDB para GitHub Actions, se corregiran posteriormente-->
+    <test name="Test Numerations">
+        <classes>
+            <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestEnumerations">
+            </class>
+        </classes>
+    </test>
+
+    <test name="Test Utilities">
+        <classes>
+            <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestUtilities">
+            </class>
+        </classes>
+    </test>
+
+    <test name="Test SadDay">
+        <classes>
+            <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSadDay">
+            </class>
+        </classes>
+    </test>
+
     <test name="Test MySQL">
         <classes>
             <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL">
