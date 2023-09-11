@@ -65,10 +65,11 @@ public class Select extends Get {
 
     /**
      * Obtiene una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
-     * Envíada como parametro
+     * Envíada como parametro, las Key para obtener el valor correpondiente a cada columna todas sus letras tienen que ser mayusculas,
+     * por ejemplo si la columna es Name, utilizar NAME para obtener el valor de esa columna, esto en el JSONObject
      *
      * @param columnas Lista con los nombres de las columnas que se desea recuperar, si se desea obtener
-     *                 odas las columnas de la tabla especificada envíar NULL como parametro
+     *                 todas las columnas de la tabla especificada envíar NULL como parametro
      * @return Retorna una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
      * Envíada como parametro
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
