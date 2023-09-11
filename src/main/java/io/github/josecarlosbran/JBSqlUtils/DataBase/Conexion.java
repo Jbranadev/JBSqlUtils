@@ -43,132 +43,107 @@ class Conexion {
 
 
     /**
-     * Tipo de BD's a la cual se conectara.
-     */
-    private DataBase dataBaseType = null;
-
-    /**
-     * Host en el cual se encuentra la BD's a la cual se conectara.
-     */
-    private String host = null;
-
-    /**
-     * Puerto en el cual esta escuchando la BD's a la cual nos vamos a conectar.
-     */
-    private String port = null;
-
-    /**
-     * Nombre de la BD's a la cual nos conectaremos.
-     */
-    private String BD = null;
-
-    /**
-     * Usuario de la BD's
-     */
-    private String user = null;
-
-    /**
-     * Contraseña del Usuario de la BD's
-     */
-    private String password = null;
-
-    /**
-     * Indica si para este modelo se utilizará la BD's establecida en las propiedades del sistema
-     * al estar en TRUE, cuando esta en FALSE, eso indica que para este modelo se tendra
-     * una configuración personalizada.
-     */
-    private Boolean getPropertySystem = true;
-
-    /**
-     * Conexión del modelo
-     */
-    private Connection connect = null;
-
-    /**
-     * Bandera que sirve para identificar si la tabla correspondiente al modelo Existe
-     */
-    private Boolean tableExist = false;
-
-    /**
-     * Nombre de la tabla correspondiente al modelo.
-     */
-    private String tableName = null;
-
-
-    /**
-     * Bandera que sirve para identificar si la tarea que estaba realizando el modelo a sido terminada
-     */
-    private Boolean taskIsReady = true;
-
-    /**
-     * Define cual será la clave primaria del modelo
-     */
-    private String primaryKey = null;
-
-    /**
-     * Define si la clave primaria es autoincrementable, el valor por default es true
-     */
-    private Boolean primaryKeyIsIncremental = true;
-
-    /**
-     * Define si el modelo desea que JBSqlUtils maneje las timestamps Created_at, Update_at.
-     */
-    private Boolean timestamps = true;
-
-
-    /**
-     * Define el formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
-     */
-    private String dateFormat = null;
-
-    /**
-     * Define el nombre de la columna correspondiente a la TimeStamp CreateAT
-     */
-    private String createdAt = "created_at";
-
-    /**
-     * Define el nombre de la columna correspondiente a la TimeStamp UpdateAT
-     */
-    private String updateAT = "updated_at";
-
-    /**
-     * Bandera que sirve para identificar si el modelo existe en BD's, de existir cuando se llame al método save se procedera a actualizar el modelo
-     */
-    private Boolean modelExist = false;
-
-    /**
-     * Representa la metadata de la tabla correspondiente al modelo en BD's
-     */
-    private TablesSQL tabla = new TablesSQL();
-
-    /**
-     * Propiedades extra para la url de conexión a BD's por ejemplo
-     * ?autoReconnect=true&useSSL=false
-     */
-    private String propertisURL = null;
-
-    /**
-     * Lista de metodos get que posee el modelo
-     */
-    private List<Method> MethodsGetOfModel = null;
-
-    /**
-     * Lista de metodos set que posee el modelo
-     */
-    private List<Method> MethodsSetOfModel = null;
-
-    /**
-     * Cantidad de conexiones que ha realizado el modelo a BD's
-     */
-    private Integer contadorConexiones = 0;
-
-    /**
      * Ejecutor de tareas asincronas
      */
     //31
     //protected ExecutorService ejecutor = Executors.newFixedThreadPool(2);
     // 1.924 seg
     protected ExecutorService ejecutor = Executors.newCachedThreadPool();
+    /**
+     * Tipo de BD's a la cual se conectara.
+     */
+    private DataBase dataBaseType = null;
+    /**
+     * Host en el cual se encuentra la BD's a la cual se conectara.
+     */
+    private String host = null;
+    /**
+     * Puerto en el cual esta escuchando la BD's a la cual nos vamos a conectar.
+     */
+    private String port = null;
+    /**
+     * Nombre de la BD's a la cual nos conectaremos.
+     */
+    private String BD = null;
+    /**
+     * Usuario de la BD's
+     */
+    private String user = null;
+    /**
+     * Contraseña del Usuario de la BD's
+     */
+    private String password = null;
+    /**
+     * Indica si para este modelo se utilizará la BD's establecida en las propiedades del sistema
+     * al estar en TRUE, cuando esta en FALSE, eso indica que para este modelo se tendra
+     * una configuración personalizada.
+     */
+    private Boolean getPropertySystem = true;
+    /**
+     * Conexión del modelo
+     */
+    private Connection connect = null;
+    /**
+     * Bandera que sirve para identificar si la tabla correspondiente al modelo Existe
+     */
+    private Boolean tableExist = false;
+    /**
+     * Nombre de la tabla correspondiente al modelo.
+     */
+    private String tableName = null;
+    /**
+     * Bandera que sirve para identificar si la tarea que estaba realizando el modelo a sido terminada
+     */
+    private Boolean taskIsReady = true;
+    /**
+     * Define cual será la clave primaria del modelo
+     */
+    private String primaryKey = null;
+    /**
+     * Define si la clave primaria es autoincrementable, el valor por default es true
+     */
+    private Boolean primaryKeyIsIncremental = true;
+    /**
+     * Define si el modelo desea que JBSqlUtils maneje las timestamps Created_at, Update_at.
+     */
+    private Boolean timestamps = true;
+    /**
+     * Define el formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
+     */
+    private String dateFormat = null;
+    /**
+     * Define el nombre de la columna correspondiente a la TimeStamp CreateAT
+     */
+    private String createdAt = "created_at";
+    /**
+     * Define el nombre de la columna correspondiente a la TimeStamp UpdateAT
+     */
+    private String updateAT = "updated_at";
+    /**
+     * Bandera que sirve para identificar si el modelo existe en BD's, de existir cuando se llame al método save se procedera a actualizar el modelo
+     */
+    private Boolean modelExist = false;
+    /**
+     * Representa la metadata de la tabla correspondiente al modelo en BD's
+     */
+    private TablesSQL tabla = new TablesSQL();
+    /**
+     * Propiedades extra para la url de conexión a BD's por ejemplo
+     * ?autoReconnect=true&useSSL=false
+     */
+    private String propertisURL = null;
+    /**
+     * Lista de metodos get que posee el modelo
+     */
+    private List<Method> MethodsGetOfModel = null;
+    /**
+     * Lista de metodos set que posee el modelo
+     */
+    private List<Method> MethodsSetOfModel = null;
+    /**
+     * Cantidad de conexiones que ha realizado el modelo a BD's
+     */
+    private Integer contadorConexiones = 0;
     //Se bloquea si una tarea bloquea el procesamiento
     //protected ExecutorService ejecutor = Executors.newSingleThreadExecutor();
     //17 seg
@@ -177,22 +152,34 @@ class Conexion {
     //protected ExecutorService ejecutor = Executors.newVirtualThreadPerTaskExecutor();
 
     /**
-     * Setea las propiedades extra para la url de conexión a BD's
+     * Constructor de la clase Conexión que se encarga de inicializar las propiedades de conexión del modelo,
+     * las cuales las obtiene de las propiedades del sistema Java.
      *
-     * @param propertisURL Propiedades extra para la url de conexión a BD's por ejemplo
-     *                     {@literal ?autoReconnect=true&useSSL=false}
+     * @throws DataBaseUndefind      Lanza esta excepción si el tipo de BD's a la cual se conectara el modelo no ha sido definida entre
+     *                               las propiedades del sistema Java.
+     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión no han sido definidas.
      */
-    public void setPropertisURL(String propertisURL) {
-        try {
-            if (!stringIsNullOrEmpty(propertisURL))
-                this.propertisURL = propertisURL;
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al setear las propiedades extra de conexión con la cual el modelo se conectara a la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+    protected Conexion() throws DataBaseUndefind, PropertiesDBUndefined {
+        this.setTableName();
+        this.getSystemProperties();
+    }
+
+    /**
+     * Constructor de la clase Conexión que se encarga de inicializar las propiedades de conexión del modelo,
+     * las cuales las obtiene de las propiedades del sistema Java.
+     * <p>
+     * c
+     *
+     * @throws DataBaseUndefind      Lanza esta excepción si el tipo de BD's a la cual se conectara el modelo no ha sido definida entre
+     *                               las propiedades del sistema Java.
+     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión no han sido definidas.
+     */
+    protected Conexion(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
+        this.setTableName();
+        if (getPropertySystem) {
+            this.getSystemProperties();
         }
+        this.setGetPropertySystem(getPropertySystem);
 
     }
 
@@ -224,37 +211,20 @@ class Conexion {
         return this.propertisURL;
     }
 
-
     /**
-     * Constructor de la clase Conexión que se encarga de inicializar las propiedades de conexión del modelo,
-     * las cuales las obtiene de las propiedades del sistema Java.
+     * Setea las propiedades extra para la url de conexión a BD's
      *
-     * @throws DataBaseUndefind      Lanza esta excepción si el tipo de BD's a la cual se conectara el modelo no ha sido definida entre
-     *                               las propiedades del sistema Java.
-     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión no han sido definidas.
+     * @param propertisURL Propiedades extra para la url de conexión a BD's por ejemplo
+     *                     {@literal ?autoReconnect=true&useSSL=false}
      */
-    protected Conexion() throws DataBaseUndefind, PropertiesDBUndefined {
-        this.setTableName();
-        this.getSystemProperties();
-    }
-
-
-    /**
-     * Constructor de la clase Conexión que se encarga de inicializar las propiedades de conexión del modelo,
-     * las cuales las obtiene de las propiedades del sistema Java.
-     * <p>
-     * c
-     *
-     * @throws DataBaseUndefind      Lanza esta excepción si el tipo de BD's a la cual se conectara el modelo no ha sido definida entre
-     *                               las propiedades del sistema Java.
-     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión no han sido definidas.
-     */
-    protected Conexion(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
-        this.setTableName();
-        if (getPropertySystem) {
-            this.getSystemProperties();
+    public void setPropertisURL(String propertisURL) {
+        try {
+            if (!stringIsNullOrEmpty(propertisURL))
+                this.propertisURL = propertisURL;
+        } catch (Exception e) {
+            LogsJB.fatal("Excepción disparada al setear las propiedades extra de conexión con la cual el modelo se conectara a la BD's: " + e.toString());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
-        this.setGetPropertySystem(getPropertySystem);
 
     }
 
@@ -515,9 +485,6 @@ class Conexion {
                 this.dataBaseType = dataBase;
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el tipo de BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
 
@@ -572,9 +539,6 @@ class Conexion {
                 this.host = host;
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el host en el que se encuentra la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
 
@@ -629,9 +593,6 @@ class Conexion {
                 this.port = port;
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el puerto en el cual se encuentra escuchando la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
@@ -685,9 +646,6 @@ class Conexion {
                 this.user = user;
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear el usuario con el cual el modelo se conectara a la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
@@ -740,9 +698,6 @@ class Conexion {
                 this.password = password;
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear la contraseña del usuario con el cual el modelo se conectara a la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
@@ -791,9 +746,6 @@ class Conexion {
                 this.BD = BD;
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el nombre de la Base de Datos a la que se conectara el modelo: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
@@ -821,9 +773,6 @@ class Conexion {
             this.getPropertySystem = getPropertySystem;
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear la bandera getPropertySystem: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
 
@@ -852,9 +801,6 @@ class Conexion {
             this.connect = connect;
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear la Conexión del modelo: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
@@ -906,6 +852,15 @@ class Conexion {
         return taskIsReady;
     }
 
+    /**
+     * Setea el valor de la bandera que indica si el modelo actual esta realizando una tarea
+     *
+     * @param taskIsReady True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
+     *                    actualmente.
+     */
+    protected synchronized void setTaskIsReady(Boolean taskIsReady) {
+        this.taskIsReady = taskIsReady;
+    }
 
     /**
      * Si queremos utilizar el mismo modelo para realizar otra operación en BD's
@@ -932,16 +887,6 @@ class Conexion {
         while (!this.getTaskIsReady()) {
 
         }
-    }
-
-    /**
-     * Setea el valor de la bandera que indica si el modelo actual esta realizando una tarea
-     *
-     * @param taskIsReady True si el modelo actualmente no esta realizando una tarea. False si el modelo esta realizando una tarea
-     *                    actualmente.
-     */
-    protected synchronized void setTaskIsReady(Boolean taskIsReady) {
-        this.taskIsReady = taskIsReady;
     }
 
     /**

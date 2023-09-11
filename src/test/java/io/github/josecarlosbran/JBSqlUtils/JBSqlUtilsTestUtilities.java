@@ -164,7 +164,7 @@ public class JBSqlUtilsTestUtilities {
     @Test(testName = "Refresh Model",
             dependsOnMethods = {"setPropertiesConexion"})
     public void refreshModel() throws Exception {
-        TestModel testModel=new TestModel();
+        TestModel testModel = new TestModel();
         logParrafo("Se refrescará el modelo con la información existente en BD's");
         testModel.refresh();
         testModel.waitOperationComplete();

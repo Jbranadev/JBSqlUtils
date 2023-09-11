@@ -120,9 +120,6 @@ class Get extends Methods_Conexion {
                     return new ResultAsync<>(true, null);
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's: " + e.toString());
-                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     modelo.setTaskIsReady(true);
                     return new ResultAsync<>(true, e);
@@ -140,9 +137,7 @@ class Get extends Methods_Conexion {
             }
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que obtiene el modelo en la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
@@ -199,9 +194,7 @@ class Get extends Methods_Conexion {
                     return new ResultAsync<>(modeloTemp, null);
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's: " + e.toString());
-                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
                     LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     modelo.setTaskIsReady(true);
                     return new ResultAsync<>(modeloTemp, e);
@@ -220,9 +213,7 @@ class Get extends Methods_Conexion {
             modeloResult = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que obtiene el modelo en la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return modeloResult;
@@ -281,9 +272,7 @@ class Get extends Methods_Conexion {
                 }
             } catch (SQLException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
                 LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's: " + e.toString());
-                LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
                 LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                 modelo.setTaskIsReady(true);
                 return new ResultAsync<>(modeloTemp, e);
@@ -391,9 +380,7 @@ class Get extends Methods_Conexion {
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
                             "SQL de la BD's: " + e.toString());
-                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
                     LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     modelo.setTaskIsReady(true);
                     return new ResultAsync(listaTemp, e);
@@ -412,9 +399,7 @@ class Get extends Methods_Conexion {
             lista = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
 
         }
@@ -500,9 +485,7 @@ class Get extends Methods_Conexion {
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
                             "SQL de la BD's: " + e.toString());
-                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
                     LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     this.setTaskIsReady(true);
                     return new ResultAsync<>(temp, e);
@@ -521,9 +504,7 @@ class Get extends Methods_Conexion {
             lista = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
 
         }

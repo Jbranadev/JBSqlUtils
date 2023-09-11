@@ -197,9 +197,7 @@ class Methods extends Methods_Conexion {
             return resultado >= 1;
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
@@ -271,9 +269,6 @@ class Methods extends Methods_Conexion {
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
                             "SQL de la BD's: " + e.toString());
-                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     return new ResultAsync<>(listatemp, e);
                 }
@@ -292,9 +287,7 @@ class Methods extends Methods_Conexion {
             lista = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return lista;
@@ -395,9 +388,6 @@ class Methods extends Methods_Conexion {
                                 }
                             } catch (Exception e) {
                                 LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador: " + e.toString());
-                                LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                                LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                                LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                                 LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                             }
                         }
@@ -407,9 +397,6 @@ class Methods extends Methods_Conexion {
                         }
                     } catch (Exception e) {
                         LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador: " + e.toString());
-                        LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                        LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                        LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                         LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     }
                 }
@@ -417,9 +404,7 @@ class Methods extends Methods_Conexion {
 
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
 
@@ -490,18 +475,14 @@ class Methods extends Methods_Conexion {
                         }
                     } catch (Exception e) {
                         LogsJB.fatal("Excepción disparada al llenar el controlador, con la info del modelo: " + e.toString());
-                        LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                        LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                        LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
                         LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     }
                 }
             }
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al llenar el controlador, con la info del modelo: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
 
@@ -555,18 +536,14 @@ class Methods extends Methods_Conexion {
                         }
                     } catch (Exception e) {
                         LogsJB.fatal("Excepción disparada al limpiar el mmodelo: " + e.toString());
-                        LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                        LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                        LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
                         LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     }
                 }
             }
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al limpiar el modelo: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }

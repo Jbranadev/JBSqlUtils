@@ -269,7 +269,6 @@ public enum DataType {
     }
 
 
-
     /**
      * Obtiene el orden del tipo de dato
      *

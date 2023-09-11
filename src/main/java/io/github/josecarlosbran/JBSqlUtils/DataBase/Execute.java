@@ -102,9 +102,6 @@ class Execute extends Methods_Conexion {
 
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que ejecuta la sentencia SQL transmitida: " + e.toString());
-                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     LogsJB.fatal("Sentencia SQL: " + this.sql);
                     return new ResultAsync<>(0, e);
@@ -123,9 +120,6 @@ class Execute extends Methods_Conexion {
             result = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que ejecuta la sentencia SQL transmitida: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
             LogsJB.fatal("Sentencia SQL: " + this.sql);
         }

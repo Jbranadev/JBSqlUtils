@@ -173,53 +173,6 @@ public class JBSqlUtils extends Methods {
     }
 
     /**
-     * Obtiene la fecha de creación del modelo
-     *
-     * @return TimeStamp correspondiente a la fecha de creación del registro en BD's
-     */
-    public Column<Timestamp> getCreated_at() {
-        if (Objects.isNull(created_at.getValor())) {
-            Long datetime = System.currentTimeMillis();
-            created_at.setValor(new Timestamp(datetime));
-            return created_at;
-        }
-        return created_at;
-    }
-
-    /**
-     * Setea la TimeStamp correspondiente a la fecha de creación del registro en BD's
-     *
-     * @param created_at TimeStamp correspondiente a la fecha de creación del registro en BD's
-     */
-    public void setCreated_at(Column<Timestamp> created_at) {
-        this.created_at = created_at;
-    }
-
-    /**
-     * Obtiene la fecha de actualización del modelo
-     *
-     * @return TimeStamp correspondiente a la fecha de actualización del registro en BD's
-     */
-    public Column<Timestamp> getUpdated_at() {
-        if (Objects.isNull(updated_at.getValor())) {
-            Long datetime = System.currentTimeMillis();
-            updated_at.setValor(new Timestamp(datetime));
-            return updated_at;
-        }
-        return updated_at;
-    }
-
-    /**
-     * Setea la TimeStamp correspondiente a la fecha de actualización del registro en BD's
-     *
-     * @param updated_at TimeStamp correspondiente a la fecha de actualización del registro en BD's
-     */
-    public void setUpdated_at(Column<Timestamp> updated_at) {
-        this.updated_at = updated_at;
-    }
-
-
-    /**
      * Proporciona un método de entrada para crear una tabla en BD's a través del generador SQL de JBSqlUtils
      *
      * @param tableName Nombre de la Tabla que deseamos crear
@@ -272,7 +225,6 @@ public class JBSqlUtils extends Methods {
         return new Select(tableName);
     }
 
-
     /**
      * Actualiza las filas de la tabla proporcionada, de acuerdo a la logica de la consulta generada.
      *
@@ -295,6 +247,52 @@ public class JBSqlUtils extends Methods {
      */
     public static Delete delete(String tableName) throws ValorUndefined {
         return new Delete(tableName);
+    }
+
+    /**
+     * Obtiene la fecha de creación del modelo
+     *
+     * @return TimeStamp correspondiente a la fecha de creación del registro en BD's
+     */
+    public Column<Timestamp> getCreated_at() {
+        if (Objects.isNull(created_at.getValor())) {
+            Long datetime = System.currentTimeMillis();
+            created_at.setValor(new Timestamp(datetime));
+            return created_at;
+        }
+        return created_at;
+    }
+
+    /**
+     * Setea la TimeStamp correspondiente a la fecha de creación del registro en BD's
+     *
+     * @param created_at TimeStamp correspondiente a la fecha de creación del registro en BD's
+     */
+    public void setCreated_at(Column<Timestamp> created_at) {
+        this.created_at = created_at;
+    }
+
+    /**
+     * Obtiene la fecha de actualización del modelo
+     *
+     * @return TimeStamp correspondiente a la fecha de actualización del registro en BD's
+     */
+    public Column<Timestamp> getUpdated_at() {
+        if (Objects.isNull(updated_at.getValor())) {
+            Long datetime = System.currentTimeMillis();
+            updated_at.setValor(new Timestamp(datetime));
+            return updated_at;
+        }
+        return updated_at;
+    }
+
+    /**
+     * Setea la TimeStamp correspondiente a la fecha de actualización del registro en BD's
+     *
+     * @param updated_at TimeStamp correspondiente a la fecha de actualización del registro en BD's
+     */
+    public void setUpdated_at(Column<Timestamp> updated_at) {
+        this.updated_at = updated_at;
     }
 
 }

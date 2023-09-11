@@ -47,7 +47,7 @@ public class Take<T> extends MethodsTake {
      */
     protected Take(String sql, int limite, T modelo, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
-        if (Objects.isNull(limite)|| limite <=0) {
+        if (Objects.isNull(limite) || limite <= 0) {
             throw new ValorUndefined("El Limite proporcionado es 0 o inferior, por lo cual no se puede" +
                     "realizar la consulta a BD's");
         }
@@ -75,7 +75,7 @@ public class Take<T> extends MethodsTake {
      */
     protected Take(String sql, int limite, T modelo, List<Column> parametros, Boolean getPropertySystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super(getPropertySystem);
-        if (Objects.isNull(limite)|| limite <=0) {
+        if (Objects.isNull(limite) || limite <= 0) {
             throw new ValorUndefined("El Limite proporcionado es 0 o inferior, por lo cual no se puede" +
                     "realizar la consulta a BD's");
         }
@@ -102,7 +102,7 @@ public class Take<T> extends MethodsTake {
      */
     protected Take(String sql, int limite, List<Column> parametros) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         super();
-        if (Objects.isNull(limite)|| limite <=0) {
+        if (Objects.isNull(limite) || limite <= 0) {
             throw new ValorUndefined("El Limite proporcionado es 0 o inferior, por lo cual no se puede" +
                     "realizar la consulta a BD's");
         }
