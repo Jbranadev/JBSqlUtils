@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
-
 /**
  * Agrega una columna a la sentencia SQL a ejecutar al momento de llamar al metodo creteTable()
  *

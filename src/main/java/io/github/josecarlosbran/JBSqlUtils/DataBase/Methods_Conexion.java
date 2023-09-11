@@ -203,9 +203,6 @@ class Methods_Conexion extends Conexion {
                     }
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada al intentar crear el directorio donde estará la BD's SQLite: " + e.toString());
-                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                 }
                 url = "jdbc:" + this.getDataBaseType().getDBType() + ":" + this.getBD();
@@ -217,9 +214,7 @@ class Methods_Conexion extends Conexion {
             }
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         this.setContadorConexiones(this.getContadorConexiones() + 1);
@@ -248,9 +243,7 @@ class Methods_Conexion extends Conexion {
             LogsJB.warning("El modelo no estaba conectado a la BD's por lo cual no se cerrara la conexión");
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada cerrar la conexión a la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
@@ -270,9 +263,7 @@ class Methods_Conexion extends Conexion {
             LogsJB.warning("El modelo no estaba conectado a la BD's por lo cual no se cerrara la conexión");
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada cerrar la conexión a la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
@@ -369,9 +360,7 @@ class Methods_Conexion extends Conexion {
                     }
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: " + e.toString());
-                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
                     LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     new ResultAsync<Boolean>(false, e);
                 }
@@ -390,9 +379,7 @@ class Methods_Conexion extends Conexion {
             result = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
@@ -501,9 +488,7 @@ class Methods_Conexion extends Conexion {
                         }
                     } catch (Exception e) {
                         LogsJB.fatal("Excepción disparada al obtener los nombres de las columnas del modelo: " + e.toString());
-                        LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                        LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                        LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
                         LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     }
                 }
@@ -511,9 +496,7 @@ class Methods_Conexion extends Conexion {
 
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
@@ -900,9 +883,7 @@ class Methods_Conexion extends Conexion {
                     }
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
-                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
                     LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     modelo.setTaskIsReady(true);
                     return new ResultAsync<>(0, e);
@@ -1036,9 +1017,7 @@ class Methods_Conexion extends Conexion {
 
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
-                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
                     LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     modelo.setTaskIsReady(true);
                     return new ResultAsync<>(0, e);
@@ -1064,9 +1043,7 @@ class Methods_Conexion extends Conexion {
             result = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
@@ -1153,9 +1130,7 @@ class Methods_Conexion extends Conexion {
                     }
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
-                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
                     LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     modelo.setTaskIsReady(true);
                     return new ResultAsync<>(0, e);
@@ -1174,9 +1149,7 @@ class Methods_Conexion extends Conexion {
             result = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
@@ -1206,9 +1179,7 @@ class Methods_Conexion extends Conexion {
         } catch (InvocationTargetException | NoSuchMethodException | InstantiationException |
                  IllegalAccessException e) {
             LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         } finally {
             return temp;
@@ -1453,9 +1424,6 @@ class Methods_Conexion extends Conexion {
                                 }
                             } catch (Exception e) {
                                 LogsJB.fatal("Excepción disparada al tratar de ordenar los metodos get de la lista: " + e.toString());
-                                LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                                LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                                LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                                 LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                             }
                             return 0;
@@ -1556,9 +1524,7 @@ class Methods_Conexion extends Conexion {
                     return new ResultAsync<Boolean>(false, null);
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Crea la tabla correspondiente al modelo: " + e.toString());
-                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
                     LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     new ResultAsync<Boolean>(false, e);
                 }
@@ -1578,9 +1544,7 @@ class Methods_Conexion extends Conexion {
             result = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que Crea la tabla correspondiente al modelo: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
@@ -1629,9 +1593,7 @@ class Methods_Conexion extends Conexion {
                     return new ResultAsync<Boolean>(false, null);
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo: " + e.toString());
-                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
                     LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     return new ResultAsync<Boolean>(false, e);
                 }
@@ -1650,9 +1612,7 @@ class Methods_Conexion extends Conexion {
             result = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
@@ -1694,9 +1654,6 @@ class Methods_Conexion extends Conexion {
                                 }
                             } catch (Exception e) {
                                 LogsJB.fatal("Excepción disparada al tratar de ordenar los metodos get de la lista: " + e.toString());
-                                LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                                LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                                LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                                 LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                             }
                             return 0;
@@ -1788,9 +1745,6 @@ class Methods_Conexion extends Conexion {
                     return new ResultAsync<Boolean>(false, null);
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Crea la tabla solicitada: " + e.toString());
-                    LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                    LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                    LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     return new ResultAsync<Boolean>(false, e);
                 }
@@ -1810,9 +1764,7 @@ class Methods_Conexion extends Conexion {
             result = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
             LogsJB.fatal("Excepción disparada en el método que Crea la tabla solicitada: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
@@ -1870,9 +1822,7 @@ class Methods_Conexion extends Conexion {
             }
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
@@ -1922,26 +1872,18 @@ class Methods_Conexion extends Conexion {
                                 }
                             } catch (Exception e) {
                                 LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador: " + e.toString());
-                                LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                                LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                                LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                                 LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                             }
                         }
                     } catch (Exception e) {
                         LogsJB.fatal("Excepción disparada al obtener los nombres de las columnas del modelo: " + e.toString());
-                        LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                        LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                        LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                         LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     }
                 }
             }
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al obtener los nombres de las columnas del modelo: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }

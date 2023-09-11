@@ -24,11 +24,11 @@ import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.select;
 public class JBSqlUtilsTestSQLServer {
 
 
+    TestModel testModel;
+
     public JBSqlUtilsTestSQLServer() {
         System.setProperty("org.uncommons.reportng.escape-output", "false");
     }
-
-    TestModel testModel;
 
     @Test(testName = "Setear Properties Conexión for Model")
     public void setPropertiesConexiontoModel() throws DataBaseUndefind, PropertiesDBUndefined {

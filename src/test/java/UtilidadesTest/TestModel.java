@@ -33,6 +33,75 @@ import org.testng.annotations.Ignore;
 public class TestModel extends JBSqlUtils {
 
     /**
+     * Declara un miembro del modelo, el cual en java almacenara un dato de tipo Integer, se define Integer,
+     * ya que la clase Column es una clase generica y no puede trabajar con datos primivitos como int, pero si con
+     * clases contenedoras como Integer.
+     * <p>
+     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
+     * Integer.
+     * <p>
+     * Agregamos dos restricciones SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
+     * desde nuestra aplicación en caso esta no exista, de lo contrario no es necesario que agreguemos restricciones.
+     */
+    private Column<Integer> id = new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
+    /**
+     * Declara un miembro del modelo, el cual en java almacenara un dato de tipo String.
+     * <p>
+     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
+     * Varchar.
+     * <p>
+     * Agregamos un parámetro extra el cual es el default_value antes de indicar las restricciones,
+     * este parámetro es de tipo String, por medio de este parámetro podemos definir el valor que deseamos tenga la
+     * columna por default (Puede ser un valor del tipo de dato SQL, o una funcion SQL que retorne un valor del
+     * tipo de dato SQL de la columna) cuando se inserte un registro y no se especifique un dato para esa columna,
+     * este unicamente funcionara cuando tenga la restriccion DEFAULT definida y se definira unicamente si se
+     * crea la tabla en BD's desde nuestra aplicación a través del método modelo.crateTable().
+     * <p>
+     * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
+     * desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
+     */
+    private Column<String> name = new Column<>(DataType.VARCHAR, "'Daniel'", Constraint.DEFAULT);
+
+    /**
+     * Para poder utilizar JBSqlUtils es necesario que los miembros de la clase modelo, que correspondan
+     * a una columna de la tabla correspondiente al modelo, sean del tipo Column, especificando el tipo de dato
+     * en java y por medio del constructor del objeto Column se pase como parámetro el tipo de dato SQL
+     * de la columna, adicional a esto se pueden definir restricciones, como valor por defecto para la columna
+     * si se desea utilizar el modelo para crear la tabla en BD's, pero estos últimos son opcionales
+     * el único parámetro obligatorio es el DataType de la columna en BD's.
+     *
+     * Por convención el nombre de cada miembro correspondiente a una columna en BD's debe tener el mismo
+     * nombre que la columna en BD's. y estos deben tener sus respectivos metodos set an get, teniendo estos
+     * por convención el nombre setColumnName, getColumName.
+     *
+     * Por ejemplo, para la columna Id = El miembro del modelo será Id, JBSqlUtils no es case sensitive,
+     * así que en BD's la columna puede ser ID y en el modelo id, que JBSqlUtils hará el match entre la columna
+     * y el miembro de la clase modelo.
+     *
+     */
+    /**
+     * Declara un miembro del modelo, el cual en java almacenara un dato de tipo String.
+     * <p>
+     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
+     * Varchar.
+     */
+    private Column<String> apellido = new Column<>(DataType.VARCHAR);
+    /**
+     * Declara un miembro del modelo, el cual en java almacenara un dato de tipo Boolean.
+     * <p>
+     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
+     * BIT.
+     * <p>
+     * En este ejemplo seteamos 'true' como default_value, debido a que este modelo se conectara a un SQLServer,
+     * en PostgreSQL la sintaxis es true. Por lo cual es importante tener claro la sintaxis de la BD's a la cual
+     * se estará conectando el modelo.
+     * <p>
+     * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
+     * desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
+     */
+    private Column<Boolean> isMayor = new Column<>(DataType.BIT, "true", Constraint.DEFAULT);
+
+    /**
      * En el constructor de nuestra clase que utilizaremos como modelo al heredar la clase JBSqlutils
      * hacemos el llamado al constructor de la clase JBSqlUtils la cual inicializara el modelo para poder
      * ser utilizado, una vez instanciado el modelo, podremos obtener uno o varios registros de la tabla
@@ -63,7 +132,6 @@ public class TestModel extends JBSqlUtils {
         this.getApellido().setSize("200");
     }
 
-
     /**
      * Si deseamos que nuestro modelo no utilice las propiedades de conexión globales, podemos crear un constructor que
      * reciba un único parametro de tipo Booleano el cual enviamos como parametro al constructor de la clase padre JBSqlUtils
@@ -82,79 +150,6 @@ public class TestModel extends JBSqlUtils {
         this.getName().setSize("200");
         this.getApellido().setSize("200");
     }
-
-    /**
-     * Para poder utilizar JBSqlUtils es necesario que los miembros de la clase modelo, que correspondan
-     * a una columna de la tabla correspondiente al modelo, sean del tipo Column, especificando el tipo de dato
-     * en java y por medio del constructor del objeto Column se pase como parámetro el tipo de dato SQL
-     * de la columna, adicional a esto se pueden definir restricciones, como valor por defecto para la columna
-     * si se desea utilizar el modelo para crear la tabla en BD's, pero estos últimos son opcionales
-     * el único parámetro obligatorio es el DataType de la columna en BD's.
-     *
-     * Por convención el nombre de cada miembro correspondiente a una columna en BD's debe tener el mismo
-     * nombre que la columna en BD's. y estos deben tener sus respectivos metodos set an get, teniendo estos
-     * por convención el nombre setColumnName, getColumName.
-     *
-     * Por ejemplo, para la columna Id = El miembro del modelo será Id, JBSqlUtils no es case sensitive,
-     * así que en BD's la columna puede ser ID y en el modelo id, que JBSqlUtils hará el match entre la columna
-     * y el miembro de la clase modelo.
-     *
-     */
-
-
-    /**
-     * Declara un miembro del modelo, el cual en java almacenara un dato de tipo Integer, se define Integer,
-     * ya que la clase Column es una clase generica y no puede trabajar con datos primivitos como int, pero si con
-     * clases contenedoras como Integer.
-     * <p>
-     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
-     * Integer.
-     * <p>
-     * Agregamos dos restricciones SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
-     * desde nuestra aplicación en caso esta no exista, de lo contrario no es necesario que agreguemos restricciones.
-     */
-    private Column<Integer> id = new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
-
-    /**
-     * Declara un miembro del modelo, el cual en java almacenara un dato de tipo String.
-     * <p>
-     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
-     * Varchar.
-     * <p>
-     * Agregamos un parámetro extra el cual es el default_value antes de indicar las restricciones,
-     * este parámetro es de tipo String, por medio de este parámetro podemos definir el valor que deseamos tenga la
-     * columna por default (Puede ser un valor del tipo de dato SQL, o una funcion SQL que retorne un valor del
-     * tipo de dato SQL de la columna) cuando se inserte un registro y no se especifique un dato para esa columna,
-     * este unicamente funcionara cuando tenga la restriccion DEFAULT definida y se definira unicamente si se
-     * crea la tabla en BD's desde nuestra aplicación a través del método modelo.crateTable().
-     * <p>
-     * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
-     * desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
-     */
-    private Column<String> name = new Column<>(DataType.VARCHAR, "'Daniel'", Constraint.DEFAULT);
-
-    /**
-     * Declara un miembro del modelo, el cual en java almacenara un dato de tipo String.
-     * <p>
-     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
-     * Varchar.
-     */
-    private Column<String> apellido = new Column<>(DataType.VARCHAR);
-
-    /**
-     * Declara un miembro del modelo, el cual en java almacenara un dato de tipo Boolean.
-     * <p>
-     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
-     * BIT.
-     * <p>
-     * En este ejemplo seteamos 'true' como default_value, debido a que este modelo se conectara a un SQLServer,
-     * en PostgreSQL la sintaxis es true. Por lo cual es importante tener claro la sintaxis de la BD's a la cual
-     * se estará conectando el modelo.
-     * <p>
-     * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
-     * desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
-     */
-    private Column<Boolean> isMayor = new Column<>(DataType.BIT, "true", Constraint.DEFAULT);
 
     public Column<Integer> getId() {
         return id;

@@ -7,7 +7,6 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 
 import java.util.List;
-import java.util.Objects;
 
 
 /**

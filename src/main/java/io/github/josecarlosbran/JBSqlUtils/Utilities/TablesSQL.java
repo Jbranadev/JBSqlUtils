@@ -26,47 +26,43 @@ import java.util.List;
  */
 public class TablesSQL {
     /**
+     * Lista de las columnas que tiene la tabla correspondiente al modelo
+     */
+    protected List<ColumnsSQL> Columnas = new ArrayList<>();
+    /**
      * TABLE_CAT String => catálogo de tablas (puede ser nulo)
      */
     private String TABLE_CAT = null;
-
     /**
      * TABLE_SCHEM String => esquema de tabla (puede ser nulo)
      */
     private String TABLE_SCHEM = null;
-
     /**
      * TABLE_NAME Cadena => nombre de la tabla
      */
     private String TABLE_NAME = null;
-
     /**
      * TABLE_TYPE Cadena => tipo de tabla. Los tipos típicos son "TABLE", "VIEW", "SYSTEM TABLE",
      * "GLOBAL TEMPORARY", "LOCAL TEMPORARY", "ALIAS", "SYNONYM".
      * OBSERVACIONES String => comentario explicativo sobre la tabla
      */
     private String TABLE_TYPE = null;
-
     /**
      * String => explanatory comment on the table
      */
     private String REMARKS = null;
-
     /**
      * TYPE_CAT String => el catálogo de tipos (puede ser nulo)
      */
     private String TYPE_CAT = null;
-
     /**
      * TYPE_SCHEM String => el esquema de tipos (puede ser nulo)
      */
     private String TYPE_SCHEM = null;
-
     /**
      * TYPE_NAME Cadena => nombre de tipo (puede ser nulo)
      */
     private String TYPE_NAME = null;
-
     /**
      * SELF_REFERENCING_COL_NAME Cadena => nombre de la columna de "identificador"
      * designada de una tabla escrita (puede ser nulo)
@@ -77,17 +73,10 @@ public class TablesSQL {
      * Los valores son "SISTEMA", "USUARIO", "DERIVADO". (puede ser nulo)
      */
     private String REF_GENERATION = null;
-
     /**
      * Clave Primaria correspondiente a la tabla
      */
     private PrimaryKey claveprimaria = null;
-
-    /**
-     * Lista de las columnas que tiene la tabla correspondiente al modelo
-     */
-    protected List<ColumnsSQL> Columnas = new ArrayList<>();
-
     /**
      * Lista de los nombres de las columnas que existen
      */

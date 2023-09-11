@@ -24,11 +24,11 @@ import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.select;
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBSqlUtilsTestMariaDB {
 
+    TestModel testModel;
+
     public JBSqlUtilsTestMariaDB() {
         System.setProperty("org.uncommons.reportng.escape-output", "false");
     }
-
-    TestModel testModel;
 
     @Test(testName = "Setear Properties Conexión for Model")
     public void setPropertiesConexiontoModel() throws DataBaseUndefind, PropertiesDBUndefined {
