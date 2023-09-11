@@ -112,9 +112,9 @@ class Methods extends Methods_Conexion {
                 LogsJB.debug("Obtendra la información de conexión de la BD's: " + modelo.getClass().getSimpleName());
                 modelo.refresh();
                 modelo.waitOperationComplete();
-                while (modelo.getTabla().getColumnas().size() == 0) {
+                /*while (modelo.getTabla().getColumnas().size() == 0) {
 
-                }
+                }*/
                 LogsJB.debug("Ya obtuvo la información de BD's");
                 temp.setTabla(modelo.getTabla());
                 temp.setTableExist(modelo.getTableExist());
@@ -170,9 +170,9 @@ class Methods extends Methods_Conexion {
                 LogsJB.debug("Obtendra la información de conexión de la BD's: " + modelo.getClass().getSimpleName());
                 modelo.refresh();
                 modelo.waitOperationComplete();
-                while (modelo.getTabla().getColumnas().size() == 0) {
+                /*while (modelo.getTabla().getColumnas().size() == 0) {
 
-                }
+                }*/
                 LogsJB.debug("Ya obtuvo la información de BD's");
                 temp.setTableExist(modelo.getTableExist());
                 temp.setTableName(modelo.getTableName());
