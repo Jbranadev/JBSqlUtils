@@ -32,9 +32,9 @@ public class closeParentecis<T> extends MethodsWhere {
      */
     protected closeParentecis(String sql, T modelo, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
-        if (Objects.isNull(modelo)) {
+        /*if (Objects.isNull(modelo)) {
             throw new ValorUndefined("El Modelo proporcionado es NULL");
-        }
+        }*/
         this.parametros = parametros;
         this.modelo = modelo;
         this.sql = sql + Operator.CLOSE_PARENTESIS;
@@ -55,9 +55,9 @@ public class closeParentecis<T> extends MethodsWhere {
      */
     protected closeParentecis(String sql, T modelo, List<Column> parametros, Boolean getGetPropertiesSystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super(getGetPropertiesSystem);
-        if (Objects.isNull(modelo)) {
+        /*if (Objects.isNull(modelo)) {
             throw new ValorUndefined("El Modelo proporcionado es NULL");
-        }
+        }*/
         this.parametros = parametros;
         this.modelo = modelo;
         this.sql = sql + Operator.CLOSE_PARENTESIS;
@@ -96,9 +96,9 @@ public class closeParentecis<T> extends MethodsWhere {
      */
     protected closeParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPost) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
-        if (Objects.isNull(modelo)) {
+        /*if (Objects.isNull(modelo)) {
             throw new ValorUndefined("El Modelo proporcionado es NULL");
-        }
+        }*/
         this.parametros = parametros;
         this.modelo = modelo;
         this.sql = sql + Operator.CLOSE_PARENTESIS + operatorPost.getOperador();
@@ -120,9 +120,9 @@ public class closeParentecis<T> extends MethodsWhere {
      */
     protected closeParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPost, Boolean getGetPropertiesSystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super(getGetPropertiesSystem);
-        if (Objects.isNull(modelo)) {
+        /*if (Objects.isNull(modelo)) {
             throw new ValorUndefined("El Modelo proporcionado es NULL");
-        }
+        }*/
         this.parametros = parametros;
         this.modelo = modelo;
         this.sql = sql + Operator.CLOSE_PARENTESIS + operatorPost.getOperador();

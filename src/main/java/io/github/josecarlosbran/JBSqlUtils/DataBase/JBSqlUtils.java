@@ -77,9 +77,6 @@ public class JBSqlUtils extends Methods {
             System.setProperty(ConeccionProperties.DBNAME.getPropiertie(), BD);
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el nombre de la Base de Datos global: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
@@ -94,9 +91,6 @@ public class JBSqlUtils extends Methods {
             System.setProperty(ConeccionProperties.DBPASSWORD.getPropiertie(), password);
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea la contraseña del usuario de BD's global: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
@@ -111,9 +105,6 @@ public class JBSqlUtils extends Methods {
             System.setProperty(ConeccionProperties.DBUSER.getPropiertie(), user);
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el usuario de BD's global: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
@@ -128,9 +119,6 @@ public class JBSqlUtils extends Methods {
             System.setProperty(ConeccionProperties.DBPORT.getPropiertie(), port);
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el Puerto de BD's global: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
@@ -145,9 +133,6 @@ public class JBSqlUtils extends Methods {
             System.setProperty(ConeccionProperties.DBHOST.getPropiertie(), host);
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el Host de la BD's global: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
 
@@ -167,9 +152,6 @@ public class JBSqlUtils extends Methods {
             System.setProperty(ConeccionProperties.DBTYPE.getPropiertie(), dataBase.name());
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el Tipo de BD's global: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
 
@@ -186,9 +168,6 @@ public class JBSqlUtils extends Methods {
             System.setProperty(ConeccionProperties.DBPROPERTIESURL.getPropiertie(), propertisUrl);
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al setear las propiedades extra de conexión con la cual el modelo se conectara a la BD's: " + e.toString());
-            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }

@@ -48,9 +48,9 @@ public class openParentecis<T> extends MethodsOpenParentecis {
         if (Objects.isNull(operatorPrev)) {
             throw new ValorUndefined("El operadorPrev proporcionado es NULL");
         }
-        if (Objects.isNull(modelo)) {
+        /*if (Objects.isNull(modelo)) {
             throw new ValorUndefined("El Modelo proporcionado es NULL");
-        }
+        }*/
         this.parametros = parametros;
         this.modelo = modelo;
         this.parametros.add(getColumn(valor));
@@ -88,9 +88,9 @@ public class openParentecis<T> extends MethodsOpenParentecis {
         if (Objects.isNull(operatorPrev)) {
             throw new ValorUndefined("El operadorPrev proporcionado es NULL");
         }
-        if (Objects.isNull(modelo)) {
+        /*if (Objects.isNull(modelo)) {
             throw new ValorUndefined("El Modelo proporcionado es NULL");
-        }
+        }*/
         this.parametros = parametros;
         this.modelo = modelo;
         this.parametros.add(getColumn(valor));
@@ -160,9 +160,9 @@ public class openParentecis<T> extends MethodsOpenParentecis {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
 
-        if (Objects.isNull(modelo)) {
+        /*if (Objects.isNull(modelo)) {
             throw new ValorUndefined("El Modelo proporcionado es NULL");
-        }
+        }*/
         this.parametros = parametros;
         this.modelo = modelo;
         this.parametros.add(getColumn(valor));
@@ -198,9 +198,9 @@ public class openParentecis<T> extends MethodsOpenParentecis {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
 
-        if (Objects.isNull(modelo)) {
+        /*if (Objects.isNull(modelo)) {
             throw new ValorUndefined("El Modelo proporcionado es NULL");
-        }
+        }*/
         this.parametros = parametros;
         this.modelo = modelo;
         this.parametros.add(getColumn(valor));

@@ -5,14 +5,19 @@ import UtilidadesTest.TestModel;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
+import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
+import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import static UtilidadesTest.Utilities.logParrafo;
 import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.*;
@@ -389,6 +394,15 @@ public class JBSqlUtilsTestSadDay {
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
 
+    @Test(testName = "Take Limite Igual o Inferior a 0 JBSqlUtils",
+            dependsOnMethods = "orderByOperatorJBSqlUtils",
+            expectedExceptions = ValorUndefined.class)
+    public void takeLimiteJBSqlUtils() throws Exception {
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", Operator.LIKE, true).take(0);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
 
 
 
@@ -399,7 +413,7 @@ public class JBSqlUtilsTestSadDay {
 
 
     @Test(testName = "Where Colum Name JBSqlUtilsModel",
-            dependsOnMethods = "andSetValueColumnValueJBSqlUtils",
+            dependsOnMethods = "takeLimiteJBSqlUtils",
             expectedExceptions = ValorUndefined.class)
     public void whereColumnNameJBSqlUtilsModel() throws Exception {
         TestModel model =new TestModel();
@@ -541,6 +555,538 @@ public class JBSqlUtilsTestSadDay {
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
+
+    @Test(testName = "Take Limite Igual o Inferior a 0 JBSqlUtilsModel",
+            dependsOnMethods = "orderByOperatorJBSqlUtilsModel",
+            expectedExceptions = ValorUndefined.class)
+    public void takeLimiteJBSqlUtilsModel() throws Exception {
+        TestModel model =new TestModel();
+        model.where("null", Operator.LIKE, true).take(-1);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @Test(testName = "Where Colum Name JBSqlUtilsModelPropertyFalse",
+            dependsOnMethods = "takeLimiteJBSqlUtilsModel",
+            expectedExceptions = ValorUndefined.class)
+    public void whereColumnNameJBSqlUtilsModelPropertyFalse() throws Exception {
+        TestModel model =new TestModel(false);
+        model.where(null, Operator.LIKE, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Where Operator JBSqlUtilsModelPropertyFalse",
+            dependsOnMethods = "whereColumnNameJBSqlUtilsModelPropertyFalse",
+            expectedExceptions = ValorUndefined.class)
+    public void whereOperatorJBSqlUtilsModelPropertyFalse() throws Exception {
+        TestModel model =new TestModel(false);
+        model.where("null", null, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Where Value JBSqlUtilsModelPropertyFalse",
+            dependsOnMethods = "whereOperatorJBSqlUtilsModelPropertyFalse",
+            expectedExceptions = ValorUndefined.class)
+    public void whereValueJBSqlUtilsModelPropertyFalse() throws Exception {
+        TestModel model =new TestModel(false);
+        model.where("null", Operator.LIKE, null);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+
+    @Test(testName = "And Colum Name JBSqlUtilsModelPropertyFalse",
+            dependsOnMethods = "whereValueJBSqlUtilsModelPropertyFalse",
+            expectedExceptions = ValorUndefined.class)
+    public void andColumnNameJBSqlUtilsModelPropertyFalse() throws Exception {
+        TestModel model =new TestModel(false);
+        model.where("null", Operator.LIKE, true).and(null, Operator.LIKE, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "And Operator JBSqlUtilsModelPropertyFalse",
+            dependsOnMethods = "andColumnNameJBSqlUtilsModelPropertyFalse",
+            expectedExceptions = ValorUndefined.class)
+    public void andOperatorJBSqlUtilsModelPropertyFalse() throws Exception {
+        TestModel model =new TestModel(false);
+        model.where("null", Operator.LIKE, true).and("null", null, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "And Value JBSqlUtilsModelPropertyFalse",
+            dependsOnMethods = "andOperatorJBSqlUtilsModelPropertyFalse",
+            expectedExceptions = ValorUndefined.class)
+    public void andValueJBSqlUtilsModelPropertyFalse() throws Exception {
+        TestModel model =new TestModel(false);
+        model.where("null", Operator.LIKE, true).and("null", Operator.LIKE, null);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+
+    @Test(testName = "Or Colum Name JBSqlUtilsModelPropertyFalse",
+            dependsOnMethods = "andValueJBSqlUtilsModelPropertyFalse",
+            expectedExceptions = ValorUndefined.class)
+    public void orColumnNameJBSqlUtilsModelPropertyFalse() throws Exception {
+        TestModel model =new TestModel(false);
+        model.where("null", Operator.LIKE, true).or(null, Operator.LIKE, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Or Operator JBSqlUtilsModelPropertyFalse",
+            dependsOnMethods = "andColumnNameJBSqlUtilsModelPropertyFalse",
+            expectedExceptions = ValorUndefined.class)
+    public void orOperatorJBSqlUtilsModelPropertyFalse() throws Exception {
+        TestModel model =new TestModel(false);
+        model.where("null", Operator.LIKE, true).or("null", null, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Or Value JBSqlUtilsModelPropertyFalse",
+            dependsOnMethods = "andOperatorJBSqlUtilsModelPropertyFalse",
+            expectedExceptions = ValorUndefined.class)
+    public void orValueJBSqlUtilsModelPropertyFalse() throws Exception {
+        TestModel model =new TestModel(false);
+        model.where("null", Operator.LIKE, true).or("null", Operator.LIKE, null);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+
+    @Test(testName = "Open Parentecis Colum Name JBSqlUtilsModelPropertyFalse",
+            dependsOnMethods = "orValueJBSqlUtilsModelPropertyFalse",
+            expectedExceptions = ValorUndefined.class)
+    public void openParentecisColumnNameJBSqlUtilsModelPropertyFalse() throws Exception {
+        TestModel model =new TestModel(false);
+        model.where("null", Operator.LIKE, true).openParentecis(Operator.OR, null, Operator.LIKE, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Open Parentecis Operator JBSqlUtilsModelPropertyFalse",
+            dependsOnMethods = "openParentecisColumnNameJBSqlUtilsModelPropertyFalse",
+            expectedExceptions = ValorUndefined.class)
+    public void openParentecisOperatorJBSqlUtilsModelPropertyFalse() throws Exception {
+        TestModel model =new TestModel(false);
+        model.where("null", Operator.LIKE, true).openParentecis(Operator.OR, "null", null, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Open Parentecis Value JBSqlUtilsModelPropertyFalse",
+            dependsOnMethods = "openParentecisOperatorJBSqlUtilsModelPropertyFalse",
+            expectedExceptions = ValorUndefined.class)
+    public void openParentecisValueJBSqlUtilsModelPropertyFalse() throws Exception {
+        TestModel model =new TestModel(false);
+        model.where("null", Operator.LIKE, true).openParentecis(Operator.OR, "null", Operator.LIKE, null);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+
+    @Test(testName = "Order By Colum Name JBSqlUtilsModelPropertyFalse",
+            dependsOnMethods = "openParentecisValueJBSqlUtilsModelPropertyFalse",
+            expectedExceptions = ValorUndefined.class)
+    public void orderByColumnNameJBSqlUtilsModelPropertyFalse() throws Exception {
+        TestModel model =new TestModel(false);
+        model.where("null", Operator.LIKE, true).orderBy(null, OrderType.ASC);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Order By OrderType JBSqlUtilsModelPropertyFalse",
+            dependsOnMethods = "orderByColumnNameJBSqlUtilsModelPropertyFalse",
+            expectedExceptions = ValorUndefined.class)
+    public void orderByOperatorJBSqlUtilsModelPropertyFalse() throws Exception {
+        TestModel model =new TestModel(false);
+        model.where("null", Operator.LIKE, true).orderBy("null", null);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Take Limite Igual o Inferior a 0 JBSqlUtilsModelPropertyFalse",
+            dependsOnMethods = "orderByOperatorJBSqlUtilsModelPropertyFalse",
+            expectedExceptions = ValorUndefined.class)
+    public void takeLimiteJBSqlUtilsModelPropertyFalse() throws Exception {
+        TestModel model =new TestModel(false);
+        model.where("null", Operator.LIKE, true).take(-1);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    @Test(testName = "Drop Table If Exists from Model",
+            dependsOnMethods = {"takeLimiteJBSqlUtilsModelPropertyFalse"})
+    public void dropTableIfExists() throws Exception {
+        logParrafo("Se creara la tabla " + this.testModel.getTableName() + " en BD's");
+        this.testModel = new TestModel();
+        this.testModel.crateTable();
+        logParrafo("La tabla a sido creada en BD's");
+        logParrafo("Se procedera a eliminar la tabla en BD's");
+        Assert.assertTrue(this.testModel.dropTableIfExist(), "No se pudo eliminar la tabla en BD's");
+        Assert.assertFalse(this.testModel.getTableExist(), "La tabla No existe en BD's y aun así responde que si la elimino");
+        logParrafo("La tabla a sido eliminada en BD's");
+    }
+
+    @Test(testName = "Insert Model",
+            dependsOnMethods = "dropTableIfExists"
+            )
+    public void insertModel() throws Exception {
+        logParrafo("Insertaremos un modelo cuyo nombre será Marcos, Apellido Cabrera y sera menor de edad");
+        /**
+         * Asignamos valores a las columnas del modelo, luego llamamos al método save(),
+         * el cual se encarga de insertar un registro en la tabla correspondiente al modelo con la información del mismo
+         * si este no existe, de existir actualiza el registro por medio de la clave primaria del modelo.
+         */
+        this.testModel.getName().setValor("Marcos");
+        this.testModel.getApellido().setValor("Cabrera");
+        this.testModel.getIsMayor().setValor(false);
+        logParrafo(this.testModel.toString());
+        Integer rowsInsert = this.testModel.save();
+        /**
+         * Esperamos se ejecute la instrucción en BD's
+         */
+        this.testModel.waitOperationComplete();
+        logParrafo("Insertamos el Modelo a través del método save");
+        logParrafo("Filas insertadas en BD's: " + rowsInsert + " " + this.testModel.toString());
+        Assert.assertTrue(rowsInsert==0,
+                "La cantidad de filas obtenidas, no corresponde a lo esperado");
+    }
+
+    @Test(testName = "First Or Fail",
+            dependsOnMethods = "insertModel",
+            expectedExceptions = Exception.class)
+    public void firstOrFail() throws Exception {
+        TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+                "Cabrerassss").firstOrFail();
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción como se esperaba");
+    }
+
+    @Test(testName = "Update Model", dependsOnMethods = "firstOrFail")
+    public void updateModel() throws Exception {
+        logParrafo("Limpiamos el modelo");
+        this.testModel.cleanModel();
+        /**
+         * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
+         */
+        logParrafo("Obtenemos el modelo que tiene por nombre Marcos, Apellido Cabrera");
+        TestModel temp = new TestModel();
+        temp.getId().setValor(5);
+        temp.getName().setValor("Marcos");
+        temp.getApellido().setValor("Cabrera");
+        temp.getIsMayor().setValor(false);
+        temp.setModelExist(true);
+        logParrafo(temp.toString());
+        /**
+         * Actualizamos la información
+         */
+        logParrafo("Actualizamos el nombre del modelo a MarcosEfrain y asígnamos que será mayor de edad");
+        temp.getName().setValor("MarcosEfrain");
+        temp.getIsMayor().setValor(true);
+        logParrafo(temp.toString());
+        /**
+         * Eliminamos el modelo en BD's
+         */
+        Integer rowsUpdate = temp.save();
+        logParrafo("Guardamos el modelo en BD's");
+        Assert.assertTrue(rowsUpdate==0,
+                "La cantidad de filas obtenidas, no corresponde a lo esperado");
+    }
+
+    @Test(testName = "Delete Model", dependsOnMethods = "updateModel")
+    public void deleteModel() throws Exception {
+
+        /**
+         * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
+         */
+        this.testModel.getId().setValor(5);
+        this.testModel.getName().setValor("Marcos");
+        this.testModel.getApellido().setValor("Cabrera");
+        this.testModel.getIsMayor().setValor(false);
+        this.testModel.setModelExist(true);
+
+
+        logParrafo(this.testModel.toString());
+        /**
+         * Eliminamos el modelo en BD's
+         */
+        logParrafo("Eliminamos el modelo a través del metodo delete");
+        Integer rowsDelete = this.testModel.delete();
+        Assert.assertTrue(rowsDelete==0,
+                "La cantidad de filas obtenidas, no corresponde a lo esperado");
+    }
+
+
+    @Test(testName = "Insert Models",
+            dependsOnMethods = "deleteModel")
+    public void insertModels() throws Exception {
+
+        logParrafo("Preparamos los modelos a insertar: ");
+        List<TestModel> models = new ArrayList<TestModel>();
+        //Llenamos la lista de mdelos a insertar en BD's
+        for (int i = 0; i < 10; i++) {
+            TestModel model = new TestModel();
+            model.llenarPropertiesFromModel(this.testModel);
+            model.getName().setValor("Modelo #" + i);
+            model.getApellido().setValor("Apellido #" + i);
+            if (i % 2 == 0) {
+                model.getIsMayor().setValor(false);
+            }
+            models.add(model);
+            logParrafo(model.toString());
+        }
+        logParrafo("Enviamos a guardar los modelos");
+        Integer rowsInsert = this.testModel.saveALL(models);
+        logParrafo("Filas insertadas en BD's: " + rowsInsert);
+        /**
+         * Esperamos se ejecute la instrucción en BD's
+         */
+        this.testModel.waitOperationComplete();
+        //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
+        Assert.assertTrue(rowsInsert==0,
+                "La cantidad de filas obtenidas, no corresponde a lo esperado");
+    }
+
+
+    @Test(testName = "Get Model",
+            dependsOnMethods = "insertModels")
+    public void getModel() throws Exception {
+        this.testModel.setModelExist(false);
+        logParrafo("Obtenemos el primero modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
+        this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+                "Cabrerassss").get();
+        this.testModel.waitOperationComplete();
+        Assert.assertTrue(!this.testModel.getModelExist(),
+                "No se Lanzo la exepción como se esperaba");
+    }
+
+    @Test(testName = "Get First Model",
+            dependsOnMethods = "getModel")
+    public void firstModel() throws Exception {
+        this.testModel.setModelExist(false);
+        logParrafo("Obtenemos el primero modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
+        TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+                "Cabrerassss").first();
+        this.testModel.waitOperationComplete();
+        Assert.assertTrue(!temp.getModelExist(),
+                "No se Lanzo la exepción como se esperaba");
+    }
+
+    @Test(testName = "Take Models",
+            dependsOnMethods = "firstModel")
+    public void takeModels() throws Exception {
+        List<TestModel> models = new ArrayList<TestModel>();
+        logParrafo("Recuperamos los primeros seis modelos que en su nombre poseen el texto Modelo #");
+        models = this.testModel.where("Name", Operator.LIKE, "%Modelo #%").take(6).get();
+        this.testModel.waitOperationComplete();
+        Assert.assertTrue(models.size()==0,
+                "La cantidad de filas obtenidas, no corresponde a lo esperado");
+    }
+
+    @Test(testName = "Get All Models",
+            dependsOnMethods = "takeModels")
+    public void getAllModels() throws Exception {
+
+        List<TestModel> models = new ArrayList<TestModel>();
+        logParrafo("Obtenemos los modelos que poseen nombre es Modelo #5 U #8 o su apellido es #3");
+        models = this.testModel.where("Name", Operator.LIKE, "%Modelo #5%").or(
+                "Name", Operator.LIKE, "Modelo #8").or("Apellido", Operator.IGUAL_QUE, "Apellido #3").getAll();
+        this.testModel.waitOperationComplete();
+        Assert.assertTrue(models.size()==0,
+                "La cantidad de filas obtenidas, no corresponde a lo esperado");
+    }
+
+
+    @Test(testName = "Update Models",
+            dependsOnMethods = "getAllModels")
+    public void updateModels() throws Exception {
+        logParrafo("Obtenemos los modelos a actualizar: ");
+        List<TestModel> models = new ArrayList<TestModel>();
+        //Llenamos la lista de mdelos a insertar en BD's
+        for (int i = 0; i < 10; i++) {
+            TestModel model = new TestModel();
+            model.llenarPropertiesFromModel(this.testModel);
+            model.getName().setValor("Modelo #" + i);
+            model.getApellido().setValor("Apellido #" + i);
+            if (i % 2 == 0) {
+                model.getIsMayor().setValor(false);
+            }
+            model.getId().setValor(i);
+            model.setModelExist(true);
+            models.add(model);
+            logParrafo(model.toString());
+        }
+        logParrafo("Enviamos a guardar los modelos a través del método saveALL");
+        Integer rowsUpdate = this.testModel.saveALL(models);
+        logParrafo("Filas actualizadas en BD's: " + rowsUpdate);
+        /**
+         * Esperamos se ejecute la instrucción en BD's
+         */
+        this.testModel.waitOperationComplete();
+        Assert.assertTrue(rowsUpdate==0,
+                "La cantidad de filas obtenidas, no corresponde a lo esperado");
+    }
+
+    @Test(testName = "Delete Models",
+            dependsOnMethods = "updateModels")
+    public void deleteModels() throws Exception {
+        logParrafo("Obtenemos los modelos a actualizar: ");
+        List<TestModel> models = new ArrayList<TestModel>();
+        //Llenamos la lista de mdelos a insertar en BD's
+        for (int i = 0; i < 10; i++) {
+            TestModel model = new TestModel();
+            model.llenarPropertiesFromModel(this.testModel);
+            model.getName().setValor("Modelo #" + i);
+            model.getApellido().setValor("Apellido #" + i);
+            if (i % 2 == 0) {
+                model.getIsMayor().setValor(false);
+            }
+            model.getId().setValor(i);
+            model.setModelExist(true);
+            models.add(model);
+            logParrafo(model.toString());
+        }
+        logParrafo("Se recuperaron " + models.size() + " Para eliminar: " + models.toString());
+        Integer rowsDelete = this.testModel.deleteALL(models);
+        this.testModel.waitOperationComplete();
+        Assert.assertTrue(rowsDelete==0,
+                "La cantidad de filas obtenidas, no corresponde a lo esperado");
+
+    }
+
+
+    @Test(testName = "Drop Table JBSqlUtils2",
+            dependsOnMethods = "deleteModels")
+    public void dropTableJBSqlUtils2() throws Exception {
+        Boolean result = false;
+        /**
+         * Para eliminar una tabla de BD's utilizamos el metodo execute de la clase dropTableIfExist a la cual mandamos como parámetro
+         * el nombre de la tabla que queremos eliminar
+         */
+        logParrafo("Eliminara la tabla Proveedor de BD's");
+        result = dropTableIfExist("Proveedor").execute();
+        logParrafo("Resultado de solicitar eliminar la tabla en BD's: " + result);
+    }
+
+    @Test(testName = "Insert Into JBSqlUtils",
+            dependsOnMethods = "dropTableJBSqlUtils2" ,expectedExceptions = Exception.class)
+    public void insertIntoJBSqlUtils() throws Exception {
+        int registros = 0;
+        logParrafo("Se insertaran 5 registros en la tabla Proveedor");
+        registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Erick").andValue("Apellido", "Ramos")
+                .execute();
+        logParrafo("Resultado de insertar el registro de Erick en la tabla Proveedor: " + registros);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción como se esperaba");
+    }
+
+
+    @Test(testName = "Get In JsonObjects JBSqlUtils",
+            dependsOnMethods = "insertIntoJBSqlUtils" )
+    public void getInJsonObjectsJBSqlUtils() throws Exception {
+        /**
+         * Si deseamos obtener todas las columnas de la tabla envíamos el parámetro columnas del método
+         * getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parámetro
+         * del método select
+         */
+        List<String> columnas = null;
+        /**
+         * Si deseamos obtener unicamente determinadas columnas, es necesario envíar como parámetro una lista de strings
+         * con los nombres de las columnas que deseamos obtener del método getInJsonObjects
+         */
+        columnas = new ArrayList<>();
+        columnas.add("Id");
+        columnas.add("Name");
+        logParrafo("Obtendra los primeros 2 registros cuyo estado sea true y en su apellido posea la letra a");
+        /**
+         * Para obtener los registros de una tabla de BD's podemos hacerlo a través del método select envíando como parámetro
+         * el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a través del método
+         * where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
+         */
+        List<JSONObject> lista = select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
+                .and("Apellido", Operator.LIKE, "%a%").take(2).getInJsonObjects(columnas);
+        logParrafo("Visualizamos los registros obtenidos de BD's: ");
+        Assert.assertTrue(lista.size()==0,
+                "La cantidad de filas obtenidas, no corresponde a lo esperado");
+    }
+
+
+    @Test(testName = "Update JBSqlUtils",
+            dependsOnMethods = "getInJsonObjectsJBSqlUtils" ,expectedExceptions = Exception.class)
+    public void updateJBSqlUtils() throws Exception {
+        int rowsUpdate = 0;
+        rowsUpdate += JBSqlUtils.update("Proveedor").set("Name", "Futura").andSet("Apellido", "Prometida")
+                .where("Id", Operator.IGUAL_QUE, 5).execute();
+        logParrafo("Filas actualizadas en BD's: " + rowsUpdate);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción como se esperaba");
+    }
+
+
+    @Test(testName = "Delete JBSqlUtils",
+            dependsOnMethods = "updateJBSqlUtils" ,expectedExceptions = Exception.class )
+    public void deleteJBSqlUtils() throws Exception {
+        int rowsDelete = 0;
+        rowsDelete += JBSqlUtils.delete("Proveedor").where("Id", Operator.IGUAL_QUE, 5).execute();
+        logParrafo("Filas eliminadas en BD's: " + rowsDelete);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción como se esperaba");
+    }
+
+
 
 
 

@@ -33,9 +33,6 @@ public class AddColumn extends Methods_Conexion {
      */
     protected AddColumn(String TableName, Column columna) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
-        if (stringIsNullOrEmpty(TableName)) {
-            throw new ValorUndefined("El nombre de la Tabla proporcionado esta vacío o es NULL");
-        }
         if (Objects.isNull(columna)) {
             throw new ValorUndefined("La columna proporcionada es NULL");
         }
@@ -57,9 +54,6 @@ public class AddColumn extends Methods_Conexion {
      */
     protected AddColumn(String TableName, Column columna, List<Column> columnas) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
-        if (stringIsNullOrEmpty(TableName)) {
-            throw new ValorUndefined("El nombre de la Tabla proporcionado esta vacío o es NULL");
-        }
         if (Objects.isNull(columna)) {
             throw new ValorUndefined("La columna proporcionada es NULL");
         }
