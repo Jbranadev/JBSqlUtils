@@ -26,6 +26,13 @@
         </classes>
     </test>
 
+    <test name="Test GodDay">
+        <classes>
+            <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestGodDay">
+            </class>
+        </classes>
+    </test>
+
     <test name="Test MySQL">
         <classes>
             <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL">
