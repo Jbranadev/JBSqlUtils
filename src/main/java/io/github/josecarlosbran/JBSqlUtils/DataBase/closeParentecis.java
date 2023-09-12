@@ -36,7 +36,7 @@ public class closeParentecis<T> extends MethodsWhere {
         }*/
         this.parametros = parametros;
         this.modelo = modelo;
-        this.sql = sql + Operator.CLOSE_PARENTESIS;
+        this.sql = sql + Operator.CLOSE_PARENTESIS.getOperador();
     }
 
     /**
@@ -59,7 +59,7 @@ public class closeParentecis<T> extends MethodsWhere {
         }*/
         this.parametros = parametros;
         this.modelo = modelo;
-        this.sql = sql + Operator.CLOSE_PARENTESIS;
+        this.sql = sql + Operator.CLOSE_PARENTESIS.getOperador();
     }
 
 
@@ -100,7 +100,7 @@ public class closeParentecis<T> extends MethodsWhere {
         }*/
         this.parametros = parametros;
         this.modelo = modelo;
-        this.sql = sql + Operator.CLOSE_PARENTESIS + operatorPost.getOperador();
+        this.sql = sql + Operator.CLOSE_PARENTESIS.getOperador() + operatorPost.getOperador();
     }
 
     /**
@@ -124,7 +124,7 @@ public class closeParentecis<T> extends MethodsWhere {
         }*/
         this.parametros = parametros;
         this.modelo = modelo;
-        this.sql = sql + Operator.CLOSE_PARENTESIS + operatorPost.getOperador();
+        this.sql = sql + Operator.CLOSE_PARENTESIS.getOperador() + operatorPost.getOperador();
     }
 
 

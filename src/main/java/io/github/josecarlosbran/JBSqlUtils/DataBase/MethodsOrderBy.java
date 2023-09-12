@@ -3,8 +3,10 @@ package io.github.josecarlosbran.JBSqlUtils.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
+import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Jose Bran
@@ -38,6 +40,33 @@ public class MethodsOrderBy<T> extends MethodsTake {
         super(getGetPropertiesSystem);
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Retorna un objeto del tipo Take que permite agregar esta sentencia a la Logica de la sentencia
+     * SQL a ejecutar.
+     *
+     * @param limite Entero que representa la cantidad maxima de valores recuperados.
+     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     */
+    public Take take(int limite) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+        if (Objects.isNull(this.modelo)) {
+            return new Take(this.sql, limite, this.parametros);
+        } else {
+            if (!this.getGetPropertySystem()) {
+                Take take = new Take(this.sql, limite, this.modelo, this.parametros, false);
+                //take.llenarPropertiesFromModel(this);
+                return take;
+            }
+            return new Take(this.sql, limite, this.modelo, this.parametros);
+        }
+    }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////

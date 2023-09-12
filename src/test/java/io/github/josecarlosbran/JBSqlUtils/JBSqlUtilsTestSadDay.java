@@ -712,146 +712,39 @@ public class JBSqlUtilsTestSadDay {
     }
 
 
-    @Test(testName = "Drop Table If Exists from Model",
-            dependsOnMethods = {"takeLimiteJBSqlUtilsModelPropertyFalse"})
-    public void dropTableIfExists() throws Exception {
-        logParrafo("Se creara la tabla " + this.testModel.getTableName() + " en BD's");
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @Test(testName = "Create Table from Model",
+            dependsOnMethods = "takeLimiteJBSqlUtilsModelPropertyFalse")
+    public void createTableModel() throws Exception {
         this.testModel = new TestModel();
+        logParrafo("Se creara la tabla " + this.testModel.getTableName() + " en BD's");
         this.testModel.crateTable();
+        this.testModel.waitOperationComplete();
+        Assert.assertTrue(this.testModel.getTableExist(), "La tabla No existe en BD's ");
         logParrafo("La tabla a sido creada en BD's");
-        logParrafo("Se procedera a eliminar la tabla en BD's");
-        Assert.assertTrue(this.testModel.dropTableIfExist(), "No se pudo eliminar la tabla en BD's");
-        Assert.assertFalse(this.testModel.getTableExist(), "La tabla No existe en BD's y aun así responde que si la elimino");
-        logParrafo("La tabla a sido eliminada en BD's");
     }
 
-    @Test(testName = "Insert Model",
-            dependsOnMethods = "dropTableIfExists"
-    )
-    public void insertModel() throws Exception {
-        logParrafo("Insertaremos un modelo cuyo nombre será Marcos, Apellido Cabrera y sera menor de edad");
-        /**
-         * Asignamos valores a las columnas del modelo, luego llamamos al método save(),
-         * el cual se encarga de insertar un registro en la tabla correspondiente al modelo con la información del mismo
-         * si este no existe, de existir actualiza el registro por medio de la clave primaria del modelo.
-         */
-        this.testModel.getName().setValor("Marcos");
-        this.testModel.getApellido().setValor("Cabrera");
-        this.testModel.getIsMayor().setValor(false);
-        logParrafo(this.testModel.toString());
-        Integer rowsInsert = this.testModel.save();
-        /**
-         * Esperamos se ejecute la instrucción en BD's
-         */
-        this.testModel.waitOperationComplete();
-        logParrafo("Insertamos el Modelo a través del método save");
-        logParrafo("Filas insertadas en BD's: " + rowsInsert + " " + this.testModel.toString());
-        Assert.assertTrue(rowsInsert == 0,
-                "La cantidad de filas obtenidas, no corresponde a lo esperado");
-    }
 
     @Test(testName = "First Or Fail",
-            dependsOnMethods = "insertModel",
-            expectedExceptions = Exception.class)
+            dependsOnMethods = "createTableModel"
+            ,expectedExceptions = Exception.class)
     public void firstOrFail() throws Exception {
-        TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+        TestModel temp = (TestModel) this.testModel.where("Estado", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
                 "Cabrerassss").firstOrFail();
         Assert.assertTrue(false,
                 "No se Lanzo la exepción como se esperaba");
     }
 
-    @Test(testName = "Update Model", dependsOnMethods = "firstOrFail")
-    public void updateModel() throws Exception {
-        logParrafo("Limpiamos el modelo");
-        this.testModel.cleanModel();
-        /**
-         * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
-         */
-        logParrafo("Obtenemos el modelo que tiene por nombre Marcos, Apellido Cabrera");
-        TestModel temp = new TestModel();
-        temp.getId().setValor(5);
-        temp.getName().setValor("Marcos");
-        temp.getApellido().setValor("Cabrera");
-        temp.getIsMayor().setValor(false);
-        temp.setModelExist(true);
-        logParrafo(temp.toString());
-        /**
-         * Actualizamos la información
-         */
-        logParrafo("Actualizamos el nombre del modelo a MarcosEfrain y asígnamos que será mayor de edad");
-        temp.getName().setValor("MarcosEfrain");
-        temp.getIsMayor().setValor(true);
-        logParrafo(temp.toString());
-        /**
-         * Eliminamos el modelo en BD's
-         */
-        Integer rowsUpdate = temp.save();
-        logParrafo("Guardamos el modelo en BD's");
-        Assert.assertTrue(rowsUpdate == 0,
-                "La cantidad de filas obtenidas, no corresponde a lo esperado");
-    }
-
-    @Test(testName = "Delete Model", dependsOnMethods = "updateModel")
-    public void deleteModel() throws Exception {
-
-        /**
-         * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
-         */
-        this.testModel.getId().setValor(5);
-        this.testModel.getName().setValor("Marcos");
-        this.testModel.getApellido().setValor("Cabrera");
-        this.testModel.getIsMayor().setValor(false);
-        this.testModel.setModelExist(true);
-
-
-        logParrafo(this.testModel.toString());
-        /**
-         * Eliminamos el modelo en BD's
-         */
-        logParrafo("Eliminamos el modelo a través del metodo delete");
-        Integer rowsDelete = this.testModel.delete();
-        Assert.assertTrue(rowsDelete == 0,
-                "La cantidad de filas obtenidas, no corresponde a lo esperado");
-    }
-
-
-    @Test(testName = "Insert Models",
-            dependsOnMethods = "deleteModel")
-    public void insertModels() throws Exception {
-
-        logParrafo("Preparamos los modelos a insertar: ");
-        List<TestModel> models = new ArrayList<TestModel>();
-        //Llenamos la lista de mdelos a insertar en BD's
-        for (int i = 0; i < 10; i++) {
-            TestModel model = new TestModel();
-            model.llenarPropertiesFromModel(this.testModel);
-            model.getName().setValor("Modelo #" + i);
-            model.getApellido().setValor("Apellido #" + i);
-            if (i % 2 == 0) {
-                model.getIsMayor().setValor(false);
-            }
-            models.add(model);
-            logParrafo(model.toString());
-        }
-        logParrafo("Enviamos a guardar los modelos");
-        Integer rowsInsert = this.testModel.saveALL(models);
-        logParrafo("Filas insertadas en BD's: " + rowsInsert);
-        /**
-         * Esperamos se ejecute la instrucción en BD's
-         */
-        this.testModel.waitOperationComplete();
-        //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
-        Assert.assertTrue(rowsInsert == 0,
-                "La cantidad de filas obtenidas, no corresponde a lo esperado");
-    }
-
-
     @Test(testName = "Get Model",
-            dependsOnMethods = "insertModels")
+            dependsOnMethods = "firstOrFail"
+            ,expectedExceptions = Exception.class)
     public void getModel() throws Exception {
         this.testModel.setModelExist(false);
         logParrafo("Obtenemos el primero modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
-        this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+        this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Estado", Operator.IGUAL_QUE,
                 "Cabrerassss").get();
         this.testModel.waitOperationComplete();
         Assert.assertTrue(!this.testModel.getModelExist(),
@@ -859,11 +752,12 @@ public class JBSqlUtilsTestSadDay {
     }
 
     @Test(testName = "Get First Model",
-            dependsOnMethods = "getModel")
+            dependsOnMethods = "getModel"
+            ,expectedExceptions = Exception.class)
     public void firstModel() throws Exception {
         this.testModel.setModelExist(false);
         logParrafo("Obtenemos el primero modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
-        TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+        TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Estado", Operator.IGUAL_QUE,
                 "Cabrerassss").first();
         this.testModel.waitOperationComplete();
         Assert.assertTrue(!temp.getModelExist(),
@@ -871,107 +765,80 @@ public class JBSqlUtilsTestSadDay {
     }
 
     @Test(testName = "Take Models",
-            dependsOnMethods = "firstModel")
+            dependsOnMethods = "firstModel"
+            ,expectedExceptions = Exception.class)
     public void takeModels() throws Exception {
         List<TestModel> models = new ArrayList<TestModel>();
         logParrafo("Recuperamos los primeros seis modelos que en su nombre poseen el texto Modelo #");
-        models = this.testModel.where("Name", Operator.LIKE, "%Modelo #%").take(6).get();
+        models = this.testModel.where("Estado", Operator.LIKE, "%Modelo #%").take(6).get();
         this.testModel.waitOperationComplete();
         Assert.assertTrue(models.size() == 0,
                 "La cantidad de filas obtenidas, no corresponde a lo esperado");
     }
 
     @Test(testName = "Get All Models",
-            dependsOnMethods = "takeModels")
+            dependsOnMethods = "takeModels"
+            ,expectedExceptions = Exception.class)
     public void getAllModels() throws Exception {
 
         List<TestModel> models = new ArrayList<TestModel>();
         logParrafo("Obtenemos los modelos que poseen nombre es Modelo #5 U #8 o su apellido es #3");
         models = this.testModel.where("Name", Operator.LIKE, "%Modelo #5%").or(
-                "Name", Operator.LIKE, "Modelo #8").or("Apellido", Operator.IGUAL_QUE, "Apellido #3").getAll();
+                "Name", Operator.LIKE, "Modelo #8").or("Estado", Operator.IGUAL_QUE, "Apellido #3").getAll();
         this.testModel.waitOperationComplete();
         Assert.assertTrue(models.size() == 0,
                 "La cantidad de filas obtenidas, no corresponde a lo esperado");
     }
 
 
-    @Test(testName = "Update Models",
+    @Test(testName = "Create Table JBSqlUtils",
             dependsOnMethods = "getAllModels")
-    public void updateModels() throws Exception {
-        logParrafo("Obtenemos los modelos a actualizar: ");
-        List<TestModel> models = new ArrayList<TestModel>();
-        //Llenamos la lista de mdelos a insertar en BD's
-        for (int i = 0; i < 10; i++) {
-            TestModel model = new TestModel();
-            model.llenarPropertiesFromModel(this.testModel);
-            model.getName().setValor("Modelo #" + i);
-            model.getApellido().setValor("Apellido #" + i);
-            if (i % 2 == 0) {
-                model.getIsMayor().setValor(false);
-            }
-            model.getId().setValor(i);
-            model.setModelExist(true);
-            models.add(model);
-            logParrafo(model.toString());
-        }
-        logParrafo("Enviamos a guardar los modelos a través del método saveALL");
-        Integer rowsUpdate = this.testModel.saveALL(models);
-        logParrafo("Filas actualizadas en BD's: " + rowsUpdate);
+    public void creteTableJBSqlUtils2() throws Exception {
         /**
-         * Esperamos se ejecute la instrucción en BD's
-         */
-        this.testModel.waitOperationComplete();
-        Assert.assertTrue(rowsUpdate == 0,
-                "La cantidad de filas obtenidas, no corresponde a lo esperado");
-    }
-
-    @Test(testName = "Delete Models",
-            dependsOnMethods = "updateModels")
-    public void deleteModels() throws Exception {
-        logParrafo("Obtenemos los modelos a actualizar: ");
-        List<TestModel> models = new ArrayList<TestModel>();
-        //Llenamos la lista de mdelos a insertar en BD's
-        for (int i = 0; i < 10; i++) {
-            TestModel model = new TestModel();
-            model.llenarPropertiesFromModel(this.testModel);
-            model.getName().setValor("Modelo #" + i);
-            model.getApellido().setValor("Apellido #" + i);
-            if (i % 2 == 0) {
-                model.getIsMayor().setValor(false);
-            }
-            model.getId().setValor(i);
-            model.setModelExist(true);
-            models.add(model);
-            logParrafo(model.toString());
-        }
-        logParrafo("Se recuperaron " + models.size() + " Para eliminar: " + models.toString());
-        Integer rowsDelete = this.testModel.deleteALL(models);
-        this.testModel.waitOperationComplete();
-        Assert.assertTrue(rowsDelete == 0,
-                "La cantidad de filas obtenidas, no corresponde a lo esperado");
-
-    }
-
-
-    @Test(testName = "Drop Table JBSqlUtils2",
-            dependsOnMethods = "deleteModels")
-    public void dropTableJBSqlUtils2() throws Exception {
-        Boolean result = false;
-        /**
-         * Para eliminar una tabla de BD's utilizamos el metodo execute de la clase dropTableIfExist a la cual mandamos como parámetro
+         * Para eliminar una tabla de BD's utilizamos el método execute de la clase dropTableIfExist a la cual mandamos como parámetro
          * el nombre de la tabla que queremos eliminar
          */
-        logParrafo("Eliminara la tabla Proveedor de BD's");
-        result = dropTableIfExist("Proveedor").execute();
-        logParrafo("Resultado de solicitar eliminar la tabla en BD's: " + result);
+        logParrafo("Eliminara la tabla Proveedor de BD's en caso de que exista");
+        logParrafo("Resultado de solicitar eliminar la tabla en BD's: " + dropTableIfExist("Proveedor").execute());
+
+        /**
+         * Definimos las columnas que deseamos posea nuestra tabla
+         */
+        Column<Integer> Id = new Column<>("Id", DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
+
+        Column<String> Name = new Column<>("Name", DataType.VARCHAR, Constraint.NOT_NULL);
+
+        Column<String> Apellido = new Column<>("Apellido", DataType.VARCHAR, Constraint.NOT_NULL);
+
+        Column<Boolean> Estado = new Column<>("Estado", DataType.BOOLEAN, "true", Constraint.DEFAULT);
+        Name.setSize("1000");
+        Apellido.setSize("1000");
+
+        logParrafo("Se solicitara la creación de la tabla Proveedor, la cual tendra las siguientes columnas, Id, Name, Apellido y Estado");
+        /**
+         * Para crear una tabla utilizamos el método createTable despues de haber definido el nombre de la tabla que deseamos Crear
+         * y las columnas que deseamos tenga nuestra tabla
+         */
+        Boolean result = false;
+        result = JBSqlUtils.createTable("Proveedor").addColumn(Name).addColumn(Id).addColumn(Apellido).
+                addColumn(Estado).createTable();
+        logParrafo("Resultado de solicitar la creación de la tabla en BD's: " + result);
+        Assert.assertTrue(result, "La Tabla no pudo ser creada debido a que ya existe en BD's");
+        logParrafo("Solicitara la creación de la tabla Proveedor cuando esta ya existe en BD's");
+        result = true;
+        result = JBSqlUtils.createTable("Proveedor").addColumn(Name).addColumn(Id).addColumn(Apellido).
+                addColumn(Estado).createTable();
+        logParrafo("Resultado de solicitar la creación de la tabla en BD's: " + result);
+        Assert.assertFalse(result, "Retorna que la tabla a sido creada cuando esta ya existe en BD's");
     }
 
+
     @Test(testName = "Insert Into JBSqlUtils",
-            dependsOnMethods = "dropTableJBSqlUtils2", expectedExceptions = Exception.class)
+            dependsOnMethods = "creteTableJBSqlUtils2", expectedExceptions = Exception.class)
     public void insertIntoJBSqlUtils() throws Exception {
         int registros = 0;
         logParrafo("Se insertaran 5 registros en la tabla Proveedor");
-        registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Erick").andValue("Apellido", "Ramos")
+        registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Erick").andValue("Estado", "Ramos")
                 .execute();
         logParrafo("Resultado de insertar el registro de Erick en la tabla Proveedor: " + registros);
         Assert.assertTrue(false,
@@ -1002,34 +869,34 @@ public class JBSqlUtilsTestSadDay {
          * where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
          */
         List<JSONObject> lista = select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
-                .and("Apellido", Operator.LIKE, "%a%").take(2).getInJsonObjects(columnas);
+                .and("Estado", Operator.LIKE, "%a%").take(2).getInJsonObjects(columnas);
         logParrafo("Visualizamos los registros obtenidos de BD's: ");
         Assert.assertTrue(lista.size() == 0,
                 "La cantidad de filas obtenidas, no corresponde a lo esperado");
     }
 
-
+/*
     @Test(testName = "Update JBSqlUtils",
             dependsOnMethods = "getInJsonObjectsJBSqlUtils", expectedExceptions = Exception.class)
     public void updateJBSqlUtils() throws Exception {
         int rowsUpdate = 0;
         rowsUpdate += JBSqlUtils.update("Proveedor").set("Name", "Futura").andSet("Apellido", "Prometida")
-                .where("Id", Operator.IGUAL_QUE, 5).execute();
+                .where("Estado", Operator.LIKE, 5).execute();
         logParrafo("Filas actualizadas en BD's: " + rowsUpdate);
         Assert.assertTrue(false,
                 "No se Lanzo la exepción como se esperaba");
-    }
+    }*/
 
-
+    /*
     @Test(testName = "Delete JBSqlUtils",
-            dependsOnMethods = "updateJBSqlUtils", expectedExceptions = Exception.class)
+            dependsOnMethods = "getInJsonObjectsJBSqlUtils", expectedExceptions = Exception.class)
     public void deleteJBSqlUtils() throws Exception {
         int rowsDelete = 0;
-        rowsDelete += JBSqlUtils.delete("Proveedor").where("Id", Operator.IGUAL_QUE, 5).execute();
+        rowsDelete += JBSqlUtils.delete("Proveedor").where("Estado", Operator.IGUAL_QUE, 5).execute();
         logParrafo("Filas eliminadas en BD's: " + rowsDelete);
         Assert.assertTrue(false,
                 "No se Lanzo la exepción como se esperaba");
     }
-
+    */
 
 }

@@ -488,7 +488,6 @@ class Methods_Conexion extends Conexion {
                         }
                     } catch (Exception e) {
                         LogsJB.fatal("Excepción disparada al obtener los nombres de las columnas del modelo: " + e.toString());
-
                         LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     }
                 }
