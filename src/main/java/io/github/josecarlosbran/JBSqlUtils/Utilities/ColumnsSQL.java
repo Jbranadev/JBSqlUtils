@@ -146,13 +146,10 @@ public class ColumnsSQL {
      * Retorna el catalogo al que pertenece la tabla
      *
      * @return TABLE_CAT String → table catalog (may be null)
-     */
+     *//*
     public String getTABLE_CAT() {
-        if (UtilitiesJB.stringIsNullOrEmpty(TABLE_CAT)) {
-            return null;
-        }
-        return TABLE_CAT;
-    }
+        return UtilitiesJB.stringIsNullOrEmpty(TABLE_CAT)?null:TABLE_CAT;
+    }*/
 
     /**
      * Sete la categoría de la tabla
@@ -167,13 +164,10 @@ public class ColumnsSQL {
      * Obtiene TABLE_SCHEM String → table schema (may be null)
      *
      * @return TABLE_SCHEM TABLE_SCHEM String → table schema (may be null)
-     */
+     *//*
     public String getTABLE_SCHEM() {
-        if (UtilitiesJB.stringIsNullOrEmpty(TABLE_SCHEM)) {
-            return null;
-        }
-        return TABLE_SCHEM;
-    }
+        return UtilitiesJB.stringIsNullOrEmpty(TABLE_SCHEM)?null:TABLE_SCHEM;
+    }*/
 
     /**
      * Setea el Schem de la tabla
@@ -188,13 +182,10 @@ public class ColumnsSQL {
      * Retorna el nombre de la tabla a la que pertenece la columna
      *
      * @return TABLE_NAME String → table name
-     */
+     *//*
     public String getTABLE_NAME() {
-        if (UtilitiesJB.stringIsNullOrEmpty(TABLE_NAME)) {
-            return null;
-        }
-        return TABLE_NAME;
-    }
+        return UtilitiesJB.stringIsNullOrEmpty(TABLE_NAME)?null:TABLE_NAME;
+    }*/
 
     /**
      * Setea el nombre de la tabla a la cual pertenece la columna
@@ -211,10 +202,7 @@ public class ColumnsSQL {
      * @return COLUMN_NAME String → column name
      */
     public String getCOLUMN_NAME() {
-        if (UtilitiesJB.stringIsNullOrEmpty(COLUMN_NAME)) {
-            return null;
-        }
-        return COLUMN_NAME;
+        return UtilitiesJB.stringIsNullOrEmpty(COLUMN_NAME)?null:COLUMN_NAME;
     }
 
     /**
@@ -230,10 +218,10 @@ public class ColumnsSQL {
      * Retorna la representación entera del tipo de dato de la columna
      *
      * @return DATA_TYPE int → SQL type from java.sql.Types
-     */
+     *//*
     public int getDATA_TYPE() {
         return DATA_TYPE;
-    }
+    }*/
 
     /**
      * Setea el Data Type de la columna en SQL
@@ -250,10 +238,7 @@ public class ColumnsSQL {
      * @return TYPE_NAME String → Data source dependent type name, for a UDT the type name is fully qualified
      */
     public String getTYPE_NAME() {
-        if (UtilitiesJB.stringIsNullOrEmpty(TYPE_NAME)) {
-            return null;
-        }
-        return TYPE_NAME;
+        return UtilitiesJB.stringIsNullOrEmpty(TYPE_NAME)?null:TYPE_NAME;
     }
 
     /**
@@ -269,10 +254,10 @@ public class ColumnsSQL {
      * Retorna el tamaño de la columna
      *
      * @return COLUMN_SIZE int → column size.
-     */
+     *//*
     public int getCOLUMN_SIZE() {
         return COLUMN_SIZE;
-    }
+    }*/
 
     /**
      * Setea el tamaño de la columna en BD's
@@ -287,10 +272,10 @@ public class ColumnsSQL {
      * Retorna la cantidad de digitos decimales que puede tener la columna
      *
      * @return DECIMAL_DIGITS int → the number of fractional digits. Null is returned for data types where DECIMAL_DIGITS is not applicable.
-     */
+     *//*
     public int getDECIMAL_DIGITS() {
         return DECIMAL_DIGITS;
-    }
+    }*/
 
     /**
      * Setea la cantidad de digitos decimales de la columna
@@ -305,10 +290,10 @@ public class ColumnsSQL {
      * Retorna el Num_Prec_Radix
      *
      * @return NUM_PREC_RADIX int → Radix (typically either 10 or 2)
-     */
+     *//*
     public int getNUM_PREC_RADIX() {
         return NUM_PREC_RADIX;
-    }
+    }*/
 
     /**
      * Setea el Num Prec Radix
@@ -326,10 +311,10 @@ public class ColumnsSQL {
      * columnNoNulls - might not allow NULL values
      * columnNullable - definitely allows NULL values
      * columnNullableUnknown - nullability unknown
-     */
+     *//*
     public int getNULLABLE() {
         return NULLABLE;
-    }
+    }*/
 
     /**
      * Setea el entero que indica si la columna es nullable
@@ -347,13 +332,10 @@ public class ColumnsSQL {
      * Retorna la descripción de la columna en cuestión
      *
      * @return REMARKS String → comment describing column (may be null)
-     */
+     *//*
     public String getREMARKS() {
-        if (UtilitiesJB.stringIsNullOrEmpty(REMARKS)) {
-            return null;
-        }
-        return REMARKS;
-    }
+        return UtilitiesJB.stringIsNullOrEmpty(REMARKS)?null:REMARKS;
+    }*/
 
     /**
      * Setea el comentario que tiene la columna en BD's
@@ -368,13 +350,10 @@ public class ColumnsSQL {
      * Retorna el valor por default para la columna en cuestión
      *
      * @return COLUMN_DEF String → default value for the column, which should be interpreted as a string when the value is enclosed in single quotes (may be null)
-     */
+     *//*
     public String getCOLUMN_DEF() {
-        if (UtilitiesJB.stringIsNullOrEmpty(COLUMN_DEF)) {
-            return null;
-        }
-        return COLUMN_DEF;
-    }
+        return UtilitiesJB.stringIsNullOrEmpty(COLUMN_DEF)?null:COLUMN_DEF;
+    }*/
 
     /**
      * Setea el Valor por default que tiene la columna en BD's
@@ -389,10 +368,10 @@ public class ColumnsSQL {
      * Retorna el maximo de bytes que puede poseer la columna
      *
      * @return CHAR_OCTET_LENGTH int → for char types the maximum number of bytes in the column
-     */
+     *//*
     public int getCHAR_OCTET_LENGTH() {
         return CHAR_OCTET_LENGTH;
-    }
+    }*/
 
     /**
      * Setea el Char Octet Length
@@ -426,13 +405,10 @@ public class ColumnsSQL {
      * YES --- if the column can include NULLs
      * NO --- if the column cannot include NULLs
      * empty string --- if the nullability for the column is unknown
-     */
+     *//*
     public String getIS_NULLABLE() {
-        if (UtilitiesJB.stringIsNullOrEmpty(IS_NULLABLE)) {
-            return null;
-        }
-        return IS_NULLABLE;
-    }
+        return UtilitiesJB.stringIsNullOrEmpty(IS_NULLABLE)?null:IS_NULLABLE;
+    }*/
 
     /**
      * Setea si la columna es nullable
@@ -450,13 +426,10 @@ public class ColumnsSQL {
      * Retorna el scope_catalog
      *
      * @return SCOPE_CATALOG String → catalog of table that is the scope of a reference attribute (null if DATA_TYPE isn't REF)
-     */
+     *//*
     public String getSCOPE_CATALOG() {
-        if (UtilitiesJB.stringIsNullOrEmpty(SCOPE_CATALOG)) {
-            return null;
-        }
-        return SCOPE_CATALOG;
-    }
+        return UtilitiesJB.stringIsNullOrEmpty(SCOPE_CATALOG)?null:SCOPE_CATALOG;
+    }*/
 
     /**
      * Setea el Scope Catalog
@@ -471,13 +444,10 @@ public class ColumnsSQL {
      * Retorna el scope_schema de la tabla en cuestión
      *
      * @return SCOPE_SCHEMA String → schema of table that is the scope of a reference attribute (null if the DATA_TYPE isn't REF)
-     */
+     *//*
     public String getSCOPE_SCHEMA() {
-        if (UtilitiesJB.stringIsNullOrEmpty(SCOPE_SCHEMA)) {
-            return null;
-        }
-        return SCOPE_SCHEMA;
-    }
+        return UtilitiesJB.stringIsNullOrEmpty(SCOPE_SCHEMA)?null:SCOPE_SCHEMA;
+    }*/
 
     /**
      * Setea el SCOPE SCHEMA
@@ -492,13 +462,10 @@ public class ColumnsSQL {
      * Retorna el scope de la tabla en cuestión
      *
      * @return SCOPE_TABLE String → table name that this the scope of a reference attribute (null if the DATA_TYPE isn't REF)
-     */
+     *//*
     public String getSCOPE_TABLE() {
-        if (UtilitiesJB.stringIsNullOrEmpty(SCOPE_TABLE)) {
-            return null;
-        }
-        return SCOPE_TABLE;
-    }
+        return UtilitiesJB.stringIsNullOrEmpty(SCOPE_TABLE)?null:SCOPE_TABLE;
+    }*/
 
     /**
      * Setea el Scope Table
@@ -514,10 +481,10 @@ public class ColumnsSQL {
      *
      * @return SOURCE_DATA_TYPE short → source type of a distinct type or user-generated Ref type,
      * SQL type from java.sql.Types (null if DATA_TYPE isn't DISTINCT or user-generated REF)
-     */
+     *//*
     public short getSOURCE_DATA_TYPE() {
         return SOURCE_DATA_TYPE;
-    }
+    }*/
 
     /**
      * Setea el Source data type de la columna
@@ -536,13 +503,10 @@ public class ColumnsSQL {
      * YES --- if the column is auto incremented
      * NO --- if the column is not auto incremented
      * empty string --- if it cannot be determined whether the column is auto incremented
-     */
+     *//*
     public String getIS_AUTOINCREMENT() {
-        if (UtilitiesJB.stringIsNullOrEmpty(IS_AUTOINCREMENT)) {
-            return null;
-        }
-        return IS_AUTOINCREMENT;
-    }
+        return UtilitiesJB.stringIsNullOrEmpty(IS_AUTOINCREMENT)?null:IS_AUTOINCREMENT;
+    }*/
 
     /**
      * Setea si la columna es auto incrementable
@@ -563,13 +527,10 @@ public class ColumnsSQL {
      * YES --- if this a generated column
      * NO --- if this not a generated column
      * empty string --- if it cannot be determined whether this is a generated column
-     */
+     *//*
     public String getIS_GENERATEDCOLUMN() {
-        if (UtilitiesJB.stringIsNullOrEmpty(IS_GENERATEDCOLUMN)) {
-            return null;
-        }
-        return IS_GENERATEDCOLUMN;
-    }
+        return UtilitiesJB.stringIsNullOrEmpty(IS_GENERATEDCOLUMN)?null:IS_GENERATEDCOLUMN;
+    }*/
 
     /**
      * Setea el IS_GENERATEDCOLUMN String → Indicates whether this is a generated column

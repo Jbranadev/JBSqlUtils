@@ -184,17 +184,6 @@ public class MethodsTake<T> extends MethodsAndSet {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /**
-     * Ejecuta la sentencia SQL proporcionada y retorna la cantidad de filas afectadas
-     *
-     * @return Retorna un Entero que representa la cantidad de filas afectadas al ejecutar la sentencia SQL
-     * proporcionada.
-     * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
-     */
-    public int execute() throws Exception {
-        return new Execute(this.sql, this.parametros).execute();
-    }
-
 
     /**
      * Obtiene una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql

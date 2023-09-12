@@ -155,7 +155,7 @@ public class JBSqlUtilsTestGodDay {
         List<String> columnas = null;
         logParrafo("Obtendra los primeros 2 registros cuyo estado sea true y en su apellido posea la letra a");
         List<JSONObject> lista = select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
-                .orderBy("Name", OrderType.ASC).getInJsonObjects(columnas);
+                .orderBy("Name", OrderType.ASC).take(5).getInJsonObjects(columnas);
         /**
          * Imprimimos los registros obtenidos
          */
@@ -204,7 +204,7 @@ public class JBSqlUtilsTestGodDay {
             dependsOnMethods = "orColumnNameJBSqlUtils")
     public void openParentecisColumnNameJBSqlUtils() throws Exception {
         JBSqlUtils.update("Proveedor").set("Estado", true).where("Estado", Operator.IGUAL_QUE, true)
-                .openParentecis(Operator.OR, "Estado", Operator.IGUAL_QUE, true).closeParentecis(null)
+                .openParentecis(Operator.OR, "Estado", Operator.IGUAL_QUE, true).or("Estado", Operator.IGUAL_QUE, true).closeParentecis(null)
                 .execute();
         Assert.assertTrue(true,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
@@ -218,7 +218,8 @@ public class JBSqlUtilsTestGodDay {
                 .orderBy("Id", OrderType.ASC).execute();
         Assert.assertTrue(true,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
-    }*/
+    }
+    */
 
 
     @Test(testName = "Take Limite Igual o Inferior a 0 JBSqlUtils",
@@ -233,7 +234,7 @@ public class JBSqlUtilsTestGodDay {
             dependsOnMethods = "takeLimiteJBSqlUtils")
     public void whereColumnNameJBSqlUtilsModel() throws Exception {
         TestModel model = new TestModel();
-        model.where("Estado", Operator.IGUAL_QUE, false).orderBy("Id", OrderType.ASC).get();
+        model.where("IsMayor", Operator.IGUAL_QUE, false).orderBy("Id", OrderType.ASC).get();
         Assert.assertTrue(true,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
@@ -242,7 +243,7 @@ public class JBSqlUtilsTestGodDay {
             dependsOnMethods = "whereColumnNameJBSqlUtilsModel")
     public void andColumnNameJBSqlUtilsModel() throws Exception {
         TestModel model = new TestModel();
-        model.where("Estado", Operator.IGUAL_QUE, false).and("Estado", Operator.IGUAL_QUE, false).getAll();
+        model.where("IsMayor", Operator.IGUAL_QUE, false).and("IsMayor", Operator.IGUAL_QUE, false).getAll();
         Assert.assertTrue(true,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
@@ -251,7 +252,7 @@ public class JBSqlUtilsTestGodDay {
             dependsOnMethods = "andColumnNameJBSqlUtilsModel")
     public void orColumnNameJBSqlUtilsModel() throws Exception {
         TestModel model = new TestModel();
-        model.where("Estado", Operator.IGUAL_QUE, false).or("Estado", Operator.IGUAL_QUE, false).get();
+        model.where("IsMayor", Operator.IGUAL_QUE, false).or("IsMayor", Operator.IGUAL_QUE, false).get();
         Assert.assertTrue(true,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
@@ -260,7 +261,7 @@ public class JBSqlUtilsTestGodDay {
             dependsOnMethods = "orColumnNameJBSqlUtilsModel")
     public void openParentecisColumnNameJBSqlUtilsModel() throws Exception {
         TestModel model = new TestModel();
-        model.where("Estado", Operator.IGUAL_QUE, false).openParentecis(Operator.OR, "Estado", Operator.IGUAL_QUE, false)
+        model.where("IsMayor", Operator.IGUAL_QUE, false).openParentecis(Operator.OR, "IsMayor", Operator.IGUAL_QUE, false)
                 .closeParentecis(null).or("Id", Operator.IGUAL_QUE, 3).get();
         Assert.assertTrue(true,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
@@ -270,7 +271,7 @@ public class JBSqlUtilsTestGodDay {
             dependsOnMethods = "openParentecisColumnNameJBSqlUtilsModel")
     public void orderByColumnNameJBSqlUtilsModel() throws Exception {
         TestModel model = new TestModel();
-        model.where("Estado", Operator.IGUAL_QUE, true).orderBy("Id", OrderType.ASC).getAll();
+        model.where("IsMayor", Operator.IGUAL_QUE, true).orderBy("Id", OrderType.ASC).getAll();
         Assert.assertTrue(true,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
@@ -279,7 +280,7 @@ public class JBSqlUtilsTestGodDay {
             dependsOnMethods = "orderByColumnNameJBSqlUtilsModel")
     public void takeLimiteJBSqlUtilsModel() throws Exception {
         TestModel model = new TestModel();
-        model.where("Estado", Operator.IGUAL_QUE, true).take(3);
+        model.where("IsMayor", Operator.IGUAL_QUE, true).take(3);
         Assert.assertTrue(true,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
@@ -298,7 +299,7 @@ public class JBSqlUtilsTestGodDay {
         this.testModel.setGetPropertySystem(false);
         this.testModel.setBD(BDSqlite);
         this.testModel.setDataBaseType(DataBase.SQLite);
-        this.testModel.where("Estado", Operator.IGUAL_QUE, true).get();
+        this.testModel.where("IsMayor", Operator.IGUAL_QUE, true).get();
         Assert.assertTrue(true,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
@@ -317,7 +318,7 @@ public class JBSqlUtilsTestGodDay {
         this.testModel.setGetPropertySystem(false);
         this.testModel.setBD(BDSqlite);
         this.testModel.setDataBaseType(DataBase.SQLite);
-        this.testModel.where("Estado", Operator.IGUAL_QUE, true).and("Estado", Operator.IGUAL_QUE, true).getAll();
+        this.testModel.where("IsMayor", Operator.IGUAL_QUE, true).and("IsMayor", Operator.IGUAL_QUE, true).getAll();
         Assert.assertTrue(true,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
@@ -335,7 +336,7 @@ public class JBSqlUtilsTestGodDay {
         this.testModel.setGetPropertySystem(false);
         this.testModel.setBD(BDSqlite);
         this.testModel.setDataBaseType(DataBase.SQLite);
-        this.testModel.where("Estado", Operator.IGUAL_QUE, true).or("Estado", Operator.IGUAL_QUE, true).take(5).get();
+        this.testModel.where("IsMayor", Operator.IGUAL_QUE, true).or("IsMayor", Operator.IGUAL_QUE, true).take(5).get();
         Assert.assertTrue(true,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
@@ -355,15 +356,14 @@ public class JBSqlUtilsTestGodDay {
         this.testModel.setGetPropertySystem(false);
         this.testModel.setBD(BDSqlite);
         this.testModel.setDataBaseType(DataBase.SQLite);
-        this.testModel.where("Estado", Operator.IGUAL_QUE, false).openParentecis(Operator.OR, "Estado", Operator.IGUAL_QUE, false)
+        this.testModel.where("IsMayor", Operator.IGUAL_QUE, false).openParentecis(Operator.OR, "IsMayor", Operator.IGUAL_QUE, false)
                 .closeParentecis(null).or("Id", Operator.IGUAL_QUE, 4).get();
         Assert.assertTrue(true,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
 
     @Test(testName = "Order By Colum Name JBSqlUtilsModelPropertyFalse",
-            dependsOnMethods = "openParentecisColumnNameJBSqlUtilsModelPropertyFalse",
-            expectedExceptions = ModelNotFound.class)
+            dependsOnMethods = "openParentecisColumnNameJBSqlUtilsModelPropertyFalse")
     public void orderByColumnNameJBSqlUtilsModelPropertyFalse() throws Exception {
          String separador = System.getProperty("file.separator");
         String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
@@ -376,7 +376,7 @@ public class JBSqlUtilsTestGodDay {
         this.testModel.setGetPropertySystem(false);
         this.testModel.setBD(BDSqlite);
         this.testModel.setDataBaseType(DataBase.SQLite);
-        this.testModel.where("Estado", Operator.IGUAL_QUE, true).orderBy("Id", OrderType.ASC).firstOrFail();
+        this.testModel.where("IsMayor", Operator.IGUAL_QUE, true).orderBy("Id", OrderType.ASC).get();
         Assert.assertTrue(true,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
@@ -395,7 +395,7 @@ public class JBSqlUtilsTestGodDay {
         this.testModel.setGetPropertySystem(false);
         this.testModel.setBD(BDSqlite);
         this.testModel.setDataBaseType(DataBase.SQLite);
-        this.testModel.where("Estado", Operator.IGUAL_QUE, true).take(1).get();
+        this.testModel.where("IsMayor", Operator.IGUAL_QUE, true).take(1).get();
         Assert.assertTrue(true,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }

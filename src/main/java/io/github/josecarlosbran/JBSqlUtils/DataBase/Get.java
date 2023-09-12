@@ -95,7 +95,7 @@ class Get extends Methods_Conexion {
                     if (modelo.getTableExist()) {
                         String sql = "SELECT * FROM " + modelo.getTableName();
                         sql = sql + Sql + ";";
-                        //LogsJB.info(sql);
+                        LogsJB.info(sql);
                         Connection connect = modelo.getConnection();
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         for (int i = 0; i < parametros.size(); i++) {

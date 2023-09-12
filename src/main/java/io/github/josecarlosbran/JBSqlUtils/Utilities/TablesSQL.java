@@ -125,10 +125,7 @@ public class TablesSQL {
      * @return TABLE_CAT String => catálogo de tablas (puede ser nulo)
      */
     public String getTABLE_CAT() {
-        if (UtilitiesJB.stringIsNullOrEmpty(TABLE_CAT)) {
-            return null;
-        }
-        return TABLE_CAT;
+        return UtilitiesJB.stringIsNullOrEmpty(TABLE_CAT)?null:TABLE_CAT;
     }
 
     /**
@@ -146,10 +143,7 @@ public class TablesSQL {
      * @return Retorna el esquema de la tabla en BD's
      */
     public String getTABLE_SCHEM() {
-        if (UtilitiesJB.stringIsNullOrEmpty(TABLE_SCHEM)) {
-            return null;
-        }
-        return TABLE_SCHEM;
+        return UtilitiesJB.stringIsNullOrEmpty(TABLE_SCHEM)?null:TABLE_SCHEM;
     }
 
     /**
@@ -167,10 +161,7 @@ public class TablesSQL {
      * @return retorna el nombre de la tabla en BD's
      */
     public String getTABLE_NAME() {
-        if (UtilitiesJB.stringIsNullOrEmpty(TABLE_NAME)) {
-            return null;
-        }
-        return TABLE_NAME;
+        return UtilitiesJB.stringIsNullOrEmpty(TABLE_NAME)?null:TABLE_NAME;
     }
 
     /**
@@ -188,13 +179,10 @@ public class TablesSQL {
      * @return TABLE_TYPE Cadena => tipo de tabla. Los tipos típicos son "TABLE", "VIEW", "SYSTEM TABLE",
      * "GLOBAL TEMPORARY", "LOCAL TEMPORARY", "ALIAS", "SYNONYM".
      * OBSERVACIONES String => comentario explicativo sobre la tabla
-     */
+     *//*
     public String getTABLE_TYPE() {
-        if (UtilitiesJB.stringIsNullOrEmpty(TABLE_TYPE)) {
-            return null;
-        }
-        return TABLE_TYPE;
-    }
+        return UtilitiesJB.stringIsNullOrEmpty(TABLE_TYPE)?null:TABLE_TYPE;
+    }*/
 
     /**
      * Setea el tipo de tabla en BD's
@@ -211,13 +199,10 @@ public class TablesSQL {
      * Obtiene el comentario de la tabla
      *
      * @return String => explanatory comment on the table
-     */
+     *//*
     public String getREMARKS() {
-        if (UtilitiesJB.stringIsNullOrEmpty(REMARKS)) {
-            return null;
-        }
-        return REMARKS;
-    }
+        return UtilitiesJB.stringIsNullOrEmpty(REMARKS)?null:REMARKS;
+    }*/
 
     /**
      * Setea el comentario correspondiente a la tabla
@@ -232,14 +217,11 @@ public class TablesSQL {
      * Obtiene el catalogo de tipos
      *
      * @return TYPE_CAT String => el catálogo de tipos (puede ser nulo)
-     */
+     *//*
     public String getTYPE_CAT() {
-        if (UtilitiesJB.stringIsNullOrEmpty(TYPE_CAT)) {
-            return null;
-        }
-        return TYPE_CAT;
+        return UtilitiesJB.stringIsNullOrEmpty(TYPE_CAT)?null:TYPE_CAT;
     }
-
+*/
     /**
      * Setea el TYPE_CAT String => el catálogo de tipos (puede ser nulo)
      *
@@ -253,13 +235,10 @@ public class TablesSQL {
      * Obtiene el tipo de esquema
      *
      * @return TYPE_SCHEM String => el esquema de tipos (puede ser nulo)
-     */
+     *//*
     public String getTYPE_SCHEM() {
-        if (UtilitiesJB.stringIsNullOrEmpty(TYPE_SCHEM)) {
-            return null;
-        }
-        return TYPE_SCHEM;
-    }
+        return UtilitiesJB.stringIsNullOrEmpty(TYPE_SCHEM)?null:TYPE_SCHEM;
+    }*/
 
     /**
      * Setea el tipo de esquema.
@@ -274,14 +253,11 @@ public class TablesSQL {
      * Retorna el nombre de tipo de la tabla en BD's
      *
      * @return TYPE_NAME Cadena => nombre de tipo (puede ser nulo)
-     */
+     *//*
     public String getTYPE_NAME() {
-        if (UtilitiesJB.stringIsNullOrEmpty(TYPE_NAME)) {
-            return null;
-        }
-        return TYPE_NAME;
+        return UtilitiesJB.stringIsNullOrEmpty(TYPE_NAME)?null:TYPE_NAME;
     }
-
+*/
     /**
      * Setea el nombre de tipo de la tabla en BD's
      *
@@ -296,14 +272,11 @@ public class TablesSQL {
      *
      * @return SELF_REFERENCING_COL_NAME Cadena => nombre de la columna de "identificador"
      * designada de una tabla escrita (puede ser nulo)
-     */
+     *//*
     public String getSELF_REFERENCING_COL_NAME() {
-        if (UtilitiesJB.stringIsNullOrEmpty(SELF_REFERENCING_COL_NAME)) {
-            return null;
-        }
-        return SELF_REFERENCING_COL_NAME;
+        return UtilitiesJB.stringIsNullOrEmpty(SELF_REFERENCING_COL_NAME)?null:SELF_REFERENCING_COL_NAME;
     }
-
+*/
     /**
      * Setea el nombre de la columna de identificación de la tabla
      *
@@ -317,13 +290,10 @@ public class TablesSQL {
     /**
      * @return REF_GENERATION String => especifica cómo se crean los valores en SELF_REFERENCING_COL_NAME.
      * Los valores son "SISTEMA", "USUARIO", "DERIVADO". (puede ser nulo)
-     */
+     *//*
     public String getREF_GENERATION() {
-        if (UtilitiesJB.stringIsNullOrEmpty(REF_GENERATION)) {
-            return null;
-        }
-        return REF_GENERATION;
-    }
+        return UtilitiesJB.stringIsNullOrEmpty(REF_GENERATION)?null:REF_GENERATION;
+    }*/
 
     /**
      * Setea como se crean los valores de referencia
