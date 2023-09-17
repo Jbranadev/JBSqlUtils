@@ -31,7 +31,6 @@ public enum OrderType {
      * Indica que deseamos se ordene de manera Ascendente los registros
      */
     ASC(" ASC "),
-
     /**
      * Indica que deseamos se ordene de manera Descendente los registros
      */
@@ -52,7 +51,6 @@ public enum OrderType {
         return this.valor;
     }
 
-
     /**
      * Retorna la numeración correspondiente al nombre proporcionado
      *
@@ -72,5 +70,4 @@ public enum OrderType {
         }
         return null;
     }
-
 }

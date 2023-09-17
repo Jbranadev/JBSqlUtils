@@ -19,7 +19,6 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  */
 public class openParentecis<T> extends MethodsOpenParentecis {
 
-
     /**
      * Constructor que recibe como parametro:
      *
@@ -131,9 +130,7 @@ public class openParentecis<T> extends MethodsOpenParentecis {
         this.sql = sql + operatorPrev.getOperador()
                 + Operator.OPEN_PARENTESIS.getOperador()
                 + Operator.OPEN_PARENTESIS.getOperador() + columna + operador.getOperador() + "?" + Operator.CLOSE_PARENTESIS.getOperador();
-
     }
-
 
     /**
      * Constructor que recibe como parametro:
@@ -170,7 +167,6 @@ public class openParentecis<T> extends MethodsOpenParentecis {
                 + Operator.OPEN_PARENTESIS.getOperador()
                 + Operator.OPEN_PARENTESIS.getOperador() + columna + operador.getOperador() + "?" + Operator.CLOSE_PARENTESIS.getOperador();
     }
-
 
     /**
      * Constructor que recibe como parametro:
@@ -209,7 +205,6 @@ public class openParentecis<T> extends MethodsOpenParentecis {
                 + Operator.OPEN_PARENTESIS.getOperador() + columna + operador.getOperador() + "?" + Operator.CLOSE_PARENTESIS.getOperador();
     }
 
-
     /**
      * Constructor que recibe como parametro:
      *
@@ -233,14 +228,10 @@ public class openParentecis<T> extends MethodsOpenParentecis {
         if (Objects.isNull(operador)) {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
-
         this.parametros = parametros;
         this.parametros.add(getColumn(valor));
         this.sql = sql
                 + Operator.OPEN_PARENTESIS.getOperador()
                 + Operator.OPEN_PARENTESIS.getOperador() + columna + operador.getOperador() + "?" + Operator.CLOSE_PARENTESIS.getOperador();
-
     }
-
-
 }

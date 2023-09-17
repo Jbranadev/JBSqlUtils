@@ -30,7 +30,6 @@ public class CreateTable {
         this.tableName = TableName;
     }
 
-
     /**
      * Agrega una columna a la sentencia SQL a ejecutar al momento de llamar al metodo creteTable()
      *
@@ -43,5 +42,4 @@ public class CreateTable {
     public AddColumn addColumn(Column columna) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         return new AddColumn(this.tableName, columna);
     }
-
 }

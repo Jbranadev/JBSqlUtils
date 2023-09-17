@@ -1,6 +1,5 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
-
 import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 
@@ -16,7 +15,6 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author José Bran
  */
 public class Value extends AndValue {
-
 
     /**
      * Constructor que recibe como parámetro:
@@ -42,6 +40,4 @@ public class Value extends AndValue {
         this.parametros.add(getColumn(value));
         this.sql = sql + "(" + columName + ")";
     }
-
-
 }

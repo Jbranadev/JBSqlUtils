@@ -15,7 +15,6 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
-
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.OrderType;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
@@ -33,7 +32,6 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author Jose Bran
  */
 public class OrderBy<T> extends MethodsOrderBy {
-
 
     /**
      * Constructor que recibe como parámetro:
@@ -64,7 +62,6 @@ public class OrderBy<T> extends MethodsOrderBy {
         this.modelo = modelo;
         this.sql = sql + " ORDER BY " + columna + orderType.getValor();
     }
-
 
     /**
      * Constructor que recibe como parámetro:
@@ -97,7 +94,6 @@ public class OrderBy<T> extends MethodsOrderBy {
         this.sql = sql + " ORDER BY " + columna + orderType.getValor();
     }
 
-
     /**
      * Constructor que recibe como parametro:
      *
@@ -122,13 +118,7 @@ public class OrderBy<T> extends MethodsOrderBy {
         this.parametros = parametros;
         this.sql = sql + " ORDER BY " + columna + orderType.getValor();
     }
-
-
-
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 }

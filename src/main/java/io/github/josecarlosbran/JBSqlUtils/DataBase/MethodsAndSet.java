@@ -20,7 +20,6 @@ public class MethodsAndSet<T> extends Get {
      */
     protected List<Column> parametros = new ArrayList<>();
 
-
     /**
      * Constructor por default de la clase MethodsWhere, que inicializa la clase
      *
@@ -45,11 +44,9 @@ public class MethodsAndSet<T> extends Get {
     protected MethodsAndSet(Boolean getGetPropertiesSystem) throws DataBaseUndefind, PropertiesDBUndefined {
         super(getGetPropertiesSystem);
     }
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
     /**
      * Ejecuta la sentencia SQL proporcionada y retorna la cantidad de filas afectadas
@@ -61,6 +58,4 @@ public class MethodsAndSet<T> extends Get {
     public int execute() throws Exception {
         return new Execute(this.sql, this.parametros).execute();
     }
-
-
 }

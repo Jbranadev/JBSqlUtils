@@ -15,7 +15,6 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
-
 import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
@@ -32,7 +31,6 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author Jose Bran
  */
 public class Set extends AndSet {
-
 
     /**
      * Constructor que recibe como parámetro:
@@ -62,6 +60,4 @@ public class Set extends AndSet {
         this.parametros.add(getColumn(value));
         this.sql = sql + "SET " + columName + "=" + "?";
     }
-
-
 }

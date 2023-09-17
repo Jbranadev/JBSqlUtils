@@ -17,7 +17,6 @@ public class MethodsTake<T> extends MethodsAndSet {
 
     protected T modelo = null;
 
-
     /**
      * Constructor por default de la clase MethodsWhere, que inicializa la clase
      *
@@ -42,8 +41,6 @@ public class MethodsTake<T> extends MethodsAndSet {
     protected MethodsTake(Boolean getGetPropertiesSystem) throws DataBaseUndefind, PropertiesDBUndefined {
         super(getGetPropertiesSystem);
     }
-
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -100,7 +97,6 @@ public class MethodsTake<T> extends MethodsAndSet {
         }
     }
 
-
     /**
      * @param operatorPrev Operador a colocar antes de la apertura de parentecis
      * @param columna      Columna a evaluar dentro de la sentencia AND
@@ -138,7 +134,6 @@ public class MethodsTake<T> extends MethodsAndSet {
                 }
                 return new openParentecis(this.sql, this.modelo, this.parametros, operatorPrev, columna, operador, valor);
             }
-
         }
     }
 
@@ -178,12 +173,9 @@ public class MethodsTake<T> extends MethodsAndSet {
             }
         }
     }
-
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
     /**
      * Obtiene una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
@@ -199,6 +191,4 @@ public class MethodsTake<T> extends MethodsAndSet {
     public List<JSONObject> getInJsonObjects(List<String> columnas) throws Exception {
         return super.get(this.sql, this.parametros, columnas);
     }
-
-
 }

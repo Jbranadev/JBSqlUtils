@@ -65,7 +65,6 @@ class Methods extends Methods_Conexion {
         super(getPropertySystem);
     }
 
-
     /**
      * Almacena la información del modelo que hace el llamado en BD's.'
      *
@@ -75,9 +74,7 @@ class Methods extends Methods_Conexion {
      */
     public Integer save() throws Exception {
         return saveModel(this);
-
     }
-
 
     /**
      * Almacena la información de los modelos proporcionados en BD's
@@ -127,7 +124,6 @@ class Methods extends Methods_Conexion {
         return result;
     }
 
-
     /**
      * Elimina la información del modelo que hace el llamado en BD´s
      *
@@ -137,7 +133,6 @@ class Methods extends Methods_Conexion {
      */
     public Integer delete() throws Exception {
         return deleteModel(this);
-
     }
 
     /**
@@ -183,7 +178,6 @@ class Methods extends Methods_Conexion {
         return result;
     }
 
-
     /**
      * Almacena la información del modelo que hace el llamado, esperando a que la operación termine de ser realizada
      *
@@ -196,13 +190,10 @@ class Methods extends Methods_Conexion {
             this.waitOperationComplete();
             return resultado >= 1;
         } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
     }
-
 
     /**
      * Proporciona un punto de entrada para obtener uno o mas modelos del tipo de modelo que invoca este procedimiento
@@ -226,7 +217,6 @@ class Methods extends Methods_Conexion {
         }
         return new Where(columna, operador, valor, this);
     }
-
 
     /**
      * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
@@ -268,15 +258,13 @@ class Methods extends Methods_Conexion {
                     }
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
-                            "SQL de la BD's: " + e.toString());
-                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                            "SQL de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     return new ResultAsync<>(listatemp, e);
                 }
             };
             //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
             Future<ResultAsync<List<T>>> future = this.ejecutor.submit(get);
             while (!future.isDone()) {
-
             }
             //this.ejecutor.shutdown();
             ResultAsync<List<T>> resultado = future.get();
@@ -286,13 +274,10 @@ class Methods extends Methods_Conexion {
             }
             lista = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
-            LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return lista;
     }
-
 
     /**
      * Llena el modelo con la información del controlador
@@ -387,8 +372,7 @@ class Methods extends Methods_Conexion {
                                     break;
                                 }
                             } catch (Exception e) {
-                                LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador: " + e.toString());
-                                LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                                LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                             }
                         }
                         if (isready) {
@@ -396,18 +380,13 @@ class Methods extends Methods_Conexion {
                             break;
                         }
                     } catch (Exception e) {
-                        LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador: " + e.toString());
-                        LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                        LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     }
                 }
             }
-
         } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
-
     }
 
     /**
@@ -474,20 +453,14 @@ class Methods extends Methods_Conexion {
                             break;
                         }
                     } catch (Exception e) {
-                        LogsJB.fatal("Excepción disparada al llenar el controlador, con la info del modelo: " + e.toString());
-
-                        LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                        LogsJB.fatal("Excepción disparada al llenar el controlador, con la info del modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     }
                 }
             }
         } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al llenar el controlador, con la info del modelo: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada al llenar el controlador, con la info del modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
-
     }
-
 
     /**
      * Setea null en el campo valor de cada columna que posee el modelo.
@@ -535,17 +508,12 @@ class Methods extends Methods_Conexion {
                             iteradorModelSetMethods.remove();
                         }
                     } catch (Exception e) {
-                        LogsJB.fatal("Excepción disparada al limpiar el mmodelo: " + e.toString());
-
-                        LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                        LogsJB.fatal("Excepción disparada al limpiar el mmodelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     }
                 }
             }
         } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al limpiar el modelo: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada al limpiar el modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
-
 }

@@ -41,7 +41,6 @@ public class Select extends Get {
         this.sql = "SELECT * FROM " + TableName + "";
     }
 
-
     /**
      * Proporciona un punto de entrada para agregar la lógica de una sentencia WHERE a la sentencia SQL que
      * deseamos ejecutar
@@ -62,7 +61,6 @@ public class Select extends Get {
         return new Where(columna, operador, value, this.sql);
     }
 
-
     /**
      * Obtiene una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
      * Envíada como parametro, las Key para obtener el valor correpondiente a cada columna todas sus letras tienen que ser mayusculas,
@@ -78,6 +76,4 @@ public class Select extends Get {
     public List<JSONObject> getInJsonObjects(List<String> columnas) throws Exception {
         return super.get(this.sql, this.parametros, columnas);
     }
-
-
 }

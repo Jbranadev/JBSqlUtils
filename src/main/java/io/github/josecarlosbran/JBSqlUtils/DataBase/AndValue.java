@@ -1,6 +1,5 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
-
 import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
@@ -20,7 +19,6 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  */
 public class AndValue {
 
-
     protected String sql;
 
     /**
@@ -32,9 +30,7 @@ public class AndValue {
      * Constructor Por defaul Utilizado para que Value Pueda acceder a los metodos de esta clase, reduciendo el codigo a mantener
      */
     protected AndValue() {
-
     }
-
 
     /**
      * Constructor que recibe como parametro:
@@ -76,7 +72,6 @@ public class AndValue {
         return new AndValue(columName, value, this.sql, this.parametros);
     }
 
-
     /**
      * Ejecuta la sentencia SQL proporcionada y retorna la cantidad de filas afectadas
      *
@@ -100,6 +95,4 @@ public class AndValue {
         this.sql = this.sql + values;
         return new Execute(this.sql, this.parametros).execute();
     }
-
-
 }

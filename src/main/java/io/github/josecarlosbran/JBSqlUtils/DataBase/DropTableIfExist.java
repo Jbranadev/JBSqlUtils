@@ -1,6 +1,5 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
-
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
@@ -31,7 +30,6 @@ public class DropTableIfExist extends Methods_Conexion {
         }
         this.setTableName(TableName);
     }
-
 
     /**
      * Ejecuta la sentencia SQL encargada de eliminar la tabla en BD's

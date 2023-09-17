@@ -52,7 +52,6 @@ public enum Operator {
      * Operador {@literal <=}
      */
     MENOR_IGUAL_QUE(" <= "),
-
     /**
      * Operador LIKE
      */
@@ -69,48 +68,38 @@ public enum Operator {
      * Operador ORDER BY
      */
     ORDERBY(" ORDER BY "),
-
     /**
      * Operador AND
      */
     AND(" AND "),
-
     /**
      * Operador OR
      */
     OR(" OR "),
-
     /**
      * Operador IS
      */
     IS(" IS "),
-
     /**
      * Operador NULL
      */
     NULL(" NULL "),
-
     /**
      * Operador NOT NULL
      */
     NOT_NULL(" NOT NULL "),
-
     /**
      * Operador IN
      */
     IN(" IN "),
-
     /**
      * Operador BETWEEN
      */
     BETWEEN(" BETWEEN "),
-
-
     /**
      * Operador NOT
      */
     NOT(" NOT ");
-
 
     private String operador;
 

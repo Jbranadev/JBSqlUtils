@@ -36,9 +36,7 @@ public class AddColumn extends Methods_Conexion {
         }
         this.tableName = TableName;
         this.columnas.add(columna);
-
     }
-
 
     /**
      * Constructor que recibe como parametro:
@@ -60,7 +58,6 @@ public class AddColumn extends Methods_Conexion {
         this.columnas.add(columna);
         this.setTableName(TableName);
     }
-
 
     /**
      * Agrega una columna a la sentencia SQL a ejecutar al momento de llamar al metodo creteTable()
@@ -85,6 +82,4 @@ public class AddColumn extends Methods_Conexion {
     public Boolean createTable() throws Exception {
         return this.crateTableJSON(this.columnas);
     }
-
-
 }

@@ -31,12 +31,10 @@ public enum Constraint {
      * Indica que la columna no acepta valores Nullos.
      */
     NOT_NULL("NOT NULL"),
-
     /**
      * El valor de esta columna tiene que ser unico
      */
     UNIQUE("UNIQUE"),
-
     /**
      * Restriccion que permite indicarle que tipo de valores si serán aceptados por la columna
      * Lo puede realizar a travez del metodo setRestriccion(String restriccion); de esta numeración.
@@ -48,8 +46,6 @@ public enum Constraint {
      * Indica que la columna funciona como clave primaria del modelo.
      */
     PRIMARY_KEY("PRIMARY KEY"),
-
-
     /**
      * Indica que la columna funciona como clave foranea del modelo.
 
@@ -59,13 +55,10 @@ public enum Constraint {
      * Indica que el campo tendra como valor por default el TimeStamp del momento en que se almacene el modelo.
      */
     CURRENT_TIMESTAMP("CURRENT_TIMESTAMP"),
-
-
     /**
      * Indica que la columna tendra un valor por default
      */
     DEFAULT("DEFAULT"),
-
     /**
      * Indica que la columna autoincrementara su valor cada vez que se almacene un registro en la tabla correspondiente al modelo.
      */
@@ -77,7 +70,6 @@ public enum Constraint {
         this.setRestriccion(Restriccion);
     }
 
-
     /**
      * Obtiene la restricción correspondiente a la numeración.
      *
@@ -86,7 +78,6 @@ public enum Constraint {
     public String getRestriccion() {
         return restriccion;
     }
-
 
     private void setRestriccion(String restriccion) {
         this.restriccion = restriccion;
@@ -111,5 +102,4 @@ public enum Constraint {
         }
         return null;
     }
-
 }

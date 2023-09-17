@@ -15,7 +15,6 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
-
 import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
@@ -89,7 +88,6 @@ class Get extends Methods_Conexion {
             if (!modelo.getTableExist()) {
                 modelo.refresh();
             }
-
             Callable<ResultAsync<Boolean>> get = () -> {
                 try {
                     if (modelo.getTableExist()) {
@@ -103,13 +101,10 @@ class Get extends Methods_Conexion {
                             Column columnsSQL = parametros.get(i);
                             convertJavaToSQL(columnsSQL, ejecutor, i + 1);
                         }
-
                         LogsJB.info(ejecutor.toString());
-
                         ResultSet registros = ejecutor.executeQuery();
                         while (registros.next()) {
                             procesarResultSetOneResult(modelo, registros);
-
                         }
                         modelo.closeConnection(connect);
                     } else {
@@ -119,8 +114,7 @@ class Get extends Methods_Conexion {
                     modelo.setTaskIsReady(true);
                     return new ResultAsync<>(true, null);
                 } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's: " + e.toString());
-                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                    LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     modelo.setTaskIsReady(true);
                     return new ResultAsync<>(true, e);
                 }
@@ -128,7 +122,6 @@ class Get extends Methods_Conexion {
             //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
             Future<ResultAsync<Boolean>> future = this.ejecutor.submit(get);
             while (!future.isDone()) {
-
             }
             //this.ejecutor.shutdown();
             ResultAsync<Boolean> resultado = future.get();
@@ -136,9 +129,7 @@ class Get extends Methods_Conexion {
                 throw resultado.getException();
             }
         } catch (ExecutionException | InterruptedException e) {
-            LogsJB.fatal("Excepción disparada en el método que obtiene el modelo en la BD's: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada en el método que obtiene el modelo en la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -183,7 +174,6 @@ class Get extends Methods_Conexion {
                         ResultSet registros = ejecutor.executeQuery();
                         if (registros.next()) {
                             modeloTemp = procesarResultSet(modelo, registros);
-
                         }
                         modelo.closeConnection(connect);
                     } else {
@@ -193,9 +183,7 @@ class Get extends Methods_Conexion {
                     modelo.setTaskIsReady(true);
                     return new ResultAsync<>(modeloTemp, null);
                 } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's: " + e.toString());
-
-                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                    LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     modelo.setTaskIsReady(true);
                     return new ResultAsync<>(modeloTemp, e);
                 }
@@ -203,7 +191,6 @@ class Get extends Methods_Conexion {
             //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
             Future<ResultAsync<T>> future = this.ejecutor.submit(get);
             while (!future.isDone()) {
-
             }
             //this.ejecutor.shutdown();
             ResultAsync<T> resultado = future.get();
@@ -212,9 +199,7 @@ class Get extends Methods_Conexion {
             }
             modeloResult = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
-            LogsJB.fatal("Excepción disparada en el método que obtiene el modelo en la BD's: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada en el método que obtiene el modelo en la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return modeloResult;
     }
@@ -250,7 +235,6 @@ class Get extends Methods_Conexion {
                     //LogsJB.info(sql);
                     Connection connect = modelo.getConnection();
                     PreparedStatement ejecutor = connect.prepareStatement(sql);
-
                     for (int i = 0; i < parametros.size(); i++) {
                         //Obtengo la información de la columna
                         Column columnsSQL = parametros.get(i);
@@ -271,18 +255,14 @@ class Get extends Methods_Conexion {
                     return new ResultAsync<>(modeloTemp, null);
                 }
             } catch (SQLException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
-                LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's: " + e.toString());
-
-                LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                 modelo.setTaskIsReady(true);
                 return new ResultAsync<>(modeloTemp, e);
             }
         };
-
         //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
         Future<ResultAsync<T>> future = this.ejecutor.submit(get);
         while (!future.isDone()) {
-
         }
         //this.ejecutor.shutdown();
         ResultAsync<T> resultado = future.get();
@@ -330,7 +310,6 @@ class Get extends Methods_Conexion {
                     if (modelo.getTableExist()) {
                         String sql = "SELECT * FROM " + modelo.getTableName();
                         sql = sql + Sql + ";";
-
                         //Si es sql server y trae la palabra limit verificara y modificara la sentencia
                         if (modelo.getDataBaseType() == DataBase.SQLServer) {
                             if (StringUtils.containsIgnoreCase(sql, "LIMIT")) {
@@ -358,7 +337,6 @@ class Get extends Methods_Conexion {
                         //LogsJB.info(sql);
                         Connection connect = modelo.getConnection();
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
-
                         for (int i = 0; i < parametros.size(); i++) {
                             //Obtengo la información de la columna
                             Column columnsSQL = parametros.get(i);
@@ -379,9 +357,7 @@ class Get extends Methods_Conexion {
                     return new ResultAsync(listaTemp, null);
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
-                            "SQL de la BD's: " + e.toString());
-
-                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                            "SQL de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     modelo.setTaskIsReady(true);
                     return new ResultAsync(listaTemp, e);
                 }
@@ -389,7 +365,6 @@ class Get extends Methods_Conexion {
             //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
             Future<ResultAsync<List<T>>> future = this.ejecutor.submit(get);
             while (!future.isDone()) {
-
             }
             //this.ejecutor.shutdown();
             ResultAsync<List<T>> resultado = future.get();
@@ -398,14 +373,10 @@ class Get extends Methods_Conexion {
             }
             lista = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
-            LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-
+            LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return lista;
     }
-
 
     /**
      * Obtiene una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
@@ -484,9 +455,7 @@ class Get extends Methods_Conexion {
                     }
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
-                            "SQL de la BD's: " + e.toString());
-
-                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                            "SQL de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     this.setTaskIsReady(true);
                     return new ResultAsync<>(temp, e);
                 }
@@ -494,7 +463,6 @@ class Get extends Methods_Conexion {
             //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
             Future<ResultAsync<List<JSONObject>>> future = this.ejecutor.submit(get);
             while (!future.isDone()) {
-
             }
             //this.ejecutor.shutdown();
             ResultAsync<List<JSONObject>> resultado = future.get();
@@ -503,13 +471,8 @@ class Get extends Methods_Conexion {
             }
             lista = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
-            LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-
+            LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return lista;
     }
-
-
 }
