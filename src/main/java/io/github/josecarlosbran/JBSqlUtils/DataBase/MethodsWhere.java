@@ -64,5 +64,4 @@ public class MethodsWhere<T> extends MethodsOrderBy {
             return new OrderBy(this.sql, columna, orderType, this.modelo, this.parametros);
         }
     }
-
 }
