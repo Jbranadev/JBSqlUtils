@@ -43,7 +43,6 @@ import java.util.stream.Collectors;
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.getBooleanfromInt;
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
-
 /**
  * @author Jose Bran
  * Clase que proporciona los métodos de conexión necesarios para que el modelo pueda realizar
@@ -51,8 +50,6 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * como de envíar valores a BD's
  */
 class Methods_Conexion extends Conexion {
-
-
     /**
      * Constructor de la clase Conexión que se encarga de inicializar las propiedades de conexión del modelo,
      * las cuales las obtiene de las propiedades del sistema Java.
@@ -66,7 +63,6 @@ class Methods_Conexion extends Conexion {
         super();
         this.getMethodsModel();
     }
-
 
     /**
      * Constructor de la clase Conexión que se encarga de inicializar las propiedades de conexión del modelo,
@@ -82,7 +78,6 @@ class Methods_Conexion extends Conexion {
         super(getPropertySystem);
         this.getMethodsModel();
     }
-
 
     /**
      * Obtiene la lista de métodos pertenecientes al modelo que lo invoca.
@@ -109,7 +104,6 @@ class Methods_Conexion extends Conexion {
             }
         }
     }
-
 
     /**
      * Obtiene la conexión del modelo a la BD's con las propiedades definidas.
@@ -138,7 +132,8 @@ class Methods_Conexion extends Conexion {
                 }
                 LogsJB.debug("Url de conexion a DB: " + url);
                 connect = DriverManager.getConnection(url, usuario, password);
-            } else if (this.getDataBaseType() == DataBase.MySQL) {
+            }
+            if (this.getDataBaseType() == DataBase.MySQL) {
                 url = null;
                 connect = null;
                 //Carga el controlador de MySQL
@@ -153,7 +148,8 @@ class Methods_Conexion extends Conexion {
                 }
                 LogsJB.debug("Url de conexion a DB: " + url);
                 connect = DriverManager.getConnection(url, usuario, password);
-            } else if (this.getDataBaseType() == DataBase.MariaDB) {
+            }
+            if (this.getDataBaseType() == DataBase.MariaDB) {
                 url = null;
                 connect = null;
                 //Carga el controlador de MariaDB
@@ -168,7 +164,8 @@ class Methods_Conexion extends Conexion {
                 }
                 LogsJB.debug("Url de conexion a DB: " + url);
                 connect = DriverManager.getConnection(url, usuario, password);
-            } else if (this.getDataBaseType() == DataBase.SQLServer) {
+            }
+            if (this.getDataBaseType() == DataBase.SQLServer) {
                 url = null;
                 connect = null;
                 //Carga el controlador de SQLServer
@@ -183,27 +180,23 @@ class Methods_Conexion extends Conexion {
                 }
                 LogsJB.debug("Url de conexion a DB: " + url);
                 connect = DriverManager.getConnection(url, usuario, password);
-            } else if (this.getDataBaseType() == DataBase.SQLite) {
+            }
+            if (this.getDataBaseType() == DataBase.SQLite) {
                 //Class.forName("org.sqlite.JDBC").newInstance();
                 //DriverManager.registerDriver(new org.sqlite.JDBC());
                 url = null;
                 connect = null;
-                try {
-                    //Rutas de archivos
-                    File fichero = new File(this.getBD());
-                    //Verifica si existe la carpeta Logs, si no existe, la Crea
-                    String carpeta = fichero.getParent();
-                    if (!Objects.isNull(carpeta)) {
-                        File directorio = new File(carpeta);
-                        if (!directorio.exists()) {
-                            if (directorio.mkdirs()) {
-                                LogsJB.debug("Crea el directorio donde estara la BD's SQLite: " + fichero.getParent());
-                            }
+                //Rutas de archivos
+                File fichero = new File(this.getBD());
+                //Verifica si existe la carpeta Logs, si no existe, la Crea
+                String carpeta = fichero.getParent();
+                if (!Objects.isNull(carpeta)) {
+                    File directorio = new File(carpeta);
+                    if (!directorio.exists()) {
+                        if (directorio.mkdirs()) {
+                            LogsJB.debug("Crea el directorio donde estara la BD's SQLite: " + fichero.getParent());
                         }
                     }
-                } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada al intentar crear el directorio donde estará la BD's SQLite: " + e.toString());
-                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                 }
                 url = "jdbc:" + this.getDataBaseType().getDBType() + ":" + this.getBD();
                 LogsJB.debug("Url de conexion a DB: " + url);
@@ -213,14 +206,11 @@ class Methods_Conexion extends Conexion {
                 LogsJB.info("Conexión a BD's " + this.getBD() + " Realizada exitosamente " + this.getClass().getSimpleName());
             }
         } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada al obtener la conexión a la BD's proporcionada, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         this.setContadorConexiones(this.getContadorConexiones() + 1);
         return connect;
     }
-
 
     /**
      * Cierra la conexión a BD's
@@ -236,15 +226,11 @@ class Methods_Conexion extends Conexion {
             if (!connect.isClosed()) {
                 connect.close();
                 LogsJB.info("Conexión a BD's cerrada " + this.getClass().getSimpleName());
-            } else {
-                LogsJB.warning("Conexión a BD's ya estaba cerrada " + this.getClass().getSimpleName());
             }
         } catch (ConexionUndefind e) {
             LogsJB.warning("El modelo no estaba conectado a la BD's por lo cual no se cerrara la conexión");
         } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada cerrar la conexión a la BD's: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada cerrar la conexión a la BD's " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -262,9 +248,7 @@ class Methods_Conexion extends Conexion {
         } catch (ConexionUndefind e) {
             LogsJB.warning("El modelo no estaba conectado a la BD's por lo cual no se cerrara la conexión");
         } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada cerrar la conexión a la BD's: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada cerrar la conexión a la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -317,11 +301,7 @@ class Methods_Conexion extends Conexion {
                         }
                         if (!tablaisofDB) {
                             if (!stringIsNullOrEmpty(DatabaseTemp2)) {
-                                if (!DatabaseName.equalsIgnoreCase(DatabaseTemp2)) {
-                                    tablaisofDB = false;
-                                } else {
-                                    tablaisofDB = true;
-                                }
+                                tablaisofDB = DatabaseName.equalsIgnoreCase(DatabaseTemp2);
                             }
                         }
                         if (this.getDataBaseType() == DataBase.PostgreSQL && NameModel.equalsIgnoreCase(NameTable)) {
@@ -359,9 +339,7 @@ class Methods_Conexion extends Conexion {
                         return new ResultAsync<Boolean>(false, null);
                     }
                 } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: " + e.toString());
-
-                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                    LogsJB.fatal("Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     new ResultAsync<Boolean>(false, e);
                 }
                 return new ResultAsync<Boolean>(false, null);
@@ -369,7 +347,6 @@ class Methods_Conexion extends Conexion {
             //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
             Future<ResultAsync<Boolean>> future = this.ejecutor.submit(VerificarExistencia);
             while (!future.isDone()) {
-
             }
             //this.ejecutor.shutdown();
             ResultAsync<Boolean> resultado = future.get();
@@ -378,13 +355,10 @@ class Methods_Conexion extends Conexion {
             }
             result = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
-            LogsJB.fatal("Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
     }
-
 
     /**
      * Obtiene las columnas que tiene la tabla correspondiente al modelo en BD's.
@@ -439,7 +413,6 @@ class Methods_Conexion extends Conexion {
             //Seteamos a cada columna si existe
             String JBSQLUTILSNAME = JBSqlUtils.class.getSimpleName();
             String SuperClaseModelo = this.getClass().getSuperclass().getSimpleName();
-
             if (StringUtils.equalsIgnoreCase(JBSQLUTILSNAME, SuperClaseModelo)) {
                 //Obtiene los metodos get del modelo
                 List<Method> modelGetMethods = this.getMethodsGetOfModel();
@@ -457,7 +430,7 @@ class Methods_Conexion extends Conexion {
                         while (iteradorColumnas.hasNext()) {
                             ColumnsSQL columTemp = iteradorColumnas.next();
                             String nombreColumnaTemp = columTemp.getCOLUMN_NAME();
-                            if (StringUtils.equalsIgnoreCase(nombreColumnaTemp, columnName)) {
+                            if (!stringIsNullOrEmpty(nombreColumnaTemp) && StringUtils.equalsIgnoreCase(nombreColumnaTemp, columnName)) {
                                 LogsJB.debug("Setea si la columna existe en BD's: " + columnName);
                                 columnsSQL.setColumnExist(true);
                             }
@@ -479,27 +452,21 @@ class Methods_Conexion extends Conexion {
                                     break;
                                 }
                             } catch (Exception e) {
-                                LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador: " + e.toString());
+                                LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                                 LogsJB.fatal("Tipo de Excepción : " + e.getClass());
                                 LogsJB.fatal("Causa de la Excepción : " + e.getCause());
                                 LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                                LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                             }
                         }
                     } catch (Exception e) {
-                        LogsJB.fatal("Excepción disparada al obtener los nombres de las columnas del modelo: " + e.toString());
-                        LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                        LogsJB.fatal("Excepción disparada al obtener los nombres de las columnas del modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     }
                 }
             }
-
         } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
-
 
     /**
      * Metodo que actualiza la información que el modelo tiene sobre lo que existe en BD's'
@@ -509,7 +476,6 @@ class Methods_Conexion extends Conexion {
     public void refresh() throws Exception {
         this.setTableExist(this.tableExist());
     }
-
 
     /**
      * Metodo que setea la información de la columna Java en el respectivo tipo de Dato SQL
@@ -523,7 +489,6 @@ class Methods_Conexion extends Conexion {
         LogsJB.debug("DataType de la columna: " + columnsSQL.getDataTypeSQL());
         LogsJB.debug("Indice donde insertara la columna: " + auxiliar);
         LogsJB.debug("Valor de la columna: " + columnsSQL.getValor());
-
         if ((columnsSQL.getDataTypeSQL() == DataType.NCHAR) || (columnsSQL.getDataTypeSQL() == DataType.NVARCHAR)) {
             //Caracteres y cadenas de Texto
             ejecutor.setNString(auxiliar, (String) columnsSQL.getValor());
@@ -533,19 +498,16 @@ class Methods_Conexion extends Conexion {
         ) {
             //Caracteres y cadenas de Texto
             ejecutor.setString(auxiliar, (String) columnsSQL.getValor());
-
         } else if ((columnsSQL.getDataTypeSQL() == DataType.SMALLINT) || (columnsSQL.getDataTypeSQL() == DataType.TINYINT)
                 || (columnsSQL.getDataTypeSQL() == DataType.INTEGER) || (columnsSQL.getDataTypeSQL() == DataType.IDENTITY)
                 || (columnsSQL.getDataTypeSQL() == DataType.SERIAL)) {
             //Valores Enteros
             ejecutor.setInt(auxiliar, (Integer) columnsSQL.getValor());
-
         } else if ((columnsSQL.getDataTypeSQL() == DataType.NUMERIC) || (columnsSQL.getDataTypeSQL() == DataType.DECIMAL)
                 || (columnsSQL.getDataTypeSQL() == DataType.MONEY) || (columnsSQL.getDataTypeSQL() == DataType.SMALLMONEY)
                 || (columnsSQL.getDataTypeSQL() == DataType.DOUBLE)) {
             //Dinero y numericos que tienen decimales
             ejecutor.setDouble(auxiliar, (Double) columnsSQL.getValor());
-
         } else if ((columnsSQL.getDataTypeSQL() == DataType.BIT)
                 || (columnsSQL.getDataTypeSQL() == DataType.BOOLEAN)
                 || (columnsSQL.getDataTypeSQL() == DataType.BOOL)) {
@@ -555,7 +517,6 @@ class Methods_Conexion extends Conexion {
         } else if ((columnsSQL.getDataTypeSQL() == DataType.REAL) || (columnsSQL.getDataTypeSQL() == DataType.FLOAT)) {
             //Valores Flotantes
             ejecutor.setFloat(auxiliar, (Float) columnsSQL.getValor());
-
         } else if ((columnsSQL.getDataTypeSQL
                 () == DataType.BINARY) || (columnsSQL.getDataTypeSQL() == DataType.VARBINARY)
                 || (columnsSQL.getDataTypeSQL() == DataType.LONGVARBINARY)) {
@@ -597,7 +558,6 @@ class Methods_Conexion extends Conexion {
         LogsJB.trace("Valor de la columna: " + resultado.getObject(columnName));
         if ((StringUtils.containsIgnoreCase(columnType, DataType.NCHAR.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.NVARCHAR.name()))
-
         ) {
             //Caracteres y cadenas de Texto
             columnaSql.setValor(resultado.getNString(columnName));
@@ -674,9 +634,7 @@ class Methods_Conexion extends Conexion {
             LogsJB.warning("No se pudo setear el valor de la columna: " + columnName + " " + this.getTableName());
             LogsJB.warning("Debido a que ninguno de los métodos corresponde al tipo de dato SQL: " + columnType);
         }
-
     }
-
 
     /**
      * Agrega la columna como una propiedad del Json Object envíado como parametro
@@ -693,7 +651,6 @@ class Methods_Conexion extends Conexion {
         LogsJB.trace("Valor de la columna: " + resultado.getObject(columnName));
         if ((StringUtils.containsIgnoreCase(columnType, DataType.NCHAR.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.NVARCHAR.name()))
-
         ) {
             //Caracteres y cadenas de Texto
             temp.put(columnName, resultado.getNString(columnName));
@@ -733,7 +690,6 @@ class Methods_Conexion extends Conexion {
                 || (StringUtils.containsIgnoreCase(columnType, DataType.SERIAL.name()))) {
             //Valores Enteros
             temp.put(columnName, resultado.getInt(columnName));
-
         } else if ((StringUtils.containsIgnoreCase(columnType, DataType.REAL.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.FLOAT.name()))) {
             //Valores Flotantes
@@ -749,7 +705,6 @@ class Methods_Conexion extends Conexion {
         } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.TIME.name()))) {
             //Time
             temp.put(columnName, resultado.getTime(columnName));
-
         } else if ((StringUtils.containsIgnoreCase(columnType, DataType.TIMESTAMP.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.DATETIME.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.SMALLDATETIME.name()))
@@ -762,7 +717,6 @@ class Methods_Conexion extends Conexion {
             LogsJB.warning("Debido a que ninguno de los metodos corresponde al tipo de dato SQL: " + columnType);
         }
     }
-
 
     /**
      * Almacena el modelo proporcionado en BD's.
@@ -800,33 +754,26 @@ class Methods_Conexion extends Conexion {
                             if (Objects.isNull(columnsSQL.getValor())) {
                                 continue;
                             }
-
                             //Si la columna existe entre la metadata de la BD's
                             if (!this.getTabla().getColumnsExist().contains(columnName.toUpperCase())) {
                                 continue;
                             }
-
-
                             //Si el modelo tiene seteado que no se manejaran las timestamps entonces
                             //Ignora el guardar esas columnas
                             if ((!this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, "created_at"))
                                     || (StringUtils.equalsIgnoreCase(columnName, "updated_at")))) {
                                 continue;
                             }
-
-
                             //Setea el nombre de la columna Created_at
                             if ((this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, "created_at"))
                             )) {
                                 columnName = this.getCreatedAt();
                             }
-
                             //Setea el nombre de la columna Update_at
                             if ((this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, "updated_at"))
                             )) {
                                 columnName = this.getUpdateAT();
                             }
-
                             datos++;
                             if (datos > 1) {
                                 sql = sql + ", ";
@@ -834,7 +781,6 @@ class Methods_Conexion extends Conexion {
                             sql = sql + columnName;
                             indicemetodos.add(i);
                         }
-
                         sql = sql + ") VALUES (";
                         //Llena los espacios con la información de los datos que serán agregados
                         for (int i = 0; i < indicemetodos.size(); i++) {
@@ -846,9 +792,7 @@ class Methods_Conexion extends Conexion {
                                 sql = sql + ");";
                             }
                         }
-
                         //LogsJB.info(sql);
-
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         //LogsJB.info("Creo la instancia del PreparedStatement");
                         //Llena el prepareStatement
@@ -862,11 +806,9 @@ class Methods_Conexion extends Conexion {
                             if (Objects.isNull(columnsSQL.getValor())) {
                                 continue;
                             }
-
                             convertJavaToSQL(columnsSQL, ejecutor, auxiliar);
                             auxiliar++;
                         }
-
                         LogsJB.info(ejecutor.toString());
                         Integer filas = ejecutor.executeUpdate();
                         LogsJB.info("Filas Insertadas en BD's': " + filas + " " + this.getTableName());
@@ -881,21 +823,16 @@ class Methods_Conexion extends Conexion {
                         return new ResultAsync<>(0, null);
                     }
                 } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
-
-                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                    LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     modelo.setTaskIsReady(true);
                     return new ResultAsync<>(0, e);
                 }
             };
-
             Callable<ResultAsync<Integer>> Update = () -> {
                 try {
                     if (modelo.getTableExist()) {
-
                         //Obtener cual es la clave primaria de la tabla
                         String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
-
                         String sql = "UPDATE " + modelo.getTableName() + " SET";
                         List<Method> metodos = new ArrayList<>();
                         metodos = modelo.getMethodsGetOfModel();
@@ -910,55 +847,44 @@ class Methods_Conexion extends Conexion {
                             Column columnsSQL = (Column) metodo.invoke(modelo, null);
                             String columnName = columnsSQL.getName();
                             //columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
-                            if (StringUtils.equalsIgnoreCase(namePrimaryKey, columnName)) {
+                            if (!UtilitiesJB.stringIsNullOrEmpty(namePrimaryKey) && StringUtils.equalsIgnoreCase(namePrimaryKey, columnName)) {
                                 indicePrimarykey = i;
                                 continue;
                             }
                             if (Objects.isNull(columnsSQL.getValor())) {
                                 continue;
                             }
-
                             //Si la columna existe entre la metadata de la BD's
-
                             if (!this.getTabla().getColumnsExist().contains(columnName.toUpperCase())) {
                                 continue;
                             }
-
                             //Si el modelo tiene seteado que no se manejaran las timestamps entonces
                             //Ignora el guardar esas columnas
                             if ((!this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, "created_at"))
                                     || (StringUtils.equalsIgnoreCase(columnName, "updated_at")))) {
                                 continue;
                             }
-
                             //Si si se manejaran las timestamps, entonces obvia la timestamps de created_at
                             if ((this.getTimestamps()) &&
                                     ((StringUtils.equalsIgnoreCase(columnName, "created_at")))
                             ) {
                                 continue;
                             }
-
                             //Setea el nombre de la columna Update_at
                             if ((this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, "updated_at"))
                             )) {
                                 columnName = this.getUpdateAT();
                             }
-
-
                             if (StringUtils.containsIgnoreCase(sql, "?")) {
                                 sql = sql + ", " + columnName + "=?";
                             } else {
                                 sql = sql + " " + columnName + "=?";
                             }
-
                             datos++;
                             indicemetodos.add(i);
                         }
-
                         //Colocamos el where
                         sql = sql + " WHERE " + namePrimaryKey + "=?;";
-
-
                         //LogsJB.info(sql);
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
                         //LogsJB.info("Creo la instancia del PreparedStatement");
@@ -979,13 +905,10 @@ class Methods_Conexion extends Conexion {
                             if (Objects.isNull(columnsSQL.getValor())) {
                                 continue;
                             }
-
                             convertJavaToSQL(columnsSQL, ejecutor, auxiliar);
                             auxiliar++;
                         }
-
                         LogsJB.debug("Termino de llenar la información de las columnas: " + auxiliar);
-
                         //Colocamos la información del where
                         //Obtengo el metodo
                         Method metodo = metodos.get(indicePrimarykey);
@@ -999,28 +922,22 @@ class Methods_Conexion extends Conexion {
                         } else {
                             convertJavaToSQL(columnsSQL, ejecutor, auxiliar);
                         }
-
                         LogsJB.info(ejecutor.toString());
                         Integer filas = ejecutor.executeUpdate();
                         LogsJB.info("Filas actualizadas: " + filas + " " + this.getTableName());
                         modelo.closeConnection(connect);
                         modelo.setTaskIsReady(true);
                         return new ResultAsync<>(filas, null);
-
                     } else {
                         LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
                                 "actualizar el Registro");
                         modelo.setTaskIsReady(true);
                         return new ResultAsync<>(0, null);
                     }
-
                 } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
-
-                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                    LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     modelo.setTaskIsReady(true);
                     return new ResultAsync<>(0, e);
-
                 }
             };
             //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
@@ -1032,7 +949,6 @@ class Methods_Conexion extends Conexion {
                 future = this.ejecutor.submit(Save);
             }
             while (!future.isDone()) {
-
             }
             //this.ejecutor.shutdown();
             ResultAsync<Integer> resultado = future.get();
@@ -1041,9 +957,7 @@ class Methods_Conexion extends Conexion {
             }
             result = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
-            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
     }
@@ -1065,7 +979,6 @@ class Methods_Conexion extends Conexion {
             if (!modelo.getTableExist()) {
                 modelo.refresh();
             }
-
             Callable<ResultAsync<Integer>> Delete = () -> {
                 try {
                     if (modelo.getTableExist()) {
@@ -1085,7 +998,7 @@ class Methods_Conexion extends Conexion {
                             Column columnsSQL = (Column) metodo.invoke(modelo, null);
                             String columnName = columnsSQL.getName();
                             //columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
-                            if (StringUtils.equalsIgnoreCase(namePrimaryKey, columnName)) {
+                            if (!UtilitiesJB.stringIsNullOrEmpty(namePrimaryKey) && StringUtils.equalsIgnoreCase(namePrimaryKey, columnName)) {
                                 indicePrimarykey = i;
                                 break;
                             }
@@ -1128,9 +1041,7 @@ class Methods_Conexion extends Conexion {
                         return new ResultAsync<>(0, null);
                     }
                 } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
-
-                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                    LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     modelo.setTaskIsReady(true);
                     return new ResultAsync<>(0, e);
                 }
@@ -1138,7 +1049,6 @@ class Methods_Conexion extends Conexion {
             //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
             Future<ResultAsync<Integer>> future = this.ejecutor.submit(Delete);
             while (!future.isDone()) {
-
             }
             //this.ejecutor.shutdown();
             ResultAsync<Integer> resultado = future.get();
@@ -1147,13 +1057,10 @@ class Methods_Conexion extends Conexion {
             }
             result = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
-            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
     }
-
 
     /**
      * Obtiene una instancia nueva del tipo de modelo que se envía como parametro
@@ -1177,9 +1084,7 @@ class Methods_Conexion extends Conexion {
             }
         } catch (InvocationTargetException | NoSuchMethodException | InstantiationException |
                  IllegalAccessException e) {
-            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         } finally {
             return temp;
         }
@@ -1252,7 +1157,7 @@ class Methods_Conexion extends Conexion {
                         //columnsSQL.setColumnExist(true);
                         String nameColumn = columnsSQL.getName();
                         LogsJB.trace("Nombre de la columna, nombre de la columna del modelo: " + columnName + "   " + nameColumn);
-                        if (StringUtils.equalsIgnoreCase(nameColumn, columnName)) {
+                        if (!stringIsNullOrEmpty(columnName) && StringUtils.equalsIgnoreCase(nameColumn, columnName)) {
                             convertSQLtoJava(columna, registros, metodo, columnsSQL, temp);
                             breakSegundoFor = true;
                             iteradorMetodosGet.remove();
@@ -1272,7 +1177,6 @@ class Methods_Conexion extends Conexion {
         }
         return temp;
     }
-
 
     /**
      * Llena el modelo proporcionado con la Información Obtenida de BD's
@@ -1326,7 +1230,7 @@ class Methods_Conexion extends Conexion {
                         //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
                         //columnsSQL.setColumnExist(true);
                         String nameColumn = columnsSQL.getName();
-                        if (StringUtils.equalsIgnoreCase(nameColumn, columnName)) {
+                        if (!stringIsNullOrEmpty(columnName) && StringUtils.equalsIgnoreCase(nameColumn, columnName)) {
                             convertSQLtoJava(columna, registros, metodo, columnsSQL, modelo);
                             breakSegundoFor = true;
                             iteradorMetodosGet.remove();
@@ -1342,12 +1246,9 @@ class Methods_Conexion extends Conexion {
                 if (breakSegundoFor) {
                     break;
                 }
-
             }
         }
-
     }
-
 
     /**
      * Obtiene un Json Object con las columnas solicitadas como propiedades del json con sus respectivos valores
@@ -1372,17 +1273,15 @@ class Methods_Conexion extends Conexion {
             } else {
                 //Si se especificaron las columnas a obtener llena unicamente esas columnas
                 for (int j = 0; j < columnas.size(); j++) {
-                    if (columnName.equalsIgnoreCase(columnas.get(j))) {
+                    if (!stringIsNullOrEmpty(columnName) && columnName.equalsIgnoreCase(columnas.get(j))) {
                         //columna.setCOLUMN_NAME(columnas.get(j));
                         this.convertSQLtoJson(columna, registros, temp);
                     }
                 }
             }
-
         }
         return temp;
     }
-
 
     /**
      * Crea la tabla correspondiente al modelo en BD's si esta no existe.
@@ -1407,7 +1306,6 @@ class Methods_Conexion extends Conexion {
                         LogsJB.debug("Comienza a ordenar la lista");
                         metodos.sort((metodo1, metodo2) -> {
                             try {
-
                                 Column columna1 = (Column) metodo1.invoke(this, null);
                                 Column columna2 = (Column) metodo2.invoke(this, null);
                                 LogsJB.trace("Columnas a evaluar: " + metodo1.getName() + "  " + metodo2.getName());
@@ -1422,14 +1320,11 @@ class Methods_Conexion extends Conexion {
                                     return 0;
                                 }
                             } catch (Exception e) {
-                                LogsJB.fatal("Excepción disparada al tratar de ordenar los metodos get de la lista: " + e.toString());
-                                LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                                LogsJB.fatal("Excepción disparada al tratar de ordenar los metodos get de la lista, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                             }
                             return 0;
                         });
-
                         LogsJB.debug("Termino de ordenar la lista");
-
                         int datos = 0;
                         for (int i = 0; i < metodos.size(); i++) {
                             //Obtengo el metodo
@@ -1468,34 +1363,28 @@ class Methods_Conexion extends Conexion {
                                     } else if ((DataBase.SQLServer == this.getDataBaseType()) &&
                                             (restriccion == Constraint.AUTO_INCREMENT)) {
                                         //tipo_de_columna = DataType.IDENTITY.toString();
-                                        restricciones = restricciones + DataType.IDENTITY.toString() + " ";
+                                        restricciones = restricciones + DataType.IDENTITY + " ";
                                     } else if ((DataBase.SQLite == this.getDataBaseType()) &&
                                             (restriccion == Constraint.AUTO_INCREMENT)) {
-                                        restricciones = restricciones + "";
+                                        restricciones = restricciones;
                                     } else if (restriccion == Constraint.DEFAULT) {
                                         restricciones = restricciones + restriccion.getRestriccion() + " " + columnsSQL.getDefault_value() + " ";
-
                                     } else {
                                         restricciones = restricciones + restriccion.getRestriccion() + " ";
                                     }
-
                                 }
                             }
-
                             //Si el modelo tiene seteado que no se manejaran las timestamps entonces
                             //Ignora el guardar esas columnas
                             if ((!this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, "created_at"))
                                     || (StringUtils.equalsIgnoreCase(columnName, "updated_at")))) {
                                 continue;
                             }
-
                             String columna = columnName + " " + tipo_de_columna + " " + restricciones;
-
                             datos++;
                             if (datos > 1) {
                                 sql = sql + ", ";
                             }
-
                             sql = sql + columna;
                             /*int temporal = metodos.size() - 1;
                             if (i < temporal) {
@@ -1503,7 +1392,6 @@ class Methods_Conexion extends Conexion {
                             } else if (i == temporal) {
                                 sql = sql + ");";
                             }*/
-
                         }
                         sql = sql + ");";
                         Connection connect = this.getConnection();
@@ -1518,22 +1406,17 @@ class Methods_Conexion extends Conexion {
                         }
                         ejecutor.close();
                         this.closeConnection(connect);
-
                     }
                     return new ResultAsync<Boolean>(false, null);
                 } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que Crea la tabla correspondiente al modelo: " + e.toString());
-
-                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                    LogsJB.fatal("Excepción disparada en el método que Crea la tabla correspondiente al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     new ResultAsync<Boolean>(false, e);
                 }
                 return new ResultAsync<Boolean>(false, null);
             };
-
             //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
             Future<ResultAsync<Boolean>> future = this.ejecutor.submit(createtabla);
             while (!future.isDone()) {
-
             }
             //this.ejecutor.shutdown();
             ResultAsync<Boolean> resultado = future.get();
@@ -1542,9 +1425,7 @@ class Methods_Conexion extends Conexion {
             }
             result = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
-            LogsJB.fatal("Excepción disparada en el método que Crea la tabla correspondiente al modelo: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada en el método que Crea la tabla correspondiente al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
     }
@@ -1584,24 +1465,19 @@ class Methods_Conexion extends Conexion {
                         }
                         ejecutor.close();
                         this.closeConnection(connect);
-
                     } else {
                         LogsJB.info("Tabla correspondiente al modelo no existe en BD's por eso no pudo ser eliminada");
                         return new ResultAsync<Boolean>(false, null);
                     }
                     return new ResultAsync<Boolean>(false, null);
                 } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo: " + e.toString());
-
-                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                    LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     return new ResultAsync<Boolean>(false, e);
                 }
             };
-
             //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
             Future<ResultAsync<Boolean>> future = this.ejecutor.submit(dropTable);
             while (!future.isDone()) {
-
             }
             //this.ejecutor.shutdown();
             ResultAsync<Boolean> resultado = future.get();
@@ -1610,13 +1486,10 @@ class Methods_Conexion extends Conexion {
             }
             result = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
-            LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
     }
-
 
     /**
      * Crea la tabla solicitada correspondiente al modelo con las columnas especificadas como parametro
@@ -1652,12 +1525,10 @@ class Methods_Conexion extends Conexion {
                                     return 0;
                                 }
                             } catch (Exception e) {
-                                LogsJB.fatal("Excepción disparada al tratar de ordenar los metodos get de la lista: " + e.toString());
-                                LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                                LogsJB.fatal("Excepción disparada al tratar de ordenar los metodos get de la lista, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                             }
                             return 0;
                         });
-
                         LogsJB.debug("Termino de ordenar la lista");
                         int datos = 0;
                         for (int i = 0; i < columnas.size(); i++) {
@@ -1695,37 +1566,29 @@ class Methods_Conexion extends Conexion {
                                     } else if ((DataBase.SQLServer == this.getDataBaseType()) &&
                                             (restriccion == Constraint.AUTO_INCREMENT)) {
                                         //tipo_de_columna = DataType.IDENTITY.toString();
-                                        restricciones = restricciones + DataType.IDENTITY.toString() + " ";
+                                        restricciones = restricciones + DataType.IDENTITY + " ";
                                     } else if ((DataBase.SQLite == this.getDataBaseType()) &&
                                             (restriccion == Constraint.AUTO_INCREMENT)) {
-                                        restricciones = restricciones + "";
+                                        restricciones = restricciones;
                                     } else if (restriccion == Constraint.DEFAULT) {
                                         restricciones = restricciones + restriccion.getRestriccion() + " " + columnsSQL.getDefault_value() + " ";
-
                                     } else {
                                         restricciones = restricciones + restriccion.getRestriccion() + " ";
                                     }
-
-
                                 }
                             }
-
                             //Si el modelo tiene seteado que no se manejaran las timestamps entonces
                             //Ignora el guardar esas columnas
                             if ((!this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, "created_at"))
                                     || (StringUtils.equalsIgnoreCase(columnName, "updated_at")))) {
                                 continue;
                             }
-
                             String columna = columnName + " " + tipo_de_columna + " " + restricciones;
-
                             datos++;
                             if (datos > 1) {
                                 sql = sql + ", ";
                             }
-
                             sql = sql + columna;
-
                         }
                         sql = sql + ");";
                         Connection connect = this.getConnection();
@@ -1743,17 +1606,13 @@ class Methods_Conexion extends Conexion {
                     }
                     return new ResultAsync<Boolean>(false, null);
                 } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que Crea la tabla solicitada: " + e.toString());
-                    LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                    LogsJB.fatal("Excepción disparada en el método que Crea la tabla solicitada, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     return new ResultAsync<Boolean>(false, e);
                 }
-
             };
-
             //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
             Future<ResultAsync<Boolean>> future = this.ejecutor.submit(createtabla);
             while (!future.isDone()) {
-
             }
             //this.ejecutor.shutdown();
             ResultAsync<Boolean> resultado = future.get();
@@ -1762,13 +1621,10 @@ class Methods_Conexion extends Conexion {
             }
             result = resultado.getResult();
         } catch (ExecutionException | InterruptedException e) {
-            LogsJB.fatal("Excepción disparada en el método que Crea la tabla solicitada: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada en el método que Crea la tabla solicitada, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
         return result;
     }
-
 
     /**
      * Llena las propiedades de conexión de un modelo desde otro
@@ -1784,26 +1640,19 @@ class Methods_Conexion extends Conexion {
             List<Method> metodosProveedor = Arrays.asList(proveedor.getClass().getMethods());
             //Filtro los metodos de las propiedades que deseo obtener
             metodosProveedor = metodosProveedor.stream().filter(metodo -> {
-                if (metodo.getName().equalsIgnoreCase("getDataBaseType") || metodo.getName().equalsIgnoreCase("getHost")
+                return metodo.getName().equalsIgnoreCase("getDataBaseType") || metodo.getName().equalsIgnoreCase("getHost")
                         || metodo.getName().equalsIgnoreCase("getPort") || metodo.getName().equalsIgnoreCase("getUser")
                         || metodo.getName().equalsIgnoreCase("getPassword") || metodo.getName().equalsIgnoreCase("getBD")
-                        || metodo.getName().equalsIgnoreCase("getPropertisURL")) {
-                    return true;
-                }
-                return false;
+                        || metodo.getName().equalsIgnoreCase("getPropertisURL");
             }).collect(Collectors.toList());
             List<Method> metodosReciber = Arrays.asList(this.getClass().getMethods());
             //Filtro los metodos en los que se setearan las propiedades
             metodosReciber = metodosReciber.stream().filter(metodo -> {
-                if (metodo.getName().equalsIgnoreCase("setDataBaseType") || metodo.getName().equalsIgnoreCase("setHost")
+                return metodo.getName().equalsIgnoreCase("setDataBaseType") || metodo.getName().equalsIgnoreCase("setHost")
                         || metodo.getName().equalsIgnoreCase("setPort") || metodo.getName().equalsIgnoreCase("setUser")
                         || metodo.getName().equalsIgnoreCase("setPassword") || metodo.getName().equalsIgnoreCase("setBD")
-                        || metodo.getName().equalsIgnoreCase("setPropertisURL")) {
-                    return true;
-                }
-                return false;
+                        || metodo.getName().equalsIgnoreCase("setPropertisURL");
             }).collect(Collectors.toList());
-
             for (Method metodoProveedor : metodosProveedor) {
                 Iterator<Method> iteradorMetodosReciber = metodosReciber.iterator();
                 while (iteradorMetodosReciber.hasNext()) {
@@ -1820,12 +1669,9 @@ class Methods_Conexion extends Conexion {
                 }
             }
         } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
-
 
     /**
      * Obtiene los nombres de las columnas que posee el modelo en caso estas no posean un nombre
@@ -1870,21 +1716,16 @@ class Methods_Conexion extends Conexion {
                                     break;
                                 }
                             } catch (Exception e) {
-                                LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador: " + e.toString());
-                                LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                                LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                             }
                         }
                     } catch (Exception e) {
-                        LogsJB.fatal("Excepción disparada al obtener los nombres de las columnas del modelo: " + e.toString());
-                        LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                        LogsJB.fatal("Excepción disparada al obtener los nombres de las columnas del modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     }
                 }
             }
         } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al obtener los nombres de las columnas del modelo: " + e.toString());
-
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada al obtener los nombres de las columnas del modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
-
 }

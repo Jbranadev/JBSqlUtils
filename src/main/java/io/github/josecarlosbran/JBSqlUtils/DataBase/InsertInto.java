@@ -1,6 +1,5 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
-
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
@@ -41,6 +40,4 @@ public class InsertInto {
     public Value value(String columName, Object value) throws ValorUndefined {
         return new Value(columName, value, this.sql);
     }
-
-
 }

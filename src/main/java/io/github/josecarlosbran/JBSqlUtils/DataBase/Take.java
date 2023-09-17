@@ -21,7 +21,6 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Clase que proporciona la logica para tomar una cantidad de resultados, siendo esa cantidad el limite trasladado como
@@ -30,7 +29,6 @@ import java.util.Objects;
  * @author Jose Bran
  */
 public class Take<T> extends MethodsTake {
-
 
     /**
      * Constructor que recibe como parametro:
@@ -47,7 +45,7 @@ public class Take<T> extends MethodsTake {
      */
     protected Take(String sql, int limite, T modelo, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
-        if (Objects.isNull(limite) || limite <= 0) {
+        if (limite <= 0) {
             throw new ValorUndefined("El Limite proporcionado es 0 o inferior, por lo cual no se puede" +
                     "realizar la consulta a BD's");
         }
@@ -75,7 +73,7 @@ public class Take<T> extends MethodsTake {
      */
     protected Take(String sql, int limite, T modelo, List<Column> parametros, Boolean getPropertySystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super(getPropertySystem);
-        if (Objects.isNull(limite) || limite <= 0) {
+        if (limite <= 0) {
             throw new ValorUndefined("El Limite proporcionado es 0 o inferior, por lo cual no se puede" +
                     "realizar la consulta a BD's");
         }
@@ -86,7 +84,6 @@ public class Take<T> extends MethodsTake {
         this.modelo = modelo;
         this.sql = sql + "LIMIT " + limite;
     }
-
 
     /**
      * Constructor que recibe como parametro:
@@ -102,14 +99,13 @@ public class Take<T> extends MethodsTake {
      */
     protected Take(String sql, int limite, List<Column> parametros) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         super();
-        if (Objects.isNull(limite) || limite <= 0) {
+        if (limite <= 0) {
             throw new ValorUndefined("El Limite proporcionado es 0 o inferior, por lo cual no se puede" +
                     "realizar la consulta a BD's");
         }
         this.parametros = parametros;
         this.sql = sql + " LIMIT " + limite;
     }
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -127,6 +123,4 @@ public class Take<T> extends MethodsTake {
     public <T extends JBSqlUtils> List<T> get() throws Exception {
         return (List<T>) super.getAll((T) this.modelo, this.sql, this.parametros);
     }
-
-
 }

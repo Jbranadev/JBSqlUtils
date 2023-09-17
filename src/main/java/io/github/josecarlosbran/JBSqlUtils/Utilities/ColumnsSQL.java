@@ -52,7 +52,6 @@ public class ColumnsSQL {
      */
     private String TYPE_NAME = null;
 
-
     /**
      * COLUMN_SIZE int → column size.
      */
@@ -85,7 +84,6 @@ public class ColumnsSQL {
      * COLUMN_DEF String → default value for the column, which should be interpreted as a string when the value is enclosed in single quotes (may be null)
      */
     private String COLUMN_DEF = null;
-
 
     /**
      * CHAR_OCTET_LENGTH int → for char types the maximum number of bytes in the column
@@ -140,8 +138,6 @@ public class ColumnsSQL {
      * empty string --- if it cannot be determined whether this is a generated column
      */
     private String IS_GENERATEDCOLUMN = null;
-
-
     /**
      * Retorna el catalogo al que pertenece la tabla
      *
@@ -159,7 +155,6 @@ public class ColumnsSQL {
     public void setTABLE_CAT(String TABLE_CAT) {
         this.TABLE_CAT = TABLE_CAT;
     }
-
     /**
      * Obtiene TABLE_SCHEM String → table schema (may be null)
      *
@@ -177,7 +172,6 @@ public class ColumnsSQL {
     public void setTABLE_SCHEM(String TABLE_SCHEM) {
         this.TABLE_SCHEM = TABLE_SCHEM;
     }
-
     /**
      * Retorna el nombre de la tabla a la que pertenece la columna
      *
@@ -202,7 +196,7 @@ public class ColumnsSQL {
      * @return COLUMN_NAME String → column name
      */
     public String getCOLUMN_NAME() {
-        return UtilitiesJB.stringIsNullOrEmpty(COLUMN_NAME)?null:COLUMN_NAME;
+        return COLUMN_NAME;
     }
 
     /**
@@ -213,7 +207,6 @@ public class ColumnsSQL {
     public void setCOLUMN_NAME(String COLUMN_NAME) {
         this.COLUMN_NAME = COLUMN_NAME;
     }
-
     /**
      * Retorna la representación entera del tipo de dato de la columna
      *
@@ -238,7 +231,7 @@ public class ColumnsSQL {
      * @return TYPE_NAME String → Data source dependent type name, for a UDT the type name is fully qualified
      */
     public String getTYPE_NAME() {
-        return UtilitiesJB.stringIsNullOrEmpty(TYPE_NAME)?null:TYPE_NAME;
+        return TYPE_NAME;
     }
 
     /**
@@ -249,7 +242,6 @@ public class ColumnsSQL {
     public void setTYPE_NAME(String TYPE_NAME) {
         this.TYPE_NAME = TYPE_NAME;
     }
-
     /**
      * Retorna el tamaño de la columna
      *
@@ -267,7 +259,6 @@ public class ColumnsSQL {
     public void setCOLUMN_SIZE(int COLUMN_SIZE) {
         this.COLUMN_SIZE = COLUMN_SIZE;
     }
-
     /**
      * Retorna la cantidad de digitos decimales que puede tener la columna
      *
@@ -285,7 +276,6 @@ public class ColumnsSQL {
     public void setDECIMAL_DIGITS(int DECIMAL_DIGITS) {
         this.DECIMAL_DIGITS = DECIMAL_DIGITS;
     }
-
     /**
      * Retorna el Num_Prec_Radix
      *
@@ -303,7 +293,6 @@ public class ColumnsSQL {
     public void setNUM_PREC_RADIX(int NUM_PREC_RADIX) {
         this.NUM_PREC_RADIX = NUM_PREC_RADIX;
     }
-
     /**
      * Retorna si la columna es Nullable
      *
@@ -327,7 +316,6 @@ public class ColumnsSQL {
     public void setNULLABLE(int NULLABLE) {
         this.NULLABLE = NULLABLE;
     }
-
     /**
      * Retorna la descripción de la columna en cuestión
      *
@@ -345,7 +333,6 @@ public class ColumnsSQL {
     public void setREMARKS(String REMARKS) {
         this.REMARKS = REMARKS;
     }
-
     /**
      * Retorna el valor por default para la columna en cuestión
      *
@@ -363,7 +350,6 @@ public class ColumnsSQL {
     public void setCOLUMN_DEF(String COLUMN_DEF) {
         this.COLUMN_DEF = COLUMN_DEF;
     }
-
     /**
      * Retorna el maximo de bytes que puede poseer la columna
      *
@@ -399,7 +385,6 @@ public class ColumnsSQL {
     public void setORDINAL_POSITION(int ORDINAL_POSITION) {
         this.ORDINAL_POSITION = ORDINAL_POSITION;
     }
-
     /**
      * @return IS_NULLABLE String → ISO rules are used to determine the nullability for a column.
      * YES --- if the column can include NULLs
@@ -421,7 +406,6 @@ public class ColumnsSQL {
     public void setIS_NULLABLE(String IS_NULLABLE) {
         this.IS_NULLABLE = IS_NULLABLE;
     }
-
     /**
      * Retorna el scope_catalog
      *
@@ -439,7 +423,6 @@ public class ColumnsSQL {
     public void setSCOPE_CATALOG(String SCOPE_CATALOG) {
         this.SCOPE_CATALOG = SCOPE_CATALOG;
     }
-
     /**
      * Retorna el scope_schema de la tabla en cuestión
      *
@@ -457,7 +440,6 @@ public class ColumnsSQL {
     public void setSCOPE_SCHEMA(String SCOPE_SCHEMA) {
         this.SCOPE_SCHEMA = SCOPE_SCHEMA;
     }
-
     /**
      * Retorna el scope de la tabla en cuestión
      *
@@ -475,7 +457,6 @@ public class ColumnsSQL {
     public void setSCOPE_TABLE(String SCOPE_TABLE) {
         this.SCOPE_TABLE = SCOPE_TABLE;
     }
-
     /**
      * Retorna el tipo de data de la fuente
      *
@@ -495,7 +476,6 @@ public class ColumnsSQL {
     public void setSOURCE_DATA_TYPE(short SOURCE_DATA_TYPE) {
         this.SOURCE_DATA_TYPE = SOURCE_DATA_TYPE;
     }
-
     /**
      * Indica si la columna es autoincrementable
      *
@@ -519,7 +499,6 @@ public class ColumnsSQL {
     public void setIS_AUTOINCREMENT(String IS_AUTOINCREMENT) {
         this.IS_AUTOINCREMENT = IS_AUTOINCREMENT;
     }
-
     /**
      * Indica si la columna es generada automaticamente
      *

@@ -41,7 +41,6 @@ public class PrimaryKey {
      */
     private String COLUMN_NAME = null;
 
-
     /**
      * KEY_SEQ short => número de secuencia dentro de la clave principal
      * (un valor de 1 representa la primera columna de la clave principal, un valor de 2 representaría la segunda
@@ -53,8 +52,6 @@ public class PrimaryKey {
      * PK_NAME Cadena => nombre de clave principal (puede ser nulo)
      */
     private String PK_NAME = null;
-
-
     /**
      * @return TABLE_CAT String => catálogo de tablas (puede ser nulo)
      *//*
@@ -70,7 +67,6 @@ public class PrimaryKey {
     public void setTABLE_CAT(String TABLE_CAT) {
         this.TABLE_CAT = TABLE_CAT;
     }
-
     /**
      * @return TABLE_SCHEM String => esquema de tabla (puede ser nulo)
      *//*
@@ -86,7 +82,6 @@ public class PrimaryKey {
     public void setTABLE_SCHEM(String TABLE_SCHEM) {
         this.TABLE_SCHEM = TABLE_SCHEM;
     }
-
     /**
      * @return TABLE_NAME Cadena => nombre de la tabla
      *//*
@@ -107,7 +102,7 @@ public class PrimaryKey {
      * @return COLUMN_NAME Cadena => nombre de columna
      */
     public String getCOLUMN_NAME() {
-        return UtilitiesJB.stringIsNullOrEmpty(COLUMN_NAME)?null:COLUMN_NAME;
+        return COLUMN_NAME;
     }
 
     /**
@@ -118,7 +113,6 @@ public class PrimaryKey {
     public void setCOLUMN_NAME(String COLUMN_NAME) {
         this.COLUMN_NAME = COLUMN_NAME;
     }
-
     /**
      * @return KEY_SEQ short => número de secuencia dentro de la clave principal
      * (un valor de 1 representa la primera columna de la clave principal, un valor de 2 representaría la segunda
@@ -138,7 +132,6 @@ public class PrimaryKey {
     public void setKEY_SEQ(short KEY_SEQ) {
         this.KEY_SEQ = KEY_SEQ;
     }
-
     /**
      * @return PK_NAME Cadena => nombre de clave principal (puede ser nulo)
      */

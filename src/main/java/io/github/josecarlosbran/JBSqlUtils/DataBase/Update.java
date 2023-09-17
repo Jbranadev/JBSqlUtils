@@ -61,6 +61,4 @@ public class Update {
     public Set set(String columName, Object value) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         return new Set(columName, value, this.sql);
     }
-
-
 }

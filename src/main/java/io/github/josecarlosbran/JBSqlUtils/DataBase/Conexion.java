@@ -41,13 +41,9 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  */
 class Conexion {
 
-
     /**
      * Ejecutor de tareas asincronas
      */
-    //31
-    //protected ExecutorService ejecutor = Executors.newFixedThreadPool(2);
-    // 1.924 seg
     protected ExecutorService ejecutor = Executors.newCachedThreadPool();
     /**
      * Tipo de BD's a la cual se conectara.
@@ -144,12 +140,6 @@ class Conexion {
      * Cantidad de conexiones que ha realizado el modelo a BD's
      */
     private Integer contadorConexiones = 0;
-    //Se bloquea si una tarea bloquea el procesamiento
-    //protected ExecutorService ejecutor = Executors.newSingleThreadExecutor();
-    //17 seg
-    //protected ExecutorService ejecutor = Executors.newWorkStealingPool();
-    // 1.570 seg
-    //protected ExecutorService ejecutor = Executors.newVirtualThreadPerTaskExecutor();
 
     /**
      * Constructor de la clase Conexión que se encarga de inicializar las propiedades de conexión del modelo,
@@ -161,26 +151,38 @@ class Conexion {
      */
     protected Conexion() throws DataBaseUndefind, PropertiesDBUndefined {
         this.setTableName();
-        this.getSystemProperties();
+        this.inicializador(true);
     }
 
     /**
      * Constructor de la clase Conexión que se encarga de inicializar las propiedades de conexión del modelo,
      * las cuales las obtiene de las propiedades del sistema Java.
-     * <p>
-     * c
      *
-     * @throws DataBaseUndefind      Lanza esta excepción si el tipo de BD's a la cual se conectara el modelo no ha sido definida entre
-     *                               las propiedades del sistema Java.
-     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión no han sido definidas.
+     * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     protected Conexion(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
         this.setTableName();
+        this.inicializador(getPropertySystem);
+    }
+
+    /**
+     * Inicializa los atributos de la clase Conexion
+     *
+     * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
+     *                               BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
+     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     */
+    protected void inicializador(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
         if (getPropertySystem) {
             this.getSystemProperties();
         }
         this.setGetPropertySystem(getPropertySystem);
-
     }
 
     /**
@@ -222,10 +224,8 @@ class Conexion {
             if (!stringIsNullOrEmpty(propertisURL))
                 this.propertisURL = propertisURL;
         } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al setear las propiedades extra de conexión con la cual el modelo se conectara a la BD's: " + e.toString());
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada al setear las propiedades extra de conexión con la cual el modelo se conectara a la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
-
     }
 
     /**
@@ -255,7 +255,6 @@ class Conexion {
         this.setPassword(setearPassword());
         this.setPropertisURL(setearPropertisUrl());
     }
-
 
     /**
      * Setea el tipo de BD's al cual se estara conectando este modelo.
@@ -298,7 +297,6 @@ class Conexion {
         return null;
     }
 
-
     /**
      * Setea el Host en el cual se encuentra la BD's a la cual se conectara.
      *
@@ -319,11 +317,9 @@ class Conexion {
                 }
             }
             return host;
-
         }
         return null;
     }
-
 
     /**
      * Setea el Puerto en el cual esta escuchando la BD's a la cual nos vamos a conectar.
@@ -345,11 +341,9 @@ class Conexion {
                 }
             }
             return port;
-
         }
         return null;
     }
-
 
     /**
      * Setea el Usuario de la BD's a la cual nos conectaremos
@@ -375,7 +369,6 @@ class Conexion {
         return null;
     }
 
-
     /**
      * Setea el Nombre de la BD's a la cual nos conectaremos.
      *
@@ -394,7 +387,6 @@ class Conexion {
                 throw new PropertiesDBUndefined("No se a seteado la BD's a la cual deseamos se pegue JBSqlUtils");
             }
             return DB;
-
         }
         return null;
     }
@@ -413,7 +405,6 @@ class Conexion {
                 if (stringIsNullOrEmpty(password)) {
                     //Si la propiedad del sistema no esta definida, Lanza una Exepción
                     throw new PropertiesDBUndefined("No se a seteado la contraseña del usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
-
                 }
             }
             return password;
@@ -433,7 +424,6 @@ class Conexion {
         }
         return null;
     }
-
 
     /**
      * Obtiene el tipo de base de datos al cual se conectara el modelo
@@ -484,12 +474,9 @@ class Conexion {
             if (!Objects.isNull(dataBase))
                 this.dataBaseType = dataBase;
         } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al setear el tipo de BD's: " + e.toString());
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada al setear el tipo de BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
-
     }
-
 
     /**
      * Obtiene el host en el cual se encuentra la BD's a la cual se desea conectar el modelo.
@@ -538,12 +525,9 @@ class Conexion {
             if (!stringIsNullOrEmpty(host))
                 this.host = host;
         } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al setear el host en el que se encuentra la BD's: " + e.toString());
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada al setear el host en el que se encuentra la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
-
     }
-
 
     /**
      * Obtiene el puerto en el cual se encuentra escuchando la BD's a la cual se pega el modelo.
@@ -592,11 +576,9 @@ class Conexion {
             if (!stringIsNullOrEmpty(port))
                 this.port = port;
         } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al setear el puerto en el cual se encuentra escuchando la BD's: " + e.toString());
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada al setear el puerto en el cual se encuentra escuchando la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
-
 
     /**
      * Obtiene el usuario con el cual el modelo se conectara a la BD's.
@@ -645,8 +627,7 @@ class Conexion {
             if (!stringIsNullOrEmpty(user))
                 this.user = user;
         } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al setear el usuario con el cual el modelo se conectara a la BD's: " + e.toString());
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada al setear el usuario con el cual el modelo se conectara a la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -697,8 +678,7 @@ class Conexion {
             if (!stringIsNullOrEmpty(password))
                 this.password = password;
         } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al setear la contraseña del usuario con el cual el modelo se conectara a la BD's: " + e.toString());
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada al setear la contraseña del usuario con el cual el modelo se conectara a la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -745,8 +725,7 @@ class Conexion {
             if (!stringIsNullOrEmpty(BD))
                 this.BD = BD;
         } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el método que Setea el nombre de la Base de Datos a la que se conectara el modelo: " + e.toString());
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada en el método que Setea el nombre de la Base de Datos a la que se conectara el modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -772,10 +751,8 @@ class Conexion {
         try {
             this.getPropertySystem = getPropertySystem;
         } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al setear la bandera getPropertySystem: " + e.toString());
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada al setear la bandera getPropertySystem, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
-
     }
 
     /**
@@ -800,8 +777,7 @@ class Conexion {
         try {
             this.connect = connect;
         } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al setear la Conexión del modelo: " + e.toString());
-            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+            LogsJB.fatal("Excepción disparada al setear la Conexión del modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -885,7 +861,6 @@ class Conexion {
          * la tarea que estaba realizando el modelo ha sido terminada
          */
         while (!this.getTaskIsReady()) {
-
         }
     }
 
@@ -999,7 +974,6 @@ class Conexion {
         this.updateAT = updateAT;
     }
 
-
     /**
      * Obtiene la Bandera que sirve para identificar si el modelo existe en BD's, de existir cuando se
      * llame al metodo save se procedera a actualizar el modelo
@@ -1039,7 +1013,6 @@ class Conexion {
         this.tabla = tabla;
     }
 
-
     /**
      * Obtiene la lista de los métodos get del modelo que lo invoca.
      *
@@ -1051,7 +1024,6 @@ class Conexion {
         }
         return MethodsGetOfModel;
     }
-
 
     /**
      * Obtiene la lista de los métodos set del modelo que lo invoca.

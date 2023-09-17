@@ -29,7 +29,6 @@ import java.util.Objects;
  */
 public class UtilitiesJB {
 
-
     /****
      * Verifica si una cadena esta vacía o es nula
      * @param cadena Cadena a Validar
@@ -68,7 +67,6 @@ public class UtilitiesJB {
         }
         return 1;
     }
-
 
     /**
      * Retorna una columna SQL correspondiente al objeto envíado como parametro
@@ -118,6 +116,4 @@ public class UtilitiesJB {
         temp.setValor((Object) valor);
         return temp;
     }
-
-
 }

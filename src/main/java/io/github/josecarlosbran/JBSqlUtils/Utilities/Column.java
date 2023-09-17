@@ -15,7 +15,6 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.Utilities;
 
-
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
 import lombok.ToString;
@@ -44,7 +43,6 @@ public class Column<T> {
 
     private String size = "";
 
-
     /**
      * Inicializa la columna indicando el tipo de dato SQL que tendra la columna
      *
@@ -66,7 +64,6 @@ public class Column<T> {
         this.setDataTypeSQL(tipo_de_dato);
         this.setSize(this.getDataTypeSQL().getSize());
     }
-
 
     /**
      * Inicializa la columna indicando el valor, el tipo de dato SQL que tendra la columna y las restricciones
@@ -95,7 +92,6 @@ public class Column<T> {
         this.setRestriccion(restriccion);
         this.setSize(this.getDataTypeSQL().getSize());
     }
-
 
     /**
      * Inicializa la columna indicando el valor, el tipo de dato SQL que tendra la columna y las restricciones
@@ -128,7 +124,6 @@ public class Column<T> {
         this.setSize(this.getDataTypeSQL().getSize());
     }
 
-
     /**
      * Inicializa la columna indicando el tipo de dato SQL que tendra la columna
      *
@@ -154,7 +149,6 @@ public class Column<T> {
         this.setDataTypeSQL(tipo_de_dato);
         this.setSize(this.getDataTypeSQL().getSize());
     }
-
 
     /**
      * Inicializa la columna indicando el valor, el tipo de dato SQL que tendra la columna y las restricciones
@@ -187,7 +181,6 @@ public class Column<T> {
         this.setRestriccion(restriccion);
         this.setSize(this.getDataTypeSQL().getSize());
     }
-
 
     /**
      * Inicializa la columna indicando el valor, el tipo de dato SQL que tendra la columna y las restricciones
@@ -223,7 +216,6 @@ public class Column<T> {
         this.setDefault_value(default_value);
         this.setSize(this.getDataTypeSQL().getSize());
     }
-
 
     /**
      * Obtiene el valor de la columna
@@ -315,7 +307,6 @@ public class Column<T> {
         this.columnExist = columnExist;
     }
 
-
     /**
      * Obtiene el nombre del tipo de Dato en SQL
      *
@@ -371,6 +362,4 @@ public class Column<T> {
     public void setName(String name) {
         this.name = name;
     }
-
-
 }

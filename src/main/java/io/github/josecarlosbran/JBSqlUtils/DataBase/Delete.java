@@ -64,6 +64,4 @@ public class Delete {
     public Where where(String columna, Operator operador, Object value) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         return new Where(columna, operador, value, this.sql);
     }
-
-
 }

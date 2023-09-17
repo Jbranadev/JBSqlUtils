@@ -15,7 +15,6 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
-
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
@@ -35,7 +34,6 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author Jose Bran
  */
 public class And<T> extends MethodsWhere {
-
 
     /**
      * Constructor que recibe como parametro:
@@ -137,6 +135,4 @@ public class And<T> extends MethodsWhere {
         this.parametros.add(getColumn(valor));
         this.sql = sql + Operator.AND.getOperador() + Operator.OPEN_PARENTESIS.getOperador() + columna + operador.getOperador() + "?" + Operator.CLOSE_PARENTESIS.getOperador();
     }
-
-
 }

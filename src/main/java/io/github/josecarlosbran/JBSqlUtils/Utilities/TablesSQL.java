@@ -15,7 +15,6 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.Utilities;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,7 +81,6 @@ public class TablesSQL {
      */
     private List<String> columnsExist = new ArrayList<>();
 
-
     /**
      * Obtiene la lista de las columnas que posee la tabla correspondiente al modelo.
      *
@@ -91,15 +89,14 @@ public class TablesSQL {
     public synchronized List<ColumnsSQL> getColumnas() {
         return this.Columnas;
     }
-
     /**
      * Setea la lista de las columnas SQL que posee la tabla en BD's
      *
      * @param columnas Lista de las columnas que posee la tabla en BD's
-     */
+     *//*
     public void setColumnas(List<ColumnsSQL> columnas) {
         this.Columnas = columnas;
-    }
+    }*/
 
     /**
      * Obtiene la Clave Primaria correspondiente a la tabla
@@ -125,7 +122,7 @@ public class TablesSQL {
      * @return TABLE_CAT String => catálogo de tablas (puede ser nulo)
      */
     public String getTABLE_CAT() {
-        return UtilitiesJB.stringIsNullOrEmpty(TABLE_CAT)?null:TABLE_CAT;
+        return UtilitiesJB.stringIsNullOrEmpty(TABLE_CAT) ? null : TABLE_CAT;
     }
 
     /**
@@ -143,7 +140,7 @@ public class TablesSQL {
      * @return Retorna el esquema de la tabla en BD's
      */
     public String getTABLE_SCHEM() {
-        return UtilitiesJB.stringIsNullOrEmpty(TABLE_SCHEM)?null:TABLE_SCHEM;
+        return UtilitiesJB.stringIsNullOrEmpty(TABLE_SCHEM) ? null : TABLE_SCHEM;
     }
 
     /**
@@ -161,7 +158,7 @@ public class TablesSQL {
      * @return retorna el nombre de la tabla en BD's
      */
     public String getTABLE_NAME() {
-        return UtilitiesJB.stringIsNullOrEmpty(TABLE_NAME)?null:TABLE_NAME;
+        return TABLE_NAME;
     }
 
     /**
@@ -172,7 +169,6 @@ public class TablesSQL {
     public void setTABLE_NAME(String TABLE_NAME) {
         this.TABLE_NAME = TABLE_NAME;
     }
-
     /**
      * Obtiene el tipo de tabla que es.
      *
@@ -194,7 +190,6 @@ public class TablesSQL {
     public void setTABLE_TYPE(String TABLE_TYPE) {
         this.TABLE_TYPE = TABLE_TYPE;
     }
-
     /**
      * Obtiene el comentario de la tabla
      *
@@ -212,7 +207,6 @@ public class TablesSQL {
     public void setREMARKS(String REMARKS) {
         this.REMARKS = REMARKS;
     }
-
     /**
      * Obtiene el catalogo de tipos
      *
@@ -222,6 +216,7 @@ public class TablesSQL {
         return UtilitiesJB.stringIsNullOrEmpty(TYPE_CAT)?null:TYPE_CAT;
     }
 */
+
     /**
      * Setea el TYPE_CAT String => el catálogo de tipos (puede ser nulo)
      *
@@ -230,7 +225,6 @@ public class TablesSQL {
     public void setTYPE_CAT(String TYPE_CAT) {
         this.TYPE_CAT = TYPE_CAT;
     }
-
     /**
      * Obtiene el tipo de esquema
      *
@@ -248,7 +242,6 @@ public class TablesSQL {
     public void setTYPE_SCHEM(String TYPE_SCHEM) {
         this.TYPE_SCHEM = TYPE_SCHEM;
     }
-
     /**
      * Retorna el nombre de tipo de la tabla en BD's
      *
@@ -258,6 +251,7 @@ public class TablesSQL {
         return UtilitiesJB.stringIsNullOrEmpty(TYPE_NAME)?null:TYPE_NAME;
     }
 */
+
     /**
      * Setea el nombre de tipo de la tabla en BD's
      *
@@ -266,7 +260,6 @@ public class TablesSQL {
     public void setTYPE_NAME(String TYPE_NAME) {
         this.TYPE_NAME = TYPE_NAME;
     }
-
     /**
      * Obtiene el nombre de la columna de identificación de la tabla
      *
@@ -277,6 +270,7 @@ public class TablesSQL {
         return UtilitiesJB.stringIsNullOrEmpty(SELF_REFERENCING_COL_NAME)?null:SELF_REFERENCING_COL_NAME;
     }
 */
+
     /**
      * Setea el nombre de la columna de identificación de la tabla
      *
@@ -286,7 +280,6 @@ public class TablesSQL {
     public void setSELF_REFERENCING_COL_NAME(String SELF_REFERENCING_COL_NAME) {
         this.SELF_REFERENCING_COL_NAME = SELF_REFERENCING_COL_NAME;
     }
-
     /**
      * @return REF_GENERATION String => especifica cómo se crean los valores en SELF_REFERENCING_COL_NAME.
      * Los valores son "SISTEMA", "USUARIO", "DERIVADO". (puede ser nulo)
@@ -304,7 +297,6 @@ public class TablesSQL {
     public void setREF_GENERATION(String REF_GENERATION) {
         this.REF_GENERATION = REF_GENERATION;
     }
-
 
     /**
      * Lista de los nombres de las columnas que existen

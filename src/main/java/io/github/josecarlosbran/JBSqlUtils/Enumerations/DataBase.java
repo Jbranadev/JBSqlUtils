@@ -31,22 +31,18 @@ public enum DataBase {
      * SQLite
      */
     SQLite("sqlite"),
-
     /**
      * MySQL
      */
     MySQL("mysql"),
-
     /**
      * MariaDB
      */
     MariaDB("mariadb"),
-
     /**
      * SQL Server
      */
     SQLServer("sqlserver"),
-
     /**
      * PostgreSQL
      */

@@ -8,14 +8,12 @@ import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 
 import java.util.List;
 
-
 /**
  * Clase que proporciona la logica para agregar un Cierre de Parentecis a una consulta SQL
  *
  * @author Jose Bran
  */
 public class closeParentecis<T> extends MethodsWhere {
-
 
     /**
      * Constructor que recibe como parametro:
@@ -62,7 +60,6 @@ public class closeParentecis<T> extends MethodsWhere {
         this.sql = sql + Operator.CLOSE_PARENTESIS.getOperador();
     }
 
-
     /**
      * Constructor que recibe como parametro:
      *
@@ -78,7 +75,6 @@ public class closeParentecis<T> extends MethodsWhere {
         this.parametros = parametros;
         this.sql = sql + Operator.CLOSE_PARENTESIS.getOperador();
     }
-
 
     /**
      * Constructor que recibe como parametro:
@@ -127,7 +123,6 @@ public class closeParentecis<T> extends MethodsWhere {
         this.sql = sql + Operator.CLOSE_PARENTESIS.getOperador() + operatorPost.getOperador();
     }
 
-
     /**
      * Constructor que recibe como parametro:
      *
@@ -144,6 +139,4 @@ public class closeParentecis<T> extends MethodsWhere {
         this.parametros = parametros;
         this.sql = sql + Operator.CLOSE_PARENTESIS.getOperador() + operatorPost.getOperador();
     }
-
-
 }

@@ -15,7 +15,6 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
-
 import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
@@ -115,6 +114,4 @@ public class AndSet extends MethodsAndSet {
     public Where where(String columna, Operator operador, Object value) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         return new Where(columna, operador, value, this.sql, this.parametros);
     }
-
-
 }

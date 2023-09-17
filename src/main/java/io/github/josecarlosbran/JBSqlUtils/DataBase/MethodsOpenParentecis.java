@@ -24,7 +24,6 @@ public class MethodsOpenParentecis<T> extends Get {
      */
     protected List<Column> parametros = new ArrayList<>();
 
-
     /**
      * Constructor por default de la clase MethodsWhere, que inicializa la clase
      *
@@ -49,8 +48,6 @@ public class MethodsOpenParentecis<T> extends Get {
     protected MethodsOpenParentecis(Boolean getGetPropertiesSystem) throws DataBaseUndefind, PropertiesDBUndefined {
         super(getGetPropertiesSystem);
     }
-
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -107,7 +104,6 @@ public class MethodsOpenParentecis<T> extends Get {
         }
     }
 
-
     /**
      * @param operatorPrev Operador a colocar antes de la apertura de parentecis
      * @param columna      Columna a evaluar dentro de la sentencia AND
@@ -145,7 +141,6 @@ public class MethodsOpenParentecis<T> extends Get {
                 }
                 return new openParentecis(this.sql, this.modelo, this.parametros, operatorPrev, columna, operador, valor);
             }
-
         }
     }
 
@@ -185,6 +180,4 @@ public class MethodsOpenParentecis<T> extends Get {
             }
         }
     }
-
-
 }
