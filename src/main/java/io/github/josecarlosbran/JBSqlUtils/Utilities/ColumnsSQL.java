@@ -196,7 +196,9 @@ public class ColumnsSQL {
      * @return COLUMN_NAME String → column name
      */
     public String getCOLUMN_NAME() {
+
         return COLUMN_NAME;
+
     }
 
     /**
