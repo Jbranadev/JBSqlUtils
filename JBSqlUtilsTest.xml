@@ -32,7 +32,7 @@
             </class>
         </classes>
     </test>
-    <!-- Se excluyen Test de MySQL, MariaDB para GitHub Actions, se corregiran posteriormente
+    <!-- Se excluyen Test de MySQL, MariaDB para GitHub Actions, se corregiran posteriormente-->
     <test name="Test MySQL">
         <classes>
             <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestMySQL">
@@ -58,7 +58,7 @@
             </class>
         </classes>
     </test>
-    -->
+
 
 
     <test name="Test SQLite">
