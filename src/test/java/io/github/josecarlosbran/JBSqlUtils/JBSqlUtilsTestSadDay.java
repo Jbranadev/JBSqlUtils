@@ -402,8 +402,35 @@ public class JBSqlUtilsTestSadDay {
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
 
-    @Test(testName = "Close Parentecis OperatorPost JBSqlUtils",
+    @Test(testName = "Open Parentecis Operator Null Colum Name JBSqlUtils",
             dependsOnMethods = "openParentecisValueJBSqlUtils",
+            expectedExceptions = ValorUndefined.class)
+    public void openParentecisOperatorNullColumnNameJBSqlUtils() throws Exception {
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", Operator.LIKE, true).openParentecis(null, null, Operator.LIKE, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Open Parentecis Operator Null Operator JBSqlUtils",
+            dependsOnMethods = "openParentecisOperatorNullColumnNameJBSqlUtils",
+            expectedExceptions = ValorUndefined.class)
+    public void openParentecisOperatorNullOperatorJBSqlUtils() throws Exception {
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", Operator.LIKE, true).openParentecis(null, "null", null, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Open Parentecis Operator Null Value JBSqlUtils",
+            dependsOnMethods = "openParentecisOperatorNullOperatorJBSqlUtils",
+            expectedExceptions = ValorUndefined.class)
+    public void openParentecisOperatorNullValueJBSqlUtils() throws Exception {
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", Operator.LIKE, true).openParentecis(null, "null", Operator.LIKE, null);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Close Parentecis OperatorPost JBSqlUtils",
+            dependsOnMethods = "openParentecisOperatorNullValueJBSqlUtils",
             expectedExceptions = Exception.class)
     public void closeParentecisValueJBSqlUtils() throws Exception {
         JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", Operator.LIKE, true).openParentecis(Operator.OR, "null", Operator.LIKE, "null").closeParentecis(null).firstOrFail();
@@ -415,7 +442,7 @@ public class JBSqlUtilsTestSadDay {
             dependsOnMethods = "closeParentecisValueJBSqlUtils",
             expectedExceptions = Exception.class)
     public void closeParentecisValue2JBSqlUtils() throws Exception {
-        JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", Operator.LIKE, true).openParentecis(Operator.OR, "null", Operator.LIKE, "null").closeParentecis(Operator.OR).firstOrFail();
+        JBSqlUtils.update("Proveedor").set("ColumnName", true).where("null", Operator.LIKE, true).openParentecis(null, "null", Operator.LIKE, "null").closeParentecis(Operator.OR).firstOrFail();
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
@@ -573,8 +600,39 @@ public class JBSqlUtilsTestSadDay {
     }
 
 
-    @Test(testName = "Close Parentecis OperatorPost JBSqlUtilsModel",
+    @Test(testName = "Open Parentecis Operador NULL Colum Name JBSqlUtilsModel",
             dependsOnMethods = "openParentecisValueJBSqlUtilsModel",
+            expectedExceptions = ValorUndefined.class)
+    public void openParentecisOperatorNULLColumnNameJBSqlUtilsModel() throws Exception {
+        TestModel model = new TestModel();
+        model.where("null", Operator.LIKE, true).openParentecis(null, null, Operator.LIKE, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Open Parentecis Operador NULL Operator JBSqlUtilsModel",
+            dependsOnMethods = "openParentecisOperatorNULLColumnNameJBSqlUtilsModel",
+            expectedExceptions = ValorUndefined.class)
+    public void openParentecisOperatorNULLOperatorJBSqlUtilsModel() throws Exception {
+        TestModel model = new TestModel();
+        model.where("null", Operator.LIKE, true).openParentecis(null, "null", null, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Open Parentecis Operador NULL Value JBSqlUtilsModel",
+            dependsOnMethods = "openParentecisOperatorNULLOperatorJBSqlUtilsModel",
+            expectedExceptions = ValorUndefined.class)
+    public void openParentecisOperatorNULLValueJBSqlUtilsModel() throws Exception {
+        TestModel model = new TestModel();
+        model.where("null", Operator.LIKE, true).openParentecis(null, "null", Operator.LIKE, null);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+
+    @Test(testName = "Close Parentecis OperatorPost JBSqlUtilsModel",
+            dependsOnMethods = "openParentecisOperatorNULLValueJBSqlUtilsModel",
             expectedExceptions = Exception.class)
     public void closeParentecisValueJBSqlUtilsModel() throws Exception {
         TestModel model = new TestModel();
@@ -588,7 +646,7 @@ public class JBSqlUtilsTestSadDay {
             expectedExceptions = Exception.class)
     public void closeParentecisValue2JBSqlUtilsModel() throws Exception {
         TestModel model = new TestModel();
-        model.where("null", Operator.LIKE, true).openParentecis(Operator.OR, "null", Operator.LIKE, "null").closeParentecis(Operator.OR).firstOrFail();
+        model.where("null", Operator.LIKE, true).openParentecis(null, "null", Operator.LIKE, "null").closeParentecis(Operator.OR).firstOrFail();
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
@@ -749,8 +807,39 @@ public class JBSqlUtilsTestSadDay {
     }
 
 
-    @Test(testName = "Close Parentecis OperatorPost JBSqlUtilsModelPropertyFalse",
+    @Test(testName = "Open Parentecis Operator NULL Colum Name JBSqlUtilsModelPropertyFalse",
             dependsOnMethods = "openParentecisValueJBSqlUtilsModelPropertyFalse",
+            expectedExceptions = ValorUndefined.class)
+    public void openParentecisOperatorNULLColumnNameJBSqlUtilsModelPropertyFalse() throws Exception {
+        TestModel model = new TestModel(false);
+        model.where("null", Operator.LIKE, true).openParentecis(null, null, Operator.LIKE, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Open Parentecis Operator NULL Operator JBSqlUtilsModelPropertyFalse",
+            dependsOnMethods = "openParentecisOperatorNULLColumnNameJBSqlUtilsModelPropertyFalse",
+            expectedExceptions = ValorUndefined.class)
+    public void openParentecisOperatorNULLOperatorJBSqlUtilsModelPropertyFalse() throws Exception {
+        TestModel model = new TestModel(false);
+        model.where("null", Operator.LIKE, true).openParentecis(null, "null", null, true);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+    @Test(testName = "Open Parentecis Operator NULL Value JBSqlUtilsModelPropertyFalse",
+            dependsOnMethods = "openParentecisOperatorNULLOperatorJBSqlUtilsModelPropertyFalse",
+            expectedExceptions = ValorUndefined.class)
+    public void openParentecisOperatorNULLValueJBSqlUtilsModelPropertyFalse() throws Exception {
+        TestModel model = new TestModel(false);
+        model.where("null", Operator.LIKE, true).openParentecis(null, "null", Operator.LIKE, null);
+        Assert.assertTrue(false,
+                "No se Lanzo la exepción ValorUndefined como se esperaba");
+    }
+
+
+    @Test(testName = "Close Parentecis OperatorPost JBSqlUtilsModelPropertyFalse",
+            dependsOnMethods = "openParentecisOperatorNULLValueJBSqlUtilsModelPropertyFalse",
             expectedExceptions = Exception.class)
     public void closeParentecisValueJBSqlUtilsModelPropertyFalse() throws Exception {
         TestModel model = new TestModel(false);
@@ -764,7 +853,7 @@ public class JBSqlUtilsTestSadDay {
             expectedExceptions = Exception.class)
     public void closeParentecisValue2JBSqlUtilsModelPropertyFalse() throws Exception {
         TestModel model = new TestModel(false);
-        model.where("null", Operator.LIKE, true).openParentecis(Operator.OR, "null", Operator.LIKE, null).closeParentecis(Operator.OR).firstOrFail();
+        model.where("null", Operator.LIKE, true).openParentecis(null, "null", Operator.LIKE, null).closeParentecis(Operator.OR).firstOrFail();
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
@@ -819,7 +908,7 @@ public class JBSqlUtilsTestSadDay {
 
     @Test(testName = "First Or Fail",
             dependsOnMethods = "createTableModel"
-            ,expectedExceptions = Exception.class)
+            , expectedExceptions = Exception.class)
     public void firstOrFail() throws Exception {
         TestModel temp = (TestModel) this.testModel.where("Estado", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
                 "Cabrerassss").firstOrFail();
@@ -829,7 +918,7 @@ public class JBSqlUtilsTestSadDay {
 
     @Test(testName = "Get Model",
             dependsOnMethods = "firstOrFail"
-            ,expectedExceptions = Exception.class)
+            , expectedExceptions = Exception.class)
     public void getModel() throws Exception {
         this.testModel.setModelExist(false);
         logParrafo("Obtenemos el primero modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
@@ -842,7 +931,7 @@ public class JBSqlUtilsTestSadDay {
 
     @Test(testName = "Get First Model",
             dependsOnMethods = "getModel"
-            ,expectedExceptions = Exception.class)
+            , expectedExceptions = Exception.class)
     public void firstModel() throws Exception {
         this.testModel.setModelExist(false);
         logParrafo("Obtenemos el primero modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
@@ -855,7 +944,7 @@ public class JBSqlUtilsTestSadDay {
 
     @Test(testName = "Take Models",
             dependsOnMethods = "firstModel"
-            ,expectedExceptions = Exception.class)
+            , expectedExceptions = Exception.class)
     public void takeModels() throws Exception {
         List<TestModel> models = new ArrayList<TestModel>();
         logParrafo("Recuperamos los primeros seis modelos que en su nombre poseen el texto Modelo #");
@@ -867,7 +956,7 @@ public class JBSqlUtilsTestSadDay {
 
     @Test(testName = "Get All Models",
             dependsOnMethods = "takeModels"
-            ,expectedExceptions = Exception.class)
+            , expectedExceptions = Exception.class)
     public void getAllModels() throws Exception {
 
         List<TestModel> models = new ArrayList<TestModel>();
