@@ -86,16 +86,7 @@ public class MethodsOrderBy<T> extends MethodsTake {
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     public And and(String columna, Operator operador, Object valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        if (Objects.isNull(this.modelo)) {
-            return new And(this.sql, columna, operador, valor, this.parametros);
-        } else {
-            if (!this.getGetPropertySystem()) {
-                And and = new And(this.sql, columna, operador, valor, this.modelo, this.parametros, false);
-                //and.llenarPropertiesFromModel(this);
-                return and;
-            }
-            return new And(this.sql, columna, operador, valor, this.modelo, this.parametros);
-        }
+        return new CommonsMethods().and(columna, operador, valor, this.sql, (JBSqlUtils) this.modelo, this.parametros, this.getGetPropertySystem());
     }
 
     /**
@@ -112,16 +103,7 @@ public class MethodsOrderBy<T> extends MethodsTake {
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     public Or or(String columna, Operator operador, Object valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        if (Objects.isNull(this.modelo)) {
-            return new Or(this.sql, columna, operador, valor, this.parametros);
-        } else {
-            if (!this.getGetPropertySystem()) {
-                Or or = new Or(this.sql, columna, operador, valor, this.modelo, this.parametros, false);
-                //or.llenarPropertiesFromModel(this);
-                return or;
-            }
-            return new Or(this.sql, columna, operador, valor, this.modelo, this.parametros);
-        }
+        return new CommonsMethods().or(columna, operador, valor, this.sql, (JBSqlUtils) this.modelo, this.parametros, this.getGetPropertySystem());
     }
 
     /**
@@ -139,29 +121,7 @@ public class MethodsOrderBy<T> extends MethodsTake {
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     public openParentecis openParentecis(Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
-        if (Objects.isNull(this.modelo)) {
-            if (Objects.isNull(operatorPrev)) {
-                return new openParentecis(this.sql, this.parametros, columna, operador, valor);
-            } else {
-                return new openParentecis(this.sql, this.parametros, operatorPrev, columna, operador, valor);
-            }
-        } else {
-            if (Objects.isNull(operatorPrev)) {
-                if (!this.getGetPropertySystem()) {
-                    openParentecis open = new openParentecis(this.sql, this.modelo, this.parametros, columna, operador, valor, false);
-                    //open.llenarPropertiesFromModel(this);
-                    return open;
-                }
-                return new openParentecis(this.sql, this.modelo, this.parametros, columna, operador, valor);
-            } else {
-                if (!this.getGetPropertySystem()) {
-                    openParentecis open = new openParentecis(this.sql, this.modelo, this.parametros, operatorPrev, columna, operador, valor, false);
-                    //open.llenarPropertiesFromModel(this);
-                    return open;
-                }
-                return new openParentecis(this.sql, this.modelo, this.parametros, operatorPrev, columna, operador, valor);
-            }
-        }
+        return new CommonsMethods().openParentecis(operatorPrev, columna, operador, valor, this.sql, (JBSqlUtils) this.modelo, this.parametros, this.getGetPropertySystem());
     }
 
     /**
@@ -176,31 +136,8 @@ public class MethodsOrderBy<T> extends MethodsTake {
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     public closeParentecis closeParentecis(Operator operatorPost) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
-        if (Objects.isNull(this.modelo)) {
-            if (Objects.isNull(operatorPost)) {
-                return new closeParentecis(this.sql, this.parametros);
-            } else {
-                return new closeParentecis(this.sql, this.parametros, operatorPost);
-            }
-        } else {
-            if (Objects.isNull(operatorPost)) {
-                if (!this.getGetPropertySystem()) {
-                    closeParentecis close = new closeParentecis(this.sql, this.modelo, this.parametros, false);
-                    //close.llenarPropertiesFromModel(this);
-                    return close;
-                }
-                return new closeParentecis(this.sql, this.modelo, this.parametros);
-            } else {
-                if (!this.getGetPropertySystem()) {
-                    closeParentecis close = new closeParentecis(this.sql, this.modelo, this.parametros, operatorPost, false);
-                    //close.llenarPropertiesFromModel(this);
-                    return close;
-                }
-                return new closeParentecis(this.sql, this.modelo, this.parametros, operatorPost);
-            }
-        }
+        return new CommonsMethods().closeParentecis(operatorPost, this.sql, (JBSqlUtils) this.modelo, this.parametros, this.getGetPropertySystem());
     }
-
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////

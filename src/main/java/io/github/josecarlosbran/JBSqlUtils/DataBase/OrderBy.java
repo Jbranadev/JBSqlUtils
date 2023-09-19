@@ -55,9 +55,7 @@ public class OrderBy<T> extends MethodsOrderBy {
         if (Objects.isNull(orderType)) {
             throw new ValorUndefined("El tipo de ordenamiento proporcionado es NULL");
         }
-        /*if (Objects.isNull(modelo)) {
-            throw new ValorUndefined("El Modelo proporcionado es NULL");
-        }*/
+
         this.parametros = parametros;
         this.modelo = modelo;
         this.sql = sql + " ORDER BY " + columna + orderType.getValor();
@@ -86,9 +84,7 @@ public class OrderBy<T> extends MethodsOrderBy {
         if (Objects.isNull(orderType)) {
             throw new ValorUndefined("El tipo de ordenamiento proporcionado es NULL");
         }
-        /*if (Objects.isNull(modelo)) {
-            throw new ValorUndefined("El Modelo proporcionado es NULL");
-        }*/
+
         this.parametros = parametros;
         this.modelo = modelo;
         this.sql = sql + " ORDER BY " + columna + orderType.getValor();

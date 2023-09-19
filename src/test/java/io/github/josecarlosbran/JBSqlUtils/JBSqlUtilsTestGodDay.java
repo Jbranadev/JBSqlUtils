@@ -4,10 +4,6 @@ package io.github.josecarlosbran.JBSqlUtils;
 import UtilidadesTest.TestModel;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import org.json.JSONObject;
 import org.testng.Assert;
@@ -19,7 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static UtilidadesTest.Utilities.logParrafo;
-import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.*;
+import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.dropTableIfExist;
+import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.select;
 
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBSqlUtilsTestGodDay {
@@ -141,7 +138,7 @@ public class JBSqlUtilsTestGodDay {
         lista.forEach(fila -> {
             logParrafo(fila.toString());
         });
-        Assert.assertTrue(lista.size() ==5, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
+        Assert.assertTrue(lista.size() == 5, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
     }
 
     @Test(testName = "Update JBSqlUtils",
@@ -163,7 +160,7 @@ public class JBSqlUtilsTestGodDay {
         for (JSONObject fila : lista) {
             rowsUpdate += JBSqlUtils.update("Proveedor").set("Estado", !fila.getBoolean("Estado")).execute();
         }
-        logParrafo("Filas afectadas: "+rowsUpdate);
+        logParrafo("Filas afectadas: " + rowsUpdate);
         Assert.assertTrue(rowsUpdate == 15, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
     }
 
@@ -197,7 +194,6 @@ public class JBSqlUtilsTestGodDay {
         Assert.assertTrue(true,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
-
 
 
     @Test(testName = "Open Parentecis Colum Name JBSqlUtils",
@@ -289,7 +285,7 @@ public class JBSqlUtilsTestGodDay {
     @Test(testName = "Where Colum Name JBSqlUtilsModelPropertyFalse",
             dependsOnMethods = "takeLimiteJBSqlUtilsModel")
     public void whereColumnNameJBSqlUtilsModelPropertyFalse() throws Exception {
-         String separador = System.getProperty("file.separator");
+        String separador = System.getProperty("file.separator");
         String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
                 "BD" +
                 separador +
@@ -307,7 +303,7 @@ public class JBSqlUtilsTestGodDay {
     @Test(testName = "And Colum Name JBSqlUtilsModelPropertyFalse",
             dependsOnMethods = "whereColumnNameJBSqlUtilsModelPropertyFalse")
     public void andColumnNameJBSqlUtilsModelPropertyFalse() throws Exception {
-         String separador = System.getProperty("file.separator");
+        String separador = System.getProperty("file.separator");
         String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
                 "BD" +
                 separador +
@@ -326,7 +322,7 @@ public class JBSqlUtilsTestGodDay {
     @Test(testName = "Or Colum Name JBSqlUtilsModelPropertyFalse",
             dependsOnMethods = "andColumnNameJBSqlUtilsModelPropertyFalse")
     public void orColumnNameJBSqlUtilsModelPropertyFalse() throws Exception {
-         String separador = System.getProperty("file.separator");
+        String separador = System.getProperty("file.separator");
         String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
                 "BD" +
                 separador +
@@ -345,7 +341,7 @@ public class JBSqlUtilsTestGodDay {
     @Test(testName = "Open Parentecis Colum Name JBSqlUtilsModelPropertyFalse",
             dependsOnMethods = "orColumnNameJBSqlUtilsModelPropertyFalse")
     public void openParentecisColumnNameJBSqlUtilsModelPropertyFalse() throws Exception {
-         String separador = System.getProperty("file.separator");
+        String separador = System.getProperty("file.separator");
         String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
                 "BD" +
                 separador +
@@ -365,7 +361,7 @@ public class JBSqlUtilsTestGodDay {
     @Test(testName = "Order By Colum Name JBSqlUtilsModelPropertyFalse",
             dependsOnMethods = "openParentecisColumnNameJBSqlUtilsModelPropertyFalse")
     public void orderByColumnNameJBSqlUtilsModelPropertyFalse() throws Exception {
-         String separador = System.getProperty("file.separator");
+        String separador = System.getProperty("file.separator");
         String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
                 "BD" +
                 separador +
@@ -384,7 +380,7 @@ public class JBSqlUtilsTestGodDay {
     @Test(testName = "Take Limite Igual o Inferior a 0 JBSqlUtilsModelPropertyFalse",
             dependsOnMethods = "orderByColumnNameJBSqlUtilsModelPropertyFalse")
     public void takeLimiteJBSqlUtilsModelPropertyFalse() throws Exception {
-         String separador = System.getProperty("file.separator");
+        String separador = System.getProperty("file.separator");
         String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
                 "BD" +
                 separador +
@@ -404,8 +400,6 @@ public class JBSqlUtilsTestGodDay {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
     @Test(testName = "Drop Table If Exists from Model",

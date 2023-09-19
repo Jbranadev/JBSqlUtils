@@ -31,8 +31,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
-
 /**
  * @author Jose Bran
  * Clase que proporciona el método para ejecutar sentencias SQL sin necesidad de instanciar

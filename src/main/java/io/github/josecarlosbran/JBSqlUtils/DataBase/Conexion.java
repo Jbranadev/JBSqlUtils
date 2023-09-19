@@ -15,14 +15,12 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
-import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.ConeccionProperties;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.TablesSQL;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import java.lang.reflect.Method;
 import java.sql.Connection;
@@ -221,8 +219,8 @@ class Conexion {
      */
     public void setPropertisURL(String propertisURL) {
 
-            if (!stringIsNullOrEmpty(propertisURL))
-                this.propertisURL = propertisURL;
+        if (!stringIsNullOrEmpty(propertisURL))
+            this.propertisURL = propertisURL;
 
     }
 
@@ -469,8 +467,8 @@ class Conexion {
      */
     public void setDataBaseType(DataBase dataBase) {
 
-            if (!Objects.isNull(dataBase))
-                this.dataBaseType = dataBase;
+        if (!Objects.isNull(dataBase))
+            this.dataBaseType = dataBase;
 
     }
 
@@ -517,8 +515,8 @@ class Conexion {
      * @param host Host en el cual se encuentra la BD's a la que nos queremos conectar.
      */
     public void setHost(String host) {
-            if (!stringIsNullOrEmpty(host))
-                this.host = host;
+        if (!stringIsNullOrEmpty(host))
+            this.host = host;
     }
 
     /**
@@ -564,8 +562,8 @@ class Conexion {
      * @param port Puerto en el cual se encuentra escuchando la BD's a la cual se pegara el modelo.
      */
     public void setPort(String port) {
-            if (!stringIsNullOrEmpty(port))
-                this.port = port;
+        if (!stringIsNullOrEmpty(port))
+            this.port = port;
 
     }
 
@@ -612,8 +610,8 @@ class Conexion {
      * @param user Usuario con el cual el modelo se conectara a la BD's.
      */
     public void setUser(String user) {
-            if (!stringIsNullOrEmpty(user))
-                this.user = user;
+        if (!stringIsNullOrEmpty(user))
+            this.user = user;
 
     }
 
@@ -660,8 +658,8 @@ class Conexion {
      * @param password Contraseña del usuario con el cual el modelo se conectara a la BD's.
      */
     public void setPassword(String password) {
-            if (!stringIsNullOrEmpty(password))
-                this.password = password;
+        if (!stringIsNullOrEmpty(password))
+            this.password = password;
 
     }
 
@@ -704,8 +702,8 @@ class Conexion {
      * @param BD Nombre de la Base de Datos a la que se conectara el modelo.
      */
     public void setBD(String BD) {
-            if (!stringIsNullOrEmpty(BD))
-                this.BD = BD;
+        if (!stringIsNullOrEmpty(BD))
+            this.BD = BD;
 
     }
 
@@ -728,7 +726,7 @@ class Conexion {
      *                          personalizada, el valor por default es TRUE.
      */
     public void setGetPropertySystem(Boolean getPropertySystem) {
-            this.getPropertySystem = getPropertySystem;
+        this.getPropertySystem = getPropertySystem;
 
     }
 
@@ -751,7 +749,7 @@ class Conexion {
      * @param connect Conexión del Modelo a la Base de Datos.
      */
     protected void setConnect(Connection connect) {
-            this.connect = connect;
+        this.connect = connect;
 
     }
 

@@ -44,12 +44,8 @@ public class openParentecis<T> extends MethodsOpenParentecis {
         if (Objects.isNull(operador)) {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
-        /*if (Objects.isNull(operatorPrev)) {
-            throw new ValorUndefined("El operadorPrev proporcionado es NULL");
-        }*/
-        /*if (Objects.isNull(modelo)) {
-            throw new ValorUndefined("El Modelo proporcionado es NULL");
-        }*/
+
+
         this.parametros = parametros;
         this.modelo = modelo;
         this.parametros.add(getColumn(valor));
@@ -64,11 +60,11 @@ public class openParentecis<T> extends MethodsOpenParentecis {
      * @param sql               Sentencia SQL a la que se agregara la apertura de parentecis
      * @param modelo            Modelo que invocara los métodos de esta clase
      * @param parametros        Lista de parametros a ser agregados a la sentencia SQL
+     * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
      * @param operatorPrev      Operador a colocar antes de la apertura de parentecis
      * @param columna           Columna a evaluar dentro de la sentencia AND
      * @param operador          Operador con el cual se evaluara la columna
      * @param valor             Valor contra el que se evaluara la columna
-     * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
      * @throws ValorUndefined        Lanza esta excepción si el parametro proporcionado está vacío o es NULL
      * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
      * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
@@ -84,12 +80,8 @@ public class openParentecis<T> extends MethodsOpenParentecis {
         if (Objects.isNull(operador)) {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
-        /*if (Objects.isNull(operatorPrev)) {
-            throw new ValorUndefined("El operadorPrev proporcionado es NULL");
-        }*/
-        /*if (Objects.isNull(modelo)) {
-            throw new ValorUndefined("El Modelo proporcionado es NULL");
-        }*/
+
+
         this.parametros = parametros;
         this.modelo = modelo;
         this.parametros.add(getColumn(valor));
@@ -122,9 +114,7 @@ public class openParentecis<T> extends MethodsOpenParentecis {
         if (Objects.isNull(operador)) {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
-        /*if (Objects.isNull(operatorPrev)) {
-            throw new ValorUndefined("El operadorPrev proporcionado es NULL");
-        }*/
+
         this.parametros = parametros;
         this.parametros.add(getColumn(valor));
         this.sql = sql + operatorPrev.getOperador()
@@ -157,9 +147,7 @@ public class openParentecis<T> extends MethodsOpenParentecis {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
 
-        /*if (Objects.isNull(modelo)) {
-            throw new ValorUndefined("El Modelo proporcionado es NULL");
-        }*/
+
         this.parametros = parametros;
         this.modelo = modelo;
         this.parametros.add(getColumn(valor));
@@ -194,9 +182,7 @@ public class openParentecis<T> extends MethodsOpenParentecis {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
 
-        /*if (Objects.isNull(modelo)) {
-            throw new ValorUndefined("El Modelo proporcionado es NULL");
-        }*/
+
         this.parametros = parametros;
         this.modelo = modelo;
         this.parametros.add(getColumn(valor));

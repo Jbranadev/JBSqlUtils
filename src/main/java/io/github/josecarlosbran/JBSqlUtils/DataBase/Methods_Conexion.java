@@ -1682,37 +1682,37 @@ class Methods_Conexion extends Conexion {
                 List<Method> modelGetMethods = this.getMethodsGetOfModel();
                 Iterator<Method> iteradorModelGetMethods = modelGetMethods.iterator();
                 while (iteradorModelGetMethods.hasNext()) {
-                        Method modelGetMethod = iteradorModelGetMethods.next();
-                        String modelGetName = modelGetMethod.getName();
-                        LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);
-                        //Obtengo la información de la columna
-                        Column columnsSQL = (Column) modelGetMethod.invoke(this, null);
-                        String columnName = modelGetMethod.getName();
-                        columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
-                        //Le meto la información a la columa
-                        LogsJB.debug("Setea el nombre a la columna: " + columnName);
-                        if (UtilitiesJB.stringIsNullOrEmpty(columnsSQL.getName())) {
-                            columnsSQL.setName(columnName);
-                        }
-                        Boolean isready = false;
-                        //Obtiene los metodos set del modelo
-                        List<Method> modelSetMethods = this.getMethodsSetOfModel();
-                        Iterator<Method> iteradorModelSetMethods = modelSetMethods.iterator();
-                        while (iteradorModelSetMethods.hasNext()) {
+                    Method modelGetMethod = iteradorModelGetMethods.next();
+                    String modelGetName = modelGetMethod.getName();
+                    LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);
+                    //Obtengo la información de la columna
+                    Column columnsSQL = (Column) modelGetMethod.invoke(this, null);
+                    String columnName = modelGetMethod.getName();
+                    columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
+                    //Le meto la información a la columa
+                    LogsJB.debug("Setea el nombre a la columna: " + columnName);
+                    if (UtilitiesJB.stringIsNullOrEmpty(columnsSQL.getName())) {
+                        columnsSQL.setName(columnName);
+                    }
+                    Boolean isready = false;
+                    //Obtiene los metodos set del modelo
+                    List<Method> modelSetMethods = this.getMethodsSetOfModel();
+                    Iterator<Method> iteradorModelSetMethods = modelSetMethods.iterator();
+                    while (iteradorModelSetMethods.hasNext()) {
 
-                                Method modelSetMethod = iteradorModelSetMethods.next();
-                                String modelSetName = modelSetMethod.getName();
-                                LogsJB.trace("Nombre del metodo set: " + modelSetName);
-                                modelSetName = StringUtils.removeStartIgnoreCase(modelSetName, "set");
-                                LogsJB.trace("Nombre del metodo set a validar: " + modelSetName);
-                                if (StringUtils.equalsIgnoreCase(modelSetName, columnName)) {
-                                    //Setea el valor del metodo
-                                    modelSetMethod.invoke(this, columnsSQL);
-                                    LogsJB.debug("Ingreso la columna en el metodo set: " + modelSetName);
-                                    break;
-                                }
-
+                        Method modelSetMethod = iteradorModelSetMethods.next();
+                        String modelSetName = modelSetMethod.getName();
+                        LogsJB.trace("Nombre del metodo set: " + modelSetName);
+                        modelSetName = StringUtils.removeStartIgnoreCase(modelSetName, "set");
+                        LogsJB.trace("Nombre del metodo set a validar: " + modelSetName);
+                        if (StringUtils.equalsIgnoreCase(modelSetName, columnName)) {
+                            //Setea el valor del metodo
+                            modelSetMethod.invoke(this, columnsSQL);
+                            LogsJB.debug("Ingreso la columna en el metodo set: " + modelSetName);
+                            break;
                         }
+
+                    }
 
                 }
             }

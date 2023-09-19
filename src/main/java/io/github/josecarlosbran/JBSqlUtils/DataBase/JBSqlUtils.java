@@ -15,7 +15,6 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
-import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.ConeccionProperties;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
@@ -24,7 +23,6 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -73,7 +71,7 @@ public class JBSqlUtils extends Methods {
      * @param BD Nombre de la Base de Datos.
      */
     public static void setDataBaseGlobal(String BD) {
-        if(!UtilitiesJB.stringIsNullOrEmpty(BD))
+        if (!UtilitiesJB.stringIsNullOrEmpty(BD))
             System.setProperty(ConeccionProperties.DBNAME.getPropiertie(), BD);
 
     }
@@ -84,7 +82,7 @@ public class JBSqlUtils extends Methods {
      * @param password Contraseña del usuario con el cual se conectara a la BD's.
      */
     public static void setPasswordGlobal(String password) {
-        if(!UtilitiesJB.stringIsNullOrEmpty(password))
+        if (!UtilitiesJB.stringIsNullOrEmpty(password))
             System.setProperty(ConeccionProperties.DBPASSWORD.getPropiertie(), password);
 
     }
@@ -95,7 +93,7 @@ public class JBSqlUtils extends Methods {
      * @param user Usuario con el cual se conectara a la BD's.
      */
     public static void setUserGlobal(String user) {
-        if(!UtilitiesJB.stringIsNullOrEmpty(user))
+        if (!UtilitiesJB.stringIsNullOrEmpty(user))
             System.setProperty(ConeccionProperties.DBUSER.getPropiertie(), user);
 
     }
@@ -106,7 +104,7 @@ public class JBSqlUtils extends Methods {
      * @param port Puerto en el cual se encuentra escuchando la BD's a la cual se pegaran los modelos.
      */
     public static void setPortGlobal(String port) {
-        if(!UtilitiesJB.stringIsNullOrEmpty(port))
+        if (!UtilitiesJB.stringIsNullOrEmpty(port))
             System.setProperty(ConeccionProperties.DBPORT.getPropiertie(), port);
 
     }
@@ -117,7 +115,7 @@ public class JBSqlUtils extends Methods {
      * @param host Host en el cual se encuentra la BD's a la que nos queremos conectar.
      */
     public static void setHostGlobal(String host) {
-        if(!UtilitiesJB.stringIsNullOrEmpty(host))
+        if (!UtilitiesJB.stringIsNullOrEmpty(host))
             System.setProperty(ConeccionProperties.DBHOST.getPropiertie(), host);
 
     }
@@ -132,7 +130,7 @@ public class JBSqlUtils extends Methods {
      *                 SQLite.
      */
     public static void setDataBaseTypeGlobal(DataBase dataBase) {
-        if(!Objects.isNull(dataBase))
+        if (!Objects.isNull(dataBase))
             System.setProperty(ConeccionProperties.DBTYPE.getPropiertie(), dataBase.name());
     }
 
@@ -143,7 +141,7 @@ public class JBSqlUtils extends Methods {
      *                     {@literal ?autoReconnect=true&useSSL=false}
      */
     public static void setPropertisUrlConexionGlobal(String propertisUrl) {
-        if(!UtilitiesJB.stringIsNullOrEmpty(propertisUrl))
+        if (!UtilitiesJB.stringIsNullOrEmpty(propertisUrl))
             System.setProperty(ConeccionProperties.DBPROPERTIESURL.getPropiertie(), propertisUrl);
 
     }
