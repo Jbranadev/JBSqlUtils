@@ -23,6 +23,7 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import java.sql.Timestamp;
@@ -72,11 +73,9 @@ public class JBSqlUtils extends Methods {
      * @param BD Nombre de la Base de Datos.
      */
     public static void setDataBaseGlobal(String BD) {
-        try {
+        if(!UtilitiesJB.stringIsNullOrEmpty(BD))
             System.setProperty(ConeccionProperties.DBNAME.getPropiertie(), BD);
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el método que Setea el nombre de la Base de Datos global, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-        }
+
     }
 
     /**
@@ -85,11 +84,9 @@ public class JBSqlUtils extends Methods {
      * @param password Contraseña del usuario con el cual se conectara a la BD's.
      */
     public static void setPasswordGlobal(String password) {
-        try {
+        if(!UtilitiesJB.stringIsNullOrEmpty(password))
             System.setProperty(ConeccionProperties.DBPASSWORD.getPropiertie(), password);
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el método que Setea la contraseña del usuario de BD's global, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-        }
+
     }
 
     /**
@@ -98,11 +95,9 @@ public class JBSqlUtils extends Methods {
      * @param user Usuario con el cual se conectara a la BD's.
      */
     public static void setUserGlobal(String user) {
-        try {
+        if(!UtilitiesJB.stringIsNullOrEmpty(user))
             System.setProperty(ConeccionProperties.DBUSER.getPropiertie(), user);
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el método que Setea el usuario de BD's global, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-        }
+
     }
 
     /**
@@ -111,11 +106,9 @@ public class JBSqlUtils extends Methods {
      * @param port Puerto en el cual se encuentra escuchando la BD's a la cual se pegaran los modelos.
      */
     public static void setPortGlobal(String port) {
-        try {
+        if(!UtilitiesJB.stringIsNullOrEmpty(port))
             System.setProperty(ConeccionProperties.DBPORT.getPropiertie(), port);
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el método que Setea el Puerto de BD's global, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-        }
+
     }
 
     /**
@@ -124,11 +117,9 @@ public class JBSqlUtils extends Methods {
      * @param host Host en el cual se encuentra la BD's a la que nos queremos conectar.
      */
     public static void setHostGlobal(String host) {
-        try {
+        if(!UtilitiesJB.stringIsNullOrEmpty(host))
             System.setProperty(ConeccionProperties.DBHOST.getPropiertie(), host);
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el método que Setea el Host de la BD's global, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-        }
+
     }
 
     /**
@@ -141,11 +132,8 @@ public class JBSqlUtils extends Methods {
      *                 SQLite.
      */
     public static void setDataBaseTypeGlobal(DataBase dataBase) {
-        try {
+        if(!Objects.isNull(dataBase))
             System.setProperty(ConeccionProperties.DBTYPE.getPropiertie(), dataBase.name());
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el método que Setea el Tipo de BD's global, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-        }
     }
 
     /**
@@ -155,11 +143,9 @@ public class JBSqlUtils extends Methods {
      *                     {@literal ?autoReconnect=true&useSSL=false}
      */
     public static void setPropertisUrlConexionGlobal(String propertisUrl) {
-        try {
+        if(!UtilitiesJB.stringIsNullOrEmpty(propertisUrl))
             System.setProperty(ConeccionProperties.DBPROPERTIESURL.getPropiertie(), propertisUrl);
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al setear las propiedades extra de conexión con la cual el modelo se conectara a la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-        }
+
     }
 
     /**

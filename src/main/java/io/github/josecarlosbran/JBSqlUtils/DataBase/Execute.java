@@ -58,9 +58,9 @@ class Execute extends Methods_Conexion {
      */
     protected Execute(String sql, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
-        if (stringIsNullOrEmpty(sql)) {
+        /*if (stringIsNullOrEmpty(sql)) {
             throw new ValorUndefined("La cadena que contiene la sentencia SQL esta vacío o es NULL");
-        }
+        }*/
         this.parametros = parametros;
         this.sql = sql;
     }

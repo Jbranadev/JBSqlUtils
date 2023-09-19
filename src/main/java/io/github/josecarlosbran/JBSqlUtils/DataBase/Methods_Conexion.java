@@ -453,9 +453,6 @@ class Methods_Conexion extends Conexion {
                                 }
                             } catch (Exception e) {
                                 LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                                LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                                LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                                LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                             }
                         }
                     } catch (Exception e) {
@@ -1685,7 +1682,6 @@ class Methods_Conexion extends Conexion {
                 List<Method> modelGetMethods = this.getMethodsGetOfModel();
                 Iterator<Method> iteradorModelGetMethods = modelGetMethods.iterator();
                 while (iteradorModelGetMethods.hasNext()) {
-                    try {
                         Method modelGetMethod = iteradorModelGetMethods.next();
                         String modelGetName = modelGetMethod.getName();
                         LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);
@@ -1703,7 +1699,7 @@ class Methods_Conexion extends Conexion {
                         List<Method> modelSetMethods = this.getMethodsSetOfModel();
                         Iterator<Method> iteradorModelSetMethods = modelSetMethods.iterator();
                         while (iteradorModelSetMethods.hasNext()) {
-                            try {
+
                                 Method modelSetMethod = iteradorModelSetMethods.next();
                                 String modelSetName = modelSetMethod.getName();
                                 LogsJB.trace("Nombre del metodo set: " + modelSetName);
@@ -1715,13 +1711,9 @@ class Methods_Conexion extends Conexion {
                                     LogsJB.debug("Ingreso la columna en el metodo set: " + modelSetName);
                                     break;
                                 }
-                            } catch (Exception e) {
-                                LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                            }
+
                         }
-                    } catch (Exception e) {
-                        LogsJB.fatal("Excepción disparada al obtener los nombres de las columnas del modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                    }
+
                 }
             }
         } catch (Exception e) {
