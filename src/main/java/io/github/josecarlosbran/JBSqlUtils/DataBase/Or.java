@@ -61,7 +61,6 @@ public class Or<T> extends MethodsWhere {
         if (Objects.isNull(operador)) {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
-
         this.parametros = parametros;
         this.modelo = modelo;
         this.parametros.add(getColumn(valor));
@@ -95,7 +94,6 @@ public class Or<T> extends MethodsWhere {
         if (Objects.isNull(operador)) {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
-
         this.parametros = parametros;
         this.modelo = modelo;
         this.parametros.add(getColumn(valor));

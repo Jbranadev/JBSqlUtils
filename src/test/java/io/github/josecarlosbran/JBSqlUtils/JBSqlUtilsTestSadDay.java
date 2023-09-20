@@ -1,6 +1,5 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
-
 import UtilidadesTest.TestModel;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
@@ -144,7 +143,6 @@ public class JBSqlUtilsTestSadDay {
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
 
-
     @Test(testName = "Where Colum Name JBSqlUtils",
             dependsOnMethods = "selectTableJBSqlUtils",
             expectedExceptions = ValorUndefined.class)
@@ -171,7 +169,6 @@ public class JBSqlUtilsTestSadDay {
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
-
 
     @Test(testName = "Add Column Table JBSqlUtils",
             dependsOnMethods = "whereSelectValueJBSqlUtils",
@@ -290,7 +287,6 @@ public class JBSqlUtilsTestSadDay {
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
 
-
     @Test(testName = "Where Colum Name JBSqlUtils",
             dependsOnMethods = "andSetValueColumnValueJBSqlUtils",
             expectedExceptions = ValorUndefined.class)
@@ -317,7 +313,6 @@ public class JBSqlUtilsTestSadDay {
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
-
 
     @Test(testName = "And Colum Name JBSqlUtils",
             dependsOnMethods = "whereValueJBSqlUtils",
@@ -346,7 +341,6 @@ public class JBSqlUtilsTestSadDay {
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
 
-
     @Test(testName = "Or Colum Name JBSqlUtils",
             dependsOnMethods = "andValueJBSqlUtils",
             expectedExceptions = ValorUndefined.class)
@@ -373,7 +367,6 @@ public class JBSqlUtilsTestSadDay {
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
-
 
     @Test(testName = "Open Parentecis Colum Name JBSqlUtils",
             dependsOnMethods = "orValueJBSqlUtils",
@@ -447,7 +440,6 @@ public class JBSqlUtilsTestSadDay {
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
 
-
     @Test(testName = "Order By Colum Name JBSqlUtils",
             dependsOnMethods = "closeParentecisValue2JBSqlUtils",
             expectedExceptions = ValorUndefined.class)
@@ -474,7 +466,6 @@ public class JBSqlUtilsTestSadDay {
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
-
 
     @Test(testName = "Where Colum Name JBSqlUtilsModel",
             dependsOnMethods = "takeLimiteJBSqlUtils",
@@ -506,7 +497,6 @@ public class JBSqlUtilsTestSadDay {
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
 
-
     @Test(testName = "And Colum Name JBSqlUtilsModel",
             dependsOnMethods = "whereValueJBSqlUtilsModel",
             expectedExceptions = ValorUndefined.class)
@@ -536,7 +526,6 @@ public class JBSqlUtilsTestSadDay {
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
-
 
     @Test(testName = "Or Colum Name JBSqlUtilsModel",
             dependsOnMethods = "andValueJBSqlUtilsModel",
@@ -568,7 +557,6 @@ public class JBSqlUtilsTestSadDay {
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
 
-
     @Test(testName = "Open Parentecis Colum Name JBSqlUtilsModel",
             dependsOnMethods = "orValueJBSqlUtilsModel",
             expectedExceptions = ValorUndefined.class)
@@ -598,7 +586,6 @@ public class JBSqlUtilsTestSadDay {
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
-
 
     @Test(testName = "Open Parentecis Operador NULL Colum Name JBSqlUtilsModel",
             dependsOnMethods = "openParentecisValueJBSqlUtilsModel",
@@ -630,7 +617,6 @@ public class JBSqlUtilsTestSadDay {
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
 
-
     @Test(testName = "Close Parentecis OperatorPost JBSqlUtilsModel",
             dependsOnMethods = "openParentecisOperatorNULLValueJBSqlUtilsModel",
             expectedExceptions = Exception.class)
@@ -650,7 +636,6 @@ public class JBSqlUtilsTestSadDay {
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
-
 
     @Test(testName = "Order By Colum Name JBSqlUtilsModel",
             dependsOnMethods = "closeParentecisValue2JBSqlUtilsModel",
@@ -682,7 +667,6 @@ public class JBSqlUtilsTestSadDay {
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
 
-
     @Test(testName = "Where Colum Name JBSqlUtilsModelPropertyFalse",
             dependsOnMethods = "takeLimiteJBSqlUtilsModel",
             expectedExceptions = ValorUndefined.class)
@@ -712,7 +696,6 @@ public class JBSqlUtilsTestSadDay {
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
-
 
     @Test(testName = "And Colum Name JBSqlUtilsModelPropertyFalse",
             dependsOnMethods = "whereValueJBSqlUtilsModelPropertyFalse",
@@ -744,7 +727,6 @@ public class JBSqlUtilsTestSadDay {
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
 
-
     @Test(testName = "Or Colum Name JBSqlUtilsModelPropertyFalse",
             dependsOnMethods = "andValueJBSqlUtilsModelPropertyFalse",
             expectedExceptions = ValorUndefined.class)
@@ -774,7 +756,6 @@ public class JBSqlUtilsTestSadDay {
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
-
 
     @Test(testName = "Open Parentecis Colum Name JBSqlUtilsModelPropertyFalse",
             dependsOnMethods = "orValueJBSqlUtilsModelPropertyFalse",
@@ -806,7 +787,6 @@ public class JBSqlUtilsTestSadDay {
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
 
-
     @Test(testName = "Open Parentecis Operator NULL Colum Name JBSqlUtilsModelPropertyFalse",
             dependsOnMethods = "openParentecisValueJBSqlUtilsModelPropertyFalse",
             expectedExceptions = ValorUndefined.class)
@@ -837,7 +817,6 @@ public class JBSqlUtilsTestSadDay {
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
 
-
     @Test(testName = "Close Parentecis OperatorPost JBSqlUtilsModelPropertyFalse",
             dependsOnMethods = "openParentecisOperatorNULLValueJBSqlUtilsModelPropertyFalse",
             expectedExceptions = Exception.class)
@@ -857,7 +836,6 @@ public class JBSqlUtilsTestSadDay {
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
-
 
     @Test(testName = "Order By Colum Name JBSqlUtilsModelPropertyFalse",
             dependsOnMethods = "closeParentecisValue2JBSqlUtilsModelPropertyFalse",
@@ -888,8 +866,6 @@ public class JBSqlUtilsTestSadDay {
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
-
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -899,12 +875,11 @@ public class JBSqlUtilsTestSadDay {
     public void createTableModel() throws Exception {
         this.testModel = new TestModel();
         logParrafo("Se creara la tabla " + this.testModel.getTableName() + " en BD's");
-        this.testModel.crateTable();
+        this.testModel.createTable();
         this.testModel.waitOperationComplete();
         Assert.assertTrue(this.testModel.getTableExist(), "La tabla No existe en BD's ");
         logParrafo("La tabla a sido creada en BD's");
     }
-
 
     @Test(testName = "First Or Fail",
             dependsOnMethods = "createTableModel"
@@ -958,7 +933,6 @@ public class JBSqlUtilsTestSadDay {
             dependsOnMethods = "takeModels"
             , expectedExceptions = Exception.class)
     public void getAllModels() throws Exception {
-
         List<TestModel> models = new ArrayList<TestModel>();
         logParrafo("Obtenemos los modelos que poseen nombre es Modelo #5 U #8 o su apellido es #3");
         models = this.testModel.where("Name", Operator.LIKE, "%Modelo #5%").or(
@@ -967,7 +941,6 @@ public class JBSqlUtilsTestSadDay {
         Assert.assertTrue(models.size() == 0,
                 "La cantidad de filas obtenidas, no corresponde a lo esperado");
     }
-
 
     @Test(testName = "Create Table JBSqlUtils",
             dependsOnMethods = "getAllModels")
@@ -978,20 +951,15 @@ public class JBSqlUtilsTestSadDay {
          */
         logParrafo("Eliminara la tabla Proveedor de BD's en caso de que exista");
         logParrafo("Resultado de solicitar eliminar la tabla en BD's: " + dropTableIfExist("Proveedor").execute());
-
         /**
          * Definimos las columnas que deseamos posea nuestra tabla
          */
         Column<Integer> Id = new Column<>("Id", DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
-
         Column<String> Name = new Column<>("Name", DataType.VARCHAR, Constraint.NOT_NULL);
-
         Column<String> Apellido = new Column<>("Apellido", DataType.VARCHAR, Constraint.NOT_NULL);
-
         Column<Boolean> Estado = new Column<>("Estado", DataType.BOOLEAN, "true", Constraint.DEFAULT);
         Name.setSize("1000");
         Apellido.setSize("1000");
-
         logParrafo("Se solicitara la creación de la tabla Proveedor, la cual tendra las siguientes columnas, Id, Name, Apellido y Estado");
         /**
          * Para crear una tabla utilizamos el método createTable despues de haber definido el nombre de la tabla que deseamos Crear
@@ -1010,7 +978,6 @@ public class JBSqlUtilsTestSadDay {
         Assert.assertFalse(result, "Retorna que la tabla a sido creada cuando esta ya existe en BD's");
     }
 
-
     @Test(testName = "Insert Into JBSqlUtils",
             dependsOnMethods = "creteTableJBSqlUtils2", expectedExceptions = Exception.class)
     public void insertIntoJBSqlUtils() throws Exception {
@@ -1022,7 +989,6 @@ public class JBSqlUtilsTestSadDay {
         Assert.assertTrue(false,
                 "No se Lanzo la exepción como se esperaba");
     }
-
 
     @Test(testName = "Get In JsonObjects JBSqlUtils",
             dependsOnMethods = "insertIntoJBSqlUtils")
@@ -1076,5 +1042,4 @@ public class JBSqlUtilsTestSadDay {
                 "No se Lanzo la exepción como se esperaba");
     }
     */
-
 }

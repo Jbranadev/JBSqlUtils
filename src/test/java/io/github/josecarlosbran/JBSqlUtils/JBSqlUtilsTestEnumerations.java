@@ -1,6 +1,5 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
-
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
@@ -16,7 +15,6 @@ public class JBSqlUtilsTestEnumerations {
     public JBSqlUtilsTestEnumerations() {
         System.setProperty("org.uncommons.reportng.escape-output", "false");
     }
-
 
     @Test(testName = "Get Numeración For Name Constraint")
     public void getNumeracionConstraint() throws DataBaseUndefind, PropertiesDBUndefined {
@@ -57,6 +55,4 @@ public class JBSqlUtilsTestEnumerations {
         Assert.assertTrue(Objects.isNull(OrderType.DESC.getNumeracionforName("null")),
                 "La Enumeración obtenida no corresponde a la esperada");
     }
-
-
 }

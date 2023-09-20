@@ -61,7 +61,6 @@ public class TestModel extends JBSqlUtils {
      * desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
      */
     private Column<String> name = new Column<>(DataType.VARCHAR, "'Daniel'", Constraint.DEFAULT);
-
     /**
      * Para poder utilizar JBSqlUtils es necesario que los miembros de la clase modelo, que correspondan
      * a una columna de la tabla correspondiente al modelo, sean del tipo Column, especificando el tipo de dato
@@ -116,7 +115,6 @@ public class TestModel extends JBSqlUtils {
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     public TestModel() throws DataBaseUndefind, PropertiesDBUndefined {
-
         /**
          * Hacemos el llamado al constructor de la Clase JBSqlUtils
          */
@@ -154,7 +152,6 @@ public class TestModel extends JBSqlUtils {
     public Column<Integer> getId() {
         return id;
     }
-
 
     public void setId(Column<Integer> id) {
         this.id = id;

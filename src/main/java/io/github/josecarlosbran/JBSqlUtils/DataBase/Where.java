@@ -58,7 +58,6 @@ public class Where<T> extends MethodsWhere {
         if (Objects.isNull(operador)) {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
-
         this.modelo = modelo;
         this.parametros.add(getColumn(valor));
         this.sql = " WHERE " + Operator.OPEN_PARENTESIS.getOperador() + columna + operador.getOperador() + "?" + Operator.CLOSE_PARENTESIS.getOperador();
@@ -89,7 +88,6 @@ public class Where<T> extends MethodsWhere {
         if (Objects.isNull(operador)) {
             throw new ValorUndefined("El operador proporcionado es NULL");
         }
-
         this.modelo = modelo;
         this.parametros.add(getColumn(valor));
         this.sql = " WHERE " + Operator.OPEN_PARENTESIS.getOperador() + columna + operador.getOperador() + "?" + Operator.CLOSE_PARENTESIS.getOperador();

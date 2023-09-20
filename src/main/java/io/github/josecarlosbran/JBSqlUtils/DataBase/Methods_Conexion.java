@@ -233,11 +233,10 @@ class Methods_Conexion extends Conexion {
             LogsJB.fatal("Excepción disparada cerrar la conexión a la BD's " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
-
     /**
      * Cierra la conexión a BD's del modelo.
      */
-    protected synchronized void closeConnection() {
+    /*protected synchronized void closeConnection() {
         try {
             if (!this.getConnect().isClosed()) {
                 this.getConnect().close();
@@ -250,7 +249,7 @@ class Methods_Conexion extends Conexion {
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada cerrar la conexión a la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
-    }
+    }*/
 
     /**
      * Verifica la existencia de la tabla correspondiente al modelo en BD's
@@ -418,45 +417,37 @@ class Methods_Conexion extends Conexion {
                 List<Method> modelGetMethods = this.getMethodsGetOfModel();
                 Iterator<Method> iteradorModelGetMethods = modelGetMethods.iterator();
                 while (iteradorModelGetMethods.hasNext()) {
-                    try {
-                        Method modelGetMethod = iteradorModelGetMethods.next();
-                        String modelGetName = modelGetMethod.getName();
-                        LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);
-                        //Obtengo la información de la columna
-                        Column columnsSQL = (Column) modelGetMethod.invoke(this, null);
-                        String columnName = columnsSQL.getName();
-                        //Le meto la información a la columa
-                        Iterator<ColumnsSQL> iteradorColumnas = this.getTabla().getColumnas().iterator();
-                        while (iteradorColumnas.hasNext()) {
-                            ColumnsSQL columTemp = iteradorColumnas.next();
-                            String nombreColumnaTemp = columTemp.getCOLUMN_NAME();
-                            if (!stringIsNullOrEmpty(nombreColumnaTemp) && StringUtils.equalsIgnoreCase(nombreColumnaTemp, columnName)) {
-                                LogsJB.debug("Setea si la columna existe en BD's: " + columnName);
-                                columnsSQL.setColumnExist(true);
-                            }
+                    Method modelGetMethod = iteradorModelGetMethods.next();
+                    String modelGetName = modelGetMethod.getName();
+                    LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);
+                    //Obtengo la información de la columna
+                    Column columnsSQL = (Column) modelGetMethod.invoke(this, null);
+                    String columnName = columnsSQL.getName();
+                    //Le meto la información a la columa
+                    Iterator<ColumnsSQL> iteradorColumnas = this.getTabla().getColumnas().iterator();
+                    while (iteradorColumnas.hasNext()) {
+                        ColumnsSQL columTemp = iteradorColumnas.next();
+                        String nombreColumnaTemp = columTemp.getCOLUMN_NAME();
+                        if (!stringIsNullOrEmpty(nombreColumnaTemp) && StringUtils.equalsIgnoreCase(nombreColumnaTemp, columnName)) {
+                            LogsJB.debug("Setea si la columna existe en BD's: " + columnName);
+                            columnsSQL.setColumnExist(true);
                         }
-                        //Obtiene los metodos set del modelo
-                        List<Method> modelSetMethods = this.getMethodsSetOfModel();
-                        Iterator<Method> iteradorModelSetMethods = modelSetMethods.iterator();
-                        while (iteradorModelSetMethods.hasNext()) {
-                            try {
-                                Method modelSetMethod = iteradorModelSetMethods.next();
-                                String modelSetName = modelSetMethod.getName();
-                                LogsJB.trace("Nombre del metodo set: " + modelSetName);
-                                modelSetName = StringUtils.removeStartIgnoreCase(modelSetName, "set");
-                                LogsJB.trace("Nombre del metodo set a validar: " + modelSetName);
-                                if (StringUtils.equalsIgnoreCase(modelSetName, columnName)) {
-                                    //Setea el valor del metodo
-                                    modelSetMethod.invoke(this, columnsSQL);
-                                    LogsJB.debug("Ingreso la columna en el metodo set: " + modelSetName);
-                                    break;
-                                }
-                            } catch (Exception e) {
-                                LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                            }
+                    }
+                    //Obtiene los metodos set del modelo
+                    List<Method> modelSetMethods = this.getMethodsSetOfModel();
+                    Iterator<Method> iteradorModelSetMethods = modelSetMethods.iterator();
+                    while (iteradorModelSetMethods.hasNext()) {
+                        Method modelSetMethod = iteradorModelSetMethods.next();
+                        String modelSetName = modelSetMethod.getName();
+                        LogsJB.trace("Nombre del metodo set: " + modelSetName);
+                        modelSetName = StringUtils.removeStartIgnoreCase(modelSetName, "set");
+                        LogsJB.trace("Nombre del metodo set a validar: " + modelSetName);
+                        if (StringUtils.equalsIgnoreCase(modelSetName, columnName)) {
+                            //Setea el valor del metodo
+                            modelSetMethod.invoke(this, columnsSQL);
+                            LogsJB.debug("Ingreso la columna en el metodo set: " + modelSetName);
+                            break;
                         }
-                    } catch (Exception e) {
-                        LogsJB.fatal("Excepción disparada al obtener los nombres de las columnas del modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     }
                 }
             }
@@ -1287,7 +1278,7 @@ class Methods_Conexion extends Conexion {
      * False si la tabla correspondiente al modelo ya existe en BD's
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
-    public Boolean crateTable() throws Exception {
+    public Boolean createTable() throws Exception {
         Boolean result = false;
         try {
             Callable<ResultAsync<Boolean>> createtabla = () -> {
@@ -1399,12 +1390,11 @@ class Methods_Conexion extends Conexion {
                             LogsJB.info("Tabla " + this.getTableName() + " Creada exitosamente");
                             this.closeConnection(connect);
                             this.refresh();
+                            ejecutor.close();
+                            this.closeConnection(connect);
                             return new ResultAsync<Boolean>(true, null);
                         }
-                        ejecutor.close();
-                        this.closeConnection(connect);
                     }
-                    return new ResultAsync<Boolean>(false, null);
                 } catch (Exception e) {
                     LogsJB.fatal("Excepción disparada en el método que Crea la tabla correspondiente al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     new ResultAsync<Boolean>(false, e);
@@ -1458,10 +1448,10 @@ class Methods_Conexion extends Conexion {
                             LogsJB.info("Tabla " + this.getTableName() + " Eliminada exitosamente");
                             //this.setTableExist(false);
                             this.refresh();
+                            ejecutor.close();
+                            this.closeConnection(connect);
                             return new ResultAsync<Boolean>(true, null);
                         }
-                        ejecutor.close();
-                        this.closeConnection(connect);
                     } else {
                         LogsJB.info("Tabla correspondiente al modelo no existe en BD's por eso no pudo ser eliminada");
                         return new ResultAsync<Boolean>(false, null);
@@ -1596,10 +1586,10 @@ class Methods_Conexion extends Conexion {
                             LogsJB.info("Tabla " + this.getTableName() + " Creada exitosamente");
                             this.closeConnection(connect);
                             this.refresh();
+                            ejecutor.close();
+                            this.closeConnection(connect);
                             return new ResultAsync<Boolean>(true, null);
                         }
-                        ejecutor.close();
-                        this.closeConnection(connect);
                     }
                     return new ResultAsync<Boolean>(false, null);
                 } catch (Exception e) {
@@ -1699,7 +1689,6 @@ class Methods_Conexion extends Conexion {
                     List<Method> modelSetMethods = this.getMethodsSetOfModel();
                     Iterator<Method> iteradorModelSetMethods = modelSetMethods.iterator();
                     while (iteradorModelSetMethods.hasNext()) {
-
                         Method modelSetMethod = iteradorModelSetMethods.next();
                         String modelSetName = modelSetMethod.getName();
                         LogsJB.trace("Nombre del metodo set: " + modelSetName);
@@ -1711,9 +1700,7 @@ class Methods_Conexion extends Conexion {
                             LogsJB.debug("Ingreso la columna en el metodo set: " + modelSetName);
                             break;
                         }
-
                     }
-
                 }
             }
         } catch (Exception e) {

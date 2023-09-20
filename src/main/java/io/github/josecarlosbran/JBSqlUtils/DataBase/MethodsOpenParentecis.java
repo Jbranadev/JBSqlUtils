@@ -117,6 +117,4 @@ public class MethodsOpenParentecis<T> extends Get {
     public closeParentecis closeParentecis(Operator operatorPost) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         return new CommonsMethods().closeParentecis(operatorPost, this.sql, (JBSqlUtils) this.modelo, this.parametros, this.getGetPropertySystem());
     }
-
-
 }

@@ -73,7 +73,6 @@ public class JBSqlUtils extends Methods {
     public static void setDataBaseGlobal(String BD) {
         if (!UtilitiesJB.stringIsNullOrEmpty(BD))
             System.setProperty(ConeccionProperties.DBNAME.getPropiertie(), BD);
-
     }
 
     /**
@@ -84,7 +83,6 @@ public class JBSqlUtils extends Methods {
     public static void setPasswordGlobal(String password) {
         if (!UtilitiesJB.stringIsNullOrEmpty(password))
             System.setProperty(ConeccionProperties.DBPASSWORD.getPropiertie(), password);
-
     }
 
     /**
@@ -95,7 +93,6 @@ public class JBSqlUtils extends Methods {
     public static void setUserGlobal(String user) {
         if (!UtilitiesJB.stringIsNullOrEmpty(user))
             System.setProperty(ConeccionProperties.DBUSER.getPropiertie(), user);
-
     }
 
     /**
@@ -106,7 +103,6 @@ public class JBSqlUtils extends Methods {
     public static void setPortGlobal(String port) {
         if (!UtilitiesJB.stringIsNullOrEmpty(port))
             System.setProperty(ConeccionProperties.DBPORT.getPropiertie(), port);
-
     }
 
     /**
@@ -117,7 +113,6 @@ public class JBSqlUtils extends Methods {
     public static void setHostGlobal(String host) {
         if (!UtilitiesJB.stringIsNullOrEmpty(host))
             System.setProperty(ConeccionProperties.DBHOST.getPropiertie(), host);
-
     }
 
     /**
@@ -143,7 +138,6 @@ public class JBSqlUtils extends Methods {
     public static void setPropertisUrlConexionGlobal(String propertisUrl) {
         if (!UtilitiesJB.stringIsNullOrEmpty(propertisUrl))
             System.setProperty(ConeccionProperties.DBPROPERTIESURL.getPropiertie(), propertisUrl);
-
     }
 
     /**

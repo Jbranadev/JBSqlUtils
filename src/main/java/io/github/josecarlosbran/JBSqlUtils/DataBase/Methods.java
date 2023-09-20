@@ -183,16 +183,10 @@ class Methods extends Methods_Conexion {
      *
      * @return Retorna True cuando se a terminado de insertar o actualizar la información del modelo en BD's
      */
-    public Boolean saveBoolean() {
-        Boolean result = false;
-        try {
-            Integer resultado = saveModel(this);
-            this.waitOperationComplete();
-            return resultado >= 1;
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-        }
-        return result;
+    public Boolean saveBoolean() throws Exception {
+        Integer resultado = saveModel(this);
+        this.waitOperationComplete();
+        return resultado >= 1;
     }
 
     /**
