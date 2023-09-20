@@ -9,22 +9,17 @@ import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import java.util.List;
 import java.util.Objects;
 
-
 /**
  * @author Jose Bran
  * Clase que brinda acceso a la logica de los metodos comunes que comparte mas de una clase a extender en comun
  */
 public class CommonsMethods<T> {
 
-
     /**
      * Constructor por default de la clase CommonsMethods, que inicializa la clase
      */
     protected CommonsMethods() {
-
     }
-
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +41,7 @@ public class CommonsMethods<T> {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public <T extends JBSqlUtils> And and(String columna, Operator operador, Object valor, String sql, T modelo, List<Column> parametros, Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    protected <T extends JBSqlUtils> And and(String columna, Operator operador, Object valor, String sql, T modelo, List<Column> parametros, Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         if (Objects.isNull(modelo)) {
             return new And(sql, columna, operador, valor, parametros);
         } else {
@@ -75,7 +70,7 @@ public class CommonsMethods<T> {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public <T extends JBSqlUtils> Or or(String columna, Operator operador, Object valor, String sql, T modelo, List<Column> parametros, Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    protected <T extends JBSqlUtils> Or or(String columna, Operator operador, Object valor, String sql, T modelo, List<Column> parametros, Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         if (Objects.isNull(modelo)) {
             return new Or(sql, columna, operador, valor, parametros);
         } else {
@@ -105,7 +100,7 @@ public class CommonsMethods<T> {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public <T extends JBSqlUtils> openParentecis openParentecis(Operator operatorPrev, String columna, Operator operador, Object valor, String sql, T modelo, List<Column> parametros, Boolean getPropertySystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected <T extends JBSqlUtils> openParentecis openParentecis(Operator operatorPrev, String columna, Operator operador, Object valor, String sql, T modelo, List<Column> parametros, Boolean getPropertySystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         if (Objects.isNull(modelo)) {
             if (Objects.isNull(operatorPrev)) {
                 return new openParentecis(sql, parametros, columna, operador, valor);
@@ -115,16 +110,12 @@ public class CommonsMethods<T> {
         } else {
             if (Objects.isNull(operatorPrev)) {
                 if (!getPropertySystem) {
-                    openParentecis open = new openParentecis(sql, modelo, parametros, columna, operador, valor, false);
-
-                    return open;
+                    return new openParentecis(sql, modelo, parametros, columna, operador, valor, false);
                 }
                 return new openParentecis(sql, modelo, parametros, columna, operador, valor);
             } else {
                 if (!getPropertySystem) {
-                    openParentecis open = new openParentecis(sql, modelo, parametros, operatorPrev, columna, operador, valor, false);
-
-                    return open;
+                    return new openParentecis(sql, modelo, parametros, operatorPrev, columna, operador, valor, false);
                 }
                 return new openParentecis(sql, modelo, parametros, operatorPrev, columna, operador, valor);
             }
@@ -146,7 +137,7 @@ public class CommonsMethods<T> {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public <T extends JBSqlUtils> closeParentecis closeParentecis(Operator operatorPost, String sql, T modelo, List<Column> parametros, Boolean getPropertySystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected <T extends JBSqlUtils> closeParentecis closeParentecis(Operator operatorPost, String sql, T modelo, List<Column> parametros, Boolean getPropertySystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         if (Objects.isNull(modelo)) {
             if (Objects.isNull(operatorPost)) {
                 return new closeParentecis(sql, parametros);
@@ -157,20 +148,15 @@ public class CommonsMethods<T> {
             if (Objects.isNull(operatorPost)) {
                 if (!getPropertySystem) {
                     closeParentecis close = new closeParentecis(sql, modelo, parametros, false);
-
                     return close;
                 }
                 return new closeParentecis(sql, modelo, parametros);
             } else {
                 if (!getPropertySystem) {
-                    closeParentecis close = new closeParentecis(sql, modelo, parametros, operatorPost, false);
-
-                    return close;
+                    return new closeParentecis(sql, modelo, parametros, operatorPost, false);
                 }
                 return new closeParentecis(sql, modelo, parametros, operatorPost);
             }
         }
     }
-
-
 }

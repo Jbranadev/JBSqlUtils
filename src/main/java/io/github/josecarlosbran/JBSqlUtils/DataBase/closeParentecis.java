@@ -49,7 +49,6 @@ public class closeParentecis<T> extends MethodsWhere {
      */
     protected closeParentecis(String sql, T modelo, List<Column> parametros, Boolean getGetPropertiesSystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super(getGetPropertiesSystem);
-
         this.parametros = parametros;
         this.modelo = modelo;
         this.sql = sql + Operator.CLOSE_PARENTESIS.getOperador();

@@ -23,7 +23,6 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.TablesSQL;
 
 import java.lang.reflect.Method;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -76,7 +75,7 @@ class Conexion {
     /**
      * Conexión del modelo
      */
-    private Connection connect = null;
+    //private Connection connect = null;
     /**
      * Bandera que sirve para identificar si la tabla correspondiente al modelo Existe
      */
@@ -104,7 +103,7 @@ class Conexion {
     /**
      * Define el formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
      */
-    private String dateFormat = null;
+    // private String dateFormat = null;
     /**
      * Define el nombre de la columna correspondiente a la TimeStamp CreateAT
      */
@@ -218,10 +217,8 @@ class Conexion {
      *                     {@literal ?autoReconnect=true&useSSL=false}
      */
     public void setPropertisURL(String propertisURL) {
-
         if (!stringIsNullOrEmpty(propertisURL))
             this.propertisURL = propertisURL;
-
     }
 
     /**
@@ -304,17 +301,17 @@ class Conexion {
      *                               esta excepción, poder manejarla.
      */
     private String setearHost() throws PropertiesDBUndefined, DataBaseUndefind {
+        String host = null;
         if (this.getGetPropertySystem()) {
-            String host = System.getProperty(ConeccionProperties.DBHOST.getPropiertie());
+            host = System.getProperty(ConeccionProperties.DBHOST.getPropiertie());
             if (this.getDataBaseType() != DataBase.SQLite) {
                 if (stringIsNullOrEmpty(host)) {
                     //Si la propiedad del sistema no esta definida, Lanza una Exepción
                     throw new PropertiesDBUndefined("No se a seteado el host en el que se encuentra la BD's a la cual deseamos se pegue JBSqlUtils");
                 }
             }
-            return host;
         }
-        return null;
+        return host;
     }
 
     /**
@@ -328,17 +325,17 @@ class Conexion {
      *                               esta excepción, poder manejarla.
      */
     private String setearPort() throws PropertiesDBUndefined, DataBaseUndefind {
+        String port = null;
         if (this.getGetPropertySystem()) {
-            String port = System.getProperty(ConeccionProperties.DBPORT.getPropiertie());
+            port = System.getProperty(ConeccionProperties.DBPORT.getPropiertie());
             if (this.getDataBaseType() != DataBase.SQLite) {
                 if (stringIsNullOrEmpty(port)) {
                     //Si la propiedad del sistema no esta definida, Lanza una Exepción
                     throw new PropertiesDBUndefined("No se a seteado el puerto en el que se encuentra escuchando la BD's a la cual deseamos se pegue JBSqlUtils");
                 }
             }
-            return port;
         }
-        return null;
+        return port;
     }
 
     /**
@@ -352,17 +349,17 @@ class Conexion {
      *                               esta excepción, poder manejarla.
      */
     private String setearUser() throws PropertiesDBUndefined, DataBaseUndefind {
+        String user = null;
         if (this.getGetPropertySystem()) {
-            String user = System.getProperty(ConeccionProperties.DBUSER.getPropiertie());
+            user = System.getProperty(ConeccionProperties.DBUSER.getPropiertie());
             if (this.getDataBaseType() != DataBase.SQLite) {
                 if (stringIsNullOrEmpty(user)) {
                     //Si la propiedad del sistema no esta definida, Lanza una Exepción
                     throw new PropertiesDBUndefined("No se a seteado el usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
                 }
             }
-            return user;
         }
-        return null;
+        return user;
     }
 
     /**
@@ -375,16 +372,16 @@ class Conexion {
      *                               esta excepción, poder manejarla.
      */
     private String setearBD() throws PropertiesDBUndefined {
+        String DB = null;
         if (this.getGetPropertySystem()) {
-            String DB = System.getProperty(ConeccionProperties.DBNAME.getPropiertie());
+            DB = System.getProperty(ConeccionProperties.DBNAME.getPropiertie());
             //System.out.println("BD seteada en system property: " + DB);
             if (stringIsNullOrEmpty(DB)) {
                 //Si la propiedad del sistema no esta definida, Lanza una Exepción
                 throw new PropertiesDBUndefined("No se a seteado la BD's a la cual deseamos se pegue JBSqlUtils");
             }
-            return DB;
         }
-        return null;
+        return DB;
     }
 
     /**
@@ -395,17 +392,17 @@ class Conexion {
      *                               se conectara a la BD's
      */
     private String setearPassword() throws PropertiesDBUndefined, DataBaseUndefind {
+        String password = null;
         if (this.getGetPropertySystem()) {
-            String password = System.getProperty(ConeccionProperties.DBPASSWORD.getPropiertie());
+            password = System.getProperty(ConeccionProperties.DBPASSWORD.getPropiertie());
             if (this.getDataBaseType() != DataBase.SQLite) {
                 if (stringIsNullOrEmpty(password)) {
                     //Si la propiedad del sistema no esta definida, Lanza una Exepción
                     throw new PropertiesDBUndefined("No se a seteado la contraseña del usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
                 }
             }
-            return password;
         }
-        return null;
+        return password;
     }
 
     /**
@@ -414,11 +411,11 @@ class Conexion {
      * @return Las propiedades de la url para la conexión a la BD's obtenida de las variables del sistema
      */
     private String setearPropertisUrl() {
+        String property = null;
         if (this.getGetPropertySystem()) {
-            String property = System.getProperty(ConeccionProperties.DBPROPERTIESURL.getPropiertie());
-            return property;
+            property = System.getProperty(ConeccionProperties.DBPROPERTIESURL.getPropiertie());
         }
-        return null;
+        return property;
     }
 
     /**
@@ -466,10 +463,8 @@ class Conexion {
      *                 SQLite.
      */
     public void setDataBaseType(DataBase dataBase) {
-
         if (!Objects.isNull(dataBase))
             this.dataBaseType = dataBase;
-
     }
 
     /**
@@ -564,7 +559,6 @@ class Conexion {
     public void setPort(String port) {
         if (!stringIsNullOrEmpty(port))
             this.port = port;
-
     }
 
     /**
@@ -612,7 +606,6 @@ class Conexion {
     public void setUser(String user) {
         if (!stringIsNullOrEmpty(user))
             this.user = user;
-
     }
 
     /**
@@ -660,7 +653,6 @@ class Conexion {
     public void setPassword(String password) {
         if (!stringIsNullOrEmpty(password))
             this.password = password;
-
     }
 
     /**
@@ -704,7 +696,6 @@ class Conexion {
     public void setBD(String BD) {
         if (!stringIsNullOrEmpty(BD))
             this.BD = BD;
-
     }
 
     /**
@@ -727,31 +718,28 @@ class Conexion {
      */
     public void setGetPropertySystem(Boolean getPropertySystem) {
         this.getPropertySystem = getPropertySystem;
-
     }
-
     /**
      * Obtiene la conexión del Modelo a la Base de Datos.
      *
      * @return Retorna la conexión del Modelo a la Base de Datos.
      * @throws ConexionUndefind lanza esta excepción si el modelo no posee una conexión abierta a BD's
      */
-    protected Connection getConnect() throws ConexionUndefind {
+    /*protected Connection getConnect() throws ConexionUndefind {
         if (Objects.isNull(this.connect)) {
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new ConexionUndefind("No se a conectado el modelo a la BD's");
         }
         return this.connect;
-    }
-
+    }*/
     /***
      * Setea la conexión del Modelo a la Base de Datos.
      * @param connect Conexión del Modelo a la Base de Datos.
      */
-    protected void setConnect(Connection connect) {
+    /*protected void setConnect(Connection connect) {
         this.connect = connect;
 
-    }
+    }*/
 
     /**
      * Obtiene la bandera que indica si la tabla correspondiente al modelo en BD's
@@ -891,24 +879,22 @@ class Conexion {
     public void setTimestamps(Boolean timestamps) {
         this.timestamps = timestamps;
     }
-
     /**
      * Obtiene el formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
      *
      * @return Una representación String del Formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
      */
-    public String getDateFormat() {
+    /*public String getDateFormat() {
         return dateFormat;
-    }
-
+    }*/
     /**
      * Setea el formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
      *
      * @param dateFormat Formato de fecha en el que se desea se almacenen las TimeStamp
      */
-    public void setDateFormat(String dateFormat) {
+    /*public void setDateFormat(String dateFormat) {
         this.dateFormat = dateFormat;
-    }
+    }*/
 
     /**
      * Obtiene el nombre de la columna correspondiente a la TimeStamp CreateAT

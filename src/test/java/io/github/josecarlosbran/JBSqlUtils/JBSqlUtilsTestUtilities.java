@@ -1,6 +1,5 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
-
 import UtilidadesTest.TestController;
 import UtilidadesTest.TestModel;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
@@ -26,7 +25,6 @@ public class JBSqlUtilsTestUtilities {
     public JBSqlUtilsTestUtilities() {
         System.setProperty("org.uncommons.reportng.escape-output", "false");
     }
-
 
     @Test(testName = "Get Boolean From Int")
     public void getBooleanFromInt() throws DataBaseUndefind, PropertiesDBUndefined {
@@ -58,37 +56,27 @@ public class JBSqlUtilsTestUtilities {
         Double tempDouble = 1052.255;
         Assert.assertTrue(UtilitiesJB.getColumn(tempDouble).getValor() instanceof Double,
                 "El tipo de Columna obtenido no corresponde al esperado");
-
         Boolean tempBoolean = true;
         Assert.assertTrue(UtilitiesJB.getColumn(tempBoolean).getValor() instanceof Boolean,
                 "El tipo de Columna obtenido no corresponde al esperado");
-
         Integer tempInteger = 255;
         Assert.assertTrue(UtilitiesJB.getColumn(tempInteger).getValor() instanceof Integer,
                 "El tipo de Columna obtenido no corresponde al esperado");
-
-
         Float tempFloat = (float) (5 / 2);
         Assert.assertTrue(UtilitiesJB.getColumn(tempFloat).getValor() instanceof Float,
                 "El tipo de Columna obtenido no corresponde al esperado");
-
-
         byte[] tempBytes = "564654".getBytes();
         Assert.assertTrue(UtilitiesJB.getColumn(tempBytes).getValor() instanceof byte[],
                 "El tipo de Columna obtenido no corresponde al esperado");
-
         java.sql.Date tempDate = new java.sql.Date(System.currentTimeMillis());
         Assert.assertTrue(UtilitiesJB.getColumn(tempDate).getValor() instanceof Date,
                 "El tipo de Columna obtenido no corresponde al esperado");
-
         Time tempTime = new Time(tempDate.getTime());
         Assert.assertTrue(UtilitiesJB.getColumn(tempTime).getValor() instanceof Time,
                 "El tipo de Columna obtenido no corresponde al esperado");
-
         Timestamp tempTimeStamp = new Timestamp(tempDate.getTime());
         Assert.assertTrue(UtilitiesJB.getColumn(tempTimeStamp).getValor() instanceof Timestamp,
                 "El tipo de Columna obtenido no corresponde al esperado");
-
         Object tempObject = new Object();
         Assert.assertTrue(UtilitiesJB.getColumn(tempObject).getValor() instanceof Object,
                 "El tipo de Columna obtenido no corresponde al esperado");
@@ -104,16 +92,12 @@ public class JBSqlUtilsTestUtilities {
         controller.setIsMayor(false);
         controller.setId(5075);
         model.llenarModelo(controller, model);
-
         Assert.assertTrue(controller.getId() == model.getId().getValor(),
                 "El valor que contiene modelo no corresponde al que posee el controlador");
-
         Assert.assertTrue(controller.getIsMayor() == model.getIsMayor().getValor(),
                 "El valor que contiene modelo no corresponde al que posee el controlador");
-
         Assert.assertTrue(controller.getName().equalsIgnoreCase(model.getName().getValor()),
                 "El valor que contiene modelo no corresponde al que posee el controlador");
-
         Assert.assertTrue(controller.getApellido().equalsIgnoreCase(model.getApellido().getValor()),
                 "El valor que contiene modelo no corresponde al que posee el controlador");
     }
@@ -128,20 +112,15 @@ public class JBSqlUtilsTestUtilities {
         model.getIsMayor().setValor(false);
         model.getId().setValor(5075);
         model.llenarControlador(controller, model);
-
         Assert.assertTrue(controller.getId() == model.getId().getValor(),
                 "El valor que contiene controlador no corresponde al que posee el modelo");
-
         Assert.assertTrue(controller.getIsMayor() == model.getIsMayor().getValor(),
                 "El valor que contiene controlador no corresponde al que posee el modelo");
-
         Assert.assertTrue(controller.getName().equalsIgnoreCase(model.getName().getValor()),
                 "El valor que contiene controlador no corresponde al que posee el modelo");
-
         Assert.assertTrue(controller.getApellido().equalsIgnoreCase(model.getApellido().getValor()),
                 "El valor que contiene controlador no corresponde al que posee el modelo");
     }
-
 
     @Test(testName = "Setear Properties Conexión Globales",
             dependsOnMethods = "llenarControlador")
@@ -169,8 +148,5 @@ public class JBSqlUtilsTestUtilities {
         testModel.refresh();
         testModel.waitOperationComplete();
         logParrafo("Se refresco el modelo con la información existente en BD's");
-
     }
-
-
 }

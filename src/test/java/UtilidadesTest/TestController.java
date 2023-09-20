@@ -20,5 +20,4 @@ public class TestController {
     @Setter
     @Getter
     private Boolean isMayor;
-
 }

@@ -1,6 +1,5 @@
 package UtilidadesTest;
 
-
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
@@ -60,7 +59,5 @@ public class UserModel extends JBSqlUtils {
         this.getRol().setSize("100");
         this.getTokenActual().setSize("2000");
         this.getTokenAnterior().setSize("2000");
-
     }
-
 }

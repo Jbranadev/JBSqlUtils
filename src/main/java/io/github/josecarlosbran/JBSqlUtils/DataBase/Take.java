@@ -49,7 +49,6 @@ public class Take<T> extends MethodsTake {
             throw new ValorUndefined("El Limite proporcionado es 0 o inferior, por lo cual no se puede" +
                     "realizar la consulta a BD's");
         }
-
         this.parametros = parametros;
         this.modelo = modelo;
         this.sql = sql + "LIMIT " + limite;
@@ -75,7 +74,6 @@ public class Take<T> extends MethodsTake {
             throw new ValorUndefined("El Limite proporcionado es 0 o inferior, por lo cual no se puede" +
                     "realizar la consulta a BD's");
         }
-
         this.parametros = parametros;
         this.modelo = modelo;
         this.sql = sql + "LIMIT " + limite;

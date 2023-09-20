@@ -49,7 +49,6 @@ public class JBSqlUtilsTestPostgreSQL {
         logParrafo("Se setearon las propiedades de conexión del modelo para PostgreSQL");
     }
 
-
     @Test(testName = "Refresh Model",
             dependsOnMethods = {"setPropertiesConexiontoModel"})
     public void refreshModel() throws Exception {
@@ -63,7 +62,7 @@ public class JBSqlUtilsTestPostgreSQL {
             dependsOnMethods = {"refreshModel"})
     public void dropTableIfExists() throws Exception {
         logParrafo("Se creara la tabla " + this.testModel.getTableName() + " en BD's");
-        this.testModel.crateTable();
+        this.testModel.createTable();
         logParrafo("La tabla a sido creada en BD's");
         logParrafo("Se procedera a eliminar la tabla en BD's");
         Assert.assertTrue(this.testModel.dropTableIfExist(), "No se pudo eliminar la tabla en BD's");
@@ -75,7 +74,7 @@ public class JBSqlUtilsTestPostgreSQL {
             dependsOnMethods = "dropTableIfExists")
     public void createTable() throws Exception {
         logParrafo("Se creara la tabla " + this.testModel.getTableName() + " en BD's");
-        Assert.assertTrue(this.testModel.crateTable(), "La Tabla No fue creada en BD's");
+        Assert.assertTrue(this.testModel.createTable(), "La Tabla No fue creada en BD's");
         Assert.assertTrue(this.testModel.getTableExist(), "La tabla No existe en BD's ");
         logParrafo("La tabla a sido creada en BD's");
     }
@@ -103,7 +102,6 @@ public class JBSqlUtilsTestPostgreSQL {
         Assert.assertTrue(rowsInsert == 1, "El registro no fue insertado en BD's");
     }
 
-
     @Test(testName = "Clean Model",
             dependsOnMethods = "insertModel")
     public void cleanModel() throws Exception {
@@ -118,7 +116,6 @@ public class JBSqlUtilsTestPostgreSQL {
         Assert.assertTrue(Objects.isNull(this.testModel.getApellido().getValor()), "No limpio la columna Apellido del Modelo");
         Assert.assertTrue(Objects.isNull(this.testModel.getIsMayor().getValor()), "No limpio la columna IsMayor del Modelo");
         Assert.assertFalse(this.testModel.getModelExist(), "No limpio la bandera que indica que el modelo no existe en BD's");
-
     }
 
     @Test(testName = "First Or Fail",
@@ -128,7 +125,6 @@ public class JBSqlUtilsTestPostgreSQL {
         TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
                 "Cabrerassss").firstOrFail();
     }
-
 
     @Test(testName = "Update Model", dependsOnMethods = "firstOrFail")
     public void updateModel() throws Exception {
@@ -183,7 +179,6 @@ public class JBSqlUtilsTestPostgreSQL {
         Assert.assertTrue(rowsDelete == 1, "El registro no fue eliminado en la BD's");
     }
 
-
     @Test(testName = "Insert Models",
             dependsOnMethods = "deleteModel")
     public void insertModels() throws Exception {
@@ -213,7 +208,6 @@ public class JBSqlUtilsTestPostgreSQL {
         //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
         Assert.assertTrue(rowsInsert == 10, "Los registros no fueron insertados correctamente en BD's");
     }
-
 
     @Test(testName = "Get Model",
             dependsOnMethods = "insertModels")
@@ -288,7 +282,6 @@ public class JBSqlUtilsTestPostgreSQL {
         Assert.assertTrue(models.size() == 3, "Los modelos no fueron recuperados de BD's");
     }
 
-
     @Test(testName = "Update Models",
             dependsOnMethods = "getAllModels")
     public void updateModels() throws Exception {
@@ -332,7 +325,6 @@ public class JBSqlUtilsTestPostgreSQL {
         logParrafo("Filas eliminadas en BD's: " + rowsDelete + " " + models);
         //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
         Assert.assertTrue(rowsDelete == 3, "Los registros no fueron eliminados correctamente en BD's");
-
     }
 
     @Test(testName = "Setear Properties Conexión Globales",
@@ -363,7 +355,6 @@ public class JBSqlUtilsTestPostgreSQL {
                 "Propiedad Propiedades de conexión no ha sido seteada correctamente");
     }
 
-
     @Test(testName = "Create Table JBSqlUtils",
             dependsOnMethods = "setPropertiesConexion")
     public void creteTableJBSqlUtils() throws Exception {
@@ -373,20 +364,15 @@ public class JBSqlUtilsTestPostgreSQL {
          */
         logParrafo("Eliminara la tabla Proveedor de BD's en caso de que exista");
         logParrafo("Resultado de solicitar eliminar la tabla en BD's: " + dropTableIfExist("Proveedor").execute());
-
         /**
          * Definimos las columnas que deseamos posea nuestra tabla
          */
         Column<Integer> Id = new Column<>("Id", DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
-
         Column<String> Name = new Column<>("Name", DataType.VARCHAR);
-
         Column<String> Apellido = new Column<>("Apellido", DataType.VARCHAR);
-
         Column<Boolean> Estado = new Column<>("Estado", DataType.BOOLEAN, "true", Constraint.DEFAULT);
         Name.setSize("1000");
         Apellido.setSize("1000");
-
         logParrafo("Se solicitara la creación de la tabla Proveedor, la cual tendra las siguientes columnas, Id, Name, Apellido y Estado");
         /**
          * Para crear una tabla utilizamos el metodo createTable despues de haber definido el nombre de la tabla que deseamos Crear
@@ -414,32 +400,27 @@ public class JBSqlUtilsTestPostgreSQL {
                 .execute();
         logParrafo("Resultado de insertar el registro de Erick en la tabla Proveedor: " + registros);
         Assert.assertTrue(registros == 1, "No se pudo insertar el registro de Erick en la tabla Proveedor de BD's");
-
         registros = 0;
         registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Daniel").andValue("Apellido", "Quiñonez").
                 andValue("Estado", false).execute();
         logParrafo("Resultado de insertar el registro de Daniel en la tabla Proveedor: " + registros);
         Assert.assertTrue(registros == 1, "No se pudo insertar el registro de Daniel en la tabla Proveedor de BD's");
-
         registros = 0;
         registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Ligia").andValue("Apellido", "Camey")
                 .andValue("Estado", true).execute();
         logParrafo("Resultado de insertar el registro de Ligia en la tabla Proveedor: " + registros);
         Assert.assertTrue(registros == 1, "No se pudo insertar el registro de Ligia en la tabla Proveedor de BD's");
-
         registros = 0;
         registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Elsa").andValue("Apellido", "Aguirre")
                 .andValue("Estado", false).execute();
         logParrafo("Resultado de insertar el registro de Elsa en la tabla Proveedor: " + registros);
         Assert.assertTrue(registros == 1, "No se pudo insertar el registro de Elsa en la tabla Proveedor de BD's");
-
         registros = 0;
         registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Alex").andValue("Apellido", "Garcia")
                 .execute();
         logParrafo("Resultado de insertar el registro de Alex en la tabla Proveedor: " + registros);
         Assert.assertTrue(registros == 1, "No se pudo insertar el registro de Alex en la tabla Proveedor de BD's");
     }
-
 
     @Test(testName = "Get In JsonObjects JBSqlUtils",
             dependsOnMethods = "insertIntoJBSqlUtils")
@@ -475,7 +456,6 @@ public class JBSqlUtilsTestPostgreSQL {
         Assert.assertTrue(lista.size() == 2, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
     }
 
-
     @Test(testName = "Update JBSqlUtils",
             dependsOnMethods = "getInJsonObjectsJBSqlUtils")
     public void updateJBSqlUtils() throws Exception {
@@ -504,7 +484,6 @@ public class JBSqlUtilsTestPostgreSQL {
         Assert.assertTrue(rowsUpdate == 1, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
     }
 
-
     @Test(testName = "Delete JBSqlUtils",
             dependsOnMethods = "updateJBSqlUtils")
     public void deleteJBSqlUtils() throws Exception {
@@ -532,7 +511,6 @@ public class JBSqlUtilsTestPostgreSQL {
         Assert.assertTrue(rowsDelete == 1, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
     }
 
-
     @Test(testName = "Drop Table JBSqlUtils",
             dependsOnMethods = "deleteJBSqlUtils")
     public void dropTableJBSqlUtils() throws Exception {
@@ -551,6 +529,4 @@ public class JBSqlUtilsTestPostgreSQL {
         logParrafo("Resultado de solicitar la eliminar la tabla cuando no existe en BD's: " + result);
         Assert.assertFalse(result, "Retorna que la tabla a sido eliminada cuando esta ya no existe en BD's");
     }
-
-
 }

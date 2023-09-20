@@ -1,6 +1,5 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
-
 import UtilidadesTest.TestModel;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
@@ -70,7 +69,7 @@ public class JBSqlUtilsTestMariaDB {
             dependsOnMethods = {"refreshModel"})
     public void dropTableIfExists() throws Exception {
         logParrafo("Se creara la tabla " + this.testModel.getTableName() + " en BD's");
-        this.testModel.crateTable();
+        this.testModel.createTable();
         logParrafo("La tabla a sido creada en BD's");
         logParrafo("Se procedera a eliminar la tabla en BD's");
         Assert.assertTrue(this.testModel.dropTableIfExist(), "No se pudo eliminar la tabla en BD's");
@@ -82,7 +81,7 @@ public class JBSqlUtilsTestMariaDB {
             dependsOnMethods = "dropTableIfExists")
     public void createTable() throws Exception {
         logParrafo("Se creara la tabla " + this.testModel.getTableName() + " en BD's");
-        Assert.assertTrue(this.testModel.crateTable(), "La Tabla No fue creada en BD's");
+        Assert.assertTrue(this.testModel.createTable(), "La Tabla No fue creada en BD's");
         Assert.assertTrue(this.testModel.getTableExist(), "La tabla No existe en BD's ");
         logParrafo("La tabla a sido creada en BD's");
     }
@@ -124,7 +123,6 @@ public class JBSqlUtilsTestMariaDB {
         Assert.assertTrue(Objects.isNull(this.testModel.getApellido().getValor()), "No limpio la columna Apellido del Modelo");
         Assert.assertTrue(Objects.isNull(this.testModel.getIsMayor().getValor()), "No limpio la columna IsMayor del Modelo");
         Assert.assertFalse(this.testModel.getModelExist(), "No limpio la bandera que indica que el modelo no existe en BD's");
-
     }
 
     @Test(testName = "First Or Fail",
@@ -342,7 +340,6 @@ public class JBSqlUtilsTestMariaDB {
         logParrafo("Filas eliminadas en BD's: " + rowsDelete + " " + models);
         //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
         Assert.assertTrue(rowsDelete == 3, "Los registros no fueron eliminados correctamente en BD's");
-
     }
 
     @Test(testName = "Setear Properties Conexión Globales",
@@ -373,7 +370,6 @@ public class JBSqlUtilsTestMariaDB {
                 "Propiedad Propiedades de conexión no ha sido seteada correctamente");
     }
 
-
     @Test(testName = "Create Table JBSqlUtils",
             dependsOnMethods = "setPropertiesConexion")
     public void creteTableJBSqlUtils() throws Exception {
@@ -383,20 +379,15 @@ public class JBSqlUtilsTestMariaDB {
          */
         logParrafo("Eliminara la tabla Proveedor de BD's en caso de que exista");
         logParrafo("Resultado de solicitar eliminar la tabla en BD's: " + dropTableIfExist("Proveedor").execute());
-
         /**
          * Definimos las columnas que deseamos posea nuestra tabla
          */
         Column<Integer> Id = new Column<>("Id", DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
-
         Column<String> Name = new Column<>("Name", DataType.VARCHAR);
-
         Column<String> Apellido = new Column<>("Apellido", DataType.VARCHAR);
-
         Column<Boolean> Estado = new Column<>("Estado", DataType.BOOLEAN, "true", Constraint.DEFAULT);
         Name.setSize("1000");
         Apellido.setSize("1000");
-
         logParrafo("Se solicitara la creación de la tabla Proveedor, la cual tendra las siguientes columnas, Id, Name, Apellido y Estado");
         /**
          * Para crear una tabla utilizamos el metodo createTable despues de haber definido el nombre de la tabla que deseamos Crear
@@ -424,25 +415,21 @@ public class JBSqlUtilsTestMariaDB {
                 .execute();
         logParrafo("Resultado de insertar el registro de Erick en la tabla Proveedor: " + registros);
         Assert.assertTrue(registros == 1, "No se pudo insertar el registro de Erick en la tabla Proveedor de BD's");
-
         registros = 0;
         registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Daniel").andValue("Apellido", "Quiñonez").
                 andValue("Estado", false).execute();
         logParrafo("Resultado de insertar el registro de Daniel en la tabla Proveedor: " + registros);
         Assert.assertTrue(registros == 1, "No se pudo insertar el registro de Daniel en la tabla Proveedor de BD's");
-
         registros = 0;
         registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Ligia").andValue("Apellido", "Camey")
                 .andValue("Estado", true).execute();
         logParrafo("Resultado de insertar el registro de Ligia en la tabla Proveedor: " + registros);
         Assert.assertTrue(registros == 1, "No se pudo insertar el registro de Ligia en la tabla Proveedor de BD's");
-
         registros = 0;
         registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Elsa").andValue("Apellido", "Aguirre")
                 .andValue("Estado", false).execute();
         logParrafo("Resultado de insertar el registro de Elsa en la tabla Proveedor: " + registros);
         Assert.assertTrue(registros == 1, "No se pudo insertar el registro de Elsa en la tabla Proveedor de BD's");
-
         registros = 0;
         registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Alex").andValue("Apellido", "Garcia")
                 .execute();
@@ -557,6 +544,4 @@ public class JBSqlUtilsTestMariaDB {
         logParrafo("Resultado de solicitar la eliminar la tabla cuando no existe en BD's: " + result);
         Assert.assertFalse(result, "Retorna que la tabla a sido eliminada cuando esta ya no existe en BD's");
     }
-
-
 }
