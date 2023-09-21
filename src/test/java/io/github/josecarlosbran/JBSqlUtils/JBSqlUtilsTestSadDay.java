@@ -752,7 +752,7 @@ public class JBSqlUtilsTestSadDay {
             expectedExceptions = ValorUndefined.class)
     public void orValueJBSqlUtilsModelPropertyFalse() throws Exception {
         TestModel model = new TestModel(false);
-        model.where("null", Operator.LIKE, true).or("null", Operator.LIKE, null);
+        model.where("null", Operator.LIKE, true).openParentecis(null, "null", Operator.LIKE, true).or("null", Operator.LIKE, null);
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }
@@ -832,7 +832,7 @@ public class JBSqlUtilsTestSadDay {
             expectedExceptions = Exception.class)
     public void closeParentecisValue2JBSqlUtilsModelPropertyFalse() throws Exception {
         TestModel model = new TestModel(false);
-        model.where("null", Operator.LIKE, true).openParentecis(null, "null", Operator.LIKE, null).closeParentecis(Operator.OR).firstOrFail();
+        model.where("null", Operator.LIKE, true).openParentecis(null, "null", Operator.LIKE, "null").closeParentecis(Operator.OR).firstOrFail();
         Assert.assertTrue(false,
                 "No se Lanzo la exepción ValorUndefined como se esperaba");
     }

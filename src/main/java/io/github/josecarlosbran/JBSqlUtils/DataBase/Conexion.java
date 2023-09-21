@@ -195,11 +195,8 @@ class Conexion {
         String clase3 = Conexion.class.getName();
         String clase4 = Get.class.getName();
         for (int i = 3; i >= 0; i--) {
-            try {
-                clase = elements[i].getClassName();
-            } catch (Exception ex) {
-                clase = "Invalid";
-            }
+            clase = "invalid";
+            clase = elements[i].getClassName();
             if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
                 break;
             }
@@ -259,32 +256,30 @@ class Conexion {
      *                          esta excepción, poder manejarla.
      */
     private DataBase setearDBType() throws DataBaseUndefind {
-        if (this.getGetPropertySystem()) {
-            String dataBase = System.getProperty(ConeccionProperties.DBTYPE.getPropiertie());
-            if (stringIsNullOrEmpty(dataBase)) {
-                //Si la propiedad del sistema no esta definida, Lanza una Exepción
-                throw new DataBaseUndefind("No se a seteado la DataBase que índica a que BD's deseamos se pegue JBSqlUtils");
-            } else {
-                if (dataBase.equals(DataBase.MySQL.name())) {
-                    setDataBaseType(DataBase.MySQL);
-                    return DataBase.MySQL;
-                }
-                if (dataBase.equals(DataBase.MariaDB.name())) {
-                    setDataBaseType(DataBase.MariaDB);
-                    return DataBase.MariaDB;
-                }
-                if (dataBase.equals(DataBase.SQLite.name())) {
-                    setDataBaseType(DataBase.SQLite);
-                    return DataBase.SQLite;
-                }
-                if (dataBase.equals(DataBase.SQLServer.name())) {
-                    setDataBaseType(DataBase.SQLServer);
-                    return DataBase.SQLServer;
-                }
-                if (dataBase.equals(DataBase.PostgreSQL.name())) {
-                    setDataBaseType(DataBase.PostgreSQL);
-                    return DataBase.PostgreSQL;
-                }
+        String dataBase = System.getProperty(ConeccionProperties.DBTYPE.getPropiertie());
+        if (stringIsNullOrEmpty(dataBase)) {
+            //Si la propiedad del sistema no esta definida, Lanza una Exepción
+            throw new DataBaseUndefind("No se a seteado la DataBase que índica a que BD's deseamos se pegue JBSqlUtils");
+        } else {
+            if (dataBase.equals(DataBase.MySQL.name())) {
+                setDataBaseType(DataBase.MySQL);
+                return DataBase.MySQL;
+            }
+            if (dataBase.equals(DataBase.MariaDB.name())) {
+                setDataBaseType(DataBase.MariaDB);
+                return DataBase.MariaDB;
+            }
+            if (dataBase.equals(DataBase.SQLite.name())) {
+                setDataBaseType(DataBase.SQLite);
+                return DataBase.SQLite;
+            }
+            if (dataBase.equals(DataBase.SQLServer.name())) {
+                setDataBaseType(DataBase.SQLServer);
+                return DataBase.SQLServer;
+            }
+            if (dataBase.equals(DataBase.PostgreSQL.name())) {
+                setDataBaseType(DataBase.PostgreSQL);
+                return DataBase.PostgreSQL;
             }
         }
         return null;
@@ -302,13 +297,11 @@ class Conexion {
      */
     private String setearHost() throws PropertiesDBUndefined, DataBaseUndefind {
         String host = null;
-        if (this.getGetPropertySystem()) {
-            host = System.getProperty(ConeccionProperties.DBHOST.getPropiertie());
-            if (this.getDataBaseType() != DataBase.SQLite) {
-                if (stringIsNullOrEmpty(host)) {
-                    //Si la propiedad del sistema no esta definida, Lanza una Exepción
-                    throw new PropertiesDBUndefined("No se a seteado el host en el que se encuentra la BD's a la cual deseamos se pegue JBSqlUtils");
-                }
+        host = System.getProperty(ConeccionProperties.DBHOST.getPropiertie());
+        if (this.getDataBaseType() != DataBase.SQLite) {
+            if (stringIsNullOrEmpty(host)) {
+                //Si la propiedad del sistema no esta definida, Lanza una Exepción
+                throw new PropertiesDBUndefined("No se a seteado el host en el que se encuentra la BD's a la cual deseamos se pegue JBSqlUtils");
             }
         }
         return host;
@@ -326,13 +319,11 @@ class Conexion {
      */
     private String setearPort() throws PropertiesDBUndefined, DataBaseUndefind {
         String port = null;
-        if (this.getGetPropertySystem()) {
-            port = System.getProperty(ConeccionProperties.DBPORT.getPropiertie());
-            if (this.getDataBaseType() != DataBase.SQLite) {
-                if (stringIsNullOrEmpty(port)) {
-                    //Si la propiedad del sistema no esta definida, Lanza una Exepción
-                    throw new PropertiesDBUndefined("No se a seteado el puerto en el que se encuentra escuchando la BD's a la cual deseamos se pegue JBSqlUtils");
-                }
+        port = System.getProperty(ConeccionProperties.DBPORT.getPropiertie());
+        if (this.getDataBaseType() != DataBase.SQLite) {
+            if (stringIsNullOrEmpty(port)) {
+                //Si la propiedad del sistema no esta definida, Lanza una Exepción
+                throw new PropertiesDBUndefined("No se a seteado el puerto en el que se encuentra escuchando la BD's a la cual deseamos se pegue JBSqlUtils");
             }
         }
         return port;
@@ -350,13 +341,11 @@ class Conexion {
      */
     private String setearUser() throws PropertiesDBUndefined, DataBaseUndefind {
         String user = null;
-        if (this.getGetPropertySystem()) {
-            user = System.getProperty(ConeccionProperties.DBUSER.getPropiertie());
-            if (this.getDataBaseType() != DataBase.SQLite) {
-                if (stringIsNullOrEmpty(user)) {
-                    //Si la propiedad del sistema no esta definida, Lanza una Exepción
-                    throw new PropertiesDBUndefined("No se a seteado el usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
-                }
+        user = System.getProperty(ConeccionProperties.DBUSER.getPropiertie());
+        if (this.getDataBaseType() != DataBase.SQLite) {
+            if (stringIsNullOrEmpty(user)) {
+                //Si la propiedad del sistema no esta definida, Lanza una Exepción
+                throw new PropertiesDBUndefined("No se a seteado el usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
             }
         }
         return user;
@@ -373,13 +362,11 @@ class Conexion {
      */
     private String setearBD() throws PropertiesDBUndefined {
         String DB = null;
-        if (this.getGetPropertySystem()) {
-            DB = System.getProperty(ConeccionProperties.DBNAME.getPropiertie());
-            //System.out.println("BD seteada en system property: " + DB);
-            if (stringIsNullOrEmpty(DB)) {
-                //Si la propiedad del sistema no esta definida, Lanza una Exepción
-                throw new PropertiesDBUndefined("No se a seteado la BD's a la cual deseamos se pegue JBSqlUtils");
-            }
+        DB = System.getProperty(ConeccionProperties.DBNAME.getPropiertie());
+        //System.out.println("BD seteada en system property: " + DB);
+        if (stringIsNullOrEmpty(DB)) {
+            //Si la propiedad del sistema no esta definida, Lanza una Exepción
+            throw new PropertiesDBUndefined("No se a seteado la BD's a la cual deseamos se pegue JBSqlUtils");
         }
         return DB;
     }
@@ -393,13 +380,11 @@ class Conexion {
      */
     private String setearPassword() throws PropertiesDBUndefined, DataBaseUndefind {
         String password = null;
-        if (this.getGetPropertySystem()) {
-            password = System.getProperty(ConeccionProperties.DBPASSWORD.getPropiertie());
-            if (this.getDataBaseType() != DataBase.SQLite) {
-                if (stringIsNullOrEmpty(password)) {
-                    //Si la propiedad del sistema no esta definida, Lanza una Exepción
-                    throw new PropertiesDBUndefined("No se a seteado la contraseña del usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
-                }
+        password = System.getProperty(ConeccionProperties.DBPASSWORD.getPropiertie());
+        if (this.getDataBaseType() != DataBase.SQLite) {
+            if (stringIsNullOrEmpty(password)) {
+                //Si la propiedad del sistema no esta definida, Lanza una Exepción
+                throw new PropertiesDBUndefined("No se a seteado la contraseña del usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
             }
         }
         return password;
@@ -412,9 +397,7 @@ class Conexion {
      */
     private String setearPropertisUrl() {
         String property = null;
-        if (this.getGetPropertySystem()) {
-            property = System.getProperty(ConeccionProperties.DBPROPERTIESURL.getPropiertie());
-        }
+        property = System.getProperty(ConeccionProperties.DBPROPERTIESURL.getPropiertie());
         return property;
     }
 
@@ -438,11 +421,8 @@ class Conexion {
         String clase3 = Conexion.class.getName();
         String clase4 = Get.class.getName();
         for (int i = 3; i >= 0; i--) {
-            try {
-                clase = elements[i].getClassName();
-            } catch (Exception ex) {
-                clase = "Invalid";
-            }
+            clase = "invalid";
+            clase = elements[i].getClassName();
             if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
                 break;
             }
@@ -489,11 +469,8 @@ class Conexion {
         String clase3 = Conexion.class.getName();
         String clase4 = Get.class.getName();
         for (int i = 3; i >= 0; i--) {
-            try {
-                clase = elements[i].getClassName();
-            } catch (Exception ex) {
-                clase = "Invalid";
-            }
+            clase = "invalid";
+            clase = elements[i].getClassName();
             if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
                 break;
             }
@@ -536,11 +513,8 @@ class Conexion {
         String clase3 = Conexion.class.getName();
         String clase4 = Get.class.getName();
         for (int i = 3; i >= 0; i--) {
-            try {
-                clase = elements[i].getClassName();
-            } catch (Exception ex) {
-                clase = "Invalid";
-            }
+            clase = "invalid";
+            clase = elements[i].getClassName();
             if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
                 break;
             }
@@ -583,11 +557,8 @@ class Conexion {
         String clase3 = Conexion.class.getName();
         String clase4 = Get.class.getName();
         for (int i = 3; i >= 0; i--) {
-            try {
-                clase = elements[i].getClassName();
-            } catch (Exception ex) {
-                clase = "Invalid";
-            }
+            clase = "invalid";
+            clase = elements[i].getClassName();
             if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
                 break;
             }
@@ -630,11 +601,8 @@ class Conexion {
         String clase3 = Conexion.class.getName();
         String clase4 = Get.class.getName();
         for (int i = 3; i >= 0; i--) {
-            try {
-                clase = elements[i].getClassName();
-            } catch (Exception ex) {
-                clase = "Invalid";
-            }
+            clase = "invalid";
+            clase = elements[i].getClassName();
             if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
                 break;
             }
@@ -673,11 +641,8 @@ class Conexion {
         String clase3 = Conexion.class.getName();
         String clase4 = Get.class.getName();
         for (int i = 3; i >= 0; i--) {
-            try {
-                clase = elements[i].getClassName();
-            } catch (Exception ex) {
-                clase = "Invalid";
-            }
+            clase = "invalid";
+            clase = elements[i].getClassName();
             if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
                 break;
             }
