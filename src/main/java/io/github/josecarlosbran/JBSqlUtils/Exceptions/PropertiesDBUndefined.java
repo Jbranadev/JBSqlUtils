@@ -22,6 +22,11 @@ package io.github.josecarlosbran.JBSqlUtils.Exceptions;
  * @author Jose Bran
  */
 public class PropertiesDBUndefined extends Exception {
+    /**
+     * Constructor por default para excepción del tipo Properties DB Undefined
+     *
+     * @param mensaje Mensaje que deseamos tenga la excepción al momento de dispararse
+     */
     public PropertiesDBUndefined(String mensaje) {
         super(mensaje);
     }

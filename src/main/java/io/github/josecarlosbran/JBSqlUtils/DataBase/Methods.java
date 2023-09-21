@@ -109,9 +109,7 @@ class Methods extends Methods_Conexion {
                 LogsJB.debug("Obtendra la información de conexión de la BD's: " + modelo.getClass().getSimpleName());
                 modelo.refresh();
                 modelo.waitOperationComplete();
-                /*while (modelo.getTabla().getColumnas().size() == 0) {
 
-                }*/
                 LogsJB.debug("Ya obtuvo la información de BD's");
                 temp.setTabla(modelo.getTabla());
                 temp.setTableExist(modelo.getTableExist());
@@ -165,9 +163,7 @@ class Methods extends Methods_Conexion {
                 LogsJB.debug("Obtendra la información de conexión de la BD's: " + modelo.getClass().getSimpleName());
                 modelo.refresh();
                 modelo.waitOperationComplete();
-                /*while (modelo.getTabla().getColumnas().size() == 0) {
 
-                }*/
                 LogsJB.debug("Ya obtuvo la información de BD's");
                 temp.setTableExist(modelo.getTableExist());
                 temp.setTableName(modelo.getTableName());
@@ -239,7 +235,6 @@ class Methods extends Methods_Conexion {
                         ResultSet registros = ejecutor.executeQuery();
                         while (registros.next()) {
                             listatemp.add(procesarResultSet((T) this, registros));
-                            //procesarResultSet(modelo, registros);
                         }
                         this.closeConnection(connect);
                         return new ResultAsync<>(listatemp, null);
@@ -254,11 +249,11 @@ class Methods extends Methods_Conexion {
                     return new ResultAsync<>(listatemp, e);
                 }
             };
-            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+
             Future<ResultAsync<List<T>>> future = this.ejecutor.submit(get);
             while (!future.isDone()) {
             }
-            //this.ejecutor.shutdown();
+
             ResultAsync<List<T>> resultado = future.get();
             this.setTaskIsReady(true);
             if (!Objects.isNull(resultado.getException())) {
@@ -291,26 +286,12 @@ class Methods extends Methods_Conexion {
                 if (claseMethod.equalsIgnoreCase("Object")) {
                     continue;
                 }
-                //Si el metodo no es un metodo get o set salta a la siguiente iteración
-                /*if (!(StringUtils.startsWithIgnoreCase(controllerName, "get"))
-                        && !(StringUtils.startsWithIgnoreCase(controllerName, "set"))) {
-                    continue;
-                }*/
                 //Si el metodo es un set, que continue, no tiene caso hacer lo siguiente
                 if (StringUtils.startsWithIgnoreCase(controllerName, "set")) {
                     continue;
                 }
                 int parametros = controladorMethod.getParameterCount();
                 LogsJB.trace("Cantidad de parametros: " + parametros);
-                /*if (parametros != 0) {
-                    continue;
-                }*/
-                //Validara si es un void
-                /*if (controladorMethod.getReturnType().equals(Void.TYPE)) {
-                    LogsJB.debug("El metodo " + controladorMethod.getName() + " No retorna ningun tipo" +
-                            "de dato por lo que no tiene caso continuar con la Iteración");
-                    continue;
-                }*/
                 LogsJB.trace("Validara si el contenido es Null: " + controllerName);
                 Object contenido = (Object) controladorMethod.invoke(controlador, null);
                 LogsJB.debug("Dato que se ingresara al modelo: " + contenido);
@@ -323,7 +304,7 @@ class Methods extends Methods_Conexion {
                         String modelGetName = modelGetMethod.getName();
                     /*Si el nombre del metodo get, no coincide con el nombre del metodo del
                     controlador, continua
-                    * */
+                    */
                         LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);
                         if (!StringUtils.equalsIgnoreCase(controllerName, modelGetName)) {
                             iteradorModelGetMethods.remove();
@@ -348,10 +329,6 @@ class Methods extends Methods_Conexion {
                                 String modelSetName = modelSetMethod.getName();
                                 LogsJB.trace("Nombre del metodo: " + modelSetName);
                                 //Si el metodo es un get, que continue, no tiene caso hacer lo siguiente
-                                /*if (StringUtils.startsWithIgnoreCase(modelSetName, "get")) {
-                                    iteradorModelSetMethods.remove();
-                                    continue;
-                                }*/
                                 LogsJB.trace("Si es un metodo Set: " + modelSetName);
                                 modelSetName = StringUtils.removeStartIgnoreCase(modelSetName, "set");
                                 LogsJB.trace("Nombre del metodo set a validar: " + modelSetName);
@@ -415,12 +392,6 @@ class Methods extends Methods_Conexion {
                             iteradorController.remove();
                             continue;
                         }
-                        //Si el metodo no es un metodo get o set salta a la siguiente iteración
-                        /*if (!(StringUtils.startsWithIgnoreCase(controllerName, "get"))
-                                && !(StringUtils.startsWithIgnoreCase(controllerName, "set"))) {
-                            iteradorController.remove();
-                            continue;
-                        }*/
                         //Si el metodo es un get, que continue, no tiene caso hacer lo siguiente
                         if (StringUtils.startsWithIgnoreCase(controllerName, "get")) {
                             iteradorController.remove();
@@ -429,10 +400,6 @@ class Methods extends Methods_Conexion {
                         //Valida que el metodo Set, si o sí, reciba un unico parametro
                         int parametros = controladorMethod.getParameterCount();
                         LogsJB.trace("Cantidad de parametros: " + parametros);
-                        /*if ((parametros != 1)) {
-                            iteradorController.remove();
-                            continue;
-                        }*/
                     /*Si el nombre del metodo Get del modelo coincide con el nombre del metodo Set
                     Guardara la información en el controlador*/
                         modelGetName = StringUtils.removeStartIgnoreCase(modelGetName, "get");
@@ -485,11 +452,6 @@ class Methods extends Methods_Conexion {
                         Method modelSetMethod = iteradorModelSetMethods.next();
                         String modelSetName = modelSetMethod.getName();
                         LogsJB.trace("Nombre del metodo: " + modelSetName);
-                        //Si el metodo es un get, que continue, no tiene caso hacer lo siguiente
-                        /*if (StringUtils.startsWithIgnoreCase(modelSetName, "get")) {
-                            iteradorModelSetMethods.remove();
-                            continue;
-                        }*/
                         LogsJB.trace("Si es un metodo Set: " + modelSetName);
                         modelSetName = StringUtils.removeStartIgnoreCase(modelSetName, "set");
                         LogsJB.trace("Nombre del metodo set a validar: " + modelSetName);

@@ -306,7 +306,7 @@ class Methods_Conexion extends Conexion {
                             }
                             LogsJB.info("La tabla correspondiente a este modelo, existe en BD's " + this.getClass().getSimpleName());
                             tables.close();
-                            //this.closeConnection(connect);
+
                             getColumnsTable(connect);
                             return new ResultAsync<Boolean>(true, null);
                         }
@@ -324,11 +324,11 @@ class Methods_Conexion extends Conexion {
                 }
                 return new ResultAsync<Boolean>(false, null);
             };
-            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+
             Future<ResultAsync<Boolean>> future = this.ejecutor.submit(VerificarExistencia);
             while (!future.isDone()) {
             }
-            //this.ejecutor.shutdown();
+
             ResultAsync<Boolean> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
@@ -348,7 +348,7 @@ class Methods_Conexion extends Conexion {
     protected void getColumnsTable(Connection connect) {
         try {
             LogsJB.debug("Comienza a obtener las columnas que le pertenecen a la tabla " + this.getTableName());
-            //Connection connect = this.getConnection();
+
             LogsJB.trace("Obtuvo el objeto conexión");
             DatabaseMetaData metaData = connect.getMetaData();
             LogsJB.trace("Ya tiene el MetaData de la BD's");
@@ -365,7 +365,7 @@ class Methods_Conexion extends Conexion {
                 temp.setTABLE_NAME(columnas.getString(3));
                 temp.setCOLUMN_NAME(columnas.getString(4));
                 //Seteara que la columna si existe en BD's
-                //columnaExist(columnas.getString(4));
+
                 this.getTabla().getColumnsExist().add(columnas.getString(4).toUpperCase());
                 temp.setDATA_TYPE(columnas.getInt(5));
                 temp.setTYPE_NAME(columnas.getString(6));
@@ -484,7 +484,6 @@ class Methods_Conexion extends Conexion {
                 || (columnsSQL.getDataTypeSQL() == DataType.BOOL)) {
             //Valores Booleanos
             ejecutor.setBoolean(auxiliar, (Boolean) columnsSQL.getValor());
-            //ejecutor.setObject(auxiliar, columnsSQL.getValor(), Types.BOOLEAN);
         } else if ((columnsSQL.getDataTypeSQL() == DataType.REAL) || (columnsSQL.getDataTypeSQL() == DataType.FLOAT)) {
             //Valores Flotantes
             Number valor = (Number) columnsSQL.getValor();
@@ -720,7 +719,7 @@ class Methods_Conexion extends Conexion {
                             //Obtengo la información de la columna
                             Column columnsSQL = (Column) metodo.invoke(modelo, null);
                             String columnName = columnsSQL.getName();
-                            //columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
+
                             if (Objects.isNull(columnsSQL.getValor())) {
                                 continue;
                             }
@@ -764,7 +763,7 @@ class Methods_Conexion extends Conexion {
                         }
                         //LogsJB.info(sql);
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
-                        //LogsJB.info("Creo la instancia del PreparedStatement");
+
                         //Llena el prepareStatement
                         LogsJB.debug("Llenara la información de las columnas: " + indicemetodos.size());
                         int auxiliar = 1;
@@ -816,7 +815,7 @@ class Methods_Conexion extends Conexion {
                             //Obtengo la información de la columna
                             Column columnsSQL = (Column) metodo.invoke(modelo, null);
                             String columnName = columnsSQL.getName();
-                            //columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
+
                             if (!UtilitiesJB.stringIsNullOrEmpty(namePrimaryKey) && StringUtils.equalsIgnoreCase(namePrimaryKey, columnName)) {
                                 indicePrimarykey = i;
                                 continue;
@@ -857,7 +856,7 @@ class Methods_Conexion extends Conexion {
                         sql = sql + " WHERE " + namePrimaryKey + "=?;";
                         //LogsJB.info(sql);
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
-                        //LogsJB.info("Creo la instancia del PreparedStatement");
+
                         //Llena el prepareStatement
                         LogsJB.debug("Llenara la información de las columnas: " + indicemetodos.size());
                         int auxiliar = 1;
@@ -867,7 +866,7 @@ class Methods_Conexion extends Conexion {
                             //Obtengo la información de la columna
                             Column columnsSQL = (Column) metodo.invoke(modelo, null);
                             String columnName = columnsSQL.getName();
-                            //columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
+
                             if ((StringUtils.equalsIgnoreCase(columnName, "updated_at"))) {
                                 Long datetime = System.currentTimeMillis();
                                 columnsSQL.setValor(new Timestamp(datetime));
@@ -910,7 +909,7 @@ class Methods_Conexion extends Conexion {
                     return new ResultAsync<>(0, e);
                 }
             };
-            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+
             LogsJB.debug("El modelo existe: " + modelo.getModelExist());
             Future<ResultAsync<Integer>> future = null;
             if (modelo.getModelExist()) {
@@ -920,7 +919,7 @@ class Methods_Conexion extends Conexion {
             }
             while (!future.isDone()) {
             }
-            //this.ejecutor.shutdown();
+
             ResultAsync<Integer> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
@@ -965,7 +964,7 @@ class Methods_Conexion extends Conexion {
                             //Obtengo la información de la columna
                             Column columnsSQL = (Column) metodo.invoke(modelo, null);
                             String columnName = columnsSQL.getName();
-                            //columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
+
                             if (!UtilitiesJB.stringIsNullOrEmpty(namePrimaryKey) && StringUtils.equalsIgnoreCase(namePrimaryKey, columnName)) {
                                 indicePrimarykey = i;
                                 break;
@@ -976,7 +975,7 @@ class Methods_Conexion extends Conexion {
                         //LogsJB.info(sql);
                         Connection connect = modelo.getConnection();
                         PreparedStatement ejecutor = connect.prepareStatement(sql);
-                        //LogsJB.info("Creo la instancia del PreparedStatement");
+
                         //Llena el prepareStatement
                         int auxiliar = 1;
                         LogsJB.debug("Colocara la información del where: " + auxiliar);
@@ -1014,11 +1013,11 @@ class Methods_Conexion extends Conexion {
                     return new ResultAsync<>(0, e);
                 }
             };
-            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+
             Future<ResultAsync<Integer>> future = this.ejecutor.submit(Delete);
             while (!future.isDone()) {
             }
-            //this.ejecutor.shutdown();
+
             ResultAsync<Integer> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
@@ -1044,7 +1043,6 @@ class Methods_Conexion extends Conexion {
             temp = (T) modelo.getClass().newInstance();
             temp.llenarPropertiesFromModel(temp);
         } else {
-            //modelo.llenarPropertiesFromModel(modelo);
             Constructor constructor = modelo.getClass().getConstructor(Boolean.class);
             temp = (T) constructor.newInstance(false);
             temp.llenarPropertiesFromModel(modelo);
@@ -1103,18 +1101,18 @@ class Methods_Conexion extends Conexion {
             LogsJB.trace("Columna : " + columnName);
             List<Method> metodosSet = new ArrayList<>(temp.getMethodsSetOfModel());
             LogsJB.trace("Inicializa el array list de los métodos set");
-            //metodosSet = temp.getMethodsSetOfModel();
+
             LogsJB.debug("Cantidad de métodos set: " + metodosSet.size());
             //Recorrera los metodos set del modelo para ver cual es el que corresponde a la columna
             Iterator<Method> iteradorMetodosSet = metodosSet.iterator();
             while (iteradorMetodosSet.hasNext()) {
                 Method metodo = iteradorMetodosSet.next();
                 String metodoName = metodo.getName();
-                //metodoName = StringUtils.removeStartIgnoreCase(metodoName, "set");
+
                 Boolean breakSegundoFor = false;
                 LogsJB.trace("Nombre de la columna, nombre del metodo set: " + columnName + "   " + metodoName);
                 List<Method> metodosget = new ArrayList<>(temp.getMethodsGetOfModel());
-                //metodosget = temp.getMethodsGetOfModel();
+
                 LogsJB.trace("Cantidad de metodos get: " + metodosget.size());
                 //Llena la información de las columnas que se insertaran
                 Iterator<Method> iteradorMetodosGet = metodosget.iterator();
@@ -1124,13 +1122,12 @@ class Methods_Conexion extends Conexion {
                     //Obtengo la información de la columna
                     Column columnsSQL = (Column) metodoget.invoke(temp, null);
                     String NameMetodoGet = metodoget.getName();
-                    //NameMetodoGet = StringUtils.removeStartIgnoreCase(NameMetodoGet, "get");
+
                     if (StringUtils.equalsIgnoreCase(
                             StringUtils.removeStartIgnoreCase(NameMetodoGet, "get"), StringUtils.removeStartIgnoreCase(metodoName, "set"))
                     ) {
                         LogsJB.trace("Nombre de la columna, nombre del metodo get: " + columnName + "   " + NameMetodoGet);
-                        //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
-                        //columnsSQL.setColumnExist(true);
+
                         String nameColumn = columnsSQL.getName();
                         LogsJB.trace("Nombre de la columna, nombre de la columna del modelo: " + columnName + "   " + nameColumn);
                         if (!stringIsNullOrEmpty(columnName) && StringUtils.equalsIgnoreCase(nameColumn, columnName)) {
@@ -1176,19 +1173,19 @@ class Methods_Conexion extends Conexion {
             LogsJB.trace("Columna : " + columnName);
             List<Method> metodosSet = new ArrayList<>(modelo.getMethodsSetOfModel());
             LogsJB.trace("Inicializa el array list de los métodos set");
-            //metodosSet = temp.getMethodsSetOfModel();
+
             LogsJB.debug("Cantidad de métodos set: " + metodosSet.size());
             //Recorrera los metodos set del modelo para ver cual es el que corresponde a la columna
             Iterator<Method> iteradorMetodosSet = metodosSet.iterator();
             while (iteradorMetodosSet.hasNext()) {
                 Method metodo = iteradorMetodosSet.next();
                 String metodoName = metodo.getName();
-                //metodoName = StringUtils.removeStartIgnoreCase(metodoName, "set");
+
                 LogsJB.trace("Nombre de la columna, nombre del metodo set: " + columnName + "   " + metodoName);
                 //Llena la información de las columnas que se insertaran
                 Boolean breakSegundoFor = false;
                 List<Method> metodosget = new ArrayList<>(modelo.getMethodsGetOfModel());
-                //metodosget = temp.getMethodsGetOfModel();
+
                 LogsJB.trace("Cantidad de metodos get: " + metodosget.size());
                 //Llena la información de las columnas que se insertaran
                 Iterator<Method> iteradorMetodosGet = metodosget.iterator();
@@ -1198,13 +1195,12 @@ class Methods_Conexion extends Conexion {
                     //Obtengo la información de la columna
                     Column columnsSQL = (Column) metodoget.invoke(modelo, null);
                     String NameMetodoGet = metodoget.getName();
-                    //NameMetodoGet = StringUtils.removeStartIgnoreCase(NameMetodoGet, "get");
+
                     if (StringUtils.equalsIgnoreCase(
                             StringUtils.removeStartIgnoreCase(NameMetodoGet, "get"), StringUtils.removeStartIgnoreCase(metodoName, "set"))
                     ) {
                         LogsJB.trace("Nombre de la columna, nombre del metodo get: " + columnName + "   " + NameMetodoGet);
-                        //LogsJB.trace("Coincide el nombre de los metodos con la columna: "+columnName);
-                        //columnsSQL.setColumnExist(true);
+
                         String nameColumn = columnsSQL.getName();
                         if (!stringIsNullOrEmpty(columnName) && StringUtils.equalsIgnoreCase(nameColumn, columnName)) {
                             convertSQLtoJava(columna, registros, metodo, columnsSQL, modelo);
@@ -1250,7 +1246,7 @@ class Methods_Conexion extends Conexion {
                 //Si se especificaron las columnas a obtener llena unicamente esas columnas
                 for (int j = 0; j < columnas.size(); j++) {
                     if (!stringIsNullOrEmpty(columnName) && columnName.equalsIgnoreCase(columnas.get(j))) {
-                        //columna.setCOLUMN_NAME(columnas.get(j));
+
                         this.convertSQLtoJson(columna, registros, temp);
                     }
                 }
@@ -1308,7 +1304,7 @@ class Methods_Conexion extends Conexion {
                             //Obtengo la información de la columna
                             Column columnsSQL = (Column) metodo.invoke(this, null);
                             String columnName = columnsSQL.getName();
-                            //columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
+
                             DataType columnType = columnsSQL.getDataTypeSQL();
                             //Manejo de tipo de dato TimeStamp en SQLServer
                             if ((columnType == DataType.TIMESTAMP) && (this.getDataBaseType() == DataBase.SQLServer)) {
@@ -1353,7 +1349,7 @@ class Methods_Conexion extends Conexion {
                                         tipo_de_columna = DataType.SERIAL.name();
                                     } else if ((DataBase.SQLServer == this.getDataBaseType()) &&
                                             (restriccion == Constraint.AUTO_INCREMENT)) {
-                                        //tipo_de_columna = DataType.IDENTITY.toString();
+
                                         restricciones = restricciones + DataType.IDENTITY + " ";
                                     } else if ((DataBase.SQLite == this.getDataBaseType()) &&
                                             (restriccion == Constraint.AUTO_INCREMENT)) {
@@ -1404,11 +1400,11 @@ class Methods_Conexion extends Conexion {
                 }
                 return new ResultAsync<Boolean>(false, null);
             };
-            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+
             Future<ResultAsync<Boolean>> future = this.ejecutor.submit(createtabla);
             while (!future.isDone()) {
             }
-            //this.ejecutor.shutdown();
+
             ResultAsync<Boolean> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
@@ -1449,7 +1445,7 @@ class Methods_Conexion extends Conexion {
                         if (!ejecutor.execute(sql)) {
                             LogsJB.info("Sentencia para eliminar tabla de la BD's ejecutada exitosamente");
                             LogsJB.info("Tabla " + this.getTableName() + " Eliminada exitosamente");
-                            //this.setTableExist(false);
+
                             this.refresh();
                             ejecutor.close();
                             this.closeConnection(connect);
@@ -1465,11 +1461,11 @@ class Methods_Conexion extends Conexion {
                     return new ResultAsync<Boolean>(false, e);
                 }
             };
-            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+
             Future<ResultAsync<Boolean>> future = this.ejecutor.submit(dropTable);
             while (!future.isDone()) {
             }
-            //this.ejecutor.shutdown();
+
             ResultAsync<Boolean> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
@@ -1555,7 +1551,7 @@ class Methods_Conexion extends Conexion {
                                         tipo_de_columna = DataType.SERIAL.name();
                                     } else if ((DataBase.SQLServer == this.getDataBaseType()) &&
                                             (restriccion == Constraint.AUTO_INCREMENT)) {
-                                        //tipo_de_columna = DataType.IDENTITY.toString();
+
                                         restricciones = restricciones + DataType.IDENTITY + " ";
                                     } else if ((DataBase.SQLite == this.getDataBaseType()) &&
                                             (restriccion == Constraint.AUTO_INCREMENT)) {
@@ -1600,11 +1596,11 @@ class Methods_Conexion extends Conexion {
                     return new ResultAsync<Boolean>(false, e);
                 }
             };
-            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+
             Future<ResultAsync<Boolean>> future = this.ejecutor.submit(createtabla);
             while (!future.isDone()) {
             }
-            //this.ejecutor.shutdown();
+
             ResultAsync<Boolean> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();

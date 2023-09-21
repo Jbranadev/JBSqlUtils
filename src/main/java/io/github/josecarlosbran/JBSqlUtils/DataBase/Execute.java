@@ -56,9 +56,6 @@ class Execute extends Methods_Conexion {
      */
     protected Execute(String sql, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
         super();
-        /*if (stringIsNullOrEmpty(sql)) {
-            throw new ValorUndefined("La cadena que contiene la sentencia SQL esta vacío o es NULL");
-        }*/
         this.parametros = parametros;
         this.sql = sql;
     }
@@ -87,10 +84,6 @@ class Execute extends Methods_Conexion {
                     LogsJB.info(ejecutor.toString());
                     int filas = 0;
                     filas = ejecutor.executeUpdate();
-                    //filas = ejecutor.getUpdateCount();
-                    /*if(StringUtils.containsIgnoreCase(this.sql, "INSERT INTO")) {
-                        filas=1;
-                    }*/
                     LogsJB.info("Cantidad de filas afectadas: " + filas);
                     this.closeConnection(connect);
                     return new ResultAsync<>(filas, null);
@@ -100,11 +93,11 @@ class Execute extends Methods_Conexion {
                     return new ResultAsync<>(0, e);
                 }
             };
-            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+
             Future<ResultAsync<Integer>> future = this.ejecutor.submit(Ejecutar_Sentencia);
             while (!future.isDone()) {
             }
-            //this.ejecutor.shutdown();
+
             ResultAsync<Integer> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
