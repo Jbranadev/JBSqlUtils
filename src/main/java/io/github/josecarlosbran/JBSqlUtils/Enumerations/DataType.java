@@ -28,7 +28,7 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author Jose Bran
  */
 public enum DataType {
-    //java.lang.Integer
+
     /**
      * Entero de 32 bits con signo
      */
@@ -91,8 +91,7 @@ public enum DataType {
      * Valor de coma flotante
      */
     FLOAT("", 4),
-    //double
-    //java.lang.Double
+
     /**
      * Gran valor de punto flotante
      */

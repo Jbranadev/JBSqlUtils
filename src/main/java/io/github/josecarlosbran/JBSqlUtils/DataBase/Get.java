@@ -117,11 +117,11 @@ class Get extends Methods_Conexion {
                     return new ResultAsync<>(true, e);
                 }
             };
-            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+
             Future<ResultAsync<Boolean>> future = this.ejecutor.submit(get);
             while (!future.isDone()) {
             }
-            //this.ejecutor.shutdown();
+
             ResultAsync<Boolean> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
@@ -184,11 +184,11 @@ class Get extends Methods_Conexion {
                     return new ResultAsync<>(modeloTemp, e);
                 }
             };
-            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+
             Future<ResultAsync<T>> future = this.ejecutor.submit(get);
             while (!future.isDone()) {
             }
-            //this.ejecutor.shutdown();
+
             ResultAsync<T> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
@@ -254,11 +254,11 @@ class Get extends Methods_Conexion {
                 return new ResultAsync<>(modeloTemp, e);
             }
         };
-        //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+
         Future<ResultAsync<T>> future = this.ejecutor.submit(get);
         while (!future.isDone()) {
         }
-        //this.ejecutor.shutdown();
+
         ResultAsync<T> resultado = future.get();
         if (!Objects.isNull(resultado.getException())) {
             throw resultado.getException();
@@ -295,7 +295,7 @@ class Get extends Methods_Conexion {
         List<T> lista = new ArrayList<>();
         try {
             modelo.validarTableExist(modelo);
-            //T finalTemp = temp;
+
             Callable<ResultAsync<List<T>>> get = () -> {
                 List<T> listaTemp = new ArrayList<>();
                 try {
@@ -338,7 +338,6 @@ class Get extends Methods_Conexion {
                         ResultSet registros = ejecutor.executeQuery();
                         while (registros.next()) {
                             listaTemp.add(procesarResultSet(modelo, registros));
-                            //procesarResultSet(modelo, registros);
                         }
                         modelo.closeConnection(connect);
                     } else {
@@ -354,11 +353,11 @@ class Get extends Methods_Conexion {
                     return new ResultAsync(listaTemp, e);
                 }
             };
-            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+
             Future<ResultAsync<List<T>>> future = this.ejecutor.submit(get);
             while (!future.isDone()) {
             }
-            //this.ejecutor.shutdown();
+
             ResultAsync<List<T>> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();
@@ -390,7 +389,7 @@ class Get extends Methods_Conexion {
         this.setTableName(tableName);
         try {
             this.validarTableExist(this);
-            //T finalTemp = temp;
+
             Callable<ResultAsync<List<JSONObject>>> get = () -> {
                 List<JSONObject> temp = new ArrayList<>();
                 try {
@@ -432,7 +431,6 @@ class Get extends Methods_Conexion {
                         ResultSet registros = ejecutor.executeQuery();
                         while (registros.next()) {
                             temp.add(this.procesarResultSetJSON(columnas, registros));
-                            //procesarResultSet(modelo, registros);
                         }
                         this.closeConnection(connect);
                         this.setTaskIsReady(true);
@@ -450,11 +448,11 @@ class Get extends Methods_Conexion {
                     return new ResultAsync<>(temp, e);
                 }
             };
-            //ExecutorService ejecutor = Executors.newFixedThreadPool(1);
+
             Future<ResultAsync<List<JSONObject>>> future = this.ejecutor.submit(get);
             while (!future.isDone()) {
             }
-            //this.ejecutor.shutdown();
+
             ResultAsync<List<JSONObject>> resultado = future.get();
             if (!Objects.isNull(resultado.getException())) {
                 throw resultado.getException();

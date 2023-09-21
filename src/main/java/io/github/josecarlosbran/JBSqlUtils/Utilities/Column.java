@@ -108,7 +108,6 @@ public class Column<T> {
         this.setDefault_value(default_value);
         this.setSize(this.getDataTypeSQL().getSize());
     }
-    //se invoca este
 
     /**
      * Inicializa la columna indicando el tipo de dato SQL  que tendra la columna y las restricciones SQL que tendra

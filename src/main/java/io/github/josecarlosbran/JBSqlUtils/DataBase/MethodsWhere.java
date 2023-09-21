@@ -58,7 +58,7 @@ public class MethodsWhere<T> extends MethodsOrderBy {
         } else {
             if (!this.getGetPropertySystem()) {
                 OrderBy orderby = new OrderBy(this.sql, columna, orderType, this.modelo, this.parametros, false);
-                //orderby.llenarPropertiesFromModel(this);
+
                 return orderby;
             }
             return new OrderBy(this.sql, columna, orderType, this.modelo, this.parametros);

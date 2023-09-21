@@ -17,7 +17,6 @@ package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.ConeccionProperties;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.TablesSQL;
@@ -72,10 +71,7 @@ class Conexion {
      * una configuración personalizada.
      */
     private Boolean getPropertySystem = true;
-    /**
-     * Conexión del modelo
-     */
-    //private Connection connect = null;
+
     /**
      * Bandera que sirve para identificar si la tabla correspondiente al modelo Existe
      */
@@ -100,10 +96,7 @@ class Conexion {
      * Define si el modelo desea que JBSqlUtils maneje las timestamps Created_at, Update_at.
      */
     private Boolean timestamps = true;
-    /**
-     * Define el formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
-     */
-    // private String dateFormat = null;
+
     /**
      * Define el nombre de la columna correspondiente a la TimeStamp CreateAT
      */
@@ -363,7 +356,7 @@ class Conexion {
     private String setearBD() throws PropertiesDBUndefined {
         String DB = null;
         DB = System.getProperty(ConeccionProperties.DBNAME.getPropiertie());
-        //System.out.println("BD seteada en system property: " + DB);
+
         if (stringIsNullOrEmpty(DB)) {
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new PropertiesDBUndefined("No se a seteado la BD's a la cual deseamos se pegue JBSqlUtils");
@@ -684,27 +677,6 @@ class Conexion {
     public void setGetPropertySystem(Boolean getPropertySystem) {
         this.getPropertySystem = getPropertySystem;
     }
-    /**
-     * Obtiene la conexión del Modelo a la Base de Datos.
-     *
-     * @return Retorna la conexión del Modelo a la Base de Datos.
-     * @throws ConexionUndefind lanza esta excepción si el modelo no posee una conexión abierta a BD's
-     */
-    /*protected Connection getConnect() throws ConexionUndefind {
-        if (Objects.isNull(this.connect)) {
-            //Si la propiedad del sistema no esta definida, Lanza una Exepción
-            throw new ConexionUndefind("No se a conectado el modelo a la BD's");
-        }
-        return this.connect;
-    }*/
-    /***
-     * Setea la conexión del Modelo a la Base de Datos.
-     * @param connect Conexión del Modelo a la Base de Datos.
-     */
-    /*protected void setConnect(Connection connect) {
-        this.connect = connect;
-
-    }*/
 
     /**
      * Obtiene la bandera que indica si la tabla correspondiente al modelo en BD's
@@ -844,22 +816,6 @@ class Conexion {
     public void setTimestamps(Boolean timestamps) {
         this.timestamps = timestamps;
     }
-    /**
-     * Obtiene el formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
-     *
-     * @return Una representación String del Formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
-     */
-    /*public String getDateFormat() {
-        return dateFormat;
-    }*/
-    /**
-     * Setea el formato de fecha en el que se desea que JBSqlUtils almacene las TimeStamp
-     *
-     * @param dateFormat Formato de fecha en el que se desea se almacenen las TimeStamp
-     */
-    /*public void setDateFormat(String dateFormat) {
-        this.dateFormat = dateFormat;
-    }*/
 
     /**
      * Obtiene el nombre de la columna correspondiente a la TimeStamp CreateAT

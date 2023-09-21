@@ -22,6 +22,11 @@ package io.github.josecarlosbran.JBSqlUtils.Exceptions;
  * @author Jose Bran
  */
 public class ValorUndefined extends Exception {
+    /**
+     * Constructor por default para excepción del tipo Valor Undefined
+     *
+     * @param mensaje Mensaje que deseamos tenga la excepción al momento de dispararse
+     */
     public ValorUndefined(String mensaje) {
         super(mensaje);
     }

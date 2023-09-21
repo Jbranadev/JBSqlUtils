@@ -89,14 +89,6 @@ public class TablesSQL {
     public synchronized List<ColumnsSQL> getColumnas() {
         return this.Columnas;
     }
-    /**
-     * Setea la lista de las columnas SQL que posee la tabla en BD's
-     *
-     * @param columnas Lista de las columnas que posee la tabla en BD's
-     *//*
-    public void setColumnas(List<ColumnsSQL> columnas) {
-        this.Columnas = columnas;
-    }*/
 
     /**
      * Obtiene la Clave Primaria correspondiente a la tabla
@@ -169,6 +161,7 @@ public class TablesSQL {
     public void setTABLE_NAME(String TABLE_NAME) {
         this.TABLE_NAME = TABLE_NAME;
     }
+
     /**
      * Obtiene el tipo de tabla que es.
      *
@@ -265,7 +258,9 @@ public class TablesSQL {
      *
      * @return SELF_REFERENCING_COL_NAME Cadena => nombre de la columna de "identificador"
      * designada de una tabla escrita (puede ser nulo)
-     *//*
+     */
+
+    /*
     public String getSELF_REFERENCING_COL_NAME() {
         return UtilitiesJB.stringIsNullOrEmpty(SELF_REFERENCING_COL_NAME)?null:SELF_REFERENCING_COL_NAME;
     }
