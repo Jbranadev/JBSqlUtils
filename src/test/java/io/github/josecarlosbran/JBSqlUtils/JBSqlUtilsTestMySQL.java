@@ -1,6 +1,7 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
 import UtilidadesTest.TestModel;
+import UtilidadesTest.UsuarioModel;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
@@ -24,6 +25,7 @@ import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.select;
 public class JBSqlUtilsTestMySQL {
 
     TestModel testModel;
+    UsuarioModel usuarioModel;
 
     public JBSqlUtilsTestMySQL() {
         System.setProperty("org.uncommons.reportng.escape-output", "false");
@@ -544,4 +546,287 @@ public class JBSqlUtilsTestMySQL {
         logParrafo("Resultado de solicitar la eliminar la tabla cuando no existe en BD's: " + result);
         Assert.assertFalse(result, "Retorna que la tabla a sido eliminada cuando esta ya no existe en BD's");
     }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    @Test(testName = "Drop Table If Exists from Model Usuario",
+            dependsOnMethods = {"dropTableJBSqlUtils"})
+    public void dropTableIfExistsUsuario() throws Exception {
+        this.usuarioModel = new UsuarioModel();
+        logParrafo("Se creara la tabla " + this.usuarioModel.getTableName() + " en BD's");
+        this.usuarioModel.createTable();
+        logParrafo("La tabla a sido creada en BD's");
+        logParrafo("Se procedera a eliminar la tabla en BD's");
+        Assert.assertTrue(this.usuarioModel.dropTableIfExist(), "No se pudo eliminar la tabla en BD's");
+        Assert.assertFalse(this.usuarioModel.getTableExist(), "La tabla No existe en BD's y aun así responde que si la elimino");
+        logParrafo("La tabla a sido eliminada en BD's");
+    }
+
+    @Test(testName = "Create Table from Model Usuario",
+            dependsOnMethods = "dropTableIfExistsUsuario")
+    public void createTableUsuario() throws Exception {
+        logParrafo("Se creara la tabla " + this.usuarioModel.getTableName() + " en BD's");
+        Assert.assertTrue(this.usuarioModel.createTable(), "La Tabla No fue creada en BD's");
+        Assert.assertTrue(this.usuarioModel.getTableExist(), "La tabla No existe en BD's ");
+        logParrafo("La tabla a sido creada en BD's");
+    }
+
+    @Test(testName = "Insert Model Usuario",
+            dependsOnMethods = "createTableUsuario")
+    public void insertModelUsuario() throws Exception {
+        logParrafo("Insertaremos un modelo cuyo nombre será Marcos, Apellido Cabrera y sera menor de edad");
+        /**
+         * Asignamos valores a las columnas del modelo, luego llamamos al método save(),
+         * el cual se encarga de insertar un registro en la tabla correspondiente al modelo con la información del mismo
+         * si este no existe, de existir actualiza el registro por medio de la clave primaria del modelo.
+         */
+        this.usuarioModel.getId_Subestación().setValor(2.0);
+        this.usuarioModel.getNombre().setValor("NombrePrimerModelo");
+        this.usuarioModel.getTelefono().setValor(null);
+        this.usuarioModel.getCorreo().setValor("CorreoPrueba");
+        this.usuarioModel.getEstado().setValor(false);
+        logParrafo(this.usuarioModel.toString());
+        Integer rowsInsert = this.usuarioModel.save();
+        /**
+         * Esperamos se ejecute la instrucción en BD's
+         */
+        this.usuarioModel.waitOperationComplete();
+        logParrafo("Insertamos el Modelo a través del método save");
+        logParrafo("Filas insertadas en BD's: " + rowsInsert + " " + this.usuarioModel.toString());
+        Assert.assertTrue(rowsInsert == 1, "El registro no fue insertado en BD's");
+    }
+
+    @Test(testName = "Update Model Usuario", dependsOnMethods = "insertModelUsuario")
+    public void updateModelUsuario() throws Exception {
+        logParrafo("Limpiamos el modelo");
+        this.usuarioModel.cleanModel();
+        /**
+         * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
+         */
+        logParrafo("Obtenemos el modelo que tiene por nombre Marcos, Apellido Cabrera");
+        UsuarioModel temp = (UsuarioModel) this.usuarioModel.where("Nombre", Operator.IGUAL_QUE, "NombrePrimerModelo").and("Estado", Operator.IGUAL_QUE,
+                false).firstOrFail();
+        /**
+         * Esperamos ejecute la operación en BD's
+         */
+        this.usuarioModel.waitOperationComplete();
+        logParrafo(temp.toString());
+        /**
+         * Actualizamos la información
+         */
+        logParrafo("Actualizamos el nombre del modelo a MarcosEfrain y asígnamos que será mayor de edad");
+        temp.getNombre().setValor("MarcosEfrain");
+        temp.getEstado().setValor(true);
+        logParrafo(temp.toString());
+        /**
+         * Eliminamos el modelo en BD's
+         */
+        Integer rowsUpdate = temp.save();
+        logParrafo("Guardamos el modelo en BD's");
+        Assert.assertTrue(rowsUpdate == 1, "El registro no fue actualizado en la BD's");
+    }
+
+    @Test(testName = "Delete Model Usuario", dependsOnMethods = "updateModelUsuario")
+    public void deleteModelUsuario() throws Exception {
+        logParrafo("Limpiamos el modelo");
+        this.usuarioModel.cleanModel();
+        /**
+         * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
+         */
+        logParrafo("Obtenemos el modelo que tiene por nombre MarcosEfrain, Apellido Cabrera y es Mayor de Edad");
+        UsuarioModel temp = (UsuarioModel) this.usuarioModel.where("Nombre", Operator.IGUAL_QUE, "MarcosEfrain").and("Estado", Operator.IGUAL_QUE, true).firstOrFail();
+        /**
+         * Esperamos ejecute la operación en BD's
+         */
+        this.usuarioModel.waitOperationComplete();
+        logParrafo(temp.toString());
+        /**
+         * Eliminamos el modelo en BD's
+         */
+        logParrafo("Eliminamos el modelo a través del metodo delete");
+        Integer rowsDelete = temp.delete();
+        Assert.assertTrue(rowsDelete == 1, "El registro no fue eliminado en la BD's");
+    }
+
+    @Test(testName = "Insert Models Usuario",
+            dependsOnMethods = "deleteModelUsuario")
+    public void insertModelsUsuario() throws Exception {
+        logParrafo("Limpiamos el modelo");
+        this.usuarioModel.cleanModel();
+        logParrafo("Preparamos los modelos a insertar: ");
+        List<UsuarioModel> models = new ArrayList<UsuarioModel>();
+        //Llenamos la lista de mdelos a insertar en BD's
+        for (int i = 0; i < 10; i++) {
+            UsuarioModel model = new UsuarioModel();
+            model.getId_Subestación().setValor((1.0 * i));
+            model.getNombre().setValor("NombreModelo#" + i);
+            model.getCorreo().setValor("CorreoPrueba#" + i);
+            if (i % 2 == 0) {
+                model.getEstado().setValor(false);
+            } else {
+                model.getEstado().setValor(true);
+            }
+            models.add(model);
+            logParrafo(model.toString());
+        }
+        logParrafo("Enviamos a guardar los modelos");
+        Integer rowsInsert = this.usuarioModel.saveALL(models);
+        logParrafo("Filas insertadas en BD's: " + rowsInsert);
+        /**
+         * Esperamos se ejecute la instrucción en BD's
+         */
+        this.usuarioModel.waitOperationComplete();
+        //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
+        Assert.assertTrue(rowsInsert == 10, "Los registros no fueron insertados correctamente en BD's");
+    }
+
+    @Test(testName = "Get Model Usuario",
+            dependsOnMethods = "insertModelsUsuario")
+    public void getModelUsuario() throws Exception {
+        //Incluir método que permita limpiar el modelo
+        logParrafo("Limpiamos el modelo");
+        this.usuarioModel.cleanModel();
+        logParrafo("Obtenemos el primero modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
+        this.usuarioModel.where("Nombre", Operator.IGUAL_QUE, "Marcossss").and("Correo", Operator.IGUAL_QUE,
+                "Cabrerassss").get();
+        this.usuarioModel.waitOperationComplete();
+        logParrafo("Trato de obtener un modelo que no existe, el resultado es: " + this.usuarioModel.getModelExist());
+        logParrafo(this.usuarioModel.toString());
+        Assert.assertFalse(this.usuarioModel.getModelExist(), "Obtuvo un registro que no existe en BD's");
+        logParrafo("Obtenemos un modelo cuyo nombre sea Modelo # y sea mayor de edad");
+        this.usuarioModel.where("Nombre", Operator.LIKE, "%Modelo#%").and("Estado", Operator.IGUAL_QUE,
+                true).get();
+        this.usuarioModel.waitOperationComplete();
+        logParrafo("Trato de obtener un modelo que sí existe, el resultado es: " + this.usuarioModel.getModelExist());
+        logParrafo(this.usuarioModel.toString());
+        Assert.assertTrue(this.usuarioModel.getModelExist(), "No obtuvo un registro que no existe en BD's");
+    }
+
+    @Test(testName = "Get First Model Usuario",
+            dependsOnMethods = "getModelUsuario")
+    public void firstModelUsuario() throws Exception {
+        //Incluir metodo que permita limpiar el modelo
+        logParrafo("Limpiamos el modelo");
+        this.usuarioModel.cleanModel();
+        logParrafo("Obtenemos el primero modelo cuyo nombre sea Marcossss y su Correo sea Cabrerassss, el cual no existe");
+        UsuarioModel temp = (UsuarioModel) this.usuarioModel.where("Nombre", Operator.IGUAL_QUE, "Marcossss").and("Correo", Operator.IGUAL_QUE,
+                "Cabrerassss").first();
+        this.usuarioModel.waitOperationComplete();
+        logParrafo("Trato de obtener un modelo que no existe, el resultado es: " + temp.getModelExist());
+        logParrafo(temp.toString());
+        Assert.assertFalse(temp.getModelExist(), "Obtuvo un registro que no existe en BD's");
+        logParrafo("Obtenemos el primero modelo cuyo nombre sea Modelo# y sea mayor de edad");
+        temp = (UsuarioModel) this.usuarioModel.where("Nombre", Operator.LIKE, "%Modelo#%").and("Estado", Operator.IGUAL_QUE,
+                true).first();
+        this.usuarioModel.waitOperationComplete();
+        logParrafo("Trato de obtener un modelo que sí existe, el resultado es: " + temp.getModelExist());
+        logParrafo(temp.toString());
+        Assert.assertTrue(temp.getModelExist(), "No obtuvo un registro que no existe en BD's");
+    }
+
+    @Test(testName = "Take Models Usuario",
+            dependsOnMethods = "firstModelUsuario")
+    public void takeModelsUsuario() throws Exception {
+        logParrafo("Limpiamos el modelo");
+        //Incluir método que permita limpiar el modelo
+        this.usuarioModel.cleanModel();
+        List<UsuarioModel> models = new ArrayList<UsuarioModel>();
+        logParrafo("Recuperamos los primeros seis modelos que en su nombre poseen el texto Modelo#");
+        models = this.usuarioModel.where("Nombre", Operator.LIKE, "%Modelo#%").take(6).get();
+        this.usuarioModel.waitOperationComplete();
+        logParrafo("Se recuperaron " + models.size() + " los cuales son: " + models.toString());
+        Assert.assertTrue(models.size() == 6, "Los modelos no fueron recuperados de BD's como se definio en la sentencia Take");
+    }
+
+    @Test(testName = "Get All Models Usuario",
+            dependsOnMethods = "takeModelsUsuario")
+    public void getAllModelsUsuario() throws Exception {
+        //Incluir método que permita limpiar el modelo
+        logParrafo("Limpiamos el modelo");
+        this.usuarioModel.cleanModel();
+        List<UsuarioModel> models = new ArrayList<UsuarioModel>();
+        logParrafo("Obtenemos los modelos que poseen nombre es Modelo#5 U #8 o su Correo es #3");
+        models = this.usuarioModel.where("Nombre", Operator.LIKE, "%Modelo#5%").or(
+                "Nombre", Operator.LIKE, "%Modelo#8%").getAll();
+        this.usuarioModel.waitOperationComplete();
+        logParrafo("Se recuperaron " + models.size() + " los cuales son: " + models.toString());
+        Assert.assertTrue(models.size() == 2, "Los modelos no fueron recuperados de BD's");
+    }
+
+    @Test(testName = "Update Models Usuario",
+            dependsOnMethods = "getAllModelsUsuario")
+    public void updateModelsUsuario() throws Exception {
+        logParrafo("Limpiamos el modelo");
+        this.usuarioModel.cleanModel();
+        logParrafo("Obtenemos los modelos a actualizar: ");
+        List<UsuarioModel> models = new ArrayList<UsuarioModel>();
+        //Llenamos la lista de mdelos a insertar en BD's
+        models = this.usuarioModel.getAll();
+        this.usuarioModel.waitOperationComplete();
+        logParrafo("Operamos los cambios a realizar en los modelos obtenidos de BD's");
+        models.forEach(modelo -> {
+            logParrafo("Modelo obtenido: " + modelo.toString());
+            modelo.getEstado().setValor(!modelo.getEstado().getValor());
+            logParrafo("Modelo a actualizar: " + modelo.toString());
+        });
+        logParrafo("Enviamos a guardar los modelos a través del método saveALL");
+        Integer rowsUpdate = this.usuarioModel.saveALL(models);
+        logParrafo("Filas actualizadas en BD's: " + rowsUpdate);
+        /**
+         * Esperamos se ejecute la instrucción en BD's
+         */
+        this.usuarioModel.waitOperationComplete();
+        //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
+        Assert.assertTrue(rowsUpdate == 10, "Los registros no fueron insertados correctamente en BD's");
+    }
+
+    @Test(testName = "Delete Models Usuario",
+            dependsOnMethods = "updateModelsUsuario")
+    public void deleteModelsUsuario() throws Exception {
+        logParrafo("Limpiamos el modelo");
+        this.usuarioModel.cleanModel();
+        List<UsuarioModel> models = new ArrayList<UsuarioModel>();
+        logParrafo("Obtenemos los modelos que poseen nombre es Modelo#5 U #8 o su Correo es #3");
+        models = this.usuarioModel.where("Nombre", Operator.LIKE, "%Modelo#5%").or(
+                "Nombre", Operator.LIKE, "%Modelo#8%").getAll();
+        this.usuarioModel.waitOperationComplete();
+        logParrafo("Se recuperaron " + models.size() + " Para eliminar: " + models.toString());
+        Integer rowsDelete = this.usuarioModel.deleteALL(models);
+        this.usuarioModel.waitOperationComplete();
+        logParrafo("Filas eliminadas en BD's: " + rowsDelete + " " + models);
+        //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
+        Assert.assertTrue(rowsDelete == 2, "Los registros no fueron eliminados correctamente en BD's");
+    }
+
+    @Test(testName = "Get In JsonObjects JBSqlUtils Usuario",
+            dependsOnMethods = "deleteModelsUsuario")
+    public void getInJsonObjectsJBSqlUtilsUsuario() throws Exception {
+        /**
+         * Si deseamos obtener todas las columnas de la tabla envíamos el parámetro columnas del método
+         * getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parámetro
+         * del método select
+         */
+        List<String> columnas = null;
+        /**
+         * Si deseamos obtener unicamente determinadas columnas, es necesario envíar como parámetro una lista de strings
+         * con los nombres de las columnas que deseamos obtener del método getInJsonObjects
+         */
+        logParrafo("Obtendra los primeros 2 registros cuyo estado sea true y en su apellido posea la letra a");
+        /**
+         * Para obtener los registros de una tabla de BD's podemos hacerlo a través del método select envíando como parámetro
+         * el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a través del método
+         * where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
+         */
+        List<JSONObject> lista = select("UsuarioTableTest").getInJsonObjects(columnas);
+        logParrafo("Visualizamos los registros obtenidos de BD's: ");
+        /**
+         * Imprimimos los registros obtenidos
+         */
+        lista.forEach(fila -> {
+            logParrafo(fila.toString());
+        });
+        Assert.assertTrue(lista.size() == 8, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
+    }
+    /////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
 }

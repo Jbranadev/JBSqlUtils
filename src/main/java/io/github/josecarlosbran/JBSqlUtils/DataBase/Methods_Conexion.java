@@ -227,29 +227,10 @@ class Methods_Conexion extends Conexion {
                 connect.close();
                 LogsJB.info("Conexión a BD's cerrada " + this.getClass().getSimpleName());
             }
-        } catch (ConexionUndefind e) {
-            LogsJB.warning("El modelo no estaba conectado a la BD's por lo cual no se cerrara la conexión");
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada cerrar la conexión a la BD's " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+        } catch (ConexionUndefind | SQLException e) {
+            LogsJB.warning("El modelo no estaba conectado a la BD's por lo cual no se cerrara la conexión: " + ExceptionUtils.getStackTrace(e));
         }
     }
-    /**
-     * Cierra la conexión a BD's del modelo.
-     */
-    /*protected synchronized void closeConnection() {
-        try {
-            if (!this.getConnect().isClosed()) {
-                this.getConnect().close();
-                LogsJB.info("Conexión a BD's cerrada " + this.getClass().getSimpleName());
-            } else {
-                LogsJB.warning("Conexión a BD's ya estaba cerrada " + this.getClass().getSimpleName());
-            }
-        } catch (ConexionUndefind e) {
-            LogsJB.warning("El modelo no estaba conectado a la BD's por lo cual no se cerrara la conexión");
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada cerrar la conexión a la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-        }
-    }*/
 
     /**
      * Verifica la existencia de la tabla correspondiente al modelo en BD's
@@ -490,12 +471,14 @@ class Methods_Conexion extends Conexion {
                 || (columnsSQL.getDataTypeSQL() == DataType.INTEGER) || (columnsSQL.getDataTypeSQL() == DataType.IDENTITY)
                 || (columnsSQL.getDataTypeSQL() == DataType.SERIAL)) {
             //Valores Enteros
-            ejecutor.setInt(auxiliar, (Integer) columnsSQL.getValor());
+            Number valor = (Number) columnsSQL.getValor();
+            ejecutor.setInt(auxiliar, valor.intValue());
         } else if ((columnsSQL.getDataTypeSQL() == DataType.NUMERIC) || (columnsSQL.getDataTypeSQL() == DataType.DECIMAL)
                 || (columnsSQL.getDataTypeSQL() == DataType.MONEY) || (columnsSQL.getDataTypeSQL() == DataType.SMALLMONEY)
                 || (columnsSQL.getDataTypeSQL() == DataType.DOUBLE)) {
             //Dinero y numericos que tienen decimales
-            ejecutor.setDouble(auxiliar, (Double) columnsSQL.getValor());
+            Number valor = (Number) columnsSQL.getValor();
+            ejecutor.setDouble(auxiliar, valor.doubleValue());
         } else if ((columnsSQL.getDataTypeSQL() == DataType.BIT)
                 || (columnsSQL.getDataTypeSQL() == DataType.BOOLEAN)
                 || (columnsSQL.getDataTypeSQL() == DataType.BOOL)) {
@@ -504,7 +487,8 @@ class Methods_Conexion extends Conexion {
             //ejecutor.setObject(auxiliar, columnsSQL.getValor(), Types.BOOLEAN);
         } else if ((columnsSQL.getDataTypeSQL() == DataType.REAL) || (columnsSQL.getDataTypeSQL() == DataType.FLOAT)) {
             //Valores Flotantes
-            ejecutor.setFloat(auxiliar, (Float) columnsSQL.getValor());
+            Number valor = (Number) columnsSQL.getValor();
+            ejecutor.setFloat(auxiliar, valor.floatValue());
         } else if ((columnsSQL.getDataTypeSQL
                 () == DataType.BINARY) || (columnsSQL.getDataTypeSQL() == DataType.VARBINARY)
                 || (columnsSQL.getDataTypeSQL() == DataType.LONGVARBINARY)) {
@@ -719,9 +703,7 @@ class Methods_Conexion extends Conexion {
         Integer result = 0;
         try {
             modelo.setTaskIsReady(false);
-            if (!modelo.getTableExist()) {
-                modelo.refresh();
-            }
+            modelo.validarTableExist(modelo);
             Connection connect = modelo.getConnection();
             Callable<ResultAsync<Integer>> Save = () -> {
                 try {
@@ -964,9 +946,7 @@ class Methods_Conexion extends Conexion {
         Integer result = 0;
         try {
             modelo.setTaskIsReady(false);
-            if (!modelo.getTableExist()) {
-                modelo.refresh();
-            }
+            modelo.validarTableExist(modelo);
             Callable<ResultAsync<Integer>> Delete = () -> {
                 try {
                     if (modelo.getTableExist()) {
@@ -1058,23 +1038,31 @@ class Methods_Conexion extends Conexion {
      *               objeto que herede la Clase JBSqlUtils
      * @return Retorna la nueva instancia del modelo creada
      */
-    public <T extends Methods_Conexion> T obtenerInstanciaOfModel(T modelo) {
+    public <T extends Methods_Conexion> T obtenerInstanciaOfModel(T modelo) throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         T temp = null;
-        try {
-            if (modelo.getGetPropertySystem()) {
-                temp = (T) modelo.getClass().newInstance();
-                temp.llenarPropertiesFromModel(temp);
-            } else {
-                //modelo.llenarPropertiesFromModel(modelo);
-                Constructor constructor = modelo.getClass().getConstructor(Boolean.class);
-                temp = (T) constructor.newInstance(false);
-                temp.llenarPropertiesFromModel(modelo);
-            }
-        } catch (InvocationTargetException | NoSuchMethodException | InstantiationException |
-                 IllegalAccessException e) {
-            LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-        } finally {
-            return temp;
+        if (modelo.getGetPropertySystem()) {
+            temp = (T) modelo.getClass().newInstance();
+            temp.llenarPropertiesFromModel(temp);
+        } else {
+            //modelo.llenarPropertiesFromModel(modelo);
+            Constructor constructor = modelo.getClass().getConstructor(Boolean.class);
+            temp = (T) constructor.newInstance(false);
+            temp.llenarPropertiesFromModel(modelo);
+        }
+        return temp;
+    }
+
+    /**
+     * Valida si el modelo ya conoce si su tabla existe en BD's de lo contrario ejecuta este metodo para asegurarse que
+     * obtenga la información de BD's
+     *
+     * @param modelo Modelo que se desea validar si su tabla existe en BD's
+     * @param <T>
+     * @throws Exception Si sucede una excepción en la ejecución de esta tarea la lanza al metodo que la invoco
+     */
+    protected <T extends Methods_Conexion> void validarTableExist(T modelo) throws Exception {
+        if (!modelo.getTableExist()) {
+            modelo.refresh();
         }
     }
 
@@ -1342,7 +1330,22 @@ class Methods_Conexion extends Conexion {
                             if ((this.getDataBaseType() == DataBase.SQLServer) && columnType == DataType.BOOLEAN) {
                                 columnsSQL.setDataTypeSQL(DataType.BIT);
                             }
+                            if ((this.getDataBaseType() == DataBase.PostgreSQL) && columnType == DataType.DOUBLE) {
+                                columnsSQL.setSize("");
+                            }
+                            if ((this.getDataBaseType() == DataBase.SQLServer) && columnType == DataType.DOUBLE) {
+                                columnsSQL.setDataTypeSQL(DataType.REAL);
+                                columnsSQL.setSize(columnsSQL.getDataTypeSQL().getSize());
+                            }
+                            if ((this.getDataBaseType() == DataBase.MySQL) && (columnType == DataType.TEXT
+                                    || columnType == DataType.JSON
+                            )) {
+                                columnsSQL.setDefault_value(null);
+                            }
                             String tipo_de_columna = columnsSQL.columnToString();
+                            if ((this.getDataBaseType() == DataBase.PostgreSQL) && columnType == DataType.DOUBLE) {
+                                tipo_de_columna = tipo_de_columna.replace("DOUBLE", "DOUBLE PRECISION");
+                            }
                             if (!Objects.isNull(columnRestriccion)) {
                                 for (Constraint restriccion : columnRestriccion) {
                                     if ((DataBase.PostgreSQL == this.getDataBaseType()) &&

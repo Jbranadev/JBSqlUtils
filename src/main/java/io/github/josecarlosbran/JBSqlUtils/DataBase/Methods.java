@@ -226,9 +226,7 @@ class Methods extends Methods_Conexion {
         this.setTaskIsReady(false);
         List<T> lista = new ArrayList<T>();
         try {
-            if (!this.getTableExist()) {
-                this.refresh();
-            }
+            this.validarTableExist(this);
             Callable<ResultAsync<List<T>>> get = () -> {
                 List<T> listatemp = new ArrayList<T>();
                 try {

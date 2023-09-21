@@ -85,9 +85,7 @@ class Get extends Methods_Conexion {
         }
         try {
             modelo.setTaskIsReady(false);
-            if (!modelo.getTableExist()) {
-                modelo.refresh();
-            }
+            modelo.validarTableExist(modelo);
             Callable<ResultAsync<Boolean>> get = () -> {
                 try {
                     if (modelo.getTableExist()) {
@@ -153,9 +151,7 @@ class Get extends Methods_Conexion {
         try {
             modeloResult = modelo.obtenerInstanciaOfModel(modelo);
             modelo.setTaskIsReady(false);
-            if (!modelo.getTableExist()) {
-                modelo.refresh();
-            }
+            modelo.validarTableExist(modelo);
             Callable<ResultAsync<T>> get = () -> {
                 T modeloTemp = modelo.obtenerInstanciaOfModel(modelo);
                 try {
@@ -222,9 +218,7 @@ class Get extends Methods_Conexion {
             modelo.llenarPropertiesFromModel(modelo);
         }
         modelo.setTaskIsReady(false);
-        if (!modelo.getTableExist()) {
-            modelo.refresh();
-        }
+        modelo.validarTableExist(modelo);
         modeloResult = modelo.obtenerInstanciaOfModel(modelo);
         Callable<ResultAsync<T>> get = () -> {
             T modeloTemp = modelo.obtenerInstanciaOfModel(modelo);
@@ -300,9 +294,7 @@ class Get extends Methods_Conexion {
         modelo.setTaskIsReady(false);
         List<T> lista = new ArrayList<>();
         try {
-            if (!modelo.getTableExist()) {
-                modelo.refresh();
-            }
+            modelo.validarTableExist(modelo);
             //T finalTemp = temp;
             Callable<ResultAsync<List<T>>> get = () -> {
                 List<T> listaTemp = new ArrayList<>();
@@ -397,9 +389,7 @@ class Get extends Methods_Conexion {
         this.setTaskIsReady(false);
         this.setTableName(tableName);
         try {
-            if (!this.getTableExist()) {
-                this.refresh();
-            }
+            this.validarTableExist(this);
             //T finalTemp = temp;
             Callable<ResultAsync<List<JSONObject>>> get = () -> {
                 List<JSONObject> temp = new ArrayList<>();
