@@ -1,3 +1,40 @@
+# Version: 1.2.0
+
+* [#76](https://github.com/Jbranadev/JBSqlUtils/pull/76): Bump org.mariadb.jdbc:mariadb-java-client from 3.1.4 to 3.2.0
+* [#77](https://github.com/Jbranadev/JBSqlUtils/pull/77): Bump org.apache.maven.plugins:maven-deploy-plugin from 2.8.2 to 3.1.1
+* [#78](https://github.com/Jbranadev/JBSqlUtils/pull/78): Bump actions/upload-artifact from 3.1.2 to 3.1.3
+* [#79](https://github.com/Jbranadev/JBSqlUtils/pull/79): Bump github/codeql-action from 2.2.4 to 2.21.5
+* [#80](https://github.com/Jbranadev/JBSqlUtils/pull/80): Bump actions/dependency-review-action from 2.5.1 to 3.1.0
+* [#81](https://github.com/Jbranadev/JBSqlUtils/pull/81): Bump actions/checkout from 3.1.0 to 4.0.0
+* [#82](https://github.com/Jbranadev/JBSqlUtils/pull/82): [StepSecurity] ci: Harden GitHub Actions
+* [#83](https://github.com/Jbranadev/JBSqlUtils/pull/83): Actualización Javadoc Badge
+* [#84](https://github.com/Jbranadev/JBSqlUtils/pull/84): Jbran integración docker
+* [#85](https://github.com/Jbranadev/JBSqlUtils/pull/85): Actualización Covertura de Test
+* [#86](https://github.com/Jbranadev/JBSqlUtils/pull/86): Refactorización de codigo, Cobertura de Test
+* [#87](https://github.com/Jbranadev/JBSqlUtils/pull/87): Refactorización de Código por Test
+* [#88](https://github.com/Jbranadev/JBSqlUtils/pull/88): Refactorización de codigo 3.0
+* [#89](https://github.com/Jbranadev/JBSqlUtils/pull/89): Actualización flujo de integración de mavenCI.yml
+* [#90](https://github.com/Jbranadev/JBSqlUtils/pull/90): Actualización TestSadDay
+* [#91](https://github.com/Jbranadev/JBSqlUtils/pull/91): Actualización Covertura de Test del 60 al 70 por ciento
+* [#92](https://github.com/Jbranadev/JBSqlUtils/pull/92): Actualización Covertura de Test del 66 al 70 por ciento
+* [#93](https://github.com/Jbranadev/JBSqlUtils/pull/93): Actualización Convertura de Test 1.0 11/09/2023
+* [#94](https://github.com/Jbranadev/JBSqlUtils/pull/94): Actualización Covertura de Test del 70 al 80 por ciento
+* [#95](https://github.com/Jbranadev/JBSqlUtils/pull/95): Bump github/codeql-action from 2.21.5 to 2.21.7
+* [#96](https://github.com/Jbranadev/JBSqlUtils/pull/96): Bump io.github.josecarlosbran:logsjbsupport from 1.0.0 to 1.0.1
+* [#97](https://github.com/Jbranadev/JBSqlUtils/pull/97): Actualización Mensajes Captura de Excepción y Formateo de código Java
+* [#98](https://github.com/Jbranadev/JBSqlUtils/pull/98): Actualización Convertura de Test A 80%
+* [#99](https://github.com/Jbranadev/JBSqlUtils/pull/99): Actualización Convertura de Test A 82%
+* [#100](https://github.com/Jbranadev/JBSqlUtils/pull/100): Actualización Covertura de codigo 88 Por Ciento
+* [#101](https://github.com/Jbranadev/JBSqlUtils/pull/101): Actualización Covertura de codigo 95 Por Ciento
+* [#102](https://github.com/Jbranadev/JBSqlUtils/pull/102): Se eliminan Comentarios y Reformatea el Codigo
+* [#103](https://github.com/Jbranadev/JBSqlUtils/pull/103): Corrección de obtencion variables de conexion y actualización covertu…
+* [#104](https://github.com/Jbranadev/JBSqlUtils/pull/104): Bump actions/setup-java from 3.12.0 to 3.13.0
+* [#105](https://github.com/Jbranadev/JBSqlUtils/pull/105): Bump github/codeql-action from 2.21.7 to 2.21.8
+* [#106](https://github.com/Jbranadev/JBSqlUtils/pull/106): Bump org.apache.maven.plugins:maven-javadoc-plugin from 3.5.0 to 3.6.0
+* [#107](https://github.com/Jbranadev/JBSqlUtils/pull/107): Bump org.projectlombok:lombok from 1.18.28 to 1.18.30
+* [#108](https://github.com/Jbranadev/JBSqlUtils/pull/108): Actualización covertura de Test a 95 Por Ciento
+
+
 # Version: 1.1.9
 
 * [#29](https://github.com/Jbranadev/JBSqlUtils/pull/29): Implementación deploy automated GitHub Actions

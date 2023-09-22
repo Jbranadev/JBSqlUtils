@@ -1,7 +1,5 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 
@@ -25,9 +23,7 @@ public class AddColumn extends Methods_Conexion {
      *
      * @param TableName El nombre de la tabla que se desea crear.
      * @param columna   Columna a agregar
-     * @throws ValorUndefined        Lanza esta excepción si el parametro proporcionado está vacío o es NULL
-     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
-     * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
+     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado está vacío o es NULL
      */
     protected AddColumn(String TableName, Column columna) throws ValorUndefined {
         super();
@@ -44,9 +40,7 @@ public class AddColumn extends Methods_Conexion {
      * @param TableName El nombre de la tabla que se desea crear.
      * @param columna   Columna a agregar
      * @param columnas  Lista de columnas que trae la sentencia previamente
-     * @throws ValorUndefined        Lanza esta excepción si el parametro proporcionado está vacío o es NULL
-     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
-     * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
+     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado está vacío o es NULL
      */
     protected AddColumn(String TableName, Column columna, List<Column> columnas) throws ValorUndefined {
         super();
@@ -64,9 +58,7 @@ public class AddColumn extends Methods_Conexion {
      *
      * @param columna Columna a agregar
      * @return retorna un objeto del tipo AddColumn que brinda la capacidad de dar una mayor logica a la operación de createTable
-     * @throws ValorUndefined        Lanza esta excepción si el parametro proporcionado está vacío o es NULL
-     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
-     * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
+     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado está vacío o es NULL
      */
     public AddColumn addColumn(Column columna) throws ValorUndefined {
         return new AddColumn(this.tableName, columna, this.columnas);

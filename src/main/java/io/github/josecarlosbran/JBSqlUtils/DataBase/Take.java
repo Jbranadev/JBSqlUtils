@@ -15,8 +15,6 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 
@@ -37,11 +35,7 @@ public class Take<T> extends MethodsTake {
      * @param limite     Entero que representa la cantidad maxima de valores recuperados.
      * @param modelo     Modelo que solicita la creación de esta clase
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     protected Take(String sql, int limite, T modelo, List<Column> parametros) throws ValorUndefined {
         super();
@@ -62,11 +56,7 @@ public class Take<T> extends MethodsTake {
      * @param modelo            Modelo que solicita la creación de esta clase
      * @param parametros        Lista de parametros a ser agregados a la sentencia SQL
      * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     protected Take(String sql, int limite, T modelo, List<Column> parametros, Boolean getPropertySystem) throws ValorUndefined {
         super(getPropertySystem);
@@ -85,11 +75,7 @@ public class Take<T> extends MethodsTake {
      * @param sql        Sentencia SQL a la cual se agregara la logica del limite.
      * @param limite     Entero que representa la cantidad maxima de valores recuperados.
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     protected Take(String sql, int limite, List<Column> parametros) throws ValorUndefined {
         super();

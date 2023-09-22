@@ -108,11 +108,6 @@ public class TestModel extends JBSqlUtils {
      * <p>
      * Es importante que antes de instanciar un modelo que herede la clase JBSqlUtils se hayan definido
      * las propiedades de conexión como variables del sistema.
-     *
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     public TestModel() throws DataBaseUndefind, PropertiesDBUndefined {
         /**
@@ -137,10 +132,6 @@ public class TestModel extends JBSqlUtils {
      * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema,
      *                          true si deseamos que obtenga las variables globales y false si deseamos que no obtenga las
      *                          variables globales
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     public TestModel(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
         super(getPropertySystem);

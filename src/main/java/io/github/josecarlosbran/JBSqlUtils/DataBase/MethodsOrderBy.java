@@ -1,9 +1,7 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 
 import java.util.List;
@@ -17,11 +15,6 @@ public class MethodsOrderBy<T> extends MethodsTake {
 
     /**
      * Constructor por default de la clase MethodsWhere, que inicializa la clase
-     *
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     protected MethodsOrderBy() {
         super();
@@ -31,10 +24,6 @@ public class MethodsOrderBy<T> extends MethodsTake {
      * Constructor por default de la clase MethodsWhere, que inicializa la clase
      *
      * @param getGetPropertiesSystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     protected MethodsOrderBy(Boolean getGetPropertiesSystem) {
         super(getGetPropertiesSystem);
@@ -48,11 +37,7 @@ public class MethodsOrderBy<T> extends MethodsTake {
      * SQL a ejecutar.
      *
      * @param limite Entero que representa la cantidad maxima de valores recuperados.
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     public Take take(int limite) throws ValorUndefined {
         if (Objects.isNull(this.modelo)) {
@@ -76,11 +61,7 @@ public class MethodsOrderBy<T> extends MethodsTake {
      * @param operador Operador con el cual se evaluara la columna
      * @param valor    Valor contra el que se evaluara la columna
      * @return objeto del tipo AND que permite agregar esta expresión a la sentencia SQL
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     public And and(String columna, Operator operador, Object valor) throws ValorUndefined {
         return new CommonsMethods().and(columna, operador, valor, this.sql, (JBSqlUtils) this.modelo, this.parametros, this.getGetPropertySystem());
@@ -93,11 +74,7 @@ public class MethodsOrderBy<T> extends MethodsTake {
      * @param operador Operador con el cual se evaluara la columna
      * @param valor    Valor contra el que se evaluara la columna
      * @return objeto del tipo OR que permite agregar esta expresión a la sentencia SQL
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     public Or or(String columna, Operator operador, Object valor) throws ValorUndefined {
         return new CommonsMethods().or(columna, operador, valor, this.sql, (JBSqlUtils) this.modelo, this.parametros, this.getGetPropertySystem());
@@ -111,11 +88,7 @@ public class MethodsOrderBy<T> extends MethodsTake {
      * @return Retorna un objeto OpenParentecis el cual proporciona acceso a los métodos necesarios
      * para filtrar de una mejor manera nuestra consulta, No olvide llamar al metodo close parentecis cuando
      * haya finalizado la logica dentro de sus parentecis
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     public openParentecis openParentecis(Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined {
         return new CommonsMethods().openParentecis(operatorPrev, columna, operador, valor, this.sql, (JBSqlUtils) this.modelo, this.parametros, this.getGetPropertySystem());
@@ -126,11 +99,7 @@ public class MethodsOrderBy<T> extends MethodsTake {
      *
      * @param operatorPost Operador a colocar despues del cierre de parentecis
      * @return Retorna un objeto closeParentecis, el cual da acceso al resto de métodos que podemos llamar.
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     public closeParentecis closeParentecis(Operator operatorPost) throws ValorUndefined {
         return new CommonsMethods().closeParentecis(operatorPost, this.sql, (JBSqlUtils) this.modelo, this.parametros, this.getGetPropertySystem());

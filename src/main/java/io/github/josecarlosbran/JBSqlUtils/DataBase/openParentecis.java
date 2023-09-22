@@ -1,8 +1,6 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 
@@ -29,9 +27,7 @@ public class openParentecis<T> extends MethodsOpenParentecis {
      * @param columna      Columna a evaluar dentro de la sentencia AND
      * @param operador     Operador con el cual se evaluara la columna
      * @param valor        Valor contra el que se evaluara la columna
-     * @throws ValorUndefined        Lanza esta excepción si el parametro proporcionado está vacío o es NULL
-     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
-     * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
+     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado está vacío o es NULL
      */
     protected openParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined {
         super();
@@ -63,9 +59,7 @@ public class openParentecis<T> extends MethodsOpenParentecis {
      * @param columna           Columna a evaluar dentro de la sentencia AND
      * @param operador          Operador con el cual se evaluara la columna
      * @param valor             Valor contra el que se evaluara la columna
-     * @throws ValorUndefined        Lanza esta excepción si el parametro proporcionado está vacío o es NULL
-     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
-     * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
+     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado está vacío o es NULL
      */
     protected openParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPrev, String columna, Operator operador, Object valor, Boolean getPropertySystem) throws ValorUndefined {
         super(getPropertySystem);
@@ -95,9 +89,7 @@ public class openParentecis<T> extends MethodsOpenParentecis {
      * @param columna      Columna a evaluar dentro de la sentencia AND
      * @param operador     Operador con el cual se evaluara la columna
      * @param valor        Valor contra el que se evaluara la columna
-     * @throws ValorUndefined        Lanza esta excepción si el parametro proporcionado está vacío o es NULL
-     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
-     * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
+     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado está vacío o es NULL
      */
     protected openParentecis(String sql, List<Column> parametros, Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined {
         super();
@@ -126,9 +118,7 @@ public class openParentecis<T> extends MethodsOpenParentecis {
      * @param columna    Columna a evaluar dentro de la sentencia AND
      * @param operador   Operador con el cual se evaluara la columna
      * @param valor      Valor contra el que se evaluara la columna
-     * @throws ValorUndefined        Lanza esta excepción si el parametro proporcionado está vacío o es NULL
-     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
-     * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
+     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado está vacío o es NULL
      */
     protected openParentecis(String sql, T modelo, List<Column> parametros, String columna, Operator operador, Object valor) throws ValorUndefined {
         super();
@@ -159,9 +149,7 @@ public class openParentecis<T> extends MethodsOpenParentecis {
      * @param operador          Operador con el cual se evaluara la columna
      * @param valor             Valor contra el que se evaluara la columna
      * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
-     * @throws ValorUndefined        Lanza esta excepción si el parametro proporcionado está vacío o es NULL
-     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
-     * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
+     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado está vacío o es NULL
      */
     protected openParentecis(String sql, T modelo, List<Column> parametros, String columna, Operator operador, Object valor, Boolean getPropertySystem) throws ValorUndefined {
         super(getPropertySystem);
@@ -190,9 +178,7 @@ public class openParentecis<T> extends MethodsOpenParentecis {
      * @param columna    Columna a evaluar dentro de la sentencia AND
      * @param operador   Operador con el cual se evaluara la columna
      * @param valor      Valor contra el que se evaluara la columna
-     * @throws ValorUndefined        Lanza esta excepción si el parametro proporcionado está vacío o es NULL
-     * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
-     * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
+     * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado está vacío o es NULL
      */
     protected openParentecis(String sql, List<Column> parametros, String columna, Operator operador, Object valor) throws ValorUndefined {
         super();
