@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static UtilidadesTest.Utilities.logParrafo;
 import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.dropTableIfExist;
@@ -734,5 +735,22 @@ public class JBSqlUtilsTestGodDay {
         logParrafo("Filas eliminadas en BD's: " + rowsDelete);
         Assert.assertTrue(false,
                 "No se Lanzo la exepción como se esperaba");
+    }
+
+    @Test(testName = "Setear Properties Conexión for Model", dependsOnMethods = "deleteJBSqlUtils1")
+    public void getPropertiesConexiontoModel() throws DataBaseUndefind, PropertiesDBUndefined {
+        this.testModel = new TestModel();
+        Assert.assertTrue(Objects.isNull(this.testModel.getPort()),
+                "La propiedad obtenida del modelo no es null");
+        Assert.assertTrue(Objects.isNull(this.testModel.getHost()),
+                "La propiedad obtenida del modelo no es null");
+        Assert.assertTrue(Objects.isNull(this.testModel.getUser()),
+                "La propiedad obtenida del modelo no es null");
+        Assert.assertTrue(Objects.isNull(this.testModel.getPassword()),
+                "La propiedad obtenida del modelo no es null");
+        Assert.assertTrue(Objects.isNull(this.testModel.getDataBaseType()),
+                "La propiedad obtenida del modelo no es null");
+        Assert.assertTrue(Objects.isNull(this.testModel.getBD()),
+                "La propiedad obtenida del modelo no es null");
     }
 }

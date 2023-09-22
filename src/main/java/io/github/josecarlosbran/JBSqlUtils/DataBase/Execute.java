@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 /**
@@ -68,44 +67,38 @@ class Execute extends Methods_Conexion {
      */
     protected int execute() throws Exception {
         int result = 0;
-        try {
-            Callable<ResultAsync<Integer>> Ejecutar_Sentencia = () -> {
-                try {
-                    Connection connect = this.getConnection();
-                    this.sql = this.sql + ";";
-                    //LogsJB.info(this.sql);
-                    PreparedStatement ejecutor = connect.prepareStatement(this.sql);
-                    //Setea los parametros de la consulta
-                    for (int i = 0; i < this.parametros.size(); i++) {
-                        //Obtengo la información de la columna
-                        Column columnsSQL = this.parametros.get(i);
-                        convertJavaToSQL(columnsSQL, ejecutor, i + 1);
-                    }
-                    LogsJB.info(ejecutor.toString());
-                    int filas = 0;
-                    filas = ejecutor.executeUpdate();
-                    LogsJB.info("Cantidad de filas afectadas: " + filas);
-                    this.closeConnection(connect);
-                    return new ResultAsync<>(filas, null);
-                } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que ejecuta la sentencia SQL transmitida, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                    LogsJB.fatal("Sentencia SQL: " + this.sql);
-                    return new ResultAsync<>(0, e);
+        Callable<ResultAsync<Integer>> Ejecutar_Sentencia = () -> {
+            try {
+                Connection connect = this.getConnection();
+                this.sql = this.sql + ";";
+                //LogsJB.info(this.sql);
+                PreparedStatement ejecutor = connect.prepareStatement(this.sql);
+                //Setea los parametros de la consulta
+                for (int i = 0; i < this.parametros.size(); i++) {
+                    //Obtengo la información de la columna
+                    Column columnsSQL = this.parametros.get(i);
+                    convertJavaToSQL(columnsSQL, ejecutor, i + 1);
                 }
-            };
-
-            Future<ResultAsync<Integer>> future = this.ejecutor.submit(Ejecutar_Sentencia);
-            while (!future.isDone()) {
+                LogsJB.info(ejecutor.toString());
+                int filas = 0;
+                filas = ejecutor.executeUpdate();
+                LogsJB.info("Cantidad de filas afectadas: " + filas);
+                this.closeConnection(connect);
+                return new ResultAsync<>(filas, null);
+            } catch (Exception e) {
+                LogsJB.fatal("Excepción disparada en el método que ejecuta la sentencia SQL transmitida, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                LogsJB.fatal("Sentencia SQL: " + this.sql);
+                return new ResultAsync<>(0, e);
             }
-
-            ResultAsync<Integer> resultado = future.get();
-            if (!Objects.isNull(resultado.getException())) {
-                throw resultado.getException();
-            }
-            result = resultado.getResult();
-        } catch (ExecutionException | InterruptedException e) {
-            LogsJB.fatal("Excepción disparada en el método que ejecuta la sentencia SQL transmitida, " + "Sentencia SQL: " + this.sql);
+        };
+        Future<ResultAsync<Integer>> future = this.ejecutor.submit(Ejecutar_Sentencia);
+        while (!future.isDone()) {
         }
+        ResultAsync<Integer> resultado = future.get();
+        if (!Objects.isNull(resultado.getException())) {
+            throw resultado.getException();
+        }
+        result = resultado.getResult();
         return result;
     }
 }
