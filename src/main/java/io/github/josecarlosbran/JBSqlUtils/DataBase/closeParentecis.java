@@ -1,8 +1,6 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 
@@ -21,11 +19,7 @@ public class closeParentecis<T> extends MethodsWhere {
      * @param sql        Sentencia SQL a la que se agregara el cierre de parentecis
      * @param modelo     Modelo que invocara los métodos de esta clase
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     protected closeParentecis(String sql, T modelo, List<Column> parametros) throws ValorUndefined {
         super();
@@ -41,11 +35,7 @@ public class closeParentecis<T> extends MethodsWhere {
      * @param modelo                 Modelo que invocara los métodos de esta clase
      * @param parametros             Lista de parametros a ser agregados a la sentencia SQL
      * @param getGetPropertiesSystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     protected closeParentecis(String sql, T modelo, List<Column> parametros, Boolean getGetPropertiesSystem) throws ValorUndefined {
         super(getGetPropertiesSystem);
@@ -59,10 +49,6 @@ public class closeParentecis<T> extends MethodsWhere {
      *
      * @param sql        Sentencia SQL a la que se agregara el cierre de parentecis
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     protected closeParentecis(String sql, List<Column> parametros) {
         super();
@@ -77,11 +63,7 @@ public class closeParentecis<T> extends MethodsWhere {
      * @param modelo       Modelo que invocara los métodos de esta clase
      * @param parametros   Lista de parametros a ser agregados a la sentencia SQL
      * @param operatorPost Operador posterior a colocar despues del cierre de parentecis
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     protected closeParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPost) throws ValorUndefined {
         super();
@@ -98,11 +80,7 @@ public class closeParentecis<T> extends MethodsWhere {
      * @param parametros             Lista de parametros a ser agregados a la sentencia SQL
      * @param operatorPost           Operador posterior a colocar despues del cierre de parentecis
      * @param getGetPropertiesSystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     protected closeParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPost, Boolean getGetPropertiesSystem) throws ValorUndefined {
         super(getGetPropertiesSystem);
@@ -117,10 +95,6 @@ public class closeParentecis<T> extends MethodsWhere {
      * @param sql          Sentencia SQL a la que se agregara el cierre de parentecis
      * @param parametros   Lista de parametros a ser agregados a la sentencia SQL
      * @param operatorPost Operador posterior a colocar despues del cierre de parentecis
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     protected closeParentecis(String sql, List<Column> parametros, Operator operatorPost) {
         super();

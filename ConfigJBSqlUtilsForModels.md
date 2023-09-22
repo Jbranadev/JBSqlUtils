@@ -59,8 +59,8 @@ public class Test extends JBSqlUtils {
     * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema,
     *                          true si deseamos que obtenga las variables globales y false si deseamos que no obtenga las 
     *                          variables globales
-    * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-    *                               BD's a la cual se conectara el modelo.
+    
+    
     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
     */

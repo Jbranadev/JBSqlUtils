@@ -17,8 +17,6 @@ package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import org.apache.commons.lang3.StringUtils;
@@ -41,11 +39,6 @@ class Methods extends Methods_Conexion {
 
     /**
      * Constructor por default de la clase Methods
-     *
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     protected Methods() {
         super();
@@ -55,10 +48,6 @@ class Methods extends Methods_Conexion {
      * Constructor por default de la clase Methods
      *
      * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     protected Methods(Boolean getPropertySystem) {
         super(getPropertySystem);
@@ -190,12 +179,8 @@ class Methods extends Methods_Conexion {
      * @param valor    Valor contra el cual se evaluara la columna
      * @return Punto de entrada a metodos que permiten seguir modificando la expresión de filtro u obtener el o los
      * modelos que hacen match con la consulta generada
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
-     * @throws ValorUndefined        Lanza esta excepción si alguno de los parametros proporcionados esta
-     *                               Vacío o es Null
+     * @throws ValorUndefined Lanza esta excepción si alguno de los parametros proporcionados esta
+     *                        Vacío o es Null
      */
     public Where where(String columna, Operator operador, Object valor) throws ValorUndefined {
         if (!this.getGetPropertySystem()) {

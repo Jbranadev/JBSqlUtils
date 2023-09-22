@@ -16,8 +16,6 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 
@@ -41,11 +39,7 @@ public class Where<T> extends MethodsWhere {
      * @param operador Operador con el cual se evaluara la columna
      * @param valor    Valor contra el que se evaluara la columna
      * @param modelo   Modelo que invocara los métodos de esta clase
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     protected Where(String columna, Operator operador, Object valor, T modelo) throws ValorUndefined {
         super();
@@ -71,11 +65,7 @@ public class Where<T> extends MethodsWhere {
      * @param valor             Valor contra el que se evaluara la columna
      * @param modelo            Modelo que invocara los métodos de esta clase
      * @param getPropertySystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     protected Where(String columna, Operator operador, Object valor, T modelo, Boolean getPropertySystem) throws ValorUndefined {
         super(getPropertySystem);
@@ -100,11 +90,7 @@ public class Where<T> extends MethodsWhere {
      * @param operador Operador con el cual se evaluara la columna
      * @param valor    Valor contra el que se evaluara la columna
      * @param sql      Sentencia SQL a la cual se agregara la Sentencia WHERE
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     protected Where(String columna, Operator operador, Object valor, String sql, List<Column> parametros) throws ValorUndefined {
         super();
@@ -129,11 +115,7 @@ public class Where<T> extends MethodsWhere {
      * @param operador Operador con el cual se evaluara la columna
      * @param valor    Valor contra el que se evaluara la columna
      * @param sql      Sentencia SQL a la cual se agregara la Sentencia WHERE
-     * @throws ValorUndefined        Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
      */
     protected Where(String columna, Operator operador, Object valor, String sql) throws ValorUndefined {
         super();
