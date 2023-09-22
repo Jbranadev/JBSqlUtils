@@ -30,7 +30,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.*;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 /**
@@ -109,7 +108,6 @@ class Methods extends Methods_Conexion {
                 LogsJB.debug("Obtendra la información de conexión de la BD's: " + modelo.getClass().getSimpleName());
                 modelo.refresh();
                 modelo.waitOperationComplete();
-
                 LogsJB.debug("Ya obtuvo la información de BD's");
                 temp.setTabla(modelo.getTabla());
                 temp.setTableExist(modelo.getTableExist());
@@ -163,7 +161,6 @@ class Methods extends Methods_Conexion {
                 LogsJB.debug("Obtendra la información de conexión de la BD's: " + modelo.getClass().getSimpleName());
                 modelo.refresh();
                 modelo.waitOperationComplete();
-
                 LogsJB.debug("Ya obtuvo la información de BD's");
                 temp.setTableExist(modelo.getTableExist());
                 temp.setTableName(modelo.getTableName());
@@ -221,48 +218,42 @@ class Methods extends Methods_Conexion {
     public <T extends JBSqlUtils> List<T> getAll() throws Exception {
         this.setTaskIsReady(false);
         List<T> lista = new ArrayList<T>();
-        try {
-            this.validarTableExist(this);
-            Callable<ResultAsync<List<T>>> get = () -> {
-                List<T> listatemp = new ArrayList<T>();
-                try {
-                    if (this.getTableExist()) {
-                        String sql = "SELECT * FROM " + this.getTableName();
-                        sql = sql + ";";
-                        LogsJB.info(sql);
-                        Connection connect = this.getConnection();
-                        PreparedStatement ejecutor = connect.prepareStatement(sql);
-                        ResultSet registros = ejecutor.executeQuery();
-                        while (registros.next()) {
-                            listatemp.add(procesarResultSet((T) this, registros));
-                        }
-                        this.closeConnection(connect);
-                        return new ResultAsync<>(listatemp, null);
-                    } else {
-                        LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
-                                "recuperar el Registro: " + this.getTableName());
-                        return new ResultAsync<>(listatemp, null);
+        this.validarTableExist(this);
+        Callable<ResultAsync<List<T>>> get = () -> {
+            List<T> listatemp = new ArrayList<T>();
+            try {
+                if (this.getTableExist()) {
+                    String sql = "SELECT * FROM " + this.getTableName();
+                    sql = sql + ";";
+                    LogsJB.info(sql);
+                    Connection connect = this.getConnection();
+                    PreparedStatement ejecutor = connect.prepareStatement(sql);
+                    ResultSet registros = ejecutor.executeQuery();
+                    while (registros.next()) {
+                        listatemp.add(procesarResultSet((T) this, registros));
                     }
-                } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
-                            "SQL de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                    return new ResultAsync<>(listatemp, e);
+                    this.closeConnection(connect);
+                    return new ResultAsync<>(listatemp, null);
+                } else {
+                    LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
+                            "recuperar el Registro: " + this.getTableName());
+                    return new ResultAsync<>(listatemp, null);
                 }
-            };
-
-            Future<ResultAsync<List<T>>> future = this.ejecutor.submit(get);
-            while (!future.isDone()) {
+            } catch (Exception e) {
+                LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
+                        "SQL de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                return new ResultAsync<>(listatemp, e);
             }
-
-            ResultAsync<List<T>> resultado = future.get();
-            this.setTaskIsReady(true);
-            if (!Objects.isNull(resultado.getException())) {
-                throw resultado.getException();
-            }
-            lista = resultado.getResult();
-        } catch (ExecutionException | InterruptedException e) {
-            LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+        };
+        Future<ResultAsync<List<T>>> future = this.ejecutor.submit(get);
+        while (!future.isDone()) {
         }
+        ResultAsync<List<T>> resultado = future.get();
+        this.setTaskIsReady(true);
+        if (!Objects.isNull(resultado.getException())) {
+            throw resultado.getException();
+        }
+        lista = resultado.getResult();
         return lista;
     }
 

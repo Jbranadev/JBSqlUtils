@@ -356,7 +356,6 @@ class Conexion {
     private String setearBD() throws PropertiesDBUndefined {
         String DB = null;
         DB = System.getProperty(ConeccionProperties.DBNAME.getPropiertie());
-
         if (stringIsNullOrEmpty(DB)) {
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new PropertiesDBUndefined("No se a seteado la BD's a la cual deseamos se pegue JBSqlUtils");
@@ -407,21 +406,25 @@ class Conexion {
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new DataBaseUndefind("No se a seteado la DataBase que índica a que BD's deseamos se pegue JBSqlUtils");
         }
-        //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
-        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-        String clase = null;
-        String clase2 = Methods_Conexion.class.getName();
-        String clase3 = Conexion.class.getName();
-        String clase4 = Get.class.getName();
-        for (int i = 3; i >= 0; i--) {
-            clase = "invalid";
-            clase = elements[i].getClassName();
-            if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
-                break;
+        try {
+            //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
+            StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+            String clase = null;
+            int posicion = 0;
+            for (int i = 3; i <= 7; i += 2) {
+                clase = elements[i].getClassName();
+                Class<?> tempClass = Class.forName(clase);
+                if (tempClass.getPackage().hashCode() == Conexion.class.getPackage().hashCode()) {
+                    posicion = i;
+                    break;
+                }
             }
-        }
-        if (!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)) {
-            return null;
+            clase = elements[posicion].getClassName();
+            Class<?> tempClass = Class.forName(clase);
+            if (tempClass.getPackage().hashCode() != Conexion.class.getPackage().hashCode()) {
+                return null;
+            }
+        } catch (ClassNotFoundException e) {
         }
         return this.dataBaseType;
     }
@@ -455,21 +458,25 @@ class Conexion {
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new PropertiesDBUndefined("No se a seteado el host en el que se encuentra la BD's a la cual deseamos se pegue JBSqlUtils");
         }
-        //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
-        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-        String clase = null;
-        String clase2 = Methods_Conexion.class.getName();
-        String clase3 = Conexion.class.getName();
-        String clase4 = Get.class.getName();
-        for (int i = 3; i >= 0; i--) {
-            clase = "invalid";
-            clase = elements[i].getClassName();
-            if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
-                break;
+        try {
+            //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
+            StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+            String clase = null;
+            int posicion = 0;
+            for (int i = 3; i <= 7; i += 2) {
+                clase = elements[i].getClassName();
+                Class<?> tempClass = Class.forName(clase);
+                if (tempClass.getPackage().hashCode() == Conexion.class.getPackage().hashCode()) {
+                    posicion = i;
+                    break;
+                }
             }
-        }
-        if (!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)) {
-            return null;
+            clase = elements[posicion].getClassName();
+            Class<?> tempClass = Class.forName(clase);
+            if (tempClass.getPackage().hashCode() != Conexion.class.getPackage().hashCode()) {
+                return null;
+            }
+        } catch (ClassNotFoundException e) {
         }
         return this.host;
     }
@@ -499,21 +506,25 @@ class Conexion {
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new PropertiesDBUndefined("No se a seteado el puerto en el que se encuentra escuchando la BD's a la cual deseamos se pegue JBSqlUtils");
         }
-        //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
-        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-        String clase = null;
-        String clase2 = Methods_Conexion.class.getName();
-        String clase3 = Conexion.class.getName();
-        String clase4 = Get.class.getName();
-        for (int i = 3; i >= 0; i--) {
-            clase = "invalid";
-            clase = elements[i].getClassName();
-            if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
-                break;
+        try {
+            //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
+            StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+            String clase = null;
+            int posicion = 0;
+            for (int i = 3; i <= 7; i += 2) {
+                clase = elements[i].getClassName();
+                Class<?> tempClass = Class.forName(clase);
+                if (tempClass.getPackage().hashCode() == Conexion.class.getPackage().hashCode()) {
+                    posicion = i;
+                    break;
+                }
             }
-        }
-        if (!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)) {
-            return null;
+            clase = elements[posicion].getClassName();
+            Class<?> tempClass = Class.forName(clase);
+            if (tempClass.getPackage().hashCode() != Conexion.class.getPackage().hashCode()) {
+                return null;
+            }
+        } catch (ClassNotFoundException e) {
         }
         return this.port;
     }
@@ -543,21 +554,25 @@ class Conexion {
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new PropertiesDBUndefined("No se a seteado el usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
         }
-        //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
-        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-        String clase = null;
-        String clase2 = Methods_Conexion.class.getName();
-        String clase3 = Conexion.class.getName();
-        String clase4 = Get.class.getName();
-        for (int i = 3; i >= 0; i--) {
-            clase = "invalid";
-            clase = elements[i].getClassName();
-            if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
-                break;
+        try {
+            //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
+            StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+            String clase = null;
+            int posicion = 0;
+            for (int i = 3; i <= 7; i += 2) {
+                clase = elements[i].getClassName();
+                Class<?> tempClass = Class.forName(clase);
+                if (tempClass.getPackage().hashCode() == Conexion.class.getPackage().hashCode()) {
+                    posicion = i;
+                    break;
+                }
             }
-        }
-        if (!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)) {
-            return null;
+            clase = elements[posicion].getClassName();
+            Class<?> tempClass = Class.forName(clase);
+            if (tempClass.getPackage().hashCode() != Conexion.class.getPackage().hashCode()) {
+                return null;
+            }
+        } catch (ClassNotFoundException e) {
         }
         return this.user;
     }
@@ -587,21 +602,25 @@ class Conexion {
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new PropertiesDBUndefined("No se a seteado la contraseña del usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
         }
-        //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
-        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-        String clase = null;
-        String clase2 = Methods_Conexion.class.getName();
-        String clase3 = Conexion.class.getName();
-        String clase4 = Get.class.getName();
-        for (int i = 3; i >= 0; i--) {
-            clase = "invalid";
-            clase = elements[i].getClassName();
-            if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
-                break;
+        try {
+            //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
+            StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+            String clase = null;
+            int posicion = 0;
+            for (int i = 3; i <= 7; i += 2) {
+                clase = elements[i].getClassName();
+                Class<?> tempClass = Class.forName(clase);
+                if (tempClass.getPackage().hashCode() == Conexion.class.getPackage().hashCode()) {
+                    posicion = i;
+                    break;
+                }
             }
-        }
-        if (!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)) {
-            return null;
+            clase = elements[posicion].getClassName();
+            Class<?> tempClass = Class.forName(clase);
+            if (tempClass.getPackage().hashCode() != Conexion.class.getPackage().hashCode()) {
+                return null;
+            }
+        } catch (ClassNotFoundException e) {
         }
         return this.password;
     }
@@ -627,21 +646,25 @@ class Conexion {
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new PropertiesDBUndefined("No se a seteado la BD's a la cual deseamos se pegue JBSqlUtils");
         }
-        //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
-        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-        String clase = null;
-        String clase2 = Methods_Conexion.class.getName();
-        String clase3 = Conexion.class.getName();
-        String clase4 = Get.class.getName();
-        for (int i = 3; i >= 0; i--) {
-            clase = "invalid";
-            clase = elements[i].getClassName();
-            if (clase.equalsIgnoreCase(clase2) || clase.equalsIgnoreCase(clase3) || clase.equalsIgnoreCase(clase4)) {
-                break;
+        try {
+            //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
+            StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+            String clase = null;
+            int posicion = 0;
+            for (int i = 3; i <= 7; i += 2) {
+                clase = elements[i].getClassName();
+                Class<?> tempClass = Class.forName(clase);
+                if (tempClass.getPackage().hashCode() == Conexion.class.getPackage().hashCode()) {
+                    posicion = i;
+                    break;
+                }
             }
-        }
-        if (!clase.equalsIgnoreCase(clase2) && !clase.equalsIgnoreCase(clase3) && !clase.equalsIgnoreCase(clase4)) {
-            return null;
+            clase = elements[posicion].getClassName();
+            Class<?> tempClass = Class.forName(clase);
+            if (tempClass.getPackage().hashCode() != Conexion.class.getPackage().hashCode()) {
+                return null;
+            }
+        } catch (ClassNotFoundException e) {
         }
         return this.BD;
     }

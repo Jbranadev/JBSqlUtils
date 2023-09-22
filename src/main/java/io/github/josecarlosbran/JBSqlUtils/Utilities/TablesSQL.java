@@ -161,7 +161,6 @@ public class TablesSQL {
     public void setTABLE_NAME(String TABLE_NAME) {
         this.TABLE_NAME = TABLE_NAME;
     }
-
     /**
      * Obtiene el tipo de tabla que es.
      *

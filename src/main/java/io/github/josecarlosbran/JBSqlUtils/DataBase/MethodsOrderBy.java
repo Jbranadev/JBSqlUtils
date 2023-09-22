@@ -60,7 +60,6 @@ public class MethodsOrderBy<T> extends MethodsTake {
         } else {
             if (!this.getGetPropertySystem()) {
                 Take take = new Take(this.sql, limite, this.modelo, this.parametros, false);
-
                 return take;
             }
             return new Take(this.sql, limite, this.modelo, this.parametros);

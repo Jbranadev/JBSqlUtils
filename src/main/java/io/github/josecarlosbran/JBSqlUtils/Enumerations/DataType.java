@@ -91,7 +91,6 @@ public enum DataType {
      * Valor de coma flotante
      */
     FLOAT("", 4),
-
     /**
      * Gran valor de punto flotante
      */

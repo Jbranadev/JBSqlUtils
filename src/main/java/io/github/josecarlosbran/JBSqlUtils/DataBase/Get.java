@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 /**
@@ -83,51 +82,45 @@ class Get extends Methods_Conexion {
             modelo.setGetPropertySystem(false);
             modelo.llenarPropertiesFromModel(modelo);
         }
-        try {
-            modelo.setTaskIsReady(false);
-            modelo.validarTableExist(modelo);
-            Callable<ResultAsync<Boolean>> get = () -> {
-                try {
-                    if (modelo.getTableExist()) {
-                        String sql = "SELECT * FROM " + modelo.getTableName();
-                        sql = sql + Sql + ";";
-                        LogsJB.info(sql);
-                        Connection connect = modelo.getConnection();
-                        PreparedStatement ejecutor = connect.prepareStatement(sql);
-                        for (int i = 0; i < parametros.size(); i++) {
-                            //Obtengo la información de la columna
-                            Column columnsSQL = parametros.get(i);
-                            convertJavaToSQL(columnsSQL, ejecutor, i + 1);
-                        }
-                        LogsJB.info(ejecutor.toString());
-                        ResultSet registros = ejecutor.executeQuery();
-                        while (registros.next()) {
-                            procesarResultSetOneResult(modelo, registros);
-                        }
-                        modelo.closeConnection(connect);
-                    } else {
-                        LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
-                                "recuperar el Registro");
+        modelo.setTaskIsReady(false);
+        modelo.validarTableExist(modelo);
+        Callable<ResultAsync<Boolean>> get = () -> {
+            try {
+                if (modelo.getTableExist()) {
+                    String sql = "SELECT * FROM " + modelo.getTableName();
+                    sql = sql + Sql + ";";
+                    LogsJB.info(sql);
+                    Connection connect = modelo.getConnection();
+                    PreparedStatement ejecutor = connect.prepareStatement(sql);
+                    for (int i = 0; i < parametros.size(); i++) {
+                        //Obtengo la información de la columna
+                        Column columnsSQL = parametros.get(i);
+                        convertJavaToSQL(columnsSQL, ejecutor, i + 1);
                     }
-                    modelo.setTaskIsReady(true);
-                    return new ResultAsync<>(true, null);
-                } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                    modelo.setTaskIsReady(true);
-                    return new ResultAsync<>(true, e);
+                    LogsJB.info(ejecutor.toString());
+                    ResultSet registros = ejecutor.executeQuery();
+                    while (registros.next()) {
+                        procesarResultSetOneResult(modelo, registros);
+                    }
+                    modelo.closeConnection(connect);
+                } else {
+                    LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
+                            "recuperar el Registro");
                 }
-            };
-
-            Future<ResultAsync<Boolean>> future = this.ejecutor.submit(get);
-            while (!future.isDone()) {
+                modelo.setTaskIsReady(true);
+                return new ResultAsync<>(true, null);
+            } catch (Exception e) {
+                LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                modelo.setTaskIsReady(true);
+                return new ResultAsync<>(true, e);
             }
-
-            ResultAsync<Boolean> resultado = future.get();
-            if (!Objects.isNull(resultado.getException())) {
-                throw resultado.getException();
-            }
-        } catch (ExecutionException | InterruptedException e) {
-            LogsJB.fatal("Excepción disparada en el método que obtiene el modelo en la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+        };
+        Future<ResultAsync<Boolean>> future = this.ejecutor.submit(get);
+        while (!future.isDone()) {
+        }
+        ResultAsync<Boolean> resultado = future.get();
+        if (!Objects.isNull(resultado.getException())) {
+            throw resultado.getException();
         }
     }
 
@@ -148,55 +141,49 @@ class Get extends Methods_Conexion {
             modelo.setGetPropertySystem(false);
             modelo.llenarPropertiesFromModel(modelo);
         }
-        try {
-            modeloResult = modelo.obtenerInstanciaOfModel(modelo);
-            modelo.setTaskIsReady(false);
-            modelo.validarTableExist(modelo);
-            Callable<ResultAsync<T>> get = () -> {
-                T modeloTemp = modelo.obtenerInstanciaOfModel(modelo);
-                try {
-                    if (modelo.getTableExist()) {
-                        String sql = "SELECT * FROM " + modelo.getTableName();
-                        sql = sql + Sql + ";";
-                        //LogsJB.info(sql);
-                        Connection connect = modelo.getConnection();
-                        PreparedStatement ejecutor = connect.prepareStatement(sql);
-                        for (int i = 0; i < parametros.size(); i++) {
-                            //Obtengo la información de la columna
-                            Column columnsSQL = parametros.get(i);
-                            convertJavaToSQL(columnsSQL, ejecutor, i + 1);
-                        }
-                        LogsJB.info(ejecutor.toString());
-                        ResultSet registros = ejecutor.executeQuery();
-                        if (registros.next()) {
-                            modeloTemp = procesarResultSet(modelo, registros);
-                        }
-                        modelo.closeConnection(connect);
-                    } else {
-                        LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
-                                "recuperar el Registro");
+        modeloResult = modelo.obtenerInstanciaOfModel(modelo);
+        modelo.setTaskIsReady(false);
+        modelo.validarTableExist(modelo);
+        Callable<ResultAsync<T>> get = () -> {
+            T modeloTemp = modelo.obtenerInstanciaOfModel(modelo);
+            try {
+                if (modelo.getTableExist()) {
+                    String sql = "SELECT * FROM " + modelo.getTableName();
+                    sql = sql + Sql + ";";
+                    //LogsJB.info(sql);
+                    Connection connect = modelo.getConnection();
+                    PreparedStatement ejecutor = connect.prepareStatement(sql);
+                    for (int i = 0; i < parametros.size(); i++) {
+                        //Obtengo la información de la columna
+                        Column columnsSQL = parametros.get(i);
+                        convertJavaToSQL(columnsSQL, ejecutor, i + 1);
                     }
-                    modelo.setTaskIsReady(true);
-                    return new ResultAsync<>(modeloTemp, null);
-                } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                    modelo.setTaskIsReady(true);
-                    return new ResultAsync<>(modeloTemp, e);
+                    LogsJB.info(ejecutor.toString());
+                    ResultSet registros = ejecutor.executeQuery();
+                    if (registros.next()) {
+                        modeloTemp = procesarResultSet(modelo, registros);
+                    }
+                    modelo.closeConnection(connect);
+                } else {
+                    LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
+                            "recuperar el Registro");
                 }
-            };
-
-            Future<ResultAsync<T>> future = this.ejecutor.submit(get);
-            while (!future.isDone()) {
+                modelo.setTaskIsReady(true);
+                return new ResultAsync<>(modeloTemp, null);
+            } catch (Exception e) {
+                LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                modelo.setTaskIsReady(true);
+                return new ResultAsync<>(modeloTemp, e);
             }
-
-            ResultAsync<T> resultado = future.get();
-            if (!Objects.isNull(resultado.getException())) {
-                throw resultado.getException();
-            }
-            modeloResult = resultado.getResult();
-        } catch (ExecutionException | InterruptedException e) {
-            LogsJB.fatal("Excepción disparada en el método que obtiene el modelo en la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+        };
+        Future<ResultAsync<T>> future = this.ejecutor.submit(get);
+        while (!future.isDone()) {
         }
+        ResultAsync<T> resultado = future.get();
+        if (!Objects.isNull(resultado.getException())) {
+            throw resultado.getException();
+        }
+        modeloResult = resultado.getResult();
         return modeloResult;
     }
 
@@ -254,11 +241,9 @@ class Get extends Methods_Conexion {
                 return new ResultAsync<>(modeloTemp, e);
             }
         };
-
         Future<ResultAsync<T>> future = this.ejecutor.submit(get);
         while (!future.isDone()) {
         }
-
         ResultAsync<T> resultado = future.get();
         if (!Objects.isNull(resultado.getException())) {
             throw resultado.getException();
@@ -293,79 +278,72 @@ class Get extends Methods_Conexion {
         }
         modelo.setTaskIsReady(false);
         List<T> lista = new ArrayList<>();
-        try {
-            modelo.validarTableExist(modelo);
-
-            Callable<ResultAsync<List<T>>> get = () -> {
-                List<T> listaTemp = new ArrayList<>();
-                try {
-                    if (modelo.getTableExist()) {
-                        String sql = "SELECT * FROM " + modelo.getTableName();
-                        sql = sql + Sql + ";";
-                        //Si es sql server y trae la palabra limit verificara y modificara la sentencia
-                        if (modelo.getDataBaseType() == DataBase.SQLServer) {
-                            if (StringUtils.containsIgnoreCase(sql, "LIMIT")) {
-                                String temporal;
-                                LogsJB.debug("Sentencia SQL a modificar: " + sql);
-                                int indice_limite = StringUtils.lastIndexOfIgnoreCase(sql, "LIMIT");
-                                LogsJB.debug("Indice limite: " + indice_limite);
-                                LogsJB.debug("Longitud de la sentencia: " + sql.length());
-                                String temporal_limite = StringUtils.substring(sql, indice_limite);
-                                sql = sql.replace(temporal_limite, ";");
-                                LogsJB.debug("Sentencia SQL despues de eliminar el limite: " + sql);
-                                LogsJB.trace("Temporal Limite: " + temporal_limite);
-                                temporal_limite = StringUtils.remove(temporal_limite, "LIMIT");
-                                LogsJB.trace("Temporal Limite: " + temporal_limite);
-                                temporal_limite = StringUtils.remove(temporal_limite, ";");
-                                LogsJB.trace("Temporal Limite: " + temporal_limite);
-                                temporal = sql;
-                                LogsJB.trace("Temporal SQL: " + temporal);
-                                String select = "SELECT TOP " + temporal_limite + " * FROM ";
-                                sql = temporal.replace("SELECT * FROM ", select);
-                                LogsJB.debug("Se modifico la sentencia SQL para que unicamente obtenga la cantidad de " +
-                                        "registros especificados por el usuario: " + sql);
-                            }
+        modelo.validarTableExist(modelo);
+        Callable<ResultAsync<List<T>>> get = () -> {
+            List<T> listaTemp = new ArrayList<>();
+            try {
+                if (modelo.getTableExist()) {
+                    String sql = "SELECT * FROM " + modelo.getTableName();
+                    sql = sql + Sql + ";";
+                    //Si es sql server y trae la palabra limit verificara y modificara la sentencia
+                    if (modelo.getDataBaseType() == DataBase.SQLServer) {
+                        if (StringUtils.containsIgnoreCase(sql, "LIMIT")) {
+                            String temporal;
+                            LogsJB.debug("Sentencia SQL a modificar: " + sql);
+                            int indice_limite = StringUtils.lastIndexOfIgnoreCase(sql, "LIMIT");
+                            LogsJB.debug("Indice limite: " + indice_limite);
+                            LogsJB.debug("Longitud de la sentencia: " + sql.length());
+                            String temporal_limite = StringUtils.substring(sql, indice_limite);
+                            sql = sql.replace(temporal_limite, ";");
+                            LogsJB.debug("Sentencia SQL despues de eliminar el limite: " + sql);
+                            LogsJB.trace("Temporal Limite: " + temporal_limite);
+                            temporal_limite = StringUtils.remove(temporal_limite, "LIMIT");
+                            LogsJB.trace("Temporal Limite: " + temporal_limite);
+                            temporal_limite = StringUtils.remove(temporal_limite, ";");
+                            LogsJB.trace("Temporal Limite: " + temporal_limite);
+                            temporal = sql;
+                            LogsJB.trace("Temporal SQL: " + temporal);
+                            String select = "SELECT TOP " + temporal_limite + " * FROM ";
+                            sql = temporal.replace("SELECT * FROM ", select);
+                            LogsJB.debug("Se modifico la sentencia SQL para que unicamente obtenga la cantidad de " +
+                                    "registros especificados por el usuario: " + sql);
                         }
-                        //LogsJB.info(sql);
-                        Connection connect = modelo.getConnection();
-                        PreparedStatement ejecutor = connect.prepareStatement(sql);
-                        for (int i = 0; i < parametros.size(); i++) {
-                            //Obtengo la información de la columna
-                            Column columnsSQL = parametros.get(i);
-                            convertJavaToSQL(columnsSQL, ejecutor, i + 1);
-                        }
-                        LogsJB.info(ejecutor.toString());
-                        ResultSet registros = ejecutor.executeQuery();
-                        while (registros.next()) {
-                            listaTemp.add(procesarResultSet(modelo, registros));
-                        }
-                        modelo.closeConnection(connect);
-                    } else {
-                        LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
-                                "recuperar el Registro");
                     }
-                    modelo.setTaskIsReady(true);
-                    return new ResultAsync(listaTemp, null);
-                } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
-                            "SQL de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                    modelo.setTaskIsReady(true);
-                    return new ResultAsync(listaTemp, e);
+                    //LogsJB.info(sql);
+                    Connection connect = modelo.getConnection();
+                    PreparedStatement ejecutor = connect.prepareStatement(sql);
+                    for (int i = 0; i < parametros.size(); i++) {
+                        //Obtengo la información de la columna
+                        Column columnsSQL = parametros.get(i);
+                        convertJavaToSQL(columnsSQL, ejecutor, i + 1);
+                    }
+                    LogsJB.info(ejecutor.toString());
+                    ResultSet registros = ejecutor.executeQuery();
+                    while (registros.next()) {
+                        listaTemp.add(procesarResultSet(modelo, registros));
+                    }
+                    modelo.closeConnection(connect);
+                } else {
+                    LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
+                            "recuperar el Registro");
                 }
-            };
-
-            Future<ResultAsync<List<T>>> future = this.ejecutor.submit(get);
-            while (!future.isDone()) {
+                modelo.setTaskIsReady(true);
+                return new ResultAsync(listaTemp, null);
+            } catch (Exception e) {
+                LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
+                        "SQL de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                modelo.setTaskIsReady(true);
+                return new ResultAsync(listaTemp, e);
             }
-
-            ResultAsync<List<T>> resultado = future.get();
-            if (!Objects.isNull(resultado.getException())) {
-                throw resultado.getException();
-            }
-            lista = resultado.getResult();
-        } catch (ExecutionException | InterruptedException e) {
-            LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+        };
+        Future<ResultAsync<List<T>>> future = this.ejecutor.submit(get);
+        while (!future.isDone()) {
         }
+        ResultAsync<List<T>> resultado = future.get();
+        if (!Objects.isNull(resultado.getException())) {
+            throw resultado.getException();
+        }
+        lista = resultado.getResult();
         return lista;
     }
 
@@ -387,80 +365,73 @@ class Get extends Methods_Conexion {
         String tableName = Sql.replace("SELECT * FROM ", "").split(" ")[0];
         this.setTaskIsReady(false);
         this.setTableName(tableName);
-        try {
-            this.validarTableExist(this);
-
-            Callable<ResultAsync<List<JSONObject>>> get = () -> {
-                List<JSONObject> temp = new ArrayList<>();
-                try {
-                    if (this.getTableExist()) {
-                        String sql = Sql + ";";
-                        //Si es sql server y trae la palabra limit verificara y modificara la sentencia
-                        if (this.getDataBaseType() == DataBase.SQLServer) {
-                            if (StringUtils.containsIgnoreCase(sql, "LIMIT")) {
-                                String temporal;
-                                LogsJB.debug("Sentencia SQL a modificar: " + sql);
-                                int indice_limite = StringUtils.lastIndexOfIgnoreCase(sql, "LIMIT");
-                                LogsJB.debug("Indice limite: " + indice_limite);
-                                LogsJB.debug("Longitud de la sentencia: " + sql.length());
-                                String temporal_limite = StringUtils.substring(sql, indice_limite);
-                                sql = sql.replace(temporal_limite, ";");
-                                LogsJB.debug("Sentencia SQL despues de eliminar el limite: " + sql);
-                                LogsJB.trace("Temporal Limite: " + temporal_limite);
-                                temporal_limite = StringUtils.remove(temporal_limite, "LIMIT");
-                                LogsJB.trace("Temporal Limite: " + temporal_limite);
-                                temporal_limite = StringUtils.remove(temporal_limite, ";");
-                                LogsJB.trace("Temporal Limite: " + temporal_limite);
-                                temporal = sql;
-                                LogsJB.trace("Temporal SQL: " + temporal);
-                                String select = "SELECT TOP " + temporal_limite + " * FROM ";
-                                sql = temporal.replace("SELECT * FROM ", select);
-                                LogsJB.debug("Se modifico la sentencia SQL para que unicamente obtenga la cantidad de " +
-                                        "registros especificados por el usuario: " + sql);
-                            }
+        this.validarTableExist(this);
+        Callable<ResultAsync<List<JSONObject>>> get = () -> {
+            List<JSONObject> temp = new ArrayList<>();
+            try {
+                if (this.getTableExist()) {
+                    String sql = Sql + ";";
+                    //Si es sql server y trae la palabra limit verificara y modificara la sentencia
+                    if (this.getDataBaseType() == DataBase.SQLServer) {
+                        if (StringUtils.containsIgnoreCase(sql, "LIMIT")) {
+                            String temporal;
+                            LogsJB.debug("Sentencia SQL a modificar: " + sql);
+                            int indice_limite = StringUtils.lastIndexOfIgnoreCase(sql, "LIMIT");
+                            LogsJB.debug("Indice limite: " + indice_limite);
+                            LogsJB.debug("Longitud de la sentencia: " + sql.length());
+                            String temporal_limite = StringUtils.substring(sql, indice_limite);
+                            sql = sql.replace(temporal_limite, ";");
+                            LogsJB.debug("Sentencia SQL despues de eliminar el limite: " + sql);
+                            LogsJB.trace("Temporal Limite: " + temporal_limite);
+                            temporal_limite = StringUtils.remove(temporal_limite, "LIMIT");
+                            LogsJB.trace("Temporal Limite: " + temporal_limite);
+                            temporal_limite = StringUtils.remove(temporal_limite, ";");
+                            LogsJB.trace("Temporal Limite: " + temporal_limite);
+                            temporal = sql;
+                            LogsJB.trace("Temporal SQL: " + temporal);
+                            String select = "SELECT TOP " + temporal_limite + " * FROM ";
+                            sql = temporal.replace("SELECT * FROM ", select);
+                            LogsJB.debug("Se modifico la sentencia SQL para que unicamente obtenga la cantidad de " +
+                                    "registros especificados por el usuario: " + sql);
                         }
-                        //LogsJB.info(sql);
-                        Connection connect = this.getConnection();
-                        PreparedStatement ejecutor = connect.prepareStatement(sql);
-                        for (int i = 0; i < parametros.size(); i++) {
-                            //Obtengo la información de la columna
-                            Column columnsSQL = parametros.get(i);
-                            convertJavaToSQL(columnsSQL, ejecutor, i + 1);
-                        }
-                        LogsJB.info(ejecutor.toString());
-                        ResultSet registros = ejecutor.executeQuery();
-                        while (registros.next()) {
-                            temp.add(this.procesarResultSetJSON(columnas, registros));
-                        }
-                        this.closeConnection(connect);
-                        this.setTaskIsReady(true);
-                        return new ResultAsync<>(temp, null);
-                    } else {
-                        LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
-                                "recuperar los Registros");
-                        this.setTaskIsReady(true);
-                        return new ResultAsync<>(temp, null);
                     }
-                } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
-                            "SQL de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                    //LogsJB.info(sql);
+                    Connection connect = this.getConnection();
+                    PreparedStatement ejecutor = connect.prepareStatement(sql);
+                    for (int i = 0; i < parametros.size(); i++) {
+                        //Obtengo la información de la columna
+                        Column columnsSQL = parametros.get(i);
+                        convertJavaToSQL(columnsSQL, ejecutor, i + 1);
+                    }
+                    LogsJB.info(ejecutor.toString());
+                    ResultSet registros = ejecutor.executeQuery();
+                    while (registros.next()) {
+                        temp.add(this.procesarResultSetJSON(columnas, registros));
+                    }
+                    this.closeConnection(connect);
                     this.setTaskIsReady(true);
-                    return new ResultAsync<>(temp, e);
+                    return new ResultAsync<>(temp, null);
+                } else {
+                    LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
+                            "recuperar los Registros");
+                    this.setTaskIsReady(true);
+                    return new ResultAsync<>(temp, null);
                 }
-            };
-
-            Future<ResultAsync<List<JSONObject>>> future = this.ejecutor.submit(get);
-            while (!future.isDone()) {
+            } catch (Exception e) {
+                LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
+                        "SQL de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                this.setTaskIsReady(true);
+                return new ResultAsync<>(temp, e);
             }
-
-            ResultAsync<List<JSONObject>> resultado = future.get();
-            if (!Objects.isNull(resultado.getException())) {
-                throw resultado.getException();
-            }
-            lista = resultado.getResult();
-        } catch (ExecutionException | InterruptedException e) {
-            LogsJB.fatal("Excepción disparada en el método que recupera los modelos de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+        };
+        Future<ResultAsync<List<JSONObject>>> future = this.ejecutor.submit(get);
+        while (!future.isDone()) {
         }
+        ResultAsync<List<JSONObject>> resultado = future.get();
+        if (!Objects.isNull(resultado.getException())) {
+            throw resultado.getException();
+        }
+        lista = resultado.getResult();
         return lista;
     }
 }

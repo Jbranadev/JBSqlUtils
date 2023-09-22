@@ -648,6 +648,7 @@ public class JBSqlUtilsTestPostgreSQL {
             model.getCorreo().setValor("CorreoPrueba#" + i);
             if (i % 2 == 0) {
                 model.getEstado().setValor(false);
+                model.setTimestamps(false);
             } else {
                 model.getEstado().setValor(true);
             }
