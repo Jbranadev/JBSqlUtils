@@ -47,7 +47,7 @@ class Methods extends Methods_Conexion {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected Methods() throws DataBaseUndefind, PropertiesDBUndefined {
+    protected Methods() {
         super();
     }
 
@@ -60,7 +60,7 @@ class Methods extends Methods_Conexion {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected Methods(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
+    protected Methods(Boolean getPropertySystem) {
         super(getPropertySystem);
     }
 
@@ -197,7 +197,7 @@ class Methods extends Methods_Conexion {
      * @throws ValorUndefined        Lanza esta excepción si alguno de los parametros proporcionados esta
      *                               Vacío o es Null
      */
-    public Where where(String columna, Operator operador, Object valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    public Where where(String columna, Operator operador, Object valor) throws ValorUndefined {
         if (!this.getGetPropertySystem()) {
             Where where = new Where(columna, operador, valor, this, false);
             return where;

@@ -39,7 +39,7 @@ public class CreateTable {
      * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
      * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
      */
-    public AddColumn addColumn(Column columna) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    public AddColumn addColumn(Column columna) throws ValorUndefined {
         return new AddColumn(this.tableName, columna);
     }
 }

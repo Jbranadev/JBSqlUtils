@@ -45,7 +45,7 @@ public class Set extends AndSet {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected Set(String columName, Object value, String sql) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected Set(String columName, Object value, String sql) throws ValorUndefined {
         super();
         if (stringIsNullOrEmpty(columName)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");

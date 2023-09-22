@@ -58,7 +58,7 @@ class Methods_Conexion extends Conexion {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected Methods_Conexion() throws DataBaseUndefind, PropertiesDBUndefined {
+    protected Methods_Conexion() {
         super();
         this.getMethodsModel();
     }
@@ -73,7 +73,7 @@ class Methods_Conexion extends Conexion {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected Methods_Conexion(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
+    protected Methods_Conexion(Boolean getPropertySystem) {
         super(getPropertySystem);
         this.getMethodsModel();
     }

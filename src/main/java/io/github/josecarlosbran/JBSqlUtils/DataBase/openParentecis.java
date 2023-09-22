@@ -33,7 +33,7 @@ public class openParentecis<T> extends MethodsOpenParentecis {
      * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
      * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
      */
-    protected openParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected openParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined {
         super();
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
@@ -67,7 +67,7 @@ public class openParentecis<T> extends MethodsOpenParentecis {
      * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
      * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
      */
-    protected openParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPrev, String columna, Operator operador, Object valor, Boolean getPropertySystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected openParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPrev, String columna, Operator operador, Object valor, Boolean getPropertySystem) throws ValorUndefined {
         super(getPropertySystem);
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
@@ -99,7 +99,7 @@ public class openParentecis<T> extends MethodsOpenParentecis {
      * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
      * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
      */
-    protected openParentecis(String sql, List<Column> parametros, Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected openParentecis(String sql, List<Column> parametros, Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined {
         super();
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
@@ -130,7 +130,7 @@ public class openParentecis<T> extends MethodsOpenParentecis {
      * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
      * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
      */
-    protected openParentecis(String sql, T modelo, List<Column> parametros, String columna, Operator operador, Object valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected openParentecis(String sql, T modelo, List<Column> parametros, String columna, Operator operador, Object valor) throws ValorUndefined {
         super();
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
@@ -163,7 +163,7 @@ public class openParentecis<T> extends MethodsOpenParentecis {
      * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
      * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
      */
-    protected openParentecis(String sql, T modelo, List<Column> parametros, String columna, Operator operador, Object valor, Boolean getPropertySystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected openParentecis(String sql, T modelo, List<Column> parametros, String columna, Operator operador, Object valor, Boolean getPropertySystem) throws ValorUndefined {
         super(getPropertySystem);
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
@@ -194,7 +194,7 @@ public class openParentecis<T> extends MethodsOpenParentecis {
      * @throws PropertiesDBUndefined Lanza esta excepción si las propiedades de conexión a BD's no estan definidas
      * @throws DataBaseUndefind      Lanza esta exepción si no a sido definida la BD's en la cual se creara la tabla
      */
-    protected openParentecis(String sql, List<Column> parametros, String columna, Operator operador, Object valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected openParentecis(String sql, List<Column> parametros, String columna, Operator operador, Object valor) throws ValorUndefined {
         super();
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");

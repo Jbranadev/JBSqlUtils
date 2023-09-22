@@ -53,7 +53,7 @@ class Execute extends Methods_Conexion {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected Execute(String sql, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected Execute(String sql, List<Column> parametros) throws ValorUndefined {
         super();
         this.parametros = parametros;
         this.sql = sql;

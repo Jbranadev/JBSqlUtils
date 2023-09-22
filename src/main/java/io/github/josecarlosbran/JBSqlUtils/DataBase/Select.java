@@ -32,7 +32,7 @@ public class Select extends Get {
      * @param TableName El nombre de la tabla sobre la cual se desea realizar el Select.
      * @throws ValorUndefined Lanza esta excepción si el parametro proporcionado está vacío o es NULL
      */
-    protected Select(String TableName) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected Select(String TableName) throws ValorUndefined {
         super();
         String respuesta = "";
         if (stringIsNullOrEmpty(TableName)) {
@@ -57,7 +57,7 @@ public class Select extends Get {
      * @throws ValorUndefined        Lanza esta excepción si alguno de los parametros proporcionados esta
      *                               Vacío o es Null
      */
-    public Where where(String columna, Operator operador, Object value) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    public Where where(String columna, Operator operador, Object value) throws ValorUndefined {
         return new Where(columna, operador, value, this.sql);
     }
 

@@ -23,7 +23,7 @@ public class MethodsOrderBy<T> extends MethodsTake {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected MethodsOrderBy() throws DataBaseUndefind, PropertiesDBUndefined {
+    protected MethodsOrderBy() {
         super();
     }
 
@@ -36,7 +36,7 @@ public class MethodsOrderBy<T> extends MethodsTake {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected MethodsOrderBy(Boolean getGetPropertiesSystem) throws DataBaseUndefind, PropertiesDBUndefined {
+    protected MethodsOrderBy(Boolean getGetPropertiesSystem) {
         super(getGetPropertiesSystem);
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,7 +54,7 @@ public class MethodsOrderBy<T> extends MethodsTake {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public Take take(int limite) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    public Take take(int limite) throws ValorUndefined {
         if (Objects.isNull(this.modelo)) {
             return new Take(this.sql, limite, this.parametros);
         } else {
@@ -82,7 +82,7 @@ public class MethodsOrderBy<T> extends MethodsTake {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public And and(String columna, Operator operador, Object valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    public And and(String columna, Operator operador, Object valor) throws ValorUndefined {
         return new CommonsMethods().and(columna, operador, valor, this.sql, (JBSqlUtils) this.modelo, this.parametros, this.getGetPropertySystem());
     }
 
@@ -99,7 +99,7 @@ public class MethodsOrderBy<T> extends MethodsTake {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public Or or(String columna, Operator operador, Object valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    public Or or(String columna, Operator operador, Object valor) throws ValorUndefined {
         return new CommonsMethods().or(columna, operador, valor, this.sql, (JBSqlUtils) this.modelo, this.parametros, this.getGetPropertySystem());
     }
 
@@ -117,7 +117,7 @@ public class MethodsOrderBy<T> extends MethodsTake {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public openParentecis openParentecis(Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    public openParentecis openParentecis(Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined {
         return new CommonsMethods().openParentecis(operatorPrev, columna, operador, valor, this.sql, (JBSqlUtils) this.modelo, this.parametros, this.getGetPropertySystem());
     }
 
@@ -132,7 +132,7 @@ public class MethodsOrderBy<T> extends MethodsTake {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public closeParentecis closeParentecis(Operator operatorPost) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    public closeParentecis closeParentecis(Operator operatorPost) throws ValorUndefined {
         return new CommonsMethods().closeParentecis(operatorPost, this.sql, (JBSqlUtils) this.modelo, this.parametros, this.getGetPropertySystem());
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////

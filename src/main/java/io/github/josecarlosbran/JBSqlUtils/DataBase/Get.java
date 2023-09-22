@@ -50,7 +50,7 @@ class Get extends Methods_Conexion {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected Get() throws DataBaseUndefind, PropertiesDBUndefined {
+    protected Get() {
         super();
     }
 
@@ -63,7 +63,7 @@ class Get extends Methods_Conexion {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected Get(Boolean getGetPropertiesSystem) throws DataBaseUndefind, PropertiesDBUndefined {
+    protected Get(Boolean getGetPropertiesSystem) {
         super(getGetPropertiesSystem);
     }
 

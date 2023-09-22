@@ -31,7 +31,7 @@ public class MethodsOpenParentecis<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected MethodsOpenParentecis() throws DataBaseUndefind, PropertiesDBUndefined {
+    protected MethodsOpenParentecis() {
         super();
     }
 
@@ -44,7 +44,7 @@ public class MethodsOpenParentecis<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected MethodsOpenParentecis(Boolean getGetPropertiesSystem) throws DataBaseUndefind, PropertiesDBUndefined {
+    protected MethodsOpenParentecis(Boolean getGetPropertiesSystem) {
         super(getGetPropertiesSystem);
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,7 +64,7 @@ public class MethodsOpenParentecis<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public And and(String columna, Operator operador, Object valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    public And and(String columna, Operator operador, Object valor) throws ValorUndefined {
         return new CommonsMethods().and(columna, operador, valor, this.sql, (JBSqlUtils) this.modelo, this.parametros, this.getGetPropertySystem());
     }
 
@@ -81,7 +81,7 @@ public class MethodsOpenParentecis<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public Or or(String columna, Operator operador, Object valor) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    public Or or(String columna, Operator operador, Object valor) throws ValorUndefined {
         return new CommonsMethods().or(columna, operador, valor, this.sql, (JBSqlUtils) this.modelo, this.parametros, this.getGetPropertySystem());
     }
 
@@ -99,7 +99,7 @@ public class MethodsOpenParentecis<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public openParentecis openParentecis(Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    public openParentecis openParentecis(Operator operatorPrev, String columna, Operator operador, Object valor) throws ValorUndefined {
         return new CommonsMethods().openParentecis(operatorPrev, columna, operador, valor, this.sql, (JBSqlUtils) this.modelo, this.parametros, this.getGetPropertySystem());
     }
 
@@ -114,7 +114,7 @@ public class MethodsOpenParentecis<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public closeParentecis closeParentecis(Operator operatorPost) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    public closeParentecis closeParentecis(Operator operatorPost) throws ValorUndefined {
         return new CommonsMethods().closeParentecis(operatorPost, this.sql, (JBSqlUtils) this.modelo, this.parametros, this.getGetPropertySystem());
     }
 }

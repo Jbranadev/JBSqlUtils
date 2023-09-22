@@ -28,7 +28,7 @@ public class MethodsAndSet<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected MethodsAndSet() throws DataBaseUndefind, PropertiesDBUndefined {
+    protected MethodsAndSet() {
         super();
     }
 
@@ -41,7 +41,7 @@ public class MethodsAndSet<T> extends Get {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected MethodsAndSet(Boolean getGetPropertiesSystem) throws DataBaseUndefind, PropertiesDBUndefined {
+    protected MethodsAndSet(Boolean getGetPropertiesSystem) {
         super(getGetPropertiesSystem);
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
