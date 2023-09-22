@@ -43,7 +43,7 @@ public class Take<T> extends MethodsTake {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected Take(String sql, int limite, T modelo, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected Take(String sql, int limite, T modelo, List<Column> parametros) throws ValorUndefined {
         super();
         if (limite <= 0) {
             throw new ValorUndefined("El Limite proporcionado es 0 o inferior, por lo cual no se puede" +
@@ -68,7 +68,7 @@ public class Take<T> extends MethodsTake {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected Take(String sql, int limite, T modelo, List<Column> parametros, Boolean getPropertySystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected Take(String sql, int limite, T modelo, List<Column> parametros, Boolean getPropertySystem) throws ValorUndefined {
         super(getPropertySystem);
         if (limite <= 0) {
             throw new ValorUndefined("El Limite proporcionado es 0 o inferior, por lo cual no se puede" +
@@ -91,7 +91,7 @@ public class Take<T> extends MethodsTake {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected Take(String sql, int limite, List<Column> parametros) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    protected Take(String sql, int limite, List<Column> parametros) throws ValorUndefined {
         super();
         if (limite <= 0) {
             throw new ValorUndefined("El Limite proporcionado es 0 o inferior, por lo cual no se puede" +

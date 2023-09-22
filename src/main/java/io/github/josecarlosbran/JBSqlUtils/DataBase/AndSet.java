@@ -43,7 +43,7 @@ public class AndSet extends MethodsAndSet {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected AndSet() throws DataBaseUndefind, PropertiesDBUndefined {
+    protected AndSet() {
         super();
     }
 
@@ -60,7 +60,7 @@ public class AndSet extends MethodsAndSet {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected AndSet(String columName, Object value, String sql, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected AndSet(String columName, Object value, String sql, List<Column> parametros) throws ValorUndefined {
         super();
         if (stringIsNullOrEmpty(columName)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
@@ -91,7 +91,7 @@ public class AndSet extends MethodsAndSet {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public AndSet andSet(String columName, Object value) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    public AndSet andSet(String columName, Object value) throws ValorUndefined {
         return new AndSet(columName, value, this.sql, this.parametros);
     }
 
@@ -111,7 +111,7 @@ public class AndSet extends MethodsAndSet {
      * @throws ValorUndefined        Lanza esta excepción si alguno de los parametros proporcionados esta
      *                               Vacío o es Null
      */
-    public Where where(String columna, Operator operador, Object value) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    public Where where(String columna, Operator operador, Object value) throws ValorUndefined {
         return new Where(columna, operador, value, this.sql, this.parametros);
     }
 }

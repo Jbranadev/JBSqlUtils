@@ -27,7 +27,7 @@ public class closeParentecis<T> extends MethodsWhere {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected closeParentecis(String sql, T modelo, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected closeParentecis(String sql, T modelo, List<Column> parametros) throws ValorUndefined {
         super();
         this.parametros = parametros;
         this.modelo = modelo;
@@ -47,7 +47,7 @@ public class closeParentecis<T> extends MethodsWhere {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected closeParentecis(String sql, T modelo, List<Column> parametros, Boolean getGetPropertiesSystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected closeParentecis(String sql, T modelo, List<Column> parametros, Boolean getGetPropertiesSystem) throws ValorUndefined {
         super(getGetPropertiesSystem);
         this.parametros = parametros;
         this.modelo = modelo;
@@ -64,7 +64,7 @@ public class closeParentecis<T> extends MethodsWhere {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected closeParentecis(String sql, List<Column> parametros) throws DataBaseUndefind, PropertiesDBUndefined {
+    protected closeParentecis(String sql, List<Column> parametros) {
         super();
         this.parametros = parametros;
         this.sql = sql + Operator.CLOSE_PARENTESIS.getOperador();
@@ -83,7 +83,7 @@ public class closeParentecis<T> extends MethodsWhere {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected closeParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPost) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected closeParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPost) throws ValorUndefined {
         super();
         this.parametros = parametros;
         this.modelo = modelo;
@@ -104,7 +104,7 @@ public class closeParentecis<T> extends MethodsWhere {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected closeParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPost, Boolean getGetPropertiesSystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected closeParentecis(String sql, T modelo, List<Column> parametros, Operator operatorPost, Boolean getGetPropertiesSystem) throws ValorUndefined {
         super(getGetPropertiesSystem);
         this.parametros = parametros;
         this.modelo = modelo;
@@ -122,7 +122,7 @@ public class closeParentecis<T> extends MethodsWhere {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected closeParentecis(String sql, List<Column> parametros, Operator operatorPost) throws DataBaseUndefind, PropertiesDBUndefined {
+    protected closeParentecis(String sql, List<Column> parametros, Operator operatorPost) {
         super();
         this.parametros = parametros;
         this.sql = sql + Operator.CLOSE_PARENTESIS.getOperador() + operatorPost.getOperador();

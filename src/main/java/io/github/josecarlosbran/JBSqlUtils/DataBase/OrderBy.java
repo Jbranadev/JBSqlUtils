@@ -47,7 +47,7 @@ public class OrderBy<T> extends MethodsOrderBy {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected OrderBy(String sql, String columna, OrderType orderType, T modelo, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected OrderBy(String sql, String columna, OrderType orderType, T modelo, List<Column> parametros) throws ValorUndefined {
         super();
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
@@ -75,7 +75,7 @@ public class OrderBy<T> extends MethodsOrderBy {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected OrderBy(String sql, String columna, OrderType orderType, T modelo, List<Column> parametros, Boolean getPropertySystem) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected OrderBy(String sql, String columna, OrderType orderType, T modelo, List<Column> parametros, Boolean getPropertySystem) throws ValorUndefined {
         super(getPropertySystem);
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");
@@ -101,7 +101,7 @@ public class OrderBy<T> extends MethodsOrderBy {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected OrderBy(String sql, String columna, OrderType orderType, List<Column> parametros) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    protected OrderBy(String sql, String columna, OrderType orderType, List<Column> parametros) throws ValorUndefined {
         super();
         if (stringIsNullOrEmpty(columna)) {
             throw new ValorUndefined("El nombre de la columna proporcionado esta vacío o es NULL");

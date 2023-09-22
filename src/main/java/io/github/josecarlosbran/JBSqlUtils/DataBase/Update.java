@@ -58,7 +58,7 @@ public class Update {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public Set set(String columName, Object value) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    public Set set(String columName, Object value) throws ValorUndefined {
         return new Set(columName, value, this.sql);
     }
 }

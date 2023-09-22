@@ -61,7 +61,7 @@ public class Delete {
      * @throws ValorUndefined        Lanza esta excepción si alguno de los parámetros proporcionados esta
      *                               Vacío o es Null
      */
-    public Where where(String columna, Operator operador, Object value) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    public Where where(String columna, Operator operador, Object value) throws ValorUndefined {
         return new Where(columna, operador, value, this.sql);
     }
 }

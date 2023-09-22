@@ -22,7 +22,7 @@ public class MethodsTake<T> extends MethodsAndSet {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected MethodsTake() throws DataBaseUndefind, PropertiesDBUndefined {
+    protected MethodsTake() {
         super();
     }
 
@@ -35,7 +35,7 @@ public class MethodsTake<T> extends MethodsAndSet {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected MethodsTake(Boolean getGetPropertiesSystem) throws DataBaseUndefind, PropertiesDBUndefined {
+    protected MethodsTake(Boolean getGetPropertiesSystem) {
         super(getGetPropertiesSystem);
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////

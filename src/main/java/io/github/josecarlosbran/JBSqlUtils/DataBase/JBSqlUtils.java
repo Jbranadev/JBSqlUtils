@@ -47,7 +47,7 @@ public class JBSqlUtils extends Methods {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public JBSqlUtils() throws DataBaseUndefind, PropertiesDBUndefined {
+    public JBSqlUtils() {
         super();
     }
 
@@ -60,7 +60,7 @@ public class JBSqlUtils extends Methods {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public JBSqlUtils(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
+    public JBSqlUtils(Boolean getPropertySystem) {
         super(getPropertySystem);
     }
 
@@ -162,7 +162,7 @@ public class JBSqlUtils extends Methods {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public static DropTableIfExist dropTableIfExist(String tableName) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    public static DropTableIfExist dropTableIfExist(String tableName) throws ValorUndefined {
         return new DropTableIfExist(tableName);
     }
 
@@ -189,7 +189,7 @@ public class JBSqlUtils extends Methods {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public static Select select(String tableName) throws ValorUndefined, DataBaseUndefind, PropertiesDBUndefined {
+    public static Select select(String tableName) throws ValorUndefined {
         return new Select(tableName);
     }
 

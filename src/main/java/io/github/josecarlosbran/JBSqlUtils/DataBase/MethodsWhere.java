@@ -21,7 +21,7 @@ public class MethodsWhere<T> extends MethodsOrderBy {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected MethodsWhere() throws DataBaseUndefind, PropertiesDBUndefined {
+    protected MethodsWhere() {
         super();
     }
 
@@ -34,7 +34,7 @@ public class MethodsWhere<T> extends MethodsOrderBy {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    protected MethodsWhere(Boolean getGetPropertiesSystem) throws DataBaseUndefind, PropertiesDBUndefined {
+    protected MethodsWhere(Boolean getGetPropertiesSystem) {
         super(getGetPropertiesSystem);
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -52,7 +52,7 @@ public class MethodsWhere<T> extends MethodsOrderBy {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
      *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
-    public OrderBy orderBy(String columna, OrderType orderType) throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    public OrderBy orderBy(String columna, OrderType orderType) throws ValorUndefined {
         if (Objects.isNull(this.modelo)) {
             return new OrderBy(this.sql, columna, orderType, this.parametros);
         } else {
