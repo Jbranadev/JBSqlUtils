@@ -15,8 +15,6 @@
  */
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
@@ -51,12 +49,8 @@ public class Update {
      * @param value     Valor que se asignara a la columna.
      * @return Retorna un objeto Set que entrega la capacidad de setear otro valor
      * antes de ejecutar la sentencia Upddate
-     * @throws ValorUndefined        ValorUndefined ValorUndefined Lanza esta Excepción si
-     *                               alguno de los parámetros proporcionados esta vacío o es Null
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
+     * @throws ValorUndefined ValorUndefined ValorUndefined Lanza esta Excepción si
+     *                        alguno de los parámetros proporcionados esta vacío o es Null
      */
     public Set set(String columName, Object value) throws ValorUndefined {
         return new Set(columName, value, this.sql);

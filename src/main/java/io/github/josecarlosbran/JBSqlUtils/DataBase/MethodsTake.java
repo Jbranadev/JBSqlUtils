@@ -1,7 +1,5 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -16,11 +14,6 @@ public class MethodsTake<T> extends MethodsAndSet {
 
     /**
      * Constructor por default de la clase MethodsWhere, que inicializa la clase
-     *
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     protected MethodsTake() {
         super();
@@ -30,10 +23,6 @@ public class MethodsTake<T> extends MethodsAndSet {
      * Constructor por default de la clase MethodsWhere, que inicializa la clase
      *
      * @param getGetPropertiesSystem Indica si el modelo obtendra las propiedades de conexión de las propiedades del sistema
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de
-     *                               BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las
-     *                               propiedades de conexión necesarias para conectarse a la BD's especificada.
      */
     protected MethodsTake(Boolean getGetPropertiesSystem) {
         super(getGetPropertiesSystem);
