@@ -734,7 +734,7 @@ class Methods_Conexion extends Conexion {
                     else if(modelo.getDataBaseType()==DataBase.MySQL || modelo.getDataBaseType()==DataBase.MariaDB){
                         //Obtener cual es la clave primaria de la tabla
                         String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
-                        sql=sql.replace(";", " SELECT * FROM " + modelo.getTableName()+" WHERE "+namePrimaryKey
+                        sql=sql.replace(";", "; SELECT * FROM " + modelo.getTableName()+" WHERE "+namePrimaryKey
                                 +" = LAST_INSERT_ID();");
                     }else{
                         sql=sql.replace(";", " RETURNING * ;");
@@ -836,7 +836,7 @@ class Methods_Conexion extends Conexion {
                     //Colocamos el where
                     sql = sql + " WHERE " + namePrimaryKey + "=?;";
                     //LogsJB.info(sql);
-                    if(modelo.getDataBaseType()==DataBase.SQLServer){
+                    /*if(modelo.getDataBaseType()==DataBase.SQLServer){
                         //Obtener cual es la clave primaria de la tabla
                         sql=sql.replace(";", " SELECT * FROM " + modelo.getTableName()+" WHERE "+namePrimaryKey
                                 +" = SCOPE_IDENTITY();");
@@ -847,7 +847,7 @@ class Methods_Conexion extends Conexion {
                                 +" = LAST_INSERT_ID();");
                     }else{
                         sql=sql.replace(";", " RETURNING * ;");
-                    }
+                    }*/
                     PreparedStatement ejecutor = connect.prepareStatement(sql);
                     //Llena el prepareStatement
                     LogsJB.debug("Llenara la información de las columnas: " + indicemetodos.size());
@@ -883,12 +883,12 @@ class Methods_Conexion extends Conexion {
                         convertJavaToSQL(columnsSQL, ejecutor, auxiliar);
                     }
                     LogsJB.info(ejecutor.toString());
-                    Integer filas=0 /*= ejecutor.executeUpdate()*/;
-                    ResultSet registros = ejecutor.executeQuery();
+                    Integer filas= ejecutor.executeUpdate();
+                    /*ResultSet registros = ejecutor.executeQuery();
                     if (registros.next()) {
                         procesarResultSetOneResult(modelo, registros);
                         filas++;
-                    }
+                    }*/
                     //Integer filas = ejecutor.executeUpdate();
                     LogsJB.info("Filas actualizadas: " + filas + " " + this.getTableName());
                     modelo.closeConnection(connect);
