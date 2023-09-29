@@ -738,9 +738,9 @@ class Methods_Conexion extends Conexion {
                                 ") AS 'IDTEMPTABLE' FROM " + modelo.getTableName()+" WHERE "+namePrimaryKey
                                 +" = 'IDTEMPTABLE';");
                         */
-                        sql=sql.replace(";", " SELECT *, LAST_INSERT_ID(" +namePrimaryKey+
-                                ") AS 'IDTEMPTABLE' FROM " + modelo.getTableName()+" WHERE "+namePrimaryKey
-                                +" = 'IDTEMPTABLE';");
+                        sql=sql.replace(";", "; SET @IDTEMPTABLE = LAST_INSERT_ID();  SELECT * " +
+                                " FROM " + modelo.getTableName()+" WHERE "+namePrimaryKey
+                                +" = @IDTEMPTABLE;");
 
                     }else{
                         sql=sql.replace(";", " RETURNING * ;");
