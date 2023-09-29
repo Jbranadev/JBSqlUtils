@@ -734,9 +734,14 @@ class Methods_Conexion extends Conexion {
                     else if(modelo.getDataBaseType()==DataBase.MySQL || modelo.getDataBaseType()==DataBase.MariaDB){
                         //Obtener cual es la clave primaria de la tabla
                         String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
-                        sql=sql.replace(";", "; SELECT *, LAST_INSERT_ID(" +namePrimaryKey+
+                        /*sql=sql.replace(";", "; SELECT *, LAST_INSERT_ID(" +namePrimaryKey+
                                 ") AS 'IDTEMPTABLE' FROM " + modelo.getTableName()+" WHERE "+namePrimaryKey
                                 +" = 'IDTEMPTABLE';");
+                        */
+                        sql=sql.replace(";", " SELECT *, LAST_INSERT_ID(" +namePrimaryKey+
+                                ") AS 'IDTEMPTABLE' FROM " + modelo.getTableName()+" WHERE "+namePrimaryKey
+                                +" = 'IDTEMPTABLE';");
+
                     }else{
                         sql=sql.replace(";", " RETURNING * ;");
                     }
