@@ -725,6 +725,7 @@ class Methods_Conexion extends Conexion {
                             sql = sql + ");";
                         }
                     }
+                    sql=sql.replace(";", " RETURNING *;");
                     //LogsJB.info(sql);
                     PreparedStatement ejecutor = connect.prepareStatement(sql);
                     //Llena el prepareStatement
@@ -742,7 +743,12 @@ class Methods_Conexion extends Conexion {
                         auxiliar++;
                     }
                     LogsJB.info(ejecutor.toString());
-                    Integer filas = ejecutor.executeUpdate();
+                    Integer filas=0 /*= ejecutor.executeUpdate()*/;
+                    ResultSet registros = ejecutor.executeQuery();
+                    if (registros.next()) {
+                        procesarResultSetOneResult(modelo, registros);
+                        filas++;
+                    }
                     LogsJB.info("Filas Insertadas en BD's': " + filas + " " + this.getTableName());
                     modelo.closeConnection(connect);
                     modelo.setTaskIsReady(true);
@@ -817,6 +823,7 @@ class Methods_Conexion extends Conexion {
                     //Colocamos el where
                     sql = sql + " WHERE " + namePrimaryKey + "=?;";
                     //LogsJB.info(sql);
+                    sql=sql.replace(";", " RETURNING *;");
                     PreparedStatement ejecutor = connect.prepareStatement(sql);
                     //Llena el prepareStatement
                     LogsJB.debug("Llenara la información de las columnas: " + indicemetodos.size());
@@ -852,7 +859,13 @@ class Methods_Conexion extends Conexion {
                         convertJavaToSQL(columnsSQL, ejecutor, auxiliar);
                     }
                     LogsJB.info(ejecutor.toString());
-                    Integer filas = ejecutor.executeUpdate();
+                    Integer filas=0 /*= ejecutor.executeUpdate()*/;
+                    ResultSet registros = ejecutor.executeQuery();
+                    if (registros.next()) {
+                        procesarResultSetOneResult(modelo, registros);
+                        filas++;
+                    }
+                    //Integer filas = ejecutor.executeUpdate();
                     LogsJB.info("Filas actualizadas: " + filas + " " + this.getTableName());
                     modelo.closeConnection(connect);
                     modelo.setTaskIsReady(true);
