@@ -405,7 +405,7 @@ class Methods_Conexion extends Conexion {
 
     /**
      * Metodo que actualiza la información que el modelo tiene sobre lo que existe en BD's'
-     *
+     * y Recarga el modelo si este existía previamente en BD's
      * @throws Exception Lanza una Excepción si ocurre algun error al ejecutar el metodo refresh
      */
     public void refresh() throws Exception {
@@ -414,12 +414,11 @@ class Methods_Conexion extends Conexion {
     }
 
     /**
-     * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
-     * proporcionada
+     * Refresca el modelo con la información de BD's, se perderan las modificaciones que se hayan realizadas sobre el modelo,
+     * si estas no han sido plasmadas en BD's.
      *
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
-     * @return Retorna una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
-     * proporcionada
+     * @return True si el modelo fue recargado desde BD's, False caso contrario.
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
      *                   captura la excepción y la lanza en el hilo principal
      */
@@ -430,7 +429,7 @@ class Methods_Conexion extends Conexion {
         Callable<ResultAsync<Boolean>> get = () -> {
             Boolean result = false;
             try {
-                if (this.getTableExist()) {
+                if (this.getTableExist() && this.getModelExist()) {
                     //Obtener cual es la clave primaria de la tabla
                     String namePrimaryKey = this.getTabla().getClaveprimaria().getCOLUMN_NAME();
                     String sql = "SELECT * FROM " + this.getTableName() + " WHERE " + namePrimaryKey + " = ?";
