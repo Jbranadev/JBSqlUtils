@@ -179,7 +179,6 @@ class Conexion {
     /**
      * método que se encarga de inicializar las propiedades de conexión del modelo,
      * las cuales las obtiene de las propiedades del sistema Java.
-     *
      */
     public void getSystemProperties() {
         this.setGetPropertySystem(true);

@@ -405,11 +405,89 @@ class Methods_Conexion extends Conexion {
 
     /**
      * Metodo que actualiza la información que el modelo tiene sobre lo que existe en BD's'
-     *
+     * y Recarga el modelo si este existía previamente en BD's
      * @throws Exception Lanza una Excepción si ocurre algun error al ejecutar el metodo refresh
      */
     public void refresh() throws Exception {
         this.setTableExist(this.tableExist());
+        this.reloadModel();
+    }
+
+    /**
+     * Refresca el modelo con la información de BD's, se perderan las modificaciones que se hayan realizadas sobre el modelo,
+     * si estas no han sido plasmadas en BD's.
+     *
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
+     * @return True si el modelo fue recargado desde BD's, False caso contrario.
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
+     */
+    public <T extends JBSqlUtils> Boolean reloadModel() throws Exception {
+        this.setTaskIsReady(false);
+        Boolean reloadModel = false;
+        this.validarTableExist(this);
+        Callable<ResultAsync<Boolean>> get = () -> {
+            Boolean result = false;
+            try {
+                if (this.getTableExist() && this.getModelExist()) {
+                    //Obtener cual es la clave primaria de la tabla
+                    String namePrimaryKey = this.getTabla().getClaveprimaria().getCOLUMN_NAME();
+                    String sql = "SELECT * FROM " + this.getTableName() + " WHERE " + namePrimaryKey + " = ?";
+                    sql = sql + ";";
+                    LogsJB.info(sql);
+                    Connection connect = this.getConnection();
+                    PreparedStatement ejecutor = connect.prepareStatement(sql);
+
+                    List<Method> metodos = new ArrayList<>();
+                    metodos = this.getMethodsGetOfModel();
+                    int indicePrimarykey = 0;
+                    //Llena la información de las columnas que se insertaran
+                    for (int i = 0; i < metodos.size(); i++) {
+                        //Obtengo el metodo
+                        Method metodo = metodos.get(i);
+                        //Obtengo la información de la columna
+                        Column columnsSQL = (Column) metodo.invoke(this, null);
+                        String columnName = columnsSQL.getName();
+                        //Si la columna existe entre la metadata de la BD's
+                        if (!this.getTabla().getColumnsExist().contains(columnName.toUpperCase())) {
+                            continue;
+                        }
+                        if (Objects.isNull(columnsSQL.getValor())) {
+                            continue;
+                        }
+                        if (!UtilitiesJB.stringIsNullOrEmpty(namePrimaryKey) && StringUtils.equalsIgnoreCase(namePrimaryKey, columnName)) {
+                            int auxiliar = 1;
+                            convertJavaToSQL(columnsSQL, ejecutor, auxiliar);
+                            ResultSet registros = ejecutor.executeQuery();
+                            if (registros.next()) {
+                                procesarResultSetOneResult((T) this, registros);
+                                result = true;
+                            }
+                        }
+                    }
+                    this.closeConnection(connect);
+                    return new ResultAsync<>(result, null);
+                } else {
+                    LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
+                            "recuperar el Registro: " + this.getTableName());
+                    return new ResultAsync<>(result, null);
+                }
+            } catch (Exception e) {
+                LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
+                        "SQL de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                return new ResultAsync<>(result, e);
+            }
+        };
+        Future<ResultAsync<Boolean>> future = this.ejecutor.submit(get);
+        while (!future.isDone()) {
+        }
+        ResultAsync<Boolean> resultado = future.get();
+        this.setTaskIsReady(true);
+        if (!Objects.isNull(resultado.getException())) {
+            throw resultado.getException();
+        }
+        reloadModel = resultado.getResult();
+        return reloadModel;
     }
 
     /**
@@ -672,7 +750,7 @@ class Methods_Conexion extends Conexion {
         Callable<ResultAsync<Integer>> Save = () -> {
             try {
                 if (modelo.getTableExist()) {
-                    String sql2="";
+                    String sql2 = "";
                     String sql = "INSERT INTO " + modelo.getTableName() + "(";
                     List<Method> metodos = new ArrayList<>();
                     metodos = modelo.getMethodsGetOfModel();
@@ -726,19 +804,18 @@ class Methods_Conexion extends Conexion {
                             sql = sql + ");";
                         }
                     }
-                    if(modelo.getDataBaseType()==DataBase.SQLServer){
+                    if (modelo.getDataBaseType() == DataBase.SQLServer) {
                         //Obtener cual es la clave primaria de la tabla
                         String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
-                        sql=sql.replace(";", " SELECT * FROM " + modelo.getTableName()+" WHERE "+namePrimaryKey
-                        +" = SCOPE_IDENTITY();");
-                    }
-                    else if(modelo.getDataBaseType()==DataBase.MySQL){
+                        sql = sql.replace(";", " SELECT * FROM " + modelo.getTableName() + " WHERE " + namePrimaryKey
+                                + " = SCOPE_IDENTITY();");
+                    } else if (modelo.getDataBaseType() == DataBase.MySQL) {
                         //Obtener cual es la clave primaria de la tabla
                         String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
-                        sql2= "SELECT * FROM " + modelo.getTableName()+" WHERE "+namePrimaryKey
-                                +" = LAST_INSERT_ID();";
-                    }else{
-                        sql=sql.replace(";", " RETURNING * ;");
+                        sql2 = "SELECT * FROM " + modelo.getTableName() + " WHERE " + namePrimaryKey
+                                + " = LAST_INSERT_ID();";
+                    } else {
+                        sql = sql.replace(";", " RETURNING * ;");
                     }
                     //LogsJB.info(sql);
                     PreparedStatement ejecutor = connect.prepareStatement(sql);
@@ -757,15 +834,15 @@ class Methods_Conexion extends Conexion {
                         auxiliar++;
                     }
                     LogsJB.info(ejecutor.toString());
-                    Integer filas=0;
-                    if(modelo.getDataBaseType()==DataBase.MySQL){
+                    Integer filas = 0;
+                    if (modelo.getDataBaseType() == DataBase.MySQL) {
                         ejecutor.executeUpdate();
                         ResultSet registros = ejecutor.executeQuery(sql2);
                         if (registros.next()) {
                             procesarResultSetOneResult(modelo, registros);
                             filas++;
                         }
-                    }else{
+                    } else {
                         ResultSet registros = ejecutor.executeQuery();
                         if (registros.next()) {
                             procesarResultSetOneResult(modelo, registros);
@@ -846,18 +923,6 @@ class Methods_Conexion extends Conexion {
                     //Colocamos el where
                     sql = sql + " WHERE " + namePrimaryKey + "=?;";
                     //LogsJB.info(sql);
-                    /*if(modelo.getDataBaseType()==DataBase.SQLServer){
-                        //Obtener cual es la clave primaria de la tabla
-                        sql=sql.replace(";", " SELECT * FROM " + modelo.getTableName()+" WHERE "+namePrimaryKey
-                                +" = SCOPE_IDENTITY();");
-                    }
-                    else if(modelo.getDataBaseType()==DataBase.MySQL || modelo.getDataBaseType()==DataBase.MariaDB){
-                        //Obtener cual es la clave primaria de la tabla
-                        sql=sql.replace(";", " SELECT * FROM " + modelo.getTableName()+" WHERE "+namePrimaryKey
-                                +" = LAST_INSERT_ID();");
-                    }else{
-                        sql=sql.replace(";", " RETURNING * ;");
-                    }*/
                     PreparedStatement ejecutor = connect.prepareStatement(sql);
                     //Llena el prepareStatement
                     LogsJB.debug("Llenara la información de las columnas: " + indicemetodos.size());
@@ -893,7 +958,7 @@ class Methods_Conexion extends Conexion {
                         convertJavaToSQL(columnsSQL, ejecutor, auxiliar);
                     }
                     LogsJB.info(ejecutor.toString());
-                    Integer filas= ejecutor.executeUpdate();
+                    Integer filas = ejecutor.executeUpdate();
                     /*ResultSet registros = ejecutor.executeQuery();
                     if (registros.next()) {
                         procesarResultSetOneResult(modelo, registros);
@@ -1054,7 +1119,7 @@ class Methods_Conexion extends Conexion {
      */
     protected <T extends Methods_Conexion> void validarTableExist(T modelo) throws Exception {
         if (!modelo.getTableExist()) {
-            modelo.refresh();
+            modelo.setTableExist(modelo.tableExist());
         }
     }
 
