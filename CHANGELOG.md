@@ -1,3 +1,14 @@
+# Version: 1.2.1
+
+* [#120](https://github.com/Jbranadev/JBSqlUtils/pull/120): Bump github/codeql-action from 2.21.8 to 2.21.9
+* [#121](https://github.com/Jbranadev/JBSqlUtils/pull/121): Bump actions/checkout from 4.0.0 to 4.1.0
+* [#122](https://github.com/Jbranadev/JBSqlUtils/pull/122): Implementación obtener clave primaría de un modelo al insertarlo en BD's
+* [#123](https://github.com/Jbranadev/JBSqlUtils/pull/123): Implementación ReloadModel From Data Base
+* [#124](https://github.com/Jbranadev/JBSqlUtils/pull/124): Bump github/codeql-action from 2.21.9 to 2.22.0
+* [#125](https://github.com/Jbranadev/JBSqlUtils/pull/125): Bump step-security/harden-runner from 2.5.1 to 2.6.0
+* [#126](https://github.com/Jbranadev/JBSqlUtils/pull/126): Bump org.apache.maven.plugins:maven-site-plugin from 4.0.0-M9 to 4.0.0-M10
+
+
 # Version: 1.2.0
 
 * [#76](https://github.com/Jbranadev/JBSqlUtils/pull/76): Bump org.mariadb.jdbc:mariadb-java-client from 3.1.4 to 3.2.0
