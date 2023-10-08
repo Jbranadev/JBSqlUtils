@@ -69,7 +69,7 @@ Maven
     <dependency>
         <groupId>io.github.josecarlosbran</groupId>
         <artifactId>logsjbsupport</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <scope>compile</scope>
     </dependency>
 ~~~
@@ -77,7 +77,7 @@ Maven
 Gradle
 
 ~~~
-implementation 'io.github.josecarlosbran:logsjbsupport:0.5.6'
+implementation 'io.github.josecarlosbran:logsjbsupport:1.0.1'
 ~~~
 
 Modificar el Nivel de Log que queremos tener sobre JBSqlUtils
@@ -117,14 +117,14 @@ Maven
 <dependency>
   <groupId>io.github.josecarlosbran</groupId>
   <artifactId>jbsqlutils</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.1</version>
 </dependency>
 ~~~
 
 Gradle
 
 ~~~
-implementation 'io.github.josecarlosbran:jbsqlutils:1.2.0'
+implementation 'io.github.josecarlosbran:jbsqlutils:1.2.1'
 ~~~
 
 Para mayor información sobre cómo descargar JBSqlUtils desde otros
