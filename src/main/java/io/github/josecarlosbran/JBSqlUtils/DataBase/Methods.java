@@ -29,6 +29,7 @@ import java.sql.ResultSet;
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
 /**
  * @author Jose Bran
@@ -253,7 +254,10 @@ class Methods extends Methods_Conexion {
      */
     public <T, G extends JBSqlUtils> void llenarModelo(T controlador, G modelo) {
         try {
-            List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getMethods()));
+            List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getDeclaredMethods()));
+            controladorMethods=controladorMethods.stream().filter(metodo->{
+                return metodo.getDeclaringClass().getPackage().hashCode()==controlador.getClass().getPackage().hashCode();
+            }).collect(Collectors.toList());
             for (Method controladorMethod : controladorMethods) {
                 String controllerName = controladorMethod.getName();
                 String claseMethod = controladorMethod.getDeclaringClass().getSimpleName();
@@ -262,11 +266,14 @@ class Methods extends Methods_Conexion {
                 if (claseMethod.equalsIgnoreCase("Object")) {
                     continue;
                 }
-                //Si el metodo es un set, que continue, no tiene caso hacer lo siguiente
-                if (StringUtils.startsWithIgnoreCase(controllerName, "set")) {
+                //Si el metodo No es un get, que continue, no tiene caso hacer lo siguiente
+                if (!StringUtils.startsWithIgnoreCase(controllerName, "get")) {
                     continue;
                 }
                 int parametros = controladorMethod.getParameterCount();
+                if(parametros>0){
+                    continue;
+                }
                 LogsJB.trace("Cantidad de parametros: " + parametros);
                 LogsJB.trace("Validara si el contenido es Null: " + controllerName);
                 Object contenido = (Object) controladorMethod.invoke(controlador, null);
@@ -348,7 +355,10 @@ class Methods extends Methods_Conexion {
             //Obtiene los metodos get del modelo
             List<Method> modelGetMethods = modelo.getMethodsGetOfModel();
             LogsJB.debug("Obtuvo los metodos Get del modelo: ");
-            List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getMethods()));
+            List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getDeclaredMethods()));
+            controladorMethods=controladorMethods.stream().filter(metodo->{
+                return metodo.getDeclaringClass().getPackage().hashCode()==controlador.getClass().getPackage().hashCode();
+            }).collect(Collectors.toList());
             for (Method modelGetMethod : modelGetMethods) {
                 String modelGetName = modelGetMethod.getName();
                 LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);
@@ -368,13 +378,16 @@ class Methods extends Methods_Conexion {
                             iteradorController.remove();
                             continue;
                         }
-                        //Si el metodo es un get, que continue, no tiene caso hacer lo siguiente
-                        if (StringUtils.startsWithIgnoreCase(controllerName, "get")) {
+                        //Si el metodo No es un set, que continue, no tiene caso hacer lo siguiente
+                        if (!StringUtils.startsWithIgnoreCase(controllerName, "set")) {
                             iteradorController.remove();
                             continue;
                         }
                         //Valida que el metodo Set, si o sí, reciba un unico parametro
                         int parametros = controladorMethod.getParameterCount();
+                        if(parametros>1||parametros<1){
+                            continue;
+                        }
                         LogsJB.trace("Cantidad de parametros: " + parametros);
                     /*Si el nombre del metodo Get del modelo coincide con el nombre del metodo Set
                     Guardara la información en el controlador*/

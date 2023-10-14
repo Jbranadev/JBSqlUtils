@@ -52,7 +52,7 @@ public enum DataType {
     /**
      * Tipo de dato auto incrementable en PostgreSQL
      */
-    SERIAL("SERIAL", 1),
+    SERIAL("", 1),
     /**
      * Tipo de dato tipo TEXT
      */
