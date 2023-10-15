@@ -1,4 +1,22 @@
                                          jbsqlutils
+                                        Version 1.2.2
+                                        Release Notes
+
+Correction in the fillModel and fillController methods
+
+## What's Changed
+* Actualizar RELEASE-NOTES.txt by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/128
+* Bump org.xerial:sqlite-jdbc from 3.43.0.0 to 3.43.2.0 by @dependabot in https://github.com/Jbranadev/JBSqlUtils/pull/129
+* Bump ossf/scorecard-action from 2.2.0 to 2.3.0 by @dependabot in https://github.com/Jbranadev/JBSqlUtils/pull/130
+* Bump github/codeql-action from 2.22.0 to 2.22.3 by @dependabot in https://github.com/Jbranadev/JBSqlUtils/pull/131
+* Release 1.2.2 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/132
+
+
+**Full Changelog**: https://github.com/Jbranadev/JBSqlUtils/compare/1.2.1...1.2.2
+
+
+
+                                         jbsqlutils
                                         Version 1.2.1
                                         Release Notes
 

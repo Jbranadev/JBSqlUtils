@@ -1,3 +1,12 @@
+# Version: 1.2.2
+
+* [#128](https://github.com/Jbranadev/JBSqlUtils/pull/128): Actualizar RELEASE-NOTES.txt
+* [#129](https://github.com/Jbranadev/JBSqlUtils/pull/129): Bump org.xerial:sqlite-jdbc from 3.43.0.0 to 3.43.2.0
+* [#130](https://github.com/Jbranadev/JBSqlUtils/pull/130): Bump ossf/scorecard-action from 2.2.0 to 2.3.0
+* [#131](https://github.com/Jbranadev/JBSqlUtils/pull/131): Bump github/codeql-action from 2.22.0 to 2.22.3
+* [#132](https://github.com/Jbranadev/JBSqlUtils/pull/132): Release 1.2.2
+
+
 # Version: 1.2.1
 
 * [#120](https://github.com/Jbranadev/JBSqlUtils/pull/120): Bump github/codeql-action from 2.21.8 to 2.21.9
