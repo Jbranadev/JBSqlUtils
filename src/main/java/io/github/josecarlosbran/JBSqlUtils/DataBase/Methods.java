@@ -263,15 +263,9 @@ class Methods extends Methods_Conexion {
                 String claseMethod = controladorMethod.getDeclaringClass().getSimpleName();
                 LogsJB.debug("Nombre del metodo del controlador: " + controllerName + " Clase a la que pertenece: " + claseMethod);
                 //Si la clase donde se declaro el metodo pertenece a la clase Object
-                if (claseMethod.equalsIgnoreCase("Object")) {
-                    continue;
-                }
                 //Si el metodo No es un get, que continue, no tiene caso hacer lo siguiente
-                if (!StringUtils.startsWithIgnoreCase(controllerName, "get")) {
-                    continue;
-                }
                 int parametros = controladorMethod.getParameterCount();
-                if(parametros>0){
+                if((parametros>0) || (!StringUtils.startsWithIgnoreCase(controllerName, "get") || claseMethod.equalsIgnoreCase("Object"))){
                     continue;
                 }
                 LogsJB.trace("Cantidad de parametros: " + parametros);
@@ -374,18 +368,10 @@ class Methods extends Methods_Conexion {
                         String claseMethod = controladorMethod.getDeclaringClass().getSimpleName();
                         LogsJB.debug("Nombre del metodo del controlador: " + controllerName + " Clase a la que pertenece: " + claseMethod);
                         //Si la clase donde se declaro el metodo pertenece a la clase Object
-                        if (claseMethod.equalsIgnoreCase("Object")) {
-                            iteradorController.remove();
-                            continue;
-                        }
                         //Si el metodo No es un set, que continue, no tiene caso hacer lo siguiente
-                        if (!StringUtils.startsWithIgnoreCase(controllerName, "set")) {
-                            iteradorController.remove();
-                            continue;
-                        }
                         //Valida que el metodo Set, si o sí, reciba un unico parametro
                         int parametros = controladorMethod.getParameterCount();
-                        if(parametros>1||parametros<1){
+                        if((parametros>1||parametros<1) || (!StringUtils.startsWithIgnoreCase(controllerName, "set")) || (claseMethod.equalsIgnoreCase("Object")) ){
                             continue;
                         }
                         LogsJB.trace("Cantidad de parametros: " + parametros);
