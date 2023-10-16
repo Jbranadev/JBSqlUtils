@@ -23,6 +23,7 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.*;
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -1733,7 +1734,22 @@ class Methods_Conexion extends Conexion {
             if (StringUtils.equalsIgnoreCase(JBSQLUTILSNAME, SuperClaseModelo)) {
                 //Obtiene los Fields del modelo
                 List<Field> modelFields = Arrays.asList(this.getClass().getDeclaredFields());
+                List<Field> modelFieldsWithAnotations=
+                        Arrays.asList(FieldUtils.getFieldsWithAnnotation(this.getClass(),
+                        io.github.josecarlosbran.JBSqlUtils.Anotations.Column.class));
+                List<Field> tempField= ListUtils.intersection(modelFields,modelFieldsWithAnotations);
+                //modelFields=ListUtils.removeAll(modelFields.stream().collect(Collectors.toList()),tempField);
+                modelFields=ListUtils.removeAll(modelFields,tempField);
+                modelFields=ListUtils.union(modelFields,tempField);
+                modelFields=modelFields.stream().sorted().collect(Collectors.toList());
+
+
+
                 Iterator<Field> iteradorModelFields = modelFields.iterator();
+
+
+
+
 
                 List<Method> modelGetMethods = this.getMethodsGetOfModel();
                 Iterator<Method> iteradorModelGetMethods = modelGetMethods.iterator();
