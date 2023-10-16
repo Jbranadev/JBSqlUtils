@@ -25,13 +25,11 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
+import java.lang.reflect.*;
 import java.sql.Date;
 import java.sql.*;
 import java.util.*;
@@ -1727,4 +1725,53 @@ class Methods_Conexion extends Conexion {
             LogsJB.fatal("Excepción disparada al obtener los nombres de las columnas del modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
+
+    private void getNameForColumnsAnotations() {
+        try {
+            String JBSQLUTILSNAME = JBSqlUtils.class.getSimpleName();
+            String SuperClaseModelo = this.getClass().getSuperclass().getSimpleName();
+            if (StringUtils.equalsIgnoreCase(JBSQLUTILSNAME, SuperClaseModelo)) {
+                //Obtiene los Fields del modelo
+                List<Field> modelFields = Arrays.asList(this.getClass().getDeclaredFields());
+                Iterator<Field> iteradorModelFields = modelFields.iterator();
+
+                List<Method> modelGetMethods = this.getMethodsGetOfModel();
+                Iterator<Method> iteradorModelGetMethods = modelGetMethods.iterator();
+                while (iteradorModelGetMethods.hasNext()) {
+                    Method modelGetMethod = iteradorModelGetMethods.next();
+                    String modelGetName = modelGetMethod.getName();
+                    LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);
+                    //Obtengo la información de la columna
+                    Column columnsSQL = (Column) modelGetMethod.invoke(this, null);
+                    String columnName = modelGetMethod.getName();
+                    columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
+                    //Le meto la información a la columa
+                    LogsJB.debug("Setea el nombre a la columna: " + columnName);
+                    if (UtilitiesJB.stringIsNullOrEmpty(columnsSQL.getName())) {
+                        columnsSQL.setName(columnName);
+                    }
+                    Boolean isready = false;
+                    //Obtiene los metodos set del modelo
+                    List<Method> modelSetMethods = this.getMethodsSetOfModel();
+                    Iterator<Method> iteradorModelSetMethods = modelSetMethods.iterator();
+                    while (iteradorModelSetMethods.hasNext()) {
+                        Method modelSetMethod = iteradorModelSetMethods.next();
+                        String modelSetName = modelSetMethod.getName();
+                        LogsJB.trace("Nombre del metodo set: " + modelSetName);
+                        modelSetName = StringUtils.removeStartIgnoreCase(modelSetName, "set");
+                        LogsJB.trace("Nombre del metodo set a validar: " + modelSetName);
+                        if (StringUtils.equalsIgnoreCase(modelSetName, columnName)) {
+                            //Setea el valor del metodo
+                            modelSetMethod.invoke(this, columnsSQL);
+                            LogsJB.debug("Ingreso la columna en el metodo set: " + modelSetName);
+                            break;
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            LogsJB.fatal("Excepción disparada al obtener los nombres de las columnas del modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+        }
+    }
+
 }

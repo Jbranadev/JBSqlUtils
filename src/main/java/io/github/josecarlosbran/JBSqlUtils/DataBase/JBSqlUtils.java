@@ -33,9 +33,13 @@ import java.util.Objects;
  */
 public class JBSqlUtils extends Methods {
 
-    private Column<Timestamp> created_at = new Column<>(DataType.TIMESTAMP);
+    private Column<Timestamp> created_at1 = new Column<>(DataType.TIMESTAMP);
 
-    private Column<Timestamp> updated_at = new Column<>(DataType.TIMESTAMP);
+    private Column<Timestamp> updated_at1 = new Column<>(DataType.TIMESTAMP);
+
+    private Timestamp created_at;
+
+    private Timestamp updated_at;
 
     /**
      * Constructor por defecto de la Clase JBSqlUtils
@@ -203,10 +207,56 @@ public class JBSqlUtils extends Methods {
      *
      * @return TimeStamp correspondiente a la fecha de creación del registro en BD's
      */
-    public Column<Timestamp> getCreated_at() {
-        if (Objects.isNull(created_at.getValor())) {
+    public Column<Timestamp> getCreated_at1() {
+        if (Objects.isNull(created_at1.getValor())) {
             Long datetime = System.currentTimeMillis();
-            created_at.setValor(new Timestamp(datetime));
+            created_at1.setValor(new Timestamp(datetime));
+            return created_at1;
+        }
+        return created_at1;
+    }
+
+    /**
+     * Setea la TimeStamp correspondiente a la fecha de creación del registro en BD's
+     *
+     * @param created_at TimeStamp correspondiente a la fecha de creación del registro en BD's
+     */
+    public void setCreated_at1(Column<Timestamp> created_at) {
+        this.created_at1 = created_at;
+    }
+
+    /**
+     * Obtiene la fecha de actualización del modelo
+     *
+     * @return TimeStamp correspondiente a la fecha de actualización del registro en BD's
+     */
+    public Column<Timestamp> getUpdated_at1() {
+        if (Objects.isNull(updated_at1.getValor())) {
+            Long datetime = System.currentTimeMillis();
+            updated_at1.setValor(new Timestamp(datetime));
+            return updated_at1;
+        }
+        return updated_at1;
+    }
+
+    /**
+     * Setea la TimeStamp correspondiente a la fecha de actualización del registro en BD's
+     *
+     * @param updated_at TimeStamp correspondiente a la fecha de actualización del registro en BD's
+     */
+    public void setUpdated_at1(Column<Timestamp> updated_at) {
+        this.updated_at1 = updated_at;
+    }
+
+    /**
+     * Obtiene la fecha de creación del modelo
+     *
+     * @return TimeStamp correspondiente a la fecha de creación del registro en BD's
+     */
+    public Timestamp getCreated_at() {
+        if (Objects.isNull(created_at)) {
+            Long datetime = System.currentTimeMillis();
+            created_at = new Timestamp(datetime);
             return created_at;
         }
         return created_at;
@@ -217,7 +267,7 @@ public class JBSqlUtils extends Methods {
      *
      * @param created_at TimeStamp correspondiente a la fecha de creación del registro en BD's
      */
-    public void setCreated_at(Column<Timestamp> created_at) {
+    public void setCreated_at(Timestamp created_at) {
         this.created_at = created_at;
     }
 
@@ -226,10 +276,10 @@ public class JBSqlUtils extends Methods {
      *
      * @return TimeStamp correspondiente a la fecha de actualización del registro en BD's
      */
-    public Column<Timestamp> getUpdated_at() {
-        if (Objects.isNull(updated_at.getValor())) {
+    public Timestamp getUpdated_at() {
+        if (Objects.isNull(updated_at)) {
             Long datetime = System.currentTimeMillis();
-            updated_at.setValor(new Timestamp(datetime));
+            updated_at = new Timestamp(datetime);
             return updated_at;
         }
         return updated_at;
@@ -240,7 +290,10 @@ public class JBSqlUtils extends Methods {
      *
      * @param updated_at TimeStamp correspondiente a la fecha de actualización del registro en BD's
      */
-    public void setUpdated_at(Column<Timestamp> updated_at) {
+    public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
     }
+
+
+
 }
