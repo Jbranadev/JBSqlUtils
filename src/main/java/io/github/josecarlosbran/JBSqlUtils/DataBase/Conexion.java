@@ -21,6 +21,7 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.TablesSQL;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -126,6 +127,10 @@ class Conexion {
      * Lista de metodos set que posee el modelo
      */
     private List<Method> MethodsSetOfModel = null;
+
+
+    private List<Field> fieldsOfModel = null;
+
     /**
      * Cantidad de conexiones que ha realizado el modelo a BD's
      */
@@ -892,4 +897,17 @@ class Conexion {
     protected synchronized void setContadorConexiones(Integer contadorConexiones) {
         this.contadorConexiones = contadorConexiones;
     }
+
+    /**
+     * Lista de Field's que posee el modelo mapeados con la tabla correspondiente en BD's
+     * @return
+     */
+    public List<Field> getFieldsOfModel() {
+        if (Objects.isNull(fieldsOfModel)) {
+            fieldsOfModel = new ArrayList<Field>();
+        }
+        return fieldsOfModel;
+    }
+
+
 }

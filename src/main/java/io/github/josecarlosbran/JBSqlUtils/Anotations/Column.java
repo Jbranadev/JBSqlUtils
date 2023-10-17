@@ -19,9 +19,8 @@ public @interface Column {
 
     DataType dataTypeSQL();
 
-    Constraint[] restriccion();
+    Constraint[] constraints() default {};
 
-    Boolean columnExist = false;
 
     String size() default "";
 
