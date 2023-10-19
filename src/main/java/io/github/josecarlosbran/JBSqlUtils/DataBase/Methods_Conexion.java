@@ -824,14 +824,14 @@ class Methods_Conexion extends Conexion {
                         sql = sql.replace(";", " SELECT * FROM " + modelo.getTableName() + " WHERE "
                                 /*+ namePrimaryKey
                                 + " = SCOPE_IDENTITY();"*/);
-                        int contador=0;
+                        int contador = 0;
                         for (Field columna : campos) {
-                            if(StringUtils.equalsIgnoreCase(namePrimaryKey, this.getColumnName(columna))){
+                            if (StringUtils.equalsIgnoreCase(namePrimaryKey, this.getColumnName(columna))) {
                                 if (contador > 1) {
                                     sql = sql + " AND ";
                                 }
-                                sql=sql + namePrimaryKey
-                                + " = SCOPE_IDENTITY()";
+                                sql = sql + namePrimaryKey
+                                        + " = SCOPE_IDENTITY()";
                                 contador++;
                             }
                             if ((this.getColumnIsIndexValidValue(this, columna))) {
@@ -849,13 +849,13 @@ class Methods_Conexion extends Conexion {
                         sql2 = "SELECT * FROM " + modelo.getTableName() + " WHERE "
                                 /*+ namePrimaryKey
                                 + " = LAST_INSERT_ID();"*/;
-                        int contador=0;
+                        int contador = 0;
                         for (Field columna : campos) {
-                            if(StringUtils.equalsIgnoreCase(namePrimaryKey, this.getColumnName(columna))){
+                            if (StringUtils.equalsIgnoreCase(namePrimaryKey, this.getColumnName(columna))) {
                                 if (contador > 1) {
                                     sql = sql + " AND ";
                                 }
-                                sql=sql + namePrimaryKey
+                                sql = sql + namePrimaryKey
                                         + " = LAST_INSERT_ID()";
                                 contador++;
                             }
@@ -878,18 +878,18 @@ class Methods_Conexion extends Conexion {
                     LogsJB.debug("Llenara la información de las columnas: " + indicemetodos.size());
                     int auxiliar = 0;
                     Integer filas = 0;
-                    if(values.size()>0){
-                        for (Field value:values) {
+                    if (values.size() > 0) {
+                        for (Field value : values) {
                             auxiliar++;
                             convertJavaToSQL(modelo, value, ejecutor, auxiliar);
                         }
                         LogsJB.info(ejecutor.toString());
                         if (modelo.getDataBaseType() == DataBase.MySQL) {
                             ejecutor.executeUpdate();
-                            ejecutor=connect.prepareStatement(sql2);
-                            auxiliar=0;
-                            if(values2.size()>0){
-                                for (Field value:values2) {
+                            ejecutor = connect.prepareStatement(sql2);
+                            auxiliar = 0;
+                            if (values2.size() > 0) {
+                                for (Field value : values2) {
                                     auxiliar++;
                                     convertJavaToSQL(modelo, value, ejecutor, auxiliar);
                                 }
@@ -984,7 +984,7 @@ class Methods_Conexion extends Conexion {
 
                     //Colocamos el where
                     sql = sql + " WHERE ";
-                    int contador=0;
+                    int contador = 0;
                     for (Field columna : campos) {
                         if ((StringUtils.equalsIgnoreCase(namePrimaryKey, this.getColumnName(columna)) && !this.getValueColumnIsNull(this, columna))
                                 || (this.getColumnIsIndexValidValue(this, columna))) {
@@ -997,17 +997,16 @@ class Methods_Conexion extends Conexion {
                         }
                     }
 
-
                     //LogsJB.info(sql);
                     PreparedStatement ejecutor = connect.prepareStatement(sql);
                     //Llena el prepareStatement
                     LogsJB.debug("Llenara la información de las columnas: " + indicemetodos.size());
                     int auxiliar = 0;
-                    Integer filas=0;
-                    if(values.size()>0){
-                        for(Field value:values){
+                    Integer filas = 0;
+                    if (values.size() > 0) {
+                        for (Field value : values) {
                             auxiliar++;
-                            String columnName=getColumnName(value);
+                            String columnName = getColumnName(value);
                             if ((StringUtils.equalsIgnoreCase(columnName, "updated_at"))) {
                                 Long datetime = System.currentTimeMillis();
                                 FieldUtils.writeField(modelo, value.getName(), new Timestamp(datetime), true);
@@ -1318,16 +1317,16 @@ class Methods_Conexion extends Conexion {
                     String sql = "CREATE TABLE " + this.getTableName() + "(";
                     List<Field> fields = new ArrayList<>();
                     fields = this.getFieldsOfModel();
-                    fields=fields.stream().filter(field ->!Objects.isNull(getDataTypeSQL(field))).collect(Collectors.toList());
-                    fields.sort((field1, field2)->{
+                    fields = fields.stream().filter(field -> !Objects.isNull(getDataTypeSQL(field))).collect(Collectors.toList());
+                    fields.sort((field1, field2) -> {
                         int sort = 0;
-                        if(getDataTypeSQL(field1).getOrden()>getDataTypeSQL(field2).getOrden()){
-                            LogsJB.trace(getColumnName(field1)+ " Columna es mayor");
+                        if (getDataTypeSQL(field1).getOrden() > getDataTypeSQL(field2).getOrden()) {
+                            LogsJB.trace(getColumnName(field1) + " Columna es mayor");
                             sort = 1;
-                        }else if(getDataTypeSQL(field2).getOrden()>getDataTypeSQL(field1).getOrden()){
-                            LogsJB.trace(getColumnName(field2)+ " Columna es mayor");
+                        } else if (getDataTypeSQL(field2).getOrden() > getDataTypeSQL(field1).getOrden()) {
+                            LogsJB.trace(getColumnName(field2) + " Columna es mayor");
                             sort = -1;
-                        }else {
+                        } else {
                             LogsJB.trace("Ambas Columnas son iguales");
                             sort = 0;
                         }
@@ -1344,11 +1343,11 @@ class Methods_Conexion extends Conexion {
                         DataType columnType = getDataTypeSQL(campo);
                         //Manejo de tipo de dato TimeStamp en SQLServer
                         if ((columnType == DataType.TIMESTAMP) && (this.getDataBaseType() == DataBase.SQLServer)) {
-                            columnType= DataType.DATETIME;
+                            columnType = DataType.DATETIME;
                         }
                         Constraint[] columnRestriccion = getConstraints(campo);
                         String restricciones = "";
-                        String defaultValue=getColumnDefaultValue(campo);
+                        String defaultValue = getColumnDefaultValue(campo);
                         String size = getSize(campo);
                         //Se adecuo el obtener el tipo de columna, para que obtenga el tipo de dato con la información correcta
                         if ((
@@ -1358,31 +1357,30 @@ class Methods_Conexion extends Conexion {
                                         || ((this.getDataBaseType() == DataBase.MariaDB))
                         ) &&
                                 (columnType == DataType.BIT)) {
-                            columnType= DataType.BOOLEAN;
+                            columnType = DataType.BOOLEAN;
                         }
                         if ((this.getDataBaseType() == DataBase.SQLServer) && columnType == DataType.BOOLEAN) {
-                            columnType= DataType.BIT;
+                            columnType = DataType.BIT;
                         }
                         if ((this.getDataBaseType() == DataBase.PostgreSQL) && columnType == DataType.DOUBLE) {
 
-                            size="";
+                            size = "";
                         }
                         if ((this.getDataBaseType() == DataBase.SQLServer) && columnType == DataType.DOUBLE) {
-                            columnType= DataType.REAL;
+                            columnType = DataType.REAL;
                         }
                         if ((this.getDataBaseType() == DataBase.MySQL) && (columnType == DataType.TEXT
                                 || columnType == DataType.JSON
                         )) {
-                            defaultValue=null;
+                            defaultValue = null;
                         }
 
                         String tipo_de_columna;
                         if (stringIsNullOrEmpty(size)) {
-                            tipo_de_columna= columnType.name();
+                            tipo_de_columna = columnType.name();
                         } else {
-                            tipo_de_columna= columnType.name() + "(" + size + ")";
+                            tipo_de_columna = columnType.name() + "(" + size + ")";
                         }
-
 
                         if ((this.getDataBaseType() == DataBase.PostgreSQL) && columnType == DataType.DOUBLE) {
                             tipo_de_columna = tipo_de_columna.replace("DOUBLE", "DOUBLE PRECISION");
@@ -1761,7 +1759,7 @@ class Methods_Conexion extends Conexion {
         //Obtengo la información de la columna
         io.github.josecarlosbran.JBSqlUtils.Anotations.Column column = field.getAnnotation(io.github.josecarlosbran.JBSqlUtils.Anotations.Column.class);
         //Tiene anotación
-        if(Objects.isNull(column)){
+        if (Objects.isNull(column)) {
             return null;
         }
         return column.default_value();
@@ -1771,7 +1769,7 @@ class Methods_Conexion extends Conexion {
         //Obtengo la información de la columna
         io.github.josecarlosbran.JBSqlUtils.Anotations.Column column = field.getAnnotation(io.github.josecarlosbran.JBSqlUtils.Anotations.Column.class);
         //Tiene anotación
-        if(Objects.isNull(column)){
+        if (Objects.isNull(column)) {
             return null;
         }
         return column.size();
@@ -1781,7 +1779,7 @@ class Methods_Conexion extends Conexion {
         //Obtengo la información de la columna
         io.github.josecarlosbran.JBSqlUtils.Anotations.Column column = field.getAnnotation(io.github.josecarlosbran.JBSqlUtils.Anotations.Column.class);
         //Tiene anotación
-        if(Objects.isNull(column)){
+        if (Objects.isNull(column)) {
             return null;
         }
         return column.constraints();
@@ -1791,7 +1789,7 @@ class Methods_Conexion extends Conexion {
         //Obtengo la información de la columna
         io.github.josecarlosbran.JBSqlUtils.Anotations.Column column = field.getAnnotation(io.github.josecarlosbran.JBSqlUtils.Anotations.Column.class);
         //Tiene anotación
-        if(Objects.isNull(column) ||Objects.isNull(column.dataTypeSQL())){
+        if (Objects.isNull(column) || Objects.isNull(column.dataTypeSQL())) {
             return null;
         }
         DataType dataType = column.dataTypeSQL();
@@ -1806,7 +1804,7 @@ class Methods_Conexion extends Conexion {
         //Obtengo la información de la columna
         io.github.josecarlosbran.JBSqlUtils.Anotations.Column column = field.getAnnotation(io.github.josecarlosbran.JBSqlUtils.Anotations.Column.class);
         //Tiene anotación
-        if(Objects.isNull(column) ||Objects.isNull(column.dataTypeSQL())){
+        if (Objects.isNull(column) || Objects.isNull(column.dataTypeSQL())) {
             return null;
         }
         return column.dataTypeSQL();

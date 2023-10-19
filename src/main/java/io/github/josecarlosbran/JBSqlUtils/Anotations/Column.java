@@ -16,7 +16,7 @@ public @interface Column {
 
     String default_value() default "";
 
-    DataType dataTypeSQL() ;
+    DataType dataTypeSQL();
 
     Constraint[] constraints() default {};
 
