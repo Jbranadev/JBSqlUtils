@@ -32,7 +32,6 @@ public class Select extends Get {
      */
     protected Select(String TableName) throws ValorUndefined {
         super();
-        String respuesta = "";
         if (stringIsNullOrEmpty(TableName)) {
             throw new ValorUndefined("El nombre de la Tabla proporcionado esta vacío o es NULL");
         }

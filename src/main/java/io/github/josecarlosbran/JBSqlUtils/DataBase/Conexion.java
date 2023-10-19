@@ -128,7 +128,6 @@ class Conexion {
      */
     private List<Method> MethodsSetOfModel = null;
 
-
     private List<Field> fieldsOfModel = null;
 
     /**
@@ -900,6 +899,7 @@ class Conexion {
 
     /**
      * Lista de Field's que posee el modelo mapeados con la tabla correspondiente en BD's
+     *
      * @return
      */
     public List<Field> getFieldsOfModel() {
@@ -908,6 +908,4 @@ class Conexion {
         }
         return fieldsOfModel;
     }
-
-
 }

@@ -140,19 +140,17 @@ public class TestModel extends JBSqlUtils {
         this.getApellido().setSize("200");
     }
 
-    public Integer getOne(Integer numero){
+    public Integer getOne(Integer numero) {
         return numero;
     }
 
-    public void setOne(Integer numero, Integer numero2){
+    public void setOne(Integer numero, Integer numero2) {
 
     }
 
-    public void setOne(){
+    public void setOne() {
 
     }
-
-
 
     public Column<Integer> getId() {
         return id;

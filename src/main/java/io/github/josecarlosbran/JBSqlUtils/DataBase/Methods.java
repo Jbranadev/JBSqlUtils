@@ -255,8 +255,8 @@ class Methods extends Methods_Conexion {
     public <T, G extends JBSqlUtils> void llenarModelo(T controlador, G modelo) {
         try {
             List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getDeclaredMethods()));
-            controladorMethods=controladorMethods.stream().filter(metodo->{
-                return metodo.getDeclaringClass().getPackage().hashCode()==controlador.getClass().getPackage().hashCode();
+            controladorMethods = controladorMethods.stream().filter(metodo -> {
+                return metodo.getDeclaringClass().getPackage().hashCode() == controlador.getClass().getPackage().hashCode();
             }).collect(Collectors.toList());
             for (Method controladorMethod : controladorMethods) {
                 String controllerName = controladorMethod.getName();
@@ -265,7 +265,7 @@ class Methods extends Methods_Conexion {
                 //Si la clase donde se declaro el metodo pertenece a la clase Object
                 //Si el metodo No es un get, que continue, no tiene caso hacer lo siguiente
                 int parametros = controladorMethod.getParameterCount();
-                if((parametros>0) || (!StringUtils.startsWithIgnoreCase(controllerName, "get") || claseMethod.equalsIgnoreCase("Object"))){
+                if ((parametros > 0) || (!StringUtils.startsWithIgnoreCase(controllerName, "get") || claseMethod.equalsIgnoreCase("Object"))) {
                     continue;
                 }
                 LogsJB.trace("Cantidad de parametros: " + parametros);
@@ -350,8 +350,8 @@ class Methods extends Methods_Conexion {
             List<Method> modelGetMethods = modelo.getMethodsGetOfModel();
             LogsJB.debug("Obtuvo los metodos Get del modelo: ");
             List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getDeclaredMethods()));
-            controladorMethods=controladorMethods.stream().filter(metodo->{
-                return metodo.getDeclaringClass().getPackage().hashCode()==controlador.getClass().getPackage().hashCode();
+            controladorMethods = controladorMethods.stream().filter(metodo -> {
+                return metodo.getDeclaringClass().getPackage().hashCode() == controlador.getClass().getPackage().hashCode();
             }).collect(Collectors.toList());
             for (Method modelGetMethod : modelGetMethods) {
                 String modelGetName = modelGetMethod.getName();
@@ -371,7 +371,7 @@ class Methods extends Methods_Conexion {
                         //Si el metodo No es un set, que continue, no tiene caso hacer lo siguiente
                         //Valida que el metodo Set, si o sí, reciba un unico parametro
                         int parametros = controladorMethod.getParameterCount();
-                        if((parametros>1||parametros<1) || (!StringUtils.startsWithIgnoreCase(controllerName, "set")) || (claseMethod.equalsIgnoreCase("Object")) ){
+                        if ((parametros > 1 || parametros < 1) || (!StringUtils.startsWithIgnoreCase(controllerName, "set")) || (claseMethod.equalsIgnoreCase("Object"))) {
                             continue;
                         }
                         LogsJB.trace("Cantidad de parametros: " + parametros);

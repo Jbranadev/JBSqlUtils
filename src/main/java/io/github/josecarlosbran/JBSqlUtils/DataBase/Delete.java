@@ -36,7 +36,6 @@ public class Delete {
      * @throws ValorUndefined Lanza esta excepción si el parámetro proporcionado está vacío o es NULL
      */
     protected Delete(String TableName) throws ValorUndefined {
-        String respuesta = "";
         if (stringIsNullOrEmpty(TableName)) {
             throw new ValorUndefined("El nombre de la Tabla proporcionado esta vacío o es NULL");
         }
