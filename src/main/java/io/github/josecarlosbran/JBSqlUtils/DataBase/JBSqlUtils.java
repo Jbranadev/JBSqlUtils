@@ -37,8 +37,10 @@ public class JBSqlUtils extends Methods {
 
     private Column<Timestamp> updated_at1 = new Column<>(DataType.TIMESTAMP);
 
+    @io.github.josecarlosbran.JBSqlUtils.Anotations.Column(name = "created_at", dataTypeSQL = DataType.TIMESTAMP)
     private Timestamp created_at;
 
+    @io.github.josecarlosbran.JBSqlUtils.Anotations.Column(name = "updated_at", dataTypeSQL = DataType.TIMESTAMP)
     private Timestamp updated_at;
 
     /**

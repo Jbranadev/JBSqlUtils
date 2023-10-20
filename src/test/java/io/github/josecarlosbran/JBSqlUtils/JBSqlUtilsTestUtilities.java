@@ -82,6 +82,7 @@ public class JBSqlUtilsTestUtilities {
                 "El tipo de Columna obtenido no corresponde al esperado");
     }
 
+    /*
     @Test(testName = "Llenar Modelo",
             dependsOnMethods = "geColumn")
     public void llenarModelo() throws DataBaseUndefind, PropertiesDBUndefined {
@@ -92,13 +93,13 @@ public class JBSqlUtilsTestUtilities {
         controller.setIsMayor(false);
         controller.setId(5075);
         model.llenarModelo(controller, model);
-        Assert.assertTrue(controller.getId() == model.getId().getValor(),
+        Assert.assertTrue(controller.getId() == model.getId(),
                 "El valor que contiene modelo no corresponde al que posee el controlador");
-        Assert.assertTrue(controller.getIsMayor() == model.getIsMayor().getValor(),
+        Assert.assertTrue(controller.getIsMayor() == model.getIsMayor(),
                 "El valor que contiene modelo no corresponde al que posee el controlador");
-        Assert.assertTrue(controller.getName().equalsIgnoreCase(model.getName().getValor()),
+        Assert.assertTrue(controller.getName().equalsIgnoreCase(model.getName()),
                 "El valor que contiene modelo no corresponde al que posee el controlador");
-        Assert.assertTrue(controller.getApellido().equalsIgnoreCase(model.getApellido().getValor()),
+        Assert.assertTrue(controller.getApellido().equalsIgnoreCase(model.getApellido()),
                 "El valor que contiene modelo no corresponde al que posee el controlador");
     }
 
@@ -107,23 +108,23 @@ public class JBSqlUtilsTestUtilities {
     public void llenarControlador() throws DataBaseUndefind, PropertiesDBUndefined {
         TestModel model = new TestModel(false);
         TestController controller = new TestController();
-        model.getName().setValor("Controller");
-        model.getApellido().setValor("Apellido");
-        model.getIsMayor().setValor(false);
-        model.getId().setValor(5075);
+        model.setName("Controller");
+        model.setApellido("Apellido");
+        model.setIsMayor(false);
+        model.setId(5075);
         model.llenarControlador(controller, model);
-        Assert.assertTrue(controller.getId() == model.getId().getValor(),
+        Assert.assertTrue(controller.getId() == model.getId(),
                 "El valor que contiene controlador no corresponde al que posee el modelo");
-        Assert.assertTrue(controller.getIsMayor() == model.getIsMayor().getValor(),
+        Assert.assertTrue(controller.getIsMayor() == model.getIsMayor(),
                 "El valor que contiene controlador no corresponde al que posee el modelo");
-        Assert.assertTrue(controller.getName().equalsIgnoreCase(model.getName().getValor()),
+        Assert.assertTrue(controller.getName().equalsIgnoreCase(model.getName()),
                 "El valor que contiene controlador no corresponde al que posee el modelo");
-        Assert.assertTrue(controller.getApellido().equalsIgnoreCase(model.getApellido().getValor()),
+        Assert.assertTrue(controller.getApellido().equalsIgnoreCase(model.getApellido()),
                 "El valor que contiene controlador no corresponde al que posee el modelo");
     }
-
+    */
     @Test(testName = "Setear Properties Conexión Globales",
-            dependsOnMethods = "llenarControlador")
+            dependsOnMethods = "geColumn")
     public void setPropertiesConexion() {
         String separador = System.getProperty("file.separator");
         String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +

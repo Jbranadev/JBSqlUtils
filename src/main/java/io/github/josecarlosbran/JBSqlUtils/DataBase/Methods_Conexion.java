@@ -39,8 +39,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
-import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.getBooleanfromInt;
-import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
+import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.*;
 
 /**
  * @author Jose Bran
@@ -68,7 +67,7 @@ class Methods_Conexion extends Conexion {
     protected Methods_Conexion(Boolean getPropertySystem) {
         super(getPropertySystem);
         this.getMethodsModel();
-        this.getFieldsOfModel();
+        this.getFieldsModel();
     }
 
     /**
@@ -110,7 +109,7 @@ class Methods_Conexion extends Conexion {
             //modelFields=ListUtils.removeAll(modelFields.stream().collect(Collectors.toList()),tempField);
             modelFields = ListUtils.removeAll(modelFields, tempField);
             modelFields = ListUtils.union(modelFields, tempField);
-            modelFields = modelFields.stream().sorted().collect(Collectors.toList());
+            modelFields.stream().sorted();
             this.getFieldsOfModel().addAll(modelFields);
         }
     }
@@ -851,18 +850,18 @@ class Methods_Conexion extends Conexion {
                         for (Field columna : campos) {
                             if (StringUtils.equalsIgnoreCase(namePrimaryKey, this.getColumnName(columna))) {
                                 if (contador > 1) {
-                                    sql = sql + " AND ";
+                                    sql2 = sql2 + " AND ";
                                 }
-                                sql = sql + namePrimaryKey
+                                sql2 = sql2 + namePrimaryKey
                                         + " = LAST_INSERT_ID()";
                                 contador++;
                             }
                             if ((this.getColumnIsIndexValidValue(this, columna))) {
                                 if (contador > 1) {
-                                    sql = sql + " AND ";
+                                    sql2 = sql2 + " AND ";
                                 }
                                 values2.add(columna);
-                                sql = sql + this.getColumnName(columna) + " = ?";
+                                sql2 = sql2 + this.getColumnName(columna) + " = ?";
                                 contador++;
                             }
                         }
@@ -1351,6 +1350,7 @@ class Methods_Conexion extends Conexion {
                         }
                         if ((this.getDataBaseType() == DataBase.SQLServer) && columnType == DataType.BOOLEAN) {
                             columnType = DataType.BIT;
+
                         }
                         if ((this.getDataBaseType() == DataBase.PostgreSQL) && columnType == DataType.DOUBLE) {
 
@@ -1363,6 +1363,9 @@ class Methods_Conexion extends Conexion {
                                 || columnType == DataType.JSON
                         )) {
                             defaultValue = null;
+                        }
+                        if((this.getDataBaseType() == DataBase.SQLServer) && columnType == DataType.BIT && !stringIsNullOrEmpty(defaultValue)){
+                            defaultValue=""+getIntFromBoolean(Boolean.valueOf(defaultValue));
                         }
 
                         String tipo_de_columna;
@@ -1386,7 +1389,9 @@ class Methods_Conexion extends Conexion {
                                 } else if ((DataBase.SQLite == this.getDataBaseType()) &&
                                         (restriccion == Constraint.AUTO_INCREMENT)) {
                                     restricciones = restricciones;
-                                } else if (restriccion == Constraint.DEFAULT && !stringIsNullOrEmpty(defaultValue)) {
+                                } else if (restriccion == Constraint.DEFAULT && stringIsNullOrEmpty(defaultValue)) {
+                                    continue;
+                                }  else if (restriccion == Constraint.DEFAULT && !stringIsNullOrEmpty(defaultValue)) {
                                     restricciones = restricciones + restriccion.getRestriccion() + " " + defaultValue + " ";
                                 } else {
                                     restricciones = restricciones + restriccion.getRestriccion() + " ";

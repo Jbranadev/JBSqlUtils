@@ -419,7 +419,7 @@ class Methods extends Methods_Conexion {
                 } else if (campo.getType().isAssignableFrom(Float.class)) {
                     FieldUtils.writeField(this, campo.getName(), null, true);
                 } else if (campo.getType().isAssignableFrom(Boolean.class)) {
-                    FieldUtils.writeField(this, campo.getName(), false, true);
+                    FieldUtils.writeField(this, campo.getName(), null, true);
                 } else if (campo.getType().isAssignableFrom(byte[].class)) {
                     FieldUtils.writeField(this, campo.getName(), null, true);
                 } else if (campo.getType().isAssignableFrom(Date.class)) {
