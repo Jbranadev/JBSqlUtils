@@ -16,6 +16,7 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 import com.josebran.LogsJB.LogsJB;
+import io.github.josecarlosbran.JBSqlUtils.Anotations.ColumnDefined;
 import io.github.josecarlosbran.JBSqlUtils.Anotations.Index;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
@@ -104,9 +105,8 @@ class Methods_Conexion extends Conexion {
             List<Field> modelFields = Arrays.asList(this.getClass().getDeclaredFields());
             List<Field> modelFieldsWithAnotations =
                     Arrays.asList(FieldUtils.getFieldsWithAnnotation(this.getClass(),
-                            io.github.josecarlosbran.JBSqlUtils.Anotations.Column.class));
+                            ColumnDefined.class));
             List<Field> tempField = ListUtils.intersection(modelFields, modelFieldsWithAnotations);
-            //modelFields=ListUtils.removeAll(modelFields.stream().collect(Collectors.toList()),tempField);
             modelFields = ListUtils.removeAll(modelFields, tempField);
             modelFields = ListUtils.union(modelFields, tempField);
             modelFields.stream().sorted();
@@ -123,9 +123,8 @@ class Methods_Conexion extends Conexion {
         Connection connect = null;
         try {
             if (this.getContadorConexiones() == 0) {
-                this.getNameForColumns();
             }
-            String url = null;
+            String url;
             String usuario = this.getUser();
             String password = this.getPassword();
             if (this.getDataBaseType() == DataBase.PostgreSQL) {
@@ -141,7 +140,6 @@ class Methods_Conexion extends Conexion {
                 connect = DriverManager.getConnection(url, usuario, password);
             }
             if (this.getDataBaseType() == DataBase.MySQL) {
-                url = null;
                 connect = null;
                 //Carga el controlador de MySQL
                 //Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -155,7 +153,6 @@ class Methods_Conexion extends Conexion {
                 connect = DriverManager.getConnection(url, usuario, password);
             }
             if (this.getDataBaseType() == DataBase.MariaDB) {
-                url = null;
                 connect = null;
                 //Carga el controlador de MariaDB
                 //Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -169,7 +166,6 @@ class Methods_Conexion extends Conexion {
                 connect = DriverManager.getConnection(url, usuario, password);
             }
             if (this.getDataBaseType() == DataBase.SQLServer) {
-                url = null;
                 connect = null;
                 //Carga el controlador de SQLServer
                 //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -232,8 +228,9 @@ class Methods_Conexion extends Conexion {
      * @return True si la tabla correspondiente al modelo existe en BD's, de lo contrario False.
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
+    @SuppressWarnings("UnusedAssignment")
     public Boolean tableExist() throws Exception {
-        Boolean result = false;
+        Boolean result;
         Callable<ResultAsync<Boolean>> VerificarExistencia = () -> {
             try {
                 LogsJB.info("Comienza a verificar la existencia de la tabla");
@@ -316,7 +313,7 @@ class Methods_Conexion extends Conexion {
             }
             return new ResultAsync<Boolean>(false, null);
         };
-        Future<ResultAsync<Boolean>> future = this.ejecutor.submit(VerificarExistencia);
+        Future<ResultAsync<Boolean>> future = ejecutor.submit(VerificarExistencia);
         while (!future.isDone()) {
         }
         ResultAsync<Boolean> resultado = future.get();
@@ -375,48 +372,6 @@ class Methods_Conexion extends Conexion {
             columnas.close();
             this.closeConnection(connect);
             this.getTabla().getColumnas().stream().sorted(Comparator.comparing(ColumnsSQL::getORDINAL_POSITION));
-            //Seteamos a cada columna si existe
-            /*String JBSQLUTILSNAME = JBSqlUtils.class.getSimpleName();
-            String SuperClaseModelo = this.getClass().getSuperclass().getSimpleName();
-            if (StringUtils.equalsIgnoreCase(JBSQLUTILSNAME, SuperClaseModelo)) {
-                //Obtiene los metodos get del modelo
-                List<Method> modelGetMethods = this.getMethodsGetOfModel();
-                Iterator<Method> iteradorModelGetMethods = modelGetMethods.iterator();
-                while (iteradorModelGetMethods.hasNext()) {
-                    Method modelGetMethod = iteradorModelGetMethods.next();
-                    String modelGetName = modelGetMethod.getName();
-                    LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);
-                    //Obtengo la información de la columna
-                    Column columnsSQL = (Column) modelGetMethod.invoke(this, null);
-                    String columnName = columnsSQL.getName();
-                    //Le meto la información a la columa
-                    Iterator<ColumnsSQL> iteradorColumnas = this.getTabla().getColumnas().iterator();
-                    while (iteradorColumnas.hasNext()) {
-                        ColumnsSQL columTemp = iteradorColumnas.next();
-                        String nombreColumnaTemp = columTemp.getCOLUMN_NAME();
-                        if (!stringIsNullOrEmpty(nombreColumnaTemp) && StringUtils.equalsIgnoreCase(nombreColumnaTemp, columnName)) {
-                            LogsJB.debug("Setea si la columna existe en BD's: " + columnName);
-                            columnsSQL.setColumnExist(true);
-                        }
-                    }
-                    //Obtiene los metodos set del modelo
-                    List<Method> modelSetMethods = this.getMethodsSetOfModel();
-                    Iterator<Method> iteradorModelSetMethods = modelSetMethods.iterator();
-                    while (iteradorModelSetMethods.hasNext()) {
-                        Method modelSetMethod = iteradorModelSetMethods.next();
-                        String modelSetName = modelSetMethod.getName();
-                        LogsJB.trace("Nombre del metodo set: " + modelSetName);
-                        modelSetName = StringUtils.removeStartIgnoreCase(modelSetName, "set");
-                        LogsJB.trace("Nombre del metodo set a validar: " + modelSetName);
-                        if (StringUtils.equalsIgnoreCase(modelSetName, columnName)) {
-                            //Setea el valor del metodo
-                            modelSetMethod.invoke(this, columnsSQL);
-                            LogsJB.debug("Ingreso la columna en el metodo set: " + modelSetName);
-                            break;
-                        }
-                    }
-                }
-            }*/
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
@@ -444,7 +399,7 @@ class Methods_Conexion extends Conexion {
      */
     public <T extends JBSqlUtils> Boolean reloadModel() throws Exception {
         this.setTaskIsReady(false);
-        Boolean reloadModel = false;
+        Boolean reloadModel;
         this.validarTableExist(this);
         Callable<ResultAsync<Boolean>> get = () -> {
             Boolean result = false;
@@ -497,7 +452,7 @@ class Methods_Conexion extends Conexion {
                 return new ResultAsync<>(result, e);
             }
         };
-        Future<ResultAsync<Boolean>> future = this.ejecutor.submit(get);
+        Future<ResultAsync<Boolean>> future = ejecutor.submit(get);
         while (!future.isDone()) {
         }
         ResultAsync<Boolean> resultado = future.get();
@@ -632,7 +587,6 @@ class Methods_Conexion extends Conexion {
      * @throws IllegalAccessException    Lanza esta excepción si hubiera algún problema al invocar el metodo Set
      */
     protected void convertSQLtoJava(ColumnsSQL columna, ResultSet resultado, Field field, Object invocador) throws SQLException, InvocationTargetException, IllegalAccessException {
-
         if (field.getType().isAssignableFrom(String.class)) {
             //Caracteres y cadenas de Texto
             FieldUtils.writeField(invocador, field.getName(), resultado.getString(columna.getCOLUMN_NAME()), true);
@@ -751,7 +705,7 @@ class Methods_Conexion extends Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     protected <T extends Methods_Conexion> Integer saveModel(T modelo) throws Exception {
-        Integer result = 0;
+        Integer result;
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
         Connection connect = modelo.getConnection();
@@ -760,7 +714,7 @@ class Methods_Conexion extends Conexion {
                 if (modelo.getTableExist()) {
                     String sql2 = "";
                     String sql = "INSERT INTO " + modelo.getTableName() + "(";
-                    List<Field> campos = new ArrayList<>();
+                    List<Field> campos;
                     List<Field> values = new ArrayList<>();
                     List<Field> values2 = new ArrayList<>();
                     campos = modelo.getFieldsOfModel();
@@ -814,7 +768,6 @@ class Methods_Conexion extends Conexion {
                             sql = sql + ");";
                         }
                     }
-
                     if (modelo.getDataBaseType() == DataBase.SQLServer) {
                         //Obtener cual es la clave primaria de la tabla
                         String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
@@ -824,7 +777,7 @@ class Methods_Conexion extends Conexion {
                         int contador = 0;
                         for (Field columna : campos) {
                             if (StringUtils.equalsIgnoreCase(namePrimaryKey, this.getColumnName(columna))) {
-                                if (contador > 1) {
+                                if (contador > 0) {
                                     sql = sql + " AND ";
                                 }
                                 sql = sql + namePrimaryKey
@@ -832,7 +785,7 @@ class Methods_Conexion extends Conexion {
                                 contador++;
                             }
                             if ((this.getColumnIsIndexValidValue(this, columna))) {
-                                if (contador > 1) {
+                                if (contador > 0) {
                                     sql = sql + " AND ";
                                 }
                                 values.add(columna);
@@ -849,7 +802,7 @@ class Methods_Conexion extends Conexion {
                         int contador = 0;
                         for (Field columna : campos) {
                             if (StringUtils.equalsIgnoreCase(namePrimaryKey, this.getColumnName(columna))) {
-                                if (contador > 1) {
+                                if (contador > 0) {
                                     sql2 = sql2 + " AND ";
                                 }
                                 sql2 = sql2 + namePrimaryKey
@@ -857,7 +810,7 @@ class Methods_Conexion extends Conexion {
                                 contador++;
                             }
                             if ((this.getColumnIsIndexValidValue(this, columna))) {
-                                if (contador > 1) {
+                                if (contador > 0) {
                                     sql2 = sql2 + " AND ";
                                 }
                                 values2.add(columna);
@@ -868,7 +821,6 @@ class Methods_Conexion extends Conexion {
                     } else {
                         sql = sql.replace(";", " RETURNING * ;");
                     }
-
                     //LogsJB.info(sql);
                     PreparedStatement ejecutor = connect.prepareStatement(sql);
                     //Llena el prepareStatement
@@ -905,7 +857,6 @@ class Methods_Conexion extends Conexion {
                             }
                         }
                     }
-
                     LogsJB.info("Filas Insertadas en BD's': " + filas + " " + this.getTableName());
                     modelo.closeConnection(connect);
                     modelo.setTaskIsReady(true);
@@ -929,7 +880,7 @@ class Methods_Conexion extends Conexion {
                     //Obtener cual es la clave primaria de la tabla
                     String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
                     String sql = "UPDATE " + modelo.getTableName() + " SET";
-                    List<Field> campos = new ArrayList<>();
+                    List<Field> campos;
                     List<Field> values = new ArrayList<>();
                     campos = modelo.getFieldsOfModel();
                     int datos = 0;
@@ -942,7 +893,6 @@ class Methods_Conexion extends Conexion {
                         //Obtengo la información de la columna
                         String columnName = getColumnName(campo);
                         if (!UtilitiesJB.stringIsNullOrEmpty(namePrimaryKey) && StringUtils.equalsIgnoreCase(namePrimaryKey, columnName)) {
-                            indicePrimarykey = i;
                             continue;
                         }
                         if (getValueColumnIsNull(modelo, campo)) {
@@ -978,7 +928,6 @@ class Methods_Conexion extends Conexion {
                         indicemetodos.add(i);
                         values.add(campo);
                     }
-
                     //Colocamos el where
                     sql = sql + " WHERE ";
                     int contador = 0;
@@ -993,7 +942,6 @@ class Methods_Conexion extends Conexion {
                             sql = sql + this.getColumnName(columna) + " = ?";
                         }
                     }
-
                     //LogsJB.info(sql);
                     PreparedStatement ejecutor = connect.prepareStatement(sql);
                     //Llena el prepareStatement
@@ -1014,7 +962,6 @@ class Methods_Conexion extends Conexion {
                         LogsJB.info(ejecutor.toString());
                         filas = ejecutor.executeUpdate();
                     }
-
                     LogsJB.info("Filas actualizadas: " + filas + " " + this.getTableName());
                     modelo.closeConnection(connect);
                     modelo.setTaskIsReady(true);
@@ -1034,9 +981,9 @@ class Methods_Conexion extends Conexion {
         LogsJB.debug("El modelo existe: " + modelo.getModelExist());
         Future<ResultAsync<Integer>> future = null;
         if (modelo.getModelExist()) {
-            future = this.ejecutor.submit(Update);
+            future = ejecutor.submit(Update);
         } else if (!modelo.getModelExist()) {
-            future = this.ejecutor.submit(Save);
+            future = ejecutor.submit(Save);
         }
         while (!future.isDone()) {
         }
@@ -1059,7 +1006,7 @@ class Methods_Conexion extends Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     protected <T extends Methods_Conexion> Integer deleteModel(T modelo) throws Exception {
-        Integer result = 0;
+        Integer result;
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
         Callable<ResultAsync<Integer>> Delete = () -> {
@@ -1076,13 +1023,12 @@ class Methods_Conexion extends Conexion {
                             values.add(columna);
                             if (values.size() > 1) {
                                 sql = sql + " AND ";
-                            }else{
-                                sql=sql+ " WHERE ";
+                            } else {
+                                sql = sql + " WHERE ";
                             }
                             sql = sql + this.getColumnName(columna) + " = ?";
                         }
                     }
-
                     //Colocamos el where
                     sql = sql + ";";
                     //LogsJB.info(sql);
@@ -1118,7 +1064,7 @@ class Methods_Conexion extends Conexion {
                 return new ResultAsync<>(0, e);
             }
         };
-        Future<ResultAsync<Integer>> future = this.ejecutor.submit(Delete);
+        Future<ResultAsync<Integer>> future = ejecutor.submit(Delete);
         while (!future.isDone()) {
         }
         ResultAsync<Integer> resultado = future.get();
@@ -1138,7 +1084,7 @@ class Methods_Conexion extends Conexion {
      * @return Retorna la nueva instancia del modelo creada
      */
     public <T extends Methods_Conexion> T obtenerInstanciaOfModel(T modelo) throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
-        T temp = null;
+        T temp;
         if (modelo.getGetPropertySystem()) {
             temp = (T) modelo.getClass().newInstance();
             temp.llenarPropertiesFromModel(temp);
@@ -1296,7 +1242,7 @@ class Methods_Conexion extends Conexion {
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
     public Boolean createTable() throws Exception {
-        Boolean result = false;
+        Boolean result;
         Callable<ResultAsync<Boolean>> createtabla = () -> {
             try {
                 if (this.tableExist()) {
@@ -1304,11 +1250,11 @@ class Methods_Conexion extends Conexion {
                     return new ResultAsync<Boolean>(false, null);
                 } else {
                     String sql = "CREATE TABLE " + this.getTableName() + "(";
-                    List<Field> fields = new ArrayList<>();
+                    List<Field> fields;
                     fields = this.getFieldsOfModel();
                     fields = fields.stream().filter(field -> !Objects.isNull(getDataTypeSQL(field))).collect(Collectors.toList());
                     fields.sort((field1, field2) -> {
-                        int sort = 0;
+                        int sort;
                         if (getDataTypeSQL(field1).getOrden() > getDataTypeSQL(field2).getOrden()) {
                             LogsJB.trace(getColumnName(field1) + " Columna es mayor");
                             sort = 1;
@@ -1321,7 +1267,6 @@ class Methods_Conexion extends Conexion {
                         }
                         return sort;
                     });
-
                     LogsJB.debug("Termino de ordenar la lista");
                     int datos = 0;
                     for (int i = 0; i < fields.size(); i++) {
@@ -1350,10 +1295,8 @@ class Methods_Conexion extends Conexion {
                         }
                         if ((this.getDataBaseType() == DataBase.SQLServer) && columnType == DataType.BOOLEAN) {
                             columnType = DataType.BIT;
-
                         }
                         if ((this.getDataBaseType() == DataBase.PostgreSQL) && columnType == DataType.DOUBLE) {
-
                             size = "";
                         }
                         if ((this.getDataBaseType() == DataBase.SQLServer) && columnType == DataType.DOUBLE) {
@@ -1364,17 +1307,15 @@ class Methods_Conexion extends Conexion {
                         )) {
                             defaultValue = null;
                         }
-                        if((this.getDataBaseType() == DataBase.SQLServer) && columnType == DataType.BIT && !stringIsNullOrEmpty(defaultValue)){
-                            defaultValue=""+getIntFromBoolean(Boolean.valueOf(defaultValue));
+                        if ((this.getDataBaseType() == DataBase.SQLServer) && columnType == DataType.BIT && !stringIsNullOrEmpty(defaultValue)) {
+                            defaultValue = "" + getIntFromBoolean(Boolean.valueOf(defaultValue));
                         }
-
                         String tipo_de_columna;
                         if (stringIsNullOrEmpty(size)) {
                             tipo_de_columna = columnType.name();
                         } else {
                             tipo_de_columna = columnType.name() + "(" + size + ")";
                         }
-
                         if ((this.getDataBaseType() == DataBase.PostgreSQL) && columnType == DataType.DOUBLE) {
                             tipo_de_columna = tipo_de_columna.replace("DOUBLE", "DOUBLE PRECISION");
                         }
@@ -1391,7 +1332,7 @@ class Methods_Conexion extends Conexion {
                                     restricciones = restricciones;
                                 } else if (restriccion == Constraint.DEFAULT && stringIsNullOrEmpty(defaultValue)) {
                                     continue;
-                                }  else if (restriccion == Constraint.DEFAULT && !stringIsNullOrEmpty(defaultValue)) {
+                                } else if (restriccion == Constraint.DEFAULT && !stringIsNullOrEmpty(defaultValue)) {
                                     restricciones = restricciones + restriccion.getRestriccion() + " " + defaultValue + " ";
                                 } else {
                                     restricciones = restricciones + restriccion.getRestriccion() + " ";
@@ -1431,7 +1372,7 @@ class Methods_Conexion extends Conexion {
             }
             return new ResultAsync<Boolean>(false, null);
         };
-        Future<ResultAsync<Boolean>> future = this.ejecutor.submit(createtabla);
+        Future<ResultAsync<Boolean>> future = ejecutor.submit(createtabla);
         while (!future.isDone()) {
         }
         ResultAsync<Boolean> resultado = future.get();
@@ -1450,11 +1391,11 @@ class Methods_Conexion extends Conexion {
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
     public Boolean dropTableIfExist() throws Exception {
-        Boolean result = false;
+        Boolean result;
         Callable<ResultAsync<Boolean>> dropTable = () -> {
             try {
                 if (this.tableExist()) {
-                    String sql = "";
+                    String sql;
                     if (this.getDataBaseType() == DataBase.SQLServer) {
                         sql = "if exists (select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = '" +
                                 this.getTableName() +
@@ -1485,7 +1426,7 @@ class Methods_Conexion extends Conexion {
                 return new ResultAsync<Boolean>(false, e);
             }
         };
-        Future<ResultAsync<Boolean>> future = this.ejecutor.submit(dropTable);
+        Future<ResultAsync<Boolean>> future = ejecutor.submit(dropTable);
         while (!future.isDone()) {
         }
         ResultAsync<Boolean> resultado = future.get();
@@ -1505,7 +1446,7 @@ class Methods_Conexion extends Conexion {
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
     protected Boolean crateTableJSON(List<Column> columnas) throws Exception {
-        Boolean result = false;
+        Boolean result;
         Callable<ResultAsync<Boolean>> createtabla = () -> {
             try {
                 if (this.tableExist()) {
@@ -1613,7 +1554,7 @@ class Methods_Conexion extends Conexion {
                 return new ResultAsync<Boolean>(false, e);
             }
         };
-        Future<ResultAsync<Boolean>> future = this.ejecutor.submit(createtabla);
+        Future<ResultAsync<Boolean>> future = ejecutor.submit(createtabla);
         while (!future.isDone()) {
         }
         ResultAsync<Boolean> resultado = future.get();
@@ -1633,7 +1574,6 @@ class Methods_Conexion extends Conexion {
      */
     public <T extends Methods_Conexion, G extends Methods_Conexion> void llenarPropertiesFromModel(G proveedor) {
         try {
-            this.getNameForColumns();
             this.setGetPropertySystem(proveedor.getGetPropertySystem());
             List<Method> metodosProveedor = Arrays.asList(proveedor.getClass().getMethods());
             //Filtro los metodos de las propiedades que deseo obtener
@@ -1671,62 +1611,15 @@ class Methods_Conexion extends Conexion {
         }
     }
 
-    /**
-     * Obtiene los nombres de las columnas que posee el modelo en caso estas no posean un nombre
-     */
-    private void getNameForColumns() {
-        try {
-            String JBSQLUTILSNAME = JBSqlUtils.class.getSimpleName();
-            String SuperClaseModelo = this.getClass().getSuperclass().getSimpleName();
-            if (StringUtils.equalsIgnoreCase(JBSQLUTILSNAME, SuperClaseModelo)) {
-                //Obtiene los metodos get del modelo
-                List<Method> modelGetMethods = this.getMethodsGetOfModel();
-                Iterator<Method> iteradorModelGetMethods = modelGetMethods.iterator();
-                while (iteradorModelGetMethods.hasNext()) {
-                    Method modelGetMethod = iteradorModelGetMethods.next();
-                    String modelGetName = modelGetMethod.getName();
-                    LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);
-                    //Obtengo la información de la columna
-                    Column columnsSQL = (Column) modelGetMethod.invoke(this, null);
-                    String columnName = modelGetMethod.getName();
-                    columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
-                    //Le meto la información a la columa
-                    LogsJB.debug("Setea el nombre a la columna: " + columnName);
-                    if (UtilitiesJB.stringIsNullOrEmpty(columnsSQL.getName())) {
-                        columnsSQL.setName(columnName);
-                    }
-                    //Obtiene los metodos set del modelo
-                    List<Method> modelSetMethods = this.getMethodsSetOfModel();
-                    Iterator<Method> iteradorModelSetMethods = modelSetMethods.iterator();
-                    while (iteradorModelSetMethods.hasNext()) {
-                        Method modelSetMethod = iteradorModelSetMethods.next();
-                        String modelSetName = modelSetMethod.getName();
-                        LogsJB.trace("Nombre del metodo set: " + modelSetName);
-                        modelSetName = StringUtils.removeStartIgnoreCase(modelSetName, "set");
-                        LogsJB.trace("Nombre del metodo set a validar: " + modelSetName);
-                        if (StringUtils.equalsIgnoreCase(modelSetName, columnName)) {
-                            //Setea el valor del metodo
-                            modelSetMethod.invoke(this, columnsSQL);
-                            LogsJB.debug("Ingreso la columna en el metodo set: " + modelSetName);
-                            break;
-                        }
-                    }
-                }
-            }
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al obtener los nombres de las columnas del modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-        }
-    }
-
     private String getColumnName(Field field) {
         //Obtengo la información de la columna
-        io.github.josecarlosbran.JBSqlUtils.Anotations.Column column = field.getAnnotation(io.github.josecarlosbran.JBSqlUtils.Anotations.Column.class);
-        if ((Objects.isNull(column)) || stringIsNullOrEmpty(column.name())) {
+        ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
+        if ((Objects.isNull(columnDefined)) || stringIsNullOrEmpty(columnDefined.name())) {
             //No tiene anotación o el valor seteado
             return field.getName();
         } else {
             //Tiene anotación
-            return column.name();
+            return columnDefined.name();
         }
     }
 
@@ -1737,12 +1630,12 @@ class Methods_Conexion extends Conexion {
 
     private Boolean getColumnIsIndexValidValue(Object model, Field field) throws IllegalAccessException {
         //Obtiene si la columna es un Index
-        return this.getColumnIsIndex(field) && this.getValueColumnIsNull(model, field);
+        return this.getColumnIsIndex(field) && !this.getValueColumnIsNull(model, field);
     }
 
     private Boolean getValueColumnIsNull(Object model, Field field) throws IllegalAccessException {
         //Obtiene si la columna es un Index
-        return Objects.isNull(FieldUtils.readDeclaredField(model, field.getName(), true)) ? true : false;
+        return Objects.isNull(FieldUtils.readDeclaredField(model, field.getName(), true));
     }
 
     private Object getValueColumn(Object model, Field field) throws IllegalAccessException {
@@ -1752,42 +1645,42 @@ class Methods_Conexion extends Conexion {
 
     private String getColumnDefaultValue(Field field) {
         //Obtengo la información de la columna
-        io.github.josecarlosbran.JBSqlUtils.Anotations.Column column = field.getAnnotation(io.github.josecarlosbran.JBSqlUtils.Anotations.Column.class);
+        ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
         //Tiene anotación
-        if (Objects.isNull(column)) {
+        if (Objects.isNull(columnDefined)) {
             return null;
         }
-        return column.default_value();
+        return columnDefined.default_value();
     }
 
     private String getSize(Field field) {
         //Obtengo la información de la columna
-        io.github.josecarlosbran.JBSqlUtils.Anotations.Column column = field.getAnnotation(io.github.josecarlosbran.JBSqlUtils.Anotations.Column.class);
+        ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
         //Tiene anotación
-        if (Objects.isNull(column)) {
+        if (Objects.isNull(columnDefined)) {
             return null;
         }
-        return column.size();
+        return columnDefined.size();
     }
 
     private Constraint[] getConstraints(Field field) {
         //Obtengo la información de la columna
-        io.github.josecarlosbran.JBSqlUtils.Anotations.Column column = field.getAnnotation(io.github.josecarlosbran.JBSqlUtils.Anotations.Column.class);
+        ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
         //Tiene anotación
-        if (Objects.isNull(column)) {
+        if (Objects.isNull(columnDefined)) {
             return null;
         }
-        return column.constraints();
+        return columnDefined.constraints();
     }
 
     private String getDataTypeSQLToString(Field field) {
         //Obtengo la información de la columna
-        io.github.josecarlosbran.JBSqlUtils.Anotations.Column column = field.getAnnotation(io.github.josecarlosbran.JBSqlUtils.Anotations.Column.class);
+        ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
         //Tiene anotación
-        if (Objects.isNull(column) || Objects.isNull(column.dataTypeSQL())) {
+        if (Objects.isNull(columnDefined) || Objects.isNull(columnDefined.dataTypeSQL())) {
             return null;
         }
-        DataType dataType = column.dataTypeSQL();
+        DataType dataType = columnDefined.dataTypeSQL();
         if (stringIsNullOrEmpty(this.getSize(field))) {
             return dataType.name();
         } else {
@@ -1797,11 +1690,11 @@ class Methods_Conexion extends Conexion {
 
     private DataType getDataTypeSQL(Field field) {
         //Obtengo la información de la columna
-        io.github.josecarlosbran.JBSqlUtils.Anotations.Column column = field.getAnnotation(io.github.josecarlosbran.JBSqlUtils.Anotations.Column.class);
+        ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
         //Tiene anotación
-        if (Objects.isNull(column) || Objects.isNull(column.dataTypeSQL())) {
+        if (Objects.isNull(columnDefined) || Objects.isNull(columnDefined.dataTypeSQL())) {
             return null;
         }
-        return column.dataTypeSQL();
+        return columnDefined.dataTypeSQL();
     }
 }

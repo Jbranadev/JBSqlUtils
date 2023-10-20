@@ -175,7 +175,7 @@ public enum DataType {
     DATETIME2("", 10),
     ;
 
-    private String size = "";
+    private String size;
 
     private int orden;
 

@@ -41,7 +41,7 @@ class Conexion {
     /**
      * Ejecutor de tareas asincronas
      */
-    protected ExecutorService ejecutor = Executors.newCachedThreadPool();
+    protected static ExecutorService ejecutor = Executors.newCachedThreadPool();
     /**
      * Tipo de BD's a la cual se conectara.
      */
@@ -232,7 +232,7 @@ class Conexion {
      * @return Retorna el Host en el cual se encuentra la BD's, de no estar definido, retorna NULL
      */
     private String setearHost() {
-        String host = null;
+        String host;
         host = System.getProperty(ConeccionProperties.DBHOST.getPropiertie());
         return host;
     }
@@ -243,7 +243,7 @@ class Conexion {
      * @return Retorna el Puerto en el cual se encuentra la BD's, de no estar definido, retorna NULL
      */
     private String setearPort() {
-        String port = null;
+        String port;
         port = System.getProperty(ConeccionProperties.DBPORT.getPropiertie());
         return port;
     }
@@ -254,7 +254,7 @@ class Conexion {
      * @return Retorna el Usuario con el cual se conectara la BD's, de no estar definido, retorna NULL
      */
     private String setearUser() {
-        String user = null;
+        String user;
         user = System.getProperty(ConeccionProperties.DBUSER.getPropiertie());
         return user;
     }
@@ -266,7 +266,7 @@ class Conexion {
      * @throws PropertiesDBUndefined Lanza esta excepción si no se a seteado el Nombre de la BD's a la cual nos conectaremos.
      */
     private String setearBD() {
-        String DB = null;
+        String DB;
         DB = System.getProperty(ConeccionProperties.DBNAME.getPropiertie());
         return DB;
     }
@@ -277,7 +277,7 @@ class Conexion {
      * @return Retorna la contraseña del usuario con el cual se conectara la BD's, de no estar definida, retorna NULL
      */
     private String setearPassword() {
-        String password = null;
+        String password;
         password = System.getProperty(ConeccionProperties.DBPASSWORD.getPropiertie());
         return password;
     }
@@ -288,7 +288,7 @@ class Conexion {
      * @return Las propiedades de la url para la conexión a la BD's obtenida de las variables del sistema
      */
     private String setearPropertisUrl() {
-        String property = null;
+        String property;
         property = System.getProperty(ConeccionProperties.DBPROPERTIESURL.getPropiertie());
         return property;
     }
@@ -309,7 +309,7 @@ class Conexion {
         try {
             //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
             StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-            String clase = null;
+            String clase;
             int posicion = 0;
             for (int i = 3; i <= 7; i += 2) {
                 clase = elements[i].getClassName();
@@ -352,7 +352,7 @@ class Conexion {
         try {
             //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
             StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-            String clase = null;
+            String clase;
             int posicion = 0;
             for (int i = 3; i <= 7; i += 2) {
                 clase = elements[i].getClassName();
@@ -401,7 +401,7 @@ class Conexion {
         try {
             //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
             StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-            String clase = null;
+            String clase;
             int posicion = 0;
             for (int i = 3; i <= 7; i += 2) {
                 clase = elements[i].getClassName();
@@ -449,7 +449,7 @@ class Conexion {
         try {
             //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
             StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-            String clase = null;
+            String clase;
             int posicion = 0;
             for (int i = 3; i <= 7; i += 2) {
                 clase = elements[i].getClassName();
@@ -497,7 +497,7 @@ class Conexion {
         try {
             //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
             StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-            String clase = null;
+            String clase;
             int posicion = 0;
             for (int i = 3; i <= 7; i += 2) {
                 clase = elements[i].getClassName();
@@ -545,7 +545,7 @@ class Conexion {
         try {
             //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
             StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-            String clase = null;
+            String clase;
             int posicion = 0;
             for (int i = 3; i <= 7; i += 2) {
                 clase = elements[i].getClassName();
@@ -589,7 +589,7 @@ class Conexion {
         try {
             //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
             StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-            String clase = null;
+            String clase;
             int posicion = 0;
             for (int i = 3; i <= 7; i += 2) {
                 clase = elements[i].getClassName();

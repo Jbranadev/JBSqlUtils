@@ -161,7 +161,6 @@ public class JBSqlUtilsTestPostgreSQL {
         reloadModel = StringUtils.containsIgnoreCase(temp.getName(), "Marcos");
         Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
         Assert.assertTrue(false == temp.getIsMayor(), "El Modelo no fue recargado de BD's como esperabamos");
-
         /**
          * Actualizamos la información
          */
@@ -635,7 +634,59 @@ public class JBSqlUtilsTestPostgreSQL {
         Assert.assertTrue(rowsInsert == 1, "El registro no fue insertado en BD's");
     }
 
-    @Test(testName = "Update Model Usuario", dependsOnMethods = "insertModelUsuario")
+    @Test(testName = "Reload Model Usuario", dependsOnMethods = "insertModelUsuario")
+    public void reloadModelUsuario() throws Exception {
+        logParrafo("Limpiamos el modelo");
+        this.usuarioModel.cleanModel();
+        /**
+         * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
+         */
+        logParrafo("Obtenemos el modelo que tiene por nombre Marcos, Apellido Cabrera");
+        UsuarioModel temp = (UsuarioModel) this.usuarioModel.where("Nombre", Operator.IGUAL_QUE, "NombrePrimerModelo").and("Estado", Operator.IGUAL_QUE,
+                false).firstOrFail();
+        /**
+         * Esperamos ejecute la operación en BD's
+         */
+        this.usuarioModel.waitOperationComplete();
+        logParrafo(temp.toString());
+        /**
+         * Actualizamos la información
+         */
+        logParrafo("Actualizamos el nombre del modelo a MarcosEfrain y asígnamos que será mayor de edad");
+        temp.setNombre("MarcosEfrain");
+        temp.setEstado(true);
+        logParrafo(temp.toString());
+        /**
+         * Recargamos el modelo con la información de BD's
+         */
+        Boolean reloadModel = temp.reloadModel();
+        logParrafo("Refrescamos el Modelo a traves del metodo reloadModel");
+        logParrafo(temp.toString());
+        Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
+        reloadModel = StringUtils.containsIgnoreCase(temp.getNombre(), "NombrePrimerModelo");
+        Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
+        Assert.assertTrue(false == temp.getEstado(), "El Modelo no fue recargado de BD's como esperabamos");
+        /**
+         * Actualizamos la información
+         */
+        logParrafo("Actualizamos el nombre del modelo a Jose, Apellido a Bran y asígnamos que será mayor de edad");
+        temp.setNombre("Jose");
+        temp.setCorreo("Bran");
+        temp.setEstado(true);
+        logParrafo(temp.toString());
+        /**
+         * Recargamos el modelo con la información de BD's
+         */
+        temp.refresh();
+        logParrafo("Refrescamos el Modelo a traves del metodo reloadModel");
+        logParrafo(temp.toString());
+        reloadModel = StringUtils.containsIgnoreCase(temp.getNombre(), "NombrePrimerModelo");
+        Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
+        Assert.assertTrue(StringUtils.containsIgnoreCase(temp.getCorreo(), "CorreoPrueba"), "El Modelo no fue recargado de BD's como esperabamos");
+        Assert.assertTrue(false == temp.getEstado(), "El Modelo no fue recargado de BD's como esperabamos");
+    }
+
+    @Test(testName = "Update Model Usuario", dependsOnMethods = "reloadModelUsuario")
     public void updateModelUsuario() throws Exception {
         logParrafo("Limpiamos el modelo");
         this.usuarioModel.cleanModel();
@@ -656,6 +707,7 @@ public class JBSqlUtilsTestPostgreSQL {
         logParrafo("Actualizamos el nombre del modelo a MarcosEfrain y asígnamos que será mayor de edad");
         temp.setNombre("MarcosEfrain");
         temp.setEstado(true);
+        temp.setId_Subestación(null);
         logParrafo(temp.toString());
         /**
          * Eliminamos el modelo en BD's

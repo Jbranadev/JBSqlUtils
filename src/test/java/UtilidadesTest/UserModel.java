@@ -1,5 +1,6 @@
 package UtilidadesTest;
 
+import io.github.josecarlosbran.JBSqlUtils.Anotations.ColumnDefined;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
@@ -26,39 +27,38 @@ public class UserModel extends JBSqlUtils {
      * @Setter con esta etiqueta creamos los set por medio de la dependencia lombok
      */
 
-
     private Column<Integer> Id_Usuario1 = new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
 
-    @io.github.josecarlosbran.JBSqlUtils.Anotations.Column(name = "Id_Usuario", dataTypeSQL = DataType.INTEGER, constraints = {
+    @ColumnDefined(name = "Id_Usuario", dataTypeSQL = DataType.INTEGER, constraints = {
             Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY
     })
     private Integer Id_Usuario;
 
     private Column<String> Usuario1 = new Column<>(DataType.VARCHAR);
 
-    @io.github.josecarlosbran.JBSqlUtils.Anotations.Column(name = "Usuario", dataTypeSQL = DataType.VARCHAR, size = "200")
+    @ColumnDefined(name = "Usuario", dataTypeSQL = DataType.VARCHAR, size = "200")
     private String Usuario;
 
     private Column<String> PasswordUser1 = new Column<>(DataType.VARCHAR);
 
-    @io.github.josecarlosbran.JBSqlUtils.Anotations.Column(name = "PasswordUser", dataTypeSQL = DataType.VARCHAR, size = "200")
+    @ColumnDefined(name = "PasswordUser", dataTypeSQL = DataType.VARCHAR, size = "200")
     private String PasswordUser;
 
     private Column<String> Rol1 = new Column<>(DataType.VARCHAR, "'Despachador'", Constraint.DEFAULT);
 
-    @io.github.josecarlosbran.JBSqlUtils.Anotations.Column(name = "Rol", dataTypeSQL = DataType.VARCHAR, constraints = {
+    @ColumnDefined(name = "Rol", dataTypeSQL = DataType.VARCHAR, constraints = {
             Constraint.DEFAULT
     }, default_value = "'Despachador'", size = "200")
     private String Rol;
 
     private Column<String> TokenActual1 = new Column<>(DataType.VARCHAR);
 
-    @io.github.josecarlosbran.JBSqlUtils.Anotations.Column(name = "TokenActual", dataTypeSQL = DataType.VARCHAR, size = "2000")
+    @ColumnDefined(name = "TokenActual", dataTypeSQL = DataType.VARCHAR, size = "2000")
     private String TokenActual;
 
     private Column<String> TokenAnterior1 = new Column<>(DataType.VARCHAR);
 
-    @io.github.josecarlosbran.JBSqlUtils.Anotations.Column(name = "TokenAnterior", dataTypeSQL = DataType.VARCHAR, size = "2000")
+    @ColumnDefined(name = "TokenAnterior", dataTypeSQL = DataType.VARCHAR, size = "2000")
     private String TokenAnterior;
 
     /**

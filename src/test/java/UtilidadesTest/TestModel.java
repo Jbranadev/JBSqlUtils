@@ -15,6 +15,7 @@
  */
 package UtilidadesTest;
 
+import io.github.josecarlosbran.JBSqlUtils.Anotations.ColumnDefined;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
@@ -32,7 +33,8 @@ import org.testng.annotations.Ignore;
  */
 @Ignore
 @ToString
-@Getter @Setter
+@Getter
+@Setter
 public class TestModel extends JBSqlUtils {
 
     /**
@@ -48,7 +50,7 @@ public class TestModel extends JBSqlUtils {
      */
     private Column<Integer> id1 = new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
 
-    @io.github.josecarlosbran.JBSqlUtils.Anotations.Column(name = "Id", dataTypeSQL = DataType.INTEGER, constraints = {
+    @ColumnDefined(name = "Id", dataTypeSQL = DataType.INTEGER, constraints = {
             Constraint.PRIMARY_KEY, Constraint.AUTO_INCREMENT
     })
     private Integer id;
@@ -71,7 +73,7 @@ public class TestModel extends JBSqlUtils {
      */
     private Column<String> name1 = new Column<>(DataType.VARCHAR, "'Daniel'", Constraint.DEFAULT);
 
-    @io.github.josecarlosbran.JBSqlUtils.Anotations.Column(name = "name", dataTypeSQL = DataType.VARCHAR, constraints = {
+    @ColumnDefined(name = "name", dataTypeSQL = DataType.VARCHAR, constraints = {
             Constraint.DEFAULT
     }, default_value = "'Daniel'", size = "200")
     private String name;
@@ -100,9 +102,8 @@ public class TestModel extends JBSqlUtils {
      */
     private Column<String> apellido1 = new Column<>(DataType.VARCHAR);
 
-    @io.github.josecarlosbran.JBSqlUtils.Anotations.Column(name = "apellido", dataTypeSQL = DataType.VARCHAR, size = "200")
+    @ColumnDefined(name = "apellido", dataTypeSQL = DataType.VARCHAR, size = "200")
     private String apellido;
-
 
     /**
      * Declara un miembro del modelo, el cual en java almacenara un dato de tipo Boolean.
@@ -119,7 +120,7 @@ public class TestModel extends JBSqlUtils {
      */
     private Column<Boolean> isMayor1 = new Column<>(DataType.BIT, "true", Constraint.DEFAULT);
 
-    @io.github.josecarlosbran.JBSqlUtils.Anotations.Column(name = "isMayor", dataTypeSQL = DataType.BIT, constraints = {
+    @ColumnDefined(name = "isMayor", dataTypeSQL = DataType.BIT, constraints = {
             Constraint.DEFAULT
     }, default_value = "true")
     private Boolean isMayor;
@@ -169,11 +170,8 @@ public class TestModel extends JBSqlUtils {
     }
 
     public void setOne(Integer numero, Integer numero2) {
-
     }
 
     public void setOne() {
-
     }
-
 }
