@@ -454,9 +454,9 @@ public class JBSqlUtilsTestGodDay {
          * el cual se encarga de insertar un registro en la tabla correspondiente al modelo con la información del mismo
          * si este no existe, de existir actualiza el registro por medio de la clave primaria del modelo.
          */
-        this.testModel.getName().setValor("Marcos");
-        this.testModel.getApellido().setValor("Cabrera");
-        this.testModel.getIsMayor().setValor(false);
+        this.testModel.setName("Marcos");
+        this.testModel.setApellido("Cabrera");
+        this.testModel.setIsMayor(false);
         logParrafo(this.testModel.toString());
         Boolean rowsInsert = this.testModel.saveBoolean();
         /**
@@ -488,18 +488,18 @@ public class JBSqlUtilsTestGodDay {
          */
         logParrafo("Obtenemos el modelo que tiene por nombre Marcos, Apellido Cabrera");
         TestModel temp = new TestModel();
-        temp.getId().setValor(5);
-        temp.getName().setValor("Marcos");
-        temp.getApellido().setValor("Cabrera");
-        temp.getIsMayor().setValor(false);
+        temp.setId(5);
+        temp.setName("Marcos");
+        temp.setApellido("Cabrera");
+        temp.setIsMayor(false);
         temp.setModelExist(true);
         logParrafo(temp.toString());
         /**
          * Actualizamos la información
          */
         logParrafo("Actualizamos el nombre del modelo a MarcosEfrain y asígnamos que será mayor de edad");
-        temp.getName().setValor("MarcosEfrain");
-        temp.getIsMayor().setValor(true);
+        temp.setName("MarcosEfrain");
+        temp.setIsMayor(true);
         logParrafo(temp.toString());
         /**
          * Eliminamos el modelo en BD's
@@ -515,10 +515,10 @@ public class JBSqlUtilsTestGodDay {
         /**
          * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
          */
-        this.testModel.getId().setValor(5);
-        this.testModel.getName().setValor("Marcos");
-        this.testModel.getApellido().setValor("Cabrera");
-        this.testModel.getIsMayor().setValor(false);
+        this.testModel.setId(5);
+        this.testModel.setName("Marcos");
+        this.testModel.setApellido("Cabrera");
+        this.testModel.setIsMayor(false);
         this.testModel.setModelExist(true);
         logParrafo(this.testModel.toString());
         /**
@@ -539,10 +539,10 @@ public class JBSqlUtilsTestGodDay {
         for (int i = 0; i < 10; i++) {
             TestModel model = new TestModel();
             model.llenarPropertiesFromModel(this.testModel);
-            model.getName().setValor("Modelo #" + i);
-            model.getApellido().setValor("Apellido #" + i);
+            model.setName("Modelo #" + i);
+            model.setApellido("Apellido #" + i);
             if (i % 2 == 0) {
-                model.getIsMayor().setValor(false);
+                model.setIsMayor(false);
             }
             models.add(model);
             logParrafo(model.toString());
@@ -615,12 +615,12 @@ public class JBSqlUtilsTestGodDay {
         for (int i = 0; i < 10; i++) {
             TestModel model = new TestModel();
             model.llenarPropertiesFromModel(this.testModel);
-            model.getName().setValor("Modelo #" + i);
-            model.getApellido().setValor("Apellido #" + i);
+            model.setName("Modelo #" + i);
+            model.setApellido("Apellido #" + i);
             if (i % 2 == 0) {
-                model.getIsMayor().setValor(false);
+                model.setIsMayor(false);
             }
-            model.getId().setValor(i);
+            model.setId(i);
             model.setModelExist(true);
             models.add(model);
             logParrafo(model.toString());
@@ -645,12 +645,12 @@ public class JBSqlUtilsTestGodDay {
         for (int i = 0; i < 10; i++) {
             TestModel model = new TestModel();
             model.llenarPropertiesFromModel(this.testModel);
-            model.getName().setValor("Modelo #" + i);
-            model.getApellido().setValor("Apellido #" + i);
+            model.setName("Modelo #" + i);
+            model.setApellido("Apellido #" + i);
             if (i % 2 == 0) {
-                model.getIsMayor().setValor(false);
+                model.setIsMayor(false);
             }
-            model.getId().setValor(i);
+            model.setId(i);
             model.setModelExist(true);
             models.add(model);
             logParrafo(model.toString());

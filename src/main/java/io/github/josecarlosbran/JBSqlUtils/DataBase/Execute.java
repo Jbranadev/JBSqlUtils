@@ -22,7 +22,6 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
@@ -39,7 +38,7 @@ class Execute extends Methods_Conexion {
     /**
      * Lista de los parametros a envíar
      */
-    private List<Column> parametros = new ArrayList<>();
+    private List<Column> parametros;
 
     /**
      * Constructor que recibe como parametro:
@@ -60,7 +59,7 @@ class Execute extends Methods_Conexion {
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
     protected int execute() throws Exception {
-        int result = 0;
+        int result;
         Callable<ResultAsync<Integer>> Ejecutar_Sentencia = () -> {
             try {
                 Connection connect = this.getConnection();
@@ -74,7 +73,7 @@ class Execute extends Methods_Conexion {
                     convertJavaToSQL(columnsSQL, ejecutor, i + 1);
                 }
                 LogsJB.info(ejecutor.toString());
-                int filas = 0;
+                int filas;
                 filas = ejecutor.executeUpdate();
                 LogsJB.info("Cantidad de filas afectadas: " + filas);
                 this.closeConnection(connect);
@@ -85,7 +84,7 @@ class Execute extends Methods_Conexion {
                 return new ResultAsync<>(0, e);
             }
         };
-        Future<ResultAsync<Integer>> future = this.ejecutor.submit(Ejecutar_Sentencia);
+        Future<ResultAsync<Integer>> future = ejecutor.submit(Ejecutar_Sentencia);
         while (!future.isDone()) {
         }
         ResultAsync<Integer> resultado = future.get();

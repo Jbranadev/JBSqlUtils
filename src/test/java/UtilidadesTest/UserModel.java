@@ -1,5 +1,6 @@
 package UtilidadesTest;
 
+import io.github.josecarlosbran.JBSqlUtils.Anotations.ColumnDefined;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
@@ -15,6 +16,8 @@ import org.testng.annotations.Ignore;
  * clase UserModel hereda de la clase JbSqlUtils los metodos
  */
 @Ignore
+@Setter
+@Getter
 public class UserModel extends JBSqlUtils {
 
     /**
@@ -24,24 +27,39 @@ public class UserModel extends JBSqlUtils {
      * @Setter con esta etiqueta creamos los set por medio de la dependencia lombok
      */
 
-    @Getter
-    @Setter
-    private Column<Integer> Id_Usuario = new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
-    @Getter
-    @Setter
-    private Column<String> Usuario = new Column<>(DataType.VARCHAR);
-    @Getter
-    @Setter
-    private Column<String> PasswordUser = new Column<>(DataType.VARCHAR);
-    @Getter
-    @Setter
-    private Column<String> Rol = new Column<>(DataType.VARCHAR, "'Despachador'", Constraint.DEFAULT);
-    @Getter
-    @Setter
-    private Column<String> TokenActual = new Column<>(DataType.VARCHAR);
-    @Getter
-    @Setter
-    private Column<String> TokenAnterior = new Column<>(DataType.VARCHAR);
+    private Column<Integer> Id_Usuario1 = new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
+
+    @ColumnDefined(name = "Id_Usuario", dataTypeSQL = DataType.INTEGER, constraints = {
+            Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY
+    })
+    private Integer Id_Usuario;
+
+    private Column<String> Usuario1 = new Column<>(DataType.VARCHAR);
+
+    @ColumnDefined(name = "Usuario", dataTypeSQL = DataType.VARCHAR, size = "200")
+    private String Usuario;
+
+    private Column<String> PasswordUser1 = new Column<>(DataType.VARCHAR);
+
+    @ColumnDefined(name = "PasswordUser", dataTypeSQL = DataType.VARCHAR, size = "200")
+    private String PasswordUser;
+
+    private Column<String> Rol1 = new Column<>(DataType.VARCHAR, "'Despachador'", Constraint.DEFAULT);
+
+    @ColumnDefined(name = "Rol", dataTypeSQL = DataType.VARCHAR, constraints = {
+            Constraint.DEFAULT
+    }, default_value = "'Despachador'", size = "200")
+    private String Rol;
+
+    private Column<String> TokenActual1 = new Column<>(DataType.VARCHAR);
+
+    @ColumnDefined(name = "TokenActual", dataTypeSQL = DataType.VARCHAR, size = "2000")
+    private String TokenActual;
+
+    private Column<String> TokenAnterior1 = new Column<>(DataType.VARCHAR);
+
+    @ColumnDefined(name = "TokenAnterior", dataTypeSQL = DataType.VARCHAR, size = "2000")
+    private String TokenAnterior;
 
     /**
      * @throws DataBaseUndefind      se realiza las exepciones DataBaseUndefind si no encuentra definida el tipo de BD`S a la que se
@@ -54,10 +72,10 @@ public class UserModel extends JBSqlUtils {
     public UserModel() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         super();
         this.setTableName("Usuario");
-        this.getUsuario().setSize("100");
-        this.getPasswordUser().setSize("200");
-        this.getRol().setSize("100");
-        this.getTokenActual().setSize("2000");
-        this.getTokenAnterior().setSize("2000");
+        this.getUsuario1().setSize("100");
+        this.getPasswordUser1().setSize("200");
+        this.getRol1().setSize("100");
+        this.getTokenActual1().setSize("2000");
+        this.getTokenAnterior1().setSize("2000");
     }
 }

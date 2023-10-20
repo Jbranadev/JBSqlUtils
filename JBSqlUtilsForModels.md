@@ -93,8 +93,8 @@ al método save(), una vez estemos seguros de que el modelo posee la informació
 * el cual se encarga de insertar un registro en la tabla correspondiente al modelo con la información del mismo
 * si este no existe, de existir actualiza el registro por medio de la clave primaria del modelo.
 */
-testModel.getName().setValor("Jose");
-testModel.getApellido().setValor("Bran");
+testModel.setName("Jose");
+testModel.setApellido("Bran");
 /**
 * En este primer ejemplo no seteamos un valor a la columna IsMayor, para comprobar que el valor
 * por default configurado al crear la tabla, se este asignando a la respectiva columna.
@@ -121,9 +121,9 @@ testModel.waitOperationComplete();
 * Una vez hemos comprobado que el modelo no esta escribiendo u obteniendo información en segundo plano
 * podemos utilizarlo, para insertar otro registro totalmente diferente al que insertamos anteriormente.
 */
-testModel.getName().setValor("Daniel");
-testModel.getApellido().setValor("Quiñonez");
-testModel.getIsMayor().setValor(false);
+testModel.setName("Daniel");
+testModel.setApellido("Quiñonez");
+testModel.setIsMayor(false);
 
 /**
 * Le indicamos a JBSqlUtils que de este segundo registro a insertar, no queremos que maneje
@@ -180,8 +180,8 @@ testModel.waitOperationComplete();
 /**
 * Mostramos la información obtenida
 */
-LogsJB.info(testModel.getId().getValor()+"  "+testModel.getName().getValor()+"  "+testModel.getApellido().getValor()
-  +"  "+testModel.getIsMayor().getValor()+"  "+testModel.getCreated_at().getValor()+"  "+testModel.getUpdated_at().getValor());
+LogsJB.info(testModel.getId()+"  "+testModel.getName()+"  "+testModel.getApellido()
+  +"  "+testModel.getIsMayor()+"  "+testModel.getCreated_at().getValor()+"  "+testModel.getUpdated_at().getValor());
 
 ~~~
 
@@ -210,8 +210,8 @@ testModel.waitOperationComplete();
 /**
 * Mostramos la información obtenida
 */
-LogsJB.info(testModel2.getId().getValor()+"  "+testModel2.getName().getValor()+"  "+testModel2.getApellido().getValor()
-  +"  "+testModel2.getIsMayor().getValor()+"  "+testModel2.getCreated_at().getValor()+"  "+testModel2.getUpdated_at().getValor());
+LogsJB.info(testModel2.getId()+"  "+testModel2.getName()+"  "+testModel2.getApellido()
+  +"  "+testModel2.getIsMayor()+"  "+testModel2.getCreated_at().getValor()+"  "+testModel2.getUpdated_at().getValor());
 ~~~
 
 ![](Imagenes/first.jpg)
@@ -253,8 +253,8 @@ testModel.waitOperationComplete();
 /**
 * Mostramos la información obtenida
 */
-LogsJB.info(testModel2.getId().getValor()+"  "+testModel2.getName().getValor()+"  "+testModel2.getApellido().getValor()
-  +"  "+testModel2.getIsMayor().getValor()+"  "+testModel2.getCreated_at().getValor()+"  "+testModel2.getUpdated_at().getValor());
+LogsJB.info(testModel2.getId()+"  "+testModel2.getName()+"  "+testModel2.getApellido()
+  +"  "+testModel2.getIsMayor()+"  "+testModel2.getCreated_at().getValor()+"  "+testModel2.getUpdated_at().getValor());
 ~~~
 
 Información en BD's SQLite
@@ -290,8 +290,8 @@ testModel.waitOperationComplete();
 /**
 * Mostramos la información obtenida
 */
-LogsJB.info(testModel2.getId().getValor()+"  "+testModel2.getName().getValor()+"  "+testModel2.getApellido().getValor()
-  +"  "+testModel2.getIsMayor().getValor()+"  "+testModel2.getCreated_at().getValor()+"  "+testModel2.getUpdated_at().getValor());
+LogsJB.info(testModel2.getId()+"  "+testModel2.getName()+"  "+testModel2.getApellido()
+  +"  "+testModel2.getIsMayor()+"  "+testModel2.getCreated_at().getValor()+"  "+testModel2.getUpdated_at().getValor());
 ~~~
 
 Información en BD's SQLite
@@ -336,7 +336,7 @@ testModel.waitOperationComplete();
 * la información del modelo.
 */
 Consumer<Test> showFilas = fila -> {
-LogsJB.info(fila.getId().getValor()+"  "+fila.getName().getValor()+"  "+fila.getApellido().getValor()+"  "+fila.getIsMayor().getValor()+"  "+fila.getCreated_at().getValor()+"  "+fila.getUpdated_at().getValor());
+LogsJB.info(fila.getId()+"  "+fila.getName()+"  "+fila.getApellido()+"  "+fila.getIsMayor()+"  "+fila.getCreated_at().getValor()+"  "+fila.getUpdated_at().getValor());
 };
 
 /**
@@ -387,7 +387,7 @@ testModel.waitOperationComplete();
 * la información del modelo.
 */
 Consumer<Test> showFilas = fila -> {
-LogsJB.info(fila.getId().getValor()+"  "+fila.getName().getValor()+"  "+fila.getApellido().getValor()+"  "+fila.getIsMayor().getValor()+"  "+fila.getCreated_at().getValor()+"  "+fila.getUpdated_at().getValor());
+LogsJB.info(fila.getId()+"  "+fila.getName()+"  "+fila.getApellido()+"  "+fila.getIsMayor()+"  "+fila.getCreated_at().getValor()+"  "+fila.getUpdated_at().getValor());
 };
 
 /**
@@ -441,7 +441,7 @@ testModel.waitOperationComplete();
 * la información del modelo.
 */
 Consumer<Test> showFilas = fila -> {
-LogsJB.info(fila.getId().getValor()+"  "+fila.getName().getValor()+"  "+fila.getApellido().getValor()+"  "+fila.getIsMayor().getValor()+"  "+fila.getCreated_at().getValor()+"  "+fila.getUpdated_at().getValor());
+LogsJB.info(fila.getId()+"  "+fila.getName()+"  "+fila.getApellido()+"  "+fila.getIsMayor()+"  "+fila.getCreated_at().getValor()+"  "+fila.getUpdated_at().getValor());
 };
 
 /**
@@ -489,13 +489,13 @@ testModel.waitOperationComplete();
 /**
 * Mostramos la información obtenida
 */
-LogsJB.info(testModel.getId().getValor()+"  "+testModel.getName().getValor()+"  "+testModel.getApellido().getValor()
-  +"  "+testModel.getIsMayor().getValor()+"  "+testModel.getCreated_at().getValor()+"  "+testModel.getUpdated_at().getValor());
+LogsJB.info(testModel.getId()+"  "+testModel.getName()+"  "+testModel.getApellido()
+  +"  "+testModel.getIsMayor()+"  "+testModel.getCreated_at().getValor()+"  "+testModel.getUpdated_at().getValor());
 
 /**
 * Modificamos el valor de la columna IsMayor a true
 */
-testModel.getIsMayor().setValor(true);
+testModel.setIsMayor(true);
 
 /**
 * LLamamos al método save, el cual se encargará de actualizar el registro en BD's.
@@ -556,9 +556,9 @@ testModel.waitOperationComplete();
 */
 Consumer<Test> showFilas = fila -> {
 //Mostramos la Información     
-LogsJB.info(fila.getId().getValor()+"  "+fila.getName().getValor()+"  "+fila.getApellido().getValor()+"  "+fila.getIsMayor().getValor()+"  "+fila.getCreated_at().getValor()+"  "+fila.getUpdated_at().getValor());
+LogsJB.info(fila.getId()+"  "+fila.getName()+"  "+fila.getApellido()+"  "+fila.getIsMayor()+"  "+fila.getCreated_at().getValor()+"  "+fila.getUpdated_at().getValor());
 //Modificamos el valor de la columna IsMayor
-fila.getIsMayor().setValor(!fila.getIsMayor().getValor());
+fila.setIsMayor(!fila.getIsMayor());
 };
 
 /**
@@ -621,8 +621,8 @@ testModel.waitOperationComplete();
 /**
 * Mostramos la información obtenida
 */
-LogsJB.info(testModel.getId().getValor()+"  "+testModel.getName().getValor()+"  "+testModel.getApellido().getValor()
-  +"  "+testModel.getIsMayor().getValor()+"  "+testModel.getCreated_at().getValor()+"  "+testModel.getUpdated_at().getValor());
+LogsJB.info(testModel.getId()+"  "+testModel.getName()+"  "+testModel.getApellido()
+  +"  "+testModel.getIsMayor()+"  "+testModel.getCreated_at().getValor()+"  "+testModel.getUpdated_at().getValor());
 
 /**
 * LLamamos al método delete, el cual se encargará de eliminar el registro en BD's.

@@ -15,12 +15,15 @@
  */
 package UtilidadesTest;
 
+import io.github.josecarlosbran.JBSqlUtils.Anotations.ColumnDefined;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.testng.annotations.Ignore;
 
@@ -30,6 +33,8 @@ import org.testng.annotations.Ignore;
  */
 @Ignore
 @ToString
+@Getter
+@Setter
 public class TestModel extends JBSqlUtils {
 
     /**
@@ -43,7 +48,13 @@ public class TestModel extends JBSqlUtils {
      * Agregamos dos restricciones SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
      * desde nuestra aplicación en caso esta no exista, de lo contrario no es necesario que agreguemos restricciones.
      */
-    private Column<Integer> id = new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
+    private Column<Integer> id1 = new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
+
+    @ColumnDefined(name = "Id", dataTypeSQL = DataType.INTEGER, constraints = {
+            Constraint.PRIMARY_KEY, Constraint.AUTO_INCREMENT
+    })
+    private Integer id;
+
     /**
      * Declara un miembro del modelo, el cual en java almacenara un dato de tipo String.
      * <p>
@@ -60,7 +71,12 @@ public class TestModel extends JBSqlUtils {
      * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
      * desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
      */
-    private Column<String> name = new Column<>(DataType.VARCHAR, "'Daniel'", Constraint.DEFAULT);
+    private Column<String> name1 = new Column<>(DataType.VARCHAR, "'Daniel'", Constraint.DEFAULT);
+
+    @ColumnDefined(name = "name", dataTypeSQL = DataType.VARCHAR, constraints = {
+            Constraint.DEFAULT
+    }, default_value = "'Daniel'", size = "200")
+    private String name;
     /**
      * Para poder utilizar JBSqlUtils es necesario que los miembros de la clase modelo, que correspondan
      * a una columna de la tabla correspondiente al modelo, sean del tipo Column, especificando el tipo de dato
@@ -84,7 +100,11 @@ public class TestModel extends JBSqlUtils {
      * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
      * Varchar.
      */
-    private Column<String> apellido = new Column<>(DataType.VARCHAR);
+    private Column<String> apellido1 = new Column<>(DataType.VARCHAR);
+
+    @ColumnDefined(name = "apellido", dataTypeSQL = DataType.VARCHAR, size = "200")
+    private String apellido;
+
     /**
      * Declara un miembro del modelo, el cual en java almacenara un dato de tipo Boolean.
      * <p>
@@ -98,7 +118,12 @@ public class TestModel extends JBSqlUtils {
      * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
      * desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
      */
-    private Column<Boolean> isMayor = new Column<>(DataType.BIT, "true", Constraint.DEFAULT);
+    private Column<Boolean> isMayor1 = new Column<>(DataType.BIT, "true", Constraint.DEFAULT);
+
+    @ColumnDefined(name = "isMayor", dataTypeSQL = DataType.BIT, constraints = {
+            Constraint.DEFAULT
+    }, default_value = "true")
+    private Boolean isMayor;
 
     /**
      * En el constructor de nuestra clase que utilizaremos como modelo al heredar la clase JBSqlutils
@@ -121,8 +146,8 @@ public class TestModel extends JBSqlUtils {
          * de acuerdo a las opciónes que nos brinda cada Servidor de BD's, en este caso es un VARCHAR(1000) al cual indicamos que deseamos
          * tenga una longitud de mil
          */
-        this.getName().setSize("200");
-        this.getApellido().setSize("200");
+        this.getName1().setSize("200");
+        this.getApellido1().setSize("200");
     }
 
     /**
@@ -136,53 +161,17 @@ public class TestModel extends JBSqlUtils {
     public TestModel(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
         super(getPropertySystem);
         this.setTableName("testModel");
-        this.getName().setSize("200");
-        this.getApellido().setSize("200");
+        this.getName1().setSize("200");
+        this.getApellido1().setSize("200");
     }
 
-    public Integer getOne(Integer numero){
+    public Integer getOne(Integer numero) {
         return numero;
     }
 
-    public void setOne(Integer numero, Integer numero2){
-
+    public void setOne(Integer numero, Integer numero2) {
     }
 
-    public void setOne(){
-
-    }
-
-
-
-    public Column<Integer> getId() {
-        return id;
-    }
-
-    public void setId(Column<Integer> id) {
-        this.id = id;
-    }
-
-    public Column<String> getName() {
-        return name;
-    }
-
-    public void setName(Column<String> name) {
-        this.name = name;
-    }
-
-    public Column<String> getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(Column<String> apellido) {
-        this.apellido = apellido;
-    }
-
-    public Column<Boolean> getIsMayor() {
-        return isMayor;
-    }
-
-    public void setIsMayor(Column<Boolean> isMayor) {
-        this.isMayor = isMayor;
+    public void setOne() {
     }
 }

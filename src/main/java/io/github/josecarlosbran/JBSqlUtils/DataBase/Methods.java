@@ -18,18 +18,16 @@ package io.github.josecarlosbran.JBSqlUtils.DataBase;
 import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 
-import java.lang.reflect.Method;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.*;
+import java.lang.reflect.Field;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
-import java.util.stream.Collectors;
 
 /**
  * @author Jose Bran
@@ -203,7 +201,7 @@ class Methods extends Methods_Conexion {
      */
     public <T extends JBSqlUtils> List<T> getAll() throws Exception {
         this.setTaskIsReady(false);
-        List<T> lista = new ArrayList<T>();
+        List<T> lista;
         this.validarTableExist(this);
         Callable<ResultAsync<List<T>>> get = () -> {
             List<T> listatemp = new ArrayList<T>();
@@ -231,7 +229,7 @@ class Methods extends Methods_Conexion {
                 return new ResultAsync<>(listatemp, e);
             }
         };
-        Future<ResultAsync<List<T>>> future = this.ejecutor.submit(get);
+        Future<ResultAsync<List<T>>> future = ejecutor.submit(get);
         while (!future.isDone()) {
         }
         ResultAsync<List<T>> resultado = future.get();
@@ -244,159 +242,6 @@ class Methods extends Methods_Conexion {
     }
 
     /**
-     * Llena el modelo con la información del controlador
-     *
-     * @param controlador Controlador que debe poseer los atributos en java, que corresponden al modelo, con
-     *                    sus respectivos metodos setter y getter
-     * @param modelo      Modelo que será llenado con la información del controlador
-     * @param <T>         Tipo de dato del controlador, acepta cualquier Object
-     * @param <G>         Tipo de dato del modelo, acepta unicamente aquellos que heredan de la clase JBSqlUtils
-     */
-    public <T, G extends JBSqlUtils> void llenarModelo(T controlador, G modelo) {
-        try {
-            List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getDeclaredMethods()));
-            controladorMethods=controladorMethods.stream().filter(metodo->{
-                return metodo.getDeclaringClass().getPackage().hashCode()==controlador.getClass().getPackage().hashCode();
-            }).collect(Collectors.toList());
-            for (Method controladorMethod : controladorMethods) {
-                String controllerName = controladorMethod.getName();
-                String claseMethod = controladorMethod.getDeclaringClass().getSimpleName();
-                LogsJB.debug("Nombre del metodo del controlador: " + controllerName + " Clase a la que pertenece: " + claseMethod);
-                //Si la clase donde se declaro el metodo pertenece a la clase Object
-                //Si el metodo No es un get, que continue, no tiene caso hacer lo siguiente
-                int parametros = controladorMethod.getParameterCount();
-                if((parametros>0) || (!StringUtils.startsWithIgnoreCase(controllerName, "get") || claseMethod.equalsIgnoreCase("Object"))){
-                    continue;
-                }
-                LogsJB.trace("Cantidad de parametros: " + parametros);
-                LogsJB.trace("Validara si el contenido es Null: " + controllerName);
-                Object contenido = (Object) controladorMethod.invoke(controlador, null);
-                LogsJB.debug("Dato que se ingresara al modelo: " + contenido);
-                //Obtiene los metodos get del modelo
-                List<Method> modelGetMethods = new ArrayList<>(modelo.getMethodsGetOfModel());
-                Iterator<Method> iteradorModelGetMethods = modelGetMethods.iterator();
-                while (iteradorModelGetMethods.hasNext()) {
-                    try {
-                        Method modelGetMethod = iteradorModelGetMethods.next();
-                        String modelGetName = modelGetMethod.getName();
-                    /*Si el nombre del metodo get, no coincide con el nombre del metodo del
-                    controlador, continua
-                    */
-                        LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);
-                        if (!StringUtils.equalsIgnoreCase(controllerName, modelGetName)) {
-                            iteradorModelGetMethods.remove();
-                            continue;
-                        }
-                        LogsJB.debug("Obtiene la columna: " + modelGetName);
-                        //Obtengo la información de la columna
-                        Column columnsSQL = (Column) modelGetMethod.invoke(modelo, null);
-                        //Le meto la información a la columa
-                        LogsJB.debug("Setea el contenido a la columna: " + modelGetName);
-                        columnsSQL.setValor(contenido);
-                        String columnName = modelGetMethod.getName();
-                        columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
-                        LogsJB.debug("Nombre de la columna a validar: " + columnName);
-                        Boolean isready = false;
-                        //Obtiene los metodos set del modelo
-                        List<Method> modelSetMethods = new ArrayList<>(modelo.getMethodsSetOfModel());
-                        Iterator<Method> iteradorModelSetMethods = modelSetMethods.iterator();
-                        while (iteradorModelSetMethods.hasNext()) {
-                            try {
-                                Method modelSetMethod = iteradorModelSetMethods.next();
-                                String modelSetName = modelSetMethod.getName();
-                                LogsJB.trace("Nombre del metodo: " + modelSetName);
-                                //Si el metodo es un get, que continue, no tiene caso hacer lo siguiente
-                                LogsJB.trace("Si es un metodo Set: " + modelSetName);
-                                modelSetName = StringUtils.removeStartIgnoreCase(modelSetName, "set");
-                                LogsJB.trace("Nombre del metodo set a validar: " + modelSetName);
-                                if (StringUtils.equalsIgnoreCase(modelSetName, columnName)) {
-                                    //Setea el valor del metodo
-                                    modelSetMethod.invoke(modelo, columnsSQL);
-                                    LogsJB.debug("Ingreso la columna en el metodo set: " + modelSetName);
-                                    isready = true;
-                                    iteradorModelSetMethods.remove();
-                                    break;
-                                }
-                            } catch (Exception e) {
-                                LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                            }
-                        }
-                        if (isready) {
-                            iteradorModelGetMethods.remove();
-                            break;
-                        }
-                    } catch (Exception e) {
-                        LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                    }
-                }
-            }
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al llenar el modelo, con la info del controlador, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-        }
-    }
-
-    /**
-     * Llena el controlador proporcionado con la información del modelo
-     *
-     * @param controlador Controlador que debe poseer los atributos en java, que corresponden al modelo, con
-     *                    sus respectivos metodos setter y getter
-     * @param modelo      Modelo del cual se extraera la información para llenar el controlador
-     * @param <T>         Tipo de dato del controlador, acepta cualquier Object
-     * @param <G>         Tipo de dato del modelo, acepta unicamente aquellos que heredan de la clase JBSqlUtils
-     */
-    public <T, G extends JBSqlUtils> void llenarControlador(T controlador, G modelo) {
-        try {
-            //Obtiene los metodos get del modelo
-            List<Method> modelGetMethods = modelo.getMethodsGetOfModel();
-            LogsJB.debug("Obtuvo los metodos Get del modelo: ");
-            List<Method> controladorMethods = new ArrayList<>(Arrays.asList(controlador.getClass().getDeclaredMethods()));
-            controladorMethods=controladorMethods.stream().filter(metodo->{
-                return metodo.getDeclaringClass().getPackage().hashCode()==controlador.getClass().getPackage().hashCode();
-            }).collect(Collectors.toList());
-            for (Method modelGetMethod : modelGetMethods) {
-                String modelGetName = modelGetMethod.getName();
-                LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);
-                //Obtengo la información de la columna
-                Column columnsSQL = (Column) modelGetMethod.invoke(modelo, null);
-                Object dato = columnsSQL.getValor();
-                LogsJB.debug("Dato que se ingresara al controlador: " + dato);
-                Iterator<Method> iteradorController = controladorMethods.iterator();
-                while (iteradorController.hasNext()) {
-                    try {
-                        Method controladorMethod = iteradorController.next();
-                        String controllerName = controladorMethod.getName();
-                        String claseMethod = controladorMethod.getDeclaringClass().getSimpleName();
-                        LogsJB.debug("Nombre del metodo del controlador: " + controllerName + " Clase a la que pertenece: " + claseMethod);
-                        //Si la clase donde se declaro el metodo pertenece a la clase Object
-                        //Si el metodo No es un set, que continue, no tiene caso hacer lo siguiente
-                        //Valida que el metodo Set, si o sí, reciba un unico parametro
-                        int parametros = controladorMethod.getParameterCount();
-                        if((parametros>1||parametros<1) || (!StringUtils.startsWithIgnoreCase(controllerName, "set")) || (claseMethod.equalsIgnoreCase("Object")) ){
-                            continue;
-                        }
-                        LogsJB.trace("Cantidad de parametros: " + parametros);
-                    /*Si el nombre del metodo Get del modelo coincide con el nombre del metodo Set
-                    Guardara la información en el controlador*/
-                        modelGetName = StringUtils.removeStartIgnoreCase(modelGetName, "get");
-                        controllerName = StringUtils.removeStartIgnoreCase(controllerName, "set");
-                        LogsJB.debug("Nombre de la columna en el modelo: " + modelGetName + ", controlador: " + controllerName);
-                        if (StringUtils.equalsIgnoreCase(modelGetName, controllerName)) {
-                            controladorMethod.invoke(controlador, dato);
-                            LogsJB.debug("Lleno la columna " + controllerName + " Con la información del modelo: " + dato);
-                            iteradorController.remove();
-                            break;
-                        }
-                    } catch (Exception e) {
-                        LogsJB.fatal("Excepción disparada al llenar el controlador, con la info del modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                    }
-                }
-            }
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada al llenar el controlador, con la info del modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-        }
-    }
-
-    /**
      * Setea null en el campo valor de cada columna que posee el modelo.
      *
      * @param <T> Tipo de dato del modelo, acepta unicamente aquellos que heredan de la clase JBSqlUtils
@@ -405,40 +250,29 @@ class Methods extends Methods_Conexion {
         try {
             this.setModelExist(false);
             //Obtiene los metodos get del modelo
-            List<Method> modelGetMethods = this.getMethodsGetOfModel();
-            List<Method> modelSetMethods = this.getMethodsSetOfModel();
-            for (Method modelGetMethod : modelGetMethods) {
-                String modelGetName = modelGetMethod.getName();
-                String modelName = modelGetMethod.getDeclaringClass().getName();
-                LogsJB.debug("Obtuvo los metodos Get del modelo: " + modelName);
-                LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);
-                //Obtengo la información de la columna
-                Column columnsSQL = (Column) modelGetMethod.invoke(this, null);
-                //Le meto la información a la columa
-                LogsJB.debug("Setea el contenido a la columna: " + modelGetName);
-                columnsSQL.setValor(null);
-                String columnName = modelGetMethod.getName();
-                columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
-                LogsJB.debug("Nombre de la columna a validar: " + columnName);
-                //Obtiene los metodos set del modelo
-                Iterator<Method> iteradorModelSetMethods = modelSetMethods.iterator();
-                while (iteradorModelSetMethods.hasNext()) {
-                    try {
-                        Method modelSetMethod = iteradorModelSetMethods.next();
-                        String modelSetName = modelSetMethod.getName();
-                        LogsJB.trace("Nombre del metodo: " + modelSetName);
-                        LogsJB.trace("Si es un metodo Set: " + modelSetName);
-                        modelSetName = StringUtils.removeStartIgnoreCase(modelSetName, "set");
-                        LogsJB.trace("Nombre del metodo set a validar: " + modelSetName);
-                        if (StringUtils.equalsIgnoreCase(modelSetName, columnName)) {
-                            //Setea el valor del metodo
-                            modelSetMethod.invoke(this, columnsSQL);
-                            LogsJB.debug("Ingreso la columna en el metodo set: " + modelSetName);
-                            iteradorModelSetMethods.remove();
-                        }
-                    } catch (Exception e) {
-                        LogsJB.fatal("Excepción disparada al limpiar el mmodelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                    }
+            List<Field> campos = this.getFieldsOfModel();
+            for (Field campo : campos) {
+                if (campo.getType().isAssignableFrom(String.class)) {
+                    //Caracteres y cadenas de Texto
+                    FieldUtils.writeField(this, campo.getName(), null, true);
+                } else if (campo.getType().isAssignableFrom(Double.class)) {
+                    FieldUtils.writeField(this, campo.getName(), null, true);
+                } else if (campo.getType().isAssignableFrom(Integer.class)) {
+                    FieldUtils.writeField(this, campo.getName(), null, true);
+                } else if (campo.getType().isAssignableFrom(Float.class)) {
+                    FieldUtils.writeField(this, campo.getName(), null, true);
+                } else if (campo.getType().isAssignableFrom(Boolean.class)) {
+                    FieldUtils.writeField(this, campo.getName(), null, true);
+                } else if (campo.getType().isAssignableFrom(byte[].class)) {
+                    FieldUtils.writeField(this, campo.getName(), null, true);
+                } else if (campo.getType().isAssignableFrom(Date.class)) {
+                    FieldUtils.writeField(this, campo.getName(), null, true);
+                } else if (campo.getType().isAssignableFrom(Time.class)) {
+                    FieldUtils.writeField(this, campo.getName(), null, true);
+                } else if (campo.getType().isAssignableFrom(Timestamp.class)) {
+                    FieldUtils.writeField(this, campo.getName(), null, true);
+                } else {
+                    FieldUtils.writeField(this, campo.getName(), null, true);
                 }
             }
         } catch (Exception e) {

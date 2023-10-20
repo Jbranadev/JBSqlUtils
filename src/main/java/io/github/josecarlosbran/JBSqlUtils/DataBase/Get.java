@@ -104,7 +104,7 @@ class Get extends Methods_Conexion {
                 return new ResultAsync<>(true, e);
             }
         };
-        Future<ResultAsync<Boolean>> future = this.ejecutor.submit(get);
+        Future<ResultAsync<Boolean>> future = ejecutor.submit(get);
         while (!future.isDone()) {
         }
         ResultAsync<Boolean> resultado = future.get();
@@ -125,7 +125,7 @@ class Get extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     protected <T extends JBSqlUtils> T first(T modelo, String Sql, List<Column> parametros) throws Exception {
-        T modeloResult = null;
+        T modeloResult;
         if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
             modelo.llenarPropertiesFromModel(modelo);
@@ -165,7 +165,7 @@ class Get extends Methods_Conexion {
                 return new ResultAsync<>(modeloTemp, e);
             }
         };
-        Future<ResultAsync<T>> future = this.ejecutor.submit(get);
+        Future<ResultAsync<T>> future = ejecutor.submit(get);
         while (!future.isDone()) {
         }
         ResultAsync<T> resultado = future.get();
@@ -188,7 +188,7 @@ class Get extends Methods_Conexion {
      *                       SQL realizada.
      */
     protected <T extends JBSqlUtils> T firstOrFail(T modelo, String Sql, List<Column> parametros) throws Exception {
-        T modeloResult = null;
+        T modeloResult;
         if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
             modelo.llenarPropertiesFromModel(modelo);
@@ -230,7 +230,7 @@ class Get extends Methods_Conexion {
                 return new ResultAsync<>(modeloTemp, e);
             }
         };
-        Future<ResultAsync<T>> future = this.ejecutor.submit(get);
+        Future<ResultAsync<T>> future = ejecutor.submit(get);
         while (!future.isDone()) {
         }
         ResultAsync<T> resultado = future.get();
@@ -238,7 +238,7 @@ class Get extends Methods_Conexion {
             throw resultado.getException();
         }
         modeloResult = resultado.getResult();
-        Boolean result = false;
+        Boolean result;
         result = modeloResult.getModelExist();
         if (!result) {
             String sql = "SELECT * FROM " + modelo.getTableName();
@@ -266,7 +266,7 @@ class Get extends Methods_Conexion {
             modelo.llenarPropertiesFromModel(modelo);
         }
         modelo.setTaskIsReady(false);
-        List<T> lista = new ArrayList<>();
+        List<T> lista;
         modelo.validarTableExist(modelo);
         Callable<ResultAsync<List<T>>> get = () -> {
             List<T> listaTemp = new ArrayList<>();
@@ -325,7 +325,7 @@ class Get extends Methods_Conexion {
                 return new ResultAsync(listaTemp, e);
             }
         };
-        Future<ResultAsync<List<T>>> future = this.ejecutor.submit(get);
+        Future<ResultAsync<List<T>>> future = ejecutor.submit(get);
         while (!future.isDone()) {
         }
         ResultAsync<List<T>> resultado = future.get();
@@ -350,7 +350,7 @@ class Get extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     protected List<JSONObject> get(String Sql, List<Column> parametros, List<String> columnas) throws Exception {
-        List<JSONObject> lista = new ArrayList<>();
+        List<JSONObject> lista;
         String tableName = Sql.replace("SELECT * FROM ", "").split(" ")[0];
         this.setTaskIsReady(false);
         this.setTableName(tableName);
@@ -413,7 +413,7 @@ class Get extends Methods_Conexion {
                 return new ResultAsync<>(temp, e);
             }
         };
-        Future<ResultAsync<List<JSONObject>>> future = this.ejecutor.submit(get);
+        Future<ResultAsync<List<JSONObject>>> future = ejecutor.submit(get);
         while (!future.isDone()) {
         }
         ResultAsync<List<JSONObject>> resultado = future.get();

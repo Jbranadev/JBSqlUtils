@@ -35,7 +35,7 @@ public class JBSqlUtilsTestSQLServer {
     @Test(testName = "Setear Properties Conexión for Model")
     public void setPropertiesConexiontoModel() throws DataBaseUndefind, PropertiesDBUndefined {
         this.testModel = new TestModel(false);
-        this.testModel.getIsMayor().setDefault_value("1");
+        //this.testModel.getIsMayor().setDefault_value("1");
         logParrafo("Se setearan las propiedades de conexión del modelo para SQLServer");
         this.testModel.setGetPropertySystem(false);
         this.testModel.setPort("6077");
@@ -92,9 +92,9 @@ public class JBSqlUtilsTestSQLServer {
          * el cual se encarga de insertar un registro en la tabla correspondiente al modelo con la información del mismo
          * si este no existe, de existir actualiza el registro por medio de la clave primaria del modelo.
          */
-        this.testModel.getName().setValor("Marcos");
-        this.testModel.getApellido().setValor("Cabrera");
-        this.testModel.getIsMayor().setValor(false);
+        this.testModel.setName("Marcos");
+        this.testModel.setApellido("Cabrera");
+        this.testModel.setIsMayor(false);
         logParrafo(this.testModel.toString());
         Integer rowsInsert = this.testModel.save();
         /**
@@ -109,16 +109,16 @@ public class JBSqlUtilsTestSQLServer {
     @Test(testName = "Clean Model",
             dependsOnMethods = "insertModel")
     public void cleanModel() throws Exception {
-        Assert.assertTrue(this.testModel.getName().getValor().equalsIgnoreCase("Marcos"));
-        Assert.assertTrue(this.testModel.getApellido().getValor().equalsIgnoreCase("Cabrera"));
-        Assert.assertTrue(this.testModel.getIsMayor().getValor() == Boolean.FALSE);
+        Assert.assertTrue(this.testModel.getName().equalsIgnoreCase("Marcos"));
+        Assert.assertTrue(this.testModel.getApellido().equalsIgnoreCase("Cabrera"));
+        Assert.assertTrue(this.testModel.getIsMayor() == Boolean.FALSE);
         Assert.assertTrue(this.testModel.getModelExist());
         logParrafo("Limpiaremos el Modelo: " + this.testModel.toString());
         this.testModel.cleanModel();
         logParrafo("Modelo despues de realizar la limpieza: " + this.testModel.toString());
-        Assert.assertTrue(Objects.isNull(this.testModel.getName().getValor()), "No limpio la columna Name del Modelo");
-        Assert.assertTrue(Objects.isNull(this.testModel.getApellido().getValor()), "No limpio la columna Apellido del Modelo");
-        Assert.assertTrue(Objects.isNull(this.testModel.getIsMayor().getValor()), "No limpio la columna IsMayor del Modelo");
+        Assert.assertTrue(Objects.isNull(this.testModel.getName()), "No limpio la columna Name del Modelo");
+        Assert.assertTrue(Objects.isNull(this.testModel.getApellido()), "No limpio la columna Apellido del Modelo");
+        Assert.assertTrue(Objects.isNull(this.testModel.getIsMayor()), "No limpio la columna IsMayor del Modelo");
         Assert.assertFalse(this.testModel.getModelExist(), "No limpio la bandera que indica que el modelo no existe en BD's");
     }
 
@@ -149,8 +149,8 @@ public class JBSqlUtilsTestSQLServer {
          * Actualizamos la información
          */
         logParrafo("Actualizamos el nombre del modelo a MarcosEfrain y asígnamos que será mayor de edad");
-        temp.getName().setValor("MarcosEfrain");
-        temp.getIsMayor().setValor(true);
+        temp.setName("MarcosEfrain");
+        temp.setIsMayor(true);
         logParrafo(temp.toString());
         /**
          * Recargamos el modelo con la información de BD's
@@ -159,17 +159,16 @@ public class JBSqlUtilsTestSQLServer {
         logParrafo("Refrescamos el Modelo a traves del metodo reloadModel");
         logParrafo(temp.toString());
         Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
-        reloadModel = StringUtils.containsIgnoreCase(temp.getName().getValor(), "Marcos");
+        reloadModel = StringUtils.containsIgnoreCase(temp.getName(), "Marcos");
         Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
-        Assert.assertTrue(false == temp.getIsMayor().getValor(), "El Modelo no fue recargado de BD's como esperabamos");
-
+        Assert.assertTrue(false == temp.getIsMayor(), "El Modelo no fue recargado de BD's como esperabamos");
         /**
          * Actualizamos la información
          */
         logParrafo("Actualizamos el nombre del modelo a Jose, Apellido a Bran y asígnamos que será mayor de edad");
-        temp.getName().setValor("Jose");
-        temp.getApellido().setValor("Bran");
-        temp.getIsMayor().setValor(true);
+        temp.setName("Jose");
+        temp.setApellido("Bran");
+        temp.setIsMayor(true);
         logParrafo(temp.toString());
         /**
          * Recargamos el modelo con la información de BD's
@@ -177,10 +176,10 @@ public class JBSqlUtilsTestSQLServer {
         temp.refresh();
         logParrafo("Refrescamos el Modelo a traves del metodo reloadModel");
         logParrafo(temp.toString());
-        reloadModel = StringUtils.containsIgnoreCase(temp.getName().getValor(), "Marcos");
+        reloadModel = StringUtils.containsIgnoreCase(temp.getName(), "Marcos");
         Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
-        Assert.assertTrue(StringUtils.containsIgnoreCase(temp.getApellido().getValor(), "Cabrera"), "El Modelo no fue recargado de BD's como esperabamos");
-        Assert.assertTrue(false == temp.getIsMayor().getValor(), "El Modelo no fue recargado de BD's como esperabamos");
+        Assert.assertTrue(StringUtils.containsIgnoreCase(temp.getApellido(), "Cabrera"), "El Modelo no fue recargado de BD's como esperabamos");
+        Assert.assertTrue(false == temp.getIsMayor(), "El Modelo no fue recargado de BD's como esperabamos");
     }
 
     @Test(testName = "Update Model", dependsOnMethods = "reloadModel")
@@ -202,8 +201,8 @@ public class JBSqlUtilsTestSQLServer {
          * Actualizamos la información
          */
         logParrafo("Actualizamos el nombre del modelo a MarcosEfrain y asígnamos que será mayor de edad");
-        temp.getName().setValor("MarcosEfrain");
-        temp.getIsMayor().setValor(true);
+        temp.setName("MarcosEfrain");
+        temp.setIsMayor(true);
         logParrafo(temp.toString());
         /**
          * Eliminamos el modelo en BD's
@@ -247,10 +246,10 @@ public class JBSqlUtilsTestSQLServer {
         for (int i = 0; i < 10; i++) {
             TestModel model = new TestModel(false);
             model.llenarPropertiesFromModel(this.testModel);
-            model.getName().setValor("Modelo #" + i);
-            model.getApellido().setValor("Apellido #" + i);
+            model.setName("Modelo #" + i);
+            model.setApellido("Apellido #" + i);
             if (i % 2 == 0) {
-                model.getIsMayor().setValor(false);
+                model.setIsMayor(false);
             }
             models.add(model);
             logParrafo(model.toString());
@@ -352,7 +351,7 @@ public class JBSqlUtilsTestSQLServer {
         logParrafo("Operamos los cambios a realizar en los modelos obtenidos de BD's");
         models.forEach(modelo -> {
             logParrafo("Modelo obtenido: " + modelo.toString());
-            modelo.getIsMayor().setValor(!modelo.getIsMayor().getValor());
+            modelo.setIsMayor(!modelo.getIsMayor());
             logParrafo("Modelo a actualizar: " + modelo.toString());
         });
         logParrafo("Enviamos a guardar los modelos a través del metodo saveALL");
@@ -621,11 +620,11 @@ public class JBSqlUtilsTestSQLServer {
          * el cual se encarga de insertar un registro en la tabla correspondiente al modelo con la información del mismo
          * si este no existe, de existir actualiza el registro por medio de la clave primaria del modelo.
          */
-        this.usuarioModel.getId_Subestación().setValor(2.0);
-        this.usuarioModel.getNombre().setValor("NombrePrimerModelo");
-        this.usuarioModel.getTelefono().setValor(null);
-        this.usuarioModel.getCorreo().setValor("CorreoPrueba");
-        this.usuarioModel.getEstado().setValor(false);
+        this.usuarioModel.setId_Subestación(2.0);
+        this.usuarioModel.setNombre("NombrePrimerModelo");
+        this.usuarioModel.setTelefono(null);
+        this.usuarioModel.setCorreo("CorreoPrueba");
+        this.usuarioModel.setEstado(false);
         logParrafo(this.usuarioModel.toString());
         Integer rowsInsert = this.usuarioModel.save();
         /**
@@ -637,7 +636,59 @@ public class JBSqlUtilsTestSQLServer {
         Assert.assertTrue(rowsInsert == 1, "El registro no fue insertado en BD's");
     }
 
-    @Test(testName = "Update Model Usuario", dependsOnMethods = "insertModelUsuario")
+    @Test(testName = "Reload Model Usuario", dependsOnMethods = "insertModelUsuario")
+    public void reloadModelUsuario() throws Exception {
+        logParrafo("Limpiamos el modelo");
+        this.usuarioModel.cleanModel();
+        /**
+         * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
+         */
+        logParrafo("Obtenemos el modelo que tiene por nombre Marcos, Apellido Cabrera");
+        UsuarioModel temp = (UsuarioModel) this.usuarioModel.where("Nombre", Operator.LIKE, "NombrePrimerModelo").and("Estado", Operator.IGUAL_QUE,
+                false).firstOrFail();
+        /**
+         * Esperamos ejecute la operación en BD's
+         */
+        this.usuarioModel.waitOperationComplete();
+        logParrafo(temp.toString());
+        /**
+         * Actualizamos la información
+         */
+        logParrafo("Actualizamos el nombre del modelo a MarcosEfrain y asígnamos que será mayor de edad");
+        temp.setNombre("MarcosEfrain");
+        temp.setEstado(true);
+        logParrafo(temp.toString());
+        /**
+         * Recargamos el modelo con la información de BD's
+         */
+        Boolean reloadModel = temp.reloadModel();
+        logParrafo("Refrescamos el Modelo a traves del metodo reloadModel");
+        logParrafo(temp.toString());
+        Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
+        reloadModel = StringUtils.containsIgnoreCase(temp.getNombre(), "NombrePrimerModelo");
+        Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
+        Assert.assertTrue(false == temp.getEstado(), "El Modelo no fue recargado de BD's como esperabamos");
+        /**
+         * Actualizamos la información
+         */
+        logParrafo("Actualizamos el nombre del modelo a Jose, Apellido a Bran y asígnamos que será mayor de edad");
+        temp.setNombre("Jose");
+        temp.setCorreo("Bran");
+        temp.setEstado(true);
+        logParrafo(temp.toString());
+        /**
+         * Recargamos el modelo con la información de BD's
+         */
+        temp.refresh();
+        logParrafo("Refrescamos el Modelo a traves del metodo reloadModel");
+        logParrafo(temp.toString());
+        reloadModel = StringUtils.containsIgnoreCase(temp.getNombre(), "NombrePrimerModelo");
+        Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
+        Assert.assertTrue(StringUtils.containsIgnoreCase(temp.getCorreo(), "CorreoPrueba"), "El Modelo no fue recargado de BD's como esperabamos");
+        Assert.assertTrue(false == temp.getEstado(), "El Modelo no fue recargado de BD's como esperabamos");
+    }
+
+    @Test(testName = "Update Model Usuario", dependsOnMethods = "reloadModelUsuario")
     public void updateModelUsuario() throws Exception {
         logParrafo("Limpiamos el modelo");
         this.usuarioModel.cleanModel();
@@ -656,8 +707,9 @@ public class JBSqlUtilsTestSQLServer {
          * Actualizamos la información
          */
         logParrafo("Actualizamos el nombre del modelo a MarcosEfrain y asígnamos que será mayor de edad");
-        temp.getNombre().setValor("MarcosEfrain");
-        temp.getEstado().setValor(true);
+        temp.setNombre("MarcosEfrain");
+        temp.setEstado(true);
+        temp.setId_Subestación(null);
         logParrafo(temp.toString());
         /**
          * Eliminamos el modelo en BD's
@@ -699,14 +751,14 @@ public class JBSqlUtilsTestSQLServer {
         //Llenamos la lista de mdelos a insertar en BD's
         for (int i = 0; i < 10; i++) {
             UsuarioModel model = new UsuarioModel();
-            model.getId_Subestación().setValor((1.0 * i));
-            model.getNombre().setValor("NombreModelo#" + i);
-            model.getCorreo().setValor("CorreoPrueba#" + i);
+            model.setId_Subestación((1.0 * i));
+            model.setNombre("NombreModelo#" + i);
+            model.setCorreo("CorreoPrueba#" + i);
             if (i % 2 == 0) {
-                model.getEstado().setValor(false);
+                model.setEstado(false);
                 model.setTimestamps(false);
             } else {
-                model.getEstado().setValor(true);
+                model.setEstado(true);
             }
             models.add(model);
             logParrafo(model.toString());
@@ -808,7 +860,7 @@ public class JBSqlUtilsTestSQLServer {
         logParrafo("Operamos los cambios a realizar en los modelos obtenidos de BD's");
         models.forEach(modelo -> {
             logParrafo("Modelo obtenido: " + modelo.toString());
-            modelo.getEstado().setValor(!modelo.getEstado().getValor());
+            modelo.setEstado(!modelo.getEstado());
             logParrafo("Modelo a actualizar: " + modelo.toString());
         });
         logParrafo("Enviamos a guardar los modelos a través del método saveALL");
