@@ -634,8 +634,6 @@ class Methods_Conexion extends Conexion {
      */
     protected void convertSQLtoJava(ColumnsSQL columna, ResultSet resultado, Field field, Object invocador) throws SQLException, InvocationTargetException, IllegalAccessException {
 
-        Object valor = getValueColumn(invocador, field);
-        LogsJB.debug("Valor de la columna: " + valor);
         if (field.getType().isAssignableFrom(String.class)) {
             //Caracteres y cadenas de Texto
             FieldUtils.writeField(invocador, field.getName(), resultado.getString(columna.getCOLUMN_NAME()), true);
@@ -1071,48 +1069,40 @@ class Methods_Conexion extends Conexion {
                     //Obtener cual es la clave primaria de la tabla
                     String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
                     String sql = "DELETE FROM " + modelo.getTableName();
-                    List<Method> metodos = new ArrayList<>();
-                    metodos = modelo.getMethodsGetOfModel();
-
-                    int indicePrimarykey = -1;
-                    //Llena la información de las columnas que se insertaran
-                    for (int i = 0; i < metodos.size(); i++) {
-                        //Obtengo el metodo
-                        Method metodo = metodos.get(i);
-                        //Obtengo la información de la columna
-                        Column columnsSQL = (Column) metodo.invoke(modelo, null);
-                        String columnName = columnsSQL.getName();
-                        if (!UtilitiesJB.stringIsNullOrEmpty(namePrimaryKey) && StringUtils.equalsIgnoreCase(namePrimaryKey, columnName)) {
-                            indicePrimarykey = i;
-                            break;
+                    List<Field> columnas = this.getFieldsOfModel();
+                    List<Field> values = new ArrayList<>();
+                    for (Field columna : columnas) {
+                        if ((StringUtils.equalsIgnoreCase(namePrimaryKey, this.getColumnName(columna)) && !this.getValueColumnIsNull(this, columna))
+                                || (this.getColumnIsIndexValidValue(this, columna))) {
+                            values.add(columna);
+                            if (values.size() > 1) {
+                                sql = sql + " AND ";
+                            }else{
+                                sql=sql+ " WHERE ";
+                            }
+                            sql = sql + this.getColumnName(columna) + " = ?";
                         }
                     }
+
                     //Colocamos el where
-                    sql = sql + " WHERE " + namePrimaryKey + "=?;";
+                    sql = sql + ";";
                     //LogsJB.info(sql);
                     Connection connect = modelo.getConnection();
                     PreparedStatement ejecutor = connect.prepareStatement(sql);
-                    //Llena el prepareStatement
-                    int auxiliar = 1;
-                    LogsJB.debug("Colocara la información del where: " + auxiliar);
-                    LogsJB.debug("Indice del metodo donde esta la información del where: " + indicePrimarykey);
                     //Colocamos la información del where si el indice es un indice valido
-                    if (indicePrimarykey >= 0) {
-                        //Obtengo el metodo
-                        Method metodo = metodos.get(indicePrimarykey);
-                        //Obtengo la información de la columna
-                        Column columnsSQL = (Column) metodo.invoke(modelo, null);
-                        if (Objects.isNull(columnsSQL.getValor())) {
-                            LogsJB.warning("El modelo proporcionado no tiene definido el valor de la clave " + namePrimaryKey
-                                    + " Por lo cual no se puede eliminar el modelo " + this.getTableName());
-                            modelo.setTaskIsReady(true);
-                            return new ResultAsync<>(0, null);
-                        } else {
-                            convertJavaToSQL(columnsSQL, ejecutor, auxiliar);
+                    //Llena la información de las columnas que se insertaran
+                    int auxiliar = 0;
+                    Integer filas = 0;
+                    LogsJB.debug("Colocara la información del where: " + auxiliar);
+                    if (values.size() > 0) {
+                        //Llenamos el ejecutor con la información del modelo
+                        for (Field value : values) {
+                            auxiliar++;
+                            convertJavaToSQL(this, value, ejecutor, auxiliar);
                         }
+                        LogsJB.info(ejecutor.toString());
+                        filas = ejecutor.executeUpdate();
                     }
-                    LogsJB.info(ejecutor.toString());
-                    Integer filas = ejecutor.executeUpdate();
                     LogsJB.info("Filas eliminadas: " + filas);
                     modelo.closeConnection(connect);
                     modelo.setTaskIsReady(true);

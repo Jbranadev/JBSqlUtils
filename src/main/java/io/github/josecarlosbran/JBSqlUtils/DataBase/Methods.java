@@ -21,11 +21,13 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
@@ -405,42 +407,34 @@ class Methods extends Methods_Conexion {
         try {
             this.setModelExist(false);
             //Obtiene los metodos get del modelo
-            List<Method> modelGetMethods = this.getMethodsGetOfModel();
-            List<Method> modelSetMethods = this.getMethodsSetOfModel();
-            for (Method modelGetMethod : modelGetMethods) {
-                String modelGetName = modelGetMethod.getName();
-                String modelName = modelGetMethod.getDeclaringClass().getName();
-                LogsJB.debug("Obtuvo los metodos Get del modelo: " + modelName);
-                LogsJB.debug("Nombre del metodo Get del modelo: " + modelGetName);
-                //Obtengo la información de la columna
-                Column columnsSQL = (Column) modelGetMethod.invoke(this, null);
-                //Le meto la información a la columa
-                LogsJB.debug("Setea el contenido a la columna: " + modelGetName);
-                columnsSQL.setValor(null);
-                String columnName = modelGetMethod.getName();
-                columnName = StringUtils.removeStartIgnoreCase(columnName, "get");
-                LogsJB.debug("Nombre de la columna a validar: " + columnName);
-                //Obtiene los metodos set del modelo
-                Iterator<Method> iteradorModelSetMethods = modelSetMethods.iterator();
-                while (iteradorModelSetMethods.hasNext()) {
-                    try {
-                        Method modelSetMethod = iteradorModelSetMethods.next();
-                        String modelSetName = modelSetMethod.getName();
-                        LogsJB.trace("Nombre del metodo: " + modelSetName);
-                        LogsJB.trace("Si es un metodo Set: " + modelSetName);
-                        modelSetName = StringUtils.removeStartIgnoreCase(modelSetName, "set");
-                        LogsJB.trace("Nombre del metodo set a validar: " + modelSetName);
-                        if (StringUtils.equalsIgnoreCase(modelSetName, columnName)) {
-                            //Setea el valor del metodo
-                            modelSetMethod.invoke(this, columnsSQL);
-                            LogsJB.debug("Ingreso la columna en el metodo set: " + modelSetName);
-                            iteradorModelSetMethods.remove();
-                        }
-                    } catch (Exception e) {
-                        LogsJB.fatal("Excepción disparada al limpiar el mmodelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                    }
+            List<Field> campos=this.getFieldsOfModel();
+            for(Field campo: campos){
+                if (campo.getType().isAssignableFrom(String.class)) {
+                    //Caracteres y cadenas de Texto
+                    FieldUtils.writeField(this, campo.getName(), null, true);
+                } else if (campo.getType().isAssignableFrom(Double.class)) {
+                    FieldUtils.writeField(this, campo.getName(), null, true);
+                } else if (campo.getType().isAssignableFrom(Integer.class)) {
+                    FieldUtils.writeField(this, campo.getName(), null, true);
+                } else if (campo.getType().isAssignableFrom(Float.class)) {
+                    FieldUtils.writeField(this, campo.getName(), null, true);
+                } else if (campo.getType().isAssignableFrom(Boolean.class)) {
+                    FieldUtils.writeField(this, campo.getName(), false, true);
+                } else if (campo.getType().isAssignableFrom(byte[].class)) {
+                    FieldUtils.writeField(this, campo.getName(), null, true);
+                } else if (campo.getType().isAssignableFrom(Date.class)) {
+                    FieldUtils.writeField(this, campo.getName(), null, true);
+                } else if (campo.getType().isAssignableFrom(Time.class)) {
+                    FieldUtils.writeField(this, campo.getName(), null, true);
+                } else if (campo.getType().isAssignableFrom(Timestamp.class)) {
+                    FieldUtils.writeField(this, campo.getName(), null, true);
+                } else {
+                    LogsJB.warning("No se pudo setear el valor de la columna: " + campo.getName() + " " + this.getTableName());
+                    LogsJB.warning("Debido a que ninguno de los métodos corresponde al tipo de dato SQL: " + campo.getType());
+                    FieldUtils.writeField(this, campo.getName(), null, true);
                 }
             }
+
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al limpiar el modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
