@@ -273,7 +273,7 @@
                 <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>4.0.0-M10</version>
+                    <version>4.0.0-M11</version>
                     <configuration>
                         <locales>es,en,fr</locales>
                     </configuration>
@@ -379,7 +379,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-site-plugin</artifactId>
-                        <version>4.0.0-M10</version>
+                        <version>4.0.0-M11</version>
                         <configuration>
                             <locales>es,en,fr</locales>
                         </configuration>
@@ -483,7 +483,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-site-plugin</artifactId>
-                        <version>4.0.0-M10</version>
+                        <version>4.0.0-M11</version>
                         <configuration>
                             <locales>es,en,fr</locales>
                         </configuration>
