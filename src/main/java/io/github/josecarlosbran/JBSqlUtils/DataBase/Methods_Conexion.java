@@ -228,7 +228,6 @@ class Methods_Conexion extends Conexion {
      * @return True si la tabla correspondiente al modelo existe en BD's, de lo contrario False.
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
-    @SuppressWarnings("UnusedAssignment")
     public Boolean tableExist() throws Exception {
         Boolean result;
         Callable<ResultAsync<Boolean>> VerificarExistencia = () -> {
@@ -328,9 +327,9 @@ class Methods_Conexion extends Conexion {
      * Obtiene las columnas que tiene la tabla correspondiente al modelo en BD's.
      *
      * @param connect a BD's para obtener la metadata
+     * @throws SQLException Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
-    protected void getColumnsTable(Connection connect) {
-        try {
+    protected void getColumnsTable(Connection connect) throws SQLException {
             LogsJB.debug("Comienza a obtener las columnas que le pertenecen a la tabla " + this.getTableName());
             LogsJB.trace("Obtuvo el objeto conexión");
             DatabaseMetaData metaData = connect.getMetaData();
@@ -372,9 +371,6 @@ class Methods_Conexion extends Conexion {
             columnas.close();
             this.closeConnection(connect);
             this.getTabla().getColumnas().stream().sorted(Comparator.comparing(ColumnsSQL::getORDINAL_POSITION));
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-        }
     }
 
     /**
@@ -570,7 +566,6 @@ class Methods_Conexion extends Conexion {
             //Timestamp
             ejecutor.setTimestamp(auxiliar, (Timestamp) valor);
         } else {
-            LogsJB.debug("No logro setear el tipo de dato");
             ejecutor.setObject(auxiliar, valor);
         }
     }
@@ -607,8 +602,6 @@ class Methods_Conexion extends Conexion {
         } else if (field.getType().isAssignableFrom(Timestamp.class)) {
             FieldUtils.writeField(invocador, field.getName(), resultado.getTimestamp(columna.getCOLUMN_NAME()), true);
         } else {
-            LogsJB.warning("No se pudo setear el valor de la columna: " + field.getName() + " " + this.getTableName());
-            LogsJB.warning("Debido a que ninguno de los métodos corresponde al tipo de dato SQL: " + field.getType());
             FieldUtils.writeField(invocador, field.getName(), resultado.getObject(columna.getCOLUMN_NAME()), true);
         }
     }
@@ -690,8 +683,6 @@ class Methods_Conexion extends Conexion {
             temp.put(columnName, resultado.getTimestamp(columnName));
         } else {
             temp.put(columnName, resultado.getObject(columnName));
-            LogsJB.warning("No se pudo setear el valor de la columna: " + columnName);
-            LogsJB.warning("Debido a que ninguno de los metodos corresponde al tipo de dato SQL: " + columnType);
         }
     }
 
@@ -726,28 +717,15 @@ class Methods_Conexion extends Conexion {
                         Field campo = campos.get(i);
                         //Obtengo la información de la columna
                         String columnName = getColumnName(campo);
-                        if (Objects.isNull(FieldUtils.readDeclaredField(modelo, campo.getName(), true))) {
-                            continue;
-                        }
                         //Si la columna existe entre la metadata de la BD's
-                        if (!this.getTabla().getColumnsExist().contains(columnName.toUpperCase())) {
-                            continue;
-                        }
                         //Si el modelo tiene seteado que no se manejaran las timestamps entonces
                         //Ignora el guardar esas columnas
-                        if ((!this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, modelo.getCreatedAt()))
-                                || (StringUtils.equalsIgnoreCase(columnName, modelo.getUpdateAT())))) {
+                        if (((!this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, modelo.getCreatedAt()))
+                                || (StringUtils.equalsIgnoreCase(columnName, modelo.getUpdateAT()))))
+                                || (!this.getTabla().getColumnsExist().contains(columnName.toUpperCase()))
+                                || (Objects.isNull(FieldUtils.readDeclaredField(modelo, campo.getName(), true)))
+                        ) {
                             continue;
-                        }
-                        //Setea el nombre de la columna Created_at pendiente de validar si tiene sentido tener esta validación
-                        if ((this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, modelo.getCreatedAt()))
-                        )) {
-                            columnName = modelo.getCreatedAt();
-                        }
-                        //Setea el nombre de la columna Update_at
-                        if ((this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, modelo.getUpdateAT()))
-                        )) {
-                            columnName = modelo.getUpdateAT();
                         }
                         datos++;
                         if (datos > 1) {
@@ -796,9 +774,7 @@ class Methods_Conexion extends Conexion {
                     } else if (modelo.getDataBaseType() == DataBase.MySQL) {
                         //Obtener cual es la clave primaria de la tabla
                         String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
-                        sql2 = "SELECT * FROM " + modelo.getTableName() + " WHERE "
-                                /*+ namePrimaryKey
-                                + " = LAST_INSERT_ID();"*/;
+                        sql2 = "SELECT * FROM " + modelo.getTableName() + " WHERE ";
                         int contador = 0;
                         for (Field columna : campos) {
                             if (StringUtils.equalsIgnoreCase(namePrimaryKey, this.getColumnName(columna))) {
@@ -830,6 +806,12 @@ class Methods_Conexion extends Conexion {
                     if (values.size() > 0) {
                         for (Field value : values) {
                             auxiliar++;
+                            String columnName = getColumnName(value);
+                            if ((StringUtils.equalsIgnoreCase(columnName, this.getUpdateAT()))
+                            ||(StringUtils.equalsIgnoreCase(columnName, this.getCreatedAt()))) {
+                                Long datetime = System.currentTimeMillis();
+                                FieldUtils.writeField(modelo, value.getName(), new Timestamp(datetime), true);
+                            }
                             convertJavaToSQL(modelo, value, ejecutor, auxiliar);
                         }
                         LogsJB.info(ejecutor.toString());
@@ -885,40 +867,27 @@ class Methods_Conexion extends Conexion {
                     campos = modelo.getFieldsOfModel();
                     int datos = 0;
                     List<Integer> indicemetodos = new ArrayList<>();
-                    int indicePrimarykey = 0;
                     //Llena la información de las columnas que se insertaran
                     for (int i = 0; i < campos.size(); i++) {
                         //Obtengo el metodo
                         Field campo = campos.get(i);
                         //Obtengo la información de la columna
                         String columnName = getColumnName(campo);
-                        if (!UtilitiesJB.stringIsNullOrEmpty(namePrimaryKey) && StringUtils.equalsIgnoreCase(namePrimaryKey, columnName)) {
-                            continue;
-                        }
-                        if (getValueColumnIsNull(modelo, campo)) {
-                            continue;
-                        }
+                        //Si el valor de la columna es nullo
                         //Si la columna existe entre la metadata de la BD's
-                        if (!this.getTabla().getColumnsExist().contains(columnName.toUpperCase())) {
-                            continue;
-                        }
                         //Si el modelo tiene seteado que no se manejaran las timestamps entonces
                         //Ignora el guardar esas columnas
-                        if ((!this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, modelo.getCreatedAt()))
-                                || (StringUtils.equalsIgnoreCase(columnName, modelo.getUpdateAT())))) {
-                            continue;
-                        }
                         //Si si se manejaran las timestamps, entonces obvia la timestamps de created_at
-                        if ((this.getTimestamps()) &&
-                                ((StringUtils.equalsIgnoreCase(columnName, this.getCreatedAt())))
+                        if (((this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, this.getCreatedAt()))))
+                                || (!UtilitiesJB.stringIsNullOrEmpty(namePrimaryKey) && StringUtils.equalsIgnoreCase(namePrimaryKey, columnName))
+                                || (getValueColumnIsNull(modelo, campo))
+                                || (!this.getTabla().getColumnsExist().contains(columnName.toUpperCase()))
+                                || ((!this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, modelo.getCreatedAt()))
+                                || (StringUtils.equalsIgnoreCase(columnName, modelo.getUpdateAT()))))
                         ) {
                             continue;
                         }
-                        //Setea el nombre de la columna Update_at
-                        if ((this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, this.getUpdateAT()))
-                        )) {
-                            columnName = this.getUpdateAT();
-                        }
+
                         if (StringUtils.containsIgnoreCase(sql, "?")) {
                             sql = sql + ", " + columnName + "=?";
                         } else {
@@ -952,7 +921,7 @@ class Methods_Conexion extends Conexion {
                         for (Field value : values) {
                             auxiliar++;
                             String columnName = getColumnName(value);
-                            if ((StringUtils.equalsIgnoreCase(columnName, "updated_at"))) {
+                            if ((StringUtils.equalsIgnoreCase(columnName, this.getUpdateAT()))) {
                                 Long datetime = System.currentTimeMillis();
                                 FieldUtils.writeField(modelo, value.getName(), new Timestamp(datetime), true);
                             }
