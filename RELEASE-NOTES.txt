@@ -1,4 +1,25 @@
                                          jbsqlutils
+                                        Version 1.2.3
+                                        Release Notes
+
+Implementation of DefinedColumn and Index tags for processing the growth of tables in JBSQLUTILS and for reloading models from DB's
+
+## What's Changed
+* Update Release Notes 1.2.2 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/133
+* Bump org.jacoco:jacoco-maven-plugin from 0.8.10 to 0.8.11 by @dependabot in https://github.com/Jbranadev/JBSqlUtils/pull/138
+* Bump org.apache.maven.plugins:maven-site-plugin from 4.0.0-M10 to 4.0.0-M11 by @dependabot in https://github.com/Jbranadev/JBSqlUtils/pull/137
+* Bump actions/checkout from 4.1.0 to 4.1.1 by @dependabot in https://github.com/Jbranadev/JBSqlUtils/pull/136
+* Bump advanced-security/maven-dependency-submission-action from 3.0.2 to 3.0.3 by @dependabot in https://github.com/Jbranadev/JBSqlUtils/pull/135
+* Bump org.json:json from 20230618 to 20231013 by @dependabot in https://github.com/Jbranadev/JBSqlUtils/pull/134
+* Bump org.xerial:sqlite-jdbc from 3.43.0.0 to 3.43.2.1 by @dependabot in https://github.com/Jbranadev/JBSqlUtils/pull/139
+* Implementación Nueva Sintaxis ColumnDefined by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/140
+* Refactorización de Codigo JBSqlUtils 1.2.3 by @Jbranadev in https://github.com/Jbranadev/JBSqlUtils/pull/141
+
+
+**Full Changelog**: https://github.com/Jbranadev/JBSqlUtils/compare/1.2.2...1.2.3
+
+
+                                         jbsqlutils
                                         Version 1.2.2
                                         Release Notes
 
