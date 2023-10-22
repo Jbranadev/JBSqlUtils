@@ -146,7 +146,9 @@ el nombre de la tabla de la cual deseamos obtener los registros, así mismo pode
 método where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
 
 Los resultados serán devueltos en una List<JSONObject> del tipo JSONObject de
-la implementación json de org.json
+la implementación json de org.json, teniendo cada objeto json una propiedad por cada
+columna recuperada, es importante tener en consideración que cada Key estara en mayusculas
+por ejemplo para la columna Estado, el Key Property será ESTADO.
 
 ~~~
 /**

@@ -543,11 +543,11 @@ public class JBSqlUtilsTestMySQL {
          */
         int rowsUpdate = 0;
         for (JSONObject fila : lista) {
-            if (fila.getString("Name").equalsIgnoreCase("Ligia") && fila.getString("Apellido").equalsIgnoreCase("Camey")) {
+            if (fila.getString("NAME").equalsIgnoreCase("Ligia") && fila.getString("APELLIDO").equalsIgnoreCase("Camey")) {
                 logParrafo("Actualizara la fila que corresponde a Ligia Camey: ");
                 logParrafo(fila.toString());
                 rowsUpdate += JBSqlUtils.update("Proveedor").set("Name", "Futura").andSet("Apellido", "Prometida")
-                        .where("Id", Operator.IGUAL_QUE, fila.getInt("Id")).execute();
+                        .where("Id", Operator.IGUAL_QUE, fila.getInt("ID")).execute();
                 logParrafo("Filas actualizadas en BD's: " + rowsUpdate);
             }
         }
@@ -571,10 +571,10 @@ public class JBSqlUtilsTestMySQL {
          */
         int rowsDelete = 0;
         for (JSONObject fila : lista) {
-            if (fila.getInt("Id") == 5) {
+            if (fila.getInt("ID") == 5) {
                 logParrafo("VIsualizamos la Fila a eliminar, cuyo Id es igual a 5: ");
                 logParrafo(fila.toString());
-                rowsDelete += JBSqlUtils.delete("Proveedor").where("Id", Operator.IGUAL_QUE, fila.getInt("Id")).execute();
+                rowsDelete += JBSqlUtils.delete("Proveedor").where("Id", Operator.IGUAL_QUE, fila.getInt("ID")).execute();
                 logParrafo("Filas eliminadas en BD's: " + rowsDelete);
             }
         }

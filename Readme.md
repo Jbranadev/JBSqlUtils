@@ -101,7 +101,7 @@ Encontraremos los Logs de JBSqlUtils en el directorio de nuestra aplicación en 
 Logs, dentro de la cual se creara una carpeta por cada día y dentro de la misma se almacenaran los Logs de la
 aplicación, para mayor información visitar el siguiente Link
 
-[LogsJB](https://github.com/Jbranadev/LogsJB/blob/support_version/Readme.md)
+[LogsJBSupport](https://github.com/Jbranadev/LogsJB/blob/support_version/Readme.md)
 
 ![](Imagenes/Logs.jpg)
 
@@ -117,14 +117,14 @@ Maven
 <dependency>
   <groupId>io.github.josecarlosbran</groupId>
   <artifactId>jbsqlutils</artifactId>
-  <version>1.2.2</version>
+  <version>1.2.3</version>
 </dependency>
 ~~~
 
 Gradle
 
 ~~~
-implementation 'io.github.josecarlosbran:jbsqlutils:1.2.2'
+implementation 'io.github.josecarlosbran:jbsqlutils:1.2.3'
 ~~~
 
 Para mayor información sobre cómo descargar JBSqlUtils desde otros

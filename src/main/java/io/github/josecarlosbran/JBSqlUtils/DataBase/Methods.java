@@ -206,18 +206,17 @@ class Methods extends Methods_Conexion {
         Callable<ResultAsync<List<T>>> get = () -> {
             List<T> listatemp = new ArrayList<T>();
             try {
-
-                    String sql = "SELECT * FROM " + this.getTableName();
-                    sql = sql + ";";
-                    LogsJB.info(sql);
-                    Connection connect = this.getConnection();
-                    PreparedStatement ejecutor = connect.prepareStatement(sql);
-                    ResultSet registros = ejecutor.executeQuery();
-                    while (registros.next()) {
-                        listatemp.add(procesarResultSet((T) this, registros));
-                    }
-                    this.closeConnection(connect);
-                    return new ResultAsync<>(listatemp, null);
+                String sql = "SELECT * FROM " + this.getTableName();
+                sql = sql + ";";
+                LogsJB.info(sql);
+                Connection connect = this.getConnection();
+                PreparedStatement ejecutor = connect.prepareStatement(sql);
+                ResultSet registros = ejecutor.executeQuery();
+                while (registros.next()) {
+                    listatemp.add(procesarResultSet((T) this, registros));
+                }
+                this.closeConnection(connect);
+                return new ResultAsync<>(listatemp, null);
             } catch (Exception e) {
                 LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
                         "SQL de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));

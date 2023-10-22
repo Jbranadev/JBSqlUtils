@@ -1,6 +1,5 @@
 package UtilidadesTest;
 
-import io.github.josecarlosbran.JBSqlUtils.Anotations.ColumnDefined;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
@@ -20,6 +19,19 @@ import org.testng.annotations.Ignore;
 @Getter
 public class UserModel extends JBSqlUtils {
 
+    Column<Integer> Id_Usuari1o = new Column<Integer>("Id_Usuario", DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
+    Column<Float> Id_Rol1 = new Column<>((float) 1.5, DataType.FLOAT, Constraint.NOT_NULL);
+    Column<Double> Id_Subestación1 = new Column<>(DataType.DOUBLE);
+    Column<String> Usuario2 = new Column<>("Usuario", DataType.TEXT, "'Daniel'", Constraint.DEFAULT);
+    Column<String> Contraseña1 = new Column<>("Contraseña", DataType.TEXT, "'ContraseñaDefault'", Constraint.DEFAULT);
+    Column<String> Nombre1 = new Column<>(DataType.TEXT);
+    Column<String> CUI1 = new Column<>("CUI", "3214764330502", DataType.TEXT);
+    Column<String> Telefono1 = new Column<>("Telefono", "50834811", "'TelefonoDefault'", DataType.TEXT, Constraint.DEFAULT);
+    Column<String> Correo1 = new Column<>("Correo", DataType.TEXT, "'Correo Default'", Constraint.DEFAULT);
+    Column<String> Token_Oaut1 = new Column<>("Token", DataType.TEXT);
+    Column<String> Token_Actual1 = new Column<>("Token_Actual", "Token", DataType.TEXT, Constraint.NOT_NULL);
+    Column<String> Token_Anterior1 = new Column<>(DataType.TEXT);
+    Column<Boolean> Estado1 = new Column<>(true, DataType.BOOLEAN);
     /**
      * Definiendo los atributos del modelo, uno por cada columna en la tabla correspondiente al modelo
      *
@@ -28,38 +40,14 @@ public class UserModel extends JBSqlUtils {
      */
 
     private Column<Integer> Id_Usuario1 = new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
-
-    @ColumnDefined(name = "Id_Usuario", dataTypeSQL = DataType.INTEGER, constraints = {
-            Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY
-    })
-    private Integer Id_Usuario;
-
     private Column<String> Usuario1 = new Column<>(DataType.VARCHAR);
-
-    @ColumnDefined(name = "Usuario", dataTypeSQL = DataType.VARCHAR, size = "200")
-    private String Usuario;
-
     private Column<String> PasswordUser1 = new Column<>(DataType.VARCHAR);
-
-    @ColumnDefined(name = "PasswordUser", dataTypeSQL = DataType.VARCHAR, size = "200")
-    private String PasswordUser;
-
     private Column<String> Rol1 = new Column<>(DataType.VARCHAR, "'Despachador'", Constraint.DEFAULT);
-
-    @ColumnDefined(name = "Rol", dataTypeSQL = DataType.VARCHAR, constraints = {
-            Constraint.DEFAULT
-    }, default_value = "'Despachador'", size = "200")
-    private String Rol;
-
     private Column<String> TokenActual1 = new Column<>(DataType.VARCHAR);
-
-    @ColumnDefined(name = "TokenActual", dataTypeSQL = DataType.VARCHAR, size = "2000")
-    private String TokenActual;
-
     private Column<String> TokenAnterior1 = new Column<>(DataType.VARCHAR);
-
-    @ColumnDefined(name = "TokenAnterior", dataTypeSQL = DataType.VARCHAR, size = "2000")
-    private String TokenAnterior;
+    private Column<Boolean> isMayor1 = new Column<>(DataType.BIT, "true", Constraint.DEFAULT);
+    private Column<String> apellido1 = new Column<>(DataType.VARCHAR);
+    private Column<String> name1 = new Column<>(DataType.VARCHAR, "'Daniel'", Constraint.DEFAULT);
 
     /**
      * @throws DataBaseUndefind      se realiza las exepciones DataBaseUndefind si no encuentra definida el tipo de BD`S a la que se
@@ -77,5 +65,7 @@ public class UserModel extends JBSqlUtils {
         this.getRol1().setSize("100");
         this.getTokenActual1().setSize("2000");
         this.getTokenAnterior1().setSize("2000");
+        this.getName1().setSize("200");
+        this.getApellido1().setSize("200");
     }
 }

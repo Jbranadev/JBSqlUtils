@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="JBSqlUtils">
+<suite name="JBSqlUtils" parallel="classes" thread-count="9">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
@@ -58,7 +58,6 @@
             </class>
         </classes>
     </test>
-
 
 
     <test name="Test SQLite">

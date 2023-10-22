@@ -21,7 +21,6 @@ import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
-import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -38,17 +37,15 @@ import org.testng.annotations.Ignore;
 public class TestModel extends JBSqlUtils {
 
     /**
-     * Declara un miembro del modelo, el cual en java almacenara un dato de tipo Integer, se define Integer,
-     * ya que la clase Column es una clase generica y no puede trabajar con datos primivitos como int, pero si con
-     * clases contenedoras como Integer.
+     * Declara un miembro del modelo, el cual en java almacenara un dato de tipo Integer.
      * <p>
-     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
-     * Integer.
+     * Si deseamos la tabla sea creada en Bd's a traves de JBSqlUtils, podemos definir las propiedades que tendría cada columna y
+     * cual sería su representación en Java a traves de la etiqueta ColumnDefined, configurando así la información que deseamos
+     * JBSqlUtils tenga en consideración al momento de crear la tabla.
      * <p>
      * Agregamos dos restricciones SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
      * desde nuestra aplicación en caso esta no exista, de lo contrario no es necesario que agreguemos restricciones.
      */
-    private Column<Integer> id1 = new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
 
     @ColumnDefined(name = "Id", dataTypeSQL = DataType.INTEGER, constraints = {
             Constraint.PRIMARY_KEY, Constraint.AUTO_INCREMENT
@@ -57,9 +54,6 @@ public class TestModel extends JBSqlUtils {
 
     /**
      * Declara un miembro del modelo, el cual en java almacenara un dato de tipo String.
-     * <p>
-     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
-     * Varchar.
      * <p>
      * Agregamos un parámetro extra el cual es el default_value antes de indicar las restricciones,
      * este parámetro es de tipo String, por medio de este parámetro podemos definir el valor que deseamos tenga la
@@ -71,36 +65,25 @@ public class TestModel extends JBSqlUtils {
      * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
      * desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
      */
-    private Column<String> name1 = new Column<>(DataType.VARCHAR, "'Daniel'", Constraint.DEFAULT);
 
     @ColumnDefined(name = "name", dataTypeSQL = DataType.VARCHAR, constraints = {
             Constraint.DEFAULT
     }, default_value = "'Daniel'", size = "200")
     private String name;
     /**
-     * Para poder utilizar JBSqlUtils es necesario que los miembros de la clase modelo, que correspondan
-     * a una columna de la tabla correspondiente al modelo, sean del tipo Column, especificando el tipo de dato
-     * en java y por medio del constructor del objeto Column se pase como parámetro el tipo de dato SQL
-     * de la columna, adicional a esto se pueden definir restricciones, como valor por defecto para la columna
-     * si se desea utilizar el modelo para crear la tabla en BD's, pero estos últimos son opcionales
-     * el único parámetro obligatorio es el DataType de la columna en BD's.
-     *
      * Por convención el nombre de cada miembro correspondiente a una columna en BD's debe tener el mismo
-     * nombre que la columna en BD's. y estos deben tener sus respectivos metodos set an get, teniendo estos
-     * por convención el nombre setColumnName, getColumName.
+     * nombre que la columna en BD's.
      *
-     * Por ejemplo, para la columna Id = El miembro del modelo será Id, JBSqlUtils no es case sensitive,
-     * así que en BD's la columna puede ser ID y en el modelo id, que JBSqlUtils hará el match entre la columna
-     * y el miembro de la clase modelo.
+     * En el caso que deseemos mapear el campo en java con una columna que posee otro nombre en BD's podemos indicar esto
+     * a traves de la propiedad name en la etiqueta ColumnDefined
      *
      */
     /**
      * Declara un miembro del modelo, el cual en java almacenara un dato de tipo String.
      * <p>
-     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
+     * Indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
      * Varchar.
      */
-    private Column<String> apellido1 = new Column<>(DataType.VARCHAR);
 
     @ColumnDefined(name = "apellido", dataTypeSQL = DataType.VARCHAR, size = "200")
     private String apellido;
@@ -108,7 +91,7 @@ public class TestModel extends JBSqlUtils {
     /**
      * Declara un miembro del modelo, el cual en java almacenara un dato de tipo Boolean.
      * <p>
-     * En el constructor indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
+     * En la definición de la columna indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
      * BIT.
      * <p>
      * En este ejemplo seteamos 'true' como default_value, debido a que este modelo se conectara a un SQLServer,
@@ -118,7 +101,6 @@ public class TestModel extends JBSqlUtils {
      * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
      * desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
      */
-    private Column<Boolean> isMayor1 = new Column<>(DataType.BIT, "true", Constraint.DEFAULT);
 
     @ColumnDefined(name = "isMayor", dataTypeSQL = DataType.BIT, constraints = {
             Constraint.DEFAULT
@@ -134,20 +116,12 @@ public class TestModel extends JBSqlUtils {
      * Es importante que antes de instanciar un modelo que herede la clase JBSqlUtils se hayan definido
      * las propiedades de conexión como variables del sistema.
      */
-    public TestModel() throws DataBaseUndefind, PropertiesDBUndefined {
+    public TestModel() {
         /**
          * Hacemos el llamado al constructor de la Clase JBSqlUtils
          */
         super();
         this.setTableName("testModel");
-        /**
-         * Setear un tamaño especifico para una columna en BD's
-         * Esto nos permitira que cuando creemos la tabla desde nuestra aplicación podamos personalizar el tamaña de las columnas
-         * de acuerdo a las opciónes que nos brinda cada Servidor de BD's, en este caso es un VARCHAR(1000) al cual indicamos que deseamos
-         * tenga una longitud de mil
-         */
-        this.getName1().setSize("200");
-        this.getApellido1().setSize("200");
     }
 
     /**
@@ -161,8 +135,6 @@ public class TestModel extends JBSqlUtils {
     public TestModel(Boolean getPropertySystem) throws DataBaseUndefind, PropertiesDBUndefined {
         super(getPropertySystem);
         this.setTableName("testModel");
-        this.getName1().setSize("200");
-        this.getApellido1().setSize("200");
     }
 
     public Integer getOne(Integer numero) {

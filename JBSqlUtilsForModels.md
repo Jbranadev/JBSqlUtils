@@ -11,6 +11,32 @@ refresh
 this.testModel.refresh();
 ~~~
 
+Para recargar un modelo obteniendo la información que este posee en BD's podemos
+usar el metodo reloadModel, es importante que para que el modelo se recargue, este haya
+sido recuperado de BD's Previamente.
+
+~~~
+/**
+* Metodo que actualiza la información que el modelo posee de BD's
+*/
+this.testModel.reloadModel();
+~~~
+
+Si desearamos poder filtrar de mejor manera la recuperación del modelo
+al momento de definir el modelo, podemos utilizar la etiqueta Index,
+Lo cual le hará saber a JBSqlUtils que dicha columna funciona como un indice
+y podra ser utilizado al momento de realizar un reload de un modelo, cuando
+dicho campo no posea un valor null.
+
+~~~
+/**
+* Este es un ejemplo de una columa que es definida como un Indice
+*/
+@ColumnDefined(name = "Id_Subestación", dataTypeSQL = DataType.DOUBLE)
+    @Index
+    private Integer Id_Subestación;
+~~~
+
 * * *
 
 ## ¿Cómo eliminar la tabla correspondiente a un modelo?
