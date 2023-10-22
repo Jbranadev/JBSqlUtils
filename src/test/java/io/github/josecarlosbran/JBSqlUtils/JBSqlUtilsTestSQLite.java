@@ -51,6 +51,10 @@ public class JBSqlUtilsTestSQLite {
         this.testModel.setGetPropertySystem(false);
         this.testModel.setBD(BDSqlite);
         this.testModel.setDataBaseType(DataBase.SQLite);
+        this.testModel.setUpdated_at(this.testModel.getUpdated_at());
+        this.testModel.setCreated_at(this.testModel.getCreated_at());
+        this.testModel.setUpdated_at(this.testModel.getUpdated_at());
+        this.testModel.setCreated_at(this.testModel.getCreated_at());
         logParrafo("Obtendra la conexión del modelo a BD's");
         Assert.assertFalse(Objects.isNull(this.testModel.getConnection()),
                 "No se logro establecer la conexión del modelo a BD's, asegurese de haber configurado correctamente" +
@@ -525,11 +529,11 @@ public class JBSqlUtilsTestSQLite {
          */
         int rowsUpdate = 0;
         for (JSONObject fila : lista) {
-            if (fila.getString("Name").equalsIgnoreCase("Ligia") && fila.getString("Apellido").equalsIgnoreCase("Camey")) {
+            if (fila.getString("NAME").equalsIgnoreCase("Ligia") && fila.getString("APELLIDO").equalsIgnoreCase("Camey")) {
                 logParrafo("Actualizara la fila que corresponde a Ligia Camey: ");
                 logParrafo(fila.toString());
                 rowsUpdate += JBSqlUtils.update("Proveedor").set("Name", "Futura").andSet("Apellido", "Prometida")
-                        .where("Id", Operator.IGUAL_QUE, fila.getInt("Id")).execute();
+                        .where("Id", Operator.IGUAL_QUE, fila.getInt("ID")).execute();
                 logParrafo("Filas actualizadas en BD's: " + rowsUpdate);
             }
         }
@@ -553,10 +557,10 @@ public class JBSqlUtilsTestSQLite {
          */
         int rowsDelete = 0;
         for (JSONObject fila : lista) {
-            if (fila.getInt("Id") == 5) {
+            if (fila.getInt("ID") == 5) {
                 logParrafo("VIsualizamos la Fila a eliminar, cuyo Id es igual a 5: ");
                 logParrafo(fila.toString());
-                rowsDelete += JBSqlUtils.delete("Proveedor").where("Id", Operator.IGUAL_QUE, fila.getInt("Id")).execute();
+                rowsDelete += JBSqlUtils.delete("Proveedor").where("Id", Operator.IGUAL_QUE, fila.getInt("ID")).execute();
                 logParrafo("Filas eliminadas en BD's: " + rowsDelete);
             }
         }

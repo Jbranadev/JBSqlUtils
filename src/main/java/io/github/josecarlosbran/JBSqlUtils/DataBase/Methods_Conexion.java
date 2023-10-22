@@ -228,7 +228,6 @@ class Methods_Conexion extends Conexion {
      * @return True si la tabla correspondiente al modelo existe en BD's, de lo contrario False.
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
-    @SuppressWarnings("UnusedAssignment")
     public Boolean tableExist() throws Exception {
         Boolean result;
         Callable<ResultAsync<Boolean>> VerificarExistencia = () -> {
@@ -328,53 +327,50 @@ class Methods_Conexion extends Conexion {
      * Obtiene las columnas que tiene la tabla correspondiente al modelo en BD's.
      *
      * @param connect a BD's para obtener la metadata
+     * @throws SQLException Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
-    protected void getColumnsTable(Connection connect) {
-        try {
-            LogsJB.debug("Comienza a obtener las columnas que le pertenecen a la tabla " + this.getTableName());
-            LogsJB.trace("Obtuvo el objeto conexión");
-            DatabaseMetaData metaData = connect.getMetaData();
-            LogsJB.trace("Ya tiene el MetaData de la BD's");
-            ResultSet columnas = metaData.getColumns(this.getTabla().getTABLE_CAT(),
-                    this.getTabla().getTABLE_SCHEM(), this.getTableName(), null);
-            LogsJB.debug("Ya tiene el resultset con las columnas de la tabla");
-            //Obtener las tablas disponibles
-            this.getTabla().getColumnas().clear();
-            this.getTabla().getColumnsExist().clear();
-            while (columnas.next()) {
-                ColumnsSQL temp = new ColumnsSQL();
-                temp.setTABLE_CAT(columnas.getString(1));
-                temp.setTABLE_SCHEM(columnas.getString(2));
-                temp.setTABLE_NAME(columnas.getString(3));
-                temp.setCOLUMN_NAME(columnas.getString(4));
-                //Seteara que la columna si existe en BD's
-                this.getTabla().getColumnsExist().add(columnas.getString(4).toUpperCase());
-                temp.setDATA_TYPE(columnas.getInt(5));
-                temp.setTYPE_NAME(columnas.getString(6));
-                temp.setCOLUMN_SIZE(columnas.getInt(7));
-                temp.setDECIMAL_DIGITS(columnas.getInt(9));
-                temp.setNUM_PREC_RADIX(columnas.getInt(10));
-                temp.setNULLABLE(columnas.getInt(11));
-                temp.setREMARKS(columnas.getString(12));
-                temp.setCOLUMN_DEF(columnas.getString(13));
-                temp.setCHAR_OCTET_LENGTH(columnas.getInt(16));
-                temp.setORDINAL_POSITION(columnas.getInt(17));
-                temp.setIS_NULLABLE(columnas.getString(18));
-                temp.setSCOPE_CATALOG(columnas.getString(19));
-                temp.setSCOPE_SCHEMA(columnas.getString(20));
-                temp.setSCOPE_TABLE(columnas.getString(21));
-                temp.setSOURCE_DATA_TYPE(columnas.getShort(22));
-                temp.setIS_AUTOINCREMENT(columnas.getString(23));
-                temp.setIS_GENERATEDCOLUMN(columnas.getString(24));
-                this.getTabla().getColumnas().add(temp);
-            }
-            LogsJB.debug("Información de las columnas de la tabla correspondiente al modelo obtenida " + this.getClass().getSimpleName());
-            columnas.close();
-            this.closeConnection(connect);
-            this.getTabla().getColumnas().stream().sorted(Comparator.comparing(ColumnsSQL::getORDINAL_POSITION));
-        } catch (Exception e) {
-            LogsJB.fatal("Excepción disparada en el método que obtiene las columnas de la tabla que corresponde al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+    protected void getColumnsTable(Connection connect) throws SQLException {
+        LogsJB.debug("Comienza a obtener las columnas que le pertenecen a la tabla " + this.getTableName());
+        LogsJB.trace("Obtuvo el objeto conexión");
+        DatabaseMetaData metaData = connect.getMetaData();
+        LogsJB.trace("Ya tiene el MetaData de la BD's");
+        ResultSet columnas = metaData.getColumns(this.getTabla().getTABLE_CAT(),
+                this.getTabla().getTABLE_SCHEM(), this.getTableName(), null);
+        LogsJB.debug("Ya tiene el resultset con las columnas de la tabla");
+        //Obtener las tablas disponibles
+        this.getTabla().getColumnas().clear();
+        this.getTabla().getColumnsExist().clear();
+        while (columnas.next()) {
+            ColumnsSQL temp = new ColumnsSQL();
+            temp.setTABLE_CAT(columnas.getString(1));
+            temp.setTABLE_SCHEM(columnas.getString(2));
+            temp.setTABLE_NAME(columnas.getString(3));
+            temp.setCOLUMN_NAME(columnas.getString(4));
+            //Seteara que la columna si existe en BD's
+            this.getTabla().getColumnsExist().add(columnas.getString(4).toUpperCase());
+            temp.setDATA_TYPE(columnas.getInt(5));
+            temp.setTYPE_NAME(columnas.getString(6));
+            temp.setCOLUMN_SIZE(columnas.getInt(7));
+            temp.setDECIMAL_DIGITS(columnas.getInt(9));
+            temp.setNUM_PREC_RADIX(columnas.getInt(10));
+            temp.setNULLABLE(columnas.getInt(11));
+            temp.setREMARKS(columnas.getString(12));
+            temp.setCOLUMN_DEF(columnas.getString(13));
+            temp.setCHAR_OCTET_LENGTH(columnas.getInt(16));
+            temp.setORDINAL_POSITION(columnas.getInt(17));
+            temp.setIS_NULLABLE(columnas.getString(18));
+            temp.setSCOPE_CATALOG(columnas.getString(19));
+            temp.setSCOPE_SCHEMA(columnas.getString(20));
+            temp.setSCOPE_TABLE(columnas.getString(21));
+            temp.setSOURCE_DATA_TYPE(columnas.getShort(22));
+            temp.setIS_AUTOINCREMENT(columnas.getString(23));
+            temp.setIS_GENERATEDCOLUMN(columnas.getString(24));
+            this.getTabla().getColumnas().add(temp);
         }
+        LogsJB.debug("Información de las columnas de la tabla correspondiente al modelo obtenida " + this.getClass().getSimpleName());
+        columnas.close();
+        this.closeConnection(connect);
+        this.getTabla().getColumnas().stream().sorted(Comparator.comparing(ColumnsSQL::getORDINAL_POSITION));
     }
 
     /**
@@ -570,7 +566,6 @@ class Methods_Conexion extends Conexion {
             //Timestamp
             ejecutor.setTimestamp(auxiliar, (Timestamp) valor);
         } else {
-            LogsJB.debug("No logro setear el tipo de dato");
             ejecutor.setObject(auxiliar, valor);
         }
     }
@@ -607,8 +602,6 @@ class Methods_Conexion extends Conexion {
         } else if (field.getType().isAssignableFrom(Timestamp.class)) {
             FieldUtils.writeField(invocador, field.getName(), resultado.getTimestamp(columna.getCOLUMN_NAME()), true);
         } else {
-            LogsJB.warning("No se pudo setear el valor de la columna: " + field.getName() + " " + this.getTableName());
-            LogsJB.warning("Debido a que ninguno de los métodos corresponde al tipo de dato SQL: " + field.getType());
             FieldUtils.writeField(invocador, field.getName(), resultado.getObject(columna.getCOLUMN_NAME()), true);
         }
     }
@@ -630,21 +623,21 @@ class Methods_Conexion extends Conexion {
                 || (StringUtils.containsIgnoreCase(columnType, DataType.NVARCHAR.name()))
         ) {
             //Caracteres y cadenas de Texto
-            temp.put(columnName, resultado.getNString(columnName));
+            temp.put(columnName.toUpperCase(), resultado.getNString(columnName));
         } else if ((StringUtils.containsIgnoreCase(columnType, DataType.CHAR.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.LONGVARCHAR.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.VARCHAR.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.TEXT.name()))
         ) {
             //Caracteres y cadenas de Texto
-            temp.put(columnName, resultado.getString(columnName));
+            temp.put(columnName.toUpperCase(), resultado.getString(columnName));
         } else if ((StringUtils.containsIgnoreCase(columnType, DataType.NUMERIC.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.DECIMAL.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.MONEY.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.SMALLMONEY.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.DOUBLE.name()))) {
             //Dinero y numericos que tienen decimales
-            temp.put(columnName, resultado.getDouble(columnName));
+            temp.put(columnName.toUpperCase(), resultado.getDouble(columnName));
         } else if ((StringUtils.containsIgnoreCase(columnType, DataType.BIT.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.BOOLEAN.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.BOOL.name()))) {
@@ -653,11 +646,11 @@ class Methods_Conexion extends Conexion {
             LogsJB.trace("Tipo de dato del valor obtenido: " + valor.getClass());
             LogsJB.trace("valor obtenido: " + valor);
             if ((valor instanceof String)) {
-                temp.put(columnName, Boolean.valueOf((String) valor).booleanValue());
+                temp.put(columnName.toUpperCase(), Boolean.valueOf((String) valor).booleanValue());
             } else if (valor instanceof Integer) {
-                temp.put(columnName, getBooleanfromInt((int) valor));
+                temp.put(columnName.toUpperCase(), getBooleanfromInt((int) valor));
             } else {
-                temp.put(columnName, resultado.getBoolean(columnName));
+                temp.put(columnName.toUpperCase(), resultado.getBoolean(columnName));
             }
         } else if ((StringUtils.containsIgnoreCase(columnType, DataType.SMALLINT.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.TINYINT.name()))
@@ -666,32 +659,30 @@ class Methods_Conexion extends Conexion {
                 || (StringUtils.containsIgnoreCase(columnType, DataType.INT.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.SERIAL.name()))) {
             //Valores Enteros
-            temp.put(columnName, resultado.getInt(columnName));
+            temp.put(columnName.toUpperCase(), resultado.getInt(columnName));
         } else if ((StringUtils.containsIgnoreCase(columnType, DataType.REAL.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.FLOAT.name()))) {
             //Valores Flotantes
-            temp.put(columnName, resultado.getFloat(columnName));
+            temp.put(columnName.toUpperCase(), resultado.getFloat(columnName));
         } else if ((StringUtils.containsIgnoreCase(columnType, DataType.BINARY.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.VARBINARY.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.LONGVARBINARY.name()))) {
             //Valores binarios
-            temp.put(columnName, resultado.getBytes(columnName));
+            temp.put(columnName.toUpperCase(), resultado.getBytes(columnName));
         } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.DATE.name()))) {
             //DATE
-            temp.put(columnName, resultado.getDate(columnName));
+            temp.put(columnName.toUpperCase(), resultado.getDate(columnName));
         } else if ((StringUtils.equalsIgnoreCase(columnType, DataType.TIME.name()))) {
             //Time
-            temp.put(columnName, resultado.getTime(columnName));
+            temp.put(columnName.toUpperCase(), resultado.getTime(columnName));
         } else if ((StringUtils.containsIgnoreCase(columnType, DataType.TIMESTAMP.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.DATETIME.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.SMALLDATETIME.name()))
                 || (StringUtils.containsIgnoreCase(columnType, DataType.DATETIME2.name()))) {
             //TimeStamp
-            temp.put(columnName, resultado.getTimestamp(columnName));
+            temp.put(columnName.toUpperCase(), resultado.getTimestamp(columnName));
         } else {
-            temp.put(columnName, resultado.getObject(columnName));
-            LogsJB.warning("No se pudo setear el valor de la columna: " + columnName);
-            LogsJB.warning("Debido a que ninguno de los metodos corresponde al tipo de dato SQL: " + columnType);
+            temp.put(columnName.toUpperCase(), resultado.getObject(columnName));
         }
     }
 
@@ -726,28 +717,15 @@ class Methods_Conexion extends Conexion {
                         Field campo = campos.get(i);
                         //Obtengo la información de la columna
                         String columnName = getColumnName(campo);
-                        if (Objects.isNull(FieldUtils.readDeclaredField(modelo, campo.getName(), true))) {
-                            continue;
-                        }
                         //Si la columna existe entre la metadata de la BD's
-                        if (!this.getTabla().getColumnsExist().contains(columnName.toUpperCase())) {
-                            continue;
-                        }
                         //Si el modelo tiene seteado que no se manejaran las timestamps entonces
                         //Ignora el guardar esas columnas
-                        if ((!this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, modelo.getCreatedAt()))
-                                || (StringUtils.equalsIgnoreCase(columnName, modelo.getUpdateAT())))) {
+                        if (((!this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, modelo.getCreatedAt()))
+                                || (StringUtils.equalsIgnoreCase(columnName, modelo.getUpdateAT()))))
+                                || (!this.getTabla().getColumnsExist().contains(columnName.toUpperCase()))
+                                || (Objects.isNull(FieldUtils.readDeclaredField(modelo, campo.getName(), true)))
+                        ) {
                             continue;
-                        }
-                        //Setea el nombre de la columna Created_at pendiente de validar si tiene sentido tener esta validación
-                        if ((this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, modelo.getCreatedAt()))
-                        )) {
-                            columnName = modelo.getCreatedAt();
-                        }
-                        //Setea el nombre de la columna Update_at
-                        if ((this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, modelo.getUpdateAT()))
-                        )) {
-                            columnName = modelo.getUpdateAT();
                         }
                         datos++;
                         if (datos > 1) {
@@ -796,9 +774,7 @@ class Methods_Conexion extends Conexion {
                     } else if (modelo.getDataBaseType() == DataBase.MySQL) {
                         //Obtener cual es la clave primaria de la tabla
                         String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
-                        sql2 = "SELECT * FROM " + modelo.getTableName() + " WHERE "
-                                /*+ namePrimaryKey
-                                + " = LAST_INSERT_ID();"*/;
+                        sql2 = "SELECT * FROM " + modelo.getTableName() + " WHERE ";
                         int contador = 0;
                         for (Field columna : campos) {
                             if (StringUtils.equalsIgnoreCase(namePrimaryKey, this.getColumnName(columna))) {
@@ -830,6 +806,12 @@ class Methods_Conexion extends Conexion {
                     if (values.size() > 0) {
                         for (Field value : values) {
                             auxiliar++;
+                            String columnName = getColumnName(value);
+                            if ((StringUtils.equalsIgnoreCase(columnName, this.getUpdateAT()))
+                                    || (StringUtils.equalsIgnoreCase(columnName, this.getCreatedAt()))) {
+                                Long datetime = System.currentTimeMillis();
+                                FieldUtils.writeField(modelo, value.getName(), new Timestamp(datetime), true);
+                            }
                             convertJavaToSQL(modelo, value, ejecutor, auxiliar);
                         }
                         LogsJB.info(ejecutor.toString());
@@ -885,39 +867,25 @@ class Methods_Conexion extends Conexion {
                     campos = modelo.getFieldsOfModel();
                     int datos = 0;
                     List<Integer> indicemetodos = new ArrayList<>();
-                    int indicePrimarykey = 0;
                     //Llena la información de las columnas que se insertaran
                     for (int i = 0; i < campos.size(); i++) {
                         //Obtengo el metodo
                         Field campo = campos.get(i);
                         //Obtengo la información de la columna
                         String columnName = getColumnName(campo);
-                        if (!UtilitiesJB.stringIsNullOrEmpty(namePrimaryKey) && StringUtils.equalsIgnoreCase(namePrimaryKey, columnName)) {
-                            continue;
-                        }
-                        if (getValueColumnIsNull(modelo, campo)) {
-                            continue;
-                        }
+                        //Si el valor de la columna es nullo
                         //Si la columna existe entre la metadata de la BD's
-                        if (!this.getTabla().getColumnsExist().contains(columnName.toUpperCase())) {
-                            continue;
-                        }
                         //Si el modelo tiene seteado que no se manejaran las timestamps entonces
                         //Ignora el guardar esas columnas
-                        if ((!this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, modelo.getCreatedAt()))
-                                || (StringUtils.equalsIgnoreCase(columnName, modelo.getUpdateAT())))) {
-                            continue;
-                        }
                         //Si si se manejaran las timestamps, entonces obvia la timestamps de created_at
-                        if ((this.getTimestamps()) &&
-                                ((StringUtils.equalsIgnoreCase(columnName, this.getCreatedAt())))
+                        if (((this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, this.getCreatedAt()))))
+                                || (!UtilitiesJB.stringIsNullOrEmpty(namePrimaryKey) && StringUtils.equalsIgnoreCase(namePrimaryKey, columnName))
+                                || (getValueColumnIsNull(modelo, campo))
+                                || (!this.getTabla().getColumnsExist().contains(columnName.toUpperCase()))
+                                || ((!this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, modelo.getCreatedAt()))
+                                || (StringUtils.equalsIgnoreCase(columnName, modelo.getUpdateAT()))))
                         ) {
                             continue;
-                        }
-                        //Setea el nombre de la columna Update_at
-                        if ((this.getTimestamps()) && ((StringUtils.equalsIgnoreCase(columnName, this.getUpdateAT()))
-                        )) {
-                            columnName = this.getUpdateAT();
                         }
                         if (StringUtils.containsIgnoreCase(sql, "?")) {
                             sql = sql + ", " + columnName + "=?";
@@ -952,7 +920,7 @@ class Methods_Conexion extends Conexion {
                         for (Field value : values) {
                             auxiliar++;
                             String columnName = getColumnName(value);
-                            if ((StringUtils.equalsIgnoreCase(columnName, "updated_at"))) {
+                            if ((StringUtils.equalsIgnoreCase(columnName, this.getUpdateAT()))) {
                                 Long datetime = System.currentTimeMillis();
                                 FieldUtils.writeField(modelo, value.getName(), new Timestamp(datetime), true);
                             }

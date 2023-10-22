@@ -149,7 +149,7 @@ public class JBSqlUtilsTestGodDay {
          */
         int rowsUpdate = 0;
         for (JSONObject fila : lista) {
-            rowsUpdate += JBSqlUtils.update("Proveedor").set("Estado", !fila.getBoolean("Estado")).execute();
+            rowsUpdate += JBSqlUtils.update("Proveedor").set("Estado", !fila.getBoolean("ESTADO")).execute();
         }
         logParrafo("Filas afectadas: " + rowsUpdate);
         Assert.assertTrue(rowsUpdate == 15, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
