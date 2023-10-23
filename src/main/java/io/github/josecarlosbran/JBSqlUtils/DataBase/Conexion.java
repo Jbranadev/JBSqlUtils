@@ -306,26 +306,6 @@ class Conexion {
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new DataBaseUndefind("No se a seteado la DataBase que índica a que BD's deseamos se pegue JBSqlUtils");
         }
-        try {
-            //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
-            StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-            String clase;
-            int posicion = 0;
-            for (int i = 3; i <= 7; i += 2) {
-                clase = elements[i].getClassName();
-                Class<?> tempClass = Class.forName(clase);
-                if (tempClass.getPackage().hashCode() == Conexion.class.getPackage().hashCode()) {
-                    posicion = i;
-                    break;
-                }
-            }
-            clase = elements[posicion].getClassName();
-            Class<?> tempClass = Class.forName(clase);
-            if (tempClass.getPackage().hashCode() != Conexion.class.getPackage().hashCode()) {
-                return null;
-            }
-        } catch (ClassNotFoundException e) {
-        }
         return this.dataBaseType;
     }
 
