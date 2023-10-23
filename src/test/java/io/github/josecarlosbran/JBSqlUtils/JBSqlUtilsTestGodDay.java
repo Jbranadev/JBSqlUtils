@@ -737,7 +737,7 @@ public class JBSqlUtilsTestGodDay {
                 "No se Lanzo la exepción como se esperaba");
     }
 
-    @Test(testName = "Setear Properties Conexión for Model", dependsOnMethods = "deleteJBSqlUtils1")
+    @Test(testName = "Obtener Properties Conexión for Model", dependsOnMethods = "deleteJBSqlUtils1")
     public void getPropertiesConexiontoModel() throws DataBaseUndefind, PropertiesDBUndefined {
         this.testModel = new TestModel();
         Assert.assertTrue(Objects.isNull(this.testModel.getPort()),
@@ -748,7 +748,7 @@ public class JBSqlUtilsTestGodDay {
                 "La propiedad obtenida del modelo no es null");
         Assert.assertTrue(Objects.isNull(this.testModel.getPassword()),
                 "La propiedad obtenida del modelo no es null");
-        Assert.assertTrue(Objects.isNull(this.testModel.getDataBaseType()),
+        Assert.assertTrue(!Objects.isNull(this.testModel.getDataBaseType()),
                 "La propiedad obtenida del modelo no es null");
         Assert.assertTrue(Objects.isNull(this.testModel.getBD()),
                 "La propiedad obtenida del modelo no es null");
