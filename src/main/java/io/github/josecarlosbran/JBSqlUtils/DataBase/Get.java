@@ -177,6 +177,74 @@ class Get extends Methods_Conexion {
     }
 
     /**
+     * Llena el modelo que invoca este método con la información que obtiene de BD's
+     *
+     * @param modelo     Modelo que está invocando el metodo
+     * @param Sql        Sentencia SQL para obtener el modelo
+     * @param parametros Lista de parametros a ser agregados a la sentencia SQL
+     * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
+     * @throws ModelNotFound Lanza esta excepción si no logra encontrar el registro correspondiente a la consulta
+     *                       SQL realizada.
+     */
+    protected <T extends JBSqlUtils> void firstOrFailGet(T modelo, String Sql, List<Column> parametros) throws Exception {
+        if (!this.getGetPropertySystem()) {
+            modelo.setGetPropertySystem(false);
+            modelo.llenarPropertiesFromModel(modelo);
+        }
+        modelo.setTaskIsReady(false);
+        modelo.validarTableExist(modelo);
+        Callable<ResultAsync<Boolean>> get = () -> {
+            try {
+                Boolean result=false;
+                if (modelo.getTableExist()) {
+                    String sql = "SELECT * FROM " + modelo.getTableName();
+                    sql = sql + Sql + ";";
+                    //LogsJB.info(sql);
+                    Connection connect = modelo.getConnection();
+                    PreparedStatement ejecutor = connect.prepareStatement(sql);
+                    for (int i = 0; i < parametros.size(); i++) {
+                        //Obtengo la información de la columna
+                        Column columnsSQL = parametros.get(i);
+                        convertJavaToSQL(columnsSQL, ejecutor, i + 1);
+                    }
+                    LogsJB.info(ejecutor.toString());
+                    ResultSet registros = ejecutor.executeQuery();
+                    if (registros.next()) {
+                        procesarResultSetOneResult(modelo, registros);
+                        result=true;
+                    }
+                    modelo.closeConnection(connect);
+                    modelo.setTaskIsReady(true);
+                    return new ResultAsync<>(result, null);
+                } else {
+                    LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
+                            "recuperar el Registro");
+                    modelo.setTaskIsReady(true);
+                    return new ResultAsync<>(false, null);
+                }
+            } catch (SQLException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+                LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                modelo.setTaskIsReady(true);
+                return new ResultAsync<>(false, e);
+            }
+        };
+        Future<ResultAsync<Boolean>> future = ejecutor.submit(get);
+        while (!future.isDone()) {
+        }
+        ResultAsync<Boolean> resultado = future.get();
+        if (!Objects.isNull(resultado.getException())) {
+            throw resultado.getException();
+        }
+        Boolean result = resultado.getResult();
+        if (!result) {
+            String sql = "SELECT * FROM " + modelo.getTableName();
+            throw new ModelNotFound("No existe un modelo en BD's que corresponda a los criterios de la consulta sql: " + sql + Sql);
+        }
+    }
+
+
+    /**
      * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's
      *
      * @param modelo     Modelo que está invocando el metodo

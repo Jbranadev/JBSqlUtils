@@ -144,6 +144,16 @@ public class MethodsOrderBy<T> extends MethodsTake {
     }
 
     /**
+     * Llena el modelo que invoca este método con la información que obtiene de BD's
+     *
+     * @throws ModelNotFound Lanza esta excepción si no logra encontrar el registro correspondiente a la consulta
+     *                       SQL realizada.
+     */
+    public <T extends JBSqlUtils> void firstOrFailGet() throws Exception {
+        super.firstOrFailGet((T) this.modelo, this.sql, this.parametros);
+    }
+
+    /**
      * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
      *
