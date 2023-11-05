@@ -1,3 +1,17 @@
+# Version: 1.2.4
+
+* [#142](https://github.com/Jbranadev/JBSqlUtils/pull/142): Release 1.2.3
+* [#143](https://github.com/Jbranadev/JBSqlUtils/pull/143): getDataBaseType
+* [#144](https://github.com/Jbranadev/JBSqlUtils/pull/144): Bump ossf/scorecard-action from 2.3.0 to 2.3.1
+* [#145](https://github.com/Jbranadev/JBSqlUtils/pull/145): Bump github/codeql-action from 2.22.3 to 2.22.5
+* [#146](https://github.com/Jbranadev/JBSqlUtils/pull/146): Bump com.microsoft.sqlserver:mssql-jdbc from 12.4.1.jre11 to 12.4.2.jre11
+* [#147](https://github.com/Jbranadev/JBSqlUtils/pull/147): Bump org.apache.maven.plugins:maven-surefire-plugin from 3.1.2 to 3.2.1
+* [#148](https://github.com/Jbranadev/JBSqlUtils/pull/148): Bump org.apache.maven.plugins:maven-clean-plugin from 3.3.1 to 3.3.2
+* [#149](https://github.com/Jbranadev/JBSqlUtils/pull/149): Bump org.xerial:sqlite-jdbc from 3.43.2.1 to 3.43.2.2
+* [#150](https://github.com/Jbranadev/JBSqlUtils/pull/150): Implementación de metodo firstOrFailGet
+* [#151](https://github.com/Jbranadev/JBSqlUtils/pull/151): Release 1.2.4
+
+
 # Version: 1.2.2
 
 * [#128](https://github.com/Jbranadev/JBSqlUtils/pull/128): Actualizar RELEASE-NOTES.txt
