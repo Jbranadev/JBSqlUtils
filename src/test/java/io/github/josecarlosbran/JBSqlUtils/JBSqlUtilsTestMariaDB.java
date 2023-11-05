@@ -136,7 +136,31 @@ public class JBSqlUtilsTestMariaDB {
                 "Cabrerassss").firstOrFail();
     }
 
-    @Test(testName = "Reload Model", dependsOnMethods = "firstOrFail")
+    @Test(testName = "First Or Fail Get", dependsOnMethods = "firstOrFail"
+    ,expectedExceptions = ModelNotFound.class)
+    public void firstOrFailGet() throws Exception {
+        logParrafo("Limpiamos el modelo");
+        this.testModel.cleanModel();
+        /**
+         * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
+         */
+        logParrafo("Obtenemos el modelo que tiene por nombre Marcos, Apellido Cabrera");
+        this.testModel.where("Name", Operator.IGUAL_QUE, "Marcos").and("Apellido", Operator.IGUAL_QUE,
+                "Cabrera").firstOrFailGet();
+        /**
+         * Esperamos ejecute la operación en BD's
+         */
+        this.testModel.waitOperationComplete();
+        logParrafo(this.testModel.toString());
+        Assert.assertTrue(this.testModel.getModelExist(), "El Modelo no fue Obtenido de BD's como esperabamos");
+        Assert.assertTrue(false == this.testModel.getIsMayor(), "El Modelo no fue Obtenido de BD's como esperabamos");
+
+        this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+                "Cabrerassss").firstOrFailGet();
+    }
+
+
+    @Test(testName = "Reload Model", dependsOnMethods = "firstOrFailGet")
     public void reloadModel() throws Exception {
         logParrafo("Limpiamos el modelo");
         this.testModel.cleanModel();
