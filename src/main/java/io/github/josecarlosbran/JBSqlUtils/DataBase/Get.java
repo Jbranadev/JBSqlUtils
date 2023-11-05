@@ -183,7 +183,6 @@ class Get extends Methods_Conexion {
      * @param Sql        Sentencia SQL para obtener el modelo
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
      * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
-     * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
      * @throws ModelNotFound Lanza esta excepción si no logra encontrar el registro correspondiente a la consulta
      *                       SQL realizada.
      */
