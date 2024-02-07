@@ -61,7 +61,7 @@
             <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
-                <version>7.8.0</version>
+                <version>7.9.0</version>
                 <scope>test</scope>
             </dependency>
 
@@ -93,7 +93,7 @@
             <dependency>
                 <groupId>org.xerial</groupId>
                 <artifactId>sqlite-jdbc</artifactId>
-                <version>3.44.0.0</version>
+                <version>3.44.1.0</version>
                 <scope>compile</scope>
             </dependency>
 
@@ -101,7 +101,7 @@
             <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
-                <version>42.7.0</version>
+                <version>42.7.1</version>
                 <scope>compile</scope>
             </dependency>
 
@@ -117,7 +117,7 @@
             <dependency>
                 <groupId>org.mariadb.jdbc</groupId>
                 <artifactId>mariadb-java-client</artifactId>
-                <version>3.3.0</version>
+                <version>3.3.2</version>
                 <scope>compile</scope>
             </dependency>
 
@@ -262,11 +262,11 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.11.0</version>
+                    <version>3.12.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.2.2</version>
+                    <version>3.2.5</version>
                     <configuration>
                         <suiteXmlFiles>
                             <suiteXmlFile>JBSqlUtilsTest.xml</suiteXmlFile>
@@ -288,7 +288,7 @@
                 <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>4.0.0-M11</version>
+                    <version>4.0.0-M13</version>
                     <configuration>
                         <locales>es,en,fr</locales>
                     </configuration>
@@ -377,7 +377,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.6.2</version>
+                        <version>3.6.3</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
@@ -394,7 +394,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-site-plugin</artifactId>
-                        <version>4.0.0-M11</version>
+                        <version>4.0.0-M13</version>
                         <configuration>
                             <locales>es,en,fr</locales>
                         </configuration>
@@ -481,7 +481,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.6.2</version>
+                        <version>3.6.3</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
@@ -498,7 +498,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-site-plugin</artifactId>
-                        <version>4.0.0-M11</version>
+                        <version>4.0.0-M13</version>
                         <configuration>
                             <locales>es,en,fr</locales>
                         </configuration>
@@ -537,7 +537,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.6.2</version>
+                <version>3.6.3</version>
                 <configuration>
                     <doclint>all,-missing</doclint>
                 </configuration>
