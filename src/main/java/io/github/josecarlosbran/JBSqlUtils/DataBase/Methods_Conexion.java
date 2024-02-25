@@ -1382,7 +1382,7 @@ class Methods_Conexion extends Conexion {
                         this.refresh();
                         ejecutor.close();
                         this.closeConnection(connect);
-                        return new ResultAsync<Boolean>(true, null);
+                        return new ResultAsync<Boolean>(false, null);
                     }
                 } else {
                     LogsJB.info("Tabla correspondiente al modelo no existe en BD's por eso no pudo ser eliminada");
