@@ -101,6 +101,8 @@ public class JBSqlUtilsTestMySQL {
         this.testModel.setName("Marcos");
         this.testModel.setApellido("Cabrera");
         this.testModel.setIsMayor(false);
+        this.testModel.getDataBaseType();
+        this.testModel.getBD();
         logParrafo(this.testModel.toString());
         Integer rowsInsert = this.testModel.save();
         /**
