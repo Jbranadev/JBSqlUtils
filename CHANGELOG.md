@@ -1,3 +1,17 @@
+# Version: 1.2.6
+
+* [#213](https://github.com/Jbranadev/JBSqlUtils/pull/213): Bump actions/checkout from 4.1.1 to 4.1.2
+* [#215](https://github.com/Jbranadev/JBSqlUtils/pull/215): Bump actions/setup-java from 4.1.0 to 4.2.1
+* [#216](https://github.com/Jbranadev/JBSqlUtils/pull/216): Bump org.xerial:sqlite-jdbc from 3.45.1.0 to 3.45.2.0
+* [#218](https://github.com/Jbranadev/JBSqlUtils/pull/218): Bump org.postgresql:postgresql from 42.7.2 to 42.7.3
+* [#219](https://github.com/Jbranadev/JBSqlUtils/pull/219): Bump org.apache.maven.plugins:maven-compiler-plugin from 3.12.1 to 3.13.0
+* [#223](https://github.com/Jbranadev/JBSqlUtils/pull/223): Bump org.projectlombok:lombok from 1.18.30 to 1.18.32
+* [#224](https://github.com/Jbranadev/JBSqlUtils/pull/224): Bump actions/dependency-review-action from 4.1.3 to 4.2.5
+* [#227](https://github.com/Jbranadev/JBSqlUtils/pull/227): Bump codecov/codecov-action from 4.1.0 to 4.3.0
+* [#228](https://github.com/Jbranadev/JBSqlUtils/pull/228): Bump github/codeql-action from 3.24.6 to 3.24.10
+* [#229](https://github.com/Jbranadev/JBSqlUtils/pull/229): Bump org.apache.maven.plugins:maven-gpg-plugin from 3.1.0 to 3.2.3
+
+
 # Version: 1.2.5
 
 * [#152](https://github.com/Jbranadev/JBSqlUtils/pull/152): Bump actions/dependency-review-action from 3.1.0 to 3.1.2
