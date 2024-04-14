@@ -382,7 +382,8 @@ class Conexion {
      *                               de BD's al cual se desea conectar es diferente a una BD's SQLite
      */
     public String getPort() throws DataBaseUndefind, PropertiesDBUndefined {
-        if (stringIsNullOrEmpty(this.port) && (this.getDataBaseType() != DataBase.SQLite)) {
+        if (stringIsNullOrEmpty(this.port) && (this.getDataBaseType() != DataBase.SQLite)
+                && (this.getDataBaseType() != DataBase.PostgreSQL) && (this.getDataBaseType() != DataBase.SQLServer)) {
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new PropertiesDBUndefined("No se a seteado el puerto en el que se encuentra escuchando la BD's a la cual deseamos se pegue JBSqlUtils");
         }
@@ -501,8 +502,8 @@ class Conexion {
      * @return Retorna el nombre de la Base de Datos a la que se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si no se a configurado la Base de Datos a la que se conectara el modelo.
      */
-    public String getBD() throws PropertiesDBUndefined {
-        if (stringIsNullOrEmpty(this.BD)) {
+    public String getBD() throws PropertiesDBUndefined, DataBaseUndefind {
+        if (stringIsNullOrEmpty(this.BD) && (this.getDataBaseType() != DataBase.PostgreSQL) && (this.getDataBaseType() != DataBase.SQLServer)) {
             //Si la propiedad del sistema no esta definida, Lanza una Exepción
             throw new PropertiesDBUndefined("No se a seteado la BD's a la cual deseamos se pegue JBSqlUtils");
         }
