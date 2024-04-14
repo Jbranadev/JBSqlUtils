@@ -1,4 +1,65 @@
                                          jbsqlutils
+                                        Version 1.2.5
+                                        Release Notes
+
+firstOrFailGet method implementation
+
+## What's Changed
+* [#152](https://github.com/Jbranadev/JBSqlUtils/pull/152): Bump actions/dependency-review-action from 3.1.0 to 3.1.2
+* [#153](https://github.com/Jbranadev/JBSqlUtils/pull/153): Bump org.apache.maven.plugins:maven-surefire-plugin from 3.2.1 to 3.2.2
+* [#154](https://github.com/Jbranadev/JBSqlUtils/pull/154): Bump org.mariadb.jdbc:mariadb-java-client from 3.2.0 to 3.3.0
+* [#155](https://github.com/Jbranadev/JBSqlUtils/pull/155): Bump org.apache.maven.plugins:maven-javadoc-plugin from 3.6.0 to 3.6.2
+* [#156](https://github.com/Jbranadev/JBSqlUtils/pull/156): Bump com.microsoft.sqlserver:mssql-jdbc from 12.4.2.jre11 to 12.5.0.jre11-preview
+* [#157](https://github.com/Jbranadev/JBSqlUtils/pull/157): Bump org.xerial:sqlite-jdbc from 3.43.2.2 to 3.44.0.0
+* [#159](https://github.com/Jbranadev/JBSqlUtils/pull/159): Bump actions/dependency-review-action from 3.1.2 to 3.1.3
+* [#160](https://github.com/Jbranadev/JBSqlUtils/pull/160): Bump step-security/harden-runner from 2.6.0 to 2.6.1
+* [#161](https://github.com/Jbranadev/JBSqlUtils/pull/161): Bump org.apache.maven.plugins:maven-project-info-reports-plugin from 3.4.5 to 3.5.0
+* [#162](https://github.com/Jbranadev/JBSqlUtils/pull/162): Bump org.postgresql:postgresql from 42.6.0 to 42.7.0
+* [#163](https://github.com/Jbranadev/JBSqlUtils/pull/163): Bump org.apache.commons:commons-lang3 from 3.13.0 to 3.14.0
+* [#164](https://github.com/Jbranadev/JBSqlUtils/pull/164): Bump github/codeql-action from 2.22.5 to 2.22.8
+* [#165](https://github.com/Jbranadev/JBSqlUtils/pull/165): Bump org.xerial:sqlite-jdbc from 3.44.0.0 to 3.44.1.0
+* [#166](https://github.com/Jbranadev/JBSqlUtils/pull/166): Bump org.mariadb.jdbc:mariadb-java-client from 3.3.0 to 3.3.1
+* [#167](https://github.com/Jbranadev/JBSqlUtils/pull/167): Bump org.apache.maven.plugins:maven-site-plugin from 4.0.0-M11 to 4.0.0-M12
+* [#168](https://github.com/Jbranadev/JBSqlUtils/pull/168): Bump actions/dependency-review-action from 3.1.3 to 3.1.4
+* [#169](https://github.com/Jbranadev/JBSqlUtils/pull/169): Bump actions/setup-java from 3.13.0 to 4.0.0
+* [#170](https://github.com/Jbranadev/JBSqlUtils/pull/170): Bump org.apache.maven.plugins:maven-javadoc-plugin from 3.6.2 to 3.6.3
+* [#171](https://github.com/Jbranadev/JBSqlUtils/pull/171): Bump org.postgresql:postgresql from 42.7.0 to 42.7.1
+* [#172](https://github.com/Jbranadev/JBSqlUtils/pull/172): Bump github/codeql-action from 2.22.8 to 2.22.9
+* [#177](https://github.com/Jbranadev/JBSqlUtils/pull/177): Bump org.mariadb.jdbc:mariadb-java-client from 3.3.1 to 3.3.2
+* [#179](https://github.com/Jbranadev/JBSqlUtils/pull/179): Bump org.apache.maven.plugins:maven-site-plugin from 4.0.0-M12 to 4.0.0-M13
+* [#180](https://github.com/Jbranadev/JBSqlUtils/pull/180): Bump org.testng:testng from 7.8.0 to 7.9.0
+* [#181](https://github.com/Jbranadev/JBSqlUtils/pull/181): Bump org.apache.maven.plugins:maven-compiler-plugin from 3.11.0 to 3.12.1
+* [#184](https://github.com/Jbranadev/JBSqlUtils/pull/184): Bump org.apache.maven.plugins:maven-surefire-plugin from 3.2.2 to 3.2.5
+* [#185](https://github.com/Jbranadev/JBSqlUtils/pull/185): Bump actions/dependency-review-action from 3.1.4 to 4.0.0
+* [#186](https://github.com/Jbranadev/JBSqlUtils/pull/186): Bump github/codeql-action from 2.22.9 to 3.23.1
+* [#188](https://github.com/Jbranadev/JBSqlUtils/pull/188): Bump advanced-security/maven-dependency-submission-action from 3.0.3 to 4.0.0
+* [#189](https://github.com/Jbranadev/JBSqlUtils/pull/189): Bump codecov/codecov-action from 3.1.4 to 3.1.5
+* [#190](https://github.com/Jbranadev/JBSqlUtils/pull/190): Bump actions/upload-artifact from 3.1.3 to 4.3.0
+* [#191](https://github.com/Jbranadev/JBSqlUtils/pull/191): Bump com.microsoft.sqlserver:mssql-jdbc from 12.5.0.jre11-preview to 12.6.0.jre11
+* [#192](https://github.com/Jbranadev/JBSqlUtils/pull/192): Bump org.xerial:sqlite-jdbc from 3.44.1.0 to 3.45.1.0
+* [#194](https://github.com/Jbranadev/JBSqlUtils/pull/194): Bump step-security/harden-runner from 2.6.1 to 2.7.0
+* [#195](https://github.com/Jbranadev/JBSqlUtils/pull/195): Bump codecov/codecov-action from 3.1.5 to 4.0.1
+* [#196](https://github.com/Jbranadev/JBSqlUtils/pull/196): Bump actions/upload-artifact from 4.3.0 to 4.3.1
+* [#198](https://github.com/Jbranadev/JBSqlUtils/pull/198): Bump org.json:json from 20231013 to 20240205
+* [#199](https://github.com/Jbranadev/JBSqlUtils/pull/199): Bump actions/dependency-review-action from 4.0.0 to 4.1.0
+* [#200](https://github.com/Jbranadev/JBSqlUtils/pull/200): Bump github/codeql-action from 3.23.1 to 3.24.3
+* [#201](https://github.com/Jbranadev/JBSqlUtils/pull/201): Bump org.postgresql:postgresql from 42.7.1 to 42.7.2
+* [#202](https://github.com/Jbranadev/JBSqlUtils/pull/202): Bump org.mariadb.jdbc:mariadb-java-client from 3.3.2 to 3.3.3
+* [#203](https://github.com/Jbranadev/JBSqlUtils/pull/203): Bump com.microsoft.sqlserver:mssql-jdbc from 12.6.0.jre11 to 12.6.1.jre11
+* [#204](https://github.com/Jbranadev/JBSqlUtils/pull/204): Bump actions/dependency-review-action from 4.1.0 to 4.1.3
+* [#205](https://github.com/Jbranadev/JBSqlUtils/pull/205): Bump github/codeql-action from 3.24.3 to 3.24.5
+* [#207](https://github.com/Jbranadev/JBSqlUtils/pull/207): Bump codecov/codecov-action from 4.0.1 to 4.1.0
+* [#208](https://github.com/Jbranadev/JBSqlUtils/pull/208): Bump github/codeql-action from 3.24.5 to 3.24.6
+* [#209](https://github.com/Jbranadev/JBSqlUtils/pull/209): Bump actions/setup-java from 4.0.0 to 4.1.0
+* [#210](https://github.com/Jbranadev/JBSqlUtils/pull/210): Bump org.json:json from 20240205 to 20240303
+* [#211](https://github.com/Jbranadev/JBSqlUtils/pull/211): Bump advanced-security/maven-dependency-submission-action from 4.0.0 to 4.0.2
+
+
+**Full Changelog**: https://github.com/Jbranadev/JBSqlUtils/compare/1.2.4...1.2.5
+
+
+
+                                         jbsqlutils
                                         Version 1.2.4
                                         Release Notes
 

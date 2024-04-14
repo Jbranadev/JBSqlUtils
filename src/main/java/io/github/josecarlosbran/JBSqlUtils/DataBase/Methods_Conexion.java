@@ -131,8 +131,15 @@ class Methods_Conexion extends Conexion {
                 //Carga el controlador de PostgreSQL
                 //Class.forName("org.postgresql.Driver");
                 //DriverManager.registerDriver(new org.postgresql.Driver());
+                String host=this.getHost();
+                if(!stringIsNullOrEmpty(this.getPort())){
+                    host=host+":"+this.getPort();
+                }
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
-                        this.getHost() + ":" + this.getPort() + "/" + this.getBD();
+                        host ;
+                if(!stringIsNullOrEmpty(this.getBD())){
+                    url=url+ "/" + this.getBD();
+                }
                 if (!stringIsNullOrEmpty(this.getPropertisURL())) {
                     url = url + this.getPropertisURL();
                 }
@@ -170,8 +177,15 @@ class Methods_Conexion extends Conexion {
                 //Carga el controlador de SQLServer
                 //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 //DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+                String host=this.getHost();
+                if(!stringIsNullOrEmpty(this.getPort())){
+                    host=host+":"+this.getPort();
+                }
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
-                        this.getHost() + ":" + this.getPort() + ";databaseName=" + this.getBD();
+                        host ;
+                if(!stringIsNullOrEmpty(this.getBD())){
+                    url=url+ ";databaseName=" + this.getBD();
+                }
                 if (!stringIsNullOrEmpty(this.getPropertisURL())) {
                     url = url + this.getPropertisURL();
                 }
