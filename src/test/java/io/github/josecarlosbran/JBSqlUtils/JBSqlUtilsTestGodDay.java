@@ -1,6 +1,7 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
 import UtilidadesTest.TestModel;
+import UtilidadesTest.TestModel2;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
@@ -435,6 +436,9 @@ public class JBSqlUtilsTestGodDay {
         logParrafo("Se creara la tabla " + this.testModel.getTableName() + " en BD's");
         this.testModel = new TestModel();
         this.testModel.createTable();
+        TestModel2 testModel2 = new TestModel2(false);
+        testModel2.llenarPropertiesFromModel(this.testModel);
+        testModel2.dropTableIfExist();
         logParrafo("La tabla a sido creada en BD's");
         logParrafo("Se procedera a eliminar la tabla en BD's");
         Assert.assertTrue(this.testModel.dropTableIfExist(), "No se pudo eliminar la tabla en BD's");

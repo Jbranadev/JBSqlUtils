@@ -21,4 +21,7 @@ public @interface ColumnDefined {
     Constraint[] constraints() default {};
 
     String size() default "";
+
+    ForeignKey foreignkey() default @ForeignKey(columName = "", tableReference = "", columnReference = "");
+
 }
