@@ -41,7 +41,7 @@ class Conexion {
     /**
      * Ejecutor de tareas asincronas
      */
-    protected static ExecutorService ejecutor = Executors.newVirtualThreadPerTaskExecutor();
+    protected ExecutorService ejecutor = Executors.newVirtualThreadPerTaskExecutor();
     /**
      * Tipo de BD's a la cual se conectara.
      */
