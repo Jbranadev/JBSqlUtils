@@ -18,7 +18,6 @@ import org.testng.annotations.Ignore;
 @Setter
 @Getter
 public class UserModel extends JBSqlUtils {
-
     Column<Integer> Id_Usuari1o = new Column<Integer>("Id_Usuario", DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
     Column<Float> Id_Rol1 = new Column<>((float) 1.5, DataType.FLOAT, Constraint.NOT_NULL);
     Column<Double> Id_Subestación1 = new Column<>(DataType.DOUBLE);
@@ -38,7 +37,6 @@ public class UserModel extends JBSqlUtils {
      * @Getter con esta etiqueta creamos los get por medio de la dependencia lombok
      * @Setter con esta etiqueta creamos los set por medio de la dependencia lombok
      */
-
     private Column<Integer> Id_Usuario1 = new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
     private Column<String> Usuario1 = new Column<>(DataType.VARCHAR);
     private Column<String> PasswordUser1 = new Column<>(DataType.VARCHAR);
@@ -56,7 +54,6 @@ public class UserModel extends JBSqlUtils {
      *                               de conxeion para conectarse  ala BD's especificada
      * @throws ValorUndefined
      */
-
     public UserModel() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         super();
         this.setTableName("Usuario");

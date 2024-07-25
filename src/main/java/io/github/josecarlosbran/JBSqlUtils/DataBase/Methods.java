@@ -35,7 +35,6 @@ import java.util.concurrent.Future;
  * correspondiente al modelo
  */
 class Methods extends Methods_Conexion {
-
     /**
      * Constructor por default de la clase Methods
      */

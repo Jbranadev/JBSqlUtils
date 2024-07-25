@@ -32,10 +32,8 @@ import java.util.Objects;
  * @author Jose Bran
  */
 public class JBSqlUtils extends Methods {
-
     @ColumnDefined(name = "created_at", dataTypeSQL = DataType.TIMESTAMP)
     private Timestamp created_at;
-
     @ColumnDefined(name = "updated_at", dataTypeSQL = DataType.TIMESTAMP)
     private Timestamp updated_at;
 

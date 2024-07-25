@@ -26,7 +26,6 @@ import java.util.List;
  * @author Jose Bran
  */
 public enum Constraint {
-
     /**
      * Indica que la columna no acepta valores Nullos.
      */
@@ -41,7 +40,6 @@ public enum Constraint {
      * considerar que la misma restricción se aplicara para el resto de columnas que tengan un valor Check.
 
      CHECK("CHECK"),*/
-
     /**
      * Indica que la columna funciona como clave primaria del modelo.
      */
@@ -50,7 +48,6 @@ public enum Constraint {
      * Indica que la columna funciona como clave foranea del modelo.
 
      FOREIGN_KEY("FOREIGN KEY"),*/
-
     /**
      * Indica que el campo tendra como valor por default el TimeStamp del momento en que se almacene el modelo.
      */
@@ -63,7 +60,6 @@ public enum Constraint {
      * Indica que la columna autoincrementara su valor cada vez que se almacene un registro en la tabla correspondiente al modelo.
      */
     AUTO_INCREMENT("AUTO_INCREMENT");
-
     private String restriccion;
 
     private Constraint(String Restriccion) {

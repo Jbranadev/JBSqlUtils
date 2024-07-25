@@ -39,7 +39,6 @@ import java.util.concurrent.Future;
  * Clase que proporciona los metodos que obtienen los registros de BD's
  */
 class Get extends Methods_Conexion {
-
     /**
      * Constructor por default de la clase Get, que inicializa la clase
      */
@@ -195,7 +194,7 @@ class Get extends Methods_Conexion {
         modelo.validarTableExist(modelo);
         Callable<ResultAsync<Boolean>> get = () -> {
             try {
-                Boolean result=false;
+                Boolean result = false;
                 if (modelo.getTableExist()) {
                     String sql = "SELECT * FROM " + modelo.getTableName();
                     sql = sql + Sql + ";";
@@ -211,7 +210,7 @@ class Get extends Methods_Conexion {
                     ResultSet registros = ejecutor.executeQuery();
                     if (registros.next()) {
                         procesarResultSetOneResult(modelo, registros);
-                        result=true;
+                        result = true;
                     }
                     modelo.closeConnection(connect);
                     modelo.setTaskIsReady(true);
@@ -241,7 +240,6 @@ class Get extends Methods_Conexion {
             throw new ModelNotFound("No existe un modelo en BD's que corresponda a los criterios de la consulta sql: " + sql + Sql);
         }
     }
-
 
     /**
      * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's

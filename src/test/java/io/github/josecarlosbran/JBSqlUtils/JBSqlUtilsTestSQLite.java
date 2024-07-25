@@ -1,6 +1,7 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
 import UtilidadesTest.TestModel;
+import UtilidadesTest.TestModel2;
 import UtilidadesTest.UsuarioModel;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
@@ -77,6 +78,9 @@ public class JBSqlUtilsTestSQLite {
     public void dropTableIfExists() throws Exception {
         logParrafo("Se creara la tabla " + this.testModel.getTableName() + " en BD's");
         this.testModel.createTable();
+        TestModel2 testModel2 = new TestModel2(false);
+        testModel2.llenarPropertiesFromModel(this.testModel);
+        testModel2.dropTableIfExist();
         logParrafo("La tabla a sido creada en BD's");
         logParrafo("Se procedera a eliminar la tabla en BD's");
         Assert.assertTrue(this.testModel.dropTableIfExist(), "No se pudo eliminar la tabla en BD's");
@@ -93,8 +97,19 @@ public class JBSqlUtilsTestSQLite {
         logParrafo("La tabla a sido creada en BD's");
     }
 
-    @Test(testName = "Insert Model",
+    @Test(testName = "Create Table Foraign Key",
             dependsOnMethods = "createTable")
+    public void createTableForaignKey() throws Exception {
+        TestModel2 testModel2 = new TestModel2(false);
+        testModel2.llenarPropertiesFromModel(this.testModel);
+        logParrafo("Se creara la tabla " + testModel2.getTableName() + " en BD's");
+        Assert.assertTrue(testModel2.createTable(), "La Tabla No fue creada en BD's");
+        Assert.assertTrue(testModel2.getTableExist(), "La tabla No existe en BD's ");
+        logParrafo("La tabla a sido creada en BD's");
+    }
+
+    @Test(testName = "Insert Model",
+            dependsOnMethods = "createTableForaignKey")
     public void insertModel() throws Exception {
         logParrafo("Insertaremos un modelo cuyo nombre será Marcos, Apellido Cabrera y sera menor de edad");
         /**
@@ -141,7 +156,7 @@ public class JBSqlUtilsTestSQLite {
     }
 
     @Test(testName = "First Or Fail Get", dependsOnMethods = "firstOrFail"
-    ,expectedExceptions = ModelNotFound.class)
+            , expectedExceptions = ModelNotFound.class)
     public void firstOrFailGet() throws Exception {
         logParrafo("Limpiamos el modelo");
         this.testModel.cleanModel();
@@ -158,11 +173,9 @@ public class JBSqlUtilsTestSQLite {
         logParrafo(this.testModel.toString());
         Assert.assertTrue(this.testModel.getModelExist(), "El Modelo no fue Obtenido de BD's como esperabamos");
         Assert.assertTrue(false == this.testModel.getIsMayor(), "El Modelo no fue Obtenido de BD's como esperabamos");
-
         this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
                 "Cabrerassss").firstOrFailGet();
     }
-
 
     @Test(testName = "Reload Model", dependsOnMethods = "firstOrFailGet")
     public void reloadModel() throws Exception {

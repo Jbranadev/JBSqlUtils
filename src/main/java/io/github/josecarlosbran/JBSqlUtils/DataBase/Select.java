@@ -16,9 +16,7 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author José Bran
  */
 public class Select extends Get {
-
     private String sql;
-
     /**
      * Lista de los parametros a envíar
      */

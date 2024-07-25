@@ -4,28 +4,24 @@
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
     </listeners>
-
     <test name="Test Numerations">
         <classes>
             <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestEnumerations">
             </class>
         </classes>
     </test>
-
     <test name="Test Utilities">
         <classes>
             <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestUtilities">
             </class>
         </classes>
     </test>
-
     <test name="Test SadDay">
         <classes>
             <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSadDay">
             </class>
         </classes>
     </test>
-
     <test name="Test GodDay">
         <classes>
             <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestGodDay">
@@ -51,15 +47,12 @@
             </class>
         </classes>
     </test>
-
     <test name="Test SQLServer">
         <classes>
             <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLServer">
             </class>
         </classes>
     </test>
-
-
     <test name="Test SQLite">
         <classes>
             <class name="io.github.josecarlosbran.JBSqlUtils.JBSqlUtilsTestSQLite">

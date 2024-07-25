@@ -9,7 +9,6 @@ import java.util.List;
  * Clase que brinda acceso a la logica de los metodos de una sentencia que incluye la apertura de un parentecis
  */
 public class MethodsTake<T> extends MethodsAndSet {
-
     protected T modelo = null;
 
     /**

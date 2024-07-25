@@ -37,11 +37,10 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * especificada.
  */
 class Conexion {
-
     /**
      * Ejecutor de tareas asincronas
      */
-    protected static ExecutorService ejecutor = Executors.newCachedThreadPool();
+    protected ExecutorService ejecutor = Executors.newVirtualThreadPerTaskExecutor();
     /**
      * Tipo de BD's a la cual se conectara.
      */
@@ -72,7 +71,6 @@ class Conexion {
      * una configuración personalizada.
      */
     private Boolean getPropertySystem = true;
-
     /**
      * Bandera que sirve para identificar si la tabla correspondiente al modelo Existe
      */
@@ -97,7 +95,6 @@ class Conexion {
      * Define si el modelo desea que JBSqlUtils maneje las timestamps Created_at, Update_at.
      */
     private Boolean timestamps = true;
-
     /**
      * Define el nombre de la columna correspondiente a la TimeStamp CreateAT
      */
@@ -127,9 +124,7 @@ class Conexion {
      * Lista de metodos set que posee el modelo
      */
     private List<Method> MethodsSetOfModel = null;
-
     private List<Field> fieldsOfModel = null;
-
     /**
      * Cantidad de conexiones que ha realizado el modelo a BD's
      */

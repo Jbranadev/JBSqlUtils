@@ -12,7 +12,6 @@ import java.util.Objects;
  * Clase que brinda acceso a la logica de los metodos comunes que comparte mas de una clase a extender en comun
  */
 public class CommonsMethods<T> {
-
     /**
      * Constructor por default de la clase CommonsMethods, que inicializa la clase
      */

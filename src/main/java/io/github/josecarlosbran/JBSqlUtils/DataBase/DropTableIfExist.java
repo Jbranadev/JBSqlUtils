@@ -10,7 +10,6 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author José Bran
  */
 public class DropTableIfExist extends Methods_Conexion {
-
     /**
      * Constructor que recibe como parámetro:
      *

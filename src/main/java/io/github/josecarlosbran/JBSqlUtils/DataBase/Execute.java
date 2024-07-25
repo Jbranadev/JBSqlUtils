@@ -34,7 +34,6 @@ import java.util.concurrent.Future;
  */
 class Execute extends Methods_Conexion {
     private String sql;
-
     /**
      * Lista de los parametros a envíar
      */

@@ -11,7 +11,6 @@ import java.util.Objects;
 
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBSqlUtilsTestEnumerations {
-
     public JBSqlUtilsTestEnumerations() {
         System.setProperty("org.uncommons.reportng.escape-output", "false");
     }

@@ -18,9 +18,7 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author Jose Bran
  */
 public class AndValue {
-
     protected String sql;
-
     /**
      * Lista de los parametros a envíar
      */

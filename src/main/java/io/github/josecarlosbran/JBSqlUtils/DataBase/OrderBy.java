@@ -30,7 +30,6 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author Jose Bran
  */
 public class OrderBy<T> extends MethodsOrderBy {
-
     /**
      * Constructor que recibe como parámetro:
      *

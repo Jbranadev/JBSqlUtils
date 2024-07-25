@@ -32,7 +32,6 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author Jose Bran
  */
 public class Or<T> extends MethodsWhere {
-
     /**
      * Constructor que recibe como parámetro:
      *

@@ -30,7 +30,6 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  */
 @ToString
 public class Column<T> {
-
     private String name = null;
     private T valor = null;
     private String default_value = null;
@@ -38,9 +37,7 @@ public class Column<T> {
     private DataType dataTypeSQL = null;
     @ToString.Exclude
     private Constraint[] restriccion = null;
-
     private Boolean columnExist = false;
-
     private String size = "";
 
     /**

@@ -21,17 +21,14 @@ package io.github.josecarlosbran.JBSqlUtils.Utilities;
  * @author Jose Bran
  */
 public class PrimaryKey {
-
     /**
      * TABLE_CAT String => catálogo de tablas (puede ser nulo)
      */
     private String TABLE_CAT = null;
-
     /**
      * TABLE_SCHEM String => esquema de tabla (puede ser nulo)
      */
     private String TABLE_SCHEM = null;
-
     /**
      * TABLE_NAME Cadena => nombre de la tabla
      */
@@ -40,14 +37,12 @@ public class PrimaryKey {
      * COLUMN_NAME Cadena => nombre de columna
      */
     private String COLUMN_NAME = null;
-
     /**
      * KEY_SEQ short => número de secuencia dentro de la clave principal
      * (un valor de 1 representa la primera columna de la clave principal, un valor de 2 representaría la segunda
      * columna dentro de la clave principal).
      */
     private short KEY_SEQ = 0;
-
     /**
      * PK_NAME Cadena => nombre de clave principal (puede ser nulo)
      */

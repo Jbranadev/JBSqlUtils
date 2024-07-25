@@ -31,7 +31,6 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author Jose Bran
  */
 public class Where<T> extends MethodsWhere {
-
     /**
      * Constructor que recibe como parámetro:
      *

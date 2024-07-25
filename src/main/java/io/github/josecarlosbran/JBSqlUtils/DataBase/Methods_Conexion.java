@@ -16,7 +16,9 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 import com.josebran.LogsJB.LogsJB;
+import io.github.josecarlosbran.JBSqlUtils.Anotations.Actions;
 import io.github.josecarlosbran.JBSqlUtils.Anotations.ColumnDefined;
+import io.github.josecarlosbran.JBSqlUtils.Anotations.ForeignKey;
 import io.github.josecarlosbran.JBSqlUtils.Anotations.Index;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
@@ -131,14 +133,14 @@ class Methods_Conexion extends Conexion {
                 //Carga el controlador de PostgreSQL
                 //Class.forName("org.postgresql.Driver");
                 //DriverManager.registerDriver(new org.postgresql.Driver());
-                String host=this.getHost();
-                if(!stringIsNullOrEmpty(this.getPort())){
-                    host=host+":"+this.getPort();
+                String host = this.getHost();
+                if (!stringIsNullOrEmpty(this.getPort())) {
+                    host = host + ":" + this.getPort();
                 }
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
-                        host ;
-                if(!stringIsNullOrEmpty(this.getBD())){
-                    url=url+ "/" + this.getBD();
+                        host;
+                if (!stringIsNullOrEmpty(this.getBD())) {
+                    url = url + "/" + this.getBD();
                 }
                 if (!stringIsNullOrEmpty(this.getPropertisURL())) {
                     url = url + this.getPropertisURL();
@@ -177,14 +179,14 @@ class Methods_Conexion extends Conexion {
                 //Carga el controlador de SQLServer
                 //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 //DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
-                String host=this.getHost();
-                if(!stringIsNullOrEmpty(this.getPort())){
-                    host=host+":"+this.getPort();
+                String host = this.getHost();
+                if (!stringIsNullOrEmpty(this.getPort())) {
+                    host = host + ":" + this.getPort();
                 }
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
-                        host ;
-                if(!stringIsNullOrEmpty(this.getBD())){
-                    url=url+ ";databaseName=" + this.getBD();
+                        host;
+                if (!stringIsNullOrEmpty(this.getBD())) {
+                    url = url + ";databaseName=" + this.getBD();
                 }
                 if (!stringIsNullOrEmpty(this.getPropertisURL())) {
                     url = url + this.getPropertisURL();
@@ -1251,12 +1253,17 @@ class Methods_Conexion extends Conexion {
                     });
                     LogsJB.debug("Termino de ordenar la lista");
                     int datos = 0;
+                    List<ForeignKey> foreignKeys = new ArrayList();
                     for (int i = 0; i < fields.size(); i++) {
                         //Obtengo el metodo
                         Field campo = fields.get(i);
                         //Obtengo la información de la columna
                         String columnName = getColumnName(campo);
                         DataType columnType = getDataTypeSQL(campo);
+                        ForeignKey temp = getForeignKey(campo);
+                        if (!Objects.isNull(temp)) {
+                            foreignKeys.add(temp);
+                        }
                         //Manejo de tipo de dato TimeStamp en SQLServer
                         if ((columnType == DataType.TIMESTAMP) && (this.getDataBaseType() == DataBase.SQLServer)) {
                             columnType = DataType.DATETIME;
@@ -1333,6 +1340,15 @@ class Methods_Conexion extends Conexion {
                             sql = sql + ", ";
                         }
                         sql = sql + columna;
+                    }
+                    //Añadir claves foraneas
+                    for (ForeignKey foreignKey : foreignKeys) {
+                        sql += ", FOREIGN KEY ("
+                                + foreignKey.columName() + ") REFERENCES " + foreignKey.tableReference() + "(" + foreignKey.columnReference() + ")";
+                        Actions[] acciones = foreignKey.actions();
+                        for (Actions accion : acciones) {
+                            sql = sql + accion.operacion().getOperador() + accion.action().getOperacion();
+                        }
                     }
                     sql = sql + ");";
                     Connection connect = this.getConnection();
@@ -1678,5 +1694,17 @@ class Methods_Conexion extends Conexion {
             return null;
         }
         return columnDefined.dataTypeSQL();
+    }
+
+    private ForeignKey getForeignKey(Field field) {
+        //Obtengo la información de la columna
+        ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
+        //Tiene anotación
+        if (Objects.isNull(columnDefined) || stringIsNullOrEmpty(columnDefined.foreignkey().columName())
+                || stringIsNullOrEmpty(columnDefined.foreignkey().tableReference())
+                || stringIsNullOrEmpty(columnDefined.foreignkey().columnReference())) {
+            return null;
+        }
+        return columnDefined.foreignkey();
     }
 }

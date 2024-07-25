@@ -16,7 +16,6 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author Jose Bran
  */
 public class openParentecis<T> extends MethodsOpenParentecis {
-
     /**
      * Constructor que recibe como parametro:
      *

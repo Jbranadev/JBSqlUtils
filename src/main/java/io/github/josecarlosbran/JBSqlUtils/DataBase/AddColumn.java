@@ -13,9 +13,7 @@ import java.util.Objects;
  * @author Jose Bran
  */
 public class AddColumn extends Methods_Conexion {
-
     private String tableName;
-
     private List<Column> columnas = new ArrayList<>();
 
     /**

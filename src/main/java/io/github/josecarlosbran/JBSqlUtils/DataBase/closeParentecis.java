@@ -12,7 +12,6 @@ import java.util.List;
  * @author Jose Bran
  */
 public class closeParentecis<T> extends MethodsWhere {
-
     /**
      * Constructor que recibe como parametro:
      *

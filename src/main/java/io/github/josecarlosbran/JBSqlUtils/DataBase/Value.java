@@ -15,7 +15,6 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author José Bran
  */
 public class Value extends AndValue {
-
     /**
      * Constructor que recibe como parámetro:
      *
