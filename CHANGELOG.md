@@ -1,3 +1,34 @@
+# Version: 1.2.7
+
+* [#231](https://github.com/Jbranadev/JBSqlUtils/pull/231): Bump com.microsoft.sqlserver:mssql-jdbc from 12.6.1.jre11 to 12.7.0.jre11-preview
+* [#232](https://github.com/Jbranadev/JBSqlUtils/pull/232): Bump org.apache.maven.plugins:maven-source-plugin from 3.3.0 to 3.3.1
+* [#234](https://github.com/Jbranadev/JBSqlUtils/pull/234): Bump org.apache.maven.plugins:maven-gpg-plugin from 3.2.3 to 3.2.4
+* [#239](https://github.com/Jbranadev/JBSqlUtils/pull/239): Bump actions/upload-artifact from 4.3.1 to 4.3.3
+* [#241](https://github.com/Jbranadev/JBSqlUtils/pull/241): Bump org.apache.maven.plugins:maven-jar-plugin from 3.3.0 to 3.4.1
+* [#243](https://github.com/Jbranadev/JBSqlUtils/pull/243): Bump advanced-security/maven-dependency-submission-action from 4.0.2 to 4.0.3
+* [#251](https://github.com/Jbranadev/JBSqlUtils/pull/251): Bump org.xerial:sqlite-jdbc from 3.45.2.0 to 3.46.0.0
+* [#254](https://github.com/Jbranadev/JBSqlUtils/pull/254): Bump codecov/codecov-action from 4.3.0 to 4.5.0
+* [#255](https://github.com/Jbranadev/JBSqlUtils/pull/255): Bump actions/checkout from 4.1.2 to 4.1.7
+* [#256](https://github.com/Jbranadev/JBSqlUtils/pull/256): Bump github/codeql-action from 3.24.10 to 3.25.10
+* [#257](https://github.com/Jbranadev/JBSqlUtils/pull/257): Bump org.testng:testng from 7.9.0 to 7.10.2
+* [#258](https://github.com/Jbranadev/JBSqlUtils/pull/258): Bump org.mariadb.jdbc:mariadb-java-client from 3.3.3 to 3.4.0
+* [#260](https://github.com/Jbranadev/JBSqlUtils/pull/260): Bump org.apache.maven.plugins:maven-javadoc-plugin from 3.6.3 to 3.7.0
+* [#261](https://github.com/Jbranadev/JBSqlUtils/pull/261): Bump org.sonatype.plugins:nexus-staging-maven-plugin from 1.6.13 to 1.7.0
+* [#262](https://github.com/Jbranadev/JBSqlUtils/pull/262): Bump ossf/scorecard-action from 2.3.1 to 2.3.3
+* [#263](https://github.com/Jbranadev/JBSqlUtils/pull/263): Bump step-security/harden-runner from 2.7.0 to 2.8.1
+* [#265](https://github.com/Jbranadev/JBSqlUtils/pull/265): Bump org.apache.maven.plugins:maven-project-info-reports-plugin from 3.5.0 to 3.6.1
+* [#266](https://github.com/Jbranadev/JBSqlUtils/pull/266): Bump advanced-security/maven-dependency-submission-action from 4.0.3 to 4.1.0
+* [#268](https://github.com/Jbranadev/JBSqlUtils/pull/268): Bump github/codeql-action from 3.25.10 to 3.25.12
+* [#269](https://github.com/Jbranadev/JBSqlUtils/pull/269): Bump actions/dependency-review-action from 4.2.5 to 4.3.4
+* [#270](https://github.com/Jbranadev/JBSqlUtils/pull/270): Bump org.apache.maven.plugins:maven-clean-plugin from 3.3.2 to 3.4.0
+* [#271](https://github.com/Jbranadev/JBSqlUtils/pull/271): Bump org.apache.maven.plugins:maven-site-plugin from 4.0.0-M13 to 4.0.0-M15
+* [#272](https://github.com/Jbranadev/JBSqlUtils/pull/272): Bump org.apache.maven.plugins:maven-deploy-plugin from 3.1.1 to 3.1.2
+* [#273](https://github.com/Jbranadev/JBSqlUtils/pull/273): Bump org.apache.maven.plugins:maven-jar-plugin from 3.4.1 to 3.4.2
+* [#274](https://github.com/Jbranadev/JBSqlUtils/pull/274): Bump com.microsoft.sqlserver:mssql-jdbc from 12.7.0.jre11-preview to 12.7.1.jre11-preview
+* [#275](https://github.com/Jbranadev/JBSqlUtils/pull/275): Bump actions/upload-artifact from 4.3.3 to 4.3.4
+* [#276](https://github.com/Jbranadev/JBSqlUtils/pull/276): Bump step-security/harden-runner from 2.8.1 to 2.9.0
+
+
 # Version: 1.2.6
 
 * [#213](https://github.com/Jbranadev/JBSqlUtils/pull/213): Bump actions/checkout from 4.1.1 to 4.1.2
