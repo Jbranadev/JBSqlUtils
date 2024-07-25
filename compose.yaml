@@ -4,7 +4,7 @@ services:
     container_name: sqlserver
     image: mcr.microsoft.com/mssql/server:2022-latest
     healthcheck:
-      test: [ "CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'BranSQLSERVEr1' -Q 'CREATE DATABASE JBSQLUTILS' || exit 1" ]
+      test: [ "CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U SA -P 'BranSQLSERVEr1' -Q 'CREATE DATABASE JBSQLUTILS' || exit 1" ]
       interval: 1s
       retries: 5
       start_period: 100ms
