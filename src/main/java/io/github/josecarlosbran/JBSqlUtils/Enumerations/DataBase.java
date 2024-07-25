@@ -26,7 +26,6 @@ import java.util.List;
  * @author Jose Bran
  */
 public enum DataBase {
-
     /**
      * SQLite
      */
@@ -47,7 +46,6 @@ public enum DataBase {
      * PostgreSQL
      */
     PostgreSQL("postgresql");
-
     private String DBType;
 
     private DataBase(String s) {

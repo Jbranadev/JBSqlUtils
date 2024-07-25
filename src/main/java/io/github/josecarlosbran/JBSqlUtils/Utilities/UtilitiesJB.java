@@ -28,7 +28,6 @@ import java.util.Objects;
  * @author Jose Bran
  */
 public class UtilitiesJB {
-
     /****
      * Verifica si una cadena esta vacía o es nula
      * @param cadena Cadena a Validar

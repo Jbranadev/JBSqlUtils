@@ -27,7 +27,6 @@ import java.util.List;
  * @author Jose Bran
  */
 public enum Operator {
-
     /**
      * Operador {@literal >=}
      */
@@ -100,7 +99,6 @@ public enum Operator {
      * Operador NOT
      */
     NOT(" NOT ");
-
     private String operador;
 
     private Operator(String s) {

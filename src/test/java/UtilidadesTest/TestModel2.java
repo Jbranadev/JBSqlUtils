@@ -39,7 +39,6 @@ import org.testng.annotations.Ignore;
 @Getter
 @Setter
 public class TestModel2 extends JBSqlUtils {
-
     /**
      * Declara un miembro del modelo, el cual en java almacenara un dato de tipo Integer.
      * <p>
@@ -50,26 +49,20 @@ public class TestModel2 extends JBSqlUtils {
      * Agregamos dos restricciones SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
      * desde nuestra aplicación en caso esta no exista, de lo contrario no es necesario que agreguemos restricciones.
      */
-
     @ColumnDefined(name = "Id", dataTypeSQL = DataType.INTEGER, constraints = {
             Constraint.PRIMARY_KEY, Constraint.AUTO_INCREMENT
     })
     private Integer id;
-
     @ColumnDefined(name = "Id2", dataTypeSQL = DataType.INTEGER,
             foreignkey = @ForeignKey(columName = "id2", tableReference = "testModel",
                     columnReference = "id",
-            actions = {@Actions(operacion = Operacion.UPDATE, action = Action.CASCADE)}))
+                    actions = {@Actions(operacion = Operacion.UPDATE, action = Action.CASCADE)}))
     private Integer id2;
-
-
     @ColumnDefined(name = "id3", dataTypeSQL = DataType.INTEGER,
             foreignkey = @ForeignKey(columName = "id3", tableReference = "testModel", columnReference = "id",
-            actions = {@Actions(operacion = Operacion.DELETE, action = Action.CASCADE),
-                    @Actions(operacion = Operacion.UPDATE, action = Action.NO_ACTION)}))
+                    actions = {@Actions(operacion = Operacion.DELETE, action = Action.CASCADE),
+                            @Actions(operacion = Operacion.UPDATE, action = Action.NO_ACTION)}))
     private Integer id3;
-
-
     @ColumnDefined(name = "isMayor", dataTypeSQL = DataType.BIT, constraints = {
             Constraint.DEFAULT
     }, default_value = "true")

@@ -29,7 +29,6 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author Jose Bran
  */
 public class Set extends AndSet {
-
     /**
      * Constructor que recibe como parámetro:
      *

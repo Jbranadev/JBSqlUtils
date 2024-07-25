@@ -12,7 +12,6 @@ import java.util.Objects;
  * Clase que brinda acceso a la logica de los metodos comunes que comparte un OrderBy Object
  */
 public class MethodsOrderBy<T> extends MethodsTake {
-
     /**
      * Constructor por default de la clase MethodsWhere, que inicializa la clase
      */

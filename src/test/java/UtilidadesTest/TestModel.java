@@ -35,7 +35,6 @@ import org.testng.annotations.Ignore;
 @Getter
 @Setter
 public class TestModel extends JBSqlUtils {
-
     /**
      * Declara un miembro del modelo, el cual en java almacenara un dato de tipo Integer.
      * <p>
@@ -46,12 +45,10 @@ public class TestModel extends JBSqlUtils {
      * Agregamos dos restricciones SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
      * desde nuestra aplicación en caso esta no exista, de lo contrario no es necesario que agreguemos restricciones.
      */
-
     @ColumnDefined(name = "Id", dataTypeSQL = DataType.INTEGER, constraints = {
             Constraint.PRIMARY_KEY, Constraint.AUTO_INCREMENT
     })
     private Integer id;
-
     /**
      * Declara un miembro del modelo, el cual en java almacenara un dato de tipo String.
      * <p>
@@ -65,7 +62,6 @@ public class TestModel extends JBSqlUtils {
      * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
      * desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
      */
-
     @ColumnDefined(name = "name", dataTypeSQL = DataType.VARCHAR, constraints = {
             Constraint.DEFAULT
     }, default_value = "'Daniel'", size = "200")
@@ -84,10 +80,8 @@ public class TestModel extends JBSqlUtils {
      * Indicamos que el tipo de dato SQL de la columna correspondiente a este miembro es de tipo
      * Varchar.
      */
-
     @ColumnDefined(name = "apellido", dataTypeSQL = DataType.VARCHAR, size = "200")
     private String apellido;
-
     /**
      * Declara un miembro del modelo, el cual en java almacenara un dato de tipo Boolean.
      * <p>
@@ -101,7 +95,6 @@ public class TestModel extends JBSqlUtils {
      * Agregamos una restriccion SQL las cuales serán útiles si deseamos utilizar el modelo para crear la tabla en BD's
      * desde nuestra aplicación en caso esta no exista a través del método modelo.crateTable(), de lo contrario no es necesario que agreguemos restricciones.
      */
-
     @ColumnDefined(name = "isMayor", dataTypeSQL = DataType.BIT, constraints = {
             Constraint.DEFAULT
     }, default_value = "true")

@@ -6,7 +6,6 @@ package io.github.josecarlosbran.JBSqlUtils.Enumerations;
  * @author Jose Bran
  */
 public enum ConeccionProperties {
-
     /**
      * Tipo de BD's a la cual se conectara.
      */
@@ -36,7 +35,6 @@ public enum ConeccionProperties {
      * Nombre de la BD's a la cual nos conectaremos.
      */
     DBNAME("DataBaseBD");
-
     /**
      * Indica la propieda que se estara setiando
      */

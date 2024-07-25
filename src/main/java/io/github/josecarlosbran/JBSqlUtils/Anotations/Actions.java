@@ -11,9 +11,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Actions {
-
     Operacion operacion() default Operacion.DELETE;
 
     Action action() default Action.NO_ACTION;
-
 }

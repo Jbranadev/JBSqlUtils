@@ -32,7 +32,6 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author Jose Bran
  */
 public class AndSet extends MethodsAndSet {
-
     /**
      * Constructor Utilizado para que la clase Set pueda acceder a los metodos heredados de esta clase
      */

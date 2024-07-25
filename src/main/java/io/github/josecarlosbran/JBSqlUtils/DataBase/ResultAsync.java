@@ -6,7 +6,6 @@ package io.github.josecarlosbran.JBSqlUtils.DataBase;
  */
 class ResultAsync<T> {
     private T result;
-
     private Exception exception;
 
     /**

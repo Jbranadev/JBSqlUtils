@@ -11,7 +11,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ColumnDefined {
-
     String name() default "";
 
     String default_value() default "";
@@ -23,5 +22,4 @@ public @interface ColumnDefined {
     String size() default "";
 
     ForeignKey foreignkey() default @ForeignKey(columName = "", tableReference = "", columnReference = "");
-
 }

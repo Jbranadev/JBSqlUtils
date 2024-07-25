@@ -6,13 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Operacion {
-
-
     INSERT(" ON INSERT "),
     UPDATE(" ON UPDATE "),
     DELETE(" ON DELETE ");
-
-
     private String operador;
 
     private Operacion(String s) {
@@ -47,5 +43,4 @@ public enum Operacion {
         }
         return null;
     }
-
 }

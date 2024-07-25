@@ -11,7 +11,6 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author Jose Bran
  */
 public class CreateTable {
-
     private String tableName;
 
     /**

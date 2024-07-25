@@ -6,14 +6,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Action {
-
-
     RESTRICT(" RESTRICT "),
     CASCADE(" CASCADE "),
     SET_NULL(" SET NULL "),
     NO_ACTION(" NO ACTION "),
     SET_DEFAULT(" SET DEFAULT ");
-
     private String operacion;
 
     private Action(String s) {
@@ -48,6 +45,4 @@ public enum Action {
         }
         return null;
     }
-
-
 }

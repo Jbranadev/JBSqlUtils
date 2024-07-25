@@ -13,7 +13,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UsuarioModel extends JBSqlUtils {
-
     @ColumnDefined(name = "Id_Usuario", dataTypeSQL = DataType.INTEGER, constraints = {
             Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY
     })

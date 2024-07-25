@@ -23,7 +23,6 @@ import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.select;
 
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBSqlUtilsTestGodDay {
-
     TestModel testModel;
 
     public JBSqlUtilsTestGodDay() {

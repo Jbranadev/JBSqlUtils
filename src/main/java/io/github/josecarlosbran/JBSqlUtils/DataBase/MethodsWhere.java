@@ -10,7 +10,6 @@ import java.util.Objects;
  * Clase que brinda acceso a la logica de los metodos de una sentencia where
  */
 public class MethodsWhere<T> extends MethodsOrderBy {
-
     /**
      * Constructor por default de la clase MethodsWhere, que inicializa la clase
      */

@@ -21,7 +21,6 @@ import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.*;
 
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBSqlUtilsTestSadDay {
-
     TestModel testModel;
 
     public JBSqlUtilsTestSadDay() {

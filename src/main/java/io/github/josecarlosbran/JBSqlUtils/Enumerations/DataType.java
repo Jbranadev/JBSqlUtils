@@ -28,7 +28,6 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author Jose Bran
  */
 public enum DataType {
-
     /**
      * Entero de 32 bits con signo
      */
@@ -174,9 +173,7 @@ public enum DataType {
      */
     DATETIME2("", 10),
     ;
-
     private String size;
-
     private int orden;
 
     private DataType(String Size, int orden) {

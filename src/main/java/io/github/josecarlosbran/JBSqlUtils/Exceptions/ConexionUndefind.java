@@ -21,7 +21,6 @@ package io.github.josecarlosbran.JBSqlUtils.Exceptions;
  * @author Jose Bran
  */
 public class ConexionUndefind extends Exception {
-
     /**
      * Constructor por default de la excepción de Tipo ConexionUndefined
      *

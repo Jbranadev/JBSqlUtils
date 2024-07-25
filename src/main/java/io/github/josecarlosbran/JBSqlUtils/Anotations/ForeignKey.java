@@ -11,14 +11,12 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ForeignKey {
-
-    String columName() ;
+    String columName();
 
     String tableReference();
+
     String columnReference();
 
-    Actions[] actions() default { @Actions(operacion = Operacion.DELETE, action = Action.NO_ACTION),
+    Actions[] actions() default {@Actions(operacion = Operacion.DELETE, action = Action.NO_ACTION),
             @Actions(operacion = Operacion.UPDATE, action = Action.CASCADE)};
-
-
 }

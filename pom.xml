@@ -3,11 +3,9 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>io.github.josecarlosbran</groupId>
     <artifactId>jbsqlutils</artifactId>
     <version>1.2.7</version>
-
     <name>${project.groupId}:${project.artifactId}</name>
     <description>
         JBSqlUtils es un ORM desarrollado en java por José Carlos Alfredo Bran Aguirre,
@@ -15,28 +13,23 @@
         y rápida sin interrumpir la ejecución del hilo principal del programa, lo cual la hace un potente ORM,
         por medio del cual tendrá acceso a un CRUD, configurando únicamente la conexión del
         modelo, los atributos que posee la tabla en BD's cómo variables que pertenecerán al modelo en su aplicación.
-
         JBSqlUtils también proporciona un potente generador de instrucciones SQL que le permitirá crear
         o eliminar una tabla, insertar, seleccionar, actualizar o eliminar registros de una tabla
         en su BD's sin necesidad de instanciar un modelo cómo tal, únicamente tendrá que configurar previamente
         la conexión a su BD's.
-
         Lo cual la hace un potente ORM para aplicaciones android y sistemas empresariales que tengan
         la necesidad de poder conectarse a alguna de estas 4 tipos de BD's, cabe mencionar que para ello utiliza
         el SQLite JDBC de org.xerial, org.postgresql, mysql y com.microsoft.sqlserver.
-
         Para mayor información, consultar el enlace del proyecto
     </description>
     <!-- FIXME change it to the project's website -->
     <url>https://github.com/JoseCarlosBran/JBSqlUtils/blob/master/Readme.md</url>
-
     <licenses>
         <license>
             <name>The Apache License, Version 2.0</name>
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
-
     <developers>
         <developer>
             <name>Jose Carlos Bran</name>
@@ -44,17 +37,14 @@
             <organization>JoseBran</organization>
         </developer>
     </developers>
-
     <scm>
         <connection>scm:git:git://github.com/JoseCarlosBran/JBSqlUtils.git</connection>
         <developerConnection>scm:git:ssh://github.com/JoseCarlosBran/JBSqlUtils.git</developerConnection>
         <url>https://github.com/JoseCarlosBran/JBSqlUtils/tree/master</url>
     </scm>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencyManagement>
         <dependencies>
             <!-- Dependencia para TestNG-->
@@ -64,7 +54,6 @@
                 <version>7.10.2</version>
                 <scope>test</scope>
             </dependency>
-
             <!-- Dependencia para ReporteTestNG-->
             <dependency>
                 <groupId>com.github.sdrss</groupId>
@@ -72,7 +61,6 @@
                 <version>2.7.0</version>
                 <scope>test</scope>
             </dependency>
-
             <!-- Dependencia para Setter and Getter-->
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -80,7 +68,6 @@
                 <version>1.18.32</version>
                 <scope>compile</scope>
             </dependency>
-
             <!-- Dependencia para el manejo de los Logs -->
             <dependency>
                 <groupId>io.github.josecarlosbran</groupId>
@@ -88,7 +75,6 @@
                 <version>1.0.1</version>
                 <scope>compile</scope>
             </dependency>
-
             <!-- Dependencia para el uso de JDBC SQLite-->
             <dependency>
                 <groupId>org.xerial</groupId>
@@ -96,7 +82,6 @@
                 <version>3.46.0.0</version>
                 <scope>compile</scope>
             </dependency>
-
             <!-- Dependencia para el uso de JDBC PostgreSQL-->
             <dependency>
                 <groupId>org.postgresql</groupId>
@@ -104,7 +89,6 @@
                 <version>42.7.3</version>
                 <scope>compile</scope>
             </dependency>
-
             <!-- Dependencia para el uso de JDBC MySQL-->
             <dependency>
                 <groupId>mysql</groupId>
@@ -112,7 +96,6 @@
                 <version>8.0.33</version>
                 <scope>compile</scope>
             </dependency>
-
             <!-- Dependencia para el uso de JDBC MariaDB-->
             <dependency>
                 <groupId>org.mariadb.jdbc</groupId>
@@ -120,7 +103,6 @@
                 <version>3.4.0</version>
                 <scope>compile</scope>
             </dependency>
-
             <!-- Dependencia para el uso de JDBC SQLServer-->
             <dependency>
                 <groupId>com.microsoft.sqlserver</groupId>
@@ -128,7 +110,6 @@
                 <version>12.7.1.jre11-preview</version>
                 <scope>compile</scope>
             </dependency>
-
             <!-- Dependencia para Extender funcionalidades de lenguaje Java-->
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -136,7 +117,6 @@
                 <version>3.14.0</version>
                 <scope>compile</scope>
             </dependency>
-
             <!-- Dependencia para Extender funcionalidades de lenguaje Java-->
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -144,7 +124,6 @@
                 <version>4.4</version>
                 <scope>compile</scope>
             </dependency>
-
             <!-- Dependencias Para JSON-->
             <!-- https://mvnrepository.com/artifact/org.json/json -->
             <dependency>
@@ -153,7 +132,6 @@
                 <version>20240303</version>
                 <scope>compile</scope>
             </dependency>
-
             <!-- Dependencia para permitir que los modelos sean serializables -->
             <dependency>
                 <groupId>jakarta.json.bind</groupId>
@@ -161,90 +139,75 @@
                 <version>3.0.0</version>
                 <scope>compile</scope>
             </dependency>
-
-
         </dependencies>
     </dependencyManagement>
-
     <dependencies>
-
         <!-- Dependencia para TestNG-->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <scope>test</scope>
         </dependency>
-
         <!-- Dependencia para ReporteTestNG-->
         <dependency>
             <groupId>com.github.sdrss</groupId>
             <artifactId>reportng</artifactId>
             <scope>test</scope>
         </dependency>
-
         <!-- Dependencia para Setter and Getter-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>compile</scope>
         </dependency>
-
         <!-- Dependencia para el manejo de los Logs -->
         <dependency>
             <groupId>io.github.josecarlosbran</groupId>
             <artifactId>logsjbsupport</artifactId>
             <scope>compile</scope>
         </dependency>
-
         <!-- Dependencia para el uso de JDBC SQLite-->
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
             <scope>compile</scope>
         </dependency>
-
         <!-- Dependencia para el uso de JDBC PostgreSQL-->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>compile</scope>
         </dependency>
-
         <!-- Dependencia para el uso de JDBC MySQL-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>compile</scope>
         </dependency>
-
         <!-- Dependencia para el uso de JDBC MariaDB-->
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
             <scope>compile</scope>
         </dependency>
-
         <!-- Dependencia para el uso de JDBC SQLServer-->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
             <scope>compile</scope>
         </dependency>
-
         <!-- Dependencia para Extender funcionalidades de lenguaje Java-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <scope>compile</scope>
         </dependency>
-
         <!-- Dependencia para Extender funcionalidades de lenguaje Java-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
             <scope>compile</scope>
         </dependency>
-
         <!-- Dependencias Para JSON-->
         <!-- https://mvnrepository.com/artifact/org.json/json -->
         <dependency>
@@ -252,17 +215,13 @@
             <artifactId>json</artifactId>
             <scope>compile</scope>
         </dependency>
-
         <!-- Dependencia para permitir que los modelos sean serializables -->
         <dependency>
             <groupId>jakarta.json.bind</groupId>
             <artifactId>jakarta.json.bind-api</artifactId>
             <scope>compile</scope>
         </dependency>
-
     </dependencies>
-
-
     <build>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
@@ -320,7 +279,6 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-
         <plugins>
             <!-- Generación de JACOCO -->
             <plugin>
@@ -344,16 +302,13 @@
                 </executions>
             </plugin>
         </plugins>
-
     </build>
-
     <profiles>
         <profile>
             <id>Maven</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-
             <distributionManagement>
                 <!-- Compilar y Publicar en Maven -->
                 <snapshotRepository>
@@ -375,7 +330,6 @@
                             <target>21</target>
                         </configuration>
                     </plugin>
-
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
@@ -389,7 +343,6 @@
                             </execution>
                         </executions>
                     </plugin>
-
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
@@ -406,7 +359,6 @@
                             <doclint>all,-missing</doclint>
                         </configuration>
                     </plugin>
-
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-site-plugin</artifactId>
@@ -415,7 +367,6 @@
                             <locales>es,en,fr</locales>
                         </configuration>
                     </plugin>
-
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -427,8 +378,6 @@
                             <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
                     </plugin>
-
-
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
@@ -449,13 +398,11 @@
                             </gpgArguments>
                         </configuration>
                     </plugin>
-
                 </plugins>
             </build>
         </profile>
         <profile>
             <id>Github</id>
-
             <distributionManagement>
                 <!-- Compilar y Publicar en Maven -->
                 <repository>
@@ -479,7 +426,6 @@
                             <target>21</target>
                         </configuration>
                     </plugin>
-
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
@@ -493,7 +439,6 @@
                             </execution>
                         </executions>
                     </plugin>
-
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
@@ -510,7 +455,6 @@
                             <doclint>all,-missing</doclint>
                         </configuration>
                     </plugin>
-
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-site-plugin</artifactId>
@@ -519,8 +463,6 @@
                             <locales>es,en,fr</locales>
                         </configuration>
                     </plugin>
-
-
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
@@ -541,13 +483,10 @@
                             </gpgArguments>
                         </configuration>
                     </plugin>
-
                 </plugins>
             </build>
         </profile>
     </profiles>
-
-
     <reporting>
         <plugins>
             <plugin>
@@ -560,5 +499,4 @@
             </plugin>
         </plugins>
     </reporting>
-
 </project>

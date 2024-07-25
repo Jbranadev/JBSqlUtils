@@ -6,7 +6,6 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 public class DateAdapter implements JsonbAdapter<Date, String> {
-
     private static final ThreadLocal<SimpleDateFormat> threadLocalDateFormat =
             ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS"));
 

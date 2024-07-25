@@ -20,7 +20,6 @@ import static UtilidadesTest.Utilities.logParrafo;
 
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBSqlUtilsTestUtilities {
-
     public JBSqlUtilsTestUtilities() {
         System.setProperty("org.uncommons.reportng.escape-output", "false");
     }

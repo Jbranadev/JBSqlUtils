@@ -25,7 +25,6 @@ import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.select;
 
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class JBSqlUtilsTestSQLServer {
-
     TestModel testModel;
     UsuarioModel usuarioModel;
 
@@ -98,7 +97,6 @@ public class JBSqlUtilsTestSQLServer {
         logParrafo("La tabla a sido creada en BD's");
     }
 
-
     @Test(testName = "Insert Model",
             dependsOnMethods = "createTableForaignKey")
     public void insertModel() throws Exception {
@@ -147,7 +145,7 @@ public class JBSqlUtilsTestSQLServer {
     }
 
     @Test(testName = "First Or Fail Get", dependsOnMethods = "firstOrFail"
-    ,expectedExceptions = ModelNotFound.class)
+            , expectedExceptions = ModelNotFound.class)
     public void firstOrFailGet() throws Exception {
         logParrafo("Limpiamos el modelo");
         this.testModel.cleanModel();
@@ -164,11 +162,9 @@ public class JBSqlUtilsTestSQLServer {
         logParrafo(this.testModel.toString());
         Assert.assertTrue(this.testModel.getModelExist(), "El Modelo no fue Obtenido de BD's como esperabamos");
         Assert.assertTrue(false == this.testModel.getIsMayor(), "El Modelo no fue Obtenido de BD's como esperabamos");
-
         this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
                 "Cabrerassss").firstOrFailGet();
     }
-
 
     @Test(testName = "Reload Model", dependsOnMethods = "firstOrFailGet")
     public void reloadModel() throws Exception {

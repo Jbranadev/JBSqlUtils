@@ -27,7 +27,6 @@ import java.util.List;
  * @author Jose Bran
  */
 public class Take<T> extends MethodsTake {
-
     /**
      * Constructor que recibe como parametro:
      *

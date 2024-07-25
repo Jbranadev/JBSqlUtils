@@ -44,5 +44,4 @@ public interface IsResource {
         LogsJB.debug("Cantidad de campos que si tienen información: " + campos_con_informacion);
         return true;
     }
-
 }

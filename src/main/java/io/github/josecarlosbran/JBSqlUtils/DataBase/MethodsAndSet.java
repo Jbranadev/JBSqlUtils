@@ -10,9 +10,7 @@ import java.util.List;
  * Clase que brinda acceso a la logica de los metodos de una sentencia que incluye la apertura de un parentecis
  */
 public class MethodsAndSet<T> extends Get {
-
     protected String sql;
-
     /**
      * Lista de los parámetros a envíar
      */

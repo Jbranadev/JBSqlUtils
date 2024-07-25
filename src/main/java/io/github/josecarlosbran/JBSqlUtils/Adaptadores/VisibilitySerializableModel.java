@@ -14,8 +14,8 @@ import java.util.Arrays;
  * Clase que implementa la interfaz PropertyVisibilityStrategy para definir la visibilidad de los campos y métodos
  * de los modelos que heredan de JBSQLUtils.
  * Puede utilizarla de la siguiente forma
- * @JsonbVisibility(CustomVisibilityStrategy.class)
- * public class MiModelo extends JBSqlUtils{
+ *
+ * @JsonbVisibility(CustomVisibilityStrategy.class) public class MiModelo extends JBSqlUtils{
  */
 public class VisibilitySerializableModel implements PropertyVisibilityStrategy {
     public boolean isVisible(Field field) {
