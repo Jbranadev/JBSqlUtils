@@ -27,7 +27,6 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.ConexionUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.*;
-import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -42,6 +41,7 @@ import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.*;
 
@@ -81,21 +81,18 @@ class Methods_Conexion extends Conexion {
      */
     protected synchronized <T> void getMethodsModel() {
         Method[] metodos = this.getClass().getMethods();
-        List<Method> result = new ArrayList<>();
         String classColumn = Column.class.getSimpleName();
+        List<Method> getMethods = this.getMethodsGetOfModel();
+        List<Method> setMethods = this.getMethodsSetOfModel();
         for (Method metodo : metodos) {
-            String returntype = metodo.getReturnType().getSimpleName();
-            Parameter[] parametros = metodo.getParameters();
-            String ParametroType = "";
+            String returnType = metodo.getReturnType().getSimpleName();
             String nameMetodo = metodo.getName();
-            if (parametros.length == 1) {
-                ParametroType = parametros[0].getType().getSimpleName();
-            }
-            if (returntype.equalsIgnoreCase(classColumn) && (StringUtils.startsWithIgnoreCase(nameMetodo, "get"))) {
-                this.getMethodsGetOfModel().add(metodo);
-            } else if (ParametroType.equalsIgnoreCase(classColumn) && (StringUtils.startsWithIgnoreCase(nameMetodo, "set"))) {
-                this.getMethodsSetOfModel().add(metodo);
-                result.add(metodo);
+            Parameter[] parametros = metodo.getParameters();
+            if (returnType.equalsIgnoreCase(classColumn) && StringUtils.startsWithIgnoreCase(nameMetodo, "get")) {
+                getMethods.add(metodo);
+            } else if (parametros.length == 1 && parametros[0].getType().getSimpleName().equalsIgnoreCase(classColumn)
+                    && StringUtils.startsWithIgnoreCase(nameMetodo, "set")) {
+                setMethods.add(metodo);
             }
         }
     }
@@ -109,10 +106,11 @@ class Methods_Conexion extends Conexion {
             List<Field> modelFieldsWithAnotations =
                     Arrays.asList(FieldUtils.getFieldsWithAnnotation(this.getClass(),
                             ColumnDefined.class));
-            List<Field> tempField = ListUtils.intersection(modelFields, modelFieldsWithAnotations);
-            modelFields = ListUtils.removeAll(modelFields, tempField);
-            modelFields = ListUtils.union(modelFields, tempField);
-            modelFields.stream().sorted();
+            // Combina y filtra los campos
+            List<Field> combinedFields = Stream.concat(
+                    modelFields.stream().filter(field -> !modelFieldsWithAnotations.contains(field)),
+                    modelFieldsWithAnotations.stream()
+            ).collect(Collectors.toList());
             this.getFieldsOfModel().addAll(modelFields);
         }
     }
@@ -131,9 +129,6 @@ class Methods_Conexion extends Conexion {
             String usuario = this.getUser();
             String password = this.getPassword();
             if (this.getDataBaseType() == DataBase.PostgreSQL) {
-                //Carga el controlador de PostgreSQL
-                //Class.forName("org.postgresql.Driver");
-                //DriverManager.registerDriver(new org.postgresql.Driver());
                 String host = this.getHost();
                 if (!stringIsNullOrEmpty(this.getPort())) {
                     host = host + ":" + this.getPort();
@@ -151,9 +146,6 @@ class Methods_Conexion extends Conexion {
             }
             if (this.getDataBaseType() == DataBase.MySQL) {
                 connect = null;
-                //Carga el controlador de MySQL
-                //Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-                //DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
                         this.getHost() + ":" + this.getPort() + "/" + this.getBD();
                 if (!stringIsNullOrEmpty(this.getPropertisURL())) {
@@ -164,9 +156,6 @@ class Methods_Conexion extends Conexion {
             }
             if (this.getDataBaseType() == DataBase.MariaDB) {
                 connect = null;
-                //Carga el controlador de MariaDB
-                //Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-                //DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
                         this.getHost() + ":" + this.getPort() + "/" + this.getBD();
                 if (!stringIsNullOrEmpty(this.getPropertisURL())) {
@@ -177,9 +166,6 @@ class Methods_Conexion extends Conexion {
             }
             if (this.getDataBaseType() == DataBase.SQLServer) {
                 connect = null;
-                //Carga el controlador de SQLServer
-                //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                //DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
                 String host = this.getHost();
                 if (!stringIsNullOrEmpty(this.getPort())) {
                     host = host + ":" + this.getPort();
@@ -196,8 +182,6 @@ class Methods_Conexion extends Conexion {
                 connect = DriverManager.getConnection(url, usuario, password);
             }
             if (this.getDataBaseType() == DataBase.SQLite) {
-                //Class.forName("org.sqlite.JDBC").newInstance();
-                //DriverManager.registerDriver(new org.sqlite.JDBC());
                 //Rutas de archivos
                 File fichero = new File(this.getBD());
                 //Verifica si existe la carpeta Logs, si no existe, la Crea

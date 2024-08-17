@@ -25,6 +25,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -198,27 +199,18 @@ class Conexion {
      */
     private DataBase setearDBType() {
         String dataBase = System.getProperty(ConeccionProperties.DBTYPE.getPropiertie());
-        if (dataBase.equals(DataBase.MySQL.name())) {
-            setDataBaseType(DataBase.MySQL);
-            return DataBase.MySQL;
+        Map<String, DataBase> dataBaseMap = Map.of(
+                DataBase.MySQL.name(), DataBase.MySQL,
+                DataBase.MariaDB.name(), DataBase.MariaDB,
+                DataBase.SQLite.name(), DataBase.SQLite,
+                DataBase.SQLServer.name(), DataBase.SQLServer,
+                DataBase.PostgreSQL.name(), DataBase.PostgreSQL
+        );
+        DataBase dbType = dataBaseMap.get(dataBase);
+        if (dbType != null) {
+            setDataBaseType(dbType);
         }
-        if (dataBase.equals(DataBase.MariaDB.name())) {
-            setDataBaseType(DataBase.MariaDB);
-            return DataBase.MariaDB;
-        }
-        if (dataBase.equals(DataBase.SQLite.name())) {
-            setDataBaseType(DataBase.SQLite);
-            return DataBase.SQLite;
-        }
-        if (dataBase.equals(DataBase.SQLServer.name())) {
-            setDataBaseType(DataBase.SQLServer);
-            return DataBase.SQLServer;
-        }
-        if (dataBase.equals(DataBase.PostgreSQL.name())) {
-            setDataBaseType(DataBase.PostgreSQL);
-            return DataBase.PostgreSQL;
-        }
-        return null;
+        return dbType;
     }
 
     /**
@@ -411,6 +403,8 @@ class Conexion {
             throw new PropertiesDBUndefined("No se a seteado el usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
         }
         try {
+            // Cache the package hash code of the Conexion class
+            int conexionPackageHashCode = Conexion.class.getPackage().hashCode();
             //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
             StackTraceElement[] elements = Thread.currentThread().getStackTrace();
             String clase;
@@ -418,14 +412,14 @@ class Conexion {
             for (int i = 3; i <= 7; i += 2) {
                 clase = elements[i].getClassName();
                 Class<?> tempClass = Class.forName(clase);
-                if (tempClass.getPackage().hashCode() == Conexion.class.getPackage().hashCode()) {
+                if (tempClass.getPackage().hashCode() == conexionPackageHashCode) {
                     posicion = i;
                     break;
                 }
             }
             clase = elements[posicion].getClassName();
             Class<?> tempClass = Class.forName(clase);
-            if (tempClass.getPackage().hashCode() != Conexion.class.getPackage().hashCode()) {
+            if (tempClass.getPackage().hashCode() != conexionPackageHashCode) {
                 return null;
             }
         } catch (ClassNotFoundException e) {
@@ -459,6 +453,8 @@ class Conexion {
             throw new PropertiesDBUndefined("No se a seteado la contraseña del usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
         }
         try {
+            // Cache the package hash code of the Conexion class
+            int conexionPackageHashCode = Conexion.class.getPackage().hashCode();
             //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
             StackTraceElement[] elements = Thread.currentThread().getStackTrace();
             String clase;
@@ -466,14 +462,14 @@ class Conexion {
             for (int i = 3; i <= 7; i += 2) {
                 clase = elements[i].getClassName();
                 Class<?> tempClass = Class.forName(clase);
-                if (tempClass.getPackage().hashCode() == Conexion.class.getPackage().hashCode()) {
+                if (tempClass.getPackage().hashCode() == conexionPackageHashCode) {
                     posicion = i;
                     break;
                 }
             }
             clase = elements[posicion].getClassName();
             Class<?> tempClass = Class.forName(clase);
-            if (tempClass.getPackage().hashCode() != Conexion.class.getPackage().hashCode()) {
+            if (tempClass.getPackage().hashCode() != conexionPackageHashCode) {
                 return null;
             }
         } catch (ClassNotFoundException e) {
