@@ -76,7 +76,6 @@ class Methods extends Methods_Conexion {
         Integer result = 0;
         T temp = null;
         boolean tableInfoCached = false;
-        List<Future<Integer>> futures = new ArrayList<>();
         for (T modelo : modelos) {
             if (tableInfoCached) {
                 modelo.setTabla(temp.getTabla());
@@ -90,11 +89,7 @@ class Methods extends Methods_Conexion {
                 temp.refresh();
                 tableInfoCached = true;
             }
-            Callable<Integer> task = () -> modelo.saveModel(modelo);
-            futures.add(temp.ejecutor.submit(task));
-        }
-        for (Future<Integer> future : futures) {
-            result += future.get();
+            result = result + modelo.saveModel(modelo);
         }
         return result;
     }
@@ -124,7 +119,6 @@ class Methods extends Methods_Conexion {
         Integer result = 0;
         T temp = null;
         boolean tableInfoCached = false;
-        List<Future<Integer>> futures = new ArrayList<>();
         for (T modelo : modelos) {
             if (tableInfoCached) {
                 modelo.setTabla(temp.getTabla());
@@ -137,11 +131,7 @@ class Methods extends Methods_Conexion {
                 temp.refresh();
                 tableInfoCached = true;
             }
-            Callable<Integer> task = () -> modelo.deleteModel(modelo);
-            futures.add(temp.ejecutor.submit(task));
-        }
-        for (Future<Integer> future : futures) {
-            result += future.get();
+            result = result + modelo.deleteModel(modelo);
         }
         return result;
     }
