@@ -27,7 +27,7 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author Jose Bran
  */
 public class Delete {
-    private String sql;
+    private final String sql;
 
     /**
      * Constructor que recibe como parámetro:

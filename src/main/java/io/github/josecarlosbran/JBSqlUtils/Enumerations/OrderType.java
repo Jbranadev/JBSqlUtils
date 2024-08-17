@@ -17,9 +17,6 @@ package io.github.josecarlosbran.JBSqlUtils.Enumerations;
 
 import com.josebran.LogsJB.LogsJB;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * Numeración que proporciona los tipos de ordenamiento SQL disponibles.
  *
@@ -34,9 +31,9 @@ public enum OrderType {
      * Indica que deseamos se ordene de manera Descendente los registros
      */
     DESC(" DESC ");
-    private String valor;
+    private final String valor;
 
-    private OrderType(String s) {
+    OrderType(String s) {
         this.valor = s;
     }
 
@@ -58,7 +55,7 @@ public enum OrderType {
     public OrderType getNumeracionforName(String name) {
         Class<OrderType> esta = OrderType.class;
         OrderType[] temp = esta.getEnumConstants();
-        List<OrderType> numeraciones = Arrays.asList(temp);
+        OrderType[] numeraciones = temp;
         for (OrderType numeracion : numeraciones) {
             if (numeracion.name().equalsIgnoreCase(name)) {
                 LogsJB.info("Nombre: " + numeracion.name() + " Posicion Ordinal: " + numeracion.ordinal()

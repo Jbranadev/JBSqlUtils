@@ -16,11 +16,11 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author José Bran
  */
 public class Select extends Get {
-    private String sql;
+    private final String sql;
     /**
      * Lista de los parametros a envíar
      */
-    private List<Column> parametros = new ArrayList<>();
+    private final List<Column> parametros = new ArrayList<>();
 
     /**
      * Constructor que recibe como parametro:
@@ -33,7 +33,7 @@ public class Select extends Get {
         if (stringIsNullOrEmpty(TableName)) {
             throw new ValorUndefined("El nombre de la Tabla proporcionado esta vacío o es NULL");
         }
-        this.sql = "SELECT * FROM " + TableName + "";
+        this.sql = "SELECT * FROM " + TableName;
     }
 
     /**

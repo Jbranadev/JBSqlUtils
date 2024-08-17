@@ -17,9 +17,6 @@ package io.github.josecarlosbran.JBSqlUtils.Enumerations;
 
 import com.josebran.LogsJB.LogsJB;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * Enumeración que permite indicar las restricciones que puede tener una columna al momento de su creación.
  *
@@ -62,7 +59,7 @@ public enum Constraint {
     AUTO_INCREMENT("AUTO_INCREMENT");
     private String restriccion;
 
-    private Constraint(String Restriccion) {
+    Constraint(String Restriccion) {
         this.setRestriccion(Restriccion);
     }
 
@@ -88,7 +85,7 @@ public enum Constraint {
     public Constraint getNumeracionforName(String name) {
         Class<Constraint> esta = Constraint.class;
         Constraint[] temp = esta.getEnumConstants();
-        List<Constraint> numeraciones = Arrays.asList(temp);
+        Constraint[] numeraciones = temp;
         for (Constraint numeracion : numeraciones) {
             if (numeracion.name().equalsIgnoreCase(name)) {
                 LogsJB.trace("Nombre: " + numeracion.name() + " Posicion Ordinal: " + numeracion.ordinal()

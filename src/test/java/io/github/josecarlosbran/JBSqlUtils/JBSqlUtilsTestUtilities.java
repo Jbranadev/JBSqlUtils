@@ -38,12 +38,9 @@ public class JBSqlUtilsTestUtilities {
 
     @Test(testName = "Get Int From Boolean")
     public void getIntFromBoolean() throws DataBaseUndefind, PropertiesDBUndefined {
-        Assert.assertTrue(0 == UtilitiesJB.getIntFromBoolean(null),
-                "El valor Entero obtenido no corresponde al esperado");
-        Assert.assertTrue(0 == UtilitiesJB.getIntFromBoolean(false),
-                "El valor Entero obtenido no corresponde al esperado");
-        Assert.assertTrue(1 == UtilitiesJB.getIntFromBoolean(true),
-                "El valor Entero obtenido no corresponde al esperado");
+        Assert.assertEquals(UtilitiesJB.getIntFromBoolean(null), 0, "El valor Entero obtenido no corresponde al esperado");
+        Assert.assertEquals(UtilitiesJB.getIntFromBoolean(false), 0, "El valor Entero obtenido no corresponde al esperado");
+        Assert.assertEquals(UtilitiesJB.getIntFromBoolean(true), 1, "El valor Entero obtenido no corresponde al esperado");
     }
 
     @Test(testName = "Get Column",
@@ -125,7 +122,7 @@ public class JBSqlUtilsTestUtilities {
             dependsOnMethods = "geColumn")
     public void setPropertiesConexion() {
         String separador = System.getProperty("file.separator");
-        String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
+        String BDSqlite = (Paths.get("").toAbsolutePath().normalize() + separador +
                 "BD" +
                 separador +
                 "JBSqlUtils.db");

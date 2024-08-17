@@ -33,11 +33,11 @@ import java.util.concurrent.Future;
  * un modelo u obtenerlo de BD's
  */
 class Execute extends Methods_Conexion {
-    private String sql;
     /**
      * Lista de los parametros a envíar
      */
-    private List<Column> parametros;
+    private final List<Column> parametros;
+    private String sql;
 
     /**
      * Constructor que recibe como parametro:
@@ -63,7 +63,6 @@ class Execute extends Methods_Conexion {
             try {
                 Connection connect = this.getConnection();
                 this.sql = this.sql + ";";
-                //LogsJB.info(this.sql);
                 PreparedStatement ejecutor = connect.prepareStatement(this.sql);
                 //Setea los parametros de la consulta
                 for (int i = 0; i < this.parametros.size(); i++) {

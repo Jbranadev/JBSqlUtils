@@ -35,7 +35,6 @@ public class JBSqlUtilsTestSQLServer {
     @Test(testName = "Setear Properties Conexión for Model")
     public void setPropertiesConexiontoModel() throws DataBaseUndefind, PropertiesDBUndefined {
         this.testModel = new TestModel(false);
-        //this.testModel.getIsMayor().setDefault_value("1");
         logParrafo("Se setearan las propiedades de conexión del modelo para SQLServer");
         this.testModel.setGetPropertySystem(false);
         this.testModel.setPort("6077");
@@ -117,7 +116,7 @@ public class JBSqlUtilsTestSQLServer {
         this.testModel.waitOperationComplete();
         logParrafo("Insertamos el Modelo a través del metodo save");
         logParrafo("Filas insertadas en BD's: " + rowsInsert + " " + this.testModel.toString());
-        Assert.assertTrue(rowsInsert == 1, "El registro no fue insertado en BD's");
+        Assert.assertEquals((int) rowsInsert, 1, "El registro no fue insertado en BD's");
     }
 
     @Test(testName = "Clean Model",
@@ -125,7 +124,7 @@ public class JBSqlUtilsTestSQLServer {
     public void cleanModel() throws Exception {
         Assert.assertTrue(this.testModel.getName().equalsIgnoreCase("Marcos"));
         Assert.assertTrue(this.testModel.getApellido().equalsIgnoreCase("Cabrera"));
-        Assert.assertTrue(this.testModel.getIsMayor() == Boolean.FALSE);
+        Assert.assertSame(this.testModel.getIsMayor(), Boolean.FALSE);
         Assert.assertTrue(this.testModel.getModelExist());
         logParrafo("Limpiaremos el Modelo: " + this.testModel.toString());
         this.testModel.cleanModel();
@@ -161,7 +160,7 @@ public class JBSqlUtilsTestSQLServer {
         this.testModel.waitOperationComplete();
         logParrafo(this.testModel.toString());
         Assert.assertTrue(this.testModel.getModelExist(), "El Modelo no fue Obtenido de BD's como esperabamos");
-        Assert.assertTrue(false == this.testModel.getIsMayor(), "El Modelo no fue Obtenido de BD's como esperabamos");
+        Assert.assertFalse(this.testModel.getIsMayor(), "El Modelo no fue Obtenido de BD's como esperabamos");
         this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
                 "Cabrerassss").firstOrFailGet();
     }
@@ -197,7 +196,7 @@ public class JBSqlUtilsTestSQLServer {
         Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
         reloadModel = StringUtils.containsIgnoreCase(temp.getName(), "Marcos");
         Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
-        Assert.assertTrue(false == temp.getIsMayor(), "El Modelo no fue recargado de BD's como esperabamos");
+        Assert.assertFalse(temp.getIsMayor(), "El Modelo no fue recargado de BD's como esperabamos");
         /**
          * Actualizamos la información
          */
@@ -215,7 +214,7 @@ public class JBSqlUtilsTestSQLServer {
         reloadModel = StringUtils.containsIgnoreCase(temp.getName(), "Marcos");
         Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
         Assert.assertTrue(StringUtils.containsIgnoreCase(temp.getApellido(), "Cabrera"), "El Modelo no fue recargado de BD's como esperabamos");
-        Assert.assertTrue(false == temp.getIsMayor(), "El Modelo no fue recargado de BD's como esperabamos");
+        Assert.assertFalse(temp.getIsMayor(), "El Modelo no fue recargado de BD's como esperabamos");
     }
 
     @Test(testName = "Update Model", dependsOnMethods = "reloadModel")
@@ -245,7 +244,7 @@ public class JBSqlUtilsTestSQLServer {
          */
         Integer rowsUpdate = temp.save();
         logParrafo("Guardamos el modelo en BD's");
-        Assert.assertTrue(rowsUpdate == 1, "El registro no fue actualizado en la BD's");
+        Assert.assertEquals((int) rowsUpdate, 1, "El registro no fue actualizado en la BD's");
     }
 
     @Test(testName = "Delete Model", dependsOnMethods = "updateModel")
@@ -268,7 +267,7 @@ public class JBSqlUtilsTestSQLServer {
          */
         logParrafo("Eliminamos el modelo a través del metodo delete");
         Integer rowsDelete = temp.delete();
-        Assert.assertTrue(rowsDelete == 1, "El registro no fue eliminado en la BD's");
+        Assert.assertEquals((int) rowsDelete, 1, "El registro no fue eliminado en la BD's");
     }
 
     @Test(testName = "Insert Models",
@@ -298,7 +297,7 @@ public class JBSqlUtilsTestSQLServer {
          */
         this.testModel.waitOperationComplete();
         //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
-        Assert.assertTrue(rowsInsert == 10, "Los registros no fueron insertados correctamente en BD's");
+        Assert.assertEquals((int) rowsInsert, 10, "Los registros no fueron insertados correctamente en BD's");
     }
 
     @Test(testName = "Get Model",
@@ -355,8 +354,8 @@ public class JBSqlUtilsTestSQLServer {
         logParrafo("Recuperamos los primeros seis modelos que en su nombre poseen el texto Modelo #");
         models = this.testModel.where("Name", Operator.LIKE, "%Modelo #%").take(6).get();
         this.testModel.waitOperationComplete();
-        logParrafo("Se recuperaron " + models.size() + " los cuales son: " + models.toString());
-        Assert.assertTrue(models.size() == 6, "Los modelos no fueron recuperados de BD's como se definio en la sentencia Take");
+        logParrafo("Se recuperaron " + models.size() + " los cuales son: " + models);
+        Assert.assertEquals(models.size(), 6, "Los modelos no fueron recuperados de BD's como se definio en la sentencia Take");
     }
 
     @Test(testName = "Get All Models",
@@ -370,8 +369,8 @@ public class JBSqlUtilsTestSQLServer {
         models = this.testModel.where("Name", Operator.LIKE, "%Modelo #5%").or(
                 "Name", Operator.LIKE, "Modelo #8").or("Apellido", Operator.IGUAL_QUE, "Apellido #3").getAll();
         this.testModel.waitOperationComplete();
-        logParrafo("Se recuperaron " + models.size() + " los cuales son: " + models.toString());
-        Assert.assertTrue(models.size() == 3, "Los modelos no fueron recuperados de BD's");
+        logParrafo("Se recuperaron " + models.size() + " los cuales son: " + models);
+        Assert.assertEquals(models.size(), 3, "Los modelos no fueron recuperados de BD's");
     }
 
     @Test(testName = "Update Models",
@@ -388,7 +387,7 @@ public class JBSqlUtilsTestSQLServer {
         models.forEach(modelo -> {
             logParrafo("Modelo obtenido: " + modelo.toString());
             modelo.setIsMayor(!modelo.getIsMayor());
-            logParrafo("Modelo a actualizar: " + modelo.toString());
+            logParrafo("Modelo a actualizar: " + modelo);
         });
         logParrafo("Enviamos a guardar los modelos a través del metodo saveALL");
         Integer rowsUpdate = this.testModel.saveALL(models);
@@ -398,7 +397,7 @@ public class JBSqlUtilsTestSQLServer {
          */
         this.testModel.waitOperationComplete();
         //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
-        Assert.assertTrue(rowsUpdate == 10, "Los registros no fueron insertados correctamente en BD's");
+        Assert.assertEquals((int) rowsUpdate, 10, "Los registros no fueron insertados correctamente en BD's");
     }
 
     @Test(testName = "Delete Models",
@@ -411,12 +410,12 @@ public class JBSqlUtilsTestSQLServer {
         models = this.testModel.where("Name", Operator.LIKE, "%Modelo #5%").or(
                 "Name", Operator.LIKE, "Modelo #8").or("Apellido", Operator.IGUAL_QUE, "Apellido #3").getAll();
         this.testModel.waitOperationComplete();
-        logParrafo("Se recuperaron " + models.size() + " Para eliminar: " + models.toString());
+        logParrafo("Se recuperaron " + models.size() + " Para eliminar: " + models);
         Integer rowsDelete = this.testModel.deleteALL(models);
         this.testModel.waitOperationComplete();
         logParrafo("Filas eliminadas en BD's: " + rowsDelete + " " + models);
         //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
-        Assert.assertTrue(rowsDelete == 3, "Los registros no fueron eliminados correctamente en BD's");
+        Assert.assertEquals((int) rowsDelete, 3, "Los registros no fueron eliminados correctamente en BD's");
     }
 
     @Test(testName = "Setear Properties Conexión Globales",
@@ -492,27 +491,27 @@ public class JBSqlUtilsTestSQLServer {
         registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Erick").andValue("Apellido", "Ramos")
                 .execute();
         logParrafo("Resultado de insertar el registro de Erick en la tabla Proveedor: " + registros);
-        Assert.assertTrue(registros == 1, "No se pudo insertar el registro de Erick en la tabla Proveedor de BD's");
+        Assert.assertEquals(registros, 1, "No se pudo insertar el registro de Erick en la tabla Proveedor de BD's");
         registros = 0;
         registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Daniel").andValue("Apellido", "Quiñonez").
                 andValue("Estado", false).execute();
         logParrafo("Resultado de insertar el registro de Daniel en la tabla Proveedor: " + registros);
-        Assert.assertTrue(registros == 1, "No se pudo insertar el registro de Daniel en la tabla Proveedor de BD's");
+        Assert.assertEquals(registros, 1, "No se pudo insertar el registro de Daniel en la tabla Proveedor de BD's");
         registros = 0;
         registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Ligia").andValue("Apellido", "Camey")
                 .andValue("Estado", true).execute();
         logParrafo("Resultado de insertar el registro de Ligia en la tabla Proveedor: " + registros);
-        Assert.assertTrue(registros == 1, "No se pudo insertar el registro de Ligia en la tabla Proveedor de BD's");
+        Assert.assertEquals(registros, 1, "No se pudo insertar el registro de Ligia en la tabla Proveedor de BD's");
         registros = 0;
         registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Elsa").andValue("Apellido", "Aguirre")
                 .andValue("Estado", false).execute();
         logParrafo("Resultado de insertar el registro de Elsa en la tabla Proveedor: " + registros);
-        Assert.assertTrue(registros == 1, "No se pudo insertar el registro de Elsa en la tabla Proveedor de BD's");
+        Assert.assertEquals(registros, 1, "No se pudo insertar el registro de Elsa en la tabla Proveedor de BD's");
         registros = 0;
         registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Alex").andValue("Apellido", "Garcia")
                 .execute();
         logParrafo("Resultado de insertar el registro de Alex en la tabla Proveedor: " + registros);
-        Assert.assertTrue(registros == 1, "No se pudo insertar el registro de Alex en la tabla Proveedor de BD's");
+        Assert.assertEquals(registros, 1, "No se pudo insertar el registro de Alex en la tabla Proveedor de BD's");
     }
 
     @Test(testName = "Get In JsonObjects JBSqlUtils",
@@ -546,7 +545,7 @@ public class JBSqlUtilsTestSQLServer {
         lista.forEach(fila -> {
             logParrafo(fila.toString());
         });
-        Assert.assertTrue(lista.size() == 2, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
+        Assert.assertEquals(lista.size(), 2, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
     }
 
     @Test(testName = "Update JBSqlUtils",
@@ -574,7 +573,7 @@ public class JBSqlUtilsTestSQLServer {
                 logParrafo("Filas actualizadas en BD's: " + rowsUpdate);
             }
         }
-        Assert.assertTrue(rowsUpdate == 1, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
+        Assert.assertEquals(rowsUpdate, 1, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
     }
 
     @Test(testName = "Delete JBSqlUtils",
@@ -601,7 +600,7 @@ public class JBSqlUtilsTestSQLServer {
                 logParrafo("Filas eliminadas en BD's: " + rowsDelete);
             }
         }
-        Assert.assertTrue(rowsDelete == 1, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
+        Assert.assertEquals(rowsDelete, 1, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
     }
 
     @Test(testName = "Drop Table JBSqlUtils",
@@ -669,7 +668,7 @@ public class JBSqlUtilsTestSQLServer {
         this.usuarioModel.waitOperationComplete();
         logParrafo("Insertamos el Modelo a través del método save");
         logParrafo("Filas insertadas en BD's: " + rowsInsert + " " + this.usuarioModel.toString());
-        Assert.assertTrue(rowsInsert == 1, "El registro no fue insertado en BD's");
+        Assert.assertEquals((int) rowsInsert, 1, "El registro no fue insertado en BD's");
     }
 
     @Test(testName = "Reload Model Usuario", dependsOnMethods = "insertModelUsuario")
@@ -703,7 +702,7 @@ public class JBSqlUtilsTestSQLServer {
         Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
         reloadModel = StringUtils.containsIgnoreCase(temp.getNombre(), "NombrePrimerModelo");
         Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
-        Assert.assertTrue(false == temp.getEstado(), "El Modelo no fue recargado de BD's como esperabamos");
+        Assert.assertFalse(temp.getEstado(), "El Modelo no fue recargado de BD's como esperabamos");
         /**
          * Actualizamos la información
          */
@@ -721,7 +720,7 @@ public class JBSqlUtilsTestSQLServer {
         reloadModel = StringUtils.containsIgnoreCase(temp.getNombre(), "NombrePrimerModelo");
         Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
         Assert.assertTrue(StringUtils.containsIgnoreCase(temp.getCorreo(), "CorreoPrueba"), "El Modelo no fue recargado de BD's como esperabamos");
-        Assert.assertTrue(false == temp.getEstado(), "El Modelo no fue recargado de BD's como esperabamos");
+        Assert.assertFalse(temp.getEstado(), "El Modelo no fue recargado de BD's como esperabamos");
     }
 
     @Test(testName = "Update Model Usuario", dependsOnMethods = "reloadModelUsuario")
@@ -752,7 +751,7 @@ public class JBSqlUtilsTestSQLServer {
          */
         Integer rowsUpdate = temp.save();
         logParrafo("Guardamos el modelo en BD's");
-        Assert.assertTrue(rowsUpdate == 1, "El registro no fue actualizado en la BD's");
+        Assert.assertEquals((int) rowsUpdate, 1, "El registro no fue actualizado en la BD's");
     }
 
     @Test(testName = "Delete Model Usuario", dependsOnMethods = "updateModelUsuario")
@@ -774,7 +773,7 @@ public class JBSqlUtilsTestSQLServer {
          */
         logParrafo("Eliminamos el modelo a través del metodo delete");
         Integer rowsDelete = temp.delete();
-        Assert.assertTrue(rowsDelete == 1, "El registro no fue eliminado en la BD's");
+        Assert.assertEquals((int) rowsDelete, 1, "El registro no fue eliminado en la BD's");
     }
 
     @Test(testName = "Insert Models Usuario",
@@ -807,7 +806,7 @@ public class JBSqlUtilsTestSQLServer {
          */
         this.usuarioModel.waitOperationComplete();
         //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
-        Assert.assertTrue(rowsInsert == 10, "Los registros no fueron insertados correctamente en BD's");
+        Assert.assertEquals((int) rowsInsert, 10, "Los registros no fueron insertados correctamente en BD's");
     }
 
     @Test(testName = "Get Model Usuario",
@@ -864,8 +863,8 @@ public class JBSqlUtilsTestSQLServer {
         logParrafo("Recuperamos los primeros seis modelos que en su nombre poseen el texto Modelo#");
         models = this.usuarioModel.where("Nombre", Operator.LIKE, "%Modelo#%").take(6).get();
         this.usuarioModel.waitOperationComplete();
-        logParrafo("Se recuperaron " + models.size() + " los cuales son: " + models.toString());
-        Assert.assertTrue(models.size() == 6, "Los modelos no fueron recuperados de BD's como se definio en la sentencia Take");
+        logParrafo("Se recuperaron " + models.size() + " los cuales son: " + models);
+        Assert.assertEquals(models.size(), 6, "Los modelos no fueron recuperados de BD's como se definio en la sentencia Take");
     }
 
     @Test(testName = "Get All Models Usuario",
@@ -879,8 +878,8 @@ public class JBSqlUtilsTestSQLServer {
         models = this.usuarioModel.where("Nombre", Operator.LIKE, "%Modelo#5%").or(
                 "Nombre", Operator.LIKE, "%Modelo#8%").getAll();
         this.usuarioModel.waitOperationComplete();
-        logParrafo("Se recuperaron " + models.size() + " los cuales son: " + models.toString());
-        Assert.assertTrue(models.size() == 2, "Los modelos no fueron recuperados de BD's");
+        logParrafo("Se recuperaron " + models.size() + " los cuales son: " + models);
+        Assert.assertEquals(models.size(), 2, "Los modelos no fueron recuperados de BD's");
     }
 
     @Test(testName = "Update Models Usuario",
@@ -897,7 +896,7 @@ public class JBSqlUtilsTestSQLServer {
         models.forEach(modelo -> {
             logParrafo("Modelo obtenido: " + modelo.toString());
             modelo.setEstado(!modelo.getEstado());
-            logParrafo("Modelo a actualizar: " + modelo.toString());
+            logParrafo("Modelo a actualizar: " + modelo);
         });
         logParrafo("Enviamos a guardar los modelos a través del método saveALL");
         Integer rowsUpdate = this.usuarioModel.saveALL(models);
@@ -907,7 +906,7 @@ public class JBSqlUtilsTestSQLServer {
          */
         this.usuarioModel.waitOperationComplete();
         //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
-        Assert.assertTrue(rowsUpdate == 10, "Los registros no fueron insertados correctamente en BD's");
+        Assert.assertEquals((int) rowsUpdate, 10, "Los registros no fueron insertados correctamente en BD's");
     }
 
     @Test(testName = "Delete Models Usuario",
@@ -920,12 +919,12 @@ public class JBSqlUtilsTestSQLServer {
         models = this.usuarioModel.where("Nombre", Operator.LIKE, "%Modelo#5%").or(
                 "Nombre", Operator.LIKE, "%Modelo#8%").getAll();
         this.usuarioModel.waitOperationComplete();
-        logParrafo("Se recuperaron " + models.size() + " Para eliminar: " + models.toString());
+        logParrafo("Se recuperaron " + models.size() + " Para eliminar: " + models);
         Integer rowsDelete = this.usuarioModel.deleteALL(models);
         this.usuarioModel.waitOperationComplete();
         logParrafo("Filas eliminadas en BD's: " + rowsDelete + " " + models);
         //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
-        Assert.assertTrue(rowsDelete == 2, "Los registros no fueron eliminados correctamente en BD's");
+        Assert.assertEquals((int) rowsDelete, 2, "Los registros no fueron eliminados correctamente en BD's");
     }
 
     @Test(testName = "Get In JsonObjects JBSqlUtils Usuario",
@@ -955,7 +954,7 @@ public class JBSqlUtilsTestSQLServer {
         lista.forEach(fila -> {
             logParrafo(fila.toString());
         });
-        Assert.assertTrue(lista.size() == 8, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
+        Assert.assertEquals(lista.size(), 8, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
     }
     /////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////

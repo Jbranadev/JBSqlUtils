@@ -26,7 +26,7 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author Jose Bran
  */
 public class Update {
-    private String sql;
+    private final String sql;
 
     /**
      * Constructor que recibe como parámetro:

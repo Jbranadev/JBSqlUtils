@@ -32,7 +32,7 @@ public class JBSqlUtilsTestGodDay {
     @Test(testName = "Setear Properties Conexión Globales")
     public void setPropertiesConexion() {
         String separador = System.getProperty("file.separator");
-        String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
+        String BDSqlite = (Paths.get("").toAbsolutePath().normalize() + separador +
                 "BD" +
                 separador +
                 "JBSqlUtils.db");
@@ -90,27 +90,27 @@ public class JBSqlUtilsTestGodDay {
         registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Erick").andValue("Apellido", "Ramos")
                 .execute();
         logParrafo("Resultado de insertar el registro de Erick en la tabla Proveedor: " + registros);
-        Assert.assertTrue(registros == 1, "No se pudo insertar el registro de Erick en la tabla Proveedor de BD's");
+        Assert.assertEquals(registros, 1, "No se pudo insertar el registro de Erick en la tabla Proveedor de BD's");
         registros = 0;
         registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Daniel").andValue("Apellido", "Quiñonez").
                 andValue("Estado", false).execute();
         logParrafo("Resultado de insertar el registro de Daniel en la tabla Proveedor: " + registros);
-        Assert.assertTrue(registros == 1, "No se pudo insertar el registro de Daniel en la tabla Proveedor de BD's");
+        Assert.assertEquals(registros, 1, "No se pudo insertar el registro de Daniel en la tabla Proveedor de BD's");
         registros = 0;
         registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Ligia").andValue("Apellido", "Camey")
                 .andValue("Estado", true).execute();
         logParrafo("Resultado de insertar el registro de Ligia en la tabla Proveedor: " + registros);
-        Assert.assertTrue(registros == 1, "No se pudo insertar el registro de Ligia en la tabla Proveedor de BD's");
+        Assert.assertEquals(registros, 1, "No se pudo insertar el registro de Ligia en la tabla Proveedor de BD's");
         registros = 0;
         registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Elsa").andValue("Apellido", "Aguirre")
                 .andValue("Estado", false).execute();
         logParrafo("Resultado de insertar el registro de Elsa en la tabla Proveedor: " + registros);
-        Assert.assertTrue(registros == 1, "No se pudo insertar el registro de Elsa en la tabla Proveedor de BD's");
+        Assert.assertEquals(registros, 1, "No se pudo insertar el registro de Elsa en la tabla Proveedor de BD's");
         registros = 0;
         registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Alex").andValue("Apellido", "Garcia")
                 .execute();
         logParrafo("Resultado de insertar el registro de Alex en la tabla Proveedor: " + registros);
-        Assert.assertTrue(registros == 1, "No se pudo insertar el registro de Alex en la tabla Proveedor de BD's");
+        Assert.assertEquals(registros, 1, "No se pudo insertar el registro de Alex en la tabla Proveedor de BD's");
     }
 
     @Test(testName = "Get In JsonObjects JBSqlUtils",
@@ -129,7 +129,7 @@ public class JBSqlUtilsTestGodDay {
         lista.forEach(fila -> {
             logParrafo(fila.toString());
         });
-        Assert.assertTrue(lista.size() == 5, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
+        Assert.assertEquals(lista.size(), 5, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
     }
 
     @Test(testName = "Update JBSqlUtils",
@@ -152,7 +152,7 @@ public class JBSqlUtilsTestGodDay {
             rowsUpdate += JBSqlUtils.update("Proveedor").set("Estado", !fila.getBoolean("ESTADO")).execute();
         }
         logParrafo("Filas afectadas: " + rowsUpdate);
-        Assert.assertTrue(rowsUpdate == 15, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
+        Assert.assertEquals(rowsUpdate, 15, "No se pudo obtener las tuplas que cumplen con los criterios de busqueda en una lista de JsonObject");
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -199,8 +199,7 @@ public class JBSqlUtilsTestGodDay {
         JBSqlUtils.update("Proveedor").set("Estado", true).where("Estado", Operator.IGUAL_QUE, true)
                 .openParentecis(null, "Estado", Operator.IGUAL_QUE, true).and("Estado", Operator.IGUAL_QUE, true).closeParentecis(null)
                 .execute();
-        Assert.assertTrue(false,
-                "No se Lanzo la exepción ValorUndefined como se esperaba");
+        Assert.fail("No se Lanzo la exepción ValorUndefined como se esperaba");
     }
 
     @Test(testName = "Take Limite Igual o Inferior a 0 JBSqlUtils",
@@ -255,8 +254,7 @@ public class JBSqlUtilsTestGodDay {
         TestModel model = new TestModel();
         model.where("IsMayor", Operator.IGUAL_QUE, false).openParentecis(null, "IsMayor", Operator.IGUAL_QUE, false)
                 .closeParentecis(Operator.OR).openParentecis(null, "Id", Operator.IGUAL_QUE, 3).closeParentecis(null).get();
-        Assert.assertTrue(false,
-                "No se Lanzo la exepción ValorUndefined como se esperaba");
+        Assert.fail("No se Lanzo la exepción ValorUndefined como se esperaba");
     }
 
     @Test(testName = "Order By Colum Name JBSqlUtilsModel",
@@ -281,7 +279,7 @@ public class JBSqlUtilsTestGodDay {
             dependsOnMethods = "takeLimiteJBSqlUtilsModel")
     public void whereColumnNameJBSqlUtilsModelPropertyFalse() throws Exception {
         String separador = System.getProperty("file.separator");
-        String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
+        String BDSqlite = (Paths.get("").toAbsolutePath().normalize() + separador +
                 "BD" +
                 separador +
                 "JBSqlUtils.db");
@@ -299,7 +297,7 @@ public class JBSqlUtilsTestGodDay {
             dependsOnMethods = "whereColumnNameJBSqlUtilsModelPropertyFalse")
     public void andColumnNameJBSqlUtilsModelPropertyFalse() throws Exception {
         String separador = System.getProperty("file.separator");
-        String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
+        String BDSqlite = (Paths.get("").toAbsolutePath().normalize() + separador +
                 "BD" +
                 separador +
                 "JBSqlUtils.db");
@@ -317,7 +315,7 @@ public class JBSqlUtilsTestGodDay {
             dependsOnMethods = "andColumnNameJBSqlUtilsModelPropertyFalse")
     public void orColumnNameJBSqlUtilsModelPropertyFalse() throws Exception {
         String separador = System.getProperty("file.separator");
-        String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
+        String BDSqlite = (Paths.get("").toAbsolutePath().normalize() + separador +
                 "BD" +
                 separador +
                 "JBSqlUtils.db");
@@ -335,7 +333,7 @@ public class JBSqlUtilsTestGodDay {
             dependsOnMethods = "orColumnNameJBSqlUtilsModelPropertyFalse")
     public void openParentecisColumnNameJBSqlUtilsModelPropertyFalse() throws Exception {
         String separador = System.getProperty("file.separator");
-        String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
+        String BDSqlite = (Paths.get("").toAbsolutePath().normalize() + separador +
                 "BD" +
                 separador +
                 "JBSqlUtils.db");
@@ -354,7 +352,7 @@ public class JBSqlUtilsTestGodDay {
             dependsOnMethods = "openParentecisColumnNameJBSqlUtilsModelPropertyFalse")
     public void openParentecisOperatorNullColumnNameJBSqlUtilsModelPropertyFalse() throws Exception {
         String separador = System.getProperty("file.separator");
-        String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
+        String BDSqlite = (Paths.get("").toAbsolutePath().normalize() + separador +
                 "BD" +
                 separador +
                 "JBSqlUtils.db");
@@ -374,7 +372,7 @@ public class JBSqlUtilsTestGodDay {
             dependsOnMethods = "openParentecisOperatorNullColumnNameJBSqlUtilsModelPropertyFalse")
     public void orderByColumnNameJBSqlUtilsModelPropertyFalse() throws Exception {
         String separador = System.getProperty("file.separator");
-        String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
+        String BDSqlite = (Paths.get("").toAbsolutePath().normalize() + separador +
                 "BD" +
                 separador +
                 "JBSqlUtils.db");
@@ -392,7 +390,7 @@ public class JBSqlUtilsTestGodDay {
             dependsOnMethods = "orderByColumnNameJBSqlUtilsModelPropertyFalse")
     public void takeLimiteJBSqlUtilsModelPropertyFalse() throws Exception {
         String separador = System.getProperty("file.separator");
-        String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
+        String BDSqlite = (Paths.get("").toAbsolutePath().normalize() + separador +
                 "BD" +
                 separador +
                 "JBSqlUtils.db");
@@ -478,8 +476,7 @@ public class JBSqlUtilsTestGodDay {
     public void firstOrFail() throws Exception {
         TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
                 "Cabrerassss").firstOrFail();
-        Assert.assertTrue(false,
-                "No se Lanzo la exepción como se esperaba");
+        Assert.fail("No se Lanzo la exepción como se esperaba");
     }
 
     @Test(testName = "Update Model", dependsOnMethods = "firstOrFail")
@@ -509,8 +506,7 @@ public class JBSqlUtilsTestGodDay {
          */
         Integer rowsUpdate = temp.save();
         logParrafo("Guardamos el modelo en BD's");
-        Assert.assertTrue(rowsUpdate == 0,
-                "La cantidad de filas obtenidas, no corresponde a lo esperado");
+        Assert.assertEquals((int) rowsUpdate, 0, "La cantidad de filas obtenidas, no corresponde a lo esperado");
     }
 
     @Test(testName = "Delete Model", dependsOnMethods = "updateModel")
@@ -529,8 +525,7 @@ public class JBSqlUtilsTestGodDay {
          */
         logParrafo("Eliminamos el modelo a través del metodo delete");
         Integer rowsDelete = this.testModel.delete();
-        Assert.assertTrue(rowsDelete == 0,
-                "La cantidad de filas obtenidas, no corresponde a lo esperado");
+        Assert.assertEquals((int) rowsDelete, 0, "La cantidad de filas obtenidas, no corresponde a lo esperado");
     }
 
     @Test(testName = "Insert Models",
@@ -558,8 +553,7 @@ public class JBSqlUtilsTestGodDay {
          */
         this.testModel.waitOperationComplete();
         //Verificamos que la cantidad de filas insertadas corresponda a la cantidad de modelos enviados a realizar el insert
-        Assert.assertTrue(rowsInsert == 10,
-                "La cantidad de filas obtenidas, no corresponde a lo esperado");
+        Assert.assertEquals((int) rowsInsert, 10, "La cantidad de filas obtenidas, no corresponde a lo esperado");
     }
 
     @Test(testName = "Get Model",
@@ -570,8 +564,7 @@ public class JBSqlUtilsTestGodDay {
         this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
                 "Cabrerassss").get();
         this.testModel.waitOperationComplete();
-        Assert.assertTrue(!this.testModel.getModelExist(),
-                "No se Lanzo la exepción como se esperaba");
+        Assert.assertFalse(this.testModel.getModelExist(), "No se Lanzo la exepción como se esperaba");
     }
 
     @Test(testName = "Get First Model",
@@ -582,8 +575,7 @@ public class JBSqlUtilsTestGodDay {
         TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
                 "Cabrerassss").first();
         this.testModel.waitOperationComplete();
-        Assert.assertTrue(!temp.getModelExist(),
-                "No se Lanzo la exepción como se esperaba");
+        Assert.assertFalse(temp.getModelExist(), "No se Lanzo la exepción como se esperaba");
     }
 
     @Test(testName = "Take Models",
@@ -593,8 +585,7 @@ public class JBSqlUtilsTestGodDay {
         logParrafo("Recuperamos los primeros seis modelos que en su nombre poseen el texto Modelo #");
         models = this.testModel.where("Name", Operator.LIKE, "%Modelo #%").take(6).get();
         this.testModel.waitOperationComplete();
-        Assert.assertTrue(models.size() == 6,
-                "La cantidad de filas obtenidas, no corresponde a lo esperado");
+        Assert.assertEquals(models.size(), 6, "La cantidad de filas obtenidas, no corresponde a lo esperado");
     }
 
     @Test(testName = "Get All Models",
@@ -605,8 +596,7 @@ public class JBSqlUtilsTestGodDay {
         models = this.testModel.where("Name", Operator.LIKE, "%Modelo #5%").or(
                 "Name", Operator.LIKE, "Modelo #8").or("Apellido", Operator.IGUAL_QUE, "Apellido #3").getAll();
         this.testModel.waitOperationComplete();
-        Assert.assertTrue(models.size() == 3,
-                "La cantidad de filas obtenidas, no corresponde a lo esperado");
+        Assert.assertEquals(models.size(), 3, "La cantidad de filas obtenidas, no corresponde a lo esperado");
     }
 
     @Test(testName = "Update Models",
@@ -635,8 +625,7 @@ public class JBSqlUtilsTestGodDay {
          * Esperamos se ejecute la instrucción en BD's
          */
         this.testModel.waitOperationComplete();
-        Assert.assertTrue(rowsUpdate == 9,
-                "La cantidad de filas obtenidas, no corresponde a lo esperado");
+        Assert.assertEquals((int) rowsUpdate, 9, "La cantidad de filas obtenidas, no corresponde a lo esperado");
     }
 
     @Test(testName = "Delete Models",
@@ -658,11 +647,10 @@ public class JBSqlUtilsTestGodDay {
             models.add(model);
             logParrafo(model.toString());
         }
-        logParrafo("Se recuperaron " + models.size() + " Para eliminar: " + models.toString());
+        logParrafo("Se recuperaron " + models.size() + " Para eliminar: " + models);
         Integer rowsDelete = this.testModel.deleteALL(models);
         this.testModel.waitOperationComplete();
-        Assert.assertTrue(rowsDelete == 9,
-                "La cantidad de filas obtenidas, no corresponde a lo esperado");
+        Assert.assertEquals((int) rowsDelete, 9, "La cantidad de filas obtenidas, no corresponde a lo esperado");
     }
 
     @Test(testName = "Drop Table JBSqlUtils2",
@@ -686,8 +674,7 @@ public class JBSqlUtilsTestGodDay {
         registros += JBSqlUtils.insertInto("Proveedor").value("Name", "Erick").andValue("Apellido", "Ramos")
                 .execute();
         logParrafo("Resultado de insertar el registro de Erick en la tabla Proveedor: " + registros);
-        Assert.assertTrue(false,
-                "No se Lanzo la exepción como se esperaba");
+        Assert.fail("No se Lanzo la exepción como se esperaba");
     }
 
     @Test(testName = "Get In JsonObjects JBSqlUtils",
@@ -715,8 +702,7 @@ public class JBSqlUtilsTestGodDay {
         List<JSONObject> lista = select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
                 .and("Apellido", Operator.LIKE, "%a%").take(2).getInJsonObjects(columnas);
         logParrafo("Visualizamos los registros obtenidos de BD's: ");
-        Assert.assertTrue(lista.size() == 0,
-                "La cantidad de filas obtenidas, no corresponde a lo esperado");
+        Assert.assertEquals(lista.size(), 0, "La cantidad de filas obtenidas, no corresponde a lo esperado");
     }
 
     @Test(testName = "Update JBSqlUtils",
@@ -726,8 +712,7 @@ public class JBSqlUtilsTestGodDay {
         rowsUpdate += JBSqlUtils.update("Proveedor").set("Name", "Futura").andSet("Apellido", "Prometida")
                 .where("Id", Operator.IGUAL_QUE, 5).execute();
         logParrafo("Filas actualizadas en BD's: " + rowsUpdate);
-        Assert.assertTrue(false,
-                "No se Lanzo la exepción como se esperaba");
+        Assert.fail("No se Lanzo la exepción como se esperaba");
     }
 
     @Test(testName = "Delete JBSqlUtils",
@@ -736,8 +721,7 @@ public class JBSqlUtilsTestGodDay {
         int rowsDelete = 0;
         rowsDelete += JBSqlUtils.delete("Proveedor").where("Id", Operator.IGUAL_QUE, 5).execute();
         logParrafo("Filas eliminadas en BD's: " + rowsDelete);
-        Assert.assertTrue(false,
-                "No se Lanzo la exepción como se esperaba");
+        Assert.fail("No se Lanzo la exepción como se esperaba");
     }
 
     @Test(testName = "Obtener Properties Conexión for Model", dependsOnMethods = "deleteJBSqlUtils1")

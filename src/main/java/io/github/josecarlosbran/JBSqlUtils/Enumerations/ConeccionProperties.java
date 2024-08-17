@@ -45,7 +45,7 @@ public enum ConeccionProperties {
      *
      * @param propiertie La propiedad correspondiente a la numeración seleccionada
      */
-    private ConeccionProperties(String propiertie) {
+    ConeccionProperties(String propiertie) {
         this.setPropiertie(propiertie);
     }
 

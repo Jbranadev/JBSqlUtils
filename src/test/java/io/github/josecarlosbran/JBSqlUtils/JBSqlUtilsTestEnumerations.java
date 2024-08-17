@@ -17,40 +17,35 @@ public class JBSqlUtilsTestEnumerations {
 
     @Test(testName = "Get Numeración For Name Constraint")
     public void getNumeracionConstraint() throws DataBaseUndefind, PropertiesDBUndefined {
-        Assert.assertTrue(Constraint.NOT_NULL == Constraint.UNIQUE.getNumeracionforName(Constraint.NOT_NULL.name()),
-                "La Enumeración obtenida no corresponde a la esperada");
+        Assert.assertSame(Constraint.NOT_NULL, Constraint.UNIQUE.getNumeracionforName(Constraint.NOT_NULL.name()), "La Enumeración obtenida no corresponde a la esperada");
         Assert.assertTrue(Objects.isNull(Constraint.UNIQUE.getNumeracionforName("null")),
                 "La Enumeración obtenida no corresponde a la esperada");
     }
 
     @Test(testName = "Get Numeración For Name Data Base Type")
     public void getNumeracionDataBaseType() throws DataBaseUndefind, PropertiesDBUndefined {
-        Assert.assertTrue(DataBase.SQLServer == DataBase.MySQL.getNumeracionforName(DataBase.SQLServer.name()),
-                "La Enumeración obtenida no corresponde a la esperada");
+        Assert.assertSame(DataBase.SQLServer, DataBase.MySQL.getNumeracionforName(DataBase.SQLServer.name()), "La Enumeración obtenida no corresponde a la esperada");
         Assert.assertTrue(Objects.isNull(DataBase.SQLServer.getNumeracionforName("null")),
                 "La Enumeración obtenida no corresponde a la esperada");
     }
 
     @Test(testName = "Get Numeración For Name Data Type")
     public void getNumeracionDataType() throws DataBaseUndefind, PropertiesDBUndefined {
-        Assert.assertTrue(DataType.NVARCHAR == DataType.JSON.getNumeracionforName(DataType.NVARCHAR.name()),
-                "La Enumeración obtenida no corresponde a la esperada");
+        Assert.assertSame(DataType.NVARCHAR, DataType.JSON.getNumeracionforName(DataType.NVARCHAR.name()), "La Enumeración obtenida no corresponde a la esperada");
         Assert.assertTrue(Objects.isNull(DataType.NVARCHAR.getNumeracionforName("null")),
                 "La Enumeración obtenida no corresponde a la esperada");
     }
 
     @Test(testName = "Get Numeración For Name Operator")
     public void getNumeracionOperator() throws DataBaseUndefind, PropertiesDBUndefined {
-        Assert.assertTrue(Operator.IN == Operator.OR.getNumeracionforName(Operator.IN.name()),
-                "La Enumeración obtenida no corresponde a la esperada");
+        Assert.assertSame(Operator.IN, Operator.OR.getNumeracionforName(Operator.IN.name()), "La Enumeración obtenida no corresponde a la esperada");
         Assert.assertTrue(Objects.isNull(Operator.IN.getNumeracionforName("nombrex")),
                 "La Enumeración obtenida no corresponde a la esperada");
     }
 
     @Test(testName = "Get Numeración For Name Order Type")
     public void getNumeracionOrderType() throws DataBaseUndefind, PropertiesDBUndefined {
-        Assert.assertTrue(OrderType.DESC == OrderType.ASC.getNumeracionforName(OrderType.DESC.name()),
-                "La Enumeración obtenida no corresponde a la esperada");
+        Assert.assertSame(OrderType.DESC, OrderType.ASC.getNumeracionforName(OrderType.DESC.name()), "La Enumeración obtenida no corresponde a la esperada");
         Assert.assertTrue(Objects.isNull(OrderType.DESC.getNumeracionforName("null")),
                 "La Enumeración obtenida no corresponde a la esperada");
     }
