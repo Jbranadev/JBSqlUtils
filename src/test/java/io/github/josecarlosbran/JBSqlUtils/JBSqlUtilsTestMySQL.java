@@ -50,7 +50,6 @@ public class JBSqlUtilsTestMySQL {
         this.testModel.setPassword("Bran");
         this.testModel.setBD("JBSQLUTILS");
         this.testModel.setDataBaseType(DataBase.MySQL);
-        //this.testModel.setPropertisURL("?autoReconnect=true&useSSL=false");
         logParrafo("Obtendra la conexión del modelo a BD's");
         Assert.assertFalse(Objects.isNull(this.testModel.getConnection()),
                 "No se logro establecer la conexión del modelo a BD's, asegurese de haber configurado correctamente" +
