@@ -73,39 +73,26 @@ class Methods extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     public <T extends JBSqlUtils> Integer saveALL(List<T> modelos) throws Exception {
-        Integer result = 0;
-        T temp = null;
-        for (T modelo : modelos) {
-            //Optimización de los tiempos de inserción de cada modelo.
-            if (!Objects.isNull(temp)) {
-                modelo.setTabla(temp.getTabla());
-                modelo.setTableExist(temp.getTableExist());
-                modelo.setTableName(temp.getTableName());
-                //Con esto se maneja las tablas que existen en BD's
-                modelo.getTabla().setColumnsExist(temp.getTabla().getColumnsExist());
-                modelo.llenarPropertiesFromModel(temp);
-                LogsJB.debug("Modelo Ya había sido inicializado: " + temp.getClass().getSimpleName());
-            } else {
-                modelo.llenarPropertiesFromModel(this);
-                temp = this.obtenerInstanciaOfModel(modelo);
-                LogsJB.warning("Modelo era Null, crea una nueva instancia: " + temp.getClass().getSimpleName());
-                temp.refresh();
-            }
-            if (!modelo.getTableExist()) {
-                LogsJB.debug("Obtendra la información de conexión de la BD's: " + modelo.getClass().getSimpleName());
-                modelo.refresh();
-                modelo.waitOperationComplete();
-                LogsJB.debug("Ya obtuvo la información de BD's");
-                temp.setTabla(modelo.getTabla());
-                temp.setTableExist(modelo.getTableExist());
-                temp.setTableName(modelo.getTableName());
-                //Con esto se maneja las tablas que existen en BD's
-                temp.getTabla().setColumnsExist(modelo.getTabla().getColumnsExist());
-            }
-            result = result + modelo.saveModel(modelo);
+    Integer result = 0;
+    T temp = null;
+    boolean tableInfoCached = false;
+    for (T modelo : modelos) {
+        if (tableInfoCached) {
+            modelo.setTabla(temp.getTabla());
+            modelo.setTableExist(temp.getTableExist());
+            modelo.setTableName(temp.getTableName());
+            modelo.getTabla().setColumnsExist(temp.getTabla().getColumnsExist());
+            modelo.llenarPropertiesFromModel(temp);
+        } else {
+            modelo.llenarPropertiesFromModel(this);
+            temp = this.obtenerInstanciaOfModel(modelo);
+            temp.refresh();
+            tableInfoCached = true;
         }
-        return result;
+        result += modelo.saveModel(modelo);
     }
+    return result;
+}
 
     /**
      * Elimina la información del modelo que hace el llamado en BD´s
