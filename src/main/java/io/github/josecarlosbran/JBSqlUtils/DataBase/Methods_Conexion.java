@@ -39,6 +39,7 @@ import java.sql.*;
 import java.util.Set;
 import java.util.*;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -231,13 +232,15 @@ class Methods_Conexion extends Conexion {
      */
     public Boolean tableExist() throws Exception {
         Boolean result;
-        Callable<ResultAsync<Boolean>> VerificarExistencia = () -> {
+        Callable<ResultAsync<Boolean>> verificarExistencia = () -> {
+            Connection connect = null;
+            ResultSet tables = null;
             try {
                 LogsJB.info("Comienza a verificar la existencia de la tabla");
-                Connection connect = this.getConnection();
+                connect = this.getConnection();
                 DatabaseMetaData metaData = connect.getMetaData();
-                String DatabaseName = this.getBD();
-                ResultSet tables = metaData.getTables(null, null, "%", null);
+                String databaseName = this.getBD();
+                tables = metaData.getTables(null, null, "%", null);
                 LogsJB.trace("Revisara el resultSet");
                 while (tables.next()) {
                     TablesSQL temp = new TablesSQL();
@@ -253,37 +256,29 @@ class Methods_Conexion extends Conexion {
                         temp.setSELF_REFERENCING_COL_NAME(tables.getString(9));
                         temp.setREF_GENERATION(tables.getString(10));
                     }
-                    String NameModel = this.getTableName();
-                    String NameTable = temp.getTABLE_NAME();
-                    //Valida que la tabla pertenezca a la BD's que pertenece el modelo
-                    DatabaseName = this.getBD();
-                    String DatabaseTemp = tables.getString(1);
-                    String DatabaseTemp2 = tables.getString(2);
-                    Boolean tablaisofDB = true;
-                    if (NameModel.equalsIgnoreCase(NameTable)) {
-                        LogsJB.debug("Base de datos del modelo: " + DatabaseName
-                                + " Base de datos del servidor: " + DatabaseTemp);
+                    String nameModel = this.getTableName();
+                    String nameTable = temp.getTABLE_NAME();
+                    String databaseTemp = tables.getString(1);
+                    String databaseTemp2 = tables.getString(2);
+                    boolean tablaisofDB = true;
+                    if (nameModel.equalsIgnoreCase(nameTable)) {
+                        LogsJB.debug("Base de datos del modelo: " + databaseName + " Base de datos del servidor: " + databaseTemp);
                     }
-                    if (!stringIsNullOrEmpty(DatabaseTemp)) {
-                        if (!DatabaseName.equalsIgnoreCase(DatabaseTemp)) {
-                            tablaisofDB = false;
-                        }
+                    if (!stringIsNullOrEmpty(databaseTemp) && !databaseName.equalsIgnoreCase(databaseTemp)) {
+                        tablaisofDB = false;
                     }
-                    if (!tablaisofDB) {
-                        if (!stringIsNullOrEmpty(DatabaseTemp2)) {
-                            tablaisofDB = DatabaseName.equalsIgnoreCase(DatabaseTemp2);
-                        }
+                    if (!tablaisofDB && !stringIsNullOrEmpty(databaseTemp2)) {
+                        tablaisofDB = databaseName.equalsIgnoreCase(databaseTemp2);
                     }
-                    if (this.getDataBaseType() == DataBase.PostgreSQL && NameModel.equalsIgnoreCase(NameTable)) {
+                    if (this.getDataBaseType() == DataBase.PostgreSQL && nameModel.equalsIgnoreCase(nameTable)) {
                         tablaisofDB = true;
                     }
-                    if (NameModel.equalsIgnoreCase(NameTable) && tablaisofDB) {
-                        LogsJB.debug("Base de datos del modelo: " + DatabaseName
-                                + " Base de datos del servidor3: " + DatabaseTemp);
+                    if (nameModel.equalsIgnoreCase(nameTable) && tablaisofDB) {
+                        LogsJB.debug("Base de datos del modelo: " + databaseName + " Base de datos del servidor3: " + databaseTemp);
                         this.setTableExist(Boolean.TRUE);
-                        this.setTableName(NameTable);
+                        this.setTableName(nameTable);
                         this.setTabla(temp);
-                        ResultSet clavePrimaria = metaData.getPrimaryKeys(temp.getTABLE_CAT(), temp.getTABLE_SCHEM(), NameTable);
+                        ResultSet clavePrimaria = metaData.getPrimaryKeys(temp.getTABLE_CAT(), temp.getTABLE_SCHEM(), nameTable);
                         if (clavePrimaria.next()) {
                             PrimaryKey clave = new PrimaryKey();
                             clave.setTABLE_CAT(clavePrimaria.getString(1));
@@ -295,25 +290,33 @@ class Methods_Conexion extends Conexion {
                             this.getTabla().setClaveprimaria(clave);
                         }
                         LogsJB.info("La tabla correspondiente a este modelo, existe en BD's " + this.getClass().getSimpleName());
-                        tables.close();
                         getColumnsTable(connect);
-                        return new ResultAsync<Boolean>(true, null);
+                        return new ResultAsync<>(true, null);
                     }
                 }
                 LogsJB.trace("Termino de Revisarar el resultSet");
-                tables.close();
                 if (!this.getTableExist()) {
                     LogsJB.info("La tabla correspondiente a este modelo, No existe en BD's " + this.getClass().getSimpleName());
-                    this.closeConnection(connect);
-                    return new ResultAsync<Boolean>(false, null);
+                    return new ResultAsync<>(false, null);
                 }
             } catch (Exception e) {
                 LogsJB.fatal("Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                new ResultAsync<Boolean>(false, e);
+                return new ResultAsync<>(false, e);
+            } finally {
+                if (tables != null) {
+                    try {
+                        tables.close();
+                    } catch (SQLException e) {
+                        LogsJB.warning("Error closing ResultSet: " + ExceptionUtils.getStackTrace(e));
+                    }
+                }
+                if (connect != null) {
+                    this.closeConnection(connect);
+                }
             }
-            return new ResultAsync<Boolean>(false, null);
+            return new ResultAsync<>(false, null);
         };
-        Future<ResultAsync<Boolean>> future = ejecutor.submit(VerificarExistencia);
+        Future<ResultAsync<Boolean>> future = ejecutor.submit(verificarExistencia);
         while (!future.isDone()) {
         }
         ResultAsync<Boolean> resultado = future.get();
@@ -332,46 +335,61 @@ class Methods_Conexion extends Conexion {
      */
     protected void getColumnsTable(Connection connect) throws SQLException {
         LogsJB.debug("Comienza a obtener las columnas que le pertenecen a la tabla " + this.getTableName());
-        LogsJB.trace("Obtuvo el objeto conexión");
-        DatabaseMetaData metaData = connect.getMetaData();
-        LogsJB.trace("Ya tiene el MetaData de la BD's");
-        ResultSet columnas = metaData.getColumns(this.getTabla().getTABLE_CAT(),
-                this.getTabla().getTABLE_SCHEM(), this.getTableName(), null);
-        LogsJB.debug("Ya tiene el resultset con las columnas de la tabla");
-        //Obtener las tablas disponibles
-        this.getTabla().getColumnas().clear();
-        this.getTabla().getColumnsExist().clear();
-        while (columnas.next()) {
-            ColumnsSQL temp = new ColumnsSQL();
-            temp.setTABLE_CAT(columnas.getString(1));
-            temp.setTABLE_SCHEM(columnas.getString(2));
-            temp.setTABLE_NAME(columnas.getString(3));
-            temp.setCOLUMN_NAME(columnas.getString(4));
-            //Seteara que la columna si existe en BD's
-            this.getTabla().getColumnsExist().add(columnas.getString(4).toUpperCase());
-            temp.setDATA_TYPE(columnas.getInt(5));
-            temp.setTYPE_NAME(columnas.getString(6));
-            temp.setCOLUMN_SIZE(columnas.getInt(7));
-            temp.setDECIMAL_DIGITS(columnas.getInt(9));
-            temp.setNUM_PREC_RADIX(columnas.getInt(10));
-            temp.setNULLABLE(columnas.getInt(11));
-            temp.setREMARKS(columnas.getString(12));
-            temp.setCOLUMN_DEF(columnas.getString(13));
-            temp.setCHAR_OCTET_LENGTH(columnas.getInt(16));
-            temp.setORDINAL_POSITION(columnas.getInt(17));
-            temp.setIS_NULLABLE(columnas.getString(18));
-            temp.setSCOPE_CATALOG(columnas.getString(19));
-            temp.setSCOPE_SCHEMA(columnas.getString(20));
-            temp.setSCOPE_TABLE(columnas.getString(21));
-            temp.setSOURCE_DATA_TYPE(columnas.getShort(22));
-            temp.setIS_AUTOINCREMENT(columnas.getString(23));
-            temp.setIS_GENERATEDCOLUMN(columnas.getString(24));
-            this.getTabla().getColumnas().add(temp);
+        DatabaseMetaData metaData = null;
+        ResultSet columnas = null;
+        try {
+            LogsJB.trace("Obtuvo el objeto conexión");
+            metaData = connect.getMetaData();
+            LogsJB.trace("Ya tiene el MetaData de la BD's");
+            columnas = metaData.getColumns(this.getTabla().getTABLE_CAT(),
+                    this.getTabla().getTABLE_SCHEM(), this.getTableName(), null);
+            LogsJB.debug("Ya tiene el resultset con las columnas de la tabla");
+            // Limpiar las listas antes de llenarlas
+            this.getTabla().getColumnas().clear();
+            this.getTabla().getColumnsExist().clear();
+            while (columnas.next()) {
+                ColumnsSQL temp = new ColumnsSQL();
+                temp.setTABLE_CAT(columnas.getString(1));
+                temp.setTABLE_SCHEM(columnas.getString(2));
+                temp.setTABLE_NAME(columnas.getString(3));
+                temp.setCOLUMN_NAME(columnas.getString(4));
+                this.getTabla().getColumnsExist().add(columnas.getString(4).toUpperCase());
+                temp.setDATA_TYPE(columnas.getInt(5));
+                temp.setTYPE_NAME(columnas.getString(6));
+                temp.setCOLUMN_SIZE(columnas.getInt(7));
+                temp.setDECIMAL_DIGITS(columnas.getInt(9));
+                temp.setNUM_PREC_RADIX(columnas.getInt(10));
+                temp.setNULLABLE(columnas.getInt(11));
+                temp.setREMARKS(columnas.getString(12));
+                temp.setCOLUMN_DEF(columnas.getString(13));
+                temp.setCHAR_OCTET_LENGTH(columnas.getInt(16));
+                temp.setORDINAL_POSITION(columnas.getInt(17));
+                temp.setIS_NULLABLE(columnas.getString(18));
+                temp.setSCOPE_CATALOG(columnas.getString(19));
+                temp.setSCOPE_SCHEMA(columnas.getString(20));
+                temp.setSCOPE_TABLE(columnas.getString(21));
+                temp.setSOURCE_DATA_TYPE(columnas.getShort(22));
+                temp.setIS_AUTOINCREMENT(columnas.getString(23));
+                temp.setIS_GENERATEDCOLUMN(columnas.getString(24));
+                this.getTabla().getColumnas().add(temp);
+            }
+            LogsJB.debug("Información de las columnas de la tabla correspondiente al modelo obtenida " + this.getClass().getSimpleName());
+        } catch (SQLException e) {
+            LogsJB.fatal("Excepción al obtener las columnas de la tabla: " + ExceptionUtils.getStackTrace(e));
+            throw e;
+        } finally {
+            if (columnas != null) {
+                try {
+                    columnas.close();
+                } catch (SQLException e) {
+                    LogsJB.warning("Error al cerrar ResultSet: " + ExceptionUtils.getStackTrace(e));
+                }
+            }
+            if (connect != null) {
+                this.closeConnection(connect);
+            }
         }
-        LogsJB.debug("Información de las columnas de la tabla correspondiente al modelo obtenida " + this.getClass().getSimpleName());
-        columnas.close();
-        this.closeConnection(connect);
-        this.getTabla().getColumnas().stream().sorted(Comparator.comparing(ColumnsSQL::getORDINAL_POSITION));
+        this.getTabla().getColumnas().sort(Comparator.comparing(ColumnsSQL::getORDINAL_POSITION));
     }
 
     /**
@@ -398,12 +416,13 @@ class Methods_Conexion extends Conexion {
         this.setTaskIsReady(false);
         Boolean reloadModel;
         this.validarTableExist(this);
-        Callable<ResultAsync<Boolean>> get = () -> {
+        CompletableFuture<ResultAsync<Boolean>> future = CompletableFuture.supplyAsync(() -> {
             Boolean result = false;
+            Connection connect = null;
+            ResultSet registros = null;
             try {
                 if (this.getTableExist() && this.getModelExist()) {
-                    //Obtener cual es la clave primaria de la tabla
-                    String sql = "SELECT * FROM " + this.getTableName() + " WHERE ";
+                    StringBuilder sql = new StringBuilder("SELECT * FROM ").append(this.getTableName()).append(" WHERE ");
                     String namePrimaryKey = this.getTabla().getClaveprimaria().getCOLUMN_NAME();
                     List<Field> columnas = this.getFieldsOfModel();
                     List<Field> values = new ArrayList<>();
@@ -412,46 +431,46 @@ class Methods_Conexion extends Conexion {
                                 || (this.getColumnIsIndexValidValue(this, columna))) {
                             values.add(columna);
                             if (values.size() > 1) {
-                                sql = sql + " AND ";
+                                sql.append(" AND ");
                             }
-                            sql = sql + this.getColumnName(columna) + " = ?";
+                            sql.append(this.getColumnName(columna)).append(" = ?");
                         }
                     }
-                    //Añadir logica de Indices para refrescar el modelo
-                    sql = sql + ";";
-                    LogsJB.info(sql);
-                    Connection connect = this.getConnection();
-                    PreparedStatement ejecutor = connect.prepareStatement(sql);
-                    //Llena la información de las columnas que se insertaran
+                    sql.append(";");
+                    LogsJB.info(sql.toString());
+                    connect = this.getConnection();
+                    PreparedStatement ejecutor = connect.prepareStatement(sql.toString());
                     int auxiliar = 0;
-                    if (values.size() > 0) {
-                        //Llenamos el ejecutor con la información del modelo
-                        for (Field value : values) {
-                            auxiliar++;
-                            convertJavaToSQL(this, value, ejecutor, auxiliar);
-                        }
-                        ResultSet registros = ejecutor.executeQuery();
-                        if (registros.next()) {
-                            procesarResultSetOneResult((T) this, registros);
-                            result = true;
-                        }
+                    for (Field value : values) {
+                        auxiliar++;
+                        convertJavaToSQL(this, value, ejecutor, auxiliar);
                     }
-                    this.closeConnection(connect);
+                    registros = ejecutor.executeQuery();
+                    if (registros.next()) {
+                        procesarResultSetOneResult((T) this, registros);
+                        result = true;
+                    }
                     return new ResultAsync<>(result, null);
                 } else {
-                    LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
-                            "recuperar el Registro: " + this.getTableName());
+                    LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo recuperar el Registro: " + this.getTableName());
                     return new ResultAsync<>(result, null);
                 }
             } catch (Exception e) {
-                LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
-                        "SQL de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia SQL de la BD's, Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                 return new ResultAsync<>(result, e);
+            } finally {
+                if (registros != null) {
+                    try {
+                        registros.close();
+                    } catch (SQLException e) {
+                        LogsJB.warning("Error al cerrar ResultSet: " + ExceptionUtils.getStackTrace(e));
+                    }
+                }
+                if (connect != null) {
+                    this.closeConnection(connect);
+                }
             }
-        };
-        Future<ResultAsync<Boolean>> future = ejecutor.submit(get);
-        while (!future.isDone()) {
-        }
+        });
         ResultAsync<Boolean> resultado = future.get();
         this.setTaskIsReady(true);
         if (!Objects.isNull(resultado.getException())) {
