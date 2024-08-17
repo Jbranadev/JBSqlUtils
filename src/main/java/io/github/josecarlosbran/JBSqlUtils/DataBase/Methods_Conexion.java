@@ -37,6 +37,7 @@ import java.io.File;
 import java.lang.reflect.*;
 import java.sql.Date;
 import java.sql.*;
+import java.util.Set;
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
@@ -554,31 +555,32 @@ class Methods_Conexion extends Conexion {
         LogsJB.debug("Indice donde insertara la columna: " + auxiliar);
         Object valor = getValueColumn(modelo, columnsSQL);
         LogsJB.debug("Valor de la columna: " + valor);
-        if (columnsSQL.getType().isAssignableFrom(String.class)) {
+        Class<?> columnType = columnsSQL.getType();
+        if (columnType.isAssignableFrom(String.class)) {
             //Caracteres y cadenas de Texto
             ejecutor.setString(auxiliar, (String) valor);
-        } else if (columnsSQL.getType().isAssignableFrom(Double.class)) {
+        } else if (columnType.isAssignableFrom(Double.class)) {
             Number value = (Number) valor;
             ejecutor.setDouble(auxiliar, value.doubleValue());
-        } else if (columnsSQL.getType().isAssignableFrom(Integer.class)) {
+        } else if (columnType.isAssignableFrom(Integer.class)) {
             Number value = (Number) valor;
             ejecutor.setInt(auxiliar, value.intValue());
-        } else if (columnsSQL.getType().isAssignableFrom(Float.class)) {
+        } else if (columnType.isAssignableFrom(Float.class)) {
             Number value = (Number) valor;
             ejecutor.setFloat(auxiliar, value.floatValue());
-        } else if (columnsSQL.getType().isAssignableFrom(Boolean.class)) {
+        } else if (columnType.isAssignableFrom(Boolean.class)) {
             Boolean value = (Boolean) valor;
             ejecutor.setBoolean(auxiliar, value.booleanValue());
-        } else if (columnsSQL.getType().isAssignableFrom(byte[].class)) {
+        } else if (columnType.isAssignableFrom(byte[].class)) {
             //Valores binarios
             ejecutor.setBytes(auxiliar, (byte[]) valor);
-        } else if (columnsSQL.getType().isAssignableFrom(Date.class)) {
+        } else if (columnType.isAssignableFrom(Date.class)) {
             //DATE
             ejecutor.setDate(auxiliar, (Date) valor);
-        } else if (columnsSQL.getType().isAssignableFrom(Time.class)) {
+        } else if (columnType.isAssignableFrom(Time.class)) {
             //Time
             ejecutor.setTime(auxiliar, (Time) valor);
-        } else if (columnsSQL.getType().isAssignableFrom(Timestamp.class)) {
+        } else if (columnType.isAssignableFrom(Timestamp.class)) {
             //Timestamp
             ejecutor.setTimestamp(auxiliar, (Timestamp) valor);
         } else {
@@ -598,27 +600,28 @@ class Methods_Conexion extends Conexion {
      * @throws IllegalAccessException    Lanza esta excepción si hubiera algún problema al invocar el metodo Set
      */
     protected void convertSQLtoJava(ColumnsSQL columna, ResultSet resultado, Field field, Object invocador) throws SQLException, InvocationTargetException, IllegalAccessException {
-        if (field.getType().isAssignableFrom(String.class)) {
-            //Caracteres y cadenas de Texto
-            FieldUtils.writeField(invocador, field.getName(), resultado.getString(columna.getCOLUMN_NAME()), true);
-        } else if (field.getType().isAssignableFrom(Double.class)) {
-            FieldUtils.writeField(invocador, field.getName(), resultado.getDouble(columna.getCOLUMN_NAME()), true);
-        } else if (field.getType().isAssignableFrom(Integer.class)) {
-            FieldUtils.writeField(invocador, field.getName(), resultado.getInt(columna.getCOLUMN_NAME()), true);
-        } else if (field.getType().isAssignableFrom(Float.class)) {
-            FieldUtils.writeField(invocador, field.getName(), resultado.getFloat(columna.getCOLUMN_NAME()), true);
-        } else if (field.getType().isAssignableFrom(Boolean.class)) {
-            FieldUtils.writeField(invocador, field.getName(), resultado.getBoolean(columna.getCOLUMN_NAME()), true);
-        } else if (field.getType().isAssignableFrom(byte[].class)) {
-            FieldUtils.writeField(invocador, field.getName(), resultado.getBytes(columna.getCOLUMN_NAME()), true);
-        } else if (field.getType().isAssignableFrom(Date.class)) {
-            FieldUtils.writeField(invocador, field.getName(), resultado.getDate(columna.getCOLUMN_NAME()), true);
-        } else if (field.getType().isAssignableFrom(Time.class)) {
-            FieldUtils.writeField(invocador, field.getName(), resultado.getTime(columna.getCOLUMN_NAME()), true);
-        } else if (field.getType().isAssignableFrom(Timestamp.class)) {
-            FieldUtils.writeField(invocador, field.getName(), resultado.getTimestamp(columna.getCOLUMN_NAME()), true);
+        Class<?> fieldType = field.getType();
+        String columnName = columna.getCOLUMN_NAME();
+        if (fieldType.isAssignableFrom(String.class)) {
+            FieldUtils.writeField(invocador, field.getName(), resultado.getString(columnName), true);
+        } else if (fieldType.isAssignableFrom(Double.class)) {
+            FieldUtils.writeField(invocador, field.getName(), resultado.getDouble(columnName), true);
+        } else if (fieldType.isAssignableFrom(Integer.class)) {
+            FieldUtils.writeField(invocador, field.getName(), resultado.getInt(columnName), true);
+        } else if (fieldType.isAssignableFrom(Float.class)) {
+            FieldUtils.writeField(invocador, field.getName(), resultado.getFloat(columnName), true);
+        } else if (fieldType.isAssignableFrom(Boolean.class)) {
+            FieldUtils.writeField(invocador, field.getName(), resultado.getBoolean(columnName), true);
+        } else if (fieldType.isAssignableFrom(byte[].class)) {
+            FieldUtils.writeField(invocador, field.getName(), resultado.getBytes(columnName), true);
+        } else if (fieldType.isAssignableFrom(Date.class)) {
+            FieldUtils.writeField(invocador, field.getName(), resultado.getDate(columnName), true);
+        } else if (fieldType.isAssignableFrom(Time.class)) {
+            FieldUtils.writeField(invocador, field.getName(), resultado.getTime(columnName), true);
+        } else if (fieldType.isAssignableFrom(Timestamp.class)) {
+            FieldUtils.writeField(invocador, field.getName(), resultado.getTimestamp(columnName), true);
         } else {
-            FieldUtils.writeField(invocador, field.getName(), resultado.getObject(columna.getCOLUMN_NAME()), true);
+            FieldUtils.writeField(invocador, field.getName(), resultado.getObject(columnName), true);
         }
     }
 
@@ -1124,25 +1127,24 @@ class Methods_Conexion extends Conexion {
         LogsJB.debug("Obtuvo un resultado de BD's, procedera a llenar el modelo " + temp.getClass().getSimpleName());
         LogsJB.trace("obtuvo los métodos set");
         LogsJB.debug("Cantidad de columnas : " + temp.getTabla().getColumnas().size());
-        //Llena la información del modelo
-        for (int i = 0; i < temp.getTabla().getColumnas().size(); i++) {
-            ColumnsSQL columna = temp.getTabla().getColumnas().get(i);
+        List<Field> fields = new ArrayList<>(temp.getFieldsOfModel());
+        LogsJB.trace("Inicializa el array list de los campos del modelo");
+        LogsJB.debug("Cantidad de campos set: " + fields.size());
+        Map<String, Field> fieldMap = new HashMap<>();
+        for (Field field : fields) {
+            String fieldName = getColumnName(field);
+            fieldMap.put(fieldName.toLowerCase(), field);
+        }
+        // Llena la información del modelo
+        for (ColumnsSQL columna : temp.getTabla().getColumnas()) {
+            //ColumnsSQL columna = temp.getTabla().getColumnas().get(i);
             String columnName = columna.getCOLUMN_NAME();
             LogsJB.trace("Columna : " + columnName);
-            List<Field> fields = new ArrayList<>(temp.getFieldsOfModel());
-            LogsJB.trace("Inicializa el array list de los campos del modelo");
-            LogsJB.debug("Cantidad de campos set: " + fields.size());
-            //Recorrera los campos del modelo para ver cual es el que corresponde a la columna
-            Iterator<Field> iteradorFields = fields.iterator();
-            while (iteradorFields.hasNext()) {
-                Field field = iteradorFields.next();
-                String fieldName = getColumnName(field);
-                LogsJB.trace("Nombre de la columna, nombre del campo a setear el valor: " + columnName + "   " + fieldName);
-                //Llena la información de las columnas que se insertaran
-                if (StringUtils.equalsIgnoreCase(columnName, fieldName)) {
-                    convertSQLtoJava(columna, registros, field, temp);
-                    break;
-                }
+            // Buscar el campo en el mapa
+            Field field = fieldMap.get(columnName.toLowerCase());
+            if (field != null) {
+                LogsJB.trace("Nombre de la columna, nombre del campo a setear el valor: " + columnName + "   " + field.getName());
+                convertSQLtoJava(columna, registros, field, temp);
             }
         }
         return temp;
@@ -1163,25 +1165,24 @@ class Methods_Conexion extends Conexion {
         modelo.setModelExist(true);
         LogsJB.debug("Obtuvo un resultado de BD's, procedera a llenar el modelo " + modelo.getTableName());
         LogsJB.debug("Cantidad de columnas : " + modelo.getTabla().getColumnas().size());
+        // Cachear los campos y crear un mapa para búsqueda rápida
+        List<Field> fields = new ArrayList<>(modelo.getFieldsOfModel());
+        LogsJB.trace("Inicializa el array list de los campos del modelo");
+        LogsJB.debug("Cantidad de campos set: " + fields.size());
+        Map<String, Field> fieldMap = new HashMap<>();
+        for (Field field : fields) {
+            String fieldName = getColumnName(field);
+            fieldMap.put(fieldName.toLowerCase(), field);
+        }
         //Llena la información del modelo
-        for (int i = 0; i < modelo.getTabla().getColumnas().size(); i++) {
-            ColumnsSQL columna = modelo.getTabla().getColumnas().get(i);
+        for (ColumnsSQL columna : modelo.getTabla().getColumnas()) {
             String columnName = columna.getCOLUMN_NAME();
             LogsJB.trace("Columna : " + columnName);
-            List<Field> fields = new ArrayList<>(modelo.getFieldsOfModel());
-            LogsJB.trace("Inicializa el array list de los campos del modelo");
-            LogsJB.debug("Cantidad de campos set: " + fields.size());
-            //Recorrera los campos del modelo para ver cual es el que corresponde a la columna
-            Iterator<Field> iteradorFields = fields.iterator();
-            while (iteradorFields.hasNext()) {
-                Field field = iteradorFields.next();
-                String fieldName = getColumnName(field);
-                LogsJB.trace("Nombre de la columna, nombre del campo a setear el valor: " + columnName + "   " + fieldName);
-                //Llena la información de las columnas que se insertaran
-                if (StringUtils.equalsIgnoreCase(columnName, fieldName)) {
-                    convertSQLtoJava(columna, registros, field, modelo);
-                    break;
-                }
+            // Buscar el campo en el mapa
+            Field field = fieldMap.get(columnName.toLowerCase());
+            if (field != null) {
+                LogsJB.trace("Nombre de la columna, nombre del campo a setear el valor: " + columnName + "   " + field.getName());
+                convertSQLtoJava(columna, registros, field, modelo);
             }
         }
     }
@@ -1198,21 +1199,23 @@ class Methods_Conexion extends Conexion {
         JSONObject temp = new JSONObject();
         LogsJB.debug("Obtuvo un resultado de BD's, procedera a llenar el JSON");
         LogsJB.debug("Cantidad de columnas : " + this.getTabla().getColumnas().size());
-        //Llena la información del modelo
-        for (int i = 0; i < this.getTabla().getColumnas().size(); i++) {
-            ColumnsSQL columna = this.getTabla().getColumnas().get(i);
-            String columnName = columna.getCOLUMN_NAME();
+        // Cachear las columnas y crear un set para búsqueda rápida
+        List<ColumnsSQL> columnasTabla = new ArrayList<>(this.getTabla().getColumnas());
+        Set<String> columnasSet = columnas != null ? new TreeSet<>(String.CASE_INSENSITIVE_ORDER) : null;
+        if (columnasSet != null) {
+            for (String columna : columnas) {
+                columnasSet.add(columna.toLowerCase());
+            }
+        }
+        // Llena la información del modelo
+        for (ColumnsSQL columna : columnasTabla) {
+            //ColumnsSQL columna = this.getTabla().getColumnas().get(i);
+            String columnName = columna.getCOLUMN_NAME().toLowerCase();
             LogsJB.trace("Columna : " + columnName);
             //Si no se especifica las columnas a obtener retorna todas las columnas
-            if (Objects.isNull(columnas)) {
+            // Si no se especifica las columnas a obtener retorna todas las columnas
+            if (columnasSet == null || columnasSet.contains(columnName)) {
                 this.convertSQLtoJson(columna, registros, temp);
-            } else {
-                //Si se especificaron las columnas a obtener llena unicamente esas columnas
-                for (int j = 0; j < columnas.size(); j++) {
-                    if (!stringIsNullOrEmpty(columnName) && columnName.equalsIgnoreCase(columnas.get(j))) {
-                        this.convertSQLtoJson(columna, registros, temp);
-                    }
-                }
             }
         }
         return temp;
