@@ -823,7 +823,6 @@ class Methods_Conexion extends Conexion {
                             sql.replace(index, index + 1, " RETURNING * ;");
                         }
                     }
-                    //LogsJB.info(sql);
                     PreparedStatement ejecutor = connect.prepareStatement(sql.toString());
                     //Llena el prepareStatement
                     LogsJB.debug("Llenara la información de las columnas: " + indicemetodos.size());
@@ -1013,7 +1012,6 @@ class Methods_Conexion extends Conexion {
                         }
                     }
                     sql.append(";");
-                    // LogsJB.info(sql.toString());
                     Connection connect = modelo.getConnection();
                     PreparedStatement ejecutor = connect.prepareStatement(sql.toString());
                     // Llena la información de las columnas que se insertaran
@@ -1131,7 +1129,6 @@ class Methods_Conexion extends Conexion {
         }
         // Llena la información del modelo
         for (ColumnsSQL columna : temp.getTabla().getColumnas()) {
-            //ColumnsSQL columna = temp.getTabla().getColumnas().get(i);
             String columnName = columna.getCOLUMN_NAME();
             LogsJB.trace("Columna : " + columnName);
             // Buscar el campo en el mapa
@@ -1203,7 +1200,6 @@ class Methods_Conexion extends Conexion {
         }
         // Llena la información del modelo
         for (ColumnsSQL columna : columnasTabla) {
-            //ColumnsSQL columna = this.getTabla().getColumnas().get(i);
             String columnName = columna.getCOLUMN_NAME().toLowerCase();
             LogsJB.trace("Columna : " + columnName);
             //Si no se especifica las columnas a obtener retorna todas las columnas

@@ -73,34 +73,31 @@ class Methods extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     public <T extends JBSqlUtils> Integer saveALL(List<T> modelos) throws Exception {
-    Integer result = 0;
-    T temp = null;
-    boolean tableInfoCached = false;
+        Integer result = 0;
+        T temp = null;
+        boolean tableInfoCached = false;
         List<Future<Integer>> futures = new ArrayList<>();
         for (T modelo : modelos) {
-        if (tableInfoCached) {
-            modelo.setTabla(temp.getTabla());
-            modelo.setTableExist(temp.getTableExist());
-            modelo.setTableName(temp.getTableName());
-            modelo.getTabla().setColumnsExist(temp.getTabla().getColumnsExist());
-            modelo.llenarPropertiesFromModel(temp);
-        } else {
-            modelo.llenarPropertiesFromModel(this);
-            temp = this.obtenerInstanciaOfModel(modelo);
-            temp.refresh();
-            tableInfoCached = true;
-        }
-
+            if (tableInfoCached) {
+                modelo.setTabla(temp.getTabla());
+                modelo.setTableExist(temp.getTableExist());
+                modelo.setTableName(temp.getTableName());
+                modelo.getTabla().setColumnsExist(temp.getTabla().getColumnsExist());
+                modelo.llenarPropertiesFromModel(temp);
+            } else {
+                modelo.llenarPropertiesFromModel(this);
+                temp = this.obtenerInstanciaOfModel(modelo);
+                temp.refresh();
+                tableInfoCached = true;
+            }
             Callable<Integer> task = () -> modelo.saveModel(modelo);
             futures.add(temp.ejecutor.submit(task));
-
-    }
+        }
         for (Future<Integer> future : futures) {
             result += future.get();
         }
-
-    return result;
-}
+        return result;
+    }
 
     /**
      * Elimina la información del modelo que hace el llamado en BD´s
@@ -146,7 +143,6 @@ class Methods extends Methods_Conexion {
         for (Future<Integer> future : futures) {
             result += future.get();
         }
-
         return result;
     }
 

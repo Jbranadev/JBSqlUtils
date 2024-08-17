@@ -68,44 +68,32 @@ class Get extends Methods_Conexion {
     protected <T extends JBSqlUtils> void get(T modelo, String Sql, List<Column> parametros) throws Exception {
         if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(modelo);
+            modelo.llenarPropertiesFromModel(this);
         }
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
         Callable<ResultAsync<Boolean>> get = () -> {
-            try {
-                if (modelo.getTableExist()) {
-                    String sql = "SELECT * FROM " + modelo.getTableName();
-                    sql = sql + Sql + ";";
-                    LogsJB.info(sql);
-                    Connection connect = modelo.getConnection();
-                    PreparedStatement ejecutor = connect.prepareStatement(sql);
-                    for (int i = 0; i < parametros.size(); i++) {
-                        //Obtengo la información de la columna
-                        Column columnsSQL = parametros.get(i);
-                        convertJavaToSQL(columnsSQL, ejecutor, i + 1);
-                    }
-                    LogsJB.info(ejecutor.toString());
-                    ResultSet registros = ejecutor.executeQuery();
+            try (Connection connect = modelo.getConnection();
+                 PreparedStatement ejecutor = connect.prepareStatement("SELECT * FROM " + modelo.getTableName() + Sql + ";")) {
+                for (int i = 0; i < parametros.size(); i++) {
+                    Column columnsSQL = parametros.get(i);
+                    convertJavaToSQL(columnsSQL, ejecutor, i + 1);
+                }
+                LogsJB.info(ejecutor.toString());
+                try (ResultSet registros = ejecutor.executeQuery()) {
                     while (registros.next()) {
                         procesarResultSetOneResult(modelo, registros);
                     }
-                    modelo.closeConnection(connect);
-                } else {
-                    LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
-                            "recuperar el Registro");
                 }
                 modelo.setTaskIsReady(true);
                 return new ResultAsync<>(true, null);
             } catch (Exception e) {
-                LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's, Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                 modelo.setTaskIsReady(true);
                 return new ResultAsync<>(true, e);
             }
         };
         Future<ResultAsync<Boolean>> future = ejecutor.submit(get);
-        while (!future.isDone()) {
-        }
         ResultAsync<Boolean> resultado = future.get();
         if (!Objects.isNull(resultado.getException())) {
             throw resultado.getException();
@@ -124,55 +112,41 @@ class Get extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     protected <T extends JBSqlUtils> T first(T modelo, String Sql, List<Column> parametros) throws Exception {
-        T modeloResult;
         if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(modelo);
+            modelo.llenarPropertiesFromModel(this);
         }
-        modeloResult = modelo.obtenerInstanciaOfModel(modelo);
+        T modeloResult = modelo.obtenerInstanciaOfModel(modelo);
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
         Callable<ResultAsync<T>> get = () -> {
             T modeloTemp = modelo.obtenerInstanciaOfModel(modelo);
-            try {
-                if (modelo.getTableExist()) {
-                    String sql = "SELECT * FROM " + modelo.getTableName();
-                    sql = sql + Sql + ";";
-                    //LogsJB.info(sql);
-                    Connection connect = modelo.getConnection();
-                    PreparedStatement ejecutor = connect.prepareStatement(sql);
-                    for (int i = 0; i < parametros.size(); i++) {
-                        //Obtengo la información de la columna
-                        Column columnsSQL = parametros.get(i);
-                        convertJavaToSQL(columnsSQL, ejecutor, i + 1);
-                    }
-                    LogsJB.info(ejecutor.toString());
-                    ResultSet registros = ejecutor.executeQuery();
+            try (Connection connect = modelo.getConnection();
+                 PreparedStatement ejecutor = connect.prepareStatement("SELECT * FROM " + modelo.getTableName() + Sql + ";")) {
+                for (int i = 0; i < parametros.size(); i++) {
+                    Column columnsSQL = parametros.get(i);
+                    convertJavaToSQL(columnsSQL, ejecutor, i + 1);
+                }
+                LogsJB.info(ejecutor.toString());
+                try (ResultSet registros = ejecutor.executeQuery()) {
                     if (registros.next()) {
                         modeloTemp = procesarResultSet(modelo, registros);
                     }
-                    modelo.closeConnection(connect);
-                } else {
-                    LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
-                            "recuperar el Registro");
                 }
                 modelo.setTaskIsReady(true);
                 return new ResultAsync<>(modeloTemp, null);
             } catch (Exception e) {
-                LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's, Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                 modelo.setTaskIsReady(true);
                 return new ResultAsync<>(modeloTemp, e);
             }
         };
         Future<ResultAsync<T>> future = ejecutor.submit(get);
-        while (!future.isDone()) {
-        }
         ResultAsync<T> resultado = future.get();
         if (!Objects.isNull(resultado.getException())) {
             throw resultado.getException();
         }
-        modeloResult = resultado.getResult();
-        return modeloResult;
+        return resultado.getResult();
     }
 
     /**
@@ -188,54 +162,39 @@ class Get extends Methods_Conexion {
     protected <T extends JBSqlUtils> void firstOrFailGet(T modelo, String Sql, List<Column> parametros) throws Exception {
         if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(modelo);
+            modelo.llenarPropertiesFromModel(this);
         }
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
         Callable<ResultAsync<Boolean>> get = () -> {
-            try {
-                Boolean result = false;
-                if (modelo.getTableExist()) {
-                    String sql = "SELECT * FROM " + modelo.getTableName();
-                    sql = sql + Sql + ";";
-                    //LogsJB.info(sql);
-                    Connection connect = modelo.getConnection();
-                    PreparedStatement ejecutor = connect.prepareStatement(sql);
-                    for (int i = 0; i < parametros.size(); i++) {
-                        //Obtengo la información de la columna
-                        Column columnsSQL = parametros.get(i);
-                        convertJavaToSQL(columnsSQL, ejecutor, i + 1);
-                    }
-                    LogsJB.info(ejecutor.toString());
-                    ResultSet registros = ejecutor.executeQuery();
+            try (Connection connect = modelo.getConnection();
+                 PreparedStatement ejecutor = connect.prepareStatement("SELECT * FROM " + modelo.getTableName() + Sql + ";")) {
+                for (int i = 0; i < parametros.size(); i++) {
+                    Column columnsSQL = parametros.get(i);
+                    convertJavaToSQL(columnsSQL, ejecutor, i + 1);
+                }
+                LogsJB.info(ejecutor.toString());
+                boolean result = false;
+                try (ResultSet registros = ejecutor.executeQuery()) {
                     if (registros.next()) {
                         procesarResultSetOneResult(modelo, registros);
                         result = true;
                     }
-                    modelo.closeConnection(connect);
-                    modelo.setTaskIsReady(true);
-                    return new ResultAsync<>(result, null);
-                } else {
-                    LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
-                            "recuperar el Registro");
-                    modelo.setTaskIsReady(true);
-                    return new ResultAsync<>(false, null);
                 }
+                modelo.setTaskIsReady(true);
+                return new ResultAsync<>(result, null);
             } catch (SQLException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
-                LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's, Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                 modelo.setTaskIsReady(true);
                 return new ResultAsync<>(false, e);
             }
         };
         Future<ResultAsync<Boolean>> future = ejecutor.submit(get);
-        while (!future.isDone()) {
-        }
         ResultAsync<Boolean> resultado = future.get();
         if (!Objects.isNull(resultado.getException())) {
             throw resultado.getException();
         }
-        Boolean result = resultado.getResult();
-        if (!result) {
+        if (!resultado.getResult()) {
             String sql = "SELECT * FROM " + modelo.getTableName();
             throw new ModelNotFound("No existe un modelo en BD's que corresponda a los criterios de la consulta sql: " + sql + Sql);
         }
@@ -253,59 +212,42 @@ class Get extends Methods_Conexion {
      *                       SQL realizada.
      */
     protected <T extends JBSqlUtils> T firstOrFail(T modelo, String Sql, List<Column> parametros) throws Exception {
-        T modeloResult;
         if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(modelo);
+            modelo.llenarPropertiesFromModel(this);
         }
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
-        modeloResult = modelo.obtenerInstanciaOfModel(modelo);
+        T modeloResult = modelo.obtenerInstanciaOfModel(modelo);
         Callable<ResultAsync<T>> get = () -> {
             T modeloTemp = modelo.obtenerInstanciaOfModel(modelo);
-            try {
-                if (modelo.getTableExist()) {
-                    String sql = "SELECT * FROM " + modelo.getTableName();
-                    sql = sql + Sql + ";";
-                    //LogsJB.info(sql);
-                    Connection connect = modelo.getConnection();
-                    PreparedStatement ejecutor = connect.prepareStatement(sql);
-                    for (int i = 0; i < parametros.size(); i++) {
-                        //Obtengo la información de la columna
-                        Column columnsSQL = parametros.get(i);
-                        convertJavaToSQL(columnsSQL, ejecutor, i + 1);
-                    }
-                    LogsJB.info(ejecutor.toString());
-                    ResultSet registros = ejecutor.executeQuery();
+            try (Connection connect = modelo.getConnection();
+                 PreparedStatement ejecutor = connect.prepareStatement("SELECT * FROM " + modelo.getTableName() + Sql + ";")) {
+                for (int i = 0; i < parametros.size(); i++) {
+                    Column columnsSQL = parametros.get(i);
+                    convertJavaToSQL(columnsSQL, ejecutor, i + 1);
+                }
+                LogsJB.info(ejecutor.toString());
+                try (ResultSet registros = ejecutor.executeQuery()) {
                     if (registros.next()) {
                         modeloTemp = procesarResultSet(modelo, registros);
                     }
-                    modelo.closeConnection(connect);
-                    modelo.setTaskIsReady(true);
-                    return new ResultAsync<>(modeloTemp, null);
-                } else {
-                    LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
-                            "recuperar el Registro");
-                    modelo.setTaskIsReady(true);
-                    return new ResultAsync<>(modeloTemp, null);
                 }
+                modelo.setTaskIsReady(true);
+                return new ResultAsync<>(modeloTemp, null);
             } catch (SQLException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
-                LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's, Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                 modelo.setTaskIsReady(true);
                 return new ResultAsync<>(modeloTemp, e);
             }
         };
         Future<ResultAsync<T>> future = ejecutor.submit(get);
-        while (!future.isDone()) {
-        }
         ResultAsync<T> resultado = future.get();
         if (!Objects.isNull(resultado.getException())) {
             throw resultado.getException();
         }
         modeloResult = resultado.getResult();
-        Boolean result;
-        result = modeloResult.getModelExist();
-        if (!result) {
+        if (!modeloResult.getModelExist()) {
             String sql = "SELECT * FROM " + modelo.getTableName();
             throw new ModelNotFound("No existe un modelo en BD's que corresponda a los criterios de la consulta sql: " + sql + Sql);
         }
@@ -328,44 +270,28 @@ class Get extends Methods_Conexion {
     protected <T extends JBSqlUtils> List<T> getAll(T modelo, String Sql, List<Column> parametros) throws Exception {
         if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(modelo);
+            modelo.llenarPropertiesFromModel(this);
         }
         modelo.setTaskIsReady(false);
-        List<T> lista;
         modelo.validarTableExist(modelo);
+        final String finalSql = Sql; // Make Sql final
         Callable<ResultAsync<List<T>>> get = () -> {
             List<T> listaTemp = new ArrayList<>();
             try {
                 if (modelo.getTableExist()) {
-                    String sql = "SELECT * FROM " + modelo.getTableName();
-                    sql = sql + Sql + ";";
+                    String query = "SELECT * FROM " + modelo.getTableName() + finalSql + ";";
                     //Si es sql server y trae la palabra limit verificara y modificara la sentencia
                     if (modelo.getDataBaseType() == DataBase.SQLServer) {
-                        if (StringUtils.containsIgnoreCase(sql, "LIMIT")) {
-                            String temporal;
-                            LogsJB.debug("Sentencia SQL a modificar: " + sql);
-                            int indice_limite = StringUtils.lastIndexOfIgnoreCase(sql, "LIMIT");
-                            LogsJB.debug("Indice limite: " + indice_limite);
-                            LogsJB.debug("Longitud de la sentencia: " + sql.length());
-                            String temporal_limite = StringUtils.substring(sql, indice_limite);
-                            sql = sql.replace(temporal_limite, ";");
-                            LogsJB.debug("Sentencia SQL despues de eliminar el limite: " + sql);
-                            LogsJB.trace("Temporal Limite: " + temporal_limite);
-                            temporal_limite = StringUtils.remove(temporal_limite, "LIMIT");
-                            LogsJB.trace("Temporal Limite: " + temporal_limite);
-                            temporal_limite = StringUtils.remove(temporal_limite, ";");
-                            LogsJB.trace("Temporal Limite: " + temporal_limite);
-                            temporal = sql;
-                            LogsJB.trace("Temporal SQL: " + temporal);
+                        if (StringUtils.containsIgnoreCase(query, "LIMIT")) {
+                            String temporal_limite = StringUtils.substringAfterLast(query, "LIMIT").replace(";", "").trim();
                             String select = "SELECT TOP " + temporal_limite + " * FROM ";
-                            sql = temporal.replace("SELECT * FROM ", select);
+                            query = query.replace("SELECT * FROM ", select).replace("LIMIT " + temporal_limite, "");
                             LogsJB.debug("Se modifico la sentencia SQL para que unicamente obtenga la cantidad de " +
-                                    "registros especificados por el usuario: " + sql);
+                                    "registros especificados por el usuario: " + query);
                         }
                     }
-                    //LogsJB.info(sql);
                     Connection connect = modelo.getConnection();
-                    PreparedStatement ejecutor = connect.prepareStatement(sql);
+                    PreparedStatement ejecutor = connect.prepareStatement(query);
                     for (int i = 0; i < parametros.size(); i++) {
                         //Obtengo la información de la columna
                         Column columnsSQL = parametros.get(i);
@@ -397,8 +323,7 @@ class Get extends Methods_Conexion {
         if (!Objects.isNull(resultado.getException())) {
             throw resultado.getException();
         }
-        lista = resultado.getResult();
-        return lista;
+        return resultado.getResult();
     }
 
     /**
@@ -415,43 +340,28 @@ class Get extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     protected List<JSONObject> get(String Sql, List<Column> parametros, List<String> columnas) throws Exception {
-        List<JSONObject> lista;
         String tableName = Sql.replace("SELECT * FROM ", "").split(" ")[0];
         this.setTaskIsReady(false);
         this.setTableName(tableName);
         this.validarTableExist(this);
+        final String finalSql = Sql; // Make Sql final
         Callable<ResultAsync<List<JSONObject>>> get = () -> {
             List<JSONObject> temp = new ArrayList<>();
+            String query = finalSql + ";";
             try {
                 if (this.getTableExist()) {
-                    String sql = Sql + ";";
                     //Si es sql server y trae la palabra limit verificara y modificara la sentencia
                     if (this.getDataBaseType() == DataBase.SQLServer) {
-                        if (StringUtils.containsIgnoreCase(sql, "LIMIT")) {
-                            String temporal;
-                            LogsJB.debug("Sentencia SQL a modificar: " + sql);
-                            int indice_limite = StringUtils.lastIndexOfIgnoreCase(sql, "LIMIT");
-                            LogsJB.debug("Indice limite: " + indice_limite);
-                            LogsJB.debug("Longitud de la sentencia: " + sql.length());
-                            String temporal_limite = StringUtils.substring(sql, indice_limite);
-                            sql = sql.replace(temporal_limite, ";");
-                            LogsJB.debug("Sentencia SQL despues de eliminar el limite: " + sql);
-                            LogsJB.trace("Temporal Limite: " + temporal_limite);
-                            temporal_limite = StringUtils.remove(temporal_limite, "LIMIT");
-                            LogsJB.trace("Temporal Limite: " + temporal_limite);
-                            temporal_limite = StringUtils.remove(temporal_limite, ";");
-                            LogsJB.trace("Temporal Limite: " + temporal_limite);
-                            temporal = sql;
-                            LogsJB.trace("Temporal SQL: " + temporal);
+                        if (StringUtils.containsIgnoreCase(query, "LIMIT")) {
+                            String temporal_limite = StringUtils.substringAfterLast(query, "LIMIT").replace(";", "").trim();
                             String select = "SELECT TOP " + temporal_limite + " * FROM ";
-                            sql = temporal.replace("SELECT * FROM ", select);
+                            query = query.replace("SELECT * FROM ", select).replace("LIMIT " + temporal_limite, "");
                             LogsJB.debug("Se modifico la sentencia SQL para que unicamente obtenga la cantidad de " +
-                                    "registros especificados por el usuario: " + sql);
+                                    "registros especificados por el usuario: " + query);
                         }
                     }
-                    //LogsJB.info(sql);
                     Connection connect = this.getConnection();
-                    PreparedStatement ejecutor = connect.prepareStatement(sql);
+                    PreparedStatement ejecutor = connect.prepareStatement(query);
                     for (int i = 0; i < parametros.size(); i++) {
                         //Obtengo la información de la columna
                         Column columnsSQL = parametros.get(i);
@@ -485,7 +395,6 @@ class Get extends Methods_Conexion {
         if (!Objects.isNull(resultado.getException())) {
             throw resultado.getException();
         }
-        lista = resultado.getResult();
-        return lista;
+        return resultado.getResult();
     }
 }
