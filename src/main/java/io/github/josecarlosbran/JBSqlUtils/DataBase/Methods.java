@@ -76,7 +76,8 @@ class Methods extends Methods_Conexion {
     Integer result = 0;
     T temp = null;
     boolean tableInfoCached = false;
-    for (T modelo : modelos) {
+        List<Future<Integer>> futures = new ArrayList<>();
+        for (T modelo : modelos) {
         if (tableInfoCached) {
             modelo.setTabla(temp.getTabla());
             modelo.setTableExist(temp.getTableExist());
@@ -89,8 +90,15 @@ class Methods extends Methods_Conexion {
             temp.refresh();
             tableInfoCached = true;
         }
-        result += modelo.saveModel(modelo);
+
+            Callable<Integer> task = () -> modelo.saveModel(modelo);
+            futures.add(temp.ejecutor.submit(task));
+
     }
+        for (Future<Integer> future : futures) {
+            result += future.get();
+        }
+
     return result;
 }
 
@@ -118,30 +126,27 @@ class Methods extends Methods_Conexion {
     public <T extends JBSqlUtils> Integer deleteALL(List<T> modelos) throws Exception {
         Integer result = 0;
         T temp = null;
+        boolean tableInfoCached = false;
+        List<Future<Integer>> futures = new ArrayList<>();
         for (T modelo : modelos) {
-            //Optimización de los tiempos de inserción de cada modelo.
-            if (!Objects.isNull(temp)) {
+            if (tableInfoCached) {
                 modelo.setTabla(temp.getTabla());
                 modelo.setTableExist(temp.getTableExist());
                 modelo.setTableName(temp.getTableName());
-                LogsJB.debug("Modelo Ya había sido inicializado: " + temp.getClass().getSimpleName());
                 modelo.llenarPropertiesFromModel(temp);
             } else {
                 modelo.llenarPropertiesFromModel(this);
-                temp = modelo.obtenerInstanciaOfModel(modelo);
-                LogsJB.warning("Modelo era Null, crea una nueva instancia: " + temp.getClass().getSimpleName());
+                temp = this.obtenerInstanciaOfModel(modelo);
+                temp.refresh();
+                tableInfoCached = true;
             }
-            if (!modelo.getTableExist()) {
-                LogsJB.debug("Obtendra la información de conexión de la BD's: " + modelo.getClass().getSimpleName());
-                modelo.refresh();
-                modelo.waitOperationComplete();
-                LogsJB.debug("Ya obtuvo la información de BD's");
-                temp.setTableExist(modelo.getTableExist());
-                temp.setTableName(modelo.getTableName());
-                temp.setTabla(modelo.getTabla());
-            }
-            result = result + modelo.deleteModel(modelo);
+            Callable<Integer> task = () -> modelo.deleteModel(modelo);
+            futures.add(temp.ejecutor.submit(task));
         }
+        for (Future<Integer> future : futures) {
+            result += future.get();
+        }
+
         return result;
     }
 
