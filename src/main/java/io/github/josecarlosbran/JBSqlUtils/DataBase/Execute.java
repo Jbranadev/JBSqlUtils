@@ -33,11 +33,11 @@ import java.util.concurrent.Future;
  * un modelo u obtenerlo de BD's
  */
 class Execute extends Methods_Conexion {
-    private String sql;
     /**
      * Lista de los parametros a envíar
      */
-    private List<Column> parametros;
+    private final List<Column> parametros;
+    private String sql;
 
     /**
      * Constructor que recibe como parametro:

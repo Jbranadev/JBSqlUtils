@@ -34,10 +34,7 @@ public class UtilitiesJB {
      * @return Retorna True si la cadena envíada esta vacía o nula, de lo contrario retorna false
      */
     public static boolean stringIsNullOrEmpty(String cadena) {
-        if (Objects.isNull(cadena) || cadena.isEmpty()) {
-            return true;
-        }
-        return false;
+        return Objects.isNull(cadena) || cadena.isEmpty();
     }
 
     /***
@@ -46,10 +43,7 @@ public class UtilitiesJB {
      * @return si el numero es mayor o igual a uno, retorna true, de lo contrario, retorna false.
      */
     public static boolean getBooleanfromInt(int numero) {
-        if (numero >= 1) {
-            return true;
-        }
-        return false;
+        return numero >= 1;
     }
 
     /**
@@ -60,7 +54,7 @@ public class UtilitiesJB {
      * Si el valor es True retorna 1.
      */
     public static int getIntFromBoolean(Boolean temp) {
-        if (temp == null || temp == false) {
+        if (temp == null || !temp) {
             return 0;
         }
         return 1;
@@ -111,7 +105,7 @@ public class UtilitiesJB {
             return columna;
         }
         Column<Object> temp = new Column<>(DataType.OBJECT);
-        temp.setValor((Object) valor);
+        temp.setValor(valor);
         return temp;
     }
 }

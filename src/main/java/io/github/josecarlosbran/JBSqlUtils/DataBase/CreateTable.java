@@ -11,7 +11,7 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author Jose Bran
  */
 public class CreateTable {
-    private String tableName;
+    private final String tableName;
 
     /**
      * Constructor que recibe como parametro:

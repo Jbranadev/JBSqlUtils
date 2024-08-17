@@ -17,9 +17,6 @@ package io.github.josecarlosbran.JBSqlUtils.Enumerations;
 
 import com.josebran.LogsJB.LogsJB;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * Enumeración que permite indicar a que Base de Datos se estara conectando el modelo.
  *
@@ -48,7 +45,7 @@ public enum DataBase {
     PostgreSQL("postgresql");
     private String DBType;
 
-    private DataBase(String s) {
+    DataBase(String s) {
         this.setDBType(s);
     }
 
@@ -74,7 +71,7 @@ public enum DataBase {
     public DataBase getNumeracionforName(String name) {
         Class<DataBase> esta = DataBase.class;
         DataBase[] temp = esta.getEnumConstants();
-        List<DataBase> numeraciones = Arrays.asList(temp);
+        DataBase[] numeraciones = temp;
         for (DataBase numeracion : numeraciones) {
             if (numeracion.name().equalsIgnoreCase(name)) {
                 LogsJB.trace("Nombre: " + numeracion.name() + " Posicion Ordinal: " + numeracion.ordinal()

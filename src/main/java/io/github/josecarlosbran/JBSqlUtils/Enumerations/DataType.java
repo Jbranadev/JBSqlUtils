@@ -17,9 +17,6 @@ package io.github.josecarlosbran.JBSqlUtils.Enumerations;
 
 import com.josebran.LogsJB.LogsJB;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
 /**
@@ -173,10 +170,10 @@ public enum DataType {
      */
     DATETIME2("", 10),
     ;
-    private String size;
-    private int orden;
+    private final String size;
+    private final int orden;
 
-    private DataType(String Size, int orden) {
+    DataType(String Size, int orden) {
         this.size = Size;
         this.orden = orden;
     }
@@ -226,7 +223,7 @@ public enum DataType {
     public DataType getNumeracionforName(String name) {
         Class<DataType> esta = DataType.class;
         DataType[] temp = esta.getEnumConstants();
-        List<DataType> numeraciones = Arrays.asList(temp);
+        DataType[] numeraciones = temp;
         for (DataType numeracion : numeraciones) {
             if (numeracion.name().equalsIgnoreCase(name)) {
                 LogsJB.trace("Nombre: " + numeracion.name() + " Posicion Ordinal: " + numeracion.ordinal()

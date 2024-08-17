@@ -17,9 +17,6 @@ package io.github.josecarlosbran.JBSqlUtils.Enumerations;
 
 import com.josebran.LogsJB.LogsJB;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * Enumeración que proporciona acceso a los diferentes tipos de operadores disponibles para realizar
  * consultas SQL Personalizadas.
@@ -99,9 +96,9 @@ public enum Operator {
      * Operador NOT
      */
     NOT(" NOT ");
-    private String operador;
+    private final String operador;
 
-    private Operator(String s) {
+    Operator(String s) {
         this.operador = s;
     }
 
@@ -123,7 +120,7 @@ public enum Operator {
     public Operator getNumeracionforName(String name) {
         Class<Operator> esta = Operator.class;
         Operator[] temp = esta.getEnumConstants();
-        List<Operator> numeraciones = Arrays.asList(temp);
+        Operator[] numeraciones = temp;
         for (Operator numeracion : numeraciones) {
             if (numeracion.name().equalsIgnoreCase(name)) {
                 LogsJB.trace("Nombre: " + numeracion.name() + " Posicion Ordinal: " + numeracion.ordinal()

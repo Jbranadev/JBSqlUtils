@@ -10,7 +10,7 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
  * @author José Bran
  */
 public class InsertInto {
-    private String sql;
+    private final String sql;
 
     /**
      * Constructor que recibe como parámetro:
@@ -22,7 +22,7 @@ public class InsertInto {
         if (stringIsNullOrEmpty(TableName)) {
             throw new ValorUndefined("El nombre de la Tabla proporcionado esta vacío o es NULL");
         }
-        this.sql = "INSERT INTO " + TableName + "";
+        this.sql = "INSERT INTO " + TableName;
     }
 
     /**
