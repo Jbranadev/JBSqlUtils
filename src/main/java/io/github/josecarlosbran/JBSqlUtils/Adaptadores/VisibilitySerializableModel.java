@@ -39,6 +39,7 @@ public class VisibilitySerializableModel implements PropertyVisibilityStrategy {
      * 1 - si esta en el mismo paquete que la clase que contiene este metodo.
      * 2 - si no tiene la anotacion JsonbTransient.
      * 3 - si se satisface algun criterio de ambiguedad.
+     *
      * @param method
      * @return
      */
