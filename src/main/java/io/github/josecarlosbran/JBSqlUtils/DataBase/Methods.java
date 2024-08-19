@@ -182,11 +182,10 @@ class Methods extends Methods_Conexion {
         this.validarTableExist(this);
         Callable<ResultAsync<List<T>>> get = () -> {
             List<T> listatemp = new ArrayList<T>();
-            try {
+            try (Connection connect = this.getConnection();) {
                 String sql = "SELECT * FROM " + this.getTableName();
                 sql = sql + ";";
                 LogsJB.info(sql);
-                Connection connect = this.getConnection();
                 PreparedStatement ejecutor = connect.prepareStatement(sql);
                 ResultSet registros = ejecutor.executeQuery();
                 while (registros.next()) {
