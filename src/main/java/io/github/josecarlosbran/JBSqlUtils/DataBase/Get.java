@@ -277,7 +277,7 @@ class Get extends Methods_Conexion {
         final String finalSql = Sql; // Make Sql final
         Callable<ResultAsync<List<T>>> get = () -> {
             List<T> listaTemp = new ArrayList<>();
-            try {
+            try (Connection connect = modelo.getConnection();) {
                 if (modelo.getTableExist()) {
                     String query = "SELECT * FROM " + modelo.getTableName() + finalSql + ";";
                     //Si es sql server y trae la palabra limit verificara y modificara la sentencia
@@ -290,7 +290,7 @@ class Get extends Methods_Conexion {
                                     "registros especificados por el usuario: " + query);
                         }
                     }
-                    Connection connect = modelo.getConnection();
+
                     PreparedStatement ejecutor = connect.prepareStatement(query);
                     for (int i = 0; i < parametros.size(); i++) {
                         //Obtengo la información de la columna
@@ -348,7 +348,7 @@ class Get extends Methods_Conexion {
         Callable<ResultAsync<List<JSONObject>>> get = () -> {
             List<JSONObject> temp = new ArrayList<>();
             String query = finalSql + ";";
-            try {
+            try (Connection connect = this.getConnection();) {
                 if (this.getTableExist()) {
                     //Si es sql server y trae la palabra limit verificara y modificara la sentencia
                     if (this.getDataBaseType() == DataBase.SQLServer) {
@@ -360,7 +360,6 @@ class Get extends Methods_Conexion {
                                     "registros especificados por el usuario: " + query);
                         }
                     }
-                    Connection connect = this.getConnection();
                     PreparedStatement ejecutor = connect.prepareStatement(query);
                     for (int i = 0; i < parametros.size(); i++) {
                         //Obtengo la información de la columna
