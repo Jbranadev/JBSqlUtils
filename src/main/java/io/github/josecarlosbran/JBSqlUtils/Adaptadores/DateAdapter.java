@@ -19,6 +19,12 @@ public class DateAdapter implements JsonbAdapter<Date, String> {
         return dateFormat.format(date);
     }
 
+    /**
+     * vsvsvcsv
+     * @param dateString
+     * @return
+     * @throws Exception
+     */
     @Override
     public Date adaptFromJson(String dateString) throws Exception {
         SimpleDateFormat dateFormat = threadLocalDateFormat.get();
