@@ -33,13 +33,28 @@ public class VisibilitySerializableModel implements PropertyVisibilityStrategy {
         }
     }
 
+    /**
+     * El metodo isVisible esta creado para determinar si es visible o no,
+     * este mismo se vasa en 3 criterios:
+     * 1 - si esta en el mismo paquete que la clase que contiene este metodo.
+     * 2 - si no tiene la anotacion JsonbTransient.
+     * 3 - si se satisface algun criterio de ambiguedad.
+     * @param method
+     * @return
+     */
     public boolean isVisible(Method method) {
         boolean declarinClass = false;
         boolean anotacionPresent = false;
         boolean handleAmbiguity = false;
         try {
+            //En esta linea se realiza la verificacion si el metodo declarado pertenece al mismo paquete
+            //que la clase actual (this).
+            //y se utiliza hashCode para realizar la comparacion de ambas clases.
             declarinClass = method.getDeclaringClass().getPackage().hashCode() == this.getClass().getPackage().hashCode();
+            //En esta linea se realiza el chequeo de las anotaciones.
+            //si el metodo tiene alguna anotacion, devolvera True, y sera visible.
             anotacionPresent = !method.isAnnotationPresent(JsonbTransient.class);
+            //en esta linea se lleva el manejo de ambiguedad
             handleAmbiguity = handleAmbiguity(method);
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al mapear el Json con el Obtjeto en cuestion " + method.toString() + ": " + ExceptionUtils.getStackTrace(e));
