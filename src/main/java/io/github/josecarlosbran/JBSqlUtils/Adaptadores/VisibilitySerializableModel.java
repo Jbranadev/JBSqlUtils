@@ -64,6 +64,13 @@ public class VisibilitySerializableModel implements PropertyVisibilityStrategy {
         }
     }
 
+    /**
+     * Este es un metodo privado donde el proposito principal es controlar la ambiguedad,
+     * dentro de las ambiguedades se puede controlar si hay multiples sobrecargas en el
+     * mismo metodo.
+     * @param member
+     * @return
+     */
     private boolean handleAmbiguity(Method member) {
         // Lógica para manejar la ambigüedad
         // Puedes lanzar una excepción, loggear un mensaje, o tomar alguna otra acción
@@ -76,11 +83,20 @@ public class VisibilitySerializableModel implements PropertyVisibilityStrategy {
         return true;
     }
 
+    /**
+     *En este metodo se puede verificar los getter o setter si estan en conflicto con un campo en su clase,
+     * tambien para verificar si algun campo tiene el mismo nombre que el que esperaria para
+     * un metodo dado.
+     * @param member
+     * @return
+     */
     private boolean isAmbiguous(Method member) {
         // Lógica para determinar si hay ambigüedad
         // Por ejemplo, puedes verificar si hay un campo y un método con el mismo nombre
         // Puedes adaptar esta lógica según tus necesidades específicas.
         return Arrays.stream(member.getDeclaringClass().getDeclaredFields())
+                //este metodo realiza una busqueda y verifica si existe por lo menos un campo
+                //que satisfaga la condicion especificada.
                 .anyMatch(field -> {
                     boolean getter = StringUtils.equalsIgnoreCase(field.getName(), StringUtils.removeStartIgnoreCase(member.getName(), "get"));
                     boolean setter = StringUtils.equalsIgnoreCase(field.getName(), StringUtils.removeStartIgnoreCase(member.getName(), "set"));
