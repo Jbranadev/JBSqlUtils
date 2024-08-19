@@ -1186,7 +1186,7 @@ class Methods_Conexion extends Conexion {
      * @return Retorna un Json Object con las columnas solicitadas como propiedades del json con sus respectivos valores
      * @throws SQLException Lanza esta excepción si sucede algún error al obtener el valor de cada una de las columnas solicitadas
      */
-    protected JSONObject procesarResultSetJSON(List<String> columnas, ResultSet registros) throws SQLException {
+    protected JSONObject procesarResultSetJSON( ResultSet registros, String... columnas) throws SQLException {
         JSONObject temp = new JSONObject();
         LogsJB.debug("Obtuvo un resultado de BD's, procedera a llenar el JSON");
         LogsJB.debug("Cantidad de columnas : " + this.getTabla().getColumnas().size());
