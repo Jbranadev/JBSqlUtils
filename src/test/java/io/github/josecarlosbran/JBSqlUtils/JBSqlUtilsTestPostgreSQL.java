@@ -525,7 +525,6 @@ public class JBSqlUtilsTestPostgreSQL {
          * Si deseamos obtener unicamente determinadas columnas, es necesario envíar como parametro una lista de strings
          * con los nombres de las columnas que deseamos obtener del metodo getInJsonObjects
          */
-
         logParrafo("Obtendra los primeros 2 registros cuyo estado sea true y en su apellido posea la letra a");
         /**
          * Para obtener los registros de una tabla de BD's podemos hacerlo a través del metodo select envíando como parametro
@@ -579,7 +578,6 @@ public class JBSqlUtilsTestPostgreSQL {
          * getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parametro
          * del metodo select
          */
-
         logParrafo("Obtenedra todos los registros que tienen estado True y en su apellido tienen una letra a");
         List<JSONObject> lista = select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
                 .and("Apellido", Operator.LIKE, "%a%").take(5).getInJsonObjects(null);

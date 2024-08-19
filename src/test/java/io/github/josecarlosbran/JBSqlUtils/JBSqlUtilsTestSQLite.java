@@ -527,7 +527,6 @@ public class JBSqlUtilsTestSQLite {
          * Si deseamos obtener unicamente determinadas columnas, es necesario envíar como parámetro una lista de strings
          * con los nombres de las columnas que deseamos obtener del método getInJsonObjects
          */
-
         logParrafo("Obtendra los primeros 2 registros cuyo estado sea true y en su apellido posea la letra a");
         /**
          * Para obtener los registros de una tabla de BD's podemos hacerlo a través del método select envíando como parámetro

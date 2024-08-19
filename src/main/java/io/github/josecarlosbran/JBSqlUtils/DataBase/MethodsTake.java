@@ -2,7 +2,6 @@ package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 import org.json.JSONObject;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**

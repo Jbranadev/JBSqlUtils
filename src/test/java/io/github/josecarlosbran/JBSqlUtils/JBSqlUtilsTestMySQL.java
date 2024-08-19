@@ -541,7 +541,6 @@ public class JBSqlUtilsTestMySQL {
          * Si deseamos obtener unicamente determinadas columnas, es necesario envíar como parametro una lista de strings
          * con los nombres de las columnas que deseamos obtener del metodo getInJsonObjects
          */
-
         logParrafo("Obtendra los primeros 2 registros cuyo estado sea true y en su apellido posea la letra a");
         /**
          * Para obtener los registros de una tabla de BD's podemos hacerlo a través del metodo select envíando como parametro
