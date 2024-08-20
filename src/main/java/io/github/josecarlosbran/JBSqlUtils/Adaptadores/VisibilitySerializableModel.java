@@ -69,6 +69,7 @@ public class VisibilitySerializableModel implements PropertyVisibilityStrategy {
      * Este es un metodo privado donde el proposito principal es controlar la ambiguedad,
      * dentro de las ambiguedades se puede controlar si hay multiples sobrecargas en el
      * mismo metodo.
+     *
      * @param member
      * @return
      */
@@ -85,9 +86,10 @@ public class VisibilitySerializableModel implements PropertyVisibilityStrategy {
     }
 
     /**
-     *En este metodo se puede verificar los getter o setter si estan en conflicto con un campo en su clase,
+     * En este metodo se puede verificar los getter o setter si estan en conflicto con un campo en su clase,
      * tambien para verificar si algun campo tiene el mismo nombre que el que esperaria para
      * un metodo dado.
+     *
      * @param member
      * @return
      */

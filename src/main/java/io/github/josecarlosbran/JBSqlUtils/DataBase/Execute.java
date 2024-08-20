@@ -61,7 +61,6 @@ class Execute extends Methods_Conexion {
         int result;
         Callable<ResultAsync<Integer>> Ejecutar_Sentencia = () -> {
             try (Connection connect = this.getConnection();) {
-
                 this.sql = this.sql + ";";
                 PreparedStatement ejecutor = connect.prepareStatement(this.sql);
                 //Setea los parametros de la consulta

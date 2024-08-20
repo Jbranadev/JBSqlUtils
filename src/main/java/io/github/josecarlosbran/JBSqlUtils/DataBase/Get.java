@@ -290,7 +290,6 @@ class Get extends Methods_Conexion {
                                     "registros especificados por el usuario: " + query);
                         }
                     }
-
                     PreparedStatement ejecutor = connect.prepareStatement(query);
                     for (int i = 0; i < parametros.size(); i++) {
                         //Obtengo la información de la columna

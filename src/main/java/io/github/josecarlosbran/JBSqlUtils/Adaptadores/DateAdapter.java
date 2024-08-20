@@ -7,7 +7,6 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
-
 /**
  * Clase que sirve para adaptar objetos tipo Date a un formato de tipo String.
  * se establece un patron donde se define el año, mes, dia, etc.
@@ -36,7 +35,6 @@ public class DateAdapter implements JsonbAdapter<Date, String> {
      * @param date Es el objeto de tipo Date que se desea convertir a un String.
      * @return Retorna un String que representa la fecha recibida como parametro
      */
-
     @Override
     public String adaptToJson(Date date) {
         //aqui se obtiene el dato de Fecha del hilo actual.
