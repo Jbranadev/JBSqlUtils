@@ -64,7 +64,7 @@ public class Select extends Get {
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
      *                   captura la excepción y la lanza en el hilo principal
      */
-    public List<JSONObject> getInJsonObjects(List<String> columnas) throws Exception {
+    public List<JSONObject> getInJsonObjects(String... columnas) throws Exception {
         return super.get(this.sql, this.parametros, columnas);
     }
 }

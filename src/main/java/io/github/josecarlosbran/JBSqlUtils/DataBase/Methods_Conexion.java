@@ -721,9 +721,9 @@ class Methods_Conexion extends Conexion {
         Integer result;
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
-        Connection connect = modelo.getConnection();
+
         Callable<ResultAsync<Integer>> Save = () -> {
-            try {
+            try (Connection connect = modelo.getConnection();) {
                 if (modelo.getTableExist()) {
                     StringBuilder sql = new StringBuilder("INSERT INTO ").append(modelo.getTableName()).append("(");
                     StringBuilder sql2 = new StringBuilder();
@@ -882,7 +882,7 @@ class Methods_Conexion extends Conexion {
             }
         };
         Callable<ResultAsync<Integer>> Update = () -> {
-            try {
+            try (Connection connect = modelo.getConnection();) {
                 if (modelo.getTableExist()) {
                     String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
                     StringBuilder sql = new StringBuilder("UPDATE ").append(modelo.getTableName()).append(" SET");
@@ -990,7 +990,7 @@ class Methods_Conexion extends Conexion {
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
         Callable<ResultAsync<Integer>> Delete = () -> {
-            try {
+            try (Connection connect = modelo.getConnection();) {
                 if (modelo.getTableExist()) {
                     // Obtener cual es la clave primaria de la tabla
                     String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
@@ -1012,7 +1012,6 @@ class Methods_Conexion extends Conexion {
                         }
                     }
                     sql.append(";");
-                    Connection connect = modelo.getConnection();
                     PreparedStatement ejecutor = connect.prepareStatement(sql.toString());
                     // Llena la información de las columnas que se insertaran
                     int auxiliar = 0;
@@ -1186,7 +1185,7 @@ class Methods_Conexion extends Conexion {
      * @return Retorna un Json Object con las columnas solicitadas como propiedades del json con sus respectivos valores
      * @throws SQLException Lanza esta excepción si sucede algún error al obtener el valor de cada una de las columnas solicitadas
      */
-    protected JSONObject procesarResultSetJSON(List<String> columnas, ResultSet registros) throws SQLException {
+    protected JSONObject procesarResultSetJSON(ResultSet registros, String... columnas) throws SQLException {
         JSONObject temp = new JSONObject();
         LogsJB.debug("Obtuvo un resultado de BD's, procedera a llenar el JSON");
         LogsJB.debug("Cantidad de columnas : " + this.getTabla().getColumnas().size());

@@ -522,14 +522,10 @@ public class JBSqlUtilsTestSQLServer {
          * getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parametro
          * del metodo select
          */
-        List<String> columnas = null;
         /**
          * Si deseamos obtener unicamente determinadas columnas, es necesario envíar como parametro una lista de strings
          * con los nombres de las columnas que deseamos obtener del metodo getInJsonObjects
          */
-        columnas = new ArrayList<>();
-        columnas.add("Id");
-        columnas.add("Name");
         logParrafo("Obtendra los primeros 2 registros cuyo estado sea true y en su apellido posea la letra a");
         /**
          * Para obtener los registros de una tabla de BD's podemos hacerlo a través del metodo select envíando como parametro
@@ -537,7 +533,7 @@ public class JBSqlUtilsTestSQLServer {
          * where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
          */
         List<JSONObject> lista = select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
-                .and("Apellido", Operator.LIKE, "%a%").take(2).getInJsonObjects(columnas);
+                .and("Apellido", Operator.LIKE, "%a%").take(2).getInJsonObjects("Id", "Name");
         logParrafo("Visualizamos los registros obtenidos de BD's: ");
         /**
          * Imprimimos los registros obtenidos
@@ -556,10 +552,9 @@ public class JBSqlUtilsTestSQLServer {
          * getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parametro
          * del metodo select
          */
-        List<String> columnas = null;
         logParrafo("Obtendra los primeros 2 registros cuyo estado sea true y en su apellido posea la letra a");
         List<JSONObject> lista = select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
-                .and("Apellido", Operator.LIKE, "%a%").take(2).getInJsonObjects(columnas);
+                .and("Apellido", Operator.LIKE, "%a%").take(2).getInJsonObjects(null);
         /**
          * Imprimimos los registros obtenidos
          */
@@ -584,10 +579,9 @@ public class JBSqlUtilsTestSQLServer {
          * getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parametro
          * del metodo select
          */
-        List<String> columnas = null;
         logParrafo("Obtenedra todos los registros que tienen estado True y en su apellido tienen una letra a");
         List<JSONObject> lista = select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
-                .and("Apellido", Operator.LIKE, "%a%").take(5).getInJsonObjects(columnas);
+                .and("Apellido", Operator.LIKE, "%a%").take(5).getInJsonObjects(null);
         /**
          * Imprimimos los registros obtenidos
          */
@@ -935,7 +929,6 @@ public class JBSqlUtilsTestSQLServer {
          * getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parámetro
          * del método select
          */
-        List<String> columnas = null;
         /**
          * Si deseamos obtener unicamente determinadas columnas, es necesario envíar como parámetro una lista de strings
          * con los nombres de las columnas que deseamos obtener del método getInJsonObjects
@@ -946,7 +939,7 @@ public class JBSqlUtilsTestSQLServer {
          * el nombre de la tabla de la cual deseamos obtener los registros, así mismo podemos filtrar los resultados a través del método
          * where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
          */
-        List<JSONObject> lista = select("UsuarioTableTest").getInJsonObjects(columnas);
+        List<JSONObject> lista = select("UsuarioTableTest").getInJsonObjects(null);
         logParrafo("Visualizamos los registros obtenidos de BD's: ");
         /**
          * Imprimimos los registros obtenidos

@@ -16,7 +16,7 @@ public class DateAdapter implements JsonbAdapter<Date, String> {
             ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS"));
 
     /**
-     *En este fragmento de codigo los usuarios de la clase DateAdapter pueden estrablecer dinamicamente,
+     * En este fragmento de codigo los usuarios de la clase DateAdapter pueden estrablecer dinamicamente,
      * el formato en que deseen manejar la fecha, sin afectar a los demas hilos.
      * se esta seteando o estableciendo el threadLocalDateFormat al new SimpleDateFormat(pattern)
      *
@@ -27,9 +27,10 @@ public class DateAdapter implements JsonbAdapter<Date, String> {
     }
 
     /**
-     *Metodo publico adaptToJson que acepta un parametro de tipo Date.
+     * Metodo publico adaptToJson que acepta un parametro de tipo Date.
      * este metodo devuelve o retorna un String.
      * y puede lanzar una excepcion en caso que algo salga mal.
+     *
      * @param date
      * @return
      * @throws Exception
@@ -44,6 +45,7 @@ public class DateAdapter implements JsonbAdapter<Date, String> {
 
     /**
      * Este metodo es el que convierte las cadenas en objetos tipo Date.
+     *
      * @param dateString
      * @return
      * @throws Exception

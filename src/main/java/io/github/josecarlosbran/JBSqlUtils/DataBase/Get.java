@@ -277,7 +277,7 @@ class Get extends Methods_Conexion {
         final String finalSql = Sql; // Make Sql final
         Callable<ResultAsync<List<T>>> get = () -> {
             List<T> listaTemp = new ArrayList<>();
-            try {
+            try (Connection connect = modelo.getConnection();) {
                 if (modelo.getTableExist()) {
                     String query = "SELECT * FROM " + modelo.getTableName() + finalSql + ";";
                     //Si es sql server y trae la palabra limit verificara y modificara la sentencia
@@ -290,7 +290,7 @@ class Get extends Methods_Conexion {
                                     "registros especificados por el usuario: " + query);
                         }
                     }
-                    Connection connect = modelo.getConnection();
+
                     PreparedStatement ejecutor = connect.prepareStatement(query);
                     for (int i = 0; i < parametros.size(); i++) {
                         //Obtengo la información de la columna
@@ -339,7 +339,7 @@ class Get extends Methods_Conexion {
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
      *                   captura la excepción y la lanza en el hilo principal
      */
-    protected List<JSONObject> get(String Sql, List<Column> parametros, List<String> columnas) throws Exception {
+    protected <T extends Methods_Conexion> List<JSONObject> get(String Sql, List<Column> parametros, String... columnas) throws Exception {
         String tableName = Sql.replace("SELECT * FROM ", "").split(" ")[0];
         this.setTaskIsReady(false);
         this.setTableName(tableName);
@@ -348,7 +348,7 @@ class Get extends Methods_Conexion {
         Callable<ResultAsync<List<JSONObject>>> get = () -> {
             List<JSONObject> temp = new ArrayList<>();
             String query = finalSql + ";";
-            try {
+            try (Connection connect = this.getConnection();) {
                 if (this.getTableExist()) {
                     //Si es sql server y trae la palabra limit verificara y modificara la sentencia
                     if (this.getDataBaseType() == DataBase.SQLServer) {
@@ -360,7 +360,6 @@ class Get extends Methods_Conexion {
                                     "registros especificados por el usuario: " + query);
                         }
                     }
-                    Connection connect = this.getConnection();
                     PreparedStatement ejecutor = connect.prepareStatement(query);
                     for (int i = 0; i < parametros.size(); i++) {
                         //Obtengo la información de la columna
@@ -370,7 +369,7 @@ class Get extends Methods_Conexion {
                     LogsJB.info(ejecutor.toString());
                     ResultSet registros = ejecutor.executeQuery();
                     while (registros.next()) {
-                        temp.add(this.procesarResultSetJSON(columnas, registros));
+                        temp.add(this.procesarResultSetJSON(registros, columnas));
                     }
                     this.closeConnection(connect);
                     this.setTaskIsReady(true);

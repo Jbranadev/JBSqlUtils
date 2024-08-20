@@ -909,14 +909,10 @@ public class JBSqlUtilsTestSadDay {
          * getInJsonObjects como null, de esa manera nos obtendra todas las columnas de la tabla especificada como parámetro
          * del método select
          */
-        List<String> columnas = null;
         /**
          * Si deseamos obtener unicamente determinadas columnas, es necesario envíar como parámetro una lista de strings
          * con los nombres de las columnas que deseamos obtener del método getInJsonObjects
          */
-        columnas = new ArrayList<>();
-        columnas.add("Id");
-        columnas.add("Name");
         logParrafo("Obtendra los primeros 2 registros cuyo estado sea true y en su apellido posea la letra a");
         /**
          * Para obtener los registros de una tabla de BD's podemos hacerlo a través del método select envíando como parámetro
@@ -924,7 +920,7 @@ public class JBSqlUtilsTestSadDay {
          * where el cual proporciona acceso a metodos por medio de los cuales podemos filtrar los resultados.
          */
         List<JSONObject> lista = select("Proveedor").where("Estado", Operator.IGUAL_QUE, true)
-                .and("Estado", Operator.LIKE, "%a%").take(2).getInJsonObjects(columnas);
+                .and("Estado", Operator.LIKE, "%a%").take(2).getInJsonObjects("Id", "Name");
         logParrafo("Visualizamos los registros obtenidos de BD's: ");
         Assert.assertEquals(lista.size(), 0, "La cantidad de filas obtenidas, no corresponde a lo esperado");
     }
