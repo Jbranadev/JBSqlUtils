@@ -98,8 +98,16 @@ class Methods_Conexion extends Conexion {
         }
     }
 
+    /**
+     * este metodo esta creado para ver si la clase actual es una subclase de JBSqlUtils,
+     * mediante los get se obtienen todos los campos de la clase actual y algunos que tienen datos especificos,
+     * los añade a una coleccion existente, pero los filtra primero.
+     * @param <T> es un metodo generico, se puede trabajar con diferentes tipos especificados en la instancia.
+     */
     protected synchronized <T> void getFieldsModel() {
+        //se esta obteniendo el nombre simple de la clase JBSqlUtils y se esta almacenando en la variable declarada
         String JBSQLUTILSNAME = JBSqlUtils.class.getSimpleName();
+        //se obtiene el nombre de la superclase y se almacena en superclasemodelo
         String SuperClaseModelo = this.getClass().getSuperclass().getSimpleName();
         if (StringUtils.equalsIgnoreCase(JBSQLUTILSNAME, SuperClaseModelo)) {
             //Obtiene los Fields del modelo
@@ -1559,6 +1567,13 @@ class Methods_Conexion extends Conexion {
         }
     }
 
+    /**
+     *en esta funcion se obtiene el nombre de la columna de un campo,
+     * si tiene anotacion el campo, va devolver el name
+     * si la anotacion es null o vacio, devolvera el nombre del campo
+     * @param field maneja un parametro de tipo objeto field
+     * @return retorna el nombre de la columna estipulado en el if
+     */
     private String getColumnName(Field field) {
         //Obtengo la información de la columna
         ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
@@ -1571,26 +1586,59 @@ class Methods_Conexion extends Conexion {
         }
     }
 
+    /**
+     *este metodo verifica si tiene anotacion index es true y si es null es false.
+     * @param field parametro tipo objeto field
+     * @return retorna una columna
+     */
     private Boolean getColumnIsIndex(Field field) {
         //Obtiene si la columna es un Index
         return !Objects.isNull(field.getAnnotation(Index.class));
     }
 
+    /**
+     * este metodo comprueba que los campos que vienen tengan indices de valor adecuado.
+     * @param model parametro de la entidad que contiene los datos model
+     * @param field parametro field que es de tipo objeto
+     * @return retorna la columana q es tipo inde y si es nula
+     * @throws IllegalAccessException maneja la ecepcion cuando intentan acceder a un campo privado
+     */
     private Boolean getColumnIsIndexValidValue(Object model, Field field) throws IllegalAccessException {
         //Obtiene si la columna es un Index
         return this.getColumnIsIndex(field) && !this.getValueColumnIsNull(model, field);
     }
 
+    /**
+     *este metodo se encarga de verificar si el valor de un campo especifico de un model es null
+     * @param model parametor del objeto donde se quiere leer el campo
+     * @param field parametro del nombre del campo que se desea leer
+     * @return retorna un valor, donde verifica si el valor es null
+     * @throws IllegalAccessException
+     */
     private Boolean getValueColumnIsNull(Object model, Field field) throws IllegalAccessException {
         //Obtiene si la columna es un Index
         return Objects.isNull(FieldUtils.readDeclaredField(model, field.getName(), true));
     }
 
+    /**
+     * este metodo se utiliza para obtener el valor de un campo especifico de un objeto,
+     * donde la diferencia es que este campo puede ser privado.
+     * @param model es el parametro donde se instancia el objeto desde cual se leera el valor.
+     * @param field es el parametro atributo del cual se recupera el valor.
+     * @return retorna el nombre obtenido
+     * @throws IllegalAccessException maneja la ecepcion
+     */
     private Object getValueColumn(Object model, Field field) throws IllegalAccessException {
         //Obtiene si la columna es un Index
         return FieldUtils.readDeclaredField(model, field.getName(), true);
     }
 
+    /**
+     * Este metodo permite determinar el valor inicial o por defecto de un campo que esta
+     * siendo mapeado a una BD.
+     * @param field es el parametro atributo del cual se recupera el valor.
+     * @return retorna la columana definida con una cadena string
+     */
     private String getColumnDefaultValue(Field field) {
         //Obtengo la información de la columna
         ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
@@ -1601,6 +1649,11 @@ class Methods_Conexion extends Conexion {
         return columnDefined.default_value();
     }
 
+    /**
+     *con este metodo se logra conocer las restricciones de tamaño de un campo que esta siendo mapeado.
+     * @param field parametro tipo fiel del cual se desea obtener el tamaño
+     * @return retorna una cadena string
+     */
     private String getSize(Field field) {
         //Obtengo la información de la columna
         ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
@@ -1611,6 +1664,12 @@ class Methods_Conexion extends Conexion {
         return columnDefined.size();
     }
 
+    /**
+     * este metodo es utilizado para obtener las restricciones definidas para determinada columna
+     * donde denota la anotacion ColumnDefined
+     * @param field parametro del cual se desea obtener las restricciones
+     * @return si el campo no tiene anotacion, retorna null
+     */
     private Constraint[] getConstraints(Field field) {
         //Obtengo la información de la columna
         ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
@@ -1621,6 +1680,11 @@ class Methods_Conexion extends Conexion {
         return columnDefined.constraints();
     }
 
+    /**
+     *este metodo se utiliza para generar una cadena que representa el tipo de dato SQL,
+     * @param field es el campo del cual se desea obtener el dato SQL como cadena
+     * @return retorna el tipo de dato, en uno sin importar el tamaño y el otro return si retorna el tamaño de la cadena.
+     */
     private String getDataTypeSQLToString(Field field) {
         //Obtengo la información de la columna
         ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
@@ -1636,6 +1700,11 @@ class Methods_Conexion extends Conexion {
         }
     }
 
+    /**
+     * este metodo obtiene el tipo de dato SQL de un campo,
+     * @param field es el parametro del cual se desea obtener el tipo de dato
+     * @return retorna un objeto tipo datatype
+     */
     private DataType getDataTypeSQL(Field field) {
         //Obtengo la información de la columna
         ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
@@ -1646,6 +1715,12 @@ class Methods_Conexion extends Conexion {
         return columnDefined.dataTypeSQL();
     }
 
+    /**
+     * este metodo devuelve la informacion sobre la clave foranea que se encuentra definida
+     * en un campo especifico.
+     * @param field parametro fiel del cual se desean obtener los datos
+     * @return rertorna null si no encuentra anotacion sobre la llave foranea
+     */
     private ForeignKey getForeignKey(Field field) {
         //Obtengo la información de la columna
         ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
