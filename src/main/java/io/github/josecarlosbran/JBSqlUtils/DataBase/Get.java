@@ -279,7 +279,7 @@ class Get extends Methods_Conexion {
             modelo.setGetPropertySystem(false);
             modelo.llenarPropertiesFromModel(modelo);
         }
-        //bran commit
+        //bran commit 2
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
         final String finalSql = Sql; // Make Sql final
