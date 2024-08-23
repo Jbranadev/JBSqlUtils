@@ -1188,32 +1188,20 @@ class Methods_Conexion extends Conexion {
     /**
      * Obtiene un Json Object con las columnas solicitadas como propiedades del json con sus respectivos valores
      *
-     * @param columnas  Lista de los nombres de las columnas que se desea recuperar, si se desea recuperar todas las columnas envíar NULL
-     * @param registros ResultSet del cual se obtendran los valores de las columnas
+     * @param registros      ResultSet del cual se obtendran los valores de las columnas
+     * @param columnMetadata List of ColumnsSQL containing metadata of the columns
      * @return Retorna un Json Object con las columnas solicitadas como propiedades del json con sus respectivos valores
      * @throws SQLException Lanza esta excepción si sucede algún error al obtener el valor de cada una de las columnas solicitadas
      */
-    protected JSONObject procesarResultSetJSON(ResultSet registros, String... columnas) throws SQLException {
+    protected JSONObject procesarResultSetJSON(ResultSet registros, List<ColumnsSQL> columnMetadata) throws SQLException {
         JSONObject temp = new JSONObject();
         LogsJB.debug("Obtuvo un resultado de BD's, procedera a llenar el JSON");
-        LogsJB.debug("Cantidad de columnas : " + this.getTabla().getColumnas().size());
-        // Cachear las columnas y crear un set para búsqueda rápida
-        List<ColumnsSQL> columnasTabla = new ArrayList<>(this.getTabla().getColumnas());
-        Set<String> columnasSet = columnas != null ? new TreeSet<>(String.CASE_INSENSITIVE_ORDER) : null;
-        if (columnasSet != null) {
-            for (String columna : columnas) {
-                columnasSet.add(columna.toLowerCase());
-            }
-        }
-        // Llena la información del modelo
-        for (ColumnsSQL columna : columnasTabla) {
-            String columnName = columna.getCOLUMN_NAME().toLowerCase();
+        for (ColumnsSQL columna : columnMetadata) {
+            String columnName = columna.getCOLUMN_NAME();
+            String columnType = columna.getTYPE_NAME();
             LogsJB.trace("Columna : " + columnName);
-            //Si no se especifica las columnas a obtener retorna todas las columnas
-            // Si no se especifica las columnas a obtener retorna todas las columnas
-            if (columnasSet == null || columnasSet.contains(columnName)) {
-                this.convertSQLtoJson(columna, registros, temp);
-            }
+            LogsJB.trace("Tipo de dato : " + columnType);
+            this.convertSQLtoJson(columna, registros, temp);
         }
         return temp;
     }

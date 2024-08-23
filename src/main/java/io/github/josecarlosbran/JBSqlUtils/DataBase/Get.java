@@ -19,15 +19,13 @@ import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.ColumnsSQL;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.json.JSONObject;
 
 import java.lang.reflect.InvocationTargetException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -547,11 +545,8 @@ class Get extends Methods_Conexion {
                             }
                             columnasStr.append(columna);
                         }
-                        query = query.replace("SELECT *", "SELECT " + columnasStr.toString());
+                        query = query.replace("SELECT *", "SELECT " + columnasStr);
                     }
-
-
-
                     PreparedStatement ejecutor = connect.prepareStatement(query);
                     for (int i = 0; i < parametros.size(); i++) {
                         //Obtengo la información de la columna
@@ -560,8 +555,17 @@ class Get extends Methods_Conexion {
                     }
                     LogsJB.info(ejecutor.toString());
                     ResultSet registros = ejecutor.executeQuery();
+                    ResultSetMetaData metaData = registros.getMetaData();
+                    int columnCount = metaData.getColumnCount();
+                    List<ColumnsSQL> columnMetadata = new ArrayList<>(columnCount);
+                    for (int i = 1; i <= columnCount; i++) {
+                        ColumnsSQL columna = new ColumnsSQL();
+                        columna.setCOLUMN_NAME(metaData.getColumnName(i));
+                        columna.setTYPE_NAME(metaData.getColumnTypeName(i));
+                        columnMetadata.add(columna);
+                    }
                     while (registros.next()) {
-                        temp.add(this.procesarResultSetJSON(registros, columnas));
+                        temp.add(this.procesarResultSetJSON(registros, columnMetadata));
                     }
                     this.closeConnection(connect);
                     this.setTaskIsReady(true);
