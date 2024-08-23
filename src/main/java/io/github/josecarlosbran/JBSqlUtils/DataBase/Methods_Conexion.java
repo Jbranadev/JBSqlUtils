@@ -1782,6 +1782,4 @@ class Methods_Conexion extends Conexion {
         }
         return query;
     }
-
-
 }
