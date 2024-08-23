@@ -233,7 +233,8 @@ public class JBSqlUtilsTestMySQL {
          * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
          */
         logParrafo("Obtenemos el modelo que tiene por nombre Marcos, Apellido Cabrera");
-        TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcos").and("Apellido", Operator.IGUAL_QUE,
+        TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcos")
+                .and("Apellido", Operator.IGUAL_QUE,
                 "Cabrera").firstOrFail();
         /**
          * Esperamos ejecute la operación en BD's

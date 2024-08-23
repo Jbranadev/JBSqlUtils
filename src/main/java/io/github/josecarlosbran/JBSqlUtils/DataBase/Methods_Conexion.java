@@ -1731,4 +1731,57 @@ class Methods_Conexion extends Conexion {
         }
         return columnDefined.foreignkey();
     }
+
+    /**
+     * Ordena la consula sql de acuerdo al estandar de consulta SQL
+     *
+     * @param query  Consulta SQL que se desea ordenar
+     * @param modelo Es el invocador de los metodos que se estan utilizando
+     * @param <T>    Metodo Generico, disponible para todas las clases que heredan la clase metodos conexion
+     * @return Retorna un string que representa la consulta SQL ordenada
+     * @throws DataBaseUndefind Lanza esta excepción cuando no se a configurado la BD's a la cual se conectara el modelo
+     *                          el usuario de la librería es el encargado de setear el tipo de BD's a la cual se conectara el modelo, asi mismo de ser lanzada
+     *                          esta excepción, poder manejarla.
+     *                          <p>
+     *                          <p>
+     *                          <p>
+     *                          Cambio X realizo por Y en fecha Z -> Cambio realizado por el usuario de la librería, en la fecha en la que se realizo el cambio
+     */
+    protected <T extends Methods_Conexion> String generateOrderSQL(String query, T modelo) throws DataBaseUndefind {
+        //Si es sql server y trae la palabra limit verificara y modificara la sentencia
+        if (modelo.getDataBaseType() == DataBase.SQLServer) {
+            if (StringUtils.containsIgnoreCase(query, "LIMIT")) {
+                String temporal_limite = StringUtils.substringAfterLast(query, "LIMIT").replace(";", "").trim();
+                String select = "SELECT TOP " + temporal_limite + " * FROM ";
+                query = query.replace("SELECT * FROM ", select).replace("LIMIT " + temporal_limite, "");
+                LogsJB.debug("Se modifico la sentencia SQL para que unicamente obtenga la cantidad de " +
+                        "registros especificados por el usuario: " + query);
+            }
+        }
+        // Insertar la cláusula GROUP BY en la posición correcta
+        int whereIndex = query.indexOf(" WHERE ");
+        int havingIndex = query.indexOf(" HAVING ");
+        int orderByIndex = query.indexOf(" ORDER BY ");
+        int limitIndex = query.indexOf(" LIMIT ");
+        int groupByIndex = query.indexOf(" GROUP BY ");
+        int groupByEndIndex = query.indexOf(";", groupByIndex);
+        if (groupByIndex != -1 && groupByEndIndex != -1) {
+            String groupByClause = query.substring(groupByIndex, groupByEndIndex + 1);
+            query = query.substring(0, groupByIndex) + query.substring(groupByEndIndex + 1);
+            if (whereIndex != -1) {
+                query = query.substring(0, whereIndex + 7) + groupByClause + query.substring(whereIndex + 7);
+            } else if (havingIndex != -1) {
+                query = query.substring(0, havingIndex) + groupByClause + query.substring(havingIndex);
+            } else if (orderByIndex != -1) {
+                query = query.substring(0, orderByIndex) + groupByClause + query.substring(orderByIndex);
+            } else if (limitIndex != -1) {
+                query = query.substring(0, limitIndex) + groupByClause + query.substring(limitIndex);
+            } else {
+                query = query + groupByClause;
+            }
+        }
+        return query;
+    }
+
+
 }
