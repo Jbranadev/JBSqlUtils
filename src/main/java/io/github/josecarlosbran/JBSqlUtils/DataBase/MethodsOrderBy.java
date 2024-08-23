@@ -49,6 +49,25 @@ public class MethodsOrderBy<T> extends MethodsTake {
             return new Take(this.sql, limite, this.modelo, this.parametros);
         }
     }
+
+    /**
+     * Retorna un objeto del tipo GroupBy que permite agregar la logica de agrupación a la sentencia
+     * SQL a ejecutar.
+     *
+     * @param columnas Lista de columnas a ser agrupadas.
+     * @throws ValorUndefined Lanza esta Excepción si la sentencia sql proporcionada esta vacía o es Null
+     */
+    public GroupBy groupBy(String... columnas) throws ValorUndefined {
+        if (Objects.isNull(this.modelo)) {
+            return new GroupBy(this.sql, this.parametros, columnas);
+        } else {
+            if (!this.getGetPropertySystem()) {
+                GroupBy groupBy = new GroupBy(this.sql, this.modelo, this.parametros, false, columnas);
+                return groupBy;
+            }
+            return new GroupBy(this.sql, this.modelo, this.parametros, columnas);
+        }
+    }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
