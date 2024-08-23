@@ -19,15 +19,13 @@ import com.josebran.LogsJB.LogsJB;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.ColumnsSQL;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.json.JSONObject;
 
 import java.lang.reflect.InvocationTargetException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -68,13 +66,47 @@ class Get extends Methods_Conexion {
     protected <T extends JBSqlUtils> void get(T modelo, String Sql, List<Column> parametros) throws Exception {
         if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(this);
+            modelo.llenarPropertiesFromModel(modelo);
         }
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
         Callable<ResultAsync<Boolean>> get = () -> {
-            try (Connection connect = modelo.getConnection();
-                 PreparedStatement ejecutor = connect.prepareStatement("SELECT * FROM " + modelo.getTableName() + Sql + ";")) {
+            try (Connection connect = modelo.getConnection()
+            ) {
+                String query = "SELECT * FROM " + modelo.getTableName() + Sql + ";";
+                //Si es sql server y trae la palabra limit verificara y modificara la sentencia
+                if (modelo.getDataBaseType() == DataBase.SQLServer) {
+                    if (StringUtils.containsIgnoreCase(query, "LIMIT")) {
+                        String temporal_limite = StringUtils.substringAfterLast(query, "LIMIT").replace(";", "").trim();
+                        String select = "SELECT TOP " + temporal_limite + " * FROM ";
+                        query = query.replace("SELECT * FROM ", select).replace("LIMIT " + temporal_limite, "");
+                        LogsJB.debug("Se modifico la sentencia SQL para que unicamente obtenga la cantidad de " +
+                                "registros especificados por el usuario: " + query);
+                    }
+                }
+                // Insertar la cláusula GROUP BY en la posición correcta
+                int whereIndex = query.indexOf(" WHERE ");
+                int havingIndex = query.indexOf(" HAVING ");
+                int orderByIndex = query.indexOf(" ORDER BY ");
+                int limitIndex = query.indexOf(" LIMIT ");
+                int groupByIndex = query.indexOf(" GROUP BY ");
+                int groupByEndIndex = query.indexOf(";", groupByIndex);
+                if (groupByIndex != -1 && groupByEndIndex != -1) {
+                    String groupByClause = query.substring(groupByIndex, groupByEndIndex + 1);
+                    query = query.substring(0, groupByIndex) + query.substring(groupByEndIndex + 1);
+                    if (whereIndex != -1) {
+                        query = query.substring(0, whereIndex + 7) + groupByClause + query.substring(whereIndex + 7);
+                    } else if (havingIndex != -1) {
+                        query = query.substring(0, havingIndex) + groupByClause + query.substring(havingIndex);
+                    } else if (orderByIndex != -1) {
+                        query = query.substring(0, orderByIndex) + groupByClause + query.substring(orderByIndex);
+                    } else if (limitIndex != -1) {
+                        query = query.substring(0, limitIndex) + groupByClause + query.substring(limitIndex);
+                    } else {
+                        query = query + groupByClause;
+                    }
+                }
+                PreparedStatement ejecutor = connect.prepareStatement(query);
                 for (int i = 0; i < parametros.size(); i++) {
                     Column columnsSQL = parametros.get(i);
                     convertJavaToSQL(columnsSQL, ejecutor, i + 1);
@@ -114,15 +146,49 @@ class Get extends Methods_Conexion {
     protected <T extends JBSqlUtils> T first(T modelo, String Sql, List<Column> parametros) throws Exception {
         if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(this);
+            modelo.llenarPropertiesFromModel(modelo);
         }
         T modeloResult = modelo.obtenerInstanciaOfModel(modelo);
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
         Callable<ResultAsync<T>> get = () -> {
             T modeloTemp = modelo.obtenerInstanciaOfModel(modelo);
-            try (Connection connect = modelo.getConnection();
-                 PreparedStatement ejecutor = connect.prepareStatement("SELECT * FROM " + modelo.getTableName() + Sql + ";")) {
+            try (Connection connect = modelo.getConnection()
+            ) {
+                String query = "SELECT * FROM " + modelo.getTableName() + Sql + ";";
+                //Si es sql server y trae la palabra limit verificara y modificara la sentencia
+                if (modelo.getDataBaseType() == DataBase.SQLServer) {
+                    if (StringUtils.containsIgnoreCase(query, "LIMIT")) {
+                        String temporal_limite = StringUtils.substringAfterLast(query, "LIMIT").replace(";", "").trim();
+                        String select = "SELECT TOP " + temporal_limite + " * FROM ";
+                        query = query.replace("SELECT * FROM ", select).replace("LIMIT " + temporal_limite, "");
+                        LogsJB.debug("Se modifico la sentencia SQL para que unicamente obtenga la cantidad de " +
+                                "registros especificados por el usuario: " + query);
+                    }
+                }
+                // Insertar la cláusula GROUP BY en la posición correcta
+                int whereIndex = query.indexOf(" WHERE ");
+                int havingIndex = query.indexOf(" HAVING ");
+                int orderByIndex = query.indexOf(" ORDER BY ");
+                int limitIndex = query.indexOf(" LIMIT ");
+                int groupByIndex = query.indexOf(" GROUP BY ");
+                int groupByEndIndex = query.indexOf(";", groupByIndex);
+                if (groupByIndex != -1 && groupByEndIndex != -1) {
+                    String groupByClause = query.substring(groupByIndex, groupByEndIndex + 1);
+                    query = query.substring(0, groupByIndex) + query.substring(groupByEndIndex + 1);
+                    if (whereIndex != -1) {
+                        query = query.substring(0, whereIndex + 7) + groupByClause + query.substring(whereIndex + 7);
+                    } else if (havingIndex != -1) {
+                        query = query.substring(0, havingIndex) + groupByClause + query.substring(havingIndex);
+                    } else if (orderByIndex != -1) {
+                        query = query.substring(0, orderByIndex) + groupByClause + query.substring(orderByIndex);
+                    } else if (limitIndex != -1) {
+                        query = query.substring(0, limitIndex) + groupByClause + query.substring(limitIndex);
+                    } else {
+                        query = query + groupByClause;
+                    }
+                }
+                PreparedStatement ejecutor = connect.prepareStatement(query);
                 for (int i = 0; i < parametros.size(); i++) {
                     Column columnsSQL = parametros.get(i);
                     convertJavaToSQL(columnsSQL, ejecutor, i + 1);
@@ -162,13 +228,47 @@ class Get extends Methods_Conexion {
     protected <T extends JBSqlUtils> void firstOrFailGet(T modelo, String Sql, List<Column> parametros) throws Exception {
         if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(this);
+            modelo.llenarPropertiesFromModel(modelo);
         }
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
         Callable<ResultAsync<Boolean>> get = () -> {
-            try (Connection connect = modelo.getConnection();
-                 PreparedStatement ejecutor = connect.prepareStatement("SELECT * FROM " + modelo.getTableName() + Sql + ";")) {
+            try (Connection connect = modelo.getConnection()
+            ) {
+                String query = "SELECT * FROM " + modelo.getTableName() + Sql + ";";
+                //Si es sql server y trae la palabra limit verificara y modificara la sentencia
+                if (modelo.getDataBaseType() == DataBase.SQLServer) {
+                    if (StringUtils.containsIgnoreCase(query, "LIMIT")) {
+                        String temporal_limite = StringUtils.substringAfterLast(query, "LIMIT").replace(";", "").trim();
+                        String select = "SELECT TOP " + temporal_limite + " * FROM ";
+                        query = query.replace("SELECT * FROM ", select).replace("LIMIT " + temporal_limite, "");
+                        LogsJB.debug("Se modifico la sentencia SQL para que unicamente obtenga la cantidad de " +
+                                "registros especificados por el usuario: " + query);
+                    }
+                }
+                // Insertar la cláusula GROUP BY en la posición correcta
+                int whereIndex = query.indexOf(" WHERE ");
+                int havingIndex = query.indexOf(" HAVING ");
+                int orderByIndex = query.indexOf(" ORDER BY ");
+                int limitIndex = query.indexOf(" LIMIT ");
+                int groupByIndex = query.indexOf(" GROUP BY ");
+                int groupByEndIndex = query.indexOf(";", groupByIndex);
+                if (groupByIndex != -1 && groupByEndIndex != -1) {
+                    String groupByClause = query.substring(groupByIndex, groupByEndIndex + 1);
+                    query = query.substring(0, groupByIndex) + query.substring(groupByEndIndex + 1);
+                    if (whereIndex != -1) {
+                        query = query.substring(0, whereIndex + 7) + groupByClause + query.substring(whereIndex + 7);
+                    } else if (havingIndex != -1) {
+                        query = query.substring(0, havingIndex) + groupByClause + query.substring(havingIndex);
+                    } else if (orderByIndex != -1) {
+                        query = query.substring(0, orderByIndex) + groupByClause + query.substring(orderByIndex);
+                    } else if (limitIndex != -1) {
+                        query = query.substring(0, limitIndex) + groupByClause + query.substring(limitIndex);
+                    } else {
+                        query = query + groupByClause;
+                    }
+                }
+                PreparedStatement ejecutor = connect.prepareStatement(query);
                 for (int i = 0; i < parametros.size(); i++) {
                     Column columnsSQL = parametros.get(i);
                     convertJavaToSQL(columnsSQL, ejecutor, i + 1);
@@ -214,15 +314,48 @@ class Get extends Methods_Conexion {
     protected <T extends JBSqlUtils> T firstOrFail(T modelo, String Sql, List<Column> parametros) throws Exception {
         if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(this);
+            modelo.llenarPropertiesFromModel(modelo);
         }
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
         T modeloResult = modelo.obtenerInstanciaOfModel(modelo);
         Callable<ResultAsync<T>> get = () -> {
             T modeloTemp = modelo.obtenerInstanciaOfModel(modelo);
-            try (Connection connect = modelo.getConnection();
-                 PreparedStatement ejecutor = connect.prepareStatement("SELECT * FROM " + modelo.getTableName() + Sql + ";")) {
+            try (Connection connect = modelo.getConnection()) {
+                String query = "SELECT * FROM " + modelo.getTableName() + Sql + ";";
+                //Si es sql server y trae la palabra limit verificara y modificara la sentencia
+                if (modelo.getDataBaseType() == DataBase.SQLServer) {
+                    if (StringUtils.containsIgnoreCase(query, "LIMIT")) {
+                        String temporal_limite = StringUtils.substringAfterLast(query, "LIMIT").replace(";", "").trim();
+                        String select = "SELECT TOP " + temporal_limite + " * FROM ";
+                        query = query.replace("SELECT * FROM ", select).replace("LIMIT " + temporal_limite, "");
+                        LogsJB.debug("Se modifico la sentencia SQL para que unicamente obtenga la cantidad de " +
+                                "registros especificados por el usuario: " + query);
+                    }
+                }
+                // Insertar la cláusula GROUP BY en la posición correcta
+                int whereIndex = query.indexOf(" WHERE ");
+                int havingIndex = query.indexOf(" HAVING ");
+                int orderByIndex = query.indexOf(" ORDER BY ");
+                int limitIndex = query.indexOf(" LIMIT ");
+                int groupByIndex = query.indexOf(" GROUP BY ");
+                int groupByEndIndex = query.indexOf(";", groupByIndex);
+                if (groupByIndex != -1 && groupByEndIndex != -1) {
+                    String groupByClause = query.substring(groupByIndex, groupByEndIndex + 1);
+                    query = query.substring(0, groupByIndex) + query.substring(groupByEndIndex + 1);
+                    if (whereIndex != -1) {
+                        query = query.substring(0, whereIndex + 7) + groupByClause + query.substring(whereIndex + 7);
+                    } else if (havingIndex != -1) {
+                        query = query.substring(0, havingIndex) + groupByClause + query.substring(havingIndex);
+                    } else if (orderByIndex != -1) {
+                        query = query.substring(0, orderByIndex) + groupByClause + query.substring(orderByIndex);
+                    } else if (limitIndex != -1) {
+                        query = query.substring(0, limitIndex) + groupByClause + query.substring(limitIndex);
+                    } else {
+                        query = query + groupByClause;
+                    }
+                }
+                PreparedStatement ejecutor = connect.prepareStatement(query);
                 for (int i = 0; i < parametros.size(); i++) {
                     Column columnsSQL = parametros.get(i);
                     convertJavaToSQL(columnsSQL, ejecutor, i + 1);
@@ -270,14 +403,14 @@ class Get extends Methods_Conexion {
     protected <T extends JBSqlUtils> List<T> getAll(T modelo, String Sql, List<Column> parametros) throws Exception {
         if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(this);
+            modelo.llenarPropertiesFromModel(modelo);
         }
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
         final String finalSql = Sql; // Make Sql final
         Callable<ResultAsync<List<T>>> get = () -> {
             List<T> listaTemp = new ArrayList<>();
-            try {
+            try (Connection connect = modelo.getConnection()) {
                 if (modelo.getTableExist()) {
                     String query = "SELECT * FROM " + modelo.getTableName() + finalSql + ";";
                     //Si es sql server y trae la palabra limit verificara y modificara la sentencia
@@ -290,7 +423,28 @@ class Get extends Methods_Conexion {
                                     "registros especificados por el usuario: " + query);
                         }
                     }
-                    Connection connect = modelo.getConnection();
+                    // Insertar la cláusula GROUP BY en la posición correcta
+                    int whereIndex = query.indexOf(" WHERE ");
+                    int havingIndex = query.indexOf(" HAVING ");
+                    int orderByIndex = query.indexOf(" ORDER BY ");
+                    int limitIndex = query.indexOf(" LIMIT ");
+                    int groupByIndex = query.indexOf(" GROUP BY ");
+                    int groupByEndIndex = query.indexOf(";", groupByIndex);
+                    if (groupByIndex != -1 && groupByEndIndex != -1) {
+                        String groupByClause = query.substring(groupByIndex, groupByEndIndex + 1);
+                        query = query.substring(0, groupByIndex) + query.substring(groupByEndIndex + 1);
+                        if (whereIndex != -1) {
+                            query = query.substring(0, whereIndex + 7) + groupByClause + query.substring(whereIndex + 7);
+                        } else if (havingIndex != -1) {
+                            query = query.substring(0, havingIndex) + groupByClause + query.substring(havingIndex);
+                        } else if (orderByIndex != -1) {
+                            query = query.substring(0, orderByIndex) + groupByClause + query.substring(orderByIndex);
+                        } else if (limitIndex != -1) {
+                            query = query.substring(0, limitIndex) + groupByClause + query.substring(limitIndex);
+                        } else {
+                            query = query + groupByClause;
+                        }
+                    }
                     PreparedStatement ejecutor = connect.prepareStatement(query);
                     for (int i = 0; i < parametros.size(); i++) {
                         //Obtengo la información de la columna
@@ -339,7 +493,7 @@ class Get extends Methods_Conexion {
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
      *                   captura la excepción y la lanza en el hilo principal
      */
-    protected List<JSONObject> get(String Sql, List<Column> parametros, List<String> columnas) throws Exception {
+    protected <T extends Methods_Conexion> List<JSONObject> get(String Sql, List<Column> parametros, String... columnas) throws Exception {
         String tableName = Sql.replace("SELECT * FROM ", "").split(" ")[0];
         this.setTaskIsReady(false);
         this.setTableName(tableName);
@@ -348,7 +502,7 @@ class Get extends Methods_Conexion {
         Callable<ResultAsync<List<JSONObject>>> get = () -> {
             List<JSONObject> temp = new ArrayList<>();
             String query = finalSql + ";";
-            try {
+            try (Connection connect = this.getConnection()) {
                 if (this.getTableExist()) {
                     //Si es sql server y trae la palabra limit verificara y modificara la sentencia
                     if (this.getDataBaseType() == DataBase.SQLServer) {
@@ -360,7 +514,39 @@ class Get extends Methods_Conexion {
                                     "registros especificados por el usuario: " + query);
                         }
                     }
-                    Connection connect = this.getConnection();
+                    // Insertar la cláusula GROUP BY en la posición correcta
+                    int whereIndex = query.indexOf(" WHERE ");
+                    int havingIndex = query.indexOf(" HAVING ");
+                    int orderByIndex = query.indexOf(" ORDER BY ");
+                    int limitIndex = query.indexOf(" LIMIT ");
+                    int groupByIndex = query.indexOf(" GROUP BY ");
+                    int groupByEndIndex = query.indexOf(";", groupByIndex);
+                    if (groupByIndex != -1 && groupByEndIndex != -1) {
+                        String groupByClause = query.substring(groupByIndex, groupByEndIndex + 1);
+                        query = query.substring(0, groupByIndex) + query.substring(groupByEndIndex + 1);
+                        if (whereIndex != -1) {
+                            query = query.substring(0, whereIndex + 7) + groupByClause + query.substring(whereIndex + 7);
+                        } else if (havingIndex != -1) {
+                            query = query.substring(0, havingIndex) + groupByClause + query.substring(havingIndex);
+                        } else if (orderByIndex != -1) {
+                            query = query.substring(0, orderByIndex) + groupByClause + query.substring(orderByIndex);
+                        } else if (limitIndex != -1) {
+                            query = query.substring(0, limitIndex) + groupByClause + query.substring(limitIndex);
+                        } else {
+                            query = query + groupByClause;
+                        }
+                    }
+                    //Acá quiero reemplazar el * por el array de columnas, si el array no es nullo
+                    if (columnas != null && columnas.length > 0) {
+                        StringBuilder columnasStr = new StringBuilder();
+                        for (String columna : columnas) {
+                            if (columnasStr.length() > 0) {
+                                columnasStr.append(", ");
+                            }
+                            columnasStr.append(columna);
+                        }
+                        query = query.replace("SELECT *", "SELECT " + columnasStr);
+                    }
                     PreparedStatement ejecutor = connect.prepareStatement(query);
                     for (int i = 0; i < parametros.size(); i++) {
                         //Obtengo la información de la columna
@@ -369,8 +555,17 @@ class Get extends Methods_Conexion {
                     }
                     LogsJB.info(ejecutor.toString());
                     ResultSet registros = ejecutor.executeQuery();
+                    ResultSetMetaData metaData = registros.getMetaData();
+                    int columnCount = metaData.getColumnCount();
+                    List<ColumnsSQL> columnMetadata = new ArrayList<>(columnCount);
+                    for (int i = 1; i <= columnCount; i++) {
+                        ColumnsSQL columna = new ColumnsSQL();
+                        columna.setCOLUMN_NAME(metaData.getColumnName(i));
+                        columna.setTYPE_NAME(metaData.getColumnTypeName(i));
+                        columnMetadata.add(columna);
+                    }
                     while (registros.next()) {
-                        temp.add(this.procesarResultSetJSON(columnas, registros));
+                        temp.add(this.procesarResultSetJSON(registros, columnMetadata));
                     }
                     this.closeConnection(connect);
                     this.setTaskIsReady(true);

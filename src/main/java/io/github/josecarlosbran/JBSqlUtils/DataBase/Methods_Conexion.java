@@ -98,8 +98,17 @@ class Methods_Conexion extends Conexion {
         }
     }
 
+    /**
+     * este metodo esta creado para ver si la clase actual es una subclase de JBSqlUtils,
+     * mediante los get se obtienen todos los campos de la clase actual y algunos que tienen datos especificos,
+     * los añade a una coleccion existente, pero los filtra primero.
+     *
+     * @param <T> es un metodo generico, se puede trabajar con diferentes tipos especificados en la instancia.
+     */
     protected synchronized <T> void getFieldsModel() {
+        //se esta obteniendo el nombre simple de la clase JBSqlUtils y se esta almacenando en la variable declarada
         String JBSQLUTILSNAME = JBSqlUtils.class.getSimpleName();
+        //se obtiene el nombre de la superclase y se almacena en superclasemodelo
         String SuperClaseModelo = this.getClass().getSuperclass().getSimpleName();
         if (StringUtils.equalsIgnoreCase(JBSQLUTILSNAME, SuperClaseModelo)) {
             //Obtiene los Fields del modelo
@@ -721,9 +730,8 @@ class Methods_Conexion extends Conexion {
         Integer result;
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
-        Connection connect = modelo.getConnection();
         Callable<ResultAsync<Integer>> Save = () -> {
-            try {
+            try (Connection connect = modelo.getConnection()) {
                 if (modelo.getTableExist()) {
                     StringBuilder sql = new StringBuilder("INSERT INTO ").append(modelo.getTableName()).append("(");
                     StringBuilder sql2 = new StringBuilder();
@@ -882,7 +890,7 @@ class Methods_Conexion extends Conexion {
             }
         };
         Callable<ResultAsync<Integer>> Update = () -> {
-            try {
+            try (Connection connect = modelo.getConnection()) {
                 if (modelo.getTableExist()) {
                     String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
                     StringBuilder sql = new StringBuilder("UPDATE ").append(modelo.getTableName()).append(" SET");
@@ -990,7 +998,7 @@ class Methods_Conexion extends Conexion {
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
         Callable<ResultAsync<Integer>> Delete = () -> {
-            try {
+            try (Connection connect = modelo.getConnection()) {
                 if (modelo.getTableExist()) {
                     // Obtener cual es la clave primaria de la tabla
                     String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
@@ -1012,7 +1020,6 @@ class Methods_Conexion extends Conexion {
                         }
                     }
                     sql.append(";");
-                    Connection connect = modelo.getConnection();
                     PreparedStatement ejecutor = connect.prepareStatement(sql.toString());
                     // Llena la información de las columnas que se insertaran
                     int auxiliar = 0;
@@ -1181,32 +1188,20 @@ class Methods_Conexion extends Conexion {
     /**
      * Obtiene un Json Object con las columnas solicitadas como propiedades del json con sus respectivos valores
      *
-     * @param columnas  Lista de los nombres de las columnas que se desea recuperar, si se desea recuperar todas las columnas envíar NULL
-     * @param registros ResultSet del cual se obtendran los valores de las columnas
+     * @param registros      ResultSet del cual se obtendran los valores de las columnas
+     * @param columnMetadata List of ColumnsSQL containing metadata of the columns
      * @return Retorna un Json Object con las columnas solicitadas como propiedades del json con sus respectivos valores
      * @throws SQLException Lanza esta excepción si sucede algún error al obtener el valor de cada una de las columnas solicitadas
      */
-    protected JSONObject procesarResultSetJSON(List<String> columnas, ResultSet registros) throws SQLException {
+    protected JSONObject procesarResultSetJSON(ResultSet registros, List<ColumnsSQL> columnMetadata) throws SQLException {
         JSONObject temp = new JSONObject();
         LogsJB.debug("Obtuvo un resultado de BD's, procedera a llenar el JSON");
-        LogsJB.debug("Cantidad de columnas : " + this.getTabla().getColumnas().size());
-        // Cachear las columnas y crear un set para búsqueda rápida
-        List<ColumnsSQL> columnasTabla = new ArrayList<>(this.getTabla().getColumnas());
-        Set<String> columnasSet = columnas != null ? new TreeSet<>(String.CASE_INSENSITIVE_ORDER) : null;
-        if (columnasSet != null) {
-            for (String columna : columnas) {
-                columnasSet.add(columna.toLowerCase());
-            }
-        }
-        // Llena la información del modelo
-        for (ColumnsSQL columna : columnasTabla) {
-            String columnName = columna.getCOLUMN_NAME().toLowerCase();
+        for (ColumnsSQL columna : columnMetadata) {
+            String columnName = columna.getCOLUMN_NAME();
+            String columnType = columna.getTYPE_NAME();
             LogsJB.trace("Columna : " + columnName);
-            //Si no se especifica las columnas a obtener retorna todas las columnas
-            // Si no se especifica las columnas a obtener retorna todas las columnas
-            if (columnasSet == null || columnasSet.contains(columnName)) {
-                this.convertSQLtoJson(columna, registros, temp);
-            }
+            LogsJB.trace("Tipo de dato : " + columnType);
+            this.convertSQLtoJson(columna, registros, temp);
         }
         return temp;
     }
@@ -1560,6 +1555,14 @@ class Methods_Conexion extends Conexion {
         }
     }
 
+    /**
+     * en esta funcion se obtiene el nombre de la columna de un campo,
+     * si tiene anotacion el campo, va devolver el name
+     * si la anotacion es null o vacio, devolvera el nombre del campo
+     *
+     * @param field maneja un parametro de tipo objeto field
+     * @return retorna el nombre de la columna estipulado en el if
+     */
     private String getColumnName(Field field) {
         //Obtengo la información de la columna
         ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
@@ -1572,26 +1575,64 @@ class Methods_Conexion extends Conexion {
         }
     }
 
+    /**
+     * este metodo verifica si tiene anotacion index es true y si es null es false.
+     *
+     * @param field parametro tipo objeto field
+     * @return retorna una columna
+     */
     private Boolean getColumnIsIndex(Field field) {
         //Obtiene si la columna es un Index
         return !Objects.isNull(field.getAnnotation(Index.class));
     }
 
+    /**
+     * este metodo comprueba que los campos que vienen tengan indices de valor adecuado.
+     *
+     * @param model parametro de la entidad que contiene los datos model
+     * @param field parametro field que es de tipo objeto
+     * @return retorna la columana q es tipo inde y si es nula
+     * @throws IllegalAccessException maneja la ecepcion cuando intentan acceder a un campo privado
+     */
     private Boolean getColumnIsIndexValidValue(Object model, Field field) throws IllegalAccessException {
         //Obtiene si la columna es un Index
         return this.getColumnIsIndex(field) && !this.getValueColumnIsNull(model, field);
     }
 
+    /**
+     * este metodo se encarga de verificar si el valor de un campo especifico de un model es null
+     *
+     * @param model parametor del objeto donde se quiere leer el campo
+     * @param field parametro del nombre del campo que se desea leer
+     * @return retorna un valor, donde verifica si el valor es null
+     * @throws IllegalAccessException
+     */
     private Boolean getValueColumnIsNull(Object model, Field field) throws IllegalAccessException {
         //Obtiene si la columna es un Index
         return Objects.isNull(FieldUtils.readDeclaredField(model, field.getName(), true));
     }
 
+    /**
+     * este metodo se utiliza para obtener el valor de un campo especifico de un objeto,
+     * donde la diferencia es que este campo puede ser privado.
+     *
+     * @param model es el objeto desde el cual se leera el valor.
+     * @param field es el parametro atributo del cual se recupera el valor.
+     * @return retorna el nombre obtenido
+     * @throws IllegalAccessException maneja la ecepcion
+     */
     private Object getValueColumn(Object model, Field field) throws IllegalAccessException {
         //Obtiene si la columna es un Index
         return FieldUtils.readDeclaredField(model, field.getName(), true);
     }
 
+    /**
+     * Este metodo permite determinar el valor inicial o por defecto de un campo que esta
+     * siendo mapeado a una BD.
+     *
+     * @param field es el campo del cual se recupera el valor.
+     * @return retorna la columana definida con una cadena string
+     */
     private String getColumnDefaultValue(Field field) {
         //Obtengo la información de la columna
         ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
@@ -1602,6 +1643,12 @@ class Methods_Conexion extends Conexion {
         return columnDefined.default_value();
     }
 
+    /**
+     * con este metodo se logra conocer las restricciones de tamaño de un campo que esta siendo mapeado.
+     *
+     * @param field campo tipo field del cual se desea obtener el tamaño
+     * @return retorna una cadena string
+     */
     private String getSize(Field field) {
         //Obtengo la información de la columna
         ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
@@ -1612,6 +1659,13 @@ class Methods_Conexion extends Conexion {
         return columnDefined.size();
     }
 
+    /**
+     * este metodo es utilizado para obtener las restricciones definidas para determinada columna
+     * donde denota la anotacion ColumnDefined
+     *
+     * @param field campo del cual se desea obtener las restricciones
+     * @return si el campo no tiene anotacion, retorna null
+     */
     private Constraint[] getConstraints(Field field) {
         //Obtengo la información de la columna
         ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
@@ -1622,6 +1676,12 @@ class Methods_Conexion extends Conexion {
         return columnDefined.constraints();
     }
 
+    /**
+     * este metodo se utiliza para generar una cadena que representa el tipo de dato SQL,
+     *
+     * @param field es el campo del cual se desea obtener el dato SQL como cadena
+     * @return retorna el tipo de dato, en uno sin importar el tamaño y el otro return si retorna el tamaño de la cadena.
+     */
     private String getDataTypeSQLToString(Field field) {
         //Obtengo la información de la columna
         ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
@@ -1637,6 +1697,12 @@ class Methods_Conexion extends Conexion {
         }
     }
 
+    /**
+     * este metodo obtiene el tipo de dato SQL de un campo,
+     *
+     * @param field es el campo del cual se desea obtener el tipo de dato
+     * @return retorna un objeto tipo datatype
+     */
     private DataType getDataTypeSQL(Field field) {
         //Obtengo la información de la columna
         ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
@@ -1647,6 +1713,13 @@ class Methods_Conexion extends Conexion {
         return columnDefined.dataTypeSQL();
     }
 
+    /**
+     * este metodo devuelve la informacion sobre la clave foranea que se encuentra definida
+     * en un campo especifico.
+     *
+     * @param field campo del cual se desean obtener los datos
+     * @return rertorna null si no encuentra anotacion sobre la llave foranea
+     */
     private ForeignKey getForeignKey(Field field) {
         //Obtengo la información de la columna
         ColumnDefined columnDefined = field.getAnnotation(ColumnDefined.class);
