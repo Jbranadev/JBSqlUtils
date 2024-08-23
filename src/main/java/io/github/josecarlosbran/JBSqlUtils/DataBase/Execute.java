@@ -60,7 +60,7 @@ class Execute extends Methods_Conexion {
     protected int execute() throws Exception {
         int result;
         Callable<ResultAsync<Integer>> Ejecutar_Sentencia = () -> {
-            try (Connection connect = this.getConnection();) {
+            try (Connection connect = this.getConnection()) {
                 this.sql = this.sql + ";";
                 PreparedStatement ejecutor = connect.prepareStatement(this.sql);
                 //Setea los parametros de la consulta

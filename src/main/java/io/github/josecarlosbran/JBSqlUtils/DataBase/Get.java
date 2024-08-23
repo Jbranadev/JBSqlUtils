@@ -277,7 +277,7 @@ class Get extends Methods_Conexion {
         final String finalSql = Sql; // Make Sql final
         Callable<ResultAsync<List<T>>> get = () -> {
             List<T> listaTemp = new ArrayList<>();
-            try (Connection connect = modelo.getConnection();) {
+            try (Connection connect = modelo.getConnection()) {
                 if (modelo.getTableExist()) {
                     String query = "SELECT * FROM " + modelo.getTableName() + finalSql + ";";
                     //Si es sql server y trae la palabra limit verificara y modificara la sentencia
@@ -347,7 +347,7 @@ class Get extends Methods_Conexion {
         Callable<ResultAsync<List<JSONObject>>> get = () -> {
             List<JSONObject> temp = new ArrayList<>();
             String query = finalSql + ";";
-            try (Connection connect = this.getConnection();) {
+            try (Connection connect = this.getConnection()) {
                 if (this.getTableExist()) {
                     //Si es sql server y trae la palabra limit verificara y modificara la sentencia
                     if (this.getDataBaseType() == DataBase.SQLServer) {

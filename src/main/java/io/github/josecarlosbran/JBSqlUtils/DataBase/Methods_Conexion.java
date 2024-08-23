@@ -731,7 +731,7 @@ class Methods_Conexion extends Conexion {
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
         Callable<ResultAsync<Integer>> Save = () -> {
-            try (Connection connect = modelo.getConnection();) {
+            try (Connection connect = modelo.getConnection()) {
                 if (modelo.getTableExist()) {
                     StringBuilder sql = new StringBuilder("INSERT INTO ").append(modelo.getTableName()).append("(");
                     StringBuilder sql2 = new StringBuilder();
@@ -890,7 +890,7 @@ class Methods_Conexion extends Conexion {
             }
         };
         Callable<ResultAsync<Integer>> Update = () -> {
-            try (Connection connect = modelo.getConnection();) {
+            try (Connection connect = modelo.getConnection()) {
                 if (modelo.getTableExist()) {
                     String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
                     StringBuilder sql = new StringBuilder("UPDATE ").append(modelo.getTableName()).append(" SET");
@@ -998,7 +998,7 @@ class Methods_Conexion extends Conexion {
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
         Callable<ResultAsync<Integer>> Delete = () -> {
-            try (Connection connect = modelo.getConnection();) {
+            try (Connection connect = modelo.getConnection()) {
                 if (modelo.getTableExist()) {
                     // Obtener cual es la clave primaria de la tabla
                     String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();

@@ -167,6 +167,25 @@ class Methods extends Methods_Conexion {
     }
 
     /**
+     * Proporciona un punto de entrada para obtener uno o mas modelos del tipo de modelo que invoca este procedimiento
+     *
+     * @param columna  Columna que sera evaluada
+     * @param operador Operador por medio del cual se evaluara la columna
+     * @param valor    Valor contra el cual se evaluara la columna
+     * @return Punto de entrada a metodos que permiten seguir modificando la expresión de filtro u obtener el o los
+     * modelos que hacen match con la consulta generada
+     * @throws ValorUndefined Lanza esta excepción si alguno de los parametros proporcionados esta
+     *                        Vacío o es Null
+     */
+    public Having having(String columna, Operator operador, Object valor) throws ValorUndefined {
+        if (!this.getGetPropertySystem()) {
+            Having having = new Having(columna, operador, valor, this, false);
+            return having;
+        }
+        return new Having(columna, operador, valor, this);
+    }
+
+    /**
      * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
      *
@@ -182,7 +201,7 @@ class Methods extends Methods_Conexion {
         this.validarTableExist(this);
         Callable<ResultAsync<List<T>>> get = () -> {
             List<T> listatemp = new ArrayList<T>();
-            try (Connection connect = this.getConnection();) {
+            try (Connection connect = this.getConnection()) {
                 String sql = "SELECT * FROM " + this.getTableName();
                 sql = sql + ";";
                 LogsJB.info(sql);

@@ -94,4 +94,20 @@ public class AndSet extends MethodsAndSet {
     public Where where(String columna, Operator operador, Object value) throws ValorUndefined {
         return new Where(columna, operador, value, this.sql, this.parametros);
     }
+
+    /**
+     * Proporciona un punto de entrada para agregar la logica de una sentencia Having a la sentencia SQL que
+     * deseamos ejecutar
+     *
+     * @param columna  Columna que sera evaluada
+     * @param operador Operador por medio del cual se evaluara la columna
+     * @param value    Valor contra el que se evaluara la columna
+     * @return Punto de entrada a métodos que permiten seguir modificando la expresión de filtro u obtener el o los
+     * modelos que hacen match con la consulta generada
+     * @throws ValorUndefined Lanza esta excepción si alguno de los parametros proporcionados esta
+     *                        Vacío o es Null
+     */
+    public Having having(String columna, Operator operador, Object value) throws ValorUndefined {
+        return new Having(columna, operador, value, this.sql, this.parametros);
+    }
 }
