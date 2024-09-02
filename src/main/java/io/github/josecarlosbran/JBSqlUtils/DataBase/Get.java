@@ -66,7 +66,7 @@ class Get extends Methods_Conexion {
     protected <T extends JBSqlUtils> void get(T modelo, String Sql, List<Column> parametros) throws Exception {
         if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(this);
+            modelo.llenarPropertiesFromModel(modelo);
         }
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
@@ -146,7 +146,7 @@ class Get extends Methods_Conexion {
     protected <T extends JBSqlUtils> T first(T modelo, String Sql, List<Column> parametros) throws Exception {
         if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(this);
+            modelo.llenarPropertiesFromModel(modelo);
         }
         T modeloResult = modelo.obtenerInstanciaOfModel(modelo);
         modelo.setTaskIsReady(false);
@@ -228,7 +228,7 @@ class Get extends Methods_Conexion {
     protected <T extends JBSqlUtils> void firstOrFailGet(T modelo, String Sql, List<Column> parametros) throws Exception {
         if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(this);
+            modelo.llenarPropertiesFromModel(modelo);
         }
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
@@ -314,7 +314,7 @@ class Get extends Methods_Conexion {
     protected <T extends JBSqlUtils> T firstOrFail(T modelo, String Sql, List<Column> parametros) throws Exception {
         if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(this);
+            modelo.llenarPropertiesFromModel(modelo);
         }
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
@@ -403,7 +403,7 @@ class Get extends Methods_Conexion {
     protected <T extends JBSqlUtils> List<T> getAll(T modelo, String Sql, List<Column> parametros) throws Exception {
         if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(this);
+            modelo.llenarPropertiesFromModel(modelo);
         }
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo);
