@@ -1,5 +1,15 @@
 # Version: 1.2.8
 
+* [#311](https://github.com/Jbranadev/JBSqlUtils/pull/311): Bump org.apache.maven.plugins:maven-surefire-plugin from 3.4.0 to 3.5.0
+* [#312](https://github.com/Jbranadev/JBSqlUtils/pull/312): Bump org.apache.maven.plugins:maven-javadoc-plugin from 3.8.0 to 3.10.0
+* [#313](https://github.com/Jbranadev/JBSqlUtils/pull/313): Bump org.apache.maven.plugins:maven-deploy-plugin from 3.1.2 to 3.1.3
+* [#314](https://github.com/Jbranadev/JBSqlUtils/pull/314): Bump org.apache.commons:commons-lang3 from 3.16.0 to 3.17.0
+* [#315](https://github.com/Jbranadev/JBSqlUtils/pull/315): Bump com.microsoft.sqlserver:mssql-jdbc from 12.8.0.jre11 to 12.8.1.jre11
+* [#316](https://github.com/Jbranadev/JBSqlUtils/pull/316): Bump github/codeql-action from 3.26.4 to 3.26.6
+
+
+# Version: 1.2.8
+
 * [#279](https://github.com/Jbranadev/JBSqlUtils/pull/279): Bump org.apache.maven.plugins:maven-site-plugin from
   4.0.0-M15 to 4.0.0-M16
 * [#280](https://github.com/Jbranadev/JBSqlUtils/pull/280): Bump org.apache.maven.plugins:maven-javadoc-plugin from
