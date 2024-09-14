@@ -512,10 +512,6 @@ class Methods_Conexion extends Conexion {
      * @throws Exception Lanza una Excepción si ocurre algun error al ejecutar el metodo refresh
      */
     public void refresh() throws Exception {
-        //this.setTableExist(this.tableExist());
-//        this.tableExist().thenAccept(
-//                exist->this.setTableExist(exist)
-//        );
         this.setTableExist(this.tableExist().join());
         this.reloadModel();
     }
@@ -534,7 +530,7 @@ class Methods_Conexion extends Conexion {
     public <T extends JBSqlUtils> Boolean reloadModel() throws Exception {
         this.setTaskIsReady(false);
         Boolean reloadModel;
-        this.validarTableExist(this);
+        this.validarTableExist(this).join();
         CompletableFuture<ResultAsync<Boolean>> future = CompletableFuture.supplyAsync(() -> {
             Boolean result = false;
             Connection connect = null;
@@ -839,7 +835,7 @@ class Methods_Conexion extends Conexion {
     protected <T extends Methods_Conexion> Integer saveModel(T modelo) throws Exception {
         Integer result;
         modelo.setTaskIsReady(false);
-        modelo.validarTableExist(modelo);
+        modelo.validarTableExist(modelo).join();
         Callable<ResultAsync<Integer>> Save = () -> {
             try (Connection connect = modelo.getConnection()) {
                 if (modelo.getTableExist()) {
@@ -1106,7 +1102,7 @@ class Methods_Conexion extends Conexion {
     protected <T extends Methods_Conexion> Integer deleteModel(T modelo) throws Exception {
         Integer result;
         modelo.setTaskIsReady(false);
-        modelo.validarTableExist(modelo);
+        modelo.validarTableExist(modelo).join();
         Callable<ResultAsync<Integer>> Delete = () -> {
             try (Connection connect = modelo.getConnection()) {
                 if (modelo.getTableExist()) {
@@ -1219,10 +1215,9 @@ class Methods_Conexion extends Conexion {
      */
     protected <T extends Methods_Conexion> CompletableFuture<Void> validarTableExist(T modelo) throws Exception {
         if (!modelo.getTableExist()) {
-//            modelo.tableExist().thenAccept(
-//                    exist->modelo.setTableExist(exist)
-//            );
-            modelo.setTableExist(modelo.tableExist().join());
+            return modelo.tableExist().thenAccept(
+                    exist->modelo.setTableExist(exist)
+            );
         }
         return CompletableFuture.completedFuture(null);
     }

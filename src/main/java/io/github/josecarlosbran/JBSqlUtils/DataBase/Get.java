@@ -341,7 +341,7 @@ class Get extends Methods_Conexion {
         String tableName = Sql.replace("SELECT * FROM ", "").split(" ")[0];
         this.setTaskIsReady(false);
         this.setTableName(tableName);
-        this.validarTableExist(this);
+        this.validarTableExist(this).join();
         final String finalSql = Sql; // Make Sql final
         Callable<ResultAsync<List<JSONObject>>> get = () -> {
             List<JSONObject> temp = new ArrayList<>();
