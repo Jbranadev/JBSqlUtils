@@ -250,7 +250,7 @@ class Methods_Conexion extends Conexion {
      * @return True si la tabla correspondiente al modelo existe en BD's, de lo contrario False.
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
-    public Boolean tableExist() throws Exception {
+    public Boolean tableExist1() throws Exception {
         Boolean result;
         Callable<ResultAsync<Boolean>> verificarExistencia = () -> {
             Connection connect = null;
@@ -353,7 +353,7 @@ class Methods_Conexion extends Conexion {
      * @return True si la tabla correspondiente al modelo existe en BD's, de lo contrario False.
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
-    public CompletableFuture<Boolean> tableExistCompleteableFeature() {
+    public CompletableFuture<Boolean> tableExist() {
         return CompletableFuture.supplyAsync(() -> {
                 Connection connect = null;
                 ResultSet tables = null;
@@ -512,7 +512,11 @@ class Methods_Conexion extends Conexion {
      * @throws Exception Lanza una Excepción si ocurre algun error al ejecutar el metodo refresh
      */
     public void refresh() throws Exception {
-        this.setTableExist(this.tableExist());
+        //this.setTableExist(this.tableExist());
+//        this.tableExist().thenAccept(
+//                exist->this.setTableExist(exist)
+//        );
+        this.setTableExist(this.tableExist().join());
         this.reloadModel();
     }
 
@@ -1196,9 +1200,12 @@ class Methods_Conexion extends Conexion {
      * @param <T>
      * @throws Exception Si sucede una excepción en la ejecución de esta tarea la lanza al metodo que la invoco
      */
-    protected <T extends Methods_Conexion> void validarTableExist(T modelo) throws Exception {
+    protected <T extends Methods_Conexion> void validarTableExist1(T modelo) throws Exception {
         if (!modelo.getTableExist()) {
-            modelo.setTableExist(modelo.tableExist());
+//            modelo.tableExist().thenAccept(
+//                    exist->modelo.setTableExist(exist)
+//            );
+            modelo.setTableExist(modelo.tableExist().join());
         }
     }
 
@@ -1210,12 +1217,12 @@ class Methods_Conexion extends Conexion {
      * @param <T>
      * @throws Exception Si sucede una excepción en la ejecución de esta tarea la lanza al metodo que la invoco
      */
-    protected <T extends Methods_Conexion> CompletableFuture<Void> validarTableExistCompleteableFeature(T modelo) throws Exception {
+    protected <T extends Methods_Conexion> CompletableFuture<Void> validarTableExist(T modelo) throws Exception {
         if (!modelo.getTableExist()) {
-            modelo.tableExistCompleteableFeature().thenAccept(
-                    exist->modelo.setTableExist(exist)
-            );
-            modelo.setTableExist(modelo.tableExist());
+//            modelo.tableExist().thenAccept(
+//                    exist->modelo.setTableExist(exist)
+//            );
+            modelo.setTableExist(modelo.tableExist().join());
         }
         return CompletableFuture.completedFuture(null);
     }
@@ -1338,18 +1345,18 @@ class Methods_Conexion extends Conexion {
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
     public Boolean createTable() throws Exception {
-        Boolean result;
-        CompletableFuture<ResultAsync<Boolean>> future = CompletableFuture.supplyAsync(() -> {
-            StringBuilder sql = new StringBuilder("CREATE TABLE ").append(this.getTableName()).append("(");
-            List<Field> fields;
-            List<ForeignKey> foreignKeys = new ArrayList<>();
-            Connection connect = null;
-            Statement ejecutor = null;
-            try {
-                if (this.tableExist()) {
-                    LogsJB.info("La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.");
-                    return new ResultAsync<>(false, null);
-                } else {
+    CompletableFuture<Boolean> future = tableExist().thenCompose(exists -> {
+        if (exists) {
+            LogsJB.info("La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.");
+            return CompletableFuture.completedFuture(false);
+        } else {
+            return CompletableFuture.supplyAsync(() -> {
+                StringBuilder sql = new StringBuilder("CREATE TABLE ").append(this.getTableName()).append("(");
+                List<Field> fields;
+                List<ForeignKey> foreignKeys = new ArrayList<>();
+                Connection connect = null;
+                Statement ejecutor = null;
+                try {
                     fields = this.getFieldsOfModel().stream()
                             .filter(field -> !Objects.isNull(getDataTypeSQL(field)))
                             .sorted(Comparator.comparingInt(field -> getDataTypeSQL(field).getOrden()))
@@ -1433,33 +1440,31 @@ class Methods_Conexion extends Conexion {
                         LogsJB.info("Sentencia para crear tabla de la BD's ejecutada exitosamente");
                         LogsJB.info("Tabla " + this.getTableName() + " Creada exitosamente");
                         this.refresh();
-                        return new ResultAsync<>(true, null);
+                        return true;
+                    }
+                } catch (Exception e) {
+                    LogsJB.fatal("Excepción disparada en el método que Crea la tabla correspondiente al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                    return false;
+                } finally {
+                    if (ejecutor != null) {
+                        try {
+                            ejecutor.close();
+                        } catch (SQLException e) {
+                            LogsJB.error("Error al cerrar el Statement: " + e.getMessage());
+                        }
+                    }
+                    if (connect != null) {
+                        this.closeConnection(connect);
                     }
                 }
-            } catch (Exception e) {
-                LogsJB.fatal("Excepción disparada en el método que Crea la tabla correspondiente al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                return new ResultAsync<>(false, e);
-            } finally {
-                if (ejecutor != null) {
-                    try {
-                        ejecutor.close();
-                    } catch (SQLException e) {
-                        LogsJB.error("Error al cerrar el Statement: " + ExceptionUtils.getStackTrace(e));
-                    }
-                }
-                if (connect != null) {
-                    this.closeConnection(connect);
-                }
-            }
-            return new ResultAsync<>(false, null);
-        });
-        ResultAsync<Boolean> resultado = future.get();
-        if (!Objects.isNull(resultado.getException())) {
-            throw resultado.getException();
+                return false;
+            });
         }
-        result = resultado.getResult();
-        return result;
-    }
+    });
+
+    Boolean resultado = future.join();
+    return resultado;
+}
 
     /**
      * Elimina la tabla correspondiente al modelo en BD's
@@ -1469,58 +1474,54 @@ class Methods_Conexion extends Conexion {
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
     public Boolean dropTableIfExist() throws Exception {
-        Boolean result;
-        CompletableFuture<ResultAsync<Boolean>> future = CompletableFuture.supplyAsync(() -> {
-            StringBuilder sql = new StringBuilder();
-            Connection connect = null;
-            Statement ejecutor = null;
-            try {
-                if (this.tableExist()) {
-                    if (this.getDataBaseType() == DataBase.SQLServer) {
-                        sql.append("if exists (select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = '")
-                                .append(this.getTableName())
-                                .append("' AND TABLE_SCHEMA = 'dbo')\n")
-                                .append("    drop table dbo.")
-                                .append(this.getTableName());
-                    } else {
-                        sql.append("DROP TABLE IF EXISTS ").append(this.getTableName());
-                    }
-                    LogsJB.info(sql.toString());
-                    connect = this.getConnection();
-                    ejecutor = connect.createStatement();
-                    if (!ejecutor.execute(sql.toString())) {
-                        LogsJB.info("Sentencia para eliminar tabla de la BD's ejecutada exitosamente");
-                        LogsJB.info("Tabla " + this.getTableName() + " Eliminada exitosamente");
-                        this.refresh();
-                        return new ResultAsync<>(true, null);
-                    }
-                } else {
-                    LogsJB.info("Tabla correspondiente al modelo no existe en BD's por eso no pudo ser eliminada");
-                    return new ResultAsync<>(false, null);
-                }
-            } catch (Exception e) {
-                LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                return new ResultAsync<>(false, e);
-            } finally {
-                if (ejecutor != null) {
+        CompletableFuture<Boolean> future = tableExist().thenCompose(exists -> {
+            if (exists) {
+                return CompletableFuture.supplyAsync(() -> {
+                    StringBuilder sql = new StringBuilder();
+                    Connection connect = null;
+                    Statement ejecutor = null;
                     try {
-                        ejecutor.close();
-                    } catch (SQLException e) {
-                        LogsJB.error("Error al cerrar el Statement: " + e.getMessage());
+                        if (this.getDataBaseType() == DataBase.SQLServer) {
+                            sql.append("if exists (select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = '")
+                                    .append(this.getTableName())
+                                    .append("' AND TABLE_SCHEMA = 'dbo')\n")
+                                    .append("    drop table dbo.")
+                                    .append(this.getTableName());
+                        } else {
+                            sql.append("DROP TABLE IF EXISTS ").append(this.getTableName());
+                        }
+                        LogsJB.info(sql.toString());
+                        connect = this.getConnection();
+                        ejecutor = connect.createStatement();
+                        if (!ejecutor.execute(sql.toString())) {
+                            LogsJB.info("Sentencia para eliminar tabla de la BD's ejecutada exitosamente");
+                            LogsJB.info("Tabla " + this.getTableName() + " Eliminada exitosamente");
+                            this.refresh();
+                            return true;
+                        }
+                    } catch (Exception e) {
+                        LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                        return false;
+                    } finally {
+                        if (ejecutor != null) {
+                            try {
+                                ejecutor.close();
+                            } catch (SQLException e) {
+                                LogsJB.error("Error al cerrar el Statement: " + e.getMessage());
+                            }
+                        }
+                        if (connect != null) {
+                            this.closeConnection(connect);
+                        }
                     }
-                }
-                if (connect != null) {
-                    this.closeConnection(connect);
-                }
+                    return false;
+                });
+            } else {
+                LogsJB.info("Tabla correspondiente al modelo no existe en BD's por eso no pudo ser eliminada");
+                return CompletableFuture.completedFuture(false);
             }
-            return new ResultAsync<>(false, null);
         });
-        ResultAsync<Boolean> resultado = future.get();
-        if (!Objects.isNull(resultado.getException())) {
-            throw resultado.getException();
-        }
-        result = resultado.getResult();
-        return result;
+        return future.join();
     }
 
     /**
@@ -1532,16 +1533,16 @@ class Methods_Conexion extends Conexion {
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
     protected Boolean crateTableJSON(List<Column> columnas) throws Exception {
-        Boolean result;
-        CompletableFuture<ResultAsync<Boolean>> future = CompletableFuture.supplyAsync(() -> {
-            StringBuilder sql = new StringBuilder("CREATE TABLE ").append(this.getTableName()).append("(");
-            Connection connect = null;
-            Statement ejecutor = null;
-            try {
-                if (this.tableExist()) {
-                    LogsJB.info("La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.");
-                    return new ResultAsync<>(false, null);
-                } else {
+    CompletableFuture<ResultAsync<Boolean>> future = tableExist().thenCompose(exists -> {
+        if (exists) {
+            LogsJB.info("La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.");
+            return CompletableFuture.completedFuture(new ResultAsync<>(false, null));
+        } else {
+            return CompletableFuture.supplyAsync(() -> {
+                StringBuilder sql = new StringBuilder("CREATE TABLE ").append(this.getTableName()).append("(");
+                Connection connect = null;
+                Statement ejecutor = null;
+                try {
                     LogsJB.debug("Comienza a ordenar la lista");
                     columnas.sort((columna1, columna2) -> {
                         try {
@@ -1614,31 +1615,32 @@ class Methods_Conexion extends Conexion {
                         this.refresh();
                         return new ResultAsync<>(true, null);
                     }
-                }
-                return new ResultAsync<>(false, null);
-            } catch (Exception e) {
-                LogsJB.fatal("Excepción disparada en el método que Crea la tabla solicitada, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                return new ResultAsync<>(false, e);
-            } finally {
-                if (ejecutor != null) {
-                    try {
-                        ejecutor.close();
-                    } catch (SQLException e) {
-                        LogsJB.fatal("Error al cerrar el Statement: " + ExceptionUtils.getStackTrace(e));
+                } catch (Exception e) {
+                    LogsJB.fatal("Excepción disparada en el método que Crea la tabla solicitada, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                    return new ResultAsync<>(false, e);
+                } finally {
+                    if (ejecutor != null) {
+                        try {
+                            ejecutor.close();
+                        } catch (SQLException e) {
+                            LogsJB.fatal("Error al cerrar el Statement: " + ExceptionUtils.getStackTrace(e));
+                        }
+                    }
+                    if (connect != null) {
+                        this.closeConnection(connect);
                     }
                 }
-                if (connect != null) {
-                    this.closeConnection(connect);
-                }
-            }
-        });
-        ResultAsync<Boolean> resultado = future.get();
-        if (!Objects.isNull(resultado.getException())) {
-            throw resultado.getException();
+                return new ResultAsync<>(false, null);
+            });
         }
-        result = resultado.getResult();
-        return result;
+    });
+
+    ResultAsync<Boolean> resultado = future.join();
+    if (!Objects.isNull(resultado.getException())) {
+        throw resultado.getException();
     }
+    return resultado.getResult();
+}
 
     /**
      * Llena las propiedades de conexión de un modelo desde otro
