@@ -67,7 +67,7 @@ class Get extends Methods_Conexion {
             modelo.llenarPropertiesFromModel(modelo);
         }
         modelo.setTaskIsReady(false);
-        modelo.validarTableExist(modelo);
+        modelo.validarTableExist(modelo).join();
         Callable<ResultAsync<Boolean>> get = () -> {
             try (Connection connect = modelo.getConnection()
             ) {
@@ -117,7 +117,7 @@ class Get extends Methods_Conexion {
         }
         T modeloResult = modelo.obtenerInstanciaOfModel(modelo);
         modelo.setTaskIsReady(false);
-        modelo.validarTableExist(modelo);
+        modelo.validarTableExist(modelo).join();
         Callable<ResultAsync<T>> get = () -> {
             T modeloTemp = modelo.obtenerInstanciaOfModel(modelo);
             try (Connection connect = modelo.getConnection()
@@ -167,7 +167,7 @@ class Get extends Methods_Conexion {
             modelo.llenarPropertiesFromModel(modelo);
         }
         modelo.setTaskIsReady(false);
-        modelo.validarTableExist(modelo);
+        modelo.validarTableExist(modelo).join();
         Callable<ResultAsync<Boolean>> get = () -> {
             try (Connection connect = modelo.getConnection()
             ) {
@@ -222,7 +222,7 @@ class Get extends Methods_Conexion {
             modelo.llenarPropertiesFromModel(modelo);
         }
         modelo.setTaskIsReady(false);
-        modelo.validarTableExist(modelo);
+        modelo.validarTableExist(modelo).join();
         T modeloResult = modelo.obtenerInstanciaOfModel(modelo);
         Callable<ResultAsync<T>> get = () -> {
             T modeloTemp = modelo.obtenerInstanciaOfModel(modelo);
@@ -281,7 +281,7 @@ class Get extends Methods_Conexion {
         }
         //bran commit 2
         modelo.setTaskIsReady(false);
-        modelo.validarTableExist(modelo);
+        modelo.validarTableExist(modelo).join();
         final String finalSql = Sql; // Make Sql final
         Callable<ResultAsync<List<T>>> get = () -> {
             List<T> listaTemp = new ArrayList<>();

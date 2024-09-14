@@ -211,7 +211,7 @@ class Methods extends Methods_Conexion {
     public <T extends JBSqlUtils> List<T> getAll() throws Exception {
         this.setTaskIsReady(false);
         List<T> lista;
-        this.validarTableExist(this);
+        this.validarTableExist(this).join();
         Callable<ResultAsync<List<T>>> get = () -> {
             List<T> listatemp = new ArrayList<T>();
             try (Connection connect = this.getConnection()) {
