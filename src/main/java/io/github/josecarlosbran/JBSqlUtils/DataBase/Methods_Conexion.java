@@ -512,7 +512,6 @@ class Methods_Conexion extends Conexion {
      * @throws Exception Lanza una Excepción si ocurre algun error al ejecutar el metodo refresh
      */
     public void refresh() throws Exception {
-        this.setTableExist(this.tableExist().join());
         this.reloadModel();
     }
 
@@ -1434,6 +1433,7 @@ class Methods_Conexion extends Conexion {
                     if (!ejecutor.execute(sql.toString())) {
                         LogsJB.info("Sentencia para crear tabla de la BD's ejecutada exitosamente");
                         LogsJB.info("Tabla " + this.getTableName() + " Creada exitosamente");
+                        this.setTableExist(true);
                         this.refresh();
                         return true;
                     }
@@ -1491,6 +1491,7 @@ class Methods_Conexion extends Conexion {
                         if (!ejecutor.execute(sql.toString())) {
                             LogsJB.info("Sentencia para eliminar tabla de la BD's ejecutada exitosamente");
                             LogsJB.info("Tabla " + this.getTableName() + " Eliminada exitosamente");
+                            this.setTableExist(false);
                             this.refresh();
                             return true;
                         }
