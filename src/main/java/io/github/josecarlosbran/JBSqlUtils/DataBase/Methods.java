@@ -86,7 +86,20 @@ class Methods extends Methods_Conexion {
             } else {
                 modelo.llenarPropertiesFromModel(this);
                 temp = this.obtenerInstanciaOfModel(modelo);
-                temp.refresh();
+                // Condiciones para ejecutar temp.refresh()
+                boolean shouldRefresh =
+                        modelo.getTableExist() == false ||
+                                modelo.getTableName() == null ||
+                                modelo.getTableName().isEmpty() ||
+                                modelo.getTabla().getColumnsExist().isEmpty();
+                if(shouldRefresh){
+                    temp.refresh();
+                }else{
+                    temp.setTabla(modelo.getTabla());
+                    temp.setTableExist(modelo.getTableExist());
+                    temp.setTableName(modelo.getTableName());
+                    temp.getTabla().setColumnsExist(modelo.getTabla().getColumnsExist());
+                }
                 tableInfoCached = true;
             }
             result = result + modelo.saveModel(modelo);

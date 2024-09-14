@@ -140,6 +140,8 @@ class Methods_Conexion extends Conexion {
             String password = this.getPassword();
             if (this.getDataBaseType() == DataBase.PostgreSQL) {
                 String host = this.getHost();
+                Class.forName("org.postgresql.Driver");
+                DriverManager.registerDriver(new org.postgresql.Driver());
                 if (!stringIsNullOrEmpty(this.getPort())) {
                     host = host + ":" + this.getPort();
                 }
@@ -156,6 +158,9 @@ class Methods_Conexion extends Conexion {
             }
             if (this.getDataBaseType() == DataBase.MySQL) {
                 connect = null;
+                Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
                         this.getHost() + ":" + this.getPort() + "/" + this.getBD();
                 if (!stringIsNullOrEmpty(this.getPropertisURL())) {
@@ -165,6 +170,8 @@ class Methods_Conexion extends Conexion {
                 connect = DriverManager.getConnection(url, usuario, password);
             }
             if (this.getDataBaseType() == DataBase.MariaDB) {
+                Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
                 connect = null;
                 url = "jdbc:" + this.getDataBaseType().getDBType() + "://" +
                         this.getHost() + ":" + this.getPort() + "/" + this.getBD();
@@ -175,6 +182,8 @@ class Methods_Conexion extends Conexion {
                 connect = DriverManager.getConnection(url, usuario, password);
             }
             if (this.getDataBaseType() == DataBase.SQLServer) {
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
                 connect = null;
                 String host = this.getHost();
                 if (!stringIsNullOrEmpty(this.getPort())) {
@@ -192,6 +201,8 @@ class Methods_Conexion extends Conexion {
                 connect = DriverManager.getConnection(url, usuario, password);
             }
             if (this.getDataBaseType() == DataBase.SQLite) {
+                Class.forName("org.sqlite.JDBC").newInstance();
+                DriverManager.registerDriver(new org.sqlite.JDBC());
                 //Rutas de archivos
                 File fichero = new File(this.getBD());
                 //Verifica si existe la carpeta Logs, si no existe, la Crea
@@ -337,6 +348,99 @@ class Methods_Conexion extends Conexion {
     }
 
     /**
+     * Verifica la existencia de la tabla correspondiente al modelo en BD's
+     *
+     * @return True si la tabla correspondiente al modelo existe en BD's, de lo contrario False.
+     * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
+     */
+    public CompletableFuture<Boolean> tableExistCompleteableFeature() {
+        return CompletableFuture.supplyAsync(() -> {
+                Connection connect = null;
+                ResultSet tables = null;
+                try {
+                    LogsJB.info("Comienza a verificar la existencia de la tabla");
+                    connect = this.getConnection();
+                    DatabaseMetaData metaData = connect.getMetaData();
+                    String databaseName = this.getBD();
+                    tables = metaData.getTables(null, null, "%", null);
+                    LogsJB.trace("Revisara el resultSet");
+                    while (tables.next()) {
+                        TablesSQL temp = new TablesSQL();
+                        temp.setTABLE_CAT(tables.getString(1));
+                        temp.setTABLE_SCHEM(tables.getString(2));
+                        temp.setTABLE_NAME(tables.getString(3));
+                        temp.setTABLE_TYPE(tables.getString(4));
+                        temp.setREMARKS(tables.getString(5));
+                        if (this.getDataBaseType() != DataBase.SQLServer) {
+                            temp.setTYPE_CAT(tables.getString(6));
+                            temp.setTYPE_SCHEM(tables.getString(7));
+                            temp.setTYPE_NAME(tables.getString(8));
+                            temp.setSELF_REFERENCING_COL_NAME(tables.getString(9));
+                            temp.setREF_GENERATION(tables.getString(10));
+                        }
+                        String nameModel = this.getTableName();
+                        String nameTable = temp.getTABLE_NAME();
+                        String databaseTemp = tables.getString(1);
+                        String databaseTemp2 = tables.getString(2);
+                        boolean tablaisofDB = true;
+                        if (nameModel.equalsIgnoreCase(nameTable)) {
+                            LogsJB.debug("Base de datos del modelo: " + databaseName + " Base de datos del servidor: " + databaseTemp);
+                        }
+                        if (!stringIsNullOrEmpty(databaseTemp) && !databaseName.equalsIgnoreCase(databaseTemp)) {
+                            tablaisofDB = false;
+                        }
+                        if (!tablaisofDB && !stringIsNullOrEmpty(databaseTemp2)) {
+                            tablaisofDB = databaseName.equalsIgnoreCase(databaseTemp2);
+                        }
+                        if (this.getDataBaseType() == DataBase.PostgreSQL && nameModel.equalsIgnoreCase(nameTable)) {
+                            tablaisofDB = true;
+                        }
+                        if (nameModel.equalsIgnoreCase(nameTable) && tablaisofDB) {
+                            LogsJB.debug("Base de datos del modelo: " + databaseName + " Base de datos del servidor3: " + databaseTemp);
+                            this.setTableExist(Boolean.TRUE);
+                            this.setTableName(nameTable);
+                            this.setTabla(temp);
+                            ResultSet clavePrimaria = metaData.getPrimaryKeys(temp.getTABLE_CAT(), temp.getTABLE_SCHEM(), nameTable);
+                            if (clavePrimaria.next()) {
+                                PrimaryKey clave = new PrimaryKey();
+                                clave.setTABLE_CAT(clavePrimaria.getString(1));
+                                clave.setTABLE_SCHEM(clavePrimaria.getString(2));
+                                clave.setTABLE_NAME(clavePrimaria.getString(3));
+                                clave.setCOLUMN_NAME(clavePrimaria.getString(4));
+                                clave.setKEY_SEQ(clavePrimaria.getShort(5));
+                                clave.setPK_NAME(clavePrimaria.getString(6));
+                                this.getTabla().setClaveprimaria(clave);
+                            }
+                            LogsJB.info("La tabla correspondiente a este modelo, existe en BD's " + this.getClass().getSimpleName());
+                            getColumnsTable(connect);
+                            return true;
+                        }
+                    }
+                    LogsJB.trace("Termino de Revisarar el resultSet");
+                    if (!this.getTableExist()) {
+                        LogsJB.info("La tabla correspondiente a este modelo, No existe en BD's " + this.getClass().getSimpleName());
+                        return false;
+                    }
+                } catch (Exception e) {
+                    LogsJB.fatal("Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                    return false;
+                } finally {
+                    if (tables != null) {
+                        try {
+                            tables.close();
+                        } catch (SQLException e) {
+                            LogsJB.warning("Error closing ResultSet: " + ExceptionUtils.getStackTrace(e));
+                        }
+                    }
+                    if (connect != null) {
+                        this.closeConnection(connect);
+                    }
+                }
+                return false;
+        });
+    }
+
+    /**
      * Obtiene las columnas que tiene la tabla correspondiente al modelo en BD's.
      *
      * @param connect a BD's para obtener la metadata
@@ -411,6 +515,8 @@ class Methods_Conexion extends Conexion {
         this.setTableExist(this.tableExist());
         this.reloadModel();
     }
+
+
 
     /**
      * Refresca el modelo con la información de BD's, se perderan las modificaciones que se hayan realizadas sobre el modelo,
@@ -1097,6 +1203,24 @@ class Methods_Conexion extends Conexion {
     }
 
     /**
+     * Valida si el modelo ya conoce si su tabla existe en BD's de lo contrario ejecuta este metodo para asegurarse que
+     * obtenga la información de BD's
+     *
+     * @param modelo Modelo que se desea validar si su tabla existe en BD's
+     * @param <T>
+     * @throws Exception Si sucede una excepción en la ejecución de esta tarea la lanza al metodo que la invoco
+     */
+    protected <T extends Methods_Conexion> CompletableFuture<Void> validarTableExistCompleteableFeature(T modelo) throws Exception {
+        if (!modelo.getTableExist()) {
+            modelo.tableExistCompleteableFeature().thenAccept(
+                    exist->modelo.setTableExist(exist)
+            );
+            modelo.setTableExist(modelo.tableExist());
+        }
+        return CompletableFuture.completedFuture(null);
+    }
+
+    /**
      * Obtiene un nuevo modelo del tipo de modelo proporcionado para procesar el ResultSet
      * con la información de BD's
      *
@@ -1529,17 +1653,19 @@ class Methods_Conexion extends Conexion {
             // Crear un set con los nombres de los métodos que queremos filtrar
             Set<String> metodosProveedorNombres = Set.of("getDataBaseType", "getHost", "getPort", "getUser", "getPassword", "getBD", "getPropertisURL");
             Set<String> metodosReciberNombres = Set.of("setDataBaseType", "setHost", "setPort", "setUser", "setPassword", "setBD", "setPropertisURL");
+            // Obtener los métodos de la clase actual y del proveedor
+            Method[] metodosClaseActual = this.getClass().getMethods();
+            Method[] metodosProveedor = proveedor.getClass().getMethods();
             // Crear un mapa para emparejar los métodos
-            Map<String, Method> metodosReciberMap = new HashMap<>();
-            for (Method metodo : this.getClass().getMethods()) {
-                String nombreMetodo = metodo.getName();
-                if (metodosReciberNombres.contains(nombreMetodo) && metodo.getParameterCount() == 1) {
-                    String nombreMetodoReciber = StringUtils.removeStartIgnoreCase(nombreMetodo, "set");
-                    metodosReciberMap.put(nombreMetodoReciber, metodo);
-                }
-            }
+            // Crear un mapa para emparejar los métodos
+            Map<String, Method> metodosReciberMap = Arrays.stream(metodosClaseActual)
+                    .filter(metodo -> metodosReciberNombres.contains(metodo.getName()) && metodo.getParameterCount() == 1)
+                    .collect(Collectors.toMap(
+                            metodo -> StringUtils.removeStartIgnoreCase(metodo.getName(), "set"),
+                            metodo -> metodo
+                    ));
             // Iterar sobre los métodos del proveedor y emparejar con los métodos del recibidor
-            for (Method metodoProveedor : proveedor.getClass().getMethods()) {
+            for (Method metodoProveedor : metodosProveedor) {
                 String nombreMetodo = metodoProveedor.getName();
                 if (metodosProveedorNombres.contains(nombreMetodo)) {
                     String nombreMetodoProveedor = StringUtils.removeStartIgnoreCase(nombreMetodo, "get");
