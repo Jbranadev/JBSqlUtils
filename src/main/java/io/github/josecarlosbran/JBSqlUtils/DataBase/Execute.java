@@ -82,7 +82,6 @@ class Execute extends Methods_Conexion {
             }
         };
         Future<ResultAsync<Integer>> future = ejecutor.submit(Ejecutar_Sentencia);
-
         ResultAsync<Integer> resultado = future.get();
         if (!Objects.isNull(resultado.getException())) {
             throw resultado.getException();

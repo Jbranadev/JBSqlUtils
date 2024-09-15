@@ -1,6 +1,7 @@
 package io.github.josecarlosbran.JBSqlUtils.Adaptadores;
 
 import com.josebran.LogsJB.LogsJB;
+import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.json.bind.config.PropertyVisibilityStrategy;
 import org.apache.commons.lang3.StringUtils;
@@ -23,7 +24,8 @@ public class VisibilitySerializableModel implements PropertyVisibilityStrategy {
         boolean declarinClass = false;
         boolean anotacionPresent = false;
         try {
-            declarinClass = field.getDeclaringClass().getPackage().hashCode() == this.getClass().getPackage().hashCode();
+            declarinClass = JBSqlUtils.class.isAssignableFrom(field.getDeclaringClass()) &&
+                    field.getDeclaringClass().getPackage().hashCode() != JBSqlUtils.class.getPackage().hashCode();
             anotacionPresent = !field.isAnnotationPresent(JsonbTransient.class);
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada al mapear el Json con el Obtjeto en cuestion " + field.toString() + ": " + ExceptionUtils.getStackTrace(e));
@@ -51,8 +53,8 @@ public class VisibilitySerializableModel implements PropertyVisibilityStrategy {
             //En esta linea se realiza la verificacion si el metodo declarado pertenece al mismo paquete
             //que la clase actual (this).
             //y se utiliza hashCode para realizar la comparacion de ambas clases.
-            declarinClass = method.getDeclaringClass().getPackage().hashCode() == this.getClass().getPackage().hashCode();
-            //En esta linea se realiza el chequeo de las anotaciones.
+            declarinClass = JBSqlUtils.class.isAssignableFrom(method.getDeclaringClass()) &&
+                    method.getDeclaringClass().getPackage().hashCode() != JBSqlUtils.class.getPackage().hashCode();            //En esta linea se realiza el chequeo de las anotaciones.
             //si el metodo tiene alguna anotacion, devolvera True, y sera visible.
             anotacionPresent = !method.isAnnotationPresent(JsonbTransient.class);
             //en esta linea se lleva el manejo de ambiguedad

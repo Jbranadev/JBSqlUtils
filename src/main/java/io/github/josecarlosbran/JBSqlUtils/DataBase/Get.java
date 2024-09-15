@@ -316,14 +316,12 @@ class Get extends Methods_Conexion {
             }
         };
         Future<ResultAsync<List<T>>> future = ejecutor.submit(get);
-
         ResultAsync<List<T>> resultado = future.get();
         if (!Objects.isNull(resultado.getException())) {
             throw resultado.getException();
         }
         return resultado.getResult();
     }
-
 
     /**
      * Obtiene una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
@@ -341,7 +339,6 @@ class Get extends Methods_Conexion {
     protected <T extends Methods_Conexion> List<JSONObject> get(String Sql, List<Column> parametros, String... columnas) throws Exception {
         return this.getCompletableFuture(Sql, parametros, columnas).get();
     }
-
 
     /**
      * Obtiene un Completeable Feature que representa la lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
@@ -414,6 +411,4 @@ class Get extends Methods_Conexion {
             }
         });
     }
-
-
 }
