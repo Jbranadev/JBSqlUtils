@@ -316,8 +316,7 @@ class Get extends Methods_Conexion {
             }
         };
         Future<ResultAsync<List<T>>> future = ejecutor.submit(get);
-        while (!future.isDone()) {
-        }
+
         ResultAsync<List<T>> resultado = future.get();
         if (!Objects.isNull(resultado.getException())) {
             throw resultado.getException();
