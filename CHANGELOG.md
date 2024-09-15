@@ -1,3 +1,12 @@
+# Version: 1.2.9
+
+* [#318](https://github.com/Jbranadev/JBSqlUtils/pull/318): Bump actions/upload-artifact from 4.3.6 to 4.4.0
+* [#319](https://github.com/Jbranadev/JBSqlUtils/pull/319): Bump github/codeql-action from 3.26.6 to 3.26.7
+* [#320](https://github.com/Jbranadev/JBSqlUtils/pull/320): Bump step-security/harden-runner from 2.9.1 to 2.10.1
+* [#321](https://github.com/Jbranadev/JBSqlUtils/pull/321): Bump actions/setup-java from 4.2.2 to 4.3.0
+* [#322](https://github.com/Jbranadev/JBSqlUtils/pull/322): Release 1.2.9
+
+
 # Version: 1.2.8
 
 * [#311](https://github.com/Jbranadev/JBSqlUtils/pull/311): Bump org.apache.maven.plugins:maven-surefire-plugin from
