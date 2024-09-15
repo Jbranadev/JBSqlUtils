@@ -1,5 +1,7 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
+import com.josebran.LogsJB.LogsJB;
+import com.josebran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
@@ -13,6 +15,7 @@ import java.util.Objects;
 public class JBSqlUtilsTestEnumerations {
     public JBSqlUtilsTestEnumerations() {
         System.setProperty("org.uncommons.reportng.escape-output", "false");
+        LogsJB.setGradeLog(NivelLog.WARNING);
     }
 
     @Test(testName = "Get Numeración For Name Constraint")

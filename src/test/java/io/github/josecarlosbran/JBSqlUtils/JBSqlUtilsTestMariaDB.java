@@ -3,6 +3,8 @@ package io.github.josecarlosbran.JBSqlUtils;
 import UtilidadesTest.TestModel;
 import UtilidadesTest.TestModel2;
 import UtilidadesTest.UsuarioModel;
+import com.josebran.LogsJB.LogsJB;
+import com.josebran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
@@ -30,6 +32,7 @@ public class JBSqlUtilsTestMariaDB {
 
     public JBSqlUtilsTestMariaDB() {
         System.setProperty("org.uncommons.reportng.escape-output", "false");
+        LogsJB.setGradeLog(NivelLog.WARNING);
     }
 
     @Test(testName = "Setear Properties Conexión for Model")

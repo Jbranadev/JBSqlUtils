@@ -1,6 +1,8 @@
 package io.github.josecarlosbran.JBSqlUtils;
 
 import UtilidadesTest.TestModel;
+import com.josebran.LogsJB.LogsJB;
+import com.josebran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
@@ -25,6 +27,7 @@ public class JBSqlUtilsTestSadDay {
 
     public JBSqlUtilsTestSadDay() {
         System.setProperty("org.uncommons.reportng.escape-output", "false");
+        LogsJB.setGradeLog(NivelLog.WARNING);
     }
 
     @Test(testName = "Properties DB Undefined",

@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
 /**
@@ -59,6 +60,17 @@ class Methods extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     public Integer save() throws Exception {
+        return saveModel(this).join();
+    }
+
+    /**
+     * Almacena la información del modelo que hace el llamado en BD's.'
+     *
+     * @return CompleteableFeature, que representa La cantidad de filas insertadas o actualizadas en BD's
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
+     */
+    public CompletableFuture<Integer> saveCompletableFuture() throws Exception {
         return saveModel(this);
     }
 
@@ -73,9 +85,9 @@ class Methods extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     public <T extends JBSqlUtils> Integer saveALL(List<T> modelos) throws Exception {
-        Integer result = 0;
         T temp = null;
         boolean tableInfoCached = false;
+        List<CompletableFuture<Integer>> futures = new ArrayList<>();
         for (T modelo : modelos) {
             if (tableInfoCached) {
                 modelo.setTabla(temp.getTabla());
@@ -86,12 +98,33 @@ class Methods extends Methods_Conexion {
             } else {
                 modelo.llenarPropertiesFromModel(this);
                 temp = this.obtenerInstanciaOfModel(modelo);
-                temp.refresh();
+                boolean shouldRefresh =
+                        !modelo.getTableExist() ||
+                                modelo.getTableName() == null ||
+                                modelo.getTableName().isEmpty() ||
+                                modelo.getTabla().getColumnsExist().isEmpty();
+                if (shouldRefresh) {
+                    temp.refresh();
+                } else {
+                    temp.setTabla(modelo.getTabla());
+                    temp.setTableExist(modelo.getTableExist());
+                    temp.setTableName(modelo.getTableName());
+                    temp.getTabla().setColumnsExist(modelo.getTabla().getColumnsExist());
+                }
                 tableInfoCached = true;
             }
-            result = result + modelo.saveModel(modelo);
+            futures.add(modelo.saveModel(modelo));
         }
-        return result;
+        CompletableFuture<Void> allOf = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
+        CompletableFuture<List<Integer>> allResults = allOf.thenApply(v -> {
+            List<Integer> results = new ArrayList<>();
+            for (CompletableFuture<Integer> future : futures) {
+                results.add(future.join());
+            }
+            return results;
+        });
+        List<Integer> results = allResults.get();
+        return results.stream().mapToInt(Integer::intValue).sum();
     }
 
     /**
@@ -102,6 +135,17 @@ class Methods extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     public Integer delete() throws Exception {
+        return deleteModel(this).join();
+    }
+
+    /**
+     * Elimina la información del modelo que hace el llamado en BD´s
+     *
+     * @return Completeable Feature que representa la cantidad de filas eliminadas en BD's
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
+     */
+    public CompletableFuture<Integer> deleteCompleteableFuture() throws Exception {
         return deleteModel(this);
     }
 
@@ -116,9 +160,9 @@ class Methods extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     public <T extends JBSqlUtils> Integer deleteALL(List<T> modelos) throws Exception {
-        Integer result = 0;
         T temp = null;
         boolean tableInfoCached = false;
+        List<CompletableFuture<Integer>> futures = new ArrayList<>();
         for (T modelo : modelos) {
             if (tableInfoCached) {
                 modelo.setTabla(temp.getTabla());
@@ -131,9 +175,18 @@ class Methods extends Methods_Conexion {
                 temp.refresh();
                 tableInfoCached = true;
             }
-            result = result + modelo.deleteModel(modelo);
+            futures.add(modelo.deleteModel(modelo));
         }
-        return result;
+        CompletableFuture<Void> allOf = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
+        CompletableFuture<List<Integer>> allResults = allOf.thenApply(v -> {
+            List<Integer> results = new ArrayList<>();
+            for (CompletableFuture<Integer> future : futures) {
+                results.add(future.join());
+            }
+            return results;
+        });
+        List<Integer> results = allResults.get();
+        return results.stream().mapToInt(Integer::intValue).sum();
     }
 
     /**
@@ -142,7 +195,7 @@ class Methods extends Methods_Conexion {
      * @return Retorna True cuando se a terminado de insertar o actualizar la información del modelo en BD's
      */
     public Boolean saveBoolean() throws Exception {
-        Integer resultado = saveModel(this);
+        Integer resultado = saveModel(this).join();
         this.waitOperationComplete();
         return resultado >= 1;
     }
@@ -198,7 +251,7 @@ class Methods extends Methods_Conexion {
     public <T extends JBSqlUtils> List<T> getAll() throws Exception {
         this.setTaskIsReady(false);
         List<T> lista;
-        this.validarTableExist(this);
+        this.validarTableExist(this).join();
         Callable<ResultAsync<List<T>>> get = () -> {
             List<T> listatemp = new ArrayList<T>();
             try (Connection connect = this.getConnection()) {
@@ -219,8 +272,6 @@ class Methods extends Methods_Conexion {
             }
         };
         Future<ResultAsync<List<T>>> future = ejecutor.submit(get);
-        while (!future.isDone()) {
-        }
         ResultAsync<List<T>> resultado = future.get();
         this.setTaskIsReady(true);
         if (!Objects.isNull(resultado.getException())) {
