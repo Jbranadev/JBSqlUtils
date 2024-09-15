@@ -38,9 +38,7 @@ import java.sql.Date;
 import java.sql.*;
 import java.util.Set;
 import java.util.*;
-import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -933,59 +931,59 @@ class Methods_Conexion extends Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     protected <T extends Methods_Conexion> CompletableFuture<Integer> deleteModel(T modelo) throws Exception {
-    modelo.setTaskIsReady(false);
-    return modelo.validarTableExist(modelo).thenCompose(v -> {
-        if (modelo.getTableExist()) {
-            return CompletableFuture.supplyAsync(() -> {
-                try (Connection connect = modelo.getConnection()) {
-                    String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
-                    StringBuilder sql = new StringBuilder("DELETE FROM ").append(modelo.getTableName());
-                    List<Field> columnas = this.getFieldsOfModel();
-                    List<Field> values = new ArrayList<>();
-                    boolean whereAdded = false;
-                    for (Field columna : columnas) {
-                        if ((StringUtils.equalsIgnoreCase(namePrimaryKey, this.getColumnName(columna)) && !this.getValueColumnIsNull(this, columna))
-                                || (this.getColumnIsIndexValidValue(this, columna))) {
-                            values.add(columna);
-                            if (whereAdded) {
-                                sql.append(" AND ");
-                            } else {
-                                sql.append(" WHERE ");
-                                whereAdded = true;
+        modelo.setTaskIsReady(false);
+        return modelo.validarTableExist(modelo).thenCompose(v -> {
+            if (modelo.getTableExist()) {
+                return CompletableFuture.supplyAsync(() -> {
+                    try (Connection connect = modelo.getConnection()) {
+                        String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
+                        StringBuilder sql = new StringBuilder("DELETE FROM ").append(modelo.getTableName());
+                        List<Field> columnas = this.getFieldsOfModel();
+                        List<Field> values = new ArrayList<>();
+                        boolean whereAdded = false;
+                        for (Field columna : columnas) {
+                            if ((StringUtils.equalsIgnoreCase(namePrimaryKey, this.getColumnName(columna)) && !this.getValueColumnIsNull(this, columna))
+                                    || (this.getColumnIsIndexValidValue(this, columna))) {
+                                values.add(columna);
+                                if (whereAdded) {
+                                    sql.append(" AND ");
+                                } else {
+                                    sql.append(" WHERE ");
+                                    whereAdded = true;
+                                }
+                                sql.append(this.getColumnName(columna)).append(" = ?");
                             }
-                            sql.append(this.getColumnName(columna)).append(" = ?");
                         }
-                    }
-                    sql.append(";");
-                    PreparedStatement ejecutor = connect.prepareStatement(sql.toString());
-                    int auxiliar = 0;
-                    Integer filas = 0;
-                    LogsJB.debug("Colocara la información del where: " + auxiliar);
-                    if (!values.isEmpty()) {
-                        for (Field value : values) {
-                            auxiliar++;
-                            convertJavaToSQL(this, value, ejecutor, auxiliar);
+                        sql.append(";");
+                        PreparedStatement ejecutor = connect.prepareStatement(sql.toString());
+                        int auxiliar = 0;
+                        Integer filas = 0;
+                        LogsJB.debug("Colocara la información del where: " + auxiliar);
+                        if (!values.isEmpty()) {
+                            for (Field value : values) {
+                                auxiliar++;
+                                convertJavaToSQL(this, value, ejecutor, auxiliar);
+                            }
+                            LogsJB.info(ejecutor.toString());
+                            filas = ejecutor.executeUpdate();
                         }
-                        LogsJB.info(ejecutor.toString());
-                        filas = ejecutor.executeUpdate();
+                        LogsJB.info("Filas eliminadas: " + filas);
+                        modelo.closeConnection(connect);
+                        modelo.setTaskIsReady(true);
+                        return filas;
+                    } catch (Exception e) {
+                        LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                        modelo.setTaskIsReady(true);
+                        return 0;
                     }
-                    LogsJB.info("Filas eliminadas: " + filas);
-                    modelo.closeConnection(connect);
-                    modelo.setTaskIsReady(true);
-                    return filas;
-                } catch (Exception e) {
-                    LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                    modelo.setTaskIsReady(true);
-                    return 0;
-                }
-            });
-        } else {
-            LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo eliminar el Registro " + this.getClass().getSimpleName());
-            modelo.setTaskIsReady(true);
-            return CompletableFuture.completedFuture(0);
-        }
-    });
-}
+                });
+            } else {
+                LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo eliminar el Registro " + this.getClass().getSimpleName());
+                modelo.setTaskIsReady(true);
+                return CompletableFuture.completedFuture(0);
+            }
+        });
+    }
 
     /**
      * Obtiene una instancia nueva del tipo de modelo que se envía como parametro

@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
 /**
@@ -324,6 +325,7 @@ class Get extends Methods_Conexion {
         return resultado.getResult();
     }
 
+
     /**
      * Obtiene una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
      * Envíada como parametro
@@ -338,71 +340,81 @@ class Get extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     protected <T extends Methods_Conexion> List<JSONObject> get(String Sql, List<Column> parametros, String... columnas) throws Exception {
+        return this.getCompletableFuture(Sql, parametros, columnas).get();
+    }
+
+
+    /**
+     * Obtiene un Completeable Feature que representa la lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
+     * Envíada como parametro
+     *
+     * @param Sql        Sentencia SQL
+     * @param parametros Lista de parametros de la sentencia SQL
+     * @param columnas   Lista con los nombres de las columnas que se desea recuperar, si se desea obtener
+     *                   todas las columnas de la tabla especificada envíar NULL como parametro
+     * @return Retorna una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
+     * Envíada como parametro
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
+     */
+    protected <T extends Methods_Conexion> CompletableFuture<List<JSONObject>> getCompletableFuture(String Sql, List<Column> parametros, String... columnas) throws Exception {
         String tableName = Sql.replace("SELECT * FROM ", "").split(" ")[0];
         this.setTaskIsReady(false);
         this.setTableName(tableName);
-        this.validarTableExist(this).join();
-        final String finalSql = Sql; // Make Sql final
-        Callable<ResultAsync<List<JSONObject>>> get = () -> {
-            List<JSONObject> temp = new ArrayList<>();
-            String query = finalSql + ";";
-            try (Connection connect = this.getConnection()) {
-                if (this.getTableExist()) {
-                    query = this.generateOrderSQL(query, this);
-                    //Acá quiero reemplazar el * por el array de columnas, si el array no es nullo
-                    if (columnas != null && columnas.length > 0) {
-                        StringBuilder columnasStr = new StringBuilder();
-                        for (String columna : columnas) {
-                            if (columnasStr.length() > 0) {
-                                columnasStr.append(", ");
+        return this.validarTableExist(this).thenCompose(v -> {
+            if (this.getTableExist()) {
+                return CompletableFuture.supplyAsync(() -> {
+                    List<JSONObject> temp = new ArrayList<>();
+                    String query = Sql + ";";
+                    try (Connection connect = this.getConnection()) {
+                        query = this.generateOrderSQL(query, this);
+                        if (columnas != null && columnas.length > 0) {
+                            StringBuilder columnasStr = new StringBuilder();
+                            for (String columna : columnas) {
+                                if (columnasStr.length() > 0) {
+                                    columnasStr.append(", ");
+                                }
+                                columnasStr.append(columna);
                             }
-                            columnasStr.append(columna);
+                            query = query.replace("SELECT *", "SELECT " + columnasStr);
                         }
-                        query = query.replace("SELECT *", "SELECT " + columnasStr);
+                        PreparedStatement ejecutor = connect.prepareStatement(query);
+                        for (int i = 0; i < parametros.size(); i++) {
+                            Column columnsSQL = parametros.get(i);
+                            convertJavaToSQL(columnsSQL, ejecutor, i + 1);
+                        }
+                        LogsJB.info(ejecutor.toString());
+                        ResultSet registros = ejecutor.executeQuery();
+                        ResultSetMetaData metaData = registros.getMetaData();
+                        int columnCount = metaData.getColumnCount();
+                        List<ColumnsSQL> columnMetadata = new ArrayList<>(columnCount);
+                        for (int i = 1; i <= columnCount; i++) {
+                            ColumnsSQL columna = new ColumnsSQL();
+                            columna.setCOLUMN_NAME(metaData.getColumnName(i));
+                            columna.setTYPE_NAME(metaData.getColumnTypeName(i));
+                            columnMetadata.add(columna);
+                        }
+                        while (registros.next()) {
+                            temp.add(this.procesarResultSetJSON(registros, columnMetadata));
+                        }
+                        this.closeConnection(connect);
+                        this.setTaskIsReady(true);
+                        return temp;
+                    } catch (Exception e) {
+                        LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
+                                "SQL de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                        this.setTaskIsReady(true);
+                        throw new RuntimeException(e);
                     }
-                    PreparedStatement ejecutor = connect.prepareStatement(query);
-                    for (int i = 0; i < parametros.size(); i++) {
-                        //Obtengo la información de la columna
-                        Column columnsSQL = parametros.get(i);
-                        convertJavaToSQL(columnsSQL, ejecutor, i + 1);
-                    }
-                    LogsJB.info(ejecutor.toString());
-                    ResultSet registros = ejecutor.executeQuery();
-                    ResultSetMetaData metaData = registros.getMetaData();
-                    int columnCount = metaData.getColumnCount();
-                    List<ColumnsSQL> columnMetadata = new ArrayList<>(columnCount);
-                    for (int i = 1; i <= columnCount; i++) {
-                        ColumnsSQL columna = new ColumnsSQL();
-                        columna.setCOLUMN_NAME(metaData.getColumnName(i));
-                        columna.setTYPE_NAME(metaData.getColumnTypeName(i));
-                        columnMetadata.add(columna);
-                    }
-                    while (registros.next()) {
-                        temp.add(this.procesarResultSetJSON(registros, columnMetadata));
-                    }
-                    this.closeConnection(connect);
-                    this.setTaskIsReady(true);
-                    return new ResultAsync<>(temp, null);
-                } else {
-                    LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
-                            "recuperar los Registros");
-                    this.setTaskIsReady(true);
-                    return new ResultAsync<>(temp, null);
-                }
-            } catch (Exception e) {
-                LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
-                        "SQL de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                });
+            } else {
+                LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
+                        "recuperar los Registros");
                 this.setTaskIsReady(true);
-                return new ResultAsync<>(temp, e);
+                return CompletableFuture.completedFuture(new ArrayList<>());
             }
-        };
-        Future<ResultAsync<List<JSONObject>>> future = ejecutor.submit(get);
-        while (!future.isDone()) {
-        }
-        ResultAsync<List<JSONObject>> resultado = future.get();
-        if (!Objects.isNull(resultado.getException())) {
-            throw resultado.getException();
-        }
-        return resultado.getResult();
+        });
     }
+
+
 }
