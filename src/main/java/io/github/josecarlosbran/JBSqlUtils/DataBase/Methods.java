@@ -135,8 +135,20 @@ class Methods extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     public Integer delete() throws Exception {
+        return deleteModel(this).join();
+    }
+
+    /**
+     * Elimina la información del modelo que hace el llamado en BD´s
+     *
+     * @return Completeable Feature que representa la cantidad de filas eliminadas en BD's
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
+     */
+    public CompletableFuture<Integer> deleteCompleteableFuture() throws Exception {
         return deleteModel(this);
     }
+
 
     /**
      * Elimina la información de los modelos proporcionados en BD's
@@ -149,25 +161,34 @@ class Methods extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     public <T extends JBSqlUtils> Integer deleteALL(List<T> modelos) throws Exception {
-        Integer result = 0;
-        T temp = null;
-        boolean tableInfoCached = false;
-        for (T modelo : modelos) {
-            if (tableInfoCached) {
-                modelo.setTabla(temp.getTabla());
-                modelo.setTableExist(temp.getTableExist());
-                modelo.setTableName(temp.getTableName());
-                modelo.llenarPropertiesFromModel(temp);
-            } else {
-                modelo.llenarPropertiesFromModel(this);
-                temp = this.obtenerInstanciaOfModel(modelo);
-                temp.refresh();
-                tableInfoCached = true;
-            }
-            result = result + modelo.deleteModel(modelo);
+    T temp = null;
+    boolean tableInfoCached = false;
+    List<CompletableFuture<Integer>> futures = new ArrayList<>();
+    for (T modelo : modelos) {
+        if (tableInfoCached) {
+            modelo.setTabla(temp.getTabla());
+            modelo.setTableExist(temp.getTableExist());
+            modelo.setTableName(temp.getTableName());
+            modelo.llenarPropertiesFromModel(temp);
+        } else {
+            modelo.llenarPropertiesFromModel(this);
+            temp = this.obtenerInstanciaOfModel(modelo);
+            temp.refresh();
+            tableInfoCached = true;
         }
-        return result;
+        futures.add(modelo.deleteModel(modelo));
     }
+    CompletableFuture<Void> allOf = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
+    CompletableFuture<List<Integer>> allResults = allOf.thenApply(v -> {
+        List<Integer> results = new ArrayList<>();
+        for (CompletableFuture<Integer> future : futures) {
+            results.add(future.join());
+        }
+        return results;
+    });
+    List<Integer> results = allResults.get();
+    return results.stream().mapToInt(Integer::intValue).sum();
+}
 
     /**
      * Almacena la información del modelo que hace el llamado, esperando a que la operación termine de ser realizada

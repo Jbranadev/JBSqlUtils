@@ -932,14 +932,12 @@ class Methods_Conexion extends Conexion {
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
      *                   captura la excepción y la lanza en el hilo principal
      */
-    protected <T extends Methods_Conexion> Integer deleteModel(T modelo) throws Exception {
-        Integer result;
-        modelo.setTaskIsReady(false);
-        modelo.validarTableExist(modelo).join();
-        Callable<ResultAsync<Integer>> Delete = () -> {
-            try (Connection connect = modelo.getConnection()) {
-                if (modelo.getTableExist()) {
-                    // Obtener cual es la clave primaria de la tabla
+    protected <T extends Methods_Conexion> CompletableFuture<Integer> deleteModel(T modelo) throws Exception {
+    modelo.setTaskIsReady(false);
+    return modelo.validarTableExist(modelo).thenCompose(v -> {
+        if (modelo.getTableExist()) {
+            return CompletableFuture.supplyAsync(() -> {
+                try (Connection connect = modelo.getConnection()) {
                     String namePrimaryKey = modelo.getTabla().getClaveprimaria().getCOLUMN_NAME();
                     StringBuilder sql = new StringBuilder("DELETE FROM ").append(modelo.getTableName());
                     List<Field> columnas = this.getFieldsOfModel();
@@ -960,12 +958,10 @@ class Methods_Conexion extends Conexion {
                     }
                     sql.append(";");
                     PreparedStatement ejecutor = connect.prepareStatement(sql.toString());
-                    // Llena la información de las columnas que se insertaran
                     int auxiliar = 0;
                     Integer filas = 0;
                     LogsJB.debug("Colocara la información del where: " + auxiliar);
                     if (!values.isEmpty()) {
-                        // Llenamos el ejecutor con la información del modelo
                         for (Field value : values) {
                             auxiliar++;
                             convertJavaToSQL(this, value, ejecutor, auxiliar);
@@ -976,29 +972,20 @@ class Methods_Conexion extends Conexion {
                     LogsJB.info("Filas eliminadas: " + filas);
                     modelo.closeConnection(connect);
                     modelo.setTaskIsReady(true);
-                    return new ResultAsync<>(filas, null);
-                } else {
-                    LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
-                            "Eliminar el Registro " + this.getClass().getSimpleName());
+                    return filas;
+                } catch (Exception e) {
+                    LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                     modelo.setTaskIsReady(true);
-                    return new ResultAsync<>(0, null);
+                    return 0;
                 }
-            } catch (Exception e) {
-                LogsJB.fatal("Excepción disparada en el método que Guarda el modelo en la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                modelo.setTaskIsReady(true);
-                return new ResultAsync<>(0, e);
-            }
-        };
-        Future<ResultAsync<Integer>> future = ejecutor.submit(Delete);
-        while (!future.isDone()) {
+            });
+        } else {
+            LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo eliminar el Registro " + this.getClass().getSimpleName());
+            modelo.setTaskIsReady(true);
+            return CompletableFuture.completedFuture(0);
         }
-        ResultAsync<Integer> resultado = future.get();
-        if (!Objects.isNull(resultado.getException())) {
-            throw resultado.getException();
-        }
-        result = resultado.getResult();
-        return result;
-    }
+    });
+}
 
     /**
      * Obtiene una instancia nueva del tipo de modelo que se envía como parametro
