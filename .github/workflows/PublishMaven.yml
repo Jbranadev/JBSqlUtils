@@ -19,7 +19,7 @@ jobs:
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v3.6.0
+      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v3.6.0
       #Corremos los servicios de Docker
       - name: Deploy Services DataBases
         run: docker compose -f ./compose.yaml up -d
