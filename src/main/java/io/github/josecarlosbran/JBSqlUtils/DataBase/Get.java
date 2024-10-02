@@ -16,6 +16,7 @@
 package io.github.josecarlosbran.JBSqlUtils.DataBase;
 
 import com.josebran.LogsJB.LogsJB;
+import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.ColumnsSQL;
@@ -101,7 +102,8 @@ class Get extends Methods_Conexion {
         }
     }
 
-    /**
+    /*** CARLA: YA ESTA APLICADO EL CAMBIO
+     * Ya esta modificado al uso de  CompletableFuture
      * Obtiene un modelo del tipo que invoca este método con la información que obtiene de BD's
      *
      * @param modelo     Modelo que está invocando el método
@@ -116,7 +118,7 @@ class Get extends Methods_Conexion {
         return this.firstCompleteableFeature(modelo, Sql, parametros).join();
     }
 
-    /**
+    /*** CARLA: YA ESTA APLICADO EL CAMBIO
      * Obtiene un CompleteableFeature que representa el modelo del tipo que invoca este método con la información que obtiene de BD's
      *
      * @param modelo     Modelo que está invocando el método
@@ -168,7 +170,7 @@ class Get extends Methods_Conexion {
         });
     }
 
-    /**
+    /** VERSION ORIGINAL DEL firstOrFailGet
      * Llena el modelo que invoca este método con la información que obtiene de BD's
      *
      * @param modelo     Modelo que está invocando el metodo
@@ -222,9 +224,64 @@ class Get extends Methods_Conexion {
         }
     }
 
-    /**
-     * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's
+    /** CAMBIO: firstOrFailGet- ADICION DEL CompleteableFeature,
+     * Llena el modelo que invoca este método con la información que obtiene de BD's
      *
+     * @param modelo     Modelo que está invocando el metodo
+     * @param Sql        Sentencia SQL para obtener el modelo
+     * @param parametros Lista de parametros a ser agregados a la sentencia SQL
+     * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @throws ModelNotFound Lanza esta excepción si no logra encontrar el registro correspondiente a la consulta
+     *                       SQL realizada.
+     */
+    protected <T extends JBSqlUtils> CompletableFuture<T> firstOrFailGetCompleteableFeature(T modelo, String Sql, List<Column> parametros) throws Exception{
+        if (!this.getGetPropertySystem()) {
+            modelo.setGetPropertySystem(false);
+            modelo.llenarPropertiesFromModel(modelo);
+        }
+
+        modelo.setTaskIsReady(false);
+        modelo.validarTableExist(modelo).join();
+
+        return CompletableFuture.supplyAsync(() -> {
+            try (Connection connect = modelo.getConnection()) {
+                String query = "SELECT * FROM " + modelo.getTableName() + Sql + ";";
+                query = modelo.generateOrderSQL(query, modelo);
+                try (PreparedStatement ejecutor = connect.prepareStatement(query)) {
+                    for (int i = 0; i < parametros.size(); i++) {
+                        Column columnsSQL = parametros.get(i);
+                        convertJavaToSQL(columnsSQL, ejecutor, i + 1);
+                    }
+                    LogsJB.info(ejecutor.toString());
+                    boolean result = false;
+                    try (ResultSet registros = ejecutor.executeQuery()) {
+                        if (registros.next()) {
+                            procesarResultSetOneResult(modelo, registros);
+                            result = true;
+                        }
+                    }
+                    modelo.setTaskIsReady(true);
+                    if (!result) {
+                        String sql = "SELECT * FROM " + modelo.getTableName();
+                        throw new ModelNotFound("No existe un modelo en BD's que corresponda a los criterios de la consulta sql: " + sql + Sql);
+                    }
+                    return modelo; // Devuelve el modelo poblado
+                } catch (ModelNotFound e) {
+                    throw new RuntimeException(e);
+                }
+            } catch (SQLException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+                LogsJB.fatal("Excepción disparada en el método que obtiene la información del modelo de la BD's, Trace de la Excepción: " + ExceptionUtils.getStackTrace(e));
+                modelo.setTaskIsReady(true);
+                throw new RuntimeException(e); // Envuelve en RuntimeException
+            } catch (DataBaseUndefind e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    /**
+     * CARLA: YA ESTA APLICADO EL CAMBIO
+     * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's
      * @param modelo     Modelo que está invocando el metodo
      * @param Sql        Sentencia SQL para obtener el modelo
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
@@ -247,7 +304,7 @@ class Get extends Methods_Conexion {
         }
     }
 
-    /**
+    /*** CARLA: YA ESTA APLICADO EL CAMBIO
      * Obtiene un CompleteableFeature con el modelo del tipo que invoca este metodo con la información que obtiene de BD's
      *
      * @param modelo     Modelo que está invocando el metodo
