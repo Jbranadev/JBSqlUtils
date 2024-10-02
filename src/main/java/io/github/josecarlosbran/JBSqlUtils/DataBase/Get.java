@@ -262,6 +262,51 @@ class Get extends Methods_Conexion {
         return modeloResult;
     }
 
+    protected <T extends JBSqlUtils> T firstOrFailCompleteableFeature(T modelo, String Sql, List<Column> parametros) throws Exception {
+        if (!this.getGetPropertySystem()) {
+            modelo.setGetPropertySystem(false);
+            modelo.llenarPropertiesFromModel(modelo);
+        }
+        modelo.setTaskIsReady(false);
+        modelo.validarTableExist(modelo).join();
+        T modeloResult = modelo.obtenerInstanciaOfModel(modelo);
+        Callable<ResultAsync<T>> get = () -> {
+            T modeloTemp = modelo.obtenerInstanciaOfModel(modelo);
+            try (Connection connect = modelo.getConnection()) {
+                String query = "SELECT * FROM " + modelo.getTableName() + Sql + ";";
+                query = modelo.generateOrderSQL(query, modelo);
+                PreparedStatement ejecutor = connect.prepareStatement(query);
+                for (int i = 0; i < parametros.size(); i++) {
+                    Column columnsSQL = parametros.get(i);
+                    convertJavaToSQL(columnsSQL, ejecutor, i + 1);
+                }
+                LogsJB.info(ejecutor.toString());
+                try (ResultSet registros = ejecutor.executeQuery()) {
+                    if (registros.next()) {
+                        modeloTemp = procesarResultSet(modelo, registros);
+                    }
+                }
+                modelo.setTaskIsReady(true);
+                return new ResultAsync<>(modeloTemp, null);
+            } catch (SQLException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+                LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's, Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                modelo.setTaskIsReady(true);
+                return new ResultAsync<>(modeloTemp, e);
+            }
+        };
+        Future<ResultAsync<T>> future = ejecutor.submit(get);
+        ResultAsync<T> resultado = future.get();
+        if (!Objects.isNull(resultado.getException())) {
+            throw resultado.getException();
+        }
+        modeloResult = resultado.getResult();
+        if (!modeloResult.getModelExist()) {
+            String sql = "SELECT * FROM " + modelo.getTableName();
+            throw new ModelNotFound("No existe un modelo en BD's que corresponda a los criterios de la consulta sql: " + sql + Sql);
+        }
+        return modeloResult;
+    }
+
     /**
      * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
