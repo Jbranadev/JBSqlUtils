@@ -27,11 +27,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
-import java.util.concurrent.Future;
 
 /**
  * @author Jose Bran
@@ -261,15 +258,16 @@ class Get extends Methods_Conexion {
                         throw new ModelNotFound("No existe un modelo en BD's que corresponda a los criterios de la consulta sql: " + sql + Sql);
                     }
                     return modelo; // Devuelve el modelo poblado
-                } catch (ModelNotFound e) {
-                    throw new RuntimeException(e);
                 }
+            } catch (ModelNotFound e) {
+                // Lanza la excepción sin envolverla
+                throw new CompletionException(e);  // Usa CompletionException en lugar de RuntimeException
             } catch (SQLException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
                 LogsJB.fatal("Excepción disparada en el método que obtiene la información del modelo de la BD's, Trace de la Excepción: " + ExceptionUtils.getStackTrace(e));
                 modelo.setTaskIsReady(true);
-                throw new RuntimeException(e); // Envuelve en RuntimeException
+                throw new CompletionException(e);  // Lanza CompletionException para otras excepciones
             } catch (DataBaseUndefind e) {
-                throw new RuntimeException(e);
+                throw new CompletionException(e);
             }
         });
     }
