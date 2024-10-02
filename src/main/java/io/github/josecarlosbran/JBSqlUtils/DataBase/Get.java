@@ -55,7 +55,7 @@ class Get extends Methods_Conexion {
     }
 
     /**
-     * VERSIÓN ORIGINAL HACIENDO cambiado al uso de USO DEL CompletableFuture
+     * Carla: VERSIÓN ORIGINAL HACIENDO cambiado al uso de USO DEL CompletableFuture
      * Llena el modelo que invoca este método con la información que obtiene de BD's
      *
      * @param modelo     Modelo que será llenado
@@ -80,7 +80,7 @@ class Get extends Methods_Conexion {
         }
     }
 
-    /** VERSIÓN CAMBIO APLICANDO EL  CompletableFuture
+    /** Carla: VERSIÓN CAMBIO APLICANDO EL  CompletableFuture
      * Llena el modelo ompletableFuture que invoca este método con la información que obtiene de BD's
      *
      * @param modelo     Modelo ompletableFuture que será llenado
@@ -194,7 +194,7 @@ class Get extends Methods_Conexion {
     }
 
     /**
-     * VERSION ORIGINAL DEL firstOrFailGet
+     * Carla: VERSION ORIGINAL DEL firstOrFailGet
      * Llena el modelo que invoca este método con la información que obtiene de BD's
      *
      * @param modelo     Modelo que está invocando el metodo
@@ -219,7 +219,7 @@ class Get extends Methods_Conexion {
         }
     }
 
-    /** CAMBIO: firstOrFailGet- ADICION DEL CompleteableFeature,
+    /** Carla : firstOrFailGet- ADICION DEL CompleteableFeature,
      * Llena el modelo CompletableFuture que invoca este método con la información que obtiene de BD's
      *
      * @param modelo     Modelo que está invocando el metodo
@@ -353,7 +353,7 @@ class Get extends Methods_Conexion {
         });
     }
 
-    /**
+    /**Carla: versión inicial del metodo getAll con el uso de  Callable
      * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
      *
@@ -413,6 +413,65 @@ class Get extends Methods_Conexion {
         }
         return resultado.getResult();
     }
+
+    /**Carla: versión con cambios del metodo getAll  con el uso de  CompletableFuture
+     * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
+     * proporcionada
+     *
+     * @param modelo     Modelo que está invocando el metodo
+     * @param Sql        Sentencia SQL para obtener el modelo
+     * @param parametros Lista de parametros a ser agregados a la sentencia SQL
+     * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @return Retorna una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
+     * proporcionada
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
+     */
+
+    protected <T extends JBSqlUtils> CompletableFuture<List<T>> getAllCompletableFuture(T modelo, String Sql, List<Column> parametros) throws Exception {
+        if (!this.getGetPropertySystem()) {
+            modelo.setGetPropertySystem(false);
+            modelo.llenarPropertiesFromModel(modelo);
+        }
+
+        modelo.setTaskIsReady(false);
+        modelo.validarTableExist(modelo).join();
+
+        final String finalSql = Sql; // Hacer Sql final
+
+        return CompletableFuture.supplyAsync(() -> {
+            List<T> listaTemp = new ArrayList<>();
+            try (Connection connect = modelo.getConnection()) {
+                if (modelo.getTableExist()) {
+                    String query = "SELECT * FROM " + modelo.getTableName() + finalSql + ";";
+                    query = modelo.generateOrderSQL(query, modelo);
+                    try (PreparedStatement ejecutor = connect.prepareStatement(query)) {
+                        for (int i = 0; i < parametros.size(); i++) {
+                            // Obtengo la información de la columna
+                            Column columnsSQL = parametros.get(i);
+                            convertJavaToSQL(columnsSQL, ejecutor, i + 1);
+                        }
+                        LogsJB.info(ejecutor.toString());
+                        try (ResultSet registros = ejecutor.executeQuery()) {
+                            while (registros.next()) {
+                                listaTemp.add(procesarResultSet(modelo, registros));
+                            }
+                        }
+                    }
+                } else {
+                    LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo recuperar el Registro");
+                }
+                modelo.setTaskIsReady(true);
+                return listaTemp; // Devuelve la lista de resultados
+            } catch (Exception e) {
+                LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia SQL de la BD's, " +
+                        "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                modelo.setTaskIsReady(true);
+                throw new RuntimeException(e); // Envuelve en RuntimeException
+            }
+        });
+    }
+
 
     /**
      * Obtiene una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
