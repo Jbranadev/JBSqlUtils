@@ -245,7 +245,6 @@ class Methods_Conexion extends Conexion {
      * Verifica la existencia de la tabla correspondiente al modelo en BD's
      *
      * @return True si la tabla correspondiente al modelo existe en BD's, de lo contrario False.
-     * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
     public CompletableFuture<Boolean> tableExist() {
         return CompletableFuture.supplyAsync(() -> {
@@ -1656,20 +1655,16 @@ class Methods_Conexion extends Conexion {
         return columnDefined.foreignkey();
     }
 
+
     /**
      * Ordena la consula sql de acuerdo al estandar de consulta SQL
-     *
      * @param query  Consulta SQL que se desea ordenar
      * @param modelo Es el invocador de los metodos que se estan utilizando
-     * @param <T>    Metodo Generico, disponible para todas las clases que heredan la clase metodos conexion
      * @return Retorna un string que representa la consulta SQL ordenada
+     * @param <T>
      * @throws DataBaseUndefind Lanza esta excepción cuando no se a configurado la BD's a la cual se conectara el modelo
-     *                          el usuario de la librería es el encargado de setear el tipo de BD's a la cual se conectara el modelo, asi mismo de ser lanzada
-     *                          esta excepción, poder manejarla.
-     *                          <p>
-     *                          <p>
-     *                          <p>
-     *                          Cambio X realizo por Y en fecha Z -> Cambio realizado por el usuario de la librería, en la fecha en la que se realizo el cambio
+     * el usuario de la librería es el encargado de setear el tipo de BD's a la cual se conectara el modelo, asi mismo de ser lanzada
+     * esta excepción, poder manejarla.
      */
     protected <T extends Methods_Conexion> String generateOrderSQL(String query, T modelo) throws DataBaseUndefind {
         //Si es sql server y trae la palabra limit verificara y modificara la sentencia
