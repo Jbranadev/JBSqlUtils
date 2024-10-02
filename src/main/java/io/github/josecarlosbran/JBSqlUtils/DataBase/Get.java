@@ -170,62 +170,34 @@ class Get extends Methods_Conexion {
         });
     }
 
-    /** VERSION ORIGINAL DEL firstOrFailGet
+    /**
+     * VERSION ORIGINAL DEL firstOrFailGet
      * Llena el modelo que invoca este método con la información que obtiene de BD's
      *
      * @param modelo     Modelo que está invocando el metodo
      * @param Sql        Sentencia SQL para obtener el modelo
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
      * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @return
      * @throws ModelNotFound Lanza esta excepción si no logra encontrar el registro correspondiente a la consulta
      *                       SQL realizada.
      */
-    protected <T extends JBSqlUtils> void firstOrFailGet(T modelo, String Sql, List<Column> parametros) throws Exception {
-        if (!this.getGetPropertySystem()) {
-            modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(modelo);
-        }
-        modelo.setTaskIsReady(false);
-        modelo.validarTableExist(modelo).join();
-        Callable<ResultAsync<Boolean>> get = () -> {
-            try (Connection connect = modelo.getConnection()
-            ) {
-                String query = "SELECT * FROM " + modelo.getTableName() + Sql + ";";
-                query = modelo.generateOrderSQL(query, modelo);
-                PreparedStatement ejecutor = connect.prepareStatement(query);
-                for (int i = 0; i < parametros.size(); i++) {
-                    Column columnsSQL = parametros.get(i);
-                    convertJavaToSQL(columnsSQL, ejecutor, i + 1);
-                }
-                LogsJB.info(ejecutor.toString());
-                boolean result = false;
-                try (ResultSet registros = ejecutor.executeQuery()) {
-                    if (registros.next()) {
-                        procesarResultSetOneResult(modelo, registros);
-                        result = true;
-                    }
-                }
-                modelo.setTaskIsReady(true);
-                return new ResultAsync<>(result, null);
-            } catch (SQLException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
-                LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's, Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                modelo.setTaskIsReady(true);
-                return new ResultAsync<>(false, e);
+    protected <T extends JBSqlUtils> T firstOrFailGet(T modelo, String Sql, List<Column> parametros) throws Exception {
+        try {
+            // Ejecuta la tarea asíncrona y espera a su resultado
+            return this.firstOrFailGetCompleteableFeature(modelo, Sql, parametros).join();
+        } catch (CompletionException e) {
+            // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
+            if (e.getCause() instanceof ModelNotFound) {
+                throw (ModelNotFound) e.getCause();
             }
-        };
-        Future<ResultAsync<Boolean>> future = ejecutor.submit(get);
-        ResultAsync<Boolean> resultado = future.get();
-        if (!Objects.isNull(resultado.getException())) {
-            throw resultado.getException();
-        }
-        if (!resultado.getResult()) {
-            String sql = "SELECT * FROM " + modelo.getTableName();
-            throw new ModelNotFound("No existe un modelo en BD's que corresponda a los criterios de la consulta sql: " + sql + Sql);
+            // Si no es una ModelNotFound, vuelve a lanzar la excepción como es
+            throw e;
         }
     }
 
     /** CAMBIO: firstOrFailGet- ADICION DEL CompleteableFeature,
-     * Llena el modelo que invoca este método con la información que obtiene de BD's
+     * Llena el modelo CompletableFuture que invoca este método con la información que obtiene de BD's
      *
      * @param modelo     Modelo que está invocando el metodo
      * @param Sql        Sentencia SQL para obtener el modelo
