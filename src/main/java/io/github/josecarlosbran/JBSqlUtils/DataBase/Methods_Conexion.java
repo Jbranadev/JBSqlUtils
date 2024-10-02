@@ -1655,16 +1655,16 @@ class Methods_Conexion extends Conexion {
         return columnDefined.foreignkey();
     }
 
-
     /**
      * Ordena la consula sql de acuerdo al estandar de consulta SQL
+     *
      * @param query  Consulta SQL que se desea ordenar
      * @param modelo Es el invocador de los metodos que se estan utilizando
-     * @return Retorna un string que representa la consulta SQL ordenada
      * @param <T>
+     * @return Retorna un string que representa la consulta SQL ordenada
      * @throws DataBaseUndefind Lanza esta excepción cuando no se a configurado la BD's a la cual se conectara el modelo
-     * el usuario de la librería es el encargado de setear el tipo de BD's a la cual se conectara el modelo, asi mismo de ser lanzada
-     * esta excepción, poder manejarla.
+     *                          el usuario de la librería es el encargado de setear el tipo de BD's a la cual se conectara el modelo, asi mismo de ser lanzada
+     *                          esta excepción, poder manejarla.
      */
     protected <T extends Methods_Conexion> String generateOrderSQL(String query, T modelo) throws DataBaseUndefind {
         //Si es sql server y trae la palabra limit verificara y modificara la sentencia

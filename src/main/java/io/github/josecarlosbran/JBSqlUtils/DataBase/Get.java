@@ -77,7 +77,8 @@ class Get extends Methods_Conexion {
         }
     }
 
-    /** Carla: VERSIÓN CAMBIO APLICANDO EL  CompletableFuture
+    /**
+     * Carla: VERSIÓN CAMBIO APLICANDO EL  CompletableFuture
      * Llena el modelo ompletableFuture que invoca este método con la información que obtiene de BD's
      *
      * @param modelo     Modelo ompletableFuture que será llenado
@@ -94,7 +95,6 @@ class Get extends Methods_Conexion {
         }
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo).join();
-
         return CompletableFuture.supplyAsync(() -> {
             try (Connection connect = modelo.getConnection()) {
                 String query = "SELECT * FROM " + modelo.getTableName() + Sql + ";";
@@ -120,7 +120,6 @@ class Get extends Methods_Conexion {
             }
         });
     }
-
 
     /*** CARLA: YA ESTA APLICADO EL CAMBIO
      * Ya esta modificado al uso de  CompletableFuture
@@ -216,7 +215,8 @@ class Get extends Methods_Conexion {
         }
     }
 
-    /** Carla : firstOrFailGet- ADICION DEL CompleteableFeature,
+    /**
+     * Carla : firstOrFailGet- ADICION DEL CompleteableFeature,
      * Llena el modelo CompletableFuture que invoca este método con la información que obtiene de BD's
      *
      * @param modelo     Modelo que está invocando el metodo
@@ -226,15 +226,13 @@ class Get extends Methods_Conexion {
      * @throws ModelNotFound Lanza esta excepción si no logra encontrar el registro correspondiente a la consulta
      *                       SQL realizada.
      */
-    protected <T extends JBSqlUtils> CompletableFuture<T> firstOrFailGetCompleteableFeature(T modelo, String Sql, List<Column> parametros) throws Exception{
+    protected <T extends JBSqlUtils> CompletableFuture<T> firstOrFailGetCompleteableFeature(T modelo, String Sql, List<Column> parametros) throws Exception {
         if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
             modelo.llenarPropertiesFromModel(modelo);
         }
-
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo).join();
-
         return CompletableFuture.supplyAsync(() -> {
             try (Connection connect = modelo.getConnection()) {
                 String query = "SELECT * FROM " + modelo.getTableName() + Sql + ";";
@@ -275,6 +273,7 @@ class Get extends Methods_Conexion {
     /**
      * CARLA: YA ESTA APLICADO EL CAMBIO
      * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's
+     *
      * @param modelo     Modelo que está invocando el metodo
      * @param Sql        Sentencia SQL para obtener el modelo
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
@@ -351,7 +350,8 @@ class Get extends Methods_Conexion {
         });
     }
 
-    /**Carla: versión modificada del metodo getAll con el uso de  CompletableFuture
+    /**
+     * Carla: versión modificada del metodo getAll con el uso de  CompletableFuture
      * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
      *
@@ -378,7 +378,8 @@ class Get extends Methods_Conexion {
         }
     }
 
-    /**Carla: versión con cambios del metodo getAll  con el uso de  CompletableFuture
+    /**
+     * Carla: versión con cambios del metodo getAll  con el uso de  CompletableFuture
      * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
      *
@@ -391,18 +392,14 @@ class Get extends Methods_Conexion {
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
      *                   captura la excepción y la lanza en el hilo principal
      */
-
     protected <T extends JBSqlUtils> CompletableFuture<List<T>> getAllCompletableFuture(T modelo, String Sql, List<Column> parametros) throws Exception {
         if (!this.getGetPropertySystem()) {
             modelo.setGetPropertySystem(false);
             modelo.llenarPropertiesFromModel(modelo);
         }
-
         modelo.setTaskIsReady(false);
         modelo.validarTableExist(modelo).join();
-
         final String finalSql = Sql; // Hacer Sql final
-
         return CompletableFuture.supplyAsync(() -> {
             List<T> listaTemp = new ArrayList<>();
             try (Connection connect = modelo.getConnection()) {
@@ -435,7 +432,6 @@ class Get extends Methods_Conexion {
             }
         });
     }
-
 
     /**
      * Obtiene una lista de Json Object la cual contiene cada uno de los registros que cumple con la sentencia sql
