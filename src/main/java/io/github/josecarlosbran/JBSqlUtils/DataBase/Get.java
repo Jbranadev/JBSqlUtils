@@ -353,7 +353,7 @@ class Get extends Methods_Conexion {
         });
     }
 
-    /**Carla: versión inicial del metodo getAll con el uso de  Callable
+    /**Carla: versión modificada del metodo getAll con el uso de  CompletableFuture
      * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
      *
@@ -367,51 +367,17 @@ class Get extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     protected <T extends JBSqlUtils> List<T> getAll(T modelo, String Sql, List<Column> parametros) throws Exception {
-        if (!this.getGetPropertySystem()) {
-            modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(modelo);
-        }
-        //bran commit 2
-        modelo.setTaskIsReady(false);
-        modelo.validarTableExist(modelo).join();
-        final String finalSql = Sql; // Make Sql final
-        Callable<ResultAsync<List<T>>> get = () -> {
-            List<T> listaTemp = new ArrayList<>();
-            try (Connection connect = modelo.getConnection()) {
-                if (modelo.getTableExist()) {
-                    String query = "SELECT * FROM " + modelo.getTableName() + finalSql + ";";
-                    query = modelo.generateOrderSQL(query, modelo);
-                    PreparedStatement ejecutor = connect.prepareStatement(query);
-                    for (int i = 0; i < parametros.size(); i++) {
-                        //Obtengo la información de la columna
-                        Column columnsSQL = parametros.get(i);
-                        convertJavaToSQL(columnsSQL, ejecutor, i + 1);
-                    }
-                    LogsJB.info(ejecutor.toString());
-                    ResultSet registros = ejecutor.executeQuery();
-                    while (registros.next()) {
-                        listaTemp.add(procesarResultSet(modelo, registros));
-                    }
-                    modelo.closeConnection(connect);
-                } else {
-                    LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo" +
-                            "recuperar el Registro");
-                }
-                modelo.setTaskIsReady(true);
-                return new ResultAsync(listaTemp, null);
-            } catch (Exception e) {
-                LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
-                        "SQL de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                modelo.setTaskIsReady(true);
-                return new ResultAsync(listaTemp, e);
+        try {
+            // Ejecuta la tarea asíncrona y espera a su resultado
+            return this.getAllCompletableFuture(modelo, Sql, parametros).join();
+        } catch (CompletionException e) {
+            // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
+            if (e.getCause() instanceof ModelNotFound) {
+                throw (ModelNotFound) e.getCause();
             }
-        };
-        Future<ResultAsync<List<T>>> future = ejecutor.submit(get);
-        ResultAsync<List<T>> resultado = future.get();
-        if (!Objects.isNull(resultado.getException())) {
-            throw resultado.getException();
+            // Si no es una ModelNotFound, vuelve a lanzar la excepción como es
+            throw e;
         }
-        return resultado.getResult();
     }
 
     /**Carla: versión con cambios del metodo getAll  con el uso de  CompletableFuture
