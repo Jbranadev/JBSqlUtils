@@ -20,6 +20,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 import static UtilidadesTest.Utilities.logParrafo;
 import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.dropTableIfExist;
@@ -364,8 +365,38 @@ public class JBSqlUtilsTestMySQL {
         Assert.assertTrue(temp.getModelExist(), "No obtuvo un registro que no existe en BD's");
     }
 
-    @Test(testName = "Take Models",
+    @Test(testName = "Get First Model CompleteableFeature",
             dependsOnMethods = "firstModel")
+    public void firstModelCompleteableFeature() throws Exception {
+        //Incluir metodo que permita limpiar el modelo
+        logParrafo("Limpiamos el modelo");
+        this.testModel.cleanModel();
+        logParrafo("Obtenemos el primero modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
+        CompletableFuture<TestModel> future = this.testModel
+                .where("Name", Operator.IGUAL_QUE, "Marcossss")
+                .and("Apellido", Operator.IGUAL_QUE, "Cabrerassss")
+                .firstCompleteableFeature();
+        // Esperar el resultado de la operación asíncrona
+        TestModel temp = future.join(); // o puedes usar get() si prefieres manejar la excepción
+        this.testModel.waitOperationComplete();
+        logParrafo("Trato de obtener un modelo que no existe, el resultado es: " + temp.getModelExist());
+        logParrafo(temp.toString());
+        Assert.assertFalse(temp.getModelExist(), "Obtuvo un registro que no existe en BD's");
+        logParrafo("Obtenemos el primero modelo cuyo nombre sea Modelo # y sea mayor de edad");
+        future = this.testModel
+                .where("Name", Operator.LIKE, "%Modelo #%")
+                .and("IsMayor", Operator.IGUAL_QUE, true)
+                .firstCompleteableFeature();
+        // Esperar el resultado de la operación asíncrona
+        temp = future.join(); // o get()
+        this.testModel.waitOperationComplete();
+        logParrafo("Trato de obtener un modelo que sí existe, el resultado es: " + temp.getModelExist());
+        logParrafo(temp.toString());
+        Assert.assertTrue(temp.getModelExist(), "No obtuvo un registro que no existe en BD's");
+    }
+
+    @Test(testName = "Take Models",
+            dependsOnMethods = "firstModelCompleteableFeature")
     public void takeModels() throws Exception {
         logParrafo("Limpiamos el modelo");
         //Incluir metodo que permita limpiar el modelo

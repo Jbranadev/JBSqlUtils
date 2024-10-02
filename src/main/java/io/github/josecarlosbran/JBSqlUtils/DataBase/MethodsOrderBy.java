@@ -6,6 +6,7 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @author Jose Bran
@@ -147,6 +148,18 @@ public class MethodsOrderBy<T> extends MethodsTake {
      */
     public <T extends JBSqlUtils> T first() throws Exception {
         return (T) super.first((T) this.modelo, this.sql, this.parametros);
+    }
+
+    /**
+     * Obtiene un CompleteableFeature que representa el modelo del tipo que invoca este método con la información que obtiene de BD's
+     *
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
+     * @return Retorna un CompleteableFeature que representa el modelo del tipo que invoca este método con la información que obtiene de BD's.
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
+     */
+    public <T extends JBSqlUtils> CompletableFuture<T> firstCompleteableFeature() throws Exception {
+        return super.firstCompleteableFeature((T) this.modelo, this.sql, this.parametros);
     }
 
     /**
