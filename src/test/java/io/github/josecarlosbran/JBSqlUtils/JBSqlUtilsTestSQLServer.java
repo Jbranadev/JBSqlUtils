@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 
 import static UtilidadesTest.Utilities.logParrafo;
 import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.dropTableIfExist;
@@ -355,27 +355,39 @@ public class JBSqlUtilsTestSQLServer {
         logParrafo("Limpiamos el modelo");
         this.testModel.cleanModel();
         logParrafo("Obtenemos el primero modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
-        CompletableFuture<TestModel> future = this.testModel
+        this.testModel
                 .where("Name", Operator.IGUAL_QUE, "Marcossss")
                 .and("Apellido", Operator.IGUAL_QUE, "Cabrerassss")
-                .firstCompleteableFeature();
+                .firstCompleteableFeature().thenApply(
+                        result -> {
+                            // Realiza un cast explícito a TestModel
+                            TestModel temp = (TestModel) result;
+                            logParrafo("Trato de obtener un modelo que no existe, el resultado es: " + temp.getModelExist());
+                            logParrafo(temp.toString());
+                            Assert.assertFalse(temp.getModelExist(), "Obtuvo un registro que no existe en BD's");
+                            logParrafo("Obtenemos el primero modelo cuyo nombre sea Modelo # y sea mayor de edad");
+                            try {
+                                this.testModel
+                                        .where("Name", Operator.LIKE, "%Modelo #%")
+                                        .and("IsMayor", Operator.IGUAL_QUE, true)
+                                        .firstCompleteableFeature()
+                                        .thenApply(result2 -> {
+                                                    // Realiza un cast explícito a TestModel
+                                                    TestModel temp2 = (TestModel) result2;
+                                                    logParrafo("Trato de obtener un modelo que sí existe, el resultado es: " + temp2.getModelExist());
+                                                    logParrafo(temp2.toString());
+                                                    Assert.assertTrue(temp2.getModelExist(), "No obtuvo un registro que no existe en BD's");
+                                                    return result2;
+                                                }
+                                        )
+                                ;
+                            } catch (Exception e) {
+                                throw new CompletionException(e);
+                            }
+                            return result;
+                        }
+                );
         // Esperar el resultado de la operación asíncrona
-        TestModel temp = future.join(); // o puedes usar get() si prefieres manejar la excepción
-        this.testModel.waitOperationComplete();
-        logParrafo("Trato de obtener un modelo que no existe, el resultado es: " + temp.getModelExist());
-        logParrafo(temp.toString());
-        Assert.assertFalse(temp.getModelExist(), "Obtuvo un registro que no existe en BD's");
-        logParrafo("Obtenemos el primero modelo cuyo nombre sea Modelo # y sea mayor de edad");
-        future = this.testModel
-                .where("Name", Operator.LIKE, "%Modelo #%")
-                .and("IsMayor", Operator.IGUAL_QUE, true)
-                .firstCompleteableFeature();
-        // Esperar el resultado de la operación asíncrona
-        temp = future.join(); // o get()
-        this.testModel.waitOperationComplete();
-        logParrafo("Trato de obtener un modelo que sí existe, el resultado es: " + temp.getModelExist());
-        logParrafo(temp.toString());
-        Assert.assertTrue(temp.getModelExist(), "No obtuvo un registro que no existe en BD's");
     }
 
     @Test(testName = "Take Models",
