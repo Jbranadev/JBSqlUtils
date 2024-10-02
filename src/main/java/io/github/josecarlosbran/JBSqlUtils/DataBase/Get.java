@@ -54,51 +54,29 @@ class Get extends Methods_Conexion {
         super(getGetPropertiesSystem);
     }
 
-    /** VERSIÓN ORIGINAL HACIENDO USO DEL Callable
+    /**
+     * VERSIÓN ORIGINAL HACIENDO cambiado al uso de USO DEL CompletableFuture
      * Llena el modelo que invoca este método con la información que obtiene de BD's
      *
      * @param modelo     Modelo que será llenado
      * @param Sql        Sentencia SQL para obtener el modelo
      * @param parametros Lista de parametros a ser agregados a la sentencia SQL
      * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el método.
+     * @return
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
      *                   captura la excepción y la lanza en el hilo principal
      */
-    protected <T extends JBSqlUtils> void get(T modelo, String Sql, List<Column> parametros) throws Exception {
-        if (!this.getGetPropertySystem()) {
-            modelo.setGetPropertySystem(false);
-            modelo.llenarPropertiesFromModel(modelo);
-        }
-        modelo.setTaskIsReady(false);
-        modelo.validarTableExist(modelo).join();
-        Callable<ResultAsync<Boolean>> get = () -> {
-            try (Connection connect = modelo.getConnection()
-            ) {
-                String query = "SELECT * FROM " + modelo.getTableName() + Sql + ";";
-                query = modelo.generateOrderSQL(query, modelo);
-                PreparedStatement ejecutor = connect.prepareStatement(query);
-                for (int i = 0; i < parametros.size(); i++) {
-                    Column columnsSQL = parametros.get(i);
-                    convertJavaToSQL(columnsSQL, ejecutor, i + 1);
-                }
-                LogsJB.info(ejecutor.toString());
-                try (ResultSet registros = ejecutor.executeQuery()) {
-                    while (registros.next()) {
-                        procesarResultSetOneResult(modelo, registros);
-                    }
-                }
-                modelo.setTaskIsReady(true);
-                return new ResultAsync<>(true, null);
-            } catch (Exception e) {
-                LogsJB.fatal("Excepción disparada en el método que Obtiene la información del modelo de la BD's, Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                modelo.setTaskIsReady(true);
-                return new ResultAsync<>(true, e);
+    protected <T extends JBSqlUtils> T get(T modelo, String Sql, List<Column> parametros) throws Exception {
+        try {
+            // Ejecuta la tarea asíncrona y espera a su resultado
+            return this.getCompletableFuture(modelo, Sql, parametros).join();
+        } catch (CompletionException e) {
+            // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
+            if (e.getCause() instanceof ModelNotFound) {
+                throw (ModelNotFound) e.getCause();
             }
-        };
-        Future<ResultAsync<Boolean>> future = ejecutor.submit(get);
-        ResultAsync<Boolean> resultado = future.get();
-        if (!Objects.isNull(resultado.getException())) {
-            throw resultado.getException();
+            // Si no es una ModelNotFound, vuelve a lanzar la excepción como es
+            throw e;
         }
     }
 
