@@ -54,7 +54,7 @@ class Get extends Methods_Conexion {
         super(getGetPropertiesSystem);
     }
 
-    /**
+    /** VERSIÓN ORIGINAL HACIENDO USO DEL Callable
      * Llena el modelo que invoca este método con la información que obtiene de BD's
      *
      * @param modelo     Modelo que será llenado
@@ -101,6 +101,51 @@ class Get extends Methods_Conexion {
             throw resultado.getException();
         }
     }
+
+    /** VERSIÓN CAMBIO APLICANDO EL  CompletableFuture
+     * Llena el modelo ompletableFuture que invoca este método con la información que obtiene de BD's
+     *
+     * @param modelo     Modelo ompletableFuture que será llenado
+     * @param Sql        Sentencia SQL para obtener el modelo
+     * @param parametros Lista de parametros a ser agregados a la sentencia SQL
+     * @param <T>        Definición del procedimiento que indica que cualquier clase podra invocar el método.
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
+     */
+    protected <T extends JBSqlUtils> CompletableFuture<T> getCompletableFuture(T modelo, String Sql, List<Column> parametros) throws Exception {
+        if (!this.getGetPropertySystem()) {
+            modelo.setGetPropertySystem(false);
+            modelo.llenarPropertiesFromModel(modelo);
+        }
+        modelo.setTaskIsReady(false);
+        modelo.validarTableExist(modelo).join();
+
+        return CompletableFuture.supplyAsync(() -> {
+            try (Connection connect = modelo.getConnection()) {
+                String query = "SELECT * FROM " + modelo.getTableName() + Sql + ";";
+                query = modelo.generateOrderSQL(query, modelo);
+                try (PreparedStatement ejecutor = connect.prepareStatement(query)) {
+                    for (int i = 0; i < parametros.size(); i++) {
+                        Column columnsSQL = parametros.get(i);
+                        convertJavaToSQL(columnsSQL, ejecutor, i + 1);
+                    }
+                    LogsJB.info(ejecutor.toString());
+                    try (ResultSet registros = ejecutor.executeQuery()) {
+                        while (registros.next()) {
+                            procesarResultSetOneResult(modelo, registros);
+                        }
+                    }
+                    modelo.setTaskIsReady(true);
+                    return modelo; // Devuelve el modelo poblado
+                }
+            } catch (Exception e) {
+                LogsJB.fatal("Excepción disparada en el método que obtiene la información del modelo de la BD's, Trace de la Excepción: " + ExceptionUtils.getStackTrace(e));
+                modelo.setTaskIsReady(true);
+                throw new RuntimeException(e); // Envuelve en RuntimeException
+            }
+        });
+    }
+
 
     /*** CARLA: YA ESTA APLICADO EL CAMBIO
      * Ya esta modificado al uso de  CompletableFuture
