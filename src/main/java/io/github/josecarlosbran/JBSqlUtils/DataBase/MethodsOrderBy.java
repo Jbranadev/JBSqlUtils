@@ -147,10 +147,8 @@ public class MethodsOrderBy<T> extends MethodsTake {
      * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
      *                   captura la excepción y la lanza en el hilo principal
      */
-    public <T extends JBSqlUtils> CompletableFuture<Void> getCompletableFeature() throws Exception {
-        super.getCompletableFuture((T) this.modelo, this.sql, this.parametros);
-
-        return null;
+    public <T extends JBSqlUtils> CompletableFuture<T> getCompletableFeature() throws Exception {
+        return super.getCompletableFuture((T) this.modelo, this.sql, this.parametros);
     }
 
     /**
