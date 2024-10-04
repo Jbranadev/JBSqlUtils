@@ -175,7 +175,7 @@ public class MethodsOrderBy<T> extends MethodsTake {
         return super.firstCompleteableFeature((T) this.modelo, this.sql, this.parametros);
     }
 
-    /**
+    /**Carla: Version Original
      * Obtiene un modelo del tipo que invoca este método con la información que obtiene de BD's
      *
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
@@ -186,7 +186,17 @@ public class MethodsOrderBy<T> extends MethodsTake {
     public <T extends JBSqlUtils> T firstOrFail() throws Exception {
         return (T) super.firstOrFail((T) this.modelo, this.sql, this.parametros);
     }
-
+    /**Carla: Version con Completable Feature
+     * Obtiene un modelo del tipo que invoca este metodo con la información que obtiene de BD's
+     *
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @return Retorna un un modelo del tipo que invoca este metodo con la información que obtiene de BD's.
+     * @throws ModelNotFound Lanza esta excepción si no logra encontrar el registro correspondiente a la consulta
+     *                       SQL realizada.
+     */
+    public <T extends JBSqlUtils> CompletableFuture<T>  firstOrFailCompletableFeature() throws Exception {
+        return  super.firstCompleteableFeature((T) this.modelo, this.sql, this.parametros);
+    }
     /** Carla: Versiòn original
      * Llena el modelo que invoca este metodo con la información que obtiene de BD's
      *
