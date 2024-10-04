@@ -321,6 +321,9 @@ public class JBSqlUtilsTestMySQL {
         Assert.assertEquals((int) rowsInsert, 10, "Los registros no fueron insertados correctamente en BD's");
     }
 
+    /**
+     *Carla: Metodo original
+     */
     @Test(testName = "Get Model",
             dependsOnMethods = "insertModels")
     public void getModel() throws Exception {
@@ -343,8 +346,52 @@ public class JBSqlUtilsTestMySQL {
         Assert.assertTrue(this.testModel.getModelExist(), "No obtuvo un registro que no existe en BD's");
     }
 
-    @Test(testName = "Get First Model",
+    /**
+     *Carla: Metodo aplicando el CompleteableFeature
+     */
+    @Test(testName = "Get Model CompleteableFeature",
             dependsOnMethods = "getModel")
+    public void getModelCompleteableFeature() throws Exception {
+        // Incluir metodo que permita limpiar el modelo
+        logParrafo("Limpiamos el modelo");
+        this.testModel.cleanModel();
+
+        logParrafo("Obtenemos el primer modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
+        CompletableFuture<Void> future1 = this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss")
+                .and("Apellido", Operator.IGUAL_QUE, "Cabrerassss")
+                .getCompletableFeature();
+
+        future1.exceptionally(ex -> {
+            // Manejo de excepciones si ocurre
+            logParrafo("Error al obtener el modelo: " + ex.getMessage());
+            return null;
+        }).join(); // Espera a que la operación se complete
+
+        logParrafo("Trato de obtener un modelo que no existe, el resultado es: " + this.testModel.getModelExist());
+        logParrafo(this.testModel.toString());
+        Assert.assertFalse(this.testModel.getModelExist(), "Obtuve un registro que no existe en BD's");
+
+        logParrafo("Obtenemos un modelo cuyo nombre sea Modelo # y sea mayor de edad");
+        CompletableFuture<Void> future2 = this.testModel.where("Name", Operator.LIKE, "%Modelo #%")
+                .and("IsMayor", Operator.IGUAL_QUE, true)
+                .getCompletableFeature();
+
+        future2.exceptionally(ex -> {
+            // Manejo de excepciones si ocurre
+            logParrafo("Error al obtener el modelo: " + ex.getMessage());
+            return null;
+        }).join(); // Espera a que la operación se complete
+
+        logParrafo("Trato de obtener un modelo que sí existe, el resultado es: " + this.testModel.getModelExist());
+        logParrafo(this.testModel.toString());
+        Assert.assertTrue(this.testModel.getModelExist(), "No obtuvo un registro que no existe en BD's");
+    }
+
+
+
+
+    @Test(testName = "Get First Model",
+            dependsOnMethods = "getModelCompleteableFeature")
     public void firstModel() throws Exception {
         //Incluir metodo que permita limpiar el modelo
         logParrafo("Limpiamos el modelo");

@@ -139,6 +139,21 @@ public class MethodsOrderBy<T> extends MethodsTake {
     }
 
     /**
+     * Carla: Creamos metodo con uso del CompleteableFeature
+     * Llena el modelo CompletableFeature que invoca este metodo con la información que obtiene de BD's
+     *
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo
+     * @return
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
+     */
+    public <T extends JBSqlUtils> CompletableFuture<Void> getCompletableFeature() throws Exception {
+        super.getCompletableFuture((T) this.modelo, this.sql, this.parametros);
+
+        return null;
+    }
+
+    /**
      * Obtiene un modelo del tipo que invoca este método con la información que obtiene de BD's
      *
      * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el método.
