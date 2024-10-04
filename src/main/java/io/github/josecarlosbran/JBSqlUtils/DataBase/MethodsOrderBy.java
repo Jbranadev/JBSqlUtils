@@ -217,7 +217,7 @@ public class MethodsOrderBy<T> extends MethodsTake {
         return super.firstOrFailGetCompleteableFeature((T) this.modelo, this.sql, this.parametros);
     }
 
-    /**
+    /**Carla:metodo original
      * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
      * proporcionada
      *
@@ -228,7 +228,24 @@ public class MethodsOrderBy<T> extends MethodsTake {
      *                   captura la excepción y la lanza en el hilo principal
      */
     public <T extends JBSqlUtils> List<T> getAll() throws Exception {
-        return (List<T>) super.getAll((T) this.modelo, this.sql, this.parametros);
+        return  super.getAll((T) this.modelo, this.sql, this.parametros);
     }
+
+    /**Carla:metodo aplicando Complete Feature
+     * Obtiene una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
+     * proporcionada
+     *
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @return Retorna una lista de modelos que coinciden con la busqueda realizada por medio de la consulta SQL
+     * proporcionada
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
+     */
+
+    public <T extends JBSqlUtils> CompletableFuture<List<T>> getAllCompletableFeature() throws Exception {
+        return super.getAllCompletableFuture((T) this.modelo, this.sql, this.parametros);
+    }
+
+
 }
 
