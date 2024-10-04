@@ -170,7 +170,52 @@ public class JBSqlUtilsTestSQLServer {
                 "Cabrerassss").firstOrFailGet();
     }
 
-    @Test(testName = "Reload Model", dependsOnMethods = "firstOrFailGet")
+    /**
+     *Carla: Metodo usando Completable Feature
+     */
+    @Test(testName = "First Or Fail Get", dependsOnMethods = "firstOrFailGet", expectedExceptions = ModelNotFound.class)
+    public void firstOrFailGetCompletableFeature() throws Exception {
+        logParrafo("Limpiamos el modelo");
+        this.testModel.cleanModel();
+
+        logParrafo("Obtenemos el modelo que tiene por nombre Marcos, Apellido Cabrera");
+
+        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+            try {
+                this.testModel.where("Name", Operator.IGUAL_QUE, "Marcos")
+                        .and("Apellido", Operator.IGUAL_QUE, "Cabrera")
+                        .firstOrFailGetCompletableFeature();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        // Esperamos que se complete la operación en la base de datos
+        future.join();  // Bloquea hasta que la operación se complete
+
+        logParrafo(this.testModel.toString());
+        Assert.assertTrue(this.testModel.getModelExist(), "El Modelo no fue Obtenido de BD's como esperabamos");
+        Assert.assertFalse(this.testModel.getIsMayor(), "El Modelo no fue Obtenido de BD's como esperabamos");
+
+        // Intentamos obtener un modelo que no existe para lanzar la excepción
+        CompletableFuture<Void> futureNotFound = CompletableFuture.runAsync(() -> {
+            try {
+                this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss")
+                        .and("Apellido", Operator.IGUAL_QUE, "Cabrerassss")
+                        .firstOrFailGetCompletableFeature();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        // Verificamos que se lance la excepción
+        Exception exception = Assert.expectThrows(ModelNotFound.class, futureNotFound::join);
+        Assert.assertNotNull(exception, "Se esperaba una ModelNotFound excepción");
+    }
+
+
+
+    @Test(testName = "Reload Model", dependsOnMethods = "firstOrFailGetCompletableFeature")
     public void reloadModel() throws Exception {
         logParrafo("Limpiamos el modelo");
         this.testModel.cleanModel();
