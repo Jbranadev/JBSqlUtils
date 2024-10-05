@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
+import java.util.concurrent.ExecutionException;
 
 import static UtilidadesTest.Utilities.logParrafo;
 import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.dropTableIfExist;
@@ -150,7 +151,7 @@ public class JBSqlUtilsTestMySQL {
     }
 
     /**
-     *Carla: Metodo original
+     * Carla: Metodo original
      */
     @Test(testName = "First Or Fail",
             dependsOnMethods = "cleanModel",
@@ -161,7 +162,7 @@ public class JBSqlUtilsTestMySQL {
     }
 
     /**
-     *Carla: Metodo con uso del Completable Feature
+     * Carla: Metodo con uso del Completable Feature
      */
     @Test(testName = "First Or Fail Completable Feature",
             dependsOnMethods = "firstOrFail",
@@ -170,9 +171,9 @@ public class JBSqlUtilsTestMySQL {
         try {
             // Ejecuta la tarea asíncrona y espera a su resultado
             TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
-                    "Cabrerassss").firstOrFailCompletableFeature().join();
+                    "Cabrerassss").firstOrFailCompletableFeature().get();
             LogsJB.info("Modelo encontrado: " + temp.toString());
-        } catch (CompletionException e) {
+        } catch (ExecutionException e) {
             // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
             if (e.getCause() instanceof ModelNotFound) {
                 throw (ModelNotFound) e.getCause();
@@ -183,7 +184,7 @@ public class JBSqlUtilsTestMySQL {
     }
 
     /**
-     *Carla: Metodo original
+     * Carla: Metodo original
      */
     @Test(testName = "First Or Fail Get", dependsOnMethods = "firstOrFailCompletableFeature"
             , expectedExceptions = ModelNotFound.class)
@@ -208,49 +209,38 @@ public class JBSqlUtilsTestMySQL {
     }
 
     /**
-     *Carla: Metodo usando Completable Feature
+     * Carla: Metodo usando Completable Feature
      */
-    @Test(testName = "First Or Fail Get Completable Feature", dependsOnMethods = "firstOrFailGet", expectedExceptions = ModelNotFound.class)
+    @Test(testName = "First Or Fail Get Completeable Feature", dependsOnMethods = "firstOrFailGet", expectedExceptions = ModelNotFound.class)
     public void firstOrFailGetCompletableFeature() throws Exception {
-        logParrafo("Limpiamos el modelo");
-        this.testModel.cleanModel();
-
-        logParrafo("Obtenemos el modelo que tiene por nombre Marcos, Apellido Cabrera");
-
-        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
-            try {
-                this.testModel.where("Name", Operator.IGUAL_QUE, "Marcos")
-                        .and("Apellido", Operator.IGUAL_QUE, "Cabrera")
-                        .firstOrFailGetCompletableFeature();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+        try {
+            logParrafo("Limpiamos el modelo");
+            this.testModel.cleanModel();
+            /**
+             * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
+             */
+            logParrafo("Obtenemos el modelo que tiene por nombre Marcos, Apellido Cabrera");
+            this.testModel.where("Name", Operator.IGUAL_QUE, "Marcos").and("Apellido", Operator.IGUAL_QUE,
+                    "Cabrera").firstOrFailGetCompletableFeature().get();
+            /**
+             * Esperamos ejecute la operación en BD's
+             */
+            this.testModel.waitOperationComplete();
+            logParrafo(this.testModel.toString());
+            Assert.assertTrue(this.testModel.getModelExist(), "El Modelo no fue Obtenido de BD's como esperabamos");
+            Assert.assertFalse(this.testModel.getIsMayor(), "El Modelo no fue Obtenido de BD's como esperabamos");
+            this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+                    "Cabrerassss").firstOrFailGetCompletableFeature().get();
+            LogsJB.info("Modelo encontrado: " + this.testModel.toString());
+        } catch (ExecutionException e) {
+            // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
+            if (e.getCause() instanceof ModelNotFound) {
+                throw (ModelNotFound) e.getCause();
             }
-        });
-
-        // Esperamos que se complete la operación en la base de datos
-        future.join();  // Bloquea hasta que la operación se complete
-
-        logParrafo(this.testModel.toString());
-        Assert.assertTrue(this.testModel.getModelExist(), "El Modelo no fue Obtenido de BD's como esperabamos");
-        Assert.assertFalse(this.testModel.getIsMayor(), "El Modelo no fue Obtenido de BD's como esperabamos");
-
-        // Intentamos obtener un modelo que no existe para lanzar la excepción
-        CompletableFuture<Void> futureNotFound = CompletableFuture.runAsync(() -> {
-            try {
-                this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss")
-                        .and("Apellido", Operator.IGUAL_QUE, "Cabrerassss")
-                        .firstOrFailGetCompletableFeature();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
-
-        // Verificamos que se lance la excepción
-        Exception exception = Assert.expectThrows(ModelNotFound.class, futureNotFound::join);
-        Assert.assertNotNull(exception, "Se esperaba una ModelNotFound excepción");
+            // Si no es una ModelNotFound, vuelve a lanzar la excepción como es
+            throw e;
+        }
     }
-
-
 
     @Test(testName = "Reload Model", dependsOnMethods = "firstOrFailGetCompletableFeature")
     public void reloadModel() throws Exception {
@@ -397,7 +387,7 @@ public class JBSqlUtilsTestMySQL {
     }
 
     /**
-     *Carla: Metodo original
+     * Carla: Metodo original
      */
     @Test(testName = "Get Model",
             dependsOnMethods = "insertModels")
@@ -422,7 +412,7 @@ public class JBSqlUtilsTestMySQL {
     }
 
     /**
-     *Carla: Metodo aplicando el CompleteableFeature
+     * Carla: Metodo aplicando el CompleteableFeature
      */
     @Test(testName = "Get Model CompleteableFeature",
             dependsOnMethods = "getModel")
@@ -430,33 +420,27 @@ public class JBSqlUtilsTestMySQL {
         // Incluir metodo que permita limpiar el modelo
         logParrafo("Limpiamos el modelo");
         this.testModel.cleanModel();
-
         logParrafo("Obtenemos el primer modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
         CompletableFuture<TestModel> future1 = this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss")
                 .and("Apellido", Operator.IGUAL_QUE, "Cabrerassss")
                 .getCompletableFeature();
-
         future1.exceptionally(ex -> {
             // Manejo de excepciones si ocurre
             logParrafo("Error al obtener el modelo: " + ex.getMessage());
             return null;
         }).join(); // Espera a que la operación se complete
-
         logParrafo("Trato de obtener un modelo que no existe, el resultado es: " + this.testModel.getModelExist());
         logParrafo(this.testModel.toString());
         Assert.assertFalse(this.testModel.getModelExist(), "Obtuve un registro que no existe en BD's");
-
         logParrafo("Obtenemos un modelo cuyo nombre sea Modelo # y sea mayor de edad");
         CompletableFuture<TestModel> future2 = this.testModel.where("Name", Operator.LIKE, "%Modelo #%")
                 .and("IsMayor", Operator.IGUAL_QUE, true)
                 .getCompletableFeature();
-
         future2.exceptionally(ex -> {
             // Manejo de excepciones si ocurre
             logParrafo("Error al obtener el modelo: " + ex.getMessage());
             return null;
         }).join(); // Espera a que la operación se complete
-
         logParrafo("Trato de obtener un modelo que sí existe, el resultado es: " + this.testModel.getModelExist());
         logParrafo(this.testModel.toString());
         Assert.assertTrue(this.testModel.getModelExist(), "No obtuvo un registro que no existe en BD's");
@@ -529,7 +513,7 @@ public class JBSqlUtilsTestMySQL {
     }
 
     /**
-     *Carla: Metodo original
+     * Carla: Metodo original
      */
     @Test(testName = "Get All Models",
             dependsOnMethods = "takeModels")
@@ -545,8 +529,9 @@ public class JBSqlUtilsTestMySQL {
         logParrafo("Se recuperaron " + models.size() + " los cuales son: " + models);
         Assert.assertEquals(models.size(), 3, "Los modelos no fueron recuperados de BD's");
     }
+
     /**
-     *Carla: Metodo con completableFeature
+     * Carla: Metodo con completableFeature
      */
     @Test(testName = "Get All Models Completable feature",
             dependsOnMethods = "getAllModels")
@@ -554,9 +539,7 @@ public class JBSqlUtilsTestMySQL {
         // Incluir metodo que permita limpiar el modelo
         logParrafo("Limpiamos el modelo");
         this.testModel.cleanModel();
-
         logParrafo("Obtenemos los modelos que poseen nombre es Modelo #5 U #8 o su apellido es #3");
-
         // Usamos CompletableFuture para obtener los modelos de manera asíncrona
         CompletableFuture<CompletableFuture<List>> futureModels = CompletableFuture.supplyAsync(() -> {
             try {
@@ -568,7 +551,6 @@ public class JBSqlUtilsTestMySQL {
                 throw new CompletionException(e); // Envuelve la excepción en CompletionException
             }
         });
-
         // Manejo del resultado y posibles excepciones
         List<TestModel> models = (List<TestModel>) futureModels.handle((result, throwable) -> {
             if (throwable != null) {
@@ -578,13 +560,10 @@ public class JBSqlUtilsTestMySQL {
             }
             return result; // Retorna la lista de modelos
         }).join(); // Bloquea hasta que se complete la operación
-
         this.testModel.waitOperationComplete(); // Asegúrate de que la operación esté completa
-
         logParrafo("Se recuperaron " + models.size() + " los cuales son: " + models);
         Assert.assertEquals(models.size(), 3, "Los modelos no fueron recuperados de BD's");
     }
-
 
     @Test(testName = "Update Models",
             dependsOnMethods = "getAllModelsCompletableFeature")
