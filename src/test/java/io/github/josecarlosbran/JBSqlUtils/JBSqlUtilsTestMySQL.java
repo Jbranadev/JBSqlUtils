@@ -10,10 +10,7 @@ import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.testng.Assert;
@@ -25,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 
 import static UtilidadesTest.Utilities.logParrafo;
 import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.dropTableIfExist;
@@ -169,24 +167,19 @@ public class JBSqlUtilsTestMySQL {
             dependsOnMethods = "firstOrFail",
             expectedExceptions = ModelNotFound.class)
     public void firstOrFailCompletableFeature() throws Exception {
-        CompletableFuture<TestModel> future = CompletableFuture.supplyAsync(() -> {
-            try {
-                return (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss")
-                        .and("Apellido", Operator.IGUAL_QUE, "Cabrerassss")
-                        .firstOrFailCompletableFeature()  // Llama al metodo asincrono
-                        .join(); // Espera el resultado
-            } catch (ValorUndefined e) {
-                throw new RuntimeException(e);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+        try {
+            this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss")
+                    .and("Apellido", Operator.IGUAL_QUE, "Cabrerassss")
+                    .firstOrFailCompletableFeature()  // Llama al metodo asincrono
+                    .join();
+        } catch (CompletionException e) {
+            // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
+            if (e.getCause() instanceof ModelNotFound) {
+                throw (ModelNotFound) e.getCause();
             }
-        });
-
-        // Intentamos obtener el modelo, se espera que lance ModelNotFound
-        TestModel temp = future.join(); // Bloquea hasta que se complete
-
-        // Si llegamos aquí, no se lanzó la excepción, lo que no debería ocurrir
-        Assert.fail("Se esperaba una ModelNotFound excepción");
+            // Si no es una ModelNotFound, vuelve a lanzar la excepción como es
+            throw e;
+        }
     }
 
     /**
