@@ -10,7 +10,6 @@ import io.github.josecarlosbran.JBSqlUtils.Enumerations.*;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
@@ -160,24 +159,19 @@ public class JBSqlUtilsTestSQLServer {
             dependsOnMethods = "firstOrFail",
             expectedExceptions = ModelNotFound.class)
     public void firstOrFailCompletableFeature() throws Exception {
-        CompletableFuture<TestModel> future = CompletableFuture.supplyAsync(() -> {
-            try {
-                return (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss")
-                        .and("Apellido", Operator.IGUAL_QUE, "Cabrerassss")
-                        .firstOrFailCompletableFeature()  // Llama al metodo asincrono
-                        .join(); // Espera el resultado
-            } catch (ValorUndefined e) {
-                throw new RuntimeException(e);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+        try {
+            // Ejecuta la tarea asíncrona y espera a su resultado
+            TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+                    "Cabrerassss").firstOrFailCompletableFeature().join();
+            LogsJB.info("Modelo encontrado: " + temp.toString());
+        } catch (CompletionException e) {
+            // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
+            if (e.getCause() instanceof ModelNotFound) {
+                throw (ModelNotFound) e.getCause();
             }
-        });
-
-        // Intentamos obtener el modelo, se espera que lance ModelNotFound
-        TestModel temp = future.join(); // Bloquea hasta que se complete
-
-        // Si llegamos aquí, no se lanzó la excepción, lo que no debería ocurrir
-        Assert.fail("Se esperaba una ModelNotFound excepción");
+            // Si no es una ModelNotFound, vuelve a lanzar la excepción como es
+            throw e;
+        }
     }
 
     /**

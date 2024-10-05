@@ -168,10 +168,10 @@ public class JBSqlUtilsTestMySQL {
             expectedExceptions = ModelNotFound.class)
     public void firstOrFailCompletableFeature() throws Exception {
         try {
-            this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss")
-                    .and("Apellido", Operator.IGUAL_QUE, "Cabrerassss")
-                    .firstOrFailCompletableFeature()  // Llama al metodo asincrono
-                    .join();
+            // Ejecuta la tarea asíncrona y espera a su resultado
+            TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+                    "Cabrerassss").firstOrFailCompletableFeature().join();
+            LogsJB.info("Modelo encontrado: " + temp.toString());
         } catch (CompletionException e) {
             // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
             if (e.getCause() instanceof ModelNotFound) {

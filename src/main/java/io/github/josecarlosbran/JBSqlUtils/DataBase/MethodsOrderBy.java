@@ -195,7 +195,7 @@ public class MethodsOrderBy<T> extends MethodsTake {
      *                       SQL realizada.
      */
     public <T extends JBSqlUtils> CompletableFuture<T>  firstOrFailCompletableFeature() throws Exception {
-        return  super.firstCompleteableFeature((T) this.modelo, this.sql, this.parametros);
+        return super.firstOrFailCompleteableFeature((T) this.modelo, this.sql, this.parametros);
     }
     /** Carla: Versiòn original
      * Llena el modelo que invoca este metodo con la información que obtiene de BD's
