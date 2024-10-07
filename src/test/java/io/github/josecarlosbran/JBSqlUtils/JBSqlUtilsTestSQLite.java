@@ -526,39 +526,35 @@ public class JBSqlUtilsTestSQLite {
     }
 
     /**
-     * Carla: Metodo con completableFeature
+     * Carla: Metodo con completableFeature. correcciòn
      */
     @Test(testName = "Get All Models Completable feature",
             dependsOnMethods = "getAllModels")
     public void getAllModelsCompletableFeature() throws Exception {
-        // Incluir metodo que permita limpiar el modelo
-        logParrafo("Limpiamos el modelo");
-        this.testModel.cleanModel();
-        logParrafo("Obtenemos los modelos que poseen nombre es Modelo #5 U #8 o su apellido es #3");
-        // Usamos CompletableFuture para obtener los modelos de manera asíncrona
-        CompletableFuture<CompletableFuture<List>> futureModels = CompletableFuture.supplyAsync(() -> {
-            try {
-                return this.testModel.where("Name", Operator.LIKE, "%Modelo #5%")
-                        .or("Name", Operator.LIKE, "Modelo #8")
-                        .or("Apellido", Operator.IGUAL_QUE, "Apellido #3")
-                        .getAllCompletableFeature(); // Llama al metodo que retorna la lista
-            } catch (Exception e) {
-                throw new CompletionException(e); // Envuelve la excepción en CompletionException
+        try{
+
+
+            //Incluir metodo que permita limpiar el modelo
+            logParrafo("Limpiamos el modelo");
+            this.testModel.cleanModel();
+
+            List<TestModel> models = new ArrayList<TestModel>();
+            logParrafo("Obtenemos los modelos que poseen nombre es Modelo #5 U #8 o su apellido es #3");
+            models = (List<TestModel>) this.testModel.where("Name", Operator.LIKE, "%Modelo #5%").or(
+                    "Name", Operator.LIKE, "Modelo #8").or("Apellido", Operator.IGUAL_QUE, "Apellido #3").getAllCompletableFeature().get();
+            this.testModel.waitOperationComplete();
+            logParrafo("Se recuperaron " + models.size() + " los cuales son: " + models);
+            Assert.assertEquals(models.size(), 3, "Los modelos no fueron recuperados de BD's");
+        }catch (ExecutionException e) {
+            // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
+            if (e.getCause() instanceof ModelNotFound) {
+                throw (ModelNotFound) e.getCause();
             }
-        });
-        // Manejo del resultado y posibles excepciones
-        List<TestModel> models = (List<TestModel>) futureModels.handle((result, throwable) -> {
-            if (throwable != null) {
-                // Manejar la excepción aquí
-                logParrafo("Ocurrió un error: " + throwable.getMessage());
-                return Collections.emptyList(); // Retorna una lista vacía en caso de error
-            }
-            return result; // Retorna la lista de modelos
-        }).join(); // Bloquea hasta que se complete la operación
-        this.testModel.waitOperationComplete(); // Asegúrate de que la operación esté completa
-        logParrafo("Se recuperaron " + models.size() + " los cuales son: " + models);
-        Assert.assertEquals(models.size(), 3, "Los modelos no fueron recuperados de BD's");
+            // Si no es una ModelNotFound, vuelve a lanzar la excepción como es
+            throw e;
+        }
     }
+
 
     @Test(testName = "Update Models",
             dependsOnMethods = "getAllModelsCompletableFeature")
