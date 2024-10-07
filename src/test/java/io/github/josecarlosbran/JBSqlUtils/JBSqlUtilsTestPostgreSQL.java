@@ -395,42 +395,42 @@ public class JBSqlUtilsTestPostgreSQL {
     }
 
     /**
-     * Carla: Metodo aplicando el CompleteableFeature
+     * Carla: Metodo aplicando el CompleteableFeature, correccion2
      */
-    @Test(testName = "Get Model CompleteableFeature",
+    @Test(testName = "Get Model Completeable Feature",
             dependsOnMethods = "getModel")
-    public void getModelCompleteableFeature() throws Exception {
-        // Incluir metodo que permita limpiar el modelo
-        logParrafo("Limpiamos el modelo");
-        this.testModel.cleanModel();
-        logParrafo("Obtenemos el primer modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
-        CompletableFuture<Void> future1 = this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss")
-                .and("Apellido", Operator.IGUAL_QUE, "Cabrerassss")
-                .getCompletableFeature();
-        future1.exceptionally(ex -> {
-            // Manejo de excepciones si ocurre
-            logParrafo("Error al obtener el modelo: " + ex.getMessage());
-            return null;
-        }).join(); // Espera a que la operación se complete
-        logParrafo("Trato de obtener un modelo que no existe, el resultado es: " + this.testModel.getModelExist());
-        logParrafo(this.testModel.toString());
-        Assert.assertFalse(this.testModel.getModelExist(), "Obtuve un registro que no existe en BD's");
-        logParrafo("Obtenemos un modelo cuyo nombre sea Modelo # y sea mayor de edad");
-        CompletableFuture<Void> future2 = this.testModel.where("Name", Operator.LIKE, "%Modelo #%")
-                .and("IsMayor", Operator.IGUAL_QUE, true)
-                .getCompletableFeature();
-        future2.exceptionally(ex -> {
-            // Manejo de excepciones si ocurre
-            logParrafo("Error al obtener el modelo: " + ex.getMessage());
-            return null;
-        }).join(); // Espera a que la operación se complete
-        logParrafo("Trato de obtener un modelo que sí existe, el resultado es: " + this.testModel.getModelExist());
-        logParrafo(this.testModel.toString());
-        Assert.assertTrue(this.testModel.getModelExist(), "No obtuvo un registro que no existe en BD's");
+    public void getModelCompletableFeature() throws Exception {
+        try {
+            //Incluir metodo que permita limpiar el modelo
+            logParrafo("Limpiamos el modelo");
+            this.testModel.cleanModel();
+            logParrafo("Obtenemos el primero modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
+            this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+                    "Cabrerassss").getCompletableFeature().get();
+            this.testModel.waitOperationComplete();
+            logParrafo("Trato de obtener un modelo que no existe, el resultado es: " + this.testModel.getModelExist());
+            logParrafo(this.testModel.toString());
+            Assert.assertFalse(this.testModel.getModelExist(), "Obtuvo un registro que no existe en BD's");
+            logParrafo("Obtenemos un modelo cuyo nombre sea Modelo # y sea mayor de edad");
+            this.testModel.where("Name", Operator.LIKE, "%Modelo #%").and("IsMayor", Operator.IGUAL_QUE,
+                    true).getCompletableFeature().get();
+            this.testModel.waitOperationComplete();
+            logParrafo("Trato de obtener un modelo que sí existe, el resultado es: " + this.testModel.getModelExist());
+            logParrafo(this.testModel.toString());
+            Assert.assertTrue(this.testModel.getModelExist(), "No obtuvo un registro que no existe en BD's");
+        }catch (ExecutionException e) {
+            // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
+            if (e.getCause() instanceof ModelNotFound) {
+                throw (ModelNotFound) e.getCause();
+            }
+            // Si no es una ModelNotFound, vuelve a lanzar la excepción como es
+            throw e;
+        }
     }
 
+
     @Test(testName = "Get First Model",
-            dependsOnMethods = "getModelCompleteableFeature")
+            dependsOnMethods = "getModelCompletableFeature")
     public void firstModel() throws Exception {
         //Incluir metodo que permita limpiar el modelo
         logParrafo("Limpiamos el modelo");
