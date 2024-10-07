@@ -465,38 +465,45 @@ public class JBSqlUtilsTestMariaDB {
         Assert.assertTrue(temp.getModelExist(), "No obtuvo un registro que no existe en BD's");
     }
 
-    @Test(testName = "Get First Model CompleteableFeature",
+    /**
+     * correccion
+     */
+    @Test(testName = "Get First Model Completable Future",
             dependsOnMethods = "firstModel")
-    public void firstModelCompleteableFeature() throws Exception {
-        //Incluir metodo que permita limpiar el modelo
-        logParrafo("Limpiamos el modelo");
-        this.testModel.cleanModel();
-        logParrafo("Obtenemos el primero modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
-        CompletableFuture<TestModel> future = this.testModel
-                .where("Name", Operator.IGUAL_QUE, "Marcossss")
-                .and("Apellido", Operator.IGUAL_QUE, "Cabrerassss")
-                .firstCompleteableFeature();
-        // Esperar el resultado de la operación asíncrona
-        TestModel temp = future.join(); // o puedes usar get() si prefieres manejar la excepción
-        this.testModel.waitOperationComplete();
-        logParrafo("Trato de obtener un modelo que no existe, el resultado es: " + temp.getModelExist());
-        logParrafo(temp.toString());
-        Assert.assertFalse(temp.getModelExist(), "Obtuvo un registro que no existe en BD's");
-        logParrafo("Obtenemos el primero modelo cuyo nombre sea Modelo # y sea mayor de edad");
-        future = this.testModel
-                .where("Name", Operator.LIKE, "%Modelo #%")
-                .and("IsMayor", Operator.IGUAL_QUE, true)
-                .firstCompleteableFeature();
-        // Esperar el resultado de la operación asíncrona
-        temp = future.join(); // o get()
-        this.testModel.waitOperationComplete();
-        logParrafo("Trato de obtener un modelo que sí existe, el resultado es: " + temp.getModelExist());
-        logParrafo(temp.toString());
-        Assert.assertTrue(temp.getModelExist(), "No obtuvo un registro que no existe en BD's");
+    public void firstModelCompletableFuture() throws Exception {
+        try{
+
+            //Incluir metodo que permita limpiar el modelo
+            logParrafo("Limpiamos el modelo");
+            this.testModel.cleanModel();
+            logParrafo("Obtenemos el primero modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
+            TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+                    "Cabrerassss").firstCompleteableFeature().get();
+            this.testModel.waitOperationComplete();
+            logParrafo("Trato de obtener un modelo que no existe, el resultado es: " + temp.getModelExist());
+            logParrafo(temp.toString());
+            Assert.assertFalse(temp.getModelExist(), "Obtuvo un registro que no existe en BD's");
+            logParrafo("Obtenemos el primero modelo cuyo nombre sea Modelo # y sea mayor de edad");
+            temp = (TestModel) this.testModel.where("Name", Operator.LIKE, "%Modelo #%").and("IsMayor", Operator.IGUAL_QUE,
+                    true).firstCompleteableFeature().get();
+            this.testModel.waitOperationComplete();
+            logParrafo("Trato de obtener un modelo que sí existe, el resultado es: " + temp.getModelExist());
+            logParrafo(temp.toString());
+            Assert.assertTrue(temp.getModelExist(), "No obtuvo un registro que no existe en BD's");
+        } catch (ExecutionException e) {
+            // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
+            if (e.getCause() instanceof ModelNotFound) {
+                throw (ModelNotFound) e.getCause();
+            }
+            // Si no es una ModelNotFound, vuelve a lanzar la excepción como es
+            throw e;
+        }
+
     }
 
+
     @Test(testName = "Take Models",
-            dependsOnMethods = "firstModelCompleteableFeature")
+            dependsOnMethods = "firstModelCompletableFuture")
     public void takeModels() throws Exception {
         logParrafo("Limpiamos el modelo");
         //Incluir metodo que permita limpiar el modelo
