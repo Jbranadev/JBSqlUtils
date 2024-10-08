@@ -421,7 +421,8 @@ class Methods_Conexion extends Conexion {
         this.setTaskIsReady(false);
         Boolean reloadModel;
         this.validarTableExist(this).join();
-        CompletableFuture<ResultAsync<Boolean>> future = CompletableFuture.supplyAsync(() -> {
+        //mandamos a consumir el nuevo metodo
+        CompletableFuture<ResultAsync<Boolean>> future = reloadModelCompletableFuture().supplyAsync(() -> {
             Boolean result = false;
             Connection connect = null;
             ResultSet registros = null;
