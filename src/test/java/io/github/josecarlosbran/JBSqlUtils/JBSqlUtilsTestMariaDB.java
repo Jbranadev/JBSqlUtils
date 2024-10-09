@@ -240,6 +240,9 @@ public class JBSqlUtilsTestMariaDB {
         }
     }
 
+    /**
+     * Carla: Metodo original
+     */
     @Test(testName = "Reload Model", dependsOnMethods = "firstOrFailGetCompletableFeature")
     public void reloadModel() throws Exception {
         logParrafo("Limpiamos el modelo");
@@ -292,7 +295,57 @@ public class JBSqlUtilsTestMariaDB {
         Assert.assertFalse(temp.getIsMayor(), "El Modelo no fue recargado de BD's como esperabamos");
     }
 
-    @Test(testName = "Update Model", dependsOnMethods = "reloadModel")
+    /**
+     * Carla: Metodo usando Completable Feature
+     */
+    @Test(testName = "Reload Model Completable Future", dependsOnMethods = "reloadModel")
+    public void reloadModelComplebleFuture() throws Exception {
+        logParrafo("Limpiamos el modelo");
+        this.testModel.cleanModel();
+
+        logParrafo("Obtenemos el modelo que tiene por nombre Marcos, Apellido Cabrera");
+        TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcos")
+                .and("Apellido", Operator.IGUAL_QUE, "Cabrera").firstOrFail();
+
+        // Esperamos a que la operación en BD's se complete
+        this.testModel.waitOperationComplete();
+        logParrafo(temp.toString());
+
+        logParrafo("Actualizamos el nombre del modelo a MarcosEfrain y asígnamos que será mayor de edad");
+        temp.setName("MarcosEfrain");
+        temp.setIsMayor(true);
+        logParrafo(temp.toString());
+
+        // Recargar el modelo con la información de BD's usando el CompletableFuture
+        Boolean reloadModel = temp.reloadModelCompletableFuture().join(); // Usamos join() para esperar el resultado
+        logParrafo("Refrescamos el Modelo a traves del metodo reloadModel");
+        logParrafo(temp.toString());
+        Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
+
+        reloadModel = StringUtils.containsIgnoreCase(temp.getName(), "Marcos");
+        Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
+        Assert.assertFalse(temp.getIsMayor(), "El Modelo no fue recargado de BD's como esperabamos");
+
+        logParrafo("Actualizamos el nombre del modelo a Jose, Apellido a Bran y asígnamos que será mayor de edad");
+        temp.setName("Jose");
+        temp.setApellido("Bran");
+        temp.setIsMayor(true);
+        logParrafo(temp.toString());
+
+        // Recargamos el modelo nuevamente
+        temp.refresh();
+        logParrafo("Refrescamos el Modelo a traves del metodo reloadModel");
+        logParrafo(temp.toString());
+
+        reloadModel = StringUtils.containsIgnoreCase(temp.getName(), "Marcos");
+        Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
+        Assert.assertTrue(StringUtils.containsIgnoreCase(temp.getApellido(), "Cabrera"), "El Modelo no fue recargado de BD's como esperabamos");
+        Assert.assertFalse(temp.getIsMayor(), "El Modelo no fue recargado de BD's como esperabamos");
+    }
+
+
+
+    @Test(testName = "Update Model", dependsOnMethods = "reloadModelComplebleFuture")
     public void updateModel() throws Exception {
         logParrafo("Limpiamos el modelo");
         this.testModel.cleanModel();
