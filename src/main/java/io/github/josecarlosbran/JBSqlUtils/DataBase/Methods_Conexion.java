@@ -39,6 +39,7 @@ import java.sql.*;
 import java.util.Set;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -418,72 +419,7 @@ class Methods_Conexion extends Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     public <T extends JBSqlUtils> Boolean reloadModel() throws Exception {
-        this.setTaskIsReady(false);
-        Boolean reloadModel;
-        this.validarTableExist(this).join();
-        //mandamos a consumir el nuevo metodo
-        CompletableFuture<ResultAsync<Boolean>> future = reloadModelCompletableFuture().supplyAsync(() -> {
-            Boolean result = false;
-            Connection connect = null;
-            ResultSet registros = null;
-            try {
-                if (this.getTableExist() && this.getModelExist()) {
-                    StringBuilder sql = new StringBuilder("SELECT * FROM ").append(this.getTableName()).append(" WHERE ");
-                    String namePrimaryKey = this.getTabla().getClaveprimaria().getCOLUMN_NAME();
-                    List<Field> columnas = this.getFieldsOfModel();
-                    List<Field> values = new ArrayList<>();
-                    for (Field columna : columnas) {
-                        if ((StringUtils.equalsIgnoreCase(namePrimaryKey, this.getColumnName(columna)) && !this.getValueColumnIsNull(this, columna))
-                                || (this.getColumnIsIndexValidValue(this, columna))) {
-                            values.add(columna);
-                            if (values.size() > 1) {
-                                sql.append(" AND ");
-                            }
-                            sql.append(this.getColumnName(columna)).append(" = ?");
-                        }
-                    }
-                    sql.append(";");
-                    LogsJB.info(sql.toString());
-                    connect = this.getConnection();
-                    PreparedStatement ejecutor = connect.prepareStatement(sql.toString());
-                    int auxiliar = 0;
-                    for (Field value : values) {
-                        auxiliar++;
-                        convertJavaToSQL(this, value, ejecutor, auxiliar);
-                    }
-                    registros = ejecutor.executeQuery();
-                    if (registros.next()) {
-                        procesarResultSetOneResult((T) this, registros);
-                        result = true;
-                    }
-                    return new ResultAsync<>(result, null);
-                } else {
-                    LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo recuperar el Registro: " + this.getTableName());
-                    return new ResultAsync<>(result, null);
-                }
-            } catch (Exception e) {
-                LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia SQL de la BD's, Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                return new ResultAsync<>(result, e);
-            } finally {
-                if (registros != null) {
-                    try {
-                        registros.close();
-                    } catch (SQLException e) {
-                        LogsJB.warning("Error al cerrar ResultSet: " + ExceptionUtils.getStackTrace(e));
-                    }
-                }
-                if (connect != null) {
-                    this.closeConnection(connect);
-                }
-            }
-        });
-        ResultAsync<Boolean> resultado = future.get();
-        this.setTaskIsReady(true);
-        if (!Objects.isNull(resultado.getException())) {
-            throw resultado.getException();
-        }
-        reloadModel = resultado.getResult();
-        return reloadModel;
+        return this.reloadModelCompletableFuture().get();
     }
 
     /**Nuevo metodo aplicando el CompletableFuture
@@ -497,10 +433,8 @@ class Methods_Conexion extends Conexion {
      */
     public <T extends JBSqlUtils> CompletableFuture<Boolean> reloadModelCompletableFuture() throws Exception {
         this.setTaskIsReady(false);
-
         // Validar la existencia de la tabla de forma síncrona
         this.validarTableExist(this).join();
-
         return CompletableFuture.supplyAsync(() -> {
             Boolean result = false;
             Connection connect = null;
@@ -545,7 +479,7 @@ class Methods_Conexion extends Conexion {
                 }
             } catch (Exception e) {
                 LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia SQL de la BD's, Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                throw new RuntimeException(e); // Lanzar una RuntimeException para manejar en el futuro
+                throw new CompletionException(e); // Lanzar una RuntimeException para manejar en el futuro
             } finally {
                 if (registros != null) {
                     try {
@@ -561,9 +495,6 @@ class Methods_Conexion extends Conexion {
         }).thenApply(reloadModel -> {
             this.setTaskIsReady(true);
             return reloadModel; // Retornar el resultado booleano
-        }).exceptionally(ex -> {
-            this.setTaskIsReady(true);
-            throw new RuntimeException(ex); // Manejar la excepción de forma adecuada
         });
     }
 

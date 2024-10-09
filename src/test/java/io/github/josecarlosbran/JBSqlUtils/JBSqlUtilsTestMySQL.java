@@ -18,11 +18,8 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutionException;
 
 import static UtilidadesTest.Utilities.logParrafo;
