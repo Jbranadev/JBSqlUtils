@@ -17,7 +17,7 @@ jobs:
         with:
           egress-policy: audit
           #Obtenemos el repositorio
-      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v3.6.0
+      - uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v3.6.0
       #Corremos el changelog
       - name: Run Changelog CI
         uses: saadmk11/changelog-ci@94435ac02b50745a2543caf0c5d6eae23665615a # v1.1.2
