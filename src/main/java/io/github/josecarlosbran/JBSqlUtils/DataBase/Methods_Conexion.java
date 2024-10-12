@@ -1274,6 +1274,127 @@ class Methods_Conexion extends Conexion {
         return resultado;
     }
 
+
+    /**Carla: Metodo que devuelve un completable Booleano
+     * Crea la tabla correspondiente al modelo en BD's si esta no existe.
+     *
+     * @return True si la tabla correspondiente al modelo en BD's no existe y fue creada exitosamente,
+     * False si la tabla correspondiente al modelo ya existe en BD's
+     * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
+     */
+    public CompletableFuture<Boolean> createTableCompletableFuture() throws Exception {
+        return tableExist().thenCompose(exists -> {
+            if (exists) {
+                LogsJB.info("La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.");
+                return CompletableFuture.completedFuture(false);
+            } else {
+                return CompletableFuture.supplyAsync(() -> {
+                    StringBuilder sql = new StringBuilder("CREATE TABLE ").append(this.getTableName()).append("(");
+                    List<Field> fields;
+                    List<ForeignKey> foreignKeys = new ArrayList<>();
+                    Connection connect = null;
+                    Statement ejecutor = null;
+                    try {
+                        fields = this.getFieldsOfModel().stream()
+                                .filter(field -> !Objects.isNull(getDataTypeSQL(field)))
+                                .sorted(Comparator.comparingInt(field -> getDataTypeSQL(field).getOrden()))
+                                .collect(Collectors.toList());
+                        int datos = 0;
+                        for (Field campo : fields) {
+                            String columnName = getColumnName(campo);
+                            DataType columnType = getDataTypeSQL(campo);
+                            ForeignKey temp = getForeignKey(campo);
+                            if (!Objects.isNull(temp)) {
+                                foreignKeys.add(temp);
+                            }
+                            // Ajustes de tipo y restricciones
+                            if (columnType == DataType.TIMESTAMP && this.getDataBaseType() == DataBase.SQLServer) {
+                                columnType = DataType.DATETIME;
+                            }
+                            Constraint[] columnRestriccion = getConstraints(campo);
+                            String restricciones = "";
+                            String defaultValue = getColumnDefaultValue(campo);
+                            String size = getSize(campo);
+                            if (Arrays.asList(DataBase.PostgreSQL, DataBase.MySQL, DataBase.SQLite, DataBase.MariaDB).contains(this.getDataBaseType())
+                                    && columnType == DataType.BIT) {
+                                columnType = DataType.BOOLEAN;
+                            }
+                            if (this.getDataBaseType() == DataBase.SQLServer && columnType == DataType.BOOLEAN) {
+                                columnType = DataType.BIT;
+                            }
+                            // Más ajustes según el tipo de base de datos
+                            String tipo_de_columna = stringIsNullOrEmpty(size) ? columnType.name() : columnType.name() + "(" + size + ")";
+                            if (this.getDataBaseType() == DataBase.PostgreSQL && columnType == DataType.DOUBLE) {
+                                tipo_de_columna = tipo_de_columna.replace("DOUBLE", "DOUBLE PRECISION");
+                            }
+                            // Agregar restricciones
+                            if (!Objects.isNull(columnRestriccion)) {
+                                for (Constraint restriccion : columnRestriccion) {
+                                    if (this.getDataBaseType() == DataBase.PostgreSQL && restriccion == Constraint.AUTO_INCREMENT) {
+                                        tipo_de_columna = DataType.SERIAL.name();
+                                    } else if (this.getDataBaseType() == DataBase.SQLServer && restriccion == Constraint.AUTO_INCREMENT) {
+                                        restricciones += DataType.IDENTITY + " ";
+                                    } else if (restriccion == Constraint.DEFAULT && stringIsNullOrEmpty(defaultValue)) {
+                                        continue;
+                                    } else if (restriccion == Constraint.DEFAULT && !stringIsNullOrEmpty(defaultValue)) {
+                                        restricciones += restriccion.getRestriccion() + " " + defaultValue + " ";
+                                    } else {
+                                        restricciones += restriccion.getRestriccion() + " ";
+                                    }
+                                }
+                            }
+                            // Ignorar timestamps si corresponde
+                            if (!this.getTimestamps() && (StringUtils.equalsIgnoreCase(columnName, this.getCreatedAt())
+                                    || StringUtils.equalsIgnoreCase(columnName, this.getUpdateAT()))) {
+                                continue;
+                            }
+                            if (datos++ > 0) {
+                                sql.append(", ");
+                            }
+                            sql.append(columnName).append(" ").append(tipo_de_columna).append(" ").append(restricciones);
+                        }
+                        for (ForeignKey foreignKey : foreignKeys) {
+                            sql.append(", FOREIGN KEY (").append(foreignKey.columName()).append(") REFERENCES ")
+                                    .append(foreignKey.tableReference()).append("(").append(foreignKey.columnReference()).append(")");
+                            for (Actions accion : foreignKey.actions()) {
+                                sql.append(accion.operacion().getOperador()).append(accion.action().getOperacion());
+                            }
+                        }
+                        sql.append(");");
+                        connect = this.getConnection();
+                        ejecutor = connect.createStatement();
+                        LogsJB.info(sql.toString());
+                        if (!ejecutor.execute(sql.toString())) {
+                            LogsJB.info("Sentencia para crear tabla de la BD's ejecutada exitosamente");
+                            LogsJB.info("Tabla " + this.getTableName() + " Creada exitosamente");
+                            this.setTableExist(true);
+                            this.refresh();
+                            return true;
+                        }
+                    } catch (Exception e) {
+                        LogsJB.fatal("Excepción disparada en el método que Crea la tabla correspondiente al modelo, Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                        return false;
+                    } finally {
+                        if (ejecutor != null) {
+                            try {
+                                ejecutor.close();
+                            } catch (SQLException e) {
+                                LogsJB.error("Error al cerrar el Statement: " + e.getMessage());
+                            }
+                        }
+                        if (connect != null) {
+                            this.closeConnection(connect);
+                        }
+                    }
+                    return false;
+                });
+            }
+        }).thenApply(created -> {
+            this.setTaskIsReady(true);
+            return created; // Retorna el resultado booleano
+        });
+    }
+
     /**
      * Elimina la tabla correspondiente al modelo en BD's
      *
