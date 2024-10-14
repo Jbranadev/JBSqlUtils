@@ -108,7 +108,7 @@ public class JBSqlUtilsTestMySQL {
     }
 
     /**
-     * Carla: Metodo original, lo comentamos debido a que si se ejcuta antes, el otro falla
+     * Carla: Metodo original
      */
   @Test(testName = "Create Table from Model",
             dependsOnMethods = "dropTableIfExistsCompletableFuture")
