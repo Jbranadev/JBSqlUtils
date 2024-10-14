@@ -86,21 +86,23 @@ public class JBSqlUtilsTestSQLServer {
     /**
      * Carla: Metodo original, lo comentamos debido a que si se ejcuta antes, el otro falla
      */
-  /*@Test(testName = "Create Table from Model",
+    @Test(testName = "Create Table from Model",
             dependsOnMethods = "dropTableIfExists")
     public void createTable() throws Exception {
         logParrafo("Se creara la tabla " + this.testModel.getTableName() + " en BD's");
         Assert.assertTrue(this.testModel.createTable(), "La Tabla No fue creada en BD's");
         Assert.assertTrue(this.testModel.getTableExist(), "La tabla No existe en BD's ");
         logParrafo("La tabla a sido creada en BD's");
-    }*/
+    }
 
     /**
      * Carla: Metodo  consumiendo el Completable Future
      */
     @Test(testName = "Create Table from Model Completable Future",
-            dependsOnMethods = "dropTableIfExists")
+            dependsOnMethods = "createTable")
     public void createTableCompletableFuture() throws Exception {
+        logParrafo("Vamos a eliminar la tabla que existia previamente");
+        Assert.assertTrue(this.testModel.dropTableIfExist(), "La tabla No existe en BD's");
         logParrafo("Se creara la tabla " + this.testModel.getTableName() + " en BD's");
         // Espera el resultado del CompletableFuture y verifica que la tabla fue creada
         Boolean resultado = this.testModel.createTableCompletableFuture().get();
