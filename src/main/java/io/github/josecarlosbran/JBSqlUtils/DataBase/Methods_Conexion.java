@@ -1156,7 +1156,6 @@ class Methods_Conexion extends Conexion {
         return this.createTableCompletableFuture().get();
     }
 
-
     /**
      * Carla: Metodo que devuelve un completable Booleano
      * Crea la tabla correspondiente al modelo en BD's si esta no existe.
@@ -1287,7 +1286,7 @@ class Methods_Conexion extends Conexion {
     }
 
 
-    /**
+    /**Metodo Original
      * Elimina la tabla correspondiente al modelo en BD's
      *
      * @return True si la tabla correspondiente al modelo en BD's existe y fue eliminada, de no existir la tabla correspondiente
@@ -1295,7 +1294,18 @@ class Methods_Conexion extends Conexion {
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
     public Boolean dropTableIfExist() throws Exception {
-        CompletableFuture<Boolean> future = tableExist().thenCompose(exists -> {
+       return this.dropTableIfExistCompletableFuture().get();
+    }
+
+    /** Carla: Metodo que devuelve un completable Booleano
+     * Elimina la tabla correspondiente al modelo en BD's
+     *
+     * @return True si la tabla correspondiente al modelo en BD's existe y fue eliminada, de no existir la tabla correspondiente
+     * en BD's retorna False.
+     * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
+     */
+    public CompletableFuture<Boolean> dropTableIfExistCompletableFuture() throws Exception {
+        return tableExist().thenCompose(exists -> {
             if (exists) {
                 return CompletableFuture.supplyAsync(() -> {
                     StringBuilder sql = new StringBuilder();
@@ -1343,7 +1353,6 @@ class Methods_Conexion extends Conexion {
                 return CompletableFuture.completedFuture(false);
             }
         });
-        return future.join();
     }
 
     /**

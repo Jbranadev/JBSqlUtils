@@ -71,7 +71,9 @@ public class JBSqlUtilsTestMySQL {
         this.testModel.waitOperationComplete();
         logParrafo("Se refresco el modelo con la información existente en BD's");
     }
-
+    /**
+     * Carla: Metodo original,
+     */
     @Test(testName = "Drop Table If Exists from Model",
             dependsOnMethods = {"refreshModel"})
     public void dropTableIfExists() throws Exception {
@@ -88,10 +90,28 @@ public class JBSqlUtilsTestMySQL {
     }
 
     /**
+     * Carla: Metodo consumiendo el metodo completable Future
+     */
+  @Test(testName = "Drop Table If Exists from Model Completable Future",
+            dependsOnMethods = {"dropTableIfExists"})
+    public void dropTableIfExistsCompletableFuture() throws Exception {
+        logParrafo("Se creara la tabla " + this.testModel.getTableName() + " en BD's");
+        this.testModel.createTable();
+        TestModel2 testModel2 = new TestModel2(false);
+        testModel2.llenarPropertiesFromModel(this.testModel);
+        testModel2.dropTableIfExistCompletableFuture();
+        logParrafo("La tabla a sido creada en BD's");
+        logParrafo("Se procedera a eliminar la tabla en BD's");
+        Assert.assertTrue(this.testModel.dropTableIfExist(), "No se pudo eliminar la tabla en BD's");
+        Assert.assertFalse(this.testModel.getTableExist(), "La tabla No existe en BD's y aun así responde que si la elimino");
+        logParrafo("La tabla a sido eliminada en BD's");
+    }
+
+    /**
      * Carla: Metodo original, lo comentamos debido a que si se ejcuta antes, el otro falla
      */
   @Test(testName = "Create Table from Model",
-            dependsOnMethods = "dropTableIfExists")
+            dependsOnMethods = "dropTableIfExistsCompletableFuture")
     public void createTable() throws Exception {
         logParrafo("Se creara la tabla " + this.testModel.getTableName() + " en BD's");
         Assert.assertTrue(this.testModel.createTable(), "La Tabla No fue creada en BD's");
