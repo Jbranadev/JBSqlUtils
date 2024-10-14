@@ -406,6 +406,7 @@ class Methods_Conexion extends Conexion {
      * @throws Exception Lanza una Excepción si ocurre algun error al ejecutar el metodo refresh
      */
     public void refresh() throws Exception {
+        this.tableExist().join();
         this.reloadModel();
     }
 
@@ -440,8 +441,8 @@ class Methods_Conexion extends Conexion {
             Connection connect = null;
             ResultSet registros = null;
             try {
-                if (this.getTableExist() && this.getModelExist()) {
-                    StringBuilder sql = new StringBuilder("SELECT * FROM ").append(this.getTableName()).append(" WHERE ");
+                if (this.getTableExist()) {
+                    StringBuilder sql = new StringBuilder("SELECT * FROM ").append(this.getTableName());
                     String namePrimaryKey = this.getTabla().getClaveprimaria().getCOLUMN_NAME();
                     List<Field> columnas = this.getFieldsOfModel();
                     List<Field> values = new ArrayList<>();
@@ -452,6 +453,8 @@ class Methods_Conexion extends Conexion {
                             values.add(columna);
                             if (values.size() > 1) {
                                 sql.append(" AND ");
+                            } else {
+                                sql.append(" WHERE ");
                             }
                             sql.append(this.getColumnName(columna)).append(" = ?");
                         }
@@ -459,18 +462,21 @@ class Methods_Conexion extends Conexion {
                     sql.append(";");
                     LogsJB.info(sql.toString());
                     connect = this.getConnection();
-                    PreparedStatement ejecutor = connect.prepareStatement(sql.toString());
-                    int auxiliar = 0;
-
-                    for (Field value : values) {
-                        auxiliar++;
-                        convertJavaToSQL(this, value, ejecutor, auxiliar);
-                    }
-
-                    registros = ejecutor.executeQuery();
-                    if (registros.next()) {
-                        procesarResultSetOneResult((T) this, registros);
-                        result = true;
+                    //if sql contiene WHERE HACE EL RESTO DE LOGICA CASO CONTRARIO RETORNA FALSE
+                    if (StringUtils.containsIgnoreCase(sql.toString(), "WHERE")) {
+                        PreparedStatement ejecutor = connect.prepareStatement(sql.toString());
+                        int auxiliar = 0;
+                        for (Field value : values) {
+                            auxiliar++;
+                            convertJavaToSQL(this, value, ejecutor, auxiliar);
+                        }
+                        registros = ejecutor.executeQuery();
+                        if (registros.next()) {
+                            procesarResultSetOneResult((T) this, registros);
+                            result = true;
+                        }
+                    } else {
+                        result = false;
                     }
                     return result; // Retornar el resultado como Boolean
                 } else {
