@@ -319,13 +319,6 @@ class Methods_Conexion extends Conexion {
                 LogsJB.fatal("Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                 return false;
             } finally {
-                if (tables != null) {
-                    try {
-                        tables.close();
-                    } catch (SQLException e) {
-                        LogsJB.warning("Error closing ResultSet: " + ExceptionUtils.getStackTrace(e));
-                    }
-                }
                 this.closeConnection(connect);
             }
             return false;
@@ -383,16 +376,7 @@ class Methods_Conexion extends Conexion {
             LogsJB.fatal("Excepción al obtener las columnas de la tabla: " + ExceptionUtils.getStackTrace(e));
             throw e;
         } finally {
-            if (columnas != null) {
-                try {
-                    columnas.close();
-                } catch (SQLException e) {
-                    LogsJB.warning("Error al cerrar ResultSet: " + ExceptionUtils.getStackTrace(e));
-                }
-            }
-            if (connect != null) {
-                this.closeConnection(connect);
-            }
+            this.closeConnection(connect);
         }
         this.getTabla().getColumnas().sort(Comparator.comparing(ColumnsSQL::getORDINAL_POSITION));
     }
@@ -485,13 +469,6 @@ class Methods_Conexion extends Conexion {
                 LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia SQL de la BD's, Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                 throw new CompletionException(e); // Lanzar una RuntimeException para manejar en el futuro
             } finally {
-                if (registros != null) {
-                    try {
-                        registros.close();
-                    } catch (SQLException e) {
-                        LogsJB.warning("Error al cerrar ResultSet: " + ExceptionUtils.getStackTrace(e));
-                    }
-                }
                 this.closeConnection(connect);
             }
         }).thenApply(reloadModel -> {
@@ -1269,16 +1246,7 @@ class Methods_Conexion extends Conexion {
                         LogsJB.fatal("Excepción disparada en el método que Crea la tabla correspondiente al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                         return false;
                     } finally {
-                        if (ejecutor != null) {
-                            try {
-                                ejecutor.close();
-                            } catch (SQLException e) {
-                                LogsJB.error("Error al cerrar el Statement: " + e.getMessage());
-                            }
-                        }
-                        if (connect != null) {
-                            this.closeConnection(connect);
-                        }
+                        this.closeConnection(connect);
                     }
                     return false;
                 });
@@ -1337,16 +1305,7 @@ class Methods_Conexion extends Conexion {
                         LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                         return false;
                     } finally {
-                        if (ejecutor != null) {
-                            try {
-                                ejecutor.close();
-                            } catch (SQLException e) {
-                                LogsJB.error("Error al cerrar el Statement: " + e.getMessage());
-                            }
-                        }
-                        if (connect != null) {
-                            this.closeConnection(connect);
-                        }
+                        this.closeConnection(connect);
                     }
                     return false;
                 });
@@ -1452,16 +1411,7 @@ class Methods_Conexion extends Conexion {
                         LogsJB.fatal("Excepción disparada en el método que Crea la tabla solicitada, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                         return new ResultAsync<>(false, e);
                     } finally {
-                        if (ejecutor != null) {
-                            try {
-                                ejecutor.close();
-                            } catch (SQLException e) {
-                                LogsJB.fatal("Error al cerrar el Statement: " + ExceptionUtils.getStackTrace(e));
-                            }
-                        }
-                        if (connect != null) {
-                            this.closeConnection(connect);
-                        }
+                        this.closeConnection(connect);
                     }
                     return new ResultAsync<>(false, null);
                 });
