@@ -6,7 +6,6 @@
 * [#321](https://github.com/Jbranadev/JBSqlUtils/pull/321): Bump actions/setup-java from 4.2.2 to 4.3.0
 * [#322](https://github.com/Jbranadev/JBSqlUtils/pull/322): Release 1.2.9
 
-
 # Version: 1.2.8
 
 * [#311](https://github.com/Jbranadev/JBSqlUtils/pull/311): Bump org.apache.maven.plugins:maven-surefire-plugin from

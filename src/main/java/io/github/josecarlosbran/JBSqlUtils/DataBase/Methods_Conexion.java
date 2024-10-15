@@ -39,6 +39,7 @@ import java.sql.*;
 import java.util.Set;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -87,9 +88,9 @@ class Methods_Conexion extends Conexion {
             String returnType = metodo.getReturnType().getSimpleName();
             String nameMetodo = metodo.getName();
             Parameter[] parametros = metodo.getParameters();
-            if (returnType.equalsIgnoreCase(classColumn) && StringUtils.startsWithIgnoreCase(nameMetodo, "get")) {
+            if (metodo.getDeclaringClass().getPackage().hashCode() != JBSqlUtils.class.getPackage().hashCode() && StringUtils.startsWithIgnoreCase(nameMetodo, "get")) {
                 getMethods.add(metodo);
-            } else if (parametros.length == 1 && parametros[0].getType().getSimpleName().equalsIgnoreCase(classColumn)
+            } else if (parametros.length == 1 && metodo.getDeclaringClass().getPackage().hashCode() != JBSqlUtils.class.getPackage().hashCode()
                     && StringUtils.startsWithIgnoreCase(nameMetodo, "set")) {
                 setMethods.add(metodo);
             }
@@ -318,16 +319,7 @@ class Methods_Conexion extends Conexion {
                 LogsJB.fatal("Excepción disparada en el método que verifica si existe la tabla correspondiente al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                 return false;
             } finally {
-                if (tables != null) {
-                    try {
-                        tables.close();
-                    } catch (SQLException e) {
-                        LogsJB.warning("Error closing ResultSet: " + ExceptionUtils.getStackTrace(e));
-                    }
-                }
-                if (connect != null) {
-                    this.closeConnection(connect);
-                }
+                this.closeConnection(connect);
             }
             return false;
         });
@@ -384,16 +376,7 @@ class Methods_Conexion extends Conexion {
             LogsJB.fatal("Excepción al obtener las columnas de la tabla: " + ExceptionUtils.getStackTrace(e));
             throw e;
         } finally {
-            if (columnas != null) {
-                try {
-                    columnas.close();
-                } catch (SQLException e) {
-                    LogsJB.warning("Error al cerrar ResultSet: " + ExceptionUtils.getStackTrace(e));
-                }
-            }
-            if (connect != null) {
-                this.closeConnection(connect);
-            }
+            this.closeConnection(connect);
         }
         this.getTabla().getColumnas().sort(Comparator.comparing(ColumnsSQL::getORDINAL_POSITION));
     }
@@ -405,6 +388,7 @@ class Methods_Conexion extends Conexion {
      * @throws Exception Lanza una Excepción si ocurre algun error al ejecutar el metodo refresh
      */
     public void refresh() throws Exception {
+        this.tableExist().join();
         this.reloadModel();
     }
 
@@ -418,16 +402,30 @@ class Methods_Conexion extends Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     public <T extends JBSqlUtils> Boolean reloadModel() throws Exception {
+        return this.reloadModelCompletableFuture().get();
+    }
+
+    /**
+     * Nuevo metodo aplicando el CompletableFuture
+     * Refresca el modelo con la información de BD's, se perderan las modificaciones que se hayan realizadas sobre el modelo,
+     * si estas no han sido plasmadas en BD's.
+     *
+     * @param <T> Definición del procedimiento que indica que cualquier clase podra invocar el metodo.
+     * @return True si el modelo fue recargado desde BD's, False caso contrario.
+     * @throws Exception Si sucede una excepción en la ejecución asyncrona de la sentencia en BD's
+     *                   captura la excepción y la lanza en el hilo principal
+     */
+    public <T extends JBSqlUtils> CompletableFuture<Boolean> reloadModelCompletableFuture() throws Exception {
         this.setTaskIsReady(false);
-        Boolean reloadModel;
+        // Validar la existencia de la tabla de forma síncrona
         this.validarTableExist(this).join();
-        CompletableFuture<ResultAsync<Boolean>> future = CompletableFuture.supplyAsync(() -> {
+        return CompletableFuture.supplyAsync(() -> {
             Boolean result = false;
             Connection connect = null;
             ResultSet registros = null;
             try {
-                if (this.getTableExist() && this.getModelExist()) {
-                    StringBuilder sql = new StringBuilder("SELECT * FROM ").append(this.getTableName()).append(" WHERE ");
+                if (this.getTableExist()) {
+                    StringBuilder sql = new StringBuilder("SELECT * FROM ").append(this.getTableName());
                     String namePrimaryKey = this.getTabla().getClaveprimaria().getCOLUMN_NAME();
                     List<Field> columnas = this.getFieldsOfModel();
                     List<Field> values = new ArrayList<>();
@@ -437,6 +435,8 @@ class Methods_Conexion extends Conexion {
                             values.add(columna);
                             if (values.size() > 1) {
                                 sql.append(" AND ");
+                            } else {
+                                sql.append(" WHERE ");
                             }
                             sql.append(this.getColumnName(columna)).append(" = ?");
                         }
@@ -444,45 +444,37 @@ class Methods_Conexion extends Conexion {
                     sql.append(";");
                     LogsJB.info(sql.toString());
                     connect = this.getConnection();
-                    PreparedStatement ejecutor = connect.prepareStatement(sql.toString());
-                    int auxiliar = 0;
-                    for (Field value : values) {
-                        auxiliar++;
-                        convertJavaToSQL(this, value, ejecutor, auxiliar);
+                    //if sql contiene WHERE HACE EL RESTO DE LOGICA CASO CONTRARIO RETORNA FALSE
+                    if (StringUtils.containsIgnoreCase(sql.toString(), "WHERE")) {
+                        PreparedStatement ejecutor = connect.prepareStatement(sql.toString());
+                        int auxiliar = 0;
+                        for (Field value : values) {
+                            auxiliar++;
+                            convertJavaToSQL(this, value, ejecutor, auxiliar);
+                        }
+                        registros = ejecutor.executeQuery();
+                        if (registros.next()) {
+                            procesarResultSetOneResult((T) this, registros);
+                            result = true;
+                        }
+                    } else {
+                        result = false;
                     }
-                    registros = ejecutor.executeQuery();
-                    if (registros.next()) {
-                        procesarResultSetOneResult((T) this, registros);
-                        result = true;
-                    }
-                    return new ResultAsync<>(result, null);
+                    return result; // Retornar el resultado como Boolean
                 } else {
                     LogsJB.warning("Tabla correspondiente al modelo no existe en BD's por esa razón no se pudo recuperar el Registro: " + this.getTableName());
-                    return new ResultAsync<>(result, null);
+                    return result; // Retornar false si la tabla no existe
                 }
             } catch (Exception e) {
                 LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia SQL de la BD's, Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                return new ResultAsync<>(result, e);
+                throw new CompletionException(e); // Lanzar una RuntimeException para manejar en el futuro
             } finally {
-                if (registros != null) {
-                    try {
-                        registros.close();
-                    } catch (SQLException e) {
-                        LogsJB.warning("Error al cerrar ResultSet: " + ExceptionUtils.getStackTrace(e));
-                    }
-                }
-                if (connect != null) {
-                    this.closeConnection(connect);
-                }
+                this.closeConnection(connect);
             }
+        }).thenApply(reloadModel -> {
+            this.setTaskIsReady(true);
+            return reloadModel; // Retornar el resultado booleano
         });
-        ResultAsync<Boolean> resultado = future.get();
-        this.setTaskIsReady(true);
-        if (!Objects.isNull(resultado.getException())) {
-            throw resultado.getException();
-        }
-        reloadModel = resultado.getResult();
-        return reloadModel;
     }
 
     /**
@@ -1140,7 +1132,19 @@ class Methods_Conexion extends Conexion {
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
     public Boolean createTable() throws Exception {
-        CompletableFuture<Boolean> future = tableExist().thenCompose(exists -> {
+        return this.createTableCompletableFuture().get();
+    }
+
+    /**
+     * Carla: Metodo que devuelve un completable Booleano
+     * Crea la tabla correspondiente al modelo en BD's si esta no existe.
+     *
+     * @return True si la tabla correspondiente al modelo en BD's no existe y fue creada exitosamente,
+     * False si la tabla correspondiente al modelo ya existe en BD's
+     * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
+     */
+    public CompletableFuture<Boolean> createTableCompletableFuture() throws Exception {
+        return tableExist().thenCompose(exists -> {
             if (exists) {
                 LogsJB.info("La tabla correspondiente al modelo ya existe en la BD's, por lo cual no será creada.");
                 return CompletableFuture.completedFuture(false);
@@ -1242,26 +1246,16 @@ class Methods_Conexion extends Conexion {
                         LogsJB.fatal("Excepción disparada en el método que Crea la tabla correspondiente al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                         return false;
                     } finally {
-                        if (ejecutor != null) {
-                            try {
-                                ejecutor.close();
-                            } catch (SQLException e) {
-                                LogsJB.error("Error al cerrar el Statement: " + e.getMessage());
-                            }
-                        }
-                        if (connect != null) {
-                            this.closeConnection(connect);
-                        }
+                        this.closeConnection(connect);
                     }
                     return false;
                 });
             }
         });
-        Boolean resultado = future.join();
-        return resultado;
     }
 
     /**
+     * Metodo Original
      * Elimina la tabla correspondiente al modelo en BD's
      *
      * @return True si la tabla correspondiente al modelo en BD's existe y fue eliminada, de no existir la tabla correspondiente
@@ -1269,7 +1263,19 @@ class Methods_Conexion extends Conexion {
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
     public Boolean dropTableIfExist() throws Exception {
-        CompletableFuture<Boolean> future = tableExist().thenCompose(exists -> {
+        return this.dropTableIfExistCompletableFuture().get();
+    }
+
+    /**
+     * Carla: Metodo que devuelve un completable Booleano
+     * Elimina la tabla correspondiente al modelo en BD's
+     *
+     * @return True si la tabla correspondiente al modelo en BD's existe y fue eliminada, de no existir la tabla correspondiente
+     * en BD's retorna False.
+     * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
+     */
+    public CompletableFuture<Boolean> dropTableIfExistCompletableFuture() throws Exception {
+        return tableExist().thenCompose(exists -> {
             if (exists) {
                 return CompletableFuture.supplyAsync(() -> {
                     StringBuilder sql = new StringBuilder();
@@ -1299,16 +1305,7 @@ class Methods_Conexion extends Conexion {
                         LogsJB.fatal("Excepción disparada en el método que Elimina la tabla correspondiente al modelo, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                         return false;
                     } finally {
-                        if (ejecutor != null) {
-                            try {
-                                ejecutor.close();
-                            } catch (SQLException e) {
-                                LogsJB.error("Error al cerrar el Statement: " + e.getMessage());
-                            }
-                        }
-                        if (connect != null) {
-                            this.closeConnection(connect);
-                        }
+                        this.closeConnection(connect);
                     }
                     return false;
                 });
@@ -1317,7 +1314,6 @@ class Methods_Conexion extends Conexion {
                 return CompletableFuture.completedFuture(false);
             }
         });
-        return future.join();
     }
 
     /**
@@ -1415,16 +1411,7 @@ class Methods_Conexion extends Conexion {
                         LogsJB.fatal("Excepción disparada en el método que Crea la tabla solicitada, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                         return new ResultAsync<>(false, e);
                     } finally {
-                        if (ejecutor != null) {
-                            try {
-                                ejecutor.close();
-                            } catch (SQLException e) {
-                                LogsJB.fatal("Error al cerrar el Statement: " + ExceptionUtils.getStackTrace(e));
-                            }
-                        }
-                        if (connect != null) {
-                            this.closeConnection(connect);
-                        }
+                        this.closeConnection(connect);
                     }
                     return new ResultAsync<>(false, null);
                 });
@@ -1655,16 +1642,16 @@ class Methods_Conexion extends Conexion {
         return columnDefined.foreignkey();
     }
 
-
     /**
      * Ordena la consula sql de acuerdo al estandar de consulta SQL
+     *
      * @param query  Consulta SQL que se desea ordenar
      * @param modelo Es el invocador de los metodos que se estan utilizando
-     * @return Retorna un string que representa la consulta SQL ordenada
      * @param <T>
+     * @return Retorna un string que representa la consulta SQL ordenada
      * @throws DataBaseUndefind Lanza esta excepción cuando no se a configurado la BD's a la cual se conectara el modelo
-     * el usuario de la librería es el encargado de setear el tipo de BD's a la cual se conectara el modelo, asi mismo de ser lanzada
-     * esta excepción, poder manejarla.
+     *                          el usuario de la librería es el encargado de setear el tipo de BD's a la cual se conectara el modelo, asi mismo de ser lanzada
+     *                          esta excepción, poder manejarla.
      */
     protected <T extends Methods_Conexion> String generateOrderSQL(String query, T modelo) throws DataBaseUndefind {
         //Si es sql server y trae la palabra limit verificara y modificara la sentencia

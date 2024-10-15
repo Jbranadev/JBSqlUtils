@@ -20,6 +20,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 import static UtilidadesTest.Utilities.logParrafo;
 import static io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils.dropTableIfExist;
@@ -70,6 +71,9 @@ public class JBSqlUtilsTestMariaDB {
         logParrafo("Se refresco el modelo con la información existente en BD's");
     }
 
+    /**
+     * Carla: Metodo original,
+     */
     @Test(testName = "Drop Table If Exists from Model",
             dependsOnMethods = {"refreshModel"})
     public void dropTableIfExists() throws Exception {
@@ -85,8 +89,29 @@ public class JBSqlUtilsTestMariaDB {
         logParrafo("La tabla a sido eliminada en BD's");
     }
 
+    /**
+     * Carla: Metodo consumiendo el metodo completable Future
+     */
+    @Test(testName = "Drop Table If Exists from Model Completable Future",
+            dependsOnMethods = {"dropTableIfExists"})
+    public void dropTableIfExistsCompletableFuture() throws Exception {
+        logParrafo("Se creara la tabla " + this.testModel.getTableName() + " en BD's");
+        this.testModel.createTable();
+        TestModel2 testModel2 = new TestModel2(false);
+        testModel2.llenarPropertiesFromModel(this.testModel);
+        testModel2.dropTableIfExistCompletableFuture();
+        logParrafo("La tabla a sido creada en BD's");
+        logParrafo("Se procedera a eliminar la tabla en BD's");
+        Assert.assertTrue(this.testModel.dropTableIfExist(), "No se pudo eliminar la tabla en BD's");
+        Assert.assertFalse(this.testModel.getTableExist(), "La tabla No existe en BD's y aun así responde que si la elimino");
+        logParrafo("La tabla a sido eliminada en BD's");
+    }
+
+    /**
+     * Carla: Metodo original,
+     */
     @Test(testName = "Create Table from Model",
-            dependsOnMethods = "dropTableIfExists")
+            dependsOnMethods = "dropTableIfExistsCompletableFuture")
     public void createTable() throws Exception {
         logParrafo("Se creara la tabla " + this.testModel.getTableName() + " en BD's");
         Assert.assertTrue(this.testModel.createTable(), "La Tabla No fue creada en BD's");
@@ -94,8 +119,24 @@ public class JBSqlUtilsTestMariaDB {
         logParrafo("La tabla a sido creada en BD's");
     }
 
-    @Test(testName = "Create Table Foraign Key",
+    /**
+     * Carla: Metodo  consumiendo el Completable Future
+     */
+    @Test(testName = "Create Table from Model Completable Future",
             dependsOnMethods = "createTable")
+    public void createTableCompletableFuture() throws Exception {
+        logParrafo("Vamos a eliminar la tabla que existia previamente");
+        Assert.assertTrue(this.testModel.dropTableIfExist(), "La tabla No existe en BD's");
+        logParrafo("Se creara la tabla " + this.testModel.getTableName() + " en BD's");
+        // Espera el resultado del CompletableFuture y verifica que la tabla fue creada
+        Boolean resultado = this.testModel.createTableCompletableFuture().get();
+        Assert.assertTrue(resultado, "La Tabla No fue creada en BD's");
+        Assert.assertTrue(this.testModel.getTableExist(), "La tabla No existe en BD's");
+        logParrafo("La tabla ha sido creada en BD's");
+    }
+
+    @Test(testName = "Create Table Foraign Key",
+            dependsOnMethods = "createTableCompletableFuture")
     public void createTableForaignKey() throws Exception {
         TestModel2 testModel2 = new TestModel2(false);
         testModel2.llenarPropertiesFromModel(this.testModel);
@@ -144,6 +185,9 @@ public class JBSqlUtilsTestMariaDB {
         Assert.assertFalse(this.testModel.getModelExist(), "No limpio la bandera que indica que el modelo no existe en BD's");
     }
 
+    /**
+     * Carla: Metodo original
+     */
     @Test(testName = "First Or Fail",
             dependsOnMethods = "cleanModel",
             expectedExceptions = ModelNotFound.class)
@@ -152,7 +196,32 @@ public class JBSqlUtilsTestMariaDB {
                 "Cabrerassss").firstOrFail();
     }
 
-    @Test(testName = "First Or Fail Get", dependsOnMethods = "firstOrFail"
+    /**
+     * Carla: Metodo con uso del Completable Feature
+     */
+    @Test(testName = "First Or Fail Completable Feature",
+            dependsOnMethods = "firstOrFail",
+            expectedExceptions = ModelNotFound.class)
+    public void firstOrFailCompletableFeature() throws Exception {
+        try {
+            // Ejecuta la tarea asíncrona y espera a su resultado
+            TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+                    "Cabrerassss").firstOrFailCompletableFeature().get();
+            LogsJB.info("Modelo encontrado: " + temp.toString());
+        } catch (ExecutionException e) {
+            // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
+            if (e.getCause() instanceof ModelNotFound) {
+                throw (ModelNotFound) e.getCause();
+            }
+            // Si no es una ModelNotFound, vuelve a lanzar la excepción como es
+            throw e;
+        }
+    }
+
+    /**
+     * Carla: Metodo original
+     */
+    @Test(testName = "First Or Fail Get", dependsOnMethods = "firstOrFailCompletableFeature"
             , expectedExceptions = ModelNotFound.class)
     public void firstOrFailGet() throws Exception {
         logParrafo("Limpiamos el modelo");
@@ -174,7 +243,44 @@ public class JBSqlUtilsTestMariaDB {
                 "Cabrerassss").firstOrFailGet();
     }
 
-    @Test(testName = "Reload Model", dependsOnMethods = "firstOrFailGet")
+    /**
+     * Carla: Metodo usando Completable Feature
+     */
+    @Test(testName = "First Or Fail Get Completeable Feature", dependsOnMethods = "firstOrFailGet", expectedExceptions = ModelNotFound.class)
+    public void firstOrFailGetCompletableFeature() throws Exception {
+        try {
+            logParrafo("Limpiamos el modelo");
+            this.testModel.cleanModel();
+            /**
+             * Obtenemos el modelo de BD's de lo contrario lanza ModelNotFoundException
+             */
+            logParrafo("Obtenemos el modelo que tiene por nombre Marcos, Apellido Cabrera");
+            this.testModel.where("Name", Operator.IGUAL_QUE, "Marcos").and("Apellido", Operator.IGUAL_QUE,
+                    "Cabrera").firstOrFailGetCompletableFeature().get();
+            /**
+             * Esperamos ejecute la operación en BD's
+             */
+            this.testModel.waitOperationComplete();
+            logParrafo(this.testModel.toString());
+            Assert.assertTrue(this.testModel.getModelExist(), "El Modelo no fue Obtenido de BD's como esperabamos");
+            Assert.assertFalse(this.testModel.getIsMayor(), "El Modelo no fue Obtenido de BD's como esperabamos");
+            this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+                    "Cabrerassss").firstOrFailGetCompletableFeature().get();
+            LogsJB.info("Modelo encontrado: " + this.testModel.toString());
+        } catch (ExecutionException e) {
+            // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
+            if (e.getCause() instanceof ModelNotFound) {
+                throw (ModelNotFound) e.getCause();
+            }
+            // Si no es una ModelNotFound, vuelve a lanzar la excepción como es
+            throw e;
+        }
+    }
+
+    /**
+     * Carla: Metodo original
+     */
+    @Test(testName = "Reload Model", dependsOnMethods = "firstOrFailGetCompletableFeature")
     public void reloadModel() throws Exception {
         logParrafo("Limpiamos el modelo");
         this.testModel.cleanModel();
@@ -226,7 +332,47 @@ public class JBSqlUtilsTestMariaDB {
         Assert.assertFalse(temp.getIsMayor(), "El Modelo no fue recargado de BD's como esperabamos");
     }
 
-    @Test(testName = "Update Model", dependsOnMethods = "reloadModel")
+    /**
+     * Carla: Metodo usando Completable Feature
+     */
+    @Test(testName = "Reload Model Completable Future", dependsOnMethods = "reloadModel")
+    public void reloadModelComplebleFuture() throws Exception {
+        logParrafo("Limpiamos el modelo");
+        this.testModel.cleanModel();
+        logParrafo("Obtenemos el modelo que tiene por nombre Marcos, Apellido Cabrera");
+        TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcos")
+                .and("Apellido", Operator.IGUAL_QUE, "Cabrera").firstOrFail();
+        // Esperamos a que la operación en BD's se complete
+        this.testModel.waitOperationComplete();
+        logParrafo(temp.toString());
+        logParrafo("Actualizamos el nombre del modelo a MarcosEfrain y asígnamos que será mayor de edad");
+        temp.setName("MarcosEfrain");
+        temp.setIsMayor(true);
+        logParrafo(temp.toString());
+        // Recargar el modelo con la información de BD's usando el CompletableFuture
+        Boolean reloadModel = temp.reloadModelCompletableFuture().join(); // Usamos join() para esperar el resultado
+        logParrafo("Refrescamos el Modelo a traves del metodo reloadModel");
+        logParrafo(temp.toString());
+        Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
+        reloadModel = StringUtils.containsIgnoreCase(temp.getName(), "Marcos");
+        Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
+        Assert.assertFalse(temp.getIsMayor(), "El Modelo no fue recargado de BD's como esperabamos");
+        logParrafo("Actualizamos el nombre del modelo a Jose, Apellido a Bran y asígnamos que será mayor de edad");
+        temp.setName("Jose");
+        temp.setApellido("Bran");
+        temp.setIsMayor(true);
+        logParrafo(temp.toString());
+        // Recargamos el modelo nuevamente
+        temp.refresh();
+        logParrafo("Refrescamos el Modelo a traves del metodo reloadModel");
+        logParrafo(temp.toString());
+        reloadModel = StringUtils.containsIgnoreCase(temp.getName(), "Marcos");
+        Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
+        Assert.assertTrue(StringUtils.containsIgnoreCase(temp.getApellido(), "Cabrera"), "El Modelo no fue recargado de BD's como esperabamos");
+        Assert.assertFalse(temp.getIsMayor(), "El Modelo no fue recargado de BD's como esperabamos");
+    }
+
+    @Test(testName = "Update Model", dependsOnMethods = "reloadModelComplebleFuture")
     public void updateModel() throws Exception {
         logParrafo("Limpiamos el modelo");
         this.testModel.cleanModel();
@@ -317,6 +463,9 @@ public class JBSqlUtilsTestMariaDB {
         Assert.assertEquals((int) rowsInsert, 10, "Los registros no fueron insertados correctamente en BD's");
     }
 
+    /**
+     * Carla: Metodo original
+     */
     @Test(testName = "Get Model",
             dependsOnMethods = "insertModels")
     public void getModel() throws Exception {
@@ -339,8 +488,42 @@ public class JBSqlUtilsTestMariaDB {
         Assert.assertTrue(this.testModel.getModelExist(), "No obtuvo un registro que no existe en BD's");
     }
 
-    @Test(testName = "Get First Model",
+    /**
+     * Carla: Metodo aplicando el CompleteableFeature, correccion2
+     */
+    @Test(testName = "Get Model Completeable Feature",
             dependsOnMethods = "getModel")
+    public void getModelCompletableFeature() throws Exception {
+        try {
+            //Incluir metodo que permita limpiar el modelo
+            logParrafo("Limpiamos el modelo");
+            this.testModel.cleanModel();
+            logParrafo("Obtenemos el primero modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
+            this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+                    "Cabrerassss").getCompletableFeature().get();
+            this.testModel.waitOperationComplete();
+            logParrafo("Trato de obtener un modelo que no existe, el resultado es: " + this.testModel.getModelExist());
+            logParrafo(this.testModel.toString());
+            Assert.assertFalse(this.testModel.getModelExist(), "Obtuvo un registro que no existe en BD's");
+            logParrafo("Obtenemos un modelo cuyo nombre sea Modelo # y sea mayor de edad");
+            this.testModel.where("Name", Operator.LIKE, "%Modelo #%").and("IsMayor", Operator.IGUAL_QUE,
+                    true).getCompletableFeature().get();
+            this.testModel.waitOperationComplete();
+            logParrafo("Trato de obtener un modelo que sí existe, el resultado es: " + this.testModel.getModelExist());
+            logParrafo(this.testModel.toString());
+            Assert.assertTrue(this.testModel.getModelExist(), "No obtuvo un registro que no existe en BD's");
+        } catch (ExecutionException e) {
+            // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
+            if (e.getCause() instanceof ModelNotFound) {
+                throw (ModelNotFound) e.getCause();
+            }
+            // Si no es una ModelNotFound, vuelve a lanzar la excepción como es
+            throw e;
+        }
+    }
+
+    @Test(testName = "Get First Model",
+            dependsOnMethods = "getModelCompletableFeature")
     public void firstModel() throws Exception {
         //Incluir metodo que permita limpiar el modelo
         logParrafo("Limpiamos el modelo");
@@ -361,8 +544,42 @@ public class JBSqlUtilsTestMariaDB {
         Assert.assertTrue(temp.getModelExist(), "No obtuvo un registro que no existe en BD's");
     }
 
-    @Test(testName = "Take Models",
+    /**
+     * correccion
+     */
+    @Test(testName = "Get First Model Completable Future",
             dependsOnMethods = "firstModel")
+    public void firstModelCompletableFuture() throws Exception {
+        try {
+            //Incluir metodo que permita limpiar el modelo
+            logParrafo("Limpiamos el modelo");
+            this.testModel.cleanModel();
+            logParrafo("Obtenemos el primero modelo cuyo nombre sea Marcossss y su apellido sea Cabrerassss, el cual no existe");
+            TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcossss").and("Apellido", Operator.IGUAL_QUE,
+                    "Cabrerassss").firstCompleteableFeature().get();
+            this.testModel.waitOperationComplete();
+            logParrafo("Trato de obtener un modelo que no existe, el resultado es: " + temp.getModelExist());
+            logParrafo(temp.toString());
+            Assert.assertFalse(temp.getModelExist(), "Obtuvo un registro que no existe en BD's");
+            logParrafo("Obtenemos el primero modelo cuyo nombre sea Modelo # y sea mayor de edad");
+            temp = (TestModel) this.testModel.where("Name", Operator.LIKE, "%Modelo #%").and("IsMayor", Operator.IGUAL_QUE,
+                    true).firstCompleteableFeature().get();
+            this.testModel.waitOperationComplete();
+            logParrafo("Trato de obtener un modelo que sí existe, el resultado es: " + temp.getModelExist());
+            logParrafo(temp.toString());
+            Assert.assertTrue(temp.getModelExist(), "No obtuvo un registro que no existe en BD's");
+        } catch (ExecutionException e) {
+            // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
+            if (e.getCause() instanceof ModelNotFound) {
+                throw (ModelNotFound) e.getCause();
+            }
+            // Si no es una ModelNotFound, vuelve a lanzar la excepción como es
+            throw e;
+        }
+    }
+
+    @Test(testName = "Take Models",
+            dependsOnMethods = "firstModelCompletableFuture")
     public void takeModels() throws Exception {
         logParrafo("Limpiamos el modelo");
         //Incluir metodo que permita limpiar el modelo
@@ -375,6 +592,9 @@ public class JBSqlUtilsTestMariaDB {
         Assert.assertEquals(models.size(), 6, "Los modelos no fueron recuperados de BD's como se definio en la sentencia Take");
     }
 
+    /**
+     * Carla: Metodo original
+     */
     @Test(testName = "Get All Models",
             dependsOnMethods = "takeModels")
     public void getAllModels() throws Exception {
@@ -390,8 +610,35 @@ public class JBSqlUtilsTestMariaDB {
         Assert.assertEquals(models.size(), 3, "Los modelos no fueron recuperados de BD's");
     }
 
-    @Test(testName = "Update Models",
+    /**
+     * Carla: Metodo con completableFeature. correcciòn
+     */
+    @Test(testName = "Get All Models Completable feature",
             dependsOnMethods = "getAllModels")
+    public void getAllModelsCompletableFeature() throws Exception {
+        try {
+            //Incluir metodo que permita limpiar el modelo
+            logParrafo("Limpiamos el modelo");
+            this.testModel.cleanModel();
+            List<TestModel> models = new ArrayList<TestModel>();
+            logParrafo("Obtenemos los modelos que poseen nombre es Modelo #5 U #8 o su apellido es #3");
+            models = (List<TestModel>) this.testModel.where("Name", Operator.LIKE, "%Modelo #5%").or(
+                    "Name", Operator.LIKE, "Modelo #8").or("Apellido", Operator.IGUAL_QUE, "Apellido #3").getAllCompletableFeature().get();
+            this.testModel.waitOperationComplete();
+            logParrafo("Se recuperaron " + models.size() + " los cuales son: " + models);
+            Assert.assertEquals(models.size(), 3, "Los modelos no fueron recuperados de BD's");
+        } catch (ExecutionException e) {
+            // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
+            if (e.getCause() instanceof ModelNotFound) {
+                throw (ModelNotFound) e.getCause();
+            }
+            // Si no es una ModelNotFound, vuelve a lanzar la excepción como es
+            throw e;
+        }
+    }
+
+    @Test(testName = "Update Models",
+            dependsOnMethods = "getAllModelsCompletableFeature")
     public void updateModels() throws Exception {
         logParrafo("Limpiamos el modelo");
         this.testModel.cleanModel();
