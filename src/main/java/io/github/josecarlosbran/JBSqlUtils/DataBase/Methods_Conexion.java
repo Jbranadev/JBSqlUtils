@@ -88,9 +88,9 @@ class Methods_Conexion extends Conexion {
             String returnType = metodo.getReturnType().getSimpleName();
             String nameMetodo = metodo.getName();
             Parameter[] parametros = metodo.getParameters();
-            if (returnType.equalsIgnoreCase(classColumn) && StringUtils.startsWithIgnoreCase(nameMetodo, "get")) {
+            if (metodo.getDeclaringClass().getPackage().hashCode() != JBSqlUtils.class.getPackage().hashCode() && StringUtils.startsWithIgnoreCase(nameMetodo, "get")) {
                 getMethods.add(metodo);
-            } else if (parametros.length == 1 && parametros[0].getType().getSimpleName().equalsIgnoreCase(classColumn)
+            } else if (parametros.length == 1 && metodo.getDeclaringClass().getPackage().hashCode() != JBSqlUtils.class.getPackage().hashCode()
                     && StringUtils.startsWithIgnoreCase(nameMetodo, "set")) {
                 setMethods.add(metodo);
             }
@@ -326,9 +326,7 @@ class Methods_Conexion extends Conexion {
                         LogsJB.warning("Error closing ResultSet: " + ExceptionUtils.getStackTrace(e));
                     }
                 }
-                if (connect != null) {
-                    this.closeConnection(connect);
-                }
+                this.closeConnection(connect);
             }
             return false;
         });
@@ -423,7 +421,8 @@ class Methods_Conexion extends Conexion {
         return this.reloadModelCompletableFuture().get();
     }
 
-    /**Nuevo metodo aplicando el CompletableFuture
+    /**
+     * Nuevo metodo aplicando el CompletableFuture
      * Refresca el modelo con la información de BD's, se perderan las modificaciones que se hayan realizadas sobre el modelo,
      * si estas no han sido plasmadas en BD's.
      *
@@ -446,7 +445,6 @@ class Methods_Conexion extends Conexion {
                     String namePrimaryKey = this.getTabla().getClaveprimaria().getCOLUMN_NAME();
                     List<Field> columnas = this.getFieldsOfModel();
                     List<Field> values = new ArrayList<>();
-
                     for (Field columna : columnas) {
                         if ((StringUtils.equalsIgnoreCase(namePrimaryKey, this.getColumnName(columna)) && !this.getValueColumnIsNull(this, columna))
                                 || (this.getColumnIsIndexValidValue(this, columna))) {
@@ -494,9 +492,7 @@ class Methods_Conexion extends Conexion {
                         LogsJB.warning("Error al cerrar ResultSet: " + ExceptionUtils.getStackTrace(e));
                     }
                 }
-                if (connect != null) {
-                    this.closeConnection(connect);
-                }
+                this.closeConnection(connect);
             }
         }).thenApply(reloadModel -> {
             this.setTaskIsReady(true);
@@ -1170,7 +1166,6 @@ class Methods_Conexion extends Conexion {
      * False si la tabla correspondiente al modelo ya existe en BD's
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
-
     public CompletableFuture<Boolean> createTableCompletableFuture() throws Exception {
         return tableExist().thenCompose(exists -> {
             if (exists) {
@@ -1291,8 +1286,8 @@ class Methods_Conexion extends Conexion {
         });
     }
 
-
-    /**Metodo Original
+    /**
+     * Metodo Original
      * Elimina la tabla correspondiente al modelo en BD's
      *
      * @return True si la tabla correspondiente al modelo en BD's existe y fue eliminada, de no existir la tabla correspondiente
@@ -1300,10 +1295,11 @@ class Methods_Conexion extends Conexion {
      * @throws Exception Si sucede una excepción en la ejecución asincrona de la sentencia en BD's lanza esta excepción
      */
     public Boolean dropTableIfExist() throws Exception {
-       return this.dropTableIfExistCompletableFuture().get();
+        return this.dropTableIfExistCompletableFuture().get();
     }
 
-    /** Carla: Metodo que devuelve un completable Booleano
+    /**
+     * Carla: Metodo que devuelve un completable Booleano
      * Elimina la tabla correspondiente al modelo en BD's
      *
      * @return True si la tabla correspondiente al modelo en BD's existe y fue eliminada, de no existir la tabla correspondiente

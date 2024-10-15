@@ -19,11 +19,8 @@ import org.testng.annotations.Test;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutionException;
 
 import static UtilidadesTest.Utilities.logParrafo;
@@ -285,6 +282,7 @@ public class JBSqlUtilsTestSQLite {
             throw e;
         }
     }
+
     /**
      * Carla: Metodo original
      */
@@ -347,48 +345,38 @@ public class JBSqlUtilsTestSQLite {
     public void reloadModelComplebleFuture() throws Exception {
         logParrafo("Limpiamos el modelo");
         this.testModel.cleanModel();
-
         logParrafo("Obtenemos el modelo que tiene por nombre Marcos, Apellido Cabrera");
         TestModel temp = (TestModel) this.testModel.where("Name", Operator.IGUAL_QUE, "Marcos")
                 .and("Apellido", Operator.IGUAL_QUE, "Cabrera").firstOrFail();
-
         // Esperamos a que la operación en BD's se complete
         this.testModel.waitOperationComplete();
         logParrafo(temp.toString());
-
         logParrafo("Actualizamos el nombre del modelo a MarcosEfrain y asígnamos que será mayor de edad");
         temp.setName("MarcosEfrain");
         temp.setIsMayor(true);
         logParrafo(temp.toString());
-
         // Recargar el modelo con la información de BD's usando el CompletableFuture
         Boolean reloadModel = temp.reloadModelCompletableFuture().join(); // Usamos join() para esperar el resultado
         logParrafo("Refrescamos el Modelo a traves del metodo reloadModel");
         logParrafo(temp.toString());
         Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
-
         reloadModel = StringUtils.containsIgnoreCase(temp.getName(), "Marcos");
         Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
         Assert.assertFalse(temp.getIsMayor(), "El Modelo no fue recargado de BD's como esperabamos");
-
         logParrafo("Actualizamos el nombre del modelo a Jose, Apellido a Bran y asígnamos que será mayor de edad");
         temp.setName("Jose");
         temp.setApellido("Bran");
         temp.setIsMayor(true);
         logParrafo(temp.toString());
-
         // Recargamos el modelo nuevamente
         temp.refresh();
         logParrafo("Refrescamos el Modelo a traves del metodo reloadModel");
         logParrafo(temp.toString());
-
         reloadModel = StringUtils.containsIgnoreCase(temp.getName(), "Marcos");
         Assert.assertTrue(reloadModel, "El Modelo no fue recargado de BD's como esperabamos");
         Assert.assertTrue(StringUtils.containsIgnoreCase(temp.getApellido(), "Cabrera"), "El Modelo no fue recargado de BD's como esperabamos");
         Assert.assertFalse(temp.getIsMayor(), "El Modelo no fue recargado de BD's como esperabamos");
     }
-
-
 
     @Test(testName = "Update Model", dependsOnMethods = "reloadModelComplebleFuture")
     public void updateModel() throws Exception {
@@ -522,7 +510,7 @@ public class JBSqlUtilsTestSQLite {
             logParrafo("Trato de obtener un modelo que sí existe, el resultado es: " + this.testModel.getModelExist());
             logParrafo(this.testModel.toString());
             Assert.assertTrue(this.testModel.getModelExist(), "No obtuvo un registro que no existe en BD's");
-        }catch (ExecutionException e) {
+        } catch (ExecutionException e) {
             // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
             if (e.getCause() instanceof ModelNotFound) {
                 throw (ModelNotFound) e.getCause();
@@ -531,7 +519,6 @@ public class JBSqlUtilsTestSQLite {
             throw e;
         }
     }
-
 
     @Test(testName = "Get First Model",
             dependsOnMethods = "getModelCompletableFeature")
@@ -561,8 +548,7 @@ public class JBSqlUtilsTestSQLite {
     @Test(testName = "Get First Model Completable Future",
             dependsOnMethods = "firstModel")
     public void firstModelCompletableFuture() throws Exception {
-        try{
-
+        try {
             //Incluir metodo que permita limpiar el modelo
             logParrafo("Limpiamos el modelo");
             this.testModel.cleanModel();
@@ -588,9 +574,7 @@ public class JBSqlUtilsTestSQLite {
             // Si no es una ModelNotFound, vuelve a lanzar la excepción como es
             throw e;
         }
-
     }
-
 
     @Test(testName = "Take Models",
             dependsOnMethods = "firstModelCompletableFuture")
@@ -630,13 +614,10 @@ public class JBSqlUtilsTestSQLite {
     @Test(testName = "Get All Models Completable feature",
             dependsOnMethods = "getAllModels")
     public void getAllModelsCompletableFeature() throws Exception {
-        try{
-
-
+        try {
             //Incluir metodo que permita limpiar el modelo
             logParrafo("Limpiamos el modelo");
             this.testModel.cleanModel();
-
             List<TestModel> models = new ArrayList<TestModel>();
             logParrafo("Obtenemos los modelos que poseen nombre es Modelo #5 U #8 o su apellido es #3");
             models = (List<TestModel>) this.testModel.where("Name", Operator.LIKE, "%Modelo #5%").or(
@@ -644,7 +625,7 @@ public class JBSqlUtilsTestSQLite {
             this.testModel.waitOperationComplete();
             logParrafo("Se recuperaron " + models.size() + " los cuales son: " + models);
             Assert.assertEquals(models.size(), 3, "Los modelos no fueron recuperados de BD's");
-        }catch (ExecutionException e) {
+        } catch (ExecutionException e) {
             // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
             if (e.getCause() instanceof ModelNotFound) {
                 throw (ModelNotFound) e.getCause();
@@ -653,7 +634,6 @@ public class JBSqlUtilsTestSQLite {
             throw e;
         }
     }
-
 
     @Test(testName = "Update Models",
             dependsOnMethods = "getAllModelsCompletableFeature")
