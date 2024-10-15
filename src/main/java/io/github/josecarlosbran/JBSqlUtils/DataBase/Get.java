@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author Jose Bran
@@ -64,17 +65,8 @@ class Get extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     protected <T extends JBSqlUtils> T get(T modelo, String Sql, List<Column> parametros) throws Exception {
-        try {
-            // Ejecuta la tarea asíncrona y espera a su resultado
-            return this.getCompletableFuture(modelo, Sql, parametros).join();
-        } catch (CompletionException e) {
-            // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
-            if (e.getCause() instanceof ModelNotFound) {
-                throw (ModelNotFound) e.getCause();
-            }
-            // Si no es una ModelNotFound, vuelve a lanzar la excepción como es
-            throw e;
-        }
+        // Ejecuta la tarea asíncrona y espera a su resultado
+        return this.getCompletableFuture(modelo, Sql, parametros).get();
     }
 
     /**
@@ -116,7 +108,7 @@ class Get extends Methods_Conexion {
             } catch (Exception e) {
                 LogsJB.fatal("Excepción disparada en el método que obtiene la información del modelo de la BD's, Trace de la Excepción: " + ExceptionUtils.getStackTrace(e));
                 modelo.setTaskIsReady(true);
-                throw new RuntimeException(e); // Envuelve en RuntimeException
+                throw new CompletionException(e); // Envuelve en CompletionException
             }
         });
     }
@@ -134,7 +126,7 @@ class Get extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     protected <T extends JBSqlUtils> T first(T modelo, String Sql, List<Column> parametros) throws Exception {
-        return this.firstCompleteableFeature(modelo, Sql, parametros).join();
+        return this.firstCompleteableFeature(modelo, Sql, parametros).get();
     }
 
     /*** CARLA: YA ESTA APLICADO EL CAMBIO
@@ -204,8 +196,8 @@ class Get extends Methods_Conexion {
     protected <T extends JBSqlUtils> T firstOrFailGet(T modelo, String Sql, List<Column> parametros) throws Exception {
         try {
             // Ejecuta la tarea asíncrona y espera a su resultado
-            return this.firstOrFailGetCompleteableFeature(modelo, Sql, parametros).join();
-        } catch (CompletionException e) {
+            return this.firstOrFailGetCompleteableFeature(modelo, Sql, parametros).get();
+        } catch (ExecutionException e) {
             // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
             if (e.getCause() instanceof ModelNotFound) {
                 throw (ModelNotFound) e.getCause();
@@ -259,7 +251,7 @@ class Get extends Methods_Conexion {
                 }
             } catch (ModelNotFound e) {
                 // Lanza la excepción sin envolverla
-                throw new CompletionException(e);  // Usa CompletionException en lugar de RuntimeException
+                throw new CompletionException(e);  // Usa CompletionException en lugar de CompletionException
             } catch (SQLException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
                 LogsJB.fatal("Excepción disparada en el método que obtiene la información del modelo de la BD's, Trace de la Excepción: " + ExceptionUtils.getStackTrace(e));
                 modelo.setTaskIsReady(true);
@@ -285,8 +277,8 @@ class Get extends Methods_Conexion {
     protected <T extends JBSqlUtils> T firstOrFail(T modelo, String Sql, List<Column> parametros) throws Exception {
         try {
             // Ejecuta la tarea asíncrona y espera a su resultado
-            return this.firstOrFailCompleteableFeature(modelo, Sql, parametros).join();
-        } catch (CompletionException e) {
+            return this.firstOrFailCompleteableFeature(modelo, Sql, parametros).get();
+        } catch (ExecutionException e) {
             // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
             if (e.getCause() instanceof ModelNotFound) {
                 throw (ModelNotFound) e.getCause();
@@ -365,17 +357,8 @@ class Get extends Methods_Conexion {
      *                   captura la excepción y la lanza en el hilo principal
      */
     protected <T extends JBSqlUtils> List<T> getAll(T modelo, String Sql, List<Column> parametros) throws Exception {
-        try {
-            // Ejecuta la tarea asíncrona y espera a su resultado
-            return this.getAllCompletableFuture(modelo, Sql, parametros).join();
-        } catch (CompletionException e) {
-            // Si es una CompletionException, revisa si la causa es ModelNotFound y la vuelve a lanzar
-            if (e.getCause() instanceof ModelNotFound) {
-                throw (ModelNotFound) e.getCause();
-            }
-            // Si no es una ModelNotFound, vuelve a lanzar la excepción como es
-            throw e;
-        }
+        // Ejecuta la tarea asíncrona y espera a su resultado
+        return this.getAllCompletableFuture(modelo, Sql, parametros).get();
     }
 
     /**
@@ -428,7 +411,7 @@ class Get extends Methods_Conexion {
                 LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia SQL de la BD's, " +
                         "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                 modelo.setTaskIsReady(true);
-                throw new RuntimeException(e); // Envuelve en RuntimeException
+                throw new CompletionException(e); // Envuelve en CompletionException
             }
         });
     }
@@ -510,7 +493,7 @@ class Get extends Methods_Conexion {
                         LogsJB.fatal("Excepción disparada en el método que Recupera la lista de registros que cumplen con la sentencia" +
                                 "SQL de la BD's, " + "Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
                         this.setTaskIsReady(true);
-                        throw new RuntimeException(e);
+                        throw new CompletionException(e);
                     }
                 });
             } else {
